@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/IAMOTZ/Ievents/issues"
   },
-  "homepage": "https://github.com/IAMOTZ/Ievents#readme"
+  "homepage": "https://github.com/IAMOTZ/Ievents#readme",
+  "dependencies": {
+    "bootstrap": "4.0.0-beta.2",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.11.1"
+  }
 }
