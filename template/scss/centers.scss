@@ -2,3 +2,44 @@ body > nav {
   background-color: rgba(0,0,0,0.9);
   border-bottom: 2px solid rgba(0, 143, 214, 0.873);
 }
+
+#centers-section {
+  min-height: 700px;
+
+  #center-section-header {
+    padding-top: 70px;
+  }
+
+  .search-box {
+    .btn {
+      color: white;
+      background-color: rgba(0,0,0,0.9);
+    }
+  }
+
+  .card {
+    margin: 5px;
+    .btn {
+      background-color: rgba(0,0,0,0.9) !important;
+    }
+  }
+
+  .seat-badge {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .pagination {
+    a {
+      font-weight: bold;
+    }
+    .active {
+      a {
+        background-color: rgba(0,0,0,1);
+      }
+    }
+  }
+}
