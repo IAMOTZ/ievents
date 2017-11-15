@@ -21,3 +21,7 @@ body > nav {
   #main-content-section .search-box .btn {
     color: white;
     background-color: rgba(0, 0, 0, 0.9); }
+
+footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-top: 2px solid #008ed6; }
