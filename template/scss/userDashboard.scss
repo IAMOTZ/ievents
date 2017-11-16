@@ -21,7 +21,24 @@ body > .container-fluid {
     border-radius: 50%;
   }
 
+  .navigation-links {
+    a {
+      color: white;
+      font-weight: bold;
+    }
+  
+    .list-group-item {
+      background-color: transparent;
+      border-top: 1px solid $custom-blue;
+    }
+  
+    .list-group-item:last-child {
+      border-bottom: 1px solid $custom-blue;
+    }
+  }
+  
 }
+
 
 #content-section {
   
