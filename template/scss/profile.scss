@@ -11,12 +11,6 @@ body {
   background-color: $custom-black;
   min-height: 700px;
 
-  .img-round {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-  }
-
   .navigation-links {
     a {
       color: white;
@@ -33,4 +27,28 @@ body {
     }
   }
   
+}
+
+#profile-section {
+  
+  .profile-card {
+    margin: 0 auto;
+
+    .list-group-item {
+      .lead {
+        font-weight: 400;
+      }
+    }
+  }
+
+  .profile-card-content {
+    margin: 0 auto;
+  }
+   
+}
+
+.img-round {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
 }
