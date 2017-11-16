@@ -1,0 +1,21 @@
+body {
+  background-color: #f6f7fa; }
+
+body > .container-fluid {
+  min-height: 700px; }
+
+#navigation-section {
+  background-color: rgba(0, 0, 0, 0.9);
+  min-height: 700px; }
+  #navigation-section .img-round {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%; }
+  #navigation-section .navigation-links a {
+    color: white;
+    font-weight: bold; }
+  #navigation-section .navigation-links .list-group-item {
+    background-color: transparent;
+    border-top: 1px solid #008ed6; }
+  #navigation-section .navigation-links .list-group-item:last-child {
+    border-bottom: 1px solid #008ed6; }
