@@ -1,3 +1,15 @@
 body > nav {
   background-color: rgba(0, 0, 0, 0.9);
   border-bottom: 2px solid rgba(0, 143, 214, 0.873); }
+
+.card-form {
+  margin-top: 100px;
+  margin-bottom: 95px;
+  width: 350px; }
+  .card-form .dark-button {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white; }
+
+footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-top: 2px solid #008ed6; }
