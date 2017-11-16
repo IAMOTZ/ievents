@@ -1,0 +1,88 @@
+$custom-black: rgba(0,0,0,0.9);
+$custom-blue: rgb(0, 142, 214);
+$background-color: #f6f7fa;
+
+
+body {
+  background-color: $background-color;
+  overflow-x: hidden; 
+}
+
+body > .container-fluid {
+    min-height: 700px;
+}
+
+#navigation-section {
+  background-color: $custom-black;
+  min-height: 700px;
+
+  .img-round {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+  }
+
+  .navigation-links {
+    a {
+      color: white;
+      font-weight: bold;
+    }
+  
+    .list-group-item {
+      background-color: transparent;
+      border-top: 1px solid $custom-blue;
+    }
+  
+    .list-group-item:last-child {
+      border-bottom: 1px solid $custom-blue;
+    }
+  }
+  
+}
+
+#centers-section {
+  min-height: 700px;
+
+  #center-section-header {
+    padding-top: 70px;
+  }
+
+  .search-box {
+    .btn {
+      color: white;
+      background-color: rgba(0,0,0,0.9);
+    }
+  }
+
+  .card {
+    margin: 5px;
+    .btn {
+      background-color: rgba(0,0,0,0.9) !important;
+    }
+  }
+
+  .seat-badge {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .pagination {
+    a {
+      font-weight: bold;
+    }
+    .active {
+      a {
+        background-color: rgba(0,0,0,1);
+      }
+    }
+  }
+}
+
+
+footer {
+  background-color: rgba(0,0,0,0.9);
+  border-top: 2px solid rgb(0, 142, 214);
+}
