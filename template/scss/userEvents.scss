@@ -1,0 +1,63 @@
+$custom-black: rgba(0,0,0,0.9);
+$custom-blue: rgb(0, 142, 214);
+$background-color: #f6f7fa;
+
+body {
+  background-color: $background-color;
+  overflow-x: hidden; 
+}
+
+body > nav {
+  background-color: rgba(0,0,0,0.9);
+  border-bottom: 2px solid rgba(0, 143, 214, 0.873);
+}
+
+#navigation-section {
+  background-color: $custom-black;
+  min-height: 700px;
+
+  .navigation-links {
+    a {
+      color: white;
+      font-weight: bold;
+    }
+  
+    .list-group-item {
+      background-color: transparent;
+      border-top: 1px solid $custom-blue;
+    }
+  
+    .list-group-item:last-child {
+      border-bottom: 1px solid $custom-blue;
+    }
+  }
+
+}
+
+#main-content {
+
+  margin-top: 80px;
+  min-height: 700px;
+
+  nav {
+    background-color: $custom-black;
+    
+    ol{
+      background-color: $custom-black;
+    }
+  }
+  .dark-button {
+    background-color : $custom-black;
+    color: white;
+  }
+
+  form {
+    margin-top: 100px;
+  }
+}
+  
+
+footer {
+  background-color: rgba(0,0,0,0.9);
+  border-top: 2px solid rgb(0, 142, 214);
+}

@@ -1,0 +1,36 @@
+body {
+  background-color: #f6f7fa;
+  overflow-x: hidden; }
+
+body > nav {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-bottom: 2px solid rgba(0, 143, 214, 0.873); }
+
+#navigation-section {
+  background-color: rgba(0, 0, 0, 0.9);
+  min-height: 700px; }
+  #navigation-section .navigation-links a {
+    color: white;
+    font-weight: bold; }
+  #navigation-section .navigation-links .list-group-item {
+    background-color: transparent;
+    border-top: 1px solid #008ed6; }
+  #navigation-section .navigation-links .list-group-item:last-child {
+    border-bottom: 1px solid #008ed6; }
+
+#main-content {
+  margin-top: 80px;
+  min-height: 700px; }
+  #main-content nav {
+    background-color: rgba(0, 0, 0, 0.9); }
+    #main-content nav ol {
+      background-color: rgba(0, 0, 0, 0.9); }
+  #main-content .dark-button {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white; }
+  #main-content form {
+    margin-top: 100px; }
+
+footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-top: 2px solid #008ed6; }
