@@ -14,6 +14,10 @@ body {
   #navigation-section .navigation-links .list-group-item:last-child {
     border-bottom: 1px solid #008ed6; }
 
+#add-event-section .dark-button {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white; }
+
 .img-round {
   height: 150px;
   width: 150px;
