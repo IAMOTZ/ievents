@@ -18,12 +18,21 @@ body > nav {
   #navigation-section .navigation-links .list-group-item:last-child {
     border-bottom: 1px solid #008ed6; }
 
+#add-event-section nav {
+  background-color: rgba(0, 0, 0, 0.9); }
+  #add-event-section nav ol {
+    background-color: rgba(0, 0, 0, 0.9); }
+
 #add-event-section .dark-button {
   background-color: rgba(0, 0, 0, 0.9);
   color: white; }
 
+#add-event-section form {
+  margin-top: 100px; }
+
 #centers-section {
-  min-height: 700px; }
+  min-height: 700px;
+  margin-top: 100px; }
   #centers-section .search-box .btn {
     color: white;
     background-color: rgba(0, 0, 0, 0.9); }
@@ -47,5 +56,6 @@ body > nav {
   width: 150px;
   border-radius: 50%; }
 
-.mt-xs-10 {
-  margin-top: 80px; }
+footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-top: 2px solid #008ed6; }

@@ -11,6 +11,8 @@
 </head>
 
 <body>
+
+  <!-- Navigation on extra small screen -->
   <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
     <div class="container">
       <a href="#" class="navbar-brand">
@@ -27,13 +29,10 @@
             <a href="#" class="nav-link">My events</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Add Events</a>
+            <a href="addEvent.html" class="nav-link">Add Events</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Centers</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Profile</a>
+            <a href="centers.html" class="nav-link">Centers</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">Logout</a>
@@ -45,9 +44,10 @@
 
   <div class="container-fluid">
     <div class="row">
+
+      <!-- Side navigation -->
       <div class="col-md-2 fixed-top d-none d-md-block" id="navigation-section">
         <div class="profile-pic mt-5 text-center">
-          <img src="img/person.jpeg" alt="" class="img-round">
           <p class="lead text-white pt-3" id="userName">Tunmise Ogunniyi</p>
         </div>
         <div class="pt-3 navigation-links">
@@ -58,35 +58,33 @@
               <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events</a>
             <a class="list-group-item" href="#content-section">
               <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
-            <a class="list-group-item" href="#profile-section">
-              <i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Profile</a>
             <a class="list-group-item" href="#">
               <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
           </div>
         </div>
       </div>
 
+      <!-- Main content -->
       <div class="col-md-10 offset-md-2" id="add-event-section">
 
-        <nav class="d-none d-md-block w-100 bg-white" role="navigation">
-          <ol class="breadcrumb bg-white py-3">
+        <!-- Content header(navigation) -->
+        <nav class="d-none d-md-block w-100 mt-3" role="navigation">
+          <ol class="breadcrumb py-3">
             <li class="breadcrumb-item">
-              <a href="addEvent.html" class="text-dark bg-white">
+              <a href="addEvent.html" class="text-white">
                 <strong>Add event</strong>
               </a>
             </li>
             <li class="breadcrumb-item active">
-              <a href="" class="text-dark bg-white">Book a center</a>
+              <a href="" class="text-white">Book a center</a>
             </li>
           </ol>
         </nav>
 
-        <div id="centers-section" class="mt-xs-10">
+        <div id="centers-section" class="mt-sm-0">  
           <div class="container">
             <div id="center-section-content" class="d-flex flex-column align-items-center">
-              <div id="center-section-header">
-                <h1 class="display-4">Book a center for your event</h1>
-              </div>
+              <!-- Search box on medium screeen and above-->
               <div class="search-box input-group w-50 mt-5">
                 <input type="text" class="form-control" placeholder="Search for a center">
                 <div class="input-group-btn d-none d-sm-block">
@@ -100,6 +98,7 @@
                   </div>
                 </div>
               </div>
+              <!-- Search box on extra small screen -->
               <div class="search-box mt-3 d-block d-sm-none">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
                   Search with
@@ -284,20 +283,25 @@
                 </li>
               </ul>
             </div>
+
+            <footer class="d-none d-sm-block"> 
+                <div class="container text-white text-center py-5">
+                    <h1>Ievents</h1>
+                    <p>Copyright &copy; 2017</p>
+                </div>
+            </footer>
           </div>
-          <footer>
-            <div class="container text-white text-center py-5">
-              <h1>Ievents</h1>
-              <p>Copyright &copy; 2017</p>
-            </div>
-          </footer>
-
         </div>
-
       </div>
     </div>
   </div>
 
+  <footer class="d-block d-sm-none"> 
+      <div class="container text-white text-center py-5">
+          <h1>Ievents</h1>
+          <p>Copyright &copy; 2017</p>
+      </div>
+  </footer>
 
   <script src="js/jquery.min.js"></script>
   <script src="js/popper.min.js"></script>

@@ -11,44 +11,42 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
-        <div class="container">
-          <a href="#" class="navbar-brand">
-            <strong>Tunmise</strong>
-            <br>
-            <p class="h6">Add Event &nbsp;/ &nbsp; Book a center</p>
-          </a>
-          <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navMenu">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a href="#" class="nav-link">My events</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">Add Events</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">Centers</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+  <!-- Navigation on small screen -->
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <strong>Tunmise</strong>
+        <br>
+        <p class="h6">Add Event &nbsp;/ &nbsp; Book a center</p>
+      </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link">My events</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Add Events</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Centers</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <div class="container-fluid">
     <div class="row">
+
+      <!-- Side navigation on large screen -->
       <div class="col-lg-2 fixed-top  d-none d-md-block" id="navigation-section">
         <div class="profile-pic mt-5 text-center">
-          <img src="img/person.jpeg" alt="" class="img-round">
           <p class="lead text-white pt-3" id="userName">Tunmise Ogunniyi</p>
         </div>
         <div class="pt-3 navigation-links">
@@ -59,22 +57,23 @@
               <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events</a>
             <a class="list-group-item" href="#content-section">
               <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
-            <a class="list-group-item" href="#profile-section">
-              <i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Profile</a>
             <a class="list-group-item" href="#">
               <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
           </div>
         </div>
       </div>
 
+      <!-- Main content -->
       <div class="col-lg-10 offset-md-2" id="add-event-section">
-        <nav class="navbar w-100 bg-white mt-3 d-none d-md-block">
-          <a class="navbar-brand text-dark" href="#">
+
+        <!-- Content Header(navigation) on large screen-->
+        <nav class="navbar w-100 mt-3 d-none d-md-block">
+          <a class="navbar-brand text-white" href="#">
             <strong>Add Event</strong>
           </a>
         </nav>
 
-        <form class="mt-5">
+        <form class="mt-sm-5">
           <div class="form-group">
             <label for="title">Title</label>
             <input type="email" class="form-control" id="title" placeholder="A short description of your event">
@@ -89,6 +88,13 @@
       </div>
     </div>
   </div>
+
+  <footer class="d-block d-sm-none mt-5"> 
+      <div class="container text-white text-center py-5">
+          <h1>Ievents</h1>
+          <p>Copyright &copy; 2017</p>
+      </div>
+  </footer>
 
 
   <script src="js/jquery.min.js"></script>

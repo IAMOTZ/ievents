@@ -36,14 +36,26 @@ body > nav {
 
 #add-event-section {
 
+  nav {
+    background-color: $custom-black;
+    
+    ol{
+      background-color: $custom-black;
+    }
+  }
   .dark-button {
     background-color : $custom-black;
     color: white;
+  }
+
+  form {
+    margin-top: 100px;
   }
 }
   
 #centers-section {
   min-height: 700px;
+  margin-top: 100px;
 
   .search-box {
     .btn {
@@ -85,6 +97,7 @@ body > nav {
   border-radius: 50%;
 }
 
-.mt-xs-10 {
-  margin-top: 80px;
+footer {
+  background-color: rgba(0,0,0,0.9);
+  border-top: 2px solid rgb(0, 142, 214);
 }
