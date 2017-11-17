@@ -7,6 +7,11 @@ body {
   overflow-x: hidden; 
 }
 
+body > nav {
+  background-color: rgba(0,0,0,0.9);
+  border-bottom: 2px solid rgba(0, 143, 214, 0.873);
+}
+
 #navigation-section {
   background-color: $custom-black;
   min-height: 700px;
@@ -78,4 +83,8 @@ body {
   height: 150px;
   width: 150px;
   border-radius: 50%;
+}
+
+.mt-xs-10 {
+  margin-top: 80px;
 }

@@ -11,9 +11,42 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
+        <div class="container">
+          <a href="#" class="navbar-brand">
+            <strong>Tunmise</strong>
+            <br>
+            <p class="h6">Add Event &nbsp;/ &nbsp; Book a center</p>
+          </a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="#" class="nav-link">My events</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Add Events</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Centers</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-2 fixed-top" id="navigation-section">
+      <div class="col-lg-2 fixed-top  d-none d-md-block" id="navigation-section">
         <div class="profile-pic mt-5 text-center">
           <img src="img/person.jpeg" alt="" class="img-round">
           <p class="lead text-white pt-3" id="userName">Tunmise Ogunniyi</p>
@@ -35,7 +68,7 @@
       </div>
 
       <div class="col-lg-10 offset-md-2" id="add-event-section">
-        <nav class="navbar w-100 bg-white mt-3">
+        <nav class="navbar w-100 bg-white mt-3 d-none d-md-block">
           <a class="navbar-brand text-dark" href="#">
             <strong>Add Event</strong>
           </a>
