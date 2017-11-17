@@ -42,7 +42,23 @@ body > nav {
       }
     }
   }
+
 }
+
+#center-details-modal {
+  .seat-badge {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .btn {
+    background-color: rgba(0,0,0,0.9);
+  }
+}
+
 
 footer {
   background-color: rgba(0,0,0,0.9);
