@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/addCenter.css">
+  <title>Ievents</title>
+</head>
+
+<body>
+  <!-- Navigation on small screen -->
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <strong>Admin</strong>
+        <br>
+        <p class="h6">Add Center</p>
+      </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link">Centers</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Add Center</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Side navigation on large screen -->
+      <div class="col-lg-2 fixed-top  d-none d-md-block" id="navigation-section">
+        <div class="profile-pic mt-5 text-center">
+          <p class="lead text-white pt-3" id="userName">Admin</p>
+        </div>
+        <div class="pt-3 navigation-links">
+          <div class="list-group">
+            <a class="list-group-item" href="#content-section">
+              <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
+            <a class="list-group-item" href="#">
+              <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center</a>
+            <a class="list-group-item" href="#">
+              <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="col-lg-10 offset-md-2" id="add-event-section">
+
+        <!-- Content Header(navigation) on large screen-->
+        <nav class="navbar w-100 mt-3 d-none d-md-block">
+          <a class="navbar-brand text-white" href="#">
+            <strong>Add a center</strong>
+          </a>
+        </nav>
+
+        <form class="mt-sm-5">
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-1 col-form-label">Name</label>
+            <div class="col-sm-11">
+              <input type="email" class="form-control w-50" id="inputEmail3" placeholder="The name of the center">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-1 col-form-label">Location</label>
+            <div class="col-sm-11">
+              <input type="text" class="form-control w-50" id="inputPassword3" placeholder="The location of the center">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="description" class="col-sm-1 col-form-label">Details</label>
+            <div class="col-sm-11">
+              <textarea class="form-control w-50" id="description" rows="7" placeholder="More details about the center"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="description" class="col-sm-1 col-form-label">Capacity</label>
+            <div class="col-sm-11">
+              <input type="number" class="form-control w-50" id="inputPassword3" placeholder="How many seats">
+            </div>
+          </div>
+          <fieldset class="form-group">
+            <div class="row">
+              <legend class="col-form-legend col-sm-1">Type</legend>
+              <div class="col-sm-11 pt-2">
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Theater
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Banquet
+                  </label>
+                </div>
+              </div>
+
+          </fieldset>
+
+          <fieldset class="form-group">
+            <div class="row">
+              <legend class="col-form-legend col-sm-1">Facilities</legend>
+              <div class="col-sm-11">
+                <div class="form-check pt-2">
+                  <label class="form-check-label pl-5">
+                    <input class="form-check-input" type="checkbox">Chairs
+                  </label>
+                  <label class="form-check-label pl-5">
+                    <input class="form-check-input" type="checkbox">Tables
+                  </label>
+                  <label class="form-check-label pl-5">
+                    <input class="form-check-input" type="checkbox"> Projector
+                  </label>
+                  <label class="form-check-label pl-5">
+                    <input class="form-check-input" type="checkbox"> Convinience
+                  </label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="form-group row">
+            <label for="price" class="col-sm-1 col-form-label">Price</label>
+            <div class="col-sm-11">
+              <input type="number" class="form-control w-50" id="price" placeholder="Price">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="image" class="col-sm-1 col-form-label">Image</label>
+            <input type="file" class="form-control-file pt-2" id="image">
+          </div>
+        </form>
+
+        <footer class="d-none d-sm-block mt-5">
+            <div class="container text-white text-center py-5">
+              <h1>Ievents</h1>
+              <p>Copyright &copy; 2017</p>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <footer class="d-block d-sm-none mt-5">
+      <div class="container text-white text-center py-5">
+        <h1>Ievents</h1>
+        <p>Copyright &copy; 2017</p>
+      </div>
+    </footer>
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
