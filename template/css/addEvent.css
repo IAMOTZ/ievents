@@ -18,6 +18,26 @@ body {
   background-color: rgba(0, 0, 0, 0.9);
   color: white; }
 
+#centers-section {
+  min-height: 700px; }
+  #centers-section .search-box .btn {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.9); }
+  #centers-section .card {
+    margin: 5px; }
+    #centers-section .card .btn {
+      background-color: rgba(0, 0, 0, 0.9) !important; }
+  #centers-section .seat-badge {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.4); }
+  #centers-section .pagination a {
+    font-weight: bold; }
+  #centers-section .pagination .active a {
+    background-color: black; }
+
 .img-round {
   height: 150px;
   width: 150px;
