@@ -8,7 +8,7 @@ body > nav {
 
 #navigation-section {
   background-color: rgba(0, 0, 0, 0.9);
-  min-height: 1000px; }
+  min-height: 2000px; }
   #navigation-section .navigation-links a {
     color: white;
     font-weight: bold; }
@@ -20,8 +20,6 @@ body > nav {
 
 #add-event-section nav {
   background-color: rgba(0, 0, 0, 0.9); }
-  #add-event-section nav ol {
-    background-color: rgba(0, 0, 0, 0.9); }
 
 #add-event-section .dark-button {
   background-color: rgba(0, 0, 0, 0.9);
@@ -29,32 +27,6 @@ body > nav {
 
 #add-event-section form {
   margin-top: 100px; }
-
-#centers-section {
-  min-height: 700px;
-  margin-top: 100px; }
-  #centers-section .search-box .btn {
-    color: white;
-    background-color: rgba(0, 0, 0, 0.9); }
-  #centers-section .card {
-    margin: 5px; }
-    #centers-section .card .btn {
-      background-color: rgba(0, 0, 0, 0.9) !important; }
-  #centers-section .seat-badge {
-    position: absolute;
-    top: 50%;
-    left: 60%;
-    font-size: 20px;
-    background-color: rgba(0, 0, 0, 0.4); }
-  #centers-section .pagination a {
-    font-weight: bold; }
-  #centers-section .pagination .active a {
-    background-color: black; }
-
-.img-round {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%; }
 
 footer {
   background-color: rgba(0, 0, 0, 0.9);

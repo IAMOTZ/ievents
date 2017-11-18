@@ -14,7 +14,7 @@ body > nav {
 
 #navigation-section {
   background-color: $custom-black;
-  min-height: 1000px;
+  min-height: 2000px;
 
   .navigation-links {
     a {
@@ -38,11 +38,8 @@ body > nav {
 
   nav {
     background-color: $custom-black;
-    
-    ol{
-      background-color: $custom-black;
-    }
   }
+
   .dark-button {
     background-color : $custom-black;
     color: white;
@@ -51,50 +48,6 @@ body > nav {
   form {
     margin-top: 100px;
   }
-}
-  
-#centers-section {
-  min-height: 700px;
-  margin-top: 100px;
-
-  .search-box {
-    .btn {
-      color: white;
-      background-color: rgba(0,0,0,0.9);
-    }
-  }
-
-  .card {
-    margin: 5px;
-    .btn {
-      background-color: rgba(0,0,0,0.9) !important;
-    }
-  }
-
-  .seat-badge {
-    position: absolute;
-    top: 50%;
-    left: 60%;
-    font-size: 20px;
-    background-color: rgba(0,0,0,0.4);
-  }
-  
-  .pagination {
-    a {
-      font-weight: bold;
-    }
-    .active {
-      a {
-        background-color: rgba(0,0,0,1);
-      }
-    }
-  }
-}
-  
-.img-round {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
 }
 
 footer {
