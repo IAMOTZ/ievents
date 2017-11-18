@@ -2,9 +2,6 @@ body {
   background-color: #f6f7fa;
   overflow-x: hidden; }
 
-body > .container-fluid {
-  min-height: 1000px; }
-
 #navigation-section {
   background-color: rgba(0, 0, 0, 0.9);
   min-height: 700px; }
@@ -22,7 +19,9 @@ body > .container-fluid {
     border-bottom: 1px solid #008ed6; }
 
 #centers-section {
-  min-height: 700px; }
+  min-height: 1000px; }
+  #centers-section nav {
+    background-color: rgba(0, 0, 0, 0.9); }
   #centers-section #center-section-header {
     padding-top: 70px; }
   #centers-section .search-box .btn {
@@ -42,6 +41,31 @@ body > .container-fluid {
     font-weight: bold; }
   #centers-section .pagination .active a {
     background-color: black; }
+
+@media (min-width: 576px) {
+  #center-details-modal .modal-dialog {
+    height: 400px;
+    width: 400px; } }
+
+@media (min-width: 992px) {
+  #center-details-modal .modal-dialog {
+    width: 400px; }
+    #center-details-modal .modal-dialog .seat-badge {
+      position: absolute;
+      top: 35%;
+      left: 65%;
+      font-size: 20px;
+      background-color: rgba(0, 0, 0, 0.4); } }
+
+#center-details-modal .seat-badge {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.4); }
+
+#center-details-modal .btn {
+  background-color: rgba(0, 0, 0, 0.9); }
 
 footer {
   background-color: rgba(0, 0, 0, 0.9);
