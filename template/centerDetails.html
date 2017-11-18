@@ -248,37 +248,79 @@
   <div class="modal fade" id="center-details-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="card">
-          <div>
+        <div class=" collapse show multi-collapse">
+          <div class="card">
             <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
             <span class="badge text-white p-2 seat-badge">4000 seat</span>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <div>
-              <h4 class="card-title">Ottawa event center</h4>
-              <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-            </div>
-            <p>Ottawa is a Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores adipisci commodi perferendis voluptatum,
-              illum doloremque.</p>
-            <fieldset class="form-group py-0">
-              <legend class="col-form-legend py-0">
-                <strong>Facilities</strong>
-              </legend>
-              <div class="form-check pt-2">
-                <label class="form-check-label pl-5">
-                  <input class="form-check-input" type="checkbox" checked disabled>Chairs
-                </label>
-                <label class="form-check-label pl-5">
-                  <input class="form-check-input" type="checkbox" checked disabled>Tables
-                </label>
-                <label class="form-check-label pl-5">
-                  <input class="form-check-input" type="checkbox" checked disabled> Projector
-                </label>
+            <div class="card-body d-flex flex-column">
+              <div>
+                <h4 class="card-title">Ottawa event center</h4>
+                <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
               </div>
-            </fieldset>
-            <a href="#" role="button" class="btn text-white mt-2">Book now for ₦3000/Day</a>
+              <p>Ottawa is a Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores adipisci commodi perferendis voluptatum,
+                illum doloremque.</p>
+              <fieldset class="form-group py-0">
+                <legend class="col-form-legend py-0">
+                  <strong>Facilities</strong>
+                </legend>
+                <div class="form-check pt-2">
+                  <label class="form-check-label pl-5">
+                    <input class="form-check-input" type="checkbox" checked disabled>Chairs
+                  </label>
+                  <label class="form-check-label pl-5">
+                    <input class="form-check-input" type="checkbox" checked disabled>Tables
+                  </label>
+                  <label class="form-check-label pl-5">
+                    <input class="form-check-input" type="checkbox" checked disabled> Projector
+                  </label>
+                </div>
+              </fieldset>
+              <a href=".multi-collapse" class="font-italic small" data-toggle="collapse">This center has been booked on...</a>
+              <a href="#" role="button" class="btn text-white mt-2">Book now for ₦3000/Day</a>
+            </div>
           </div>
         </div>
+
+        <div class="collapse multi-collapse ">
+          <div class="card">
+            <div class="card-header clear-fix bg-white">
+                <a href=".multi-collapse" class="float-right" data-toggle="collapse">
+                  <i class="fa fa-remove"></i>
+                </a>
+                <h4 class="card-title">Ottawa event center</h4>
+                <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
+                <p class="text-muted small mb-0">This center has already been booked on the following dates</p>
+            </div>
+            
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Year</th>
+                  <th scope="col">Month</th>                  
+                  <th scope="col">Day</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row">2017</td>
+                  <td>January</td>
+                  <td>9 - 15</td>
+                </tr>
+                <tr>
+                  <td scope="row">2017</td>
+                  <td scope="row">January</td>
+                  <td scope="row">20</td>
+                </tr>
+                <tr>
+                  <td scope="row">2017</td>
+                  <td scope="row">February</td>
+                  <td scope="row">7</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
