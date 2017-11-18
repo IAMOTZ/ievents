@@ -8,7 +8,7 @@ body > nav {
 
 #navigation-section {
   background-color: rgba(0, 0, 0, 0.9);
-  min-height: 700px; }
+  min-height: 1000px; }
   #navigation-section .navigation-links a {
     color: white;
     font-weight: bold; }
