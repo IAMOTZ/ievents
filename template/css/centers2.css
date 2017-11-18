@@ -2,13 +2,13 @@ body {
   background-color: #f6f7fa;
   overflow-x: hidden; }
 
+body > nav {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-bottom: 2px solid rgba(0, 143, 214, 0.873); }
+
 #navigation-section {
   background-color: rgba(0, 0, 0, 0.9);
-  min-height: 700px; }
-  #navigation-section .img-round {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%; }
+  min-height: 2000px; }
   #navigation-section .navigation-links a {
     color: white;
     font-weight: bold; }
@@ -19,14 +19,14 @@ body {
     border-bottom: 1px solid #008ed6; }
 
 #centers-section {
-  min-height: 1000px; }
+  min-height: 700px; }
   #centers-section nav {
     background-color: rgba(0, 0, 0, 0.9); }
-  #centers-section #center-section-header {
-    padding-top: 70px; }
-  #centers-section .search-box .btn {
-    color: white;
-    background-color: rgba(0, 0, 0, 0.9); }
+  #centers-section .search-box {
+    margin-top: 100px; }
+    #centers-section .search-box .btn {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.9); }
   #centers-section .card {
     margin: 5px; }
     #centers-section .card .btn {

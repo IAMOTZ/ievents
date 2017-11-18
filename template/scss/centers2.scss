@@ -8,16 +8,15 @@ body {
   overflow-x: hidden; 
 }
 
+body > nav {
+  background-color: $custom-black;
+  border-bottom: 2px solid rgba(0, 143, 214, 0.873);
+}
+
 
 #navigation-section {
   background-color: $custom-black;
-  min-height: 700px;
-
-  .img-round {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-  }
+  min-height: 2000px;
 
   .navigation-links {
     a {
@@ -38,18 +37,14 @@ body {
 }
 
 #centers-section {
-
+  min-height: 700px;
   nav {
     background-color: $custom-black;
   }
   
-  min-height: 1000px;
-
-  #center-section-header {
-    padding-top: 70px;
-  }
-
   .search-box {
+    margin-top: 100px;
+
     .btn {
       color: white;
       background-color: $custom-black;
@@ -123,5 +118,5 @@ body {
 
 footer {
   background-color: $custom-black;
-  border-top: 2px solid rgb(0, 142, 214);
+  border-top: 2px solid $custom-blue;
 }
