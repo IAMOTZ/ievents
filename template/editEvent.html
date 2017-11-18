@@ -17,7 +17,7 @@
       <a href="#" class="navbar-brand">
         <strong>Tunmise</strong>
         <br>
-        <p class="h6">Add Event &nbsp;/ &nbsp; Book a center</p>
+        <p class="h6">Edit Event &nbsp;/ &nbsp; Book a center</p>
       </a>
       <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
         <span class="navbar-toggler-icon"></span>
@@ -69,22 +69,33 @@
         <!-- Content Header(navigation) on large screen-->
         <nav class="navbar w-100 mt-3 d-none d-md-block">
           <a class="navbar-brand text-white" href="#">
-            <strong>Add Event</strong>
+            <strong>Edit event</strong>
           </a>
         </nav>
 
         <form class="mt-sm-5">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="email" class="form-control" id="title" placeholder="My Dad Birthday">
+            <input type="email" class="form-control" id="title" value="My Dad Birthday">
           </div>
           <div class="form-group">
             <label for="description">Description</label>
             <textarea class="form-control" id="description" rows="7" placeholder="More details about the event">My dad's birthday is a really Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque, labore dolorum? Dicta suscipit similique unde?</textarea>
           </div>
-          <a href="bookCenter.html" class="btn btn-outline-dark ">Book a center</a>
         </form>
 
+        <form class="my-3 form-inline">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" value="2017-06-01" class="form-control mx-sm-3">
+          </div>
+          <div class="form-group">
+            <label for="days">Days</label>
+            <input type="number" id="days" class="form-control mx-sm-3" value="4">
+          </div>
+          
+        </form>
+        <a href="#" class="btn btn-outline-dark">Update</a>
       </div>
     </div>
   </div>
