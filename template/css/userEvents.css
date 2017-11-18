@@ -8,7 +8,7 @@ body > nav {
 
 #navigation-section {
   background-color: rgba(0, 0, 0, 0.9);
-  min-height: 1000px; }
+  min-height: 2000px; }
   #navigation-section .navigation-links a {
     color: white;
     font-weight: bold; }
@@ -23,8 +23,6 @@ body > nav {
   min-height: 700px; }
   #main-content nav {
     background-color: rgba(0, 0, 0, 0.9); }
-    #main-content nav ol {
-      background-color: rgba(0, 0, 0, 0.9); }
   #main-content .dark-button {
     background-color: rgba(0, 0, 0, 0.9);
     color: white; }
