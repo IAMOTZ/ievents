@@ -17,6 +17,8 @@ Presently the application is in template development stage, so by installing thi
 >- Use `$ npm install` to install all required dependencies packages.
 >- Start app with `$ npm run template:dev`
 >- The home page of the template would open in your default browser and you can navigate the pages
+>- Login in the app to explore user features
+>- Sign up in the app to explore admin features
 
 NOTE: The project is still in template development stage so the pages are not functional yet.
 
