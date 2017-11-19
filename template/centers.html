@@ -245,7 +245,7 @@
   </section>
 
   <!-- Modal -->
-  <div class="modal fade" id="center-details-modal" tabindex="-1" role="dialog">
+  <div class="modal fade" id="center-details-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class=" collapse show multi-collapse">
@@ -254,7 +254,11 @@
             <span class="badge text-white p-2 seat-badge">4000 seat</span>
             <div class="card-body d-flex flex-column">
               <div>
-                <h4 class="card-title">Ottawa event center</h4>
+                <h4 class="card-title d-inline">Ottawa event center</h4>
+                <a href="" class="close text-primary" data-dismiss="modal" aria-label="Close">
+                  <i class="fa fa-remove fa-fw"></i>
+                </a>
+                <br>
                 <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
               </div>
               <p>Ottawa is a Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores adipisci commodi perferendis voluptatum,
@@ -284,19 +288,19 @@
         <div class="collapse multi-collapse ">
           <div class="card">
             <div class="card-header clear-fix bg-white">
-                <a href=".multi-collapse" class="float-right" data-toggle="collapse">
-                  <i class="fa fa-remove"></i>
-                </a>
-                <h4 class="card-title">Ottawa event center</h4>
-                <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                <p class="text-muted small mb-0">This center has already been booked on the following dates</p>
+              <a href=".multi-collapse" class="float-right" data-toggle="collapse">
+                <i class="fa fa-remove"></i>
+              </a>
+              <h4 class="card-title">Ottawa event center</h4>
+              <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
+              <p class="text-muted small mb-0">This center has already been booked on the following dates</p>
             </div>
-            
+
             <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Year</th>
-                  <th scope="col">Month</th>                  
+                  <th scope="col">Month</th>
                   <th scope="col">Day</th>
                 </tr>
               </thead>
