@@ -8,19 +8,15 @@ body {
   overflow-x: hidden; 
 }
 
-body > .container-fluid {
-    min-height: 700px;
+body > nav {
+  background-color: $custom-black;
+  border-bottom: 2px solid rgba(0, 143, 214, 0.873);
 }
+
 
 #navigation-section {
   background-color: $custom-black;
-  min-height: 700px;
-
-  .img-round {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-  }
+  min-height: 2000px;
 
   .navigation-links {
     a {
@@ -42,22 +38,23 @@ body > .container-fluid {
 
 #centers-section {
   min-height: 700px;
-
-  #center-section-header {
-    padding-top: 70px;
+  nav {
+    background-color: $custom-black;
   }
-
+  
   .search-box {
+    margin-top: 100px;
+
     .btn {
       color: white;
-      background-color: rgba(0,0,0,0.9);
+      background-color: $custom-black;
     }
   }
 
   .card {
     margin: 5px;
     .btn {
-      background-color: rgba(0,0,0,0.9) !important;
+      background-color: $custom-black !important;
     }
   }
 
@@ -79,10 +76,47 @@ body > .container-fluid {
       }
     }
   }
+
+}
+
+#center-details-modal {
+
+  @media (min-width: 576px) {
+    .modal-dialog {
+      height: 400px;
+      width: 400px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .modal-dialog {
+      width: 400px;
+      .seat-badge {
+        position: absolute;
+        top: 35%;
+        left: 65%;
+        font-size: 20px;
+        background-color: rgba(0,0,0,0.4);
+      }
+    }
+  }
+
+  .seat-badge {
+    position: absolute;
+    top: 30%;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.4);
+  }
+
+  .btn {
+    background-color: $custom-black;
+  }
 }
 
 
+
 footer {
-  background-color: rgba(0,0,0,0.9);
-  border-top: 2px solid rgb(0, 142, 214);
+  background-color: $custom-black;
+  border-top: 2px solid $custom-blue;
 }

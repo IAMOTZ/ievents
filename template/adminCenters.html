@@ -11,8 +11,8 @@
 </head>
 
 <body>
-  <!-- Navigation on small screen -->
-  <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
+  <!-- Top Navigation on small screen -->
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
     <div class="container">
       <a href="#" class="navbar-brand">
         <strong>Admin</strong>
@@ -28,10 +28,10 @@
             <a href="#" class="nav-link">Centers</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Add Center</a>
+            <a href="addCenter.html" class="nav-link">Add Center</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Logout</a>
+            <a href="index.html" class="nav-link">Logout</a>
           </li>
         </ul>
       </div>
@@ -42,37 +42,37 @@
     <div class="row">
 
       <!-- Side navigation on large screen -->
-      <div class="col-lg-2 fixed-top  d-none d-md-block" id="navigation-section">
+      <div class="col-lg-2 fixed-top  d-none d-lg-block" id="navigation-section">
         <div class="profile-pic mt-5 text-center">
           <p class="lead text-white pt-3" id="userName">Admin</p>
         </div>
         <div class="pt-3 navigation-links">
           <div class="list-group">
-            <a class="list-group-item" href="#content-section">
+            <a class="list-group-item" href="#">
               <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
-            <a class="list-group-item" href="#">
+            <a class="list-group-item" href="addCenter.html">
               <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center</a>
-            <a class="list-group-item" href="#">
+            <a class="list-group-item" href="index.html">
               <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
           </div>
         </div>
       </div>
 
       <!-- Main content -->
-      <div class="col-lg-10 offset-md-2" id="add-event-section">
+      <div class="col-lg-10 offset-lg-2" id="add-event-section">
 
-        <!-- Content Header(navigation) on large screen-->
-        <nav class="navbar w-100 mt-3 d-none d-md-block">
+        <!-- Content Header on large screen-->
+        <nav class="navbar w-100 mt-3 d-none d-lg-block">
           <a class="navbar-brand text-white" href="#">
             <strong>Centers</strong>
           </a>
         </nav>
 
-        <div id="centers-section" class="mt-sm-0">
+        <div id="centers-section" class="mt-lg-0">
           <div class="container">
             <div id="center-section-content" class="d-flex flex-column align-items-center">
               <!-- Search box on medium screeen and above-->
-              <div class="search-box input-group w-50 mt-5">
+              <div class="search-box input-group w-50 mt-lg-5">
                 <input type="text" class="form-control" placeholder="Search for a center">
                 <div class="input-group-btn d-none d-sm-block">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
@@ -226,7 +226,7 @@
               </ul>
             </div>
 
-            <footer class="d-none d-sm-block">
+            <footer class="d-none d-lg-block">
               <div class="container text-white text-center py-5">
                 <h1>Ievents</h1>
                 <p>Copyright &copy; 2017</p>
@@ -241,7 +241,7 @@
       </div>
     </div>
 
-    <footer class="d-block d-sm-none mt-5">
+    <footer class="d-block d-lg-none mt-5">
       <div class="container text-white text-center py-5">
         <h1>Ievents</h1>
         <p>Copyright &copy; 2017</p>

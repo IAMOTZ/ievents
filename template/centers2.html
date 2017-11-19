@@ -11,256 +11,374 @@
 </head>
 
 <body>
-  <div class="d-block">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-2 fixed-top" id="navigation-section">
-          <div class="profile-pic mt-5 text-center">
-            <img src="img/person.jpeg" alt="" class="img-round">
-            <p class="lead text-white pt-3" id="userName">Tunmise Ogunniyi</p>
-          </div>
-          <div class="pt-3 navigation-links">
-            <div class="list-group">
-              <a class="list-group-item" href="#">
-                <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>&nbsp; My Events</a>
-              <a class="list-group-item" href="#">
-                <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events</a>
-              <a class="list-group-item" href="#content-section">
-                <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
-              <a class="list-group-item" href="#">
-                <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>&nbsp; Messages</a>
-              <a class="list-group-item" href="#">
-                <i class="fa fa-history fa-fw" aria-hidden="true"></i>&nbsp; History</a>
-              <a class="list-group-item" href="#">
-                <i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Profile</a>
-              <a class="list-group-item" href="#">
-                <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
-            </div>
+  <!-- Top Navigation on small screen -->
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <strong>Tunmise</strong>
+        <br>
+        <p class="h6">Centers</p>
+      </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="userEvents.html" class="nav-link">My events</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Add Events</a>
+          </li>
+          <li class="nav-item">
+            <a href="centers2.html" class="nav-link">Centers</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Side navigation on large screen -->
+      <div class="col-lg-2 fixed-top  d-none d-lg-block" id="navigation-section">
+        <div class="profile-pic mt-5 text-center">
+          <p class="lead text-white pt-3" id="userName">Tunmise Ogunniyi</p>
+        </div>
+        <div class="pt-3 navigation-links">
+          <div class="list-group">
+            <a class="list-group-item" href="userEvents.html">
+              <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>&nbsp; My Events</a>
+            <a class="list-group-item" href="addEvent.html">
+              <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events</a>
+            <a class="list-group-item" href="#">
+              <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
+            <a class="list-group-item" href="index.html">
+              <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
           </div>
         </div>
+      </div>
 
-        <div class="col-lg-10 offset-md-2" id="content-section">
-          <nav class="navbar w-100 bg-white">
-            <a class="navbar-brand text-dark" href="#">
-              <strong>Centers</strong>
-            </a>
-          </nav>
-          <section id="centers-section">
-            <div class="container">
-              <div id="center-section-content" class="d-flex flex-column align-items-center">
-                <div id="center-section-header">
-                  <h1 class="display-4">A special center for a special event</h1>
-                </div>
-                <div class="search-box input-group w-50 mt-5">
-                  <input type="text" class="form-control" placeholder="Search for a center">
-                  <div class="input-group-btn d-none d-sm-block">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-                      Search with
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <a class="dropdown-item" href="#">Location</a>
-                      <div role="separator" class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Name</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="search-box mt-3 d-block d-sm-none">
+
+      <!-- Main content -->
+      <div class="col-lg-10 offset-lg-2" id="centers-section">
+
+        <!-- Content Header on large screen-->
+        <nav class="navbar w-100 mt-3 d-none d-lg-block">
+          <a class="navbar-brand text-white" href="#">
+            <strong>Centers</strong>
+          </a>
+        </nav>
+
+        <section id="centers-section">
+          <div class="container">
+            <div id="center-section-content" class="d-flex flex-column align-items-center">
+              <div class="input-group w-50 mt-lg-5 search-box">
+                <input type="text" class="form-control" placeholder="Search for a center">
+                <div class="input-group-btn d-none d-sm-block">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
                     Search with
                   </button>
-                  <div class="dropdown-menu">
+                  <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="#">Location</a>
                     <div role="separator" class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Name</a>
                   </div>
                 </div>
               </div>
-              <!-- Grid view -->
-              <div class="mt-5">
-                <div class="row">
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+              <div class="search-box mt-3 d-block d-sm-none">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                  Search with
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Location</a>
+                  <div role="separator" class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Name</a>
+                </div>
+              </div>
+            </div>
+            <!-- Grid view -->
+            <div class="mt-5">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="card">
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="card">
+                    <div>
+                      <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                      <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                    </div>
+                    <div class="card-body d-flex flex-column">
                       <div>
-                        <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
-                        <span class="badge text-white p-2 seat-badge ">4000 seat</span>
+                        <h4 class="card-title">Ottawa event center</h4>
+                        <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
                       </div>
-                      <div class="card-body d-flex flex-column">
-                        <div>
-                          <h4 class="card-title">Ottawa event center</h4>
-                          <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
-                        </div>
-                        <a href="#" role="button" class="btn bg-primary text-white mt-3">Details</a>
-                      </div>
+                      <a role="button" class="btn text-white mt-3" data-toggle="modal" data-target="#center-details-modal">Details</a>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- Pagination  -->
-              <div class="mt-3">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item">
-                    <a href="" class="page-link">
-                      <i class="fa fa-angle-left"></i>
-                    </a>
-                  </li>
-                  <li class="page-item active">
-                    <a href="" class="page-link">1</a>
-
-                  </li>
-                  <li class="page-item">
-                    <a href="" class="page-link">2</a>
-
-                  </li>
-                  <li class="page-item">
-                    <a href="" class="page-link">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="" class="page-link">4</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="" class="page-link">5</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="" class="page-link">
-                      <i class="fa fa-angle-right"></i>
-                    </a>
-                    </i>
-                  </li>
-                </ul>
-              </div>
             </div>
-            <footer>
-              <div class="container text-white text-center py-5">
-                <h1>Ievents</h1>
-                <p>Copyright &copy; 2017</p>
+            <!-- Pagination  -->
+            <div class="mt-3">
+              <ul class="pagination justify-content-center">
+                <li class="page-item">
+                  <a href="" class="page-link">
+                    <i class="fa fa-angle-left"></i>
+                  </a>
+                </li>
+                <li class="page-item active">
+                  <a href="" class="page-link">1</a>
+
+                </li>
+                <li class="page-item">
+                  <a href="" class="page-link">2</a>
+
+                </li>
+                <li class="page-item">
+                  <a href="" class="page-link">3</a>
+                </li>
+                <li class="page-item">
+                  <a href="" class="page-link">4</a>
+                </li>
+                <li class="page-item">
+                  <a href="" class="page-link">5</a>
+                </li>
+                <li class="page-item">
+                  <a href="" class="page-link">
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                  </i>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal fade" id="center-details-modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class=" collapse show multi-collapse">
+                <div class="card">
+                  <img class="card-img-top" src="img/eventCenter1.jpeg" alt="">
+                  <span class="badge text-white p-2 seat-badge">4000 seat</span>
+                  <div class="card-body d-flex flex-column">
+                    <div>
+                      <h4 class="card-title d-inline">Ottawa event center</h4>
+                      <a href="" class="close text-primary" data-dismiss="modal" aria-label="Close">
+                          <i class="fa fa-remove fa-fw"></i>
+                        </a>
+                        <br>
+                      <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
+                    </div>
+                    <p>Ottawa is a Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores adipisci commodi perferendis
+                      voluptatum, illum doloremque.</p>
+                    <fieldset class="form-group py-0">
+                      <legend class="col-form-legend py-0">
+                        <strong>Facilities</strong>
+                      </legend>
+                      <div class="form-check pt-2">
+                        <label class="form-check-label pl-5">
+                          <input class="form-check-input" type="checkbox" checked disabled>Chairs
+                        </label>
+                        <label class="form-check-label pl-5">
+                          <input class="form-check-input" type="checkbox" checked disabled>Tables
+                        </label>
+                        <label class="form-check-label pl-5">
+                          <input class="form-check-input" type="checkbox" checked disabled> Projector
+                        </label>
+                      </div>
+                    </fieldset>
+                    <a href=".multi-collapse" class="font-italic small" data-toggle="collapse">This center has been booked on...</a>
+                    <a href="#" role="button" class="btn text-white mt-2">Book now for ₦3000/Day</a>
+                  </div>
+                </div>
               </div>
-            </footer>
-          </section>
+
+              <div class="collapse multi-collapse ">
+                <div class="card">
+                  <div class="card-header clear-fix bg-white">
+                    <a href=".multi-collapse" class="float-right" data-toggle="collapse">
+                      <i class="fa fa-remove"></i>
+                    </a>
+                    <h4 class="card-title">Ottawa event center</h4>
+                    <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; Ottawa, USA
+                    <p class="text-muted small mb-0">This center has already been booked on the following dates</p>
+                  </div>
+
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Year</th>
+                        <th scope="col">Month</th>
+                        <th scope="col">Day</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">2017</td>
+                        <td>January</td>
+                        <td>9 - 15</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">2017</td>
+                        <td scope="row">January</td>
+                        <td scope="row">20</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">2017</td>
+                        <td scope="row">February</td>
+                        <td scope="row">7</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
+
+        <footer class="d-none d-lg-block mt-5">
+            <div class="container text-white text-center py-5">
+              <h1>Ievents</h1>
+              <p>Copyright &copy; 2017</p>
+            </div>
+          </footer>
+
       </div>
     </div>
   </div>
 
+  <footer class="d-block d-lg-none mt-5">
+    <div class="container text-white text-center py-5">
+      <h1>Ievents</h1>
+      <p>Copyright &copy; 2017</p>
+    </div>
+  </footer>
 
 
   <script src="js/jquery.min.js"></script>

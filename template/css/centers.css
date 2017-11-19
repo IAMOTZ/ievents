@@ -3,7 +3,7 @@ body > nav {
   border-bottom: 2px solid rgba(0, 143, 214, 0.873); }
 
 #centers-section {
-  min-height: 700px; }
+  min-height: 1000px; }
   #centers-section #center-section-header {
     padding-top: 70px; }
   #centers-section .search-box .btn {
@@ -23,6 +23,21 @@ body > nav {
     font-weight: bold; }
   #centers-section .pagination .active a {
     background-color: black; }
+
+@media (min-width: 576px) {
+  #center-details-modal .modal-dialog {
+    height: 400px;
+    width: 400px; } }
+
+@media (min-width: 992px) {
+  #center-details-modal .modal-dialog {
+    width: 400px; }
+    #center-details-modal .modal-dialog .seat-badge {
+      position: absolute;
+      top: 35%;
+      left: 65%;
+      font-size: 20px;
+      background-color: rgba(0, 0, 0, 0.4); } }
 
 #center-details-modal .seat-badge {
   position: absolute;

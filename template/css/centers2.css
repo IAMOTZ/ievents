@@ -2,16 +2,13 @@ body {
   background-color: #f6f7fa;
   overflow-x: hidden; }
 
-body > .container-fluid {
-  min-height: 700px; }
+body > nav {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-bottom: 2px solid rgba(0, 143, 214, 0.873); }
 
 #navigation-section {
   background-color: rgba(0, 0, 0, 0.9);
-  min-height: 700px; }
-  #navigation-section .img-round {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%; }
+  min-height: 2000px; }
   #navigation-section .navigation-links a {
     color: white;
     font-weight: bold; }
@@ -23,11 +20,13 @@ body > .container-fluid {
 
 #centers-section {
   min-height: 700px; }
-  #centers-section #center-section-header {
-    padding-top: 70px; }
-  #centers-section .search-box .btn {
-    color: white;
+  #centers-section nav {
     background-color: rgba(0, 0, 0, 0.9); }
+  #centers-section .search-box {
+    margin-top: 100px; }
+    #centers-section .search-box .btn {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.9); }
   #centers-section .card {
     margin: 5px; }
     #centers-section .card .btn {
@@ -42,6 +41,31 @@ body > .container-fluid {
     font-weight: bold; }
   #centers-section .pagination .active a {
     background-color: black; }
+
+@media (min-width: 576px) {
+  #center-details-modal .modal-dialog {
+    height: 400px;
+    width: 400px; } }
+
+@media (min-width: 992px) {
+  #center-details-modal .modal-dialog {
+    width: 400px; }
+    #center-details-modal .modal-dialog .seat-badge {
+      position: absolute;
+      top: 35%;
+      left: 65%;
+      font-size: 20px;
+      background-color: rgba(0, 0, 0, 0.4); } }
+
+#center-details-modal .seat-badge {
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.4); }
+
+#center-details-modal .btn {
+  background-color: rgba(0, 0, 0, 0.9); }
 
 footer {
   background-color: rgba(0, 0, 0, 0.9);

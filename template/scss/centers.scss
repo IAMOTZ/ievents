@@ -4,7 +4,7 @@ body > nav {
 }
 
 #centers-section {
-  min-height: 700px;
+  min-height: 1000px;
 
   #center-section-header {
     padding-top: 70px;
@@ -46,6 +46,27 @@ body > nav {
 }
 
 #center-details-modal {
+
+  @media (min-width: 576px) {
+    .modal-dialog {
+      height: 400px;
+      width: 400px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .modal-dialog {
+      width: 400px;
+      .seat-badge {
+        position: absolute;
+        top: 35%;
+        left: 65%;
+        font-size: 20px;
+        background-color: rgba(0,0,0,0.4);
+      }
+    }
+  }
+
   .seat-badge {
     position: absolute;
     top: 30%;
