@@ -1,0 +1,53 @@
+body {
+  background-color: #f6f7fa;
+  overflow-x: hidden; }
+
+body > nav {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-bottom: 2px solid #008ed6; }
+
+#navigation-section {
+  background-color: rgba(0, 0, 0, 0.9);
+  min-height: 2000px; }
+  #navigation-section .navigation-links a {
+    color: white;
+    font-weight: bold; }
+  #navigation-section .navigation-links .list-group-item {
+    background-color: transparent;
+    border-top: 1px solid #008ed6; }
+  #navigation-section .navigation-links .list-group-item:last-child {
+    border-bottom: 1px solid #008ed6; }
+
+#add-event-section nav {
+  background-color: rgba(0, 0, 0, 0.9); }
+
+#add-event-section .dark-button {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white; }
+
+#add-event-section form {
+  margin-top: 100px; }
+
+#centers-section {
+  margin-top: 100px; }
+  #centers-section .search-box .btn {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.9); }
+  #centers-section .card {
+    margin: 5px; }
+    #centers-section .card .btn {
+      background-color: rgba(0, 0, 0, 0.9) !important; }
+  #centers-section .seat-badge {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0.4); }
+  #centers-section .pagination a {
+    font-weight: bold; }
+  #centers-section .pagination .active a {
+    background-color: black; }
+
+footer {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-top: 2px solid #008ed6; }
