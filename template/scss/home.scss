@@ -1,14 +1,18 @@
+$custom-black: rgba(0,0,0,0.9);
+$custom-blue: rgb(0, 142, 214);
+$background-color: #f6f7fa;
+
 body > nav {
-  background-color: rgba(0,0,0,0.9);
-  border-bottom: 2px solid rgba(0, 143, 214, 0.873);
+  background-color: $custom-black;
+  border-bottom: 2px solid $custom-blue;
 }
 
 #main-content-section {
   background: url('../img/eventCenter1.jpeg') no-repeat;
-  min-height: 700px;
+  min-height: 900px;
   background-size: cover;
   background-attachment: fixed;
-  border-bottom: 2px solid rgb(0, 142, 214);
+  border-bottom: 2px solid $custom-blue;
 
   .dark-overlay {
     background-color: rgba(0,0,0,0.7);
@@ -16,24 +20,24 @@ body > nav {
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 700px;
+    min-height: 900px;
   }
   
   #main-content {
     padding-top: 100px;
     color: white;
-    min-height: 700px;
+    min-height: 900px;
   }
 
   .search-box {
     .btn {
       color: white;
-      background-color: rgba(0,0,0,0.9);
+      background-color: $custom-black;
     }
   }
 }
 
 footer {
-  background-color: rgba(0,0,0,0.9);
-  border-top: 2px solid rgb(0, 142, 214);
+  background-color: $custom-black;
+  border-top: 2px solid $custom-blue;
 }

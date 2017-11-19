@@ -1,10 +1,10 @@
 body > nav {
   background-color: rgba(0, 0, 0, 0.9);
-  border-bottom: 2px solid rgba(0, 143, 214, 0.873); }
+  border-bottom: 2px solid #008ed6; }
 
 #main-content-section {
   background: url("../img/eventCenter1.jpeg") no-repeat;
-  min-height: 700px;
+  min-height: 900px;
   background-size: cover;
   background-attachment: fixed;
   border-bottom: 2px solid #008ed6; }
@@ -14,11 +14,11 @@ body > nav {
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 700px; }
+    min-height: 900px; }
   #main-content-section #main-content {
     padding-top: 100px;
     color: white;
-    min-height: 700px; }
+    min-height: 900px; }
   #main-content-section .search-box .btn {
     color: white;
     background-color: rgba(0, 0, 0, 0.9); }
