@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/transactions.css">
+  <title>Ievents</title>
+</head>
+
+<body>
+  <!-- Top Navigation on small screen -->
+  <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <strong>Admin</strong>
+        <br>
+        <p class="h6">Transactions</p>
+      </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="adminCenters.html" class="nav-link">Centers</a>
+          </li>
+          <li class="nav-item">
+            <a href="addCenter.html" class="nav-link">Add Center</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Transactions</a>
+          </li>
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <!-- Side navigation on large screen -->
+      <div class="col-lg-2 fixed-top  d-none d-lg-block" id="navigation-section">
+        <div class="profile-pic mt-5 text-center">
+          <p class="lead text-white pt-3" id="userName">Admin</p>
+        </div>
+        <div class="pt-3 navigation-links">
+          <div class="list-group">
+            <a class="list-group-item" href="adminCenters.html">
+              <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
+            <a class="list-group-item" href="addCenter.html">
+              <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center</a>
+            <a class="list-group-item" href="#">
+              <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions</a>
+            <a class="list-group-item" href="index.html">
+              <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="col-lg-10 offset-lg-2" id="main-content">
+
+        <!-- Content Header on large screen-->
+        <nav class="navbar w-100 mt-3 d-none d-lg-block">
+          <a class="navbar-brand text-white" href="#">
+            <strong>Transactions</strong>
+          </a>
+        </nav>
+
+        <!-- Transactions -->
+        <div id="transactions" class="mt-lg-0">
+          <div id="accordion" role="tablist">
+
+            <div class="card w-lg-75 my-3 bg-white">
+              <a href="#collapse-1" data-toggle="collapse" class="text-dark">
+                <div class="card-header" role="tab">
+                  <h5 class="mb-0">
+                    Havilla event
+                    <span class="badge badge-primary">4 new</span>
+                  </h5>
+                </div>
+              </a>
+              <div id="collapse-1" class="collapse" role="tabpanel" data-parent="#accordion">
+                <div class="card-body">
+                  <table class="table table-striped table-responsive-md">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="d-none d-lg-table-cell">#</th>
+                        <th scope="col" class="d-none d-lg-table-cell">Client Name</th>
+                        <th scope="col">Client Email</th>
+                        <th scope="col">Booking-Date</th>
+                        <th scope="col">Decision</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">1</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>markOtto@gmail.com</td>
+                        <td>17/8/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">2</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>danny67@gmail.com</td>
+                        <td>15/9/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">3</th>
+                        <td class="d-none d-lg-table-cell">Larry</td>
+                        <td>larry4sure@gmail.com</td>
+                        <td>1/06/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card w-lg-75 my-3 bg-white">
+              <a href="#collapse-2" data-toggle="collapse" class="text-dark">
+                <div class="card-header" role="tab">
+                  <h5 class="mb-0">
+                    Rubby Hall
+                    <span class="badge badge-primary">4 new</span>
+                  </h5>
+                </div>
+              </a>
+              <div id="collapse-2" class="collapse" role="tabpanel" data-parent="#accordion">
+                <div class="card-body">
+                  <table class="table table-striped table-responsive-md">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="d-none d-lg-table-cell">#</th>
+                        <th scope="col" class="d-none d-lg-table-cell">Client Name</th>
+                        <th scope="col">Client Email</th>
+                        <th scope="col">Booking-Date</th>
+                        <th scope="col">Decision</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">1</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>markOtto@gmail.com</td>
+                        <td>17/8/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">2</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>danny67@gmail.com</td>
+                        <td>15/9/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">3</th>
+                        <td class="d-none d-lg-table-cell">Larry</td>
+                        <td>larry4sure@gmail.com</td>
+                        <td>1/06/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card w-lg-75 my-3 bg-white">
+              <a href="#collapse-3" data-toggle="collapse" class="text-dark">
+                <div class="card-header" role="tab">
+                  <h5 class="mb-0">
+                    The Five
+                    <span class="badge badge-primary">4 new</span>
+                  </h5>
+                </div>
+              </a>
+              <div id="collapse-3" class="collapse" role="tabpanel" data-parent="#accordion">
+                <div class="card-body">
+                  <table class="table table-striped table-responsive-md">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="d-none d-lg-table-cell">#</th>
+                        <th scope="col" class="d-none d-lg-table-cell">Client Name</th>
+                        <th scope="col">Client Email</th>
+                        <th scope="col">Booking-Date</th>
+                        <th scope="col">Decision</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">1</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>markOtto@gmail.com</td>
+                        <td>17/8/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">2</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>danny67@gmail.com</td>
+                        <td>15/9/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">3</th>
+                        <td class="d-none d-lg-table-cell">Larry</td>
+                        <td>larry4sure@gmail.com</td>
+                        <td>1/06/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card w-lg-75 my-3 bg-white">
+              <a href="#collapse-4" data-toggle="collapse" class="text-dark">
+                <div class="card-header" role="tab">
+                  <h5 class="mb-0">
+                    Ottawa event center
+                    <span class="badge badge-primary">4 new</span>
+                  </h5>
+                </div>
+              </a>
+              <div id="collapse-4" class="collapse" role="tabpanel" data-parent="#accordion">
+                <div class="card-body">
+                  <table class="table table-striped table-responsive-md">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="d-none d-lg-table-cell">#</th>
+                        <th scope="col" class="d-none d-lg-table-cell">Client Name</th>
+                        <th scope="col">Client Email</th>
+                        <th scope="col">Booking-Date</th>
+                        <th scope="col">Decision</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">1</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>markOtto@gmail.com</td>
+                        <td>17/8/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">2</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>danny67@gmail.com</td>
+                        <td>15/9/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">3</th>
+                        <td class="d-none d-lg-table-cell">Larry</td>
+                        <td>larry4sure@gmail.com</td>
+                        <td>1/06/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="card w-lg-75 my-3 bg-white">
+              <a href="#collapse-5" data-toggle="collapse" class="text-dark">
+                <div class="card-header" role="tab">
+                  <h5 class="mb-0">
+                    The place
+                    <span class="badge badge-primary">4 new</span>
+                  </h5>
+                </div>
+              </a>
+              <div id="collapse-5" class="collapse" role="tabpanel" data-parent="#accordion">
+                <div class="card-body">
+                  <table class="table table-striped table-responsive-md">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="d-none d-lg-table-cell">#</th>
+                        <th scope="col" class="d-none d-lg-table-cell">Client Name</th>
+                        <th scope="col">Client Email</th>
+                        <th scope="col">Booking-Date</th>
+                        <th scope="col">Decision</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">1</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>markOtto@gmail.com</td>
+                        <td>17/8/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">2</th>
+                        <td class="d-none d-lg-table-cell">Mark</td>
+                        <td>danny67@gmail.com</td>
+                        <td>15/9/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="d-none d-lg-table-cell">3</th>
+                        <td class="d-none d-lg-table-cell">Larry</td>
+                        <td>larry4sure@gmail.com</td>
+                        <td>1/06/2017</td>
+                        <td>
+                          <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0">Allow</button>
+                          <button class="btn btn-outline-danger p-1">Cancel</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <footer class="d-block d-sm-none mt-5">
+    <div class="container text-white text-center py-5">
+      <h1>Ievents</h1>
+      <p>Copyright &copy; 2017</p>
+    </div>
+  </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>
