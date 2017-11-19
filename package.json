@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
+    "eslint": "^4.11.0",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0"
   }
