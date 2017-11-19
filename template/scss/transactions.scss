@@ -34,57 +34,33 @@ body > nav {
 
 }
 
-#add-event-section {
+#main-content {
 
   nav {
     background-color: $custom-black;
   }
-  .dark-button {
-    background-color : $custom-black;
-    color: white;
-  }
 
-  form {
-    margin-top: 100px;
-  }
-}
-  
-#centers-section {
-  margin-top: 100px;
+  #transactions {
+    .card {
+      z-index: 4;
+      
+      a:hover {
+        text-decoration: none;      
+      }
 
-  .search-box {
-    .btn {
-      color: white;
-      background-color: $custom-black;
-    }
-  }
+      .card-header {
+        background-color: white;
+      }
 
-  .card {
-    margin: 5px;
-    .btn {
-      background-color: $custom-black !important;
-    }
-  }
-
-  .seat-badge {
-    position: absolute;
-    top: 50%;
-    left: 60%;
-    font-size: 20px;
-    background-color: rgba(0,0,0,0.4);
-  }
-  
-  .pagination {
-    a {
-      font-weight: bold;
-    }
-    .active {
-      a {
-        background-color: rgba(0,0,0,1);
+      .badge {
+        background-color: $custom-blue;
       }
     }
   }
 }
+
+
+
   
 footer {
   background-color: $custom-black;
