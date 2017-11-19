@@ -8,13 +8,13 @@ body {
 }
 
 body > nav {
-  background-color: rgba(0,0,0,0.9);
-  border-bottom: 2px solid rgba(0, 143, 214, 0.873);
+  background-color: $custom-black;
+  border-bottom: 2px solid $custom-blue;
 }
 
 #navigation-section {
   background-color: $custom-black;
-  min-height: 700px;
+  min-height: 2000px;
 
   .navigation-links {
     a {
@@ -38,10 +38,6 @@ body > nav {
 
   nav {
     background-color: $custom-black;
-    
-    ol{
-      background-color: $custom-black;
-    }
   }
   .dark-button {
     background-color : $custom-black;
@@ -54,20 +50,19 @@ body > nav {
 }
   
 #centers-section {
-  min-height: 1000px;
   margin-top: 100px;
 
   .search-box {
     .btn {
       color: white;
-      background-color: rgba(0,0,0,0.9);
+      background-color: $custom-black;
     }
   }
 
   .card {
     margin: 5px;
     .btn {
-      background-color: rgba(0,0,0,0.9) !important;
+      background-color: $custom-black !important;
     }
   }
 
@@ -91,13 +86,7 @@ body > nav {
   }
 }
   
-.img-round {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-}
-
 footer {
-  background-color: rgba(0,0,0,0.9);
-  border-top: 2px solid rgb(0, 142, 214);
+  background-color: $custom-black;
+  border-top: 2px solid $custom-blue;
 }

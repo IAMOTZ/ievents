@@ -4,11 +4,11 @@ body {
 
 body > nav {
   background-color: rgba(0, 0, 0, 0.9);
-  border-bottom: 2px solid rgba(0, 143, 214, 0.873); }
+  border-bottom: 2px solid #008ed6; }
 
 #navigation-section {
   background-color: rgba(0, 0, 0, 0.9);
-  min-height: 700px; }
+  min-height: 2000px; }
   #navigation-section .navigation-links a {
     color: white;
     font-weight: bold; }
@@ -20,8 +20,6 @@ body > nav {
 
 #add-event-section nav {
   background-color: rgba(0, 0, 0, 0.9); }
-  #add-event-section nav ol {
-    background-color: rgba(0, 0, 0, 0.9); }
 
 #add-event-section .dark-button {
   background-color: rgba(0, 0, 0, 0.9);
@@ -31,7 +29,6 @@ body > nav {
   margin-top: 100px; }
 
 #centers-section {
-  min-height: 1000px;
   margin-top: 100px; }
   #centers-section .search-box .btn {
     color: white;
@@ -50,11 +47,6 @@ body > nav {
     font-weight: bold; }
   #centers-section .pagination .active a {
     background-color: black; }
-
-.img-round {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%; }
 
 footer {
   background-color: rgba(0, 0, 0, 0.9);
