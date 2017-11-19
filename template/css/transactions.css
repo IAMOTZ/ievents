@@ -21,14 +21,16 @@ body > nav {
 #main-content nav {
   background-color: rgba(0, 0, 0, 0.9); }
 
-#main-content #transactions .card {
-  z-index: 4; }
-  #main-content #transactions .card a:hover {
-    text-decoration: none; }
-  #main-content #transactions .card .card-header {
-    background-color: white; }
-  #main-content #transactions .card .badge {
-    background-color: #008ed6; }
+#main-content #transactions {
+  margin-top: 100px; }
+  #main-content #transactions .card {
+    z-index: 4; }
+    #main-content #transactions .card a:hover {
+      text-decoration: none; }
+    #main-content #transactions .card .card-header {
+      background-color: white; }
+    #main-content #transactions .card .badge {
+      background-color: #008ed6; }
 
 .dark-button {
   background-color: rgba(0, 0, 0, 0.9); }
