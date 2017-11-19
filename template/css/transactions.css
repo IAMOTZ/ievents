@@ -30,6 +30,9 @@ body > nav {
   #main-content #transactions .card .badge {
     background-color: #008ed6; }
 
+.dark-button {
+  background-color: rgba(0, 0, 0, 0.9); }
+
 footer {
   background-color: rgba(0, 0, 0, 0.9);
   border-top: 2px solid #008ed6; }
