@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import db from './models/index';
 
 const app = express();
 
@@ -19,9 +20,11 @@ app.use((req, res) => {
   res.status(404).json({ error: 'page not found' });
 });
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
-app.listen(app.get('port'), () => {
-  console.log(`App started on port ${app.get('port')}`);
-});
-
+db.sequelize.sync()
+  .then(() => {
+    app.listen(app.get('port'), () => {
+      console.log(`App started on port ${app.get('port')}`);
+    });
+  });
