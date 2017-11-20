@@ -22,7 +22,8 @@
     "bootstrap": "4.0.0-beta.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
-    "popper.js": "^1.11.1"
+    "popper.js": "^1.11.1",
+    "sequelize": "^4.22.8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
