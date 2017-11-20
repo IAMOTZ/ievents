@@ -4,8 +4,9 @@
   "description": "A web app to help manage and run commercial event centers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "server:dev": "nodemon ./server/app --exec babel-node",
     "template:dev": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
@@ -19,9 +20,13 @@
   },
   "homepage": "https://github.com/IAMOTZ/Ievents#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bootstrap": "4.0.0-beta.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
+    "morgan": "^1.9.0",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
     "popper.js": "^1.11.1",
@@ -38,6 +43,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
     "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "nodemon": "^1.12.1"
   }
 }
