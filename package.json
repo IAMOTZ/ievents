@@ -22,6 +22,8 @@
     "bootstrap": "4.0.0-beta.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
+    "pg": "^7.4.0",
+    "pg-hstore": "^2.3.2",
     "popper.js": "^1.11.1",
     "sequelize": "^4.22.8"
   },
