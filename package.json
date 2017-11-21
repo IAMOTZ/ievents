@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server:dev": "nodemon ./server/app --exec babel-node",
+    "test": "mocha --compilers js:babel-core/register ./test/**/*.js --exit",    
     "template:dev": "gulp",
     "lint": "./node_modules/.bin/eslint"
   },
