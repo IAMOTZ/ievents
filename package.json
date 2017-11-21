@@ -6,7 +6,7 @@
   "scripts": {
     "server:dev": "nodemon ./server/app --exec babel-node",
     "template:dev": "gulp",
-    "test": "mocha --compilers js:babel-core/register ./test/**/*.js --exit",
+    "test": "nyc mocha --compilers js:babel-core/register ./test/**/*.js --exit",
     "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
