@@ -28,3 +28,5 @@ db.sequelize.sync()
       console.log(`App started on port ${app.get('port')}`);
     });
   });
+
+export default app;
