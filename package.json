@@ -7,7 +7,7 @@
     "server:dev": "nodemon ./server/app --exec babel-node",
     "template:dev": "gulp",
     "test": "nyc mocha --compilers js:babel-core/register ./test/**/*.js --exit",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
