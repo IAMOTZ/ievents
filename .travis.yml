@@ -1,0 +1,12 @@
+sudo: required
+
+language: node_js
+
+node_js: 
+   - "stable"
+
+before_script: 
+   - npm install
+
+script: 
+   - "./node_modules/.bin/mocha --compilers js:babel-core/register ./test/**/*.js --exit"
