@@ -20,7 +20,7 @@ if (presentConfg.use_env_variable) {
     presentConfg.password, {
       host: presentConfg.host,
       port: presentConfg.port,
-      dialect: presentConfg.dialect,
+      dialect: 'postgres',
     },
   );
 }

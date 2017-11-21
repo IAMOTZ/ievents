@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "server:dev": "nodemon ./server/app --exec babel-node",
-    "test": "mocha --compilers js:babel-core/register ./test/**/*.js --exit",    
     "template:dev": "gulp",
+    "test": "nyc mocha --compilers js:babel-core/register ./test/**/*.js --exit",
+    "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint"
   },
   "repository": {
@@ -39,6 +40,7 @@
     "browser-sync": "^2.18.13",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "coveralls": "^3.0.0",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
@@ -47,6 +49,8 @@
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
     "mocha": "^4.0.1",
-    "nodemon": "^1.12.1"
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.12.1",
+    "nyc": "^11.3.0"
   }
 }
