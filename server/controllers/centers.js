@@ -37,7 +37,6 @@ export default {
         res.status(400).json({ status: 'error', message: err.message });
       });
   },
-  
   create(req, res) {
     const inputData = {};
     const inputKeys = Object.keys(req.body);
