@@ -196,6 +196,29 @@ describe('Centers', () => {
     });
   });
 
+  describe('GET /api/v1/centers/:id', () => {
+    it('should get a single', (done) => {
+      chai.request(app)
+        .get(`/api/v1/centers/${centerId}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.id.should.be.eql(centerId);
+          done();
+        });
+    });
+    it('should not get a single center', (done) => {
+      const wrongId = 4;
+      chai.request(app)
+        .get(`/api/v1/centers/${wrongId}`)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('center does not exist');
+          done();
+        });
+    });
+  });
+
   after((done) => {
     centers
       .destroy({
