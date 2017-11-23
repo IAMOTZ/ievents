@@ -126,6 +126,80 @@ describe('Events', () => {
     });
   });
 
+  describe('PUT: /api/v1/events/:id', () => {
+    it('should modify the event', (done) => {
+      const reqBody = {
+        title: 'Tunmise party',
+        description: 'Its gonna be special epic',
+        date: '13/2/2017',
+        token: userToken,
+      };
+      chai.request(app)
+        .put(`/api/v1/events/${eventId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('event updated');
+          res.body.data.title.should.be.eql(reqBody.title);
+          res.body.data.description.should.be.eql(reqBody.description);
+          res.body.data.date.should.be.eql(reqBody.date);
+          done();
+        });
+    });
+    it('should not modify when title is empty', (done) => {
+      const reqBody = {
+        title: '',
+        description: 'Its gonna be epic',
+        date: '17/2/2017',
+        token: userToken,
+      };
+      chai.request(app)
+        .post(`/api/v1/events/${eventId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('title cannot be empty');
+          done();
+        });
+    });
+    it('should not modify when date is of wrong format', (done) => {
+      const reqBody = {
+        title: 'Andela party',
+        description: 'Its gonna be epic',
+        date: '17-2/2017',
+        token: userToken,
+      };
+      chai.request(app)
+        .post(`/api/v1/events/${eventId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('the date format should be dd/mm/yyyy');
+          done();
+        });
+    });
+    it('should not modify when center is given and date is not', (done) => {
+      const reqBody = {
+        title: 'Andela party',
+        description: 'Its gonna be epic',
+        centerName: 'Havilla event center',
+        token: userToken,
+      };
+      chai.request(app)
+        .post(`/api/v1/events/${eventId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('date must be give if center is given');
+          done();
+        });
+    });
+  });
+
   after((done) => {
     centers
       .destroy({
