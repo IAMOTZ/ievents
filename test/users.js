@@ -11,8 +11,7 @@ const should = chai.should();
 
 describe('Authentication', () => {
   describe('POST /api/v1/users', () => {
-    it('sign up when all input fields are given', function (done) {
-      this.timeout(0);
+    it('sign up when all input fields are given', (done) => {
       const reqBody = {
         name: 'Tunmise',
         email: 'OgunniyiTunmis@gmail.com',
@@ -168,8 +167,7 @@ describe('Authentication', () => {
   });
 
   describe('POST /api/v1/users/login', () => {
-    before(function (done) {
-      this.timeout(0);
+    before((done) => {
       users
         .create({
           name: 'user1',
