@@ -11,6 +11,7 @@ const should = chai.should();
 
 describe('Centers', () => {
   let adminToken;
+  let centerId;
   before((done) => {
     users
       .create({
@@ -52,6 +53,7 @@ describe('Centers', () => {
         .post('/api/v1/centers')
         .send(reqBody)
         .end((err, res) => {
+          centerId = res.body.data.id;
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('center created');
@@ -155,18 +157,16 @@ describe('Centers', () => {
         token: adminToken,
       };
       chai.request(app)
-        .post('/api/v1/centers/:id')
+        .put(`/api/v1/centers/${centerId}`)
         .send(reqBody)
         .end((err, res) => {
           console.log(res.body.message);
-          res.should.have.status(201);
+          res.should.have.status(200);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('center created');
+          res.body.message.should.be.eql('center updated');
           res.body.data.name.should.be.eql(reqBody.name);
           res.body.data.location.should.be.eql(reqBody.location);
           res.body.data.details.should.be.eql(reqBody.details);
-          res.body.data.capacity.should.be.eql(Number(reqBody.capacity));
-          res.body.data.price.should.be.eql(Number(reqBody.price));
           res.body.data.type.should.be.eql(reqBody.type);
           res.body.data.facilities.should.be.a('array');
           res.body.data.facilities[0].should.be.eql('table');
@@ -186,7 +186,7 @@ describe('Centers', () => {
         token: adminToken,
       };
       chai.request(app)
-        .post('/api/v1/centers/:id')
+        .put(`/api/v1/centers/${centerId}`)
         .send(reqBody)
         .end((err, res) => {
           res.should.have.status(400);
@@ -212,7 +212,7 @@ describe('Centers', () => {
           })
           .then(() => {
             done();
-          })
+          });
       })
       .catch((err) => {
         console.log({
