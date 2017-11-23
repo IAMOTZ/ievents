@@ -52,7 +52,6 @@ describe('Centers', () => {
         .post('/api/v1/centers')
         .send(reqBody)
         .end((err, res) => {
-          console.log(res.body.message);
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('center created');
@@ -138,6 +137,60 @@ describe('Centers', () => {
         .end((err, res) => {
           res.body.should.be.a('array');
           res.body.length.should.be.eql(1);
+          done();
+        });
+    });
+  });
+
+  describe('PUT /api/v1/centers/:id', () => {
+    it('should update a center', (done) => {
+      const reqBody = {
+        name: 'new ottawa event center',
+        location: 'new Ottawa USA',
+        details: 'It is a beautiful place and I love it',
+        capacity: '300',
+        type: 'theater',
+        facilities: 'table,chairs,projector',
+        price: '400',
+        token: adminToken,
+      };
+      chai.request(app)
+        .post('/api/v1/centers/:id')
+        .send(reqBody)
+        .end((err, res) => {
+          console.log(res.body.message);
+          res.should.have.status(201);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('center created');
+          res.body.data.name.should.be.eql(reqBody.name);
+          res.body.data.location.should.be.eql(reqBody.location);
+          res.body.data.details.should.be.eql(reqBody.details);
+          res.body.data.capacity.should.be.eql(Number(reqBody.capacity));
+          res.body.data.price.should.be.eql(Number(reqBody.price));
+          res.body.data.type.should.be.eql(reqBody.type);
+          res.body.data.facilities.should.be.a('array');
+          res.body.data.facilities[0].should.be.eql('table');
+          res.body.data.facilities[2].should.be.eql('projector');
+          done();
+        });
+    });
+    it('should not update when new name is an empty string', (done) => {
+      const reqBody = {
+        name: '',
+        location: 'new Ottawa USA',
+        details: 'It is a beautiful place and I love it',
+        capacity: '300',
+        type: 'theater',
+        facilities: 'table,chairs,projector',
+        price: '400',
+        token: adminToken,
+      };
+      chai.request(app)
+        .post('/api/v1/centers/:id')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.message.should.be.eql('center name cannot be empty');
           done();
         });
     });
