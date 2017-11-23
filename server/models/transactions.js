@@ -30,13 +30,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.ARRAY(DataTypes.BOOLEAN),
       defaultValue: [],
     },
-    adminId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     centerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      onDelete: 'CASCADE',
     },
   });
   return transaction;

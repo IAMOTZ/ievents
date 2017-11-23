@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 export default (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
     id: {
@@ -23,6 +25,14 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.ENUM,
       values: ['user', 'admin'],
       defaultValue: 'user',
+    },
+  }, {
+    hooks: {
+      beforeCreate: (theUser) => {
+        const salt = bcrypt.genSaltSync(10);
+        const hashPassword = bcrypt.hashSync(theUser.password, salt);
+        theUser.password = hashPassword;
+      },
     },
   });
   return user;
