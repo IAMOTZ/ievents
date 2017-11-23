@@ -1,4 +1,5 @@
 import db from '../models/index';
+import validation from './validation/events';
 
 const { events, centers } = db;
 
@@ -17,7 +18,14 @@ export default {
       date,
       centername,
     } = inputData;
-
+    const validationOutput = validation.create(inputData);
+    if (validationOutput !== 'success') {
+      res.status(400).json({
+        status: 'failed',
+        message: validationOutput,
+      });
+      return;
+    }
     const userId = req.decoded.id;
     centers
       .findOne({
