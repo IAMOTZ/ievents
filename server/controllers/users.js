@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 import db from '../models/index';
+import validation from './validation/users';
 
 const { users } = db;
 
 export default {
-  signup(req, res) {
+  signUp(req, res) {
     const inputData = {};
     const inputKeys = Object.keys(req.body);
     for (let i = 0; i < inputKeys.length; i += 1) {
@@ -18,6 +19,14 @@ export default {
       password,
       role,
     } = inputData;
+    const validationOutput = validation.signUp(inputData);
+    if (validationOutput !== 'success') {
+      res.status(400).json({
+        status: 'failed',
+        message: validationOutput,
+      });
+      return 'done';
+    }
     users
       .findOne({
         where: {
