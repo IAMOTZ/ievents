@@ -38,4 +38,6 @@ router.get('/test', (req, res) => {
 
 router.post('/centers', controllers.centers.create);
 
+router.put('/centers/:id', controllers.centers.update);
+
 export default router;
