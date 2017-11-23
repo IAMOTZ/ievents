@@ -109,14 +109,14 @@ export default {
       price,
       image,
     } = inputData;
-    // const validationOutput = validation.update(inputData);
-    // if (validationOutput !== 'success') {
-    //   res.status(400).json({
-    //     status: 'failed',
-    //     message: validationOutput,
-    //   });
-    //   return;
-    // }
+    const validationOutput = validation.update(inputData);
+    if (validationOutput !== 'success') {
+      res.status(400).json({
+        status: 'failed',
+        message: validationOutput,
+      });
+      return;
+    }
     centers
       .findOne({
         where: {
