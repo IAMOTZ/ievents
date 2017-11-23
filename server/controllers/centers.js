@@ -1,4 +1,5 @@
 import db from '../models/index';
+import validation from './validation/centers';
 
 const { centers } = db;
 
@@ -21,6 +22,14 @@ export default {
       price,
       image,
     } = inputData;
+    const validationOutput = validation.create(inputData);
+    if (validationOutput !== 'success') {
+      res.status(400).json({
+        status: 'failed',
+        message: validationOutput,
+      });
+      return;
+    }
     const userId = req.decoded.id;
     centers
       .findOne({

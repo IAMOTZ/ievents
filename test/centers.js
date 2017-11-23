@@ -9,34 +9,32 @@ chai.use(chaiHttp);
 
 const should = chai.should();
 
-
-let adminToken;
-before((done) => {
-  users
-    .create({
-      name: 'user2',
-      email: 'user2@gmail.com',
-      password: 'myPassword12',
-      confirmPassword: 'myPassword12',
-      role: 'admin',
-    })
-    .then(() => {
-      chai.request(app)
-        .post('/api/v1/users/login')
-        .send({ email: 'user2@gmail.com', password: 'myPassword12' })
-        .end((err, res) => {
-          res.should.have.status(200);
-          adminToken = res.body.data.token;
-          console.log(adminToken);
-          done();
-        });
-    })
-    .catch((err) => {
-      console.log({ status: 'creating user error', message: err.message });
-    });
-});
-
 describe('POST: /api/v1/centers', () => {
+  let adminToken;
+  before((done) => {
+    users
+      .create({
+        name: 'user2',
+        email: 'user2@gmail.com',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+        role: 'admin',
+      })
+      .then(() => {
+        chai.request(app)
+          .post('/api/v1/users/login')
+          .send({ email: 'user2@gmail.com', password: 'myPassword12' })
+          .end((err, res) => {
+            res.should.have.status(200);
+            adminToken = res.body.data.token;
+            console.log(adminToken);
+            done();
+          });
+      })
+      .catch((err) => {
+        console.log({ status: 'creating user error', message: err.message });
+      });
+  });
 
   it('post when all fields is given', (done) => {
     const reqBody = {
@@ -53,6 +51,7 @@ describe('POST: /api/v1/centers', () => {
       .post('/api/v1/centers')
       .send(reqBody)
       .end((err, res) => {
+        console.log(res.body.message);
         res.should.have.status(201);
         res.body.status.should.be.eql('success');
         res.body.message.should.be.eql('center created');
@@ -62,9 +61,9 @@ describe('POST: /api/v1/centers', () => {
         res.body.data.capacity.should.be.eql(Number(reqBody.capacity));
         res.body.data.price.should.be.eql(Number(reqBody.price));
         res.body.data.type.should.be.eql(reqBody.type);
-        res.body.facilities.should.be.a('array');
-        res.body.facilities[0].should.be.eql('table');
-        res.body.facilities[2].should.be.eql('projector');
+        res.body.data.facilities.should.be.a('array');
+        res.body.data.facilities[0].should.be.eql('table');
+        res.body.data.facilities[2].should.be.eql('projector');
         done();
       });
   });
@@ -138,22 +137,15 @@ describe('POST: /api/v1/centers', () => {
         restartIdentity: true,
       })
       .then(() => {
-        done();
-      })
-      .catch((err) => {
-        console.log({
-          status: 'error',
-          message: err.message,
-        });
-      });
-    users
-      .destroy({
-        cascade: true,
-        truncate: true,
-        restartIdentity: true,
-      })
-      .then(() => {
-        done();
+        users
+          .destroy({
+            cascade: true,
+            truncate: true,
+            restartIdentity: true,
+          })
+          .then(() => {
+            done();
+          })
       })
       .catch((err) => {
         console.log({
