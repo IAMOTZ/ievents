@@ -1,4 +1,5 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import controllers from './controllers/index';
 
 const router = express.Router();
@@ -27,6 +28,10 @@ router.use((req, res, next) => {
       message: 'No access-token provided',
     });
   }
+});
+
+router.get('/test', (req, res) => {
+  res.send('I am working');
 });
 
 
