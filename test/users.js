@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 const should = chai.should();
 
-describe('User Authentication', () => {
+describe('Authentication', () => {
   describe('POST /api/v1/users', () => {
     it('sign up when all input fields are given', function (done) {
       this.timeout(0);
@@ -168,7 +168,8 @@ describe('User Authentication', () => {
   });
 
   describe('POST /api/v1/users/login', () => {
-    before((done) => {
+    before(function (done) {
+      this.timeout(0);
       users
         .create({
           name: 'user1',
@@ -193,6 +194,7 @@ describe('User Authentication', () => {
         .post('/api/v1/users/login')
         .send(reqBody)
         .end((err, res) => {
+          console.log(res.body.message)
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('Logged in');
@@ -279,4 +281,3 @@ describe('User Authentication', () => {
       });
   });
 });
-
