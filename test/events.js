@@ -1,0 +1,156 @@
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../server/app';
+import db from '../server/models/index';
+
+const { centers, users } = db;
+
+chai.use(chaiHttp);
+
+const should = chai.should();
+
+describe('Events', () => {
+  let userToken;
+  let eventId;
+  before((done) => {
+    users
+      .create({
+        name: 'user2',
+        email: 'user2@gmail.com',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+        role: 'admin',
+      })
+      .then(() => {
+        chai.request(app)
+          .post('/api/v1/users/login')
+          .send({ email: 'user2@gmail.com', password: 'myPassword12' })
+          .end((err, res) => {
+            res.should.have.status(200);
+            userToken = res.body.data.token;
+            console.log(userToken);
+            centers
+              .create({
+                name: 'Havilla event center',
+                location: 'Ottawa USA',
+                details: 'It is a beautiful place',
+                capacity: '3000',
+                type: 'theater',
+                facilities: 'table,chairs,projector',
+                price: '4000',
+                token: userToken,
+              })
+              .then(() => {
+                done();
+              });
+          });
+      })
+      .catch((err) => {
+        console.log({ status: 'creating user error', message: err.message });
+      });
+  });
+
+  describe('POST: /api/v1/events', () => {
+    it('should post when all fields is given', (done) => {
+      const reqBody = {
+        title: 'Andela party',
+        description: 'Its gonna be epic',
+        date: '17/2/2017',
+        centerName: 'Havilla event center',
+        token: userToken,
+      };
+      chai.request(app)
+        .post('/api/v1/events')
+        .send(reqBody)
+        .end((err, res) => {
+          eventId = res.body.data.id;
+          res.should.have.status(201);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('event created');
+          res.body.data.title.should.be.eql(reqBody.title);
+          res.body.data.description.should.be.eql(reqBody.description);
+          res.body.data.date.should.be.eql(reqBody.date);
+          done();
+        });
+    });
+    it('should not post when title is not given', (done) => {
+      const reqBody = {
+        description: 'Its gonna be epic',
+        date: '17/2/2017',
+        centerName: 'Havilla event center',
+        token: userToken,
+      };
+      chai.request(app)
+        .post('/api/v1/events')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('faled');
+          res.body.message.should.be.eql('title has to be given');
+          done();
+        });
+    });
+    it('should not post when date format is wrong', (done) => {
+      const reqBody = {
+        title: 'Andela party',
+        description: 'Its gonna be epic',
+        date: '17-2/2017',
+        centerName: 'Havilla event center',
+        token: userToken,
+      };
+      chai.request(app)
+        .post('/api/v1/events')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('the date format should be dd/mm/yyyy');
+          done();
+        });
+    });
+    it('should not post when center is given and date is not', (done) => {
+      const reqBody = {
+        title: 'Andela party',
+        description: 'Its gonna be epic',
+        centerName: 'Havilla event center',
+        token: userToken,
+      };
+      chai.request(app)
+        .post('/api/v1/events')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('date must be give if center is given');
+          done();
+        });
+    });
+  });
+
+  after((done) => {
+    centers
+      .destroy({
+        cascade: true,
+        truncate: true,
+        restartIdentity: true,
+      })
+      .then(() => {
+        users
+          .destroy({
+            cascade: true,
+            truncate: true,
+            restartIdentity: true,
+          })
+          .then(() => {
+            done();
+          });
+      })
+      .catch((err) => {
+        console.log({
+          status: 'error',
+          message: err.message,
+        });
+      });
+  });
+});
+
