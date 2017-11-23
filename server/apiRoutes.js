@@ -34,5 +34,6 @@ router.get('/test', (req, res) => {
   res.send('I am working');
 });
 
+router.post('/centers', controllers.centers.create);
 
 export default router;
