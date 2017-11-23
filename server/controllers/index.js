@@ -1,4 +1,5 @@
 import users from './users';
 import centers from './centers';
+import events from './events';
 
-export default { users, centers };
+export default { users, centers, events };

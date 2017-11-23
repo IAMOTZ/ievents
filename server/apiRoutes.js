@@ -38,6 +38,8 @@ router.get('/test', (req, res) => {
   res.send('I am working');
 });
 
+router.post('/events', controllers.events.create);
+
 router.post('/centers', controllers.centers.create);
 
 router.put('/centers/:id', controllers.centers.update);
