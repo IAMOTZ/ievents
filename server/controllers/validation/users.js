@@ -54,4 +54,34 @@ export default {
     }
     return 'success';
   },
+
+  signin(inputData) {
+    const {
+      email,
+      password,
+    } = inputData;
+
+    if (email === undefined) {
+      return 'User email has to be given';
+    }
+    if (email === '') {
+      return 'User email cannot be empty';
+    }
+    if (!email.match(/^\S+?@\S+.\S+$/)) {
+      return 'email format is wrong';
+    }
+    if (email.match(/^\S+$/) === null) {
+      return 'User email must not contain whitespaces';
+    }
+    if (password === undefined) {
+      return 'User password has to be given';
+    }
+    if (password === '') {
+      return 'User password cannot be empty';
+    }
+    if (password.match(/^\S+$/) === null) {
+      return 'User password must not contain whitespaces';
+    }
+    return 'success';
+  },
 };
