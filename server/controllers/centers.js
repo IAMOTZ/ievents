@@ -14,6 +14,30 @@ export default {
         res.status(400).json({ status: 'error', message: err.message });
       });
   },
+
+  getOne(req, res) {
+    const centerId = req.params.id;
+    centers
+      .findOne({
+        where: {
+          id: centerId,
+        },
+      })
+      .then((centerData) => {
+        if (!centerData) {
+          res.status(400).json({
+            status: 'failed',
+            message: 'center does not exist',
+          });
+        } else {
+          res.status(200).json(centerData);
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({ status: 'error', message: err.message });
+      });
+  },
+  
   create(req, res) {
     const inputData = {};
     const inputKeys = Object.keys(req.body);
