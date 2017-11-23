@@ -1,6 +1,9 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server/app';
+import db from '../server/models/index';
+
+const { users } = db;
 
 chai.use(chaiHttp);
 
@@ -159,6 +162,24 @@ describe('POST /api/v1/users', () => {
         res.body.status.should.be.eql('failed');
         res.body.message.should.be.eql('password and confirmpassword does not match');
         done();
+      });
+  });
+
+  after((done) => {
+    users
+      .destroy({
+        cascade: true,
+        truncate: true,
+        restartIdentity: true,
+      })
+      .then(() => {
+        done();
+      })
+      .catch((err) => {
+        console.log({
+          status: 'error',
+          message: err.message,
+        });
       });
   });
 });
