@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 const should = chai.should();
 
-describe('POST: /api/v1/centers', () => {
+describe('Centers', () => {
   let adminToken;
   before((done) => {
     users
@@ -36,97 +36,111 @@ describe('POST: /api/v1/centers', () => {
       });
   });
 
-  it('post when all fields is given', (done) => {
-    const reqBody = {
-      name: 'ottawa event center',
-      location: 'Ottawa USA',
-      details: 'It is a beautiful place',
-      capacity: '3000',
-      type: 'theater',
-      facilities: 'table,chairs,projector',
-      price: '4000',
-      token: adminToken,
-    };
-    chai.request(app)
-      .post('/api/v1/centers')
-      .send(reqBody)
-      .end((err, res) => {
-        console.log(res.body.message);
-        res.should.have.status(201);
-        res.body.status.should.be.eql('success');
-        res.body.message.should.be.eql('center created');
-        res.body.data.name.should.be.eql(reqBody.name);
-        res.body.data.location.should.be.eql(reqBody.location);
-        res.body.data.details.should.be.eql(reqBody.details);
-        res.body.data.capacity.should.be.eql(Number(reqBody.capacity));
-        res.body.data.price.should.be.eql(Number(reqBody.price));
-        res.body.data.type.should.be.eql(reqBody.type);
-        res.body.data.facilities.should.be.a('array');
-        res.body.data.facilities[0].should.be.eql('table');
-        res.body.data.facilities[2].should.be.eql('projector');
-        done();
-      });
+  describe('POST: /api/v1/centers', () => {
+    it('post when all fields is given', (done) => {
+      const reqBody = {
+        name: 'ottawa event center',
+        location: 'Ottawa USA',
+        details: 'It is a beautiful place',
+        capacity: '3000',
+        type: 'theater',
+        facilities: 'table,chairs,projector',
+        price: '4000',
+        token: adminToken,
+      };
+      chai.request(app)
+        .post('/api/v1/centers')
+        .send(reqBody)
+        .end((err, res) => {
+          console.log(res.body.message);
+          res.should.have.status(201);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('center created');
+          res.body.data.name.should.be.eql(reqBody.name);
+          res.body.data.location.should.be.eql(reqBody.location);
+          res.body.data.details.should.be.eql(reqBody.details);
+          res.body.data.capacity.should.be.eql(Number(reqBody.capacity));
+          res.body.data.price.should.be.eql(Number(reqBody.price));
+          res.body.data.type.should.be.eql(reqBody.type);
+          res.body.data.facilities.should.be.a('array');
+          res.body.data.facilities[0].should.be.eql('table');
+          res.body.data.facilities[2].should.be.eql('projector');
+          done();
+        });
+    });
+    it('should not post when name fields is not given', (done) => {
+      const reqBody = {
+        location: 'Ottawa USA',
+        details: 'It is a beautiful place',
+        capacity: '3000',
+        type: 'theater',
+        facilities: 'table,chairs,projector',
+        price: '4000',
+        token: adminToken,
+      };
+      chai.request(app)
+        .post('/api/v1/centers')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('center name has to be given');
+          done();
+        });
+    });
+    it('should not post when type fields is not given', (done) => {
+      const reqBody = {
+        name: 'Ottawa',
+        location: 'Ottawa USA',
+        details: 'It is a beautiful place',
+        capacity: '3000',
+        facilities: 'table,chairs,projector',
+        price: '4000',
+        token: adminToken,
+      };
+      chai.request(app)
+        .post('/api/v1/centers')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('center type has to be given');
+          done();
+        });
+    });
+    it('should not post when type fields is wrong', (done) => {
+      const reqBody = {
+        name: 'Ottawa',
+        location: 'Ottawa USA',
+        details: 'It is a beautiful place',
+        capacity: '3000',
+        type: 'anything',
+        facilities: 'table,chairs,projector',
+        price: '4000',
+        token: adminToken,
+      };
+      chai.request(app)
+        .post('/api/v1/centers')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('center type can either be theater or banquet');
+          done();
+        });
+    });
   });
-  it('should not post when name fields is not given', (done) => {
-    const reqBody = {
-      location: 'Ottawa USA',
-      details: 'It is a beautiful place',
-      capacity: '3000',
-      type: 'theater',
-      facilities: 'table,chairs,projector',
-      price: '4000',
-      token: adminToken,
-    };
-    chai.request(app)
-      .post('/api/v1/centers')
-      .send(reqBody)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.body.status.should.be.eql('failed');
-        res.body.message.should.be.eql('center name has to be given');
-        done();
-      });
-  });
-  it('should not post when type fields is not given', (done) => {
-    const reqBody = {
-      name: 'Ottawa',
-      location: 'Ottawa USA',
-      details: 'It is a beautiful place',
-      capacity: '3000',
-      facilities: 'table,chairs,projector',
-      price: '4000',
-      token: adminToken,
-    };
-    chai.request(app)
-      .post('/api/v1/centers')
-      .send(reqBody)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.body.status.should.be.eql('failed');
-        res.body.message.should.be.eql('center type has to be given');
-        done();
-      });
-  });
-  it('should not post when type fields is wrong', (done) => {
-    const reqBody = {
-      name: 'Ottawa',
-      location: 'Ottawa USA',
-      details: 'It is a beautiful place',
-      capacity: '3000',
-      type: 'anything',
-      facilities: 'table,chairs,projector',
-      price: '4000',
-      token: adminToken,
-    };
-    chai.request(app)
-      .post('/api/v1/centers')
-      .send(reqBody)
-      .end((err, res) => {
-        res.should.have.status(400);
-        res.body.status.should.be.eql('failed');
-        res.body.message.should.be.eql('center type can either be theater or banquet');
-        done();
-      });
+
+  describe('GET /api/v1/centers', () => {
+    it('get one center', (done) => {
+      chai.request(app)
+        .get('/api/v1/centers')
+        .end((err, res) => {
+          res.body.should.be.a('array');
+          res.body.length.should.be.eql(1);
+          done();
+        });
+    });
   });
 
   after((done) => {
@@ -155,3 +169,4 @@ describe('POST: /api/v1/centers', () => {
       });
   });
 });
+

@@ -4,6 +4,16 @@ import validation from './validation/centers';
 const { centers } = db;
 
 export default {
+  getAll(req, res) {
+    centers
+      .all()
+      .then((centersData) => {
+        res.status(200).json(centersData);
+      })
+      .catch((err) => {
+        res.status(400).json({ status: 'error', message: err.message });
+      });
+  },
   create(req, res) {
     const inputData = {};
     const inputKeys = Object.keys(req.body);
@@ -79,4 +89,4 @@ export default {
         res.status(400).json({ status: 'error', message: err.message });
       });
   },
-}
+};

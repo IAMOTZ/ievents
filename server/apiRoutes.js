@@ -8,6 +8,8 @@ router.post('/users', controllers.users.signup);
 
 router.post('/users/login', controllers.users.signin);
 
+router.get('/centers', controllers.centers.getAll);
+
 router.use((req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['access-token'];
   if (token) {
