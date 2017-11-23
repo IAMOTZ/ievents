@@ -10,14 +10,11 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    descrption: {
+    description: {
       type: DataTypes.TEXT,
     },
     date: {
       type: DataTypes.STRING,
-    },
-    days: {
-      type: DataTypes.INTEGER,
     },
     centerName: {
       type: DataTypes.STRING,
@@ -25,10 +22,12 @@ export default (sequelize, DataTypes) => {
     centerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      onDelete: 'RESTRICT',
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      onDelete: 'CASCADE',
     },
   });
   return userEvent;

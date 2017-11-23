@@ -24,7 +24,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.ENUM,
       values: ['theater', 'banquet'],
     },
-    faclities: {
+    facilities: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
     price: {
@@ -35,10 +35,6 @@ export default (sequelize, DataTypes) => {
     },
     image: {
       type: DataTypes.ARRAY(DataTypes.BLOB),
-    },
-    adminId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
   });
   return center;

@@ -11,6 +11,8 @@ const presentConfg = config[env];
 
 let sequelize;
 
+console.log(`we are on ${env} enviroment`);
+
 if (presentConfg.use_env_variable) {
   sequelize = new Sequelize(process.env[presentConfg.use_env_variable]);
 } else {

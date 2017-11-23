@@ -6,7 +6,7 @@
   "scripts": {
     "server:dev": "nodemon ./server/app --exec babel-node",
     "template:dev": "gulp",
-    "test": "nyc mocha --compilers js:babel-core/register ./test/**/*.js --exit",
+    "test": "set NODE_ENV=test&& nyc mocha --compilers js:babel-core/register ./test/**/*.js --exit",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint"
   },
@@ -21,12 +21,14 @@
   },
   "homepage": "https://github.com/IAMOTZ/Ievents#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "bootstrap": "4.0.0-beta.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
+    "jsonwebtoken": "^8.1.0",
     "morgan": "^1.9.0",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
