@@ -31,14 +31,13 @@ describe('Events', () => {
             console.log(userToken);
             centers
               .create({
-                name: 'Havilla event center',
+                name: 'havilla event center',
                 location: 'Ottawa USA',
                 details: 'It is a beautiful place',
                 capacity: '3000',
                 type: 'theater',
-                facilities: 'table,chairs,projector',
+                facilities: ['table', 'chairs', 'projector'],
                 price: '4000',
-                token: userToken,
               })
               .then(() => {
                 done();
@@ -85,7 +84,7 @@ describe('Events', () => {
         .send(reqBody)
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.status.should.be.eql('faled');
+          res.body.status.should.be.eql('failed');
           res.body.message.should.be.eql('title has to be given');
           done();
         });
