@@ -10,6 +10,8 @@ router.post('/users/login', controllers.users.signin);
 
 router.get('/centers', controllers.centers.getAll);
 
+router.get('/centers/:id', controllers.centers.getOne);
+
 router.use((req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['access-token'];
   if (token) {
