@@ -99,14 +99,14 @@ export default {
       date,
       centername,
     } = inputData;
-    // const validationOutput = validation.update(inputData);
-    // if (validationOutput !== 'success') {
-    //   res.status(400).json({
-    //     status: 'failed',
-    //     message: validationOutput,
-    //   });
-    //   return;
-    // }
+    const validationOutput = validation.update(inputData);
+    if (validationOutput !== 'success') {
+      res.status(400).json({
+        status: 'failed',
+        message: validationOutput,
+      });
+      return;
+    }
     events
       .findOne({
         where: {
