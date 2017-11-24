@@ -22,12 +22,10 @@ export default (sequelize, DataTypes) => {
     centerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      onDelete: 'RESTRICT',
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      onDelete: 'CASCADE',
     },
   });
   return userEvent;
