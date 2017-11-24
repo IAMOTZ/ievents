@@ -215,4 +215,54 @@ export default {
         res.status(400).json({ status: 'error', message: err.message });
       });
   },
+
+  delete(req, res) {
+    const eventId = req.params.id;
+    return events
+      .findOne({
+        where: {
+          id: eventId,
+        },
+      })
+      .then((eventData) => {
+        if (!eventData) {
+          res.status(400).json({
+            status: 'failed',
+            message: 'event does not exist',
+          });
+        } else if (eventData.userId === req.decoded.id) {
+          centers
+            .findOne({
+              where: {
+                id: eventData.centerId,
+              },
+            })
+            .then((centerData) => {
+              const centerRegister = centerData.bookedOn;
+              centerRegister.splice(centerRegister.indexOf(eventData.date), 1);
+              centerData
+                .update({
+                  bookedOn: centerRegister,
+                })
+                .then(() => {
+                  eventData.destroy()
+                    .then(() => {
+                      res.status(200).json({
+                        status: 'success',
+                        message: 'event deleted',
+                      });
+                    });
+                });
+            });
+        } else {
+          res.status(401).json({
+            status: 'failed',
+            message: 'Unauthorised to perform this action',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({ status: 'error', message: err.message });
+      });
+  },
 };
