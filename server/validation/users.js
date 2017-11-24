@@ -19,6 +19,9 @@ export default {
     if (name.match(/^\S+$/) === null) {
       return 'User name must not contain whitespaces';
     }
+    if (name.match(/[$-/:-?{-~!"#^,._`\[\]]/) !== null) {
+      return 'User name can contain only numbers and letters';
+    }
     if (email === undefined) {
       return 'User email has to be given';
     }

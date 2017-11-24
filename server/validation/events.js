@@ -18,6 +18,9 @@ export default {
     if (description !== undefined && description.length > 200) {
       return 'event description must be below 200 characters';
     }
+    if (date === undefined) {
+      return 'date must be given'
+    }
     if (date !== undefined) {
       const dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
       if (!dateData) {
