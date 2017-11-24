@@ -61,56 +61,56 @@ export default {
         status: 'failed',
         message: validationOutput,
       });
-      return;
-    }
-    const userId = req.decoded.id;
-    centers
-      .findOne({
-        where: {
-          name: name.toLowerCase(),
-        },
-      })
-      .then((centerData) => {
-        if (centerData) {
-          res.status(400).json({
-            status: 'failed',
-            message: 'center with this name already exist',
-          });
-        } else {
-          return centers
-            .create({
-              name,
-              location,
-              details,
-              capacity,
-              type,
-              facilities: facilities ? facilities.split(',') : null,
-              price,
-              image,
-              userId,
-            })
-            .then((center) => {
-              res.status(201).json({
-                status: 'success',
-                message: 'center created',
-                center: {
-                  id: center.id,
-                  name: center.name,
-                  location: center.location,
-                  details: center.details,
-                  capacity: center.capacity,
-                  type: center.type,
-                  facilities: center.facilities,
-                  price: center.price,
-                  image: center.image,
-                },
-              });
+    } else {
+      const userId = req.decoded.id;
+      centers
+        .findOne({
+          where: {
+            name: name.toLowerCase(),
+          },
+        })
+        .then((centerData) => {
+          if (centerData) {
+            res.status(400).json({
+              status: 'failed',
+              message: 'center with this name already exist',
             });
-        }
-      })
-      .catch((err) => {
-        res.status(400).json({ status: 'error', message: err.message });
-      });
+          } else {
+            return centers
+              .create({
+                name,
+                location,
+                details,
+                capacity,
+                type,
+                facilities: facilities ? facilities.split(',') : null,
+                price,
+                image,
+                userId,
+              })
+              .then((center) => {
+                res.status(201).json({
+                  status: 'success',
+                  message: 'center created',
+                  center: {
+                    id: center.id,
+                    name: center.name,
+                    location: center.location,
+                    details: center.details,
+                    capacity: center.capacity,
+                    type: center.type,
+                    facilities: center.facilities,
+                    price: center.price,
+                    image: center.image,
+                  },
+                });
+              });
+          }
+        })
+        .catch((err) => {
+          res.status(400).json({ status: 'error', message: err.message });
+        });
+    }
   },
 
   update(req, res) {
@@ -138,53 +138,53 @@ export default {
         status: 'failed',
         message: validationOutput,
       });
-      return;
-    }
-    centers
-      .findOne({
-        where: {
-          id: centerId,
-        },
-      })
-      .then((centerData) => {
-        if (!centerData) {
-          res.status(400).json({ sucess: 'failed', message: 'center does not exist' });
-        } else {
-          centerData
-            .update({
-              name: name || centerData.name,
-              location: location || centerData.location,
-              details: details || centerData.details,
-              capacity: capacity || centerData.capacity,
-              type: type || centerData.type,
-              facilities: facilities ? facilities.split(',') : centerData.facilities,
-              price: price || centerData.price,
-              image: image || centerData.image,
-            })
-            .then((updatedCenter) => {
-              res.status(200).json({
-                status: 'success',
-                message: 'center updated',
-                center: {
-                  id: updatedCenter.id,
-                  name: updatedCenter.name,
-                  location: updatedCenter.location,
-                  details: updatedCenter.details,
-                  capacity: updatedCenter.capacity,
-                  type: updatedCenter.type,
-                  facilities: updatedCenter.facilities,
-                  price: updatedCenter.price,
-                  image: updatedCenter.image,
-                },
+    } else {
+      centers
+        .findOne({
+          where: {
+            id: centerId,
+          },
+        })
+        .then((centerData) => {
+          if (!centerData) {
+            res.status(400).json({ sucess: 'failed', message: 'center does not exist' });
+          } else {
+            centerData
+              .update({
+                name: name || centerData.name,
+                location: location || centerData.location,
+                details: details || centerData.details,
+                capacity: capacity || centerData.capacity,
+                type: type || centerData.type,
+                facilities: facilities ? facilities.split(',') : centerData.facilities,
+                price: price || centerData.price,
+                image: image || centerData.image,
+              })
+              .then((updatedCenter) => {
+                res.status(200).json({
+                  status: 'success',
+                  message: 'center updated',
+                  center: {
+                    id: updatedCenter.id,
+                    name: updatedCenter.name,
+                    location: updatedCenter.location,
+                    details: updatedCenter.details,
+                    capacity: updatedCenter.capacity,
+                    type: updatedCenter.type,
+                    facilities: updatedCenter.facilities,
+                    price: updatedCenter.price,
+                    image: updatedCenter.image,
+                  },
+                });
+              })
+              .catch((err) => {
+                res.status(400).json({ status: 'error', message: err.message });
               });
-            })
-            .catch((err) => {
-              res.status(400).json({ status: 'error', message: err.message });
-            });
-        }
-      })
-      .catch((err) => {
-        res.status(400).json({ status: 'error', message: err.message });
-      });
+          }
+        })
+        .catch((err) => {
+          res.status(400).json({ status: 'error', message: err.message });
+        });
+    }
   },
 };

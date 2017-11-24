@@ -24,64 +24,62 @@ export default {
         status: 'failed',
         message: validationOutput,
       });
-      return;
-    }
-    const userId = req.decoded.id;
-    centers
-      .findOne({
-        where: {
-          name: centername.toLowerCase(),
-        },
-      })
-      .then((centerData) => {
-        if (!centerData) {
-          res.status(400).json({
-            status: 'failed',
-            message: 'the choosen center does not exist',
-          });
-        } else {
-          if (centerData.bookedOn) {
+    } else {
+      const userId = req.decoded.id;
+      centers
+        .findOne({
+          where: {
+            name: centername.toLowerCase(),
+          },
+        })
+        .then((centerData) => {
+          if (!centerData) {
+            res.status(400).json({
+              status: 'failed',
+              message: 'the choosen center does not exist',
+            });
+          } else if (centerData.bookedOn) {
             if (centerData.bookedOn.indexOf(date) >= 0) {
               res.status(400).json({
                 status: 'failed',
                 message: 'the center has been booked for that date',
               });
-              return;
             }
-          }
-          let newBookedOn;
-          if (centerData.bookedOn === null) {
-            newBookedOn = [date];
           } else {
-            newBookedOn = [date].concat(centerData.bookedOn);
-          }
-          centerData
-            .update({
-              bookedOn: newBookedOn,
-            })
-            .then(() => {
-              events
-                .create({
-                  title,
-                  description,
-                  date,
-                  centerName: centername,
-                  centerId: centerData.id,
-                  userId,
-                })
-                .then((eventData) => {
-                  res.status(201).json({
-                    status: 'success',
-                    message: 'event created',
-                    event: eventData,
+            let newBookedOn;
+            if (centerData.bookedOn === null) {
+              newBookedOn = [date];
+            } else {
+              newBookedOn = [date].concat(centerData.bookedOn);
+            }
+            centerData
+              .update({
+                bookedOn: newBookedOn,
+              })
+              .then(() => {
+                events
+                  .create({
+                    title,
+                    description,
+                    date,
+                    centerName: centername,
+                    centerId: centerData.id,
+                    userId,
+                  })
+                  .then((eventData) => {
+                    res.status(201).json({
+                      status: 'success',
+                      message: 'event created',
+                      event: eventData,
+                    });
                   });
-                });
-            });
-        }
-      })
-      .catch((err) => {
-        res.status(400).json({ status: 'error', message: err.message });
-      });
+              });
+          }
+        })
+        .catch((err) => {
+          res.status(400).json({ status: 'error', message: err.message });
+        });
+    }
   },
 
   update(req, res) {
@@ -105,115 +103,115 @@ export default {
         status: 'failed',
         message: validationOutput,
       });
-      return;
-    }
-    events
-      .findOne({
-        where: {
-          id: eventId,
-        },
-      })
-      .then((eventData) => {
-        if (!eventData) {
-          // if the event does not exist
-          res.status(400).json({ sucess: 'failed', message: 'event does not exist' });
-        } else if (eventData.userId === req.decoded.id) {
-          if (centername && eventData.centerName !== centername) {
-            centers
-              .findOne({
-                where: {
-                  name: centername.toLowerCase(),
-                },
-              })
-              .then((newCenterData) => {
-                if (!newCenterData) {
-                  res.status(400).json({
-                    status: 'failed',
-                    message: 'the new choosen center does not exist',
-                  });
-                } else {
-                  if (newCenterData.bookedOn !== null) {
-                    if (newCenterData.bookedOn.indexOf(date) >= 0) {
-                      res.status(400).json({
-                        status: 'failed',
-                        message: 'the new choose center has been booked for that date',
-                      });
-                      return;
-                    }
-                  }
-                  // Add the new date to the booking register of the new center.
-                  let newBookedOn;
-                  if (newCenterData.bookedOn === null) {
-                    newBookedOn = [date || eventData.date];
-                  } else {
-                    newBookedOn = [date || eventData.date].concat(newCenterData.bookedOn);
-                  }
-                  newCenterData
-                    .update({
-                      bookedOn: newBookedOn,
-                    })
-                    .then(() => {
-                      // Remove the booking of this center in the previous center
-                      centers
-                        .findOne({
-                          where: {
-                            id: eventData.centerId,
-                          },
-                        })
-                        .then((centerData) => {
-                          const centerRegister = centerData.bookedOn;
-                          centerRegister.splice(centerRegister.indexOf(eventData.date), 1);
-                          centerData
-                            .update({
-                              bookedOn: centerRegister,
-                            })
-                            .then(() => {
-                              // update the event it self
-                              eventData
-                                .update({
-                                  title: title || eventData.title,
-                                  description: description || eventData.description,
-                                  date: date || eventData.date,
-                                  centerName: centername,
-                                  centerId: newCenterData.id,
-                                })
-                                .then((newEventData) => {
-                                  res.status(201).json({
-                                    status: 'success',
-                                    message: 'event updated',
-                                    event: newEventData,
-                                  });
-                                });
-                            });
-                        });
+    } else {
+      events
+        .findOne({
+          where: {
+            id: eventId,
+          },
+        })
+        .then((eventData) => {
+          if (!eventData) {
+            // if the event does not exist
+            res.status(400).json({ sucess: 'failed', message: 'event does not exist' });
+          } else if (eventData.userId === req.decoded.id) {
+            if (centername && eventData.centerName !== centername) {
+              centers
+                .findOne({
+                  where: {
+                    name: centername.toLowerCase(),
+                  },
+                })
+                .then((newCenterData) => {
+                  if (!newCenterData) {
+                    res.status(400).json({
+                      status: 'failed',
+                      message: 'the new choosen center does not exist',
                     });
-                }
-              });
-          } else {
-            eventData
-              .update({
-                title: title || eventData.title,
-                description: description || eventData.description,
-                date: date || eventData.date,
-              })
-              .then((newEventData) => {
-                res.status(200).json({
-                  status: 'success',
-                  message: 'event updated',
-                  event: newEventData,
+                  } else {
+                    if (newCenterData.bookedOn !== null) {
+                      if (newCenterData.bookedOn.indexOf(date) >= 0) {
+                        res.status(400).json({
+                          status: 'failed',
+                          message: 'the new choose center has been booked for that date',
+                        });
+                        return;
+                      }
+                    }
+                    // Add the new date to the booking register of the new center.
+                    let newBookedOn;
+                    if (newCenterData.bookedOn === null) {
+                      newBookedOn = [date || eventData.date];
+                    } else {
+                      newBookedOn = [date || eventData.date].concat(newCenterData.bookedOn);
+                    }
+                    newCenterData
+                      .update({
+                        bookedOn: newBookedOn,
+                      })
+                      .then(() => {
+                        // Remove the booking of this center in the previous center
+                        centers
+                          .findOne({
+                            where: {
+                              id: eventData.centerId,
+                            },
+                          })
+                          .then((centerData) => {
+                            const centerRegister = centerData.bookedOn;
+                            centerRegister.splice(centerRegister.indexOf(eventData.date), 1);
+                            centerData
+                              .update({
+                                bookedOn: centerRegister,
+                              })
+                              .then(() => {
+                                // update the event it self
+                                eventData
+                                  .update({
+                                    title: title || eventData.title,
+                                    description: description || eventData.description,
+                                    date: date || eventData.date,
+                                    centerName: centername,
+                                    centerId: newCenterData.id,
+                                  })
+                                  .then((newEventData) => {
+                                    res.status(201).json({
+                                      status: 'success',
+                                      message: 'event updated',
+                                      event: newEventData,
+                                    });
+                                  });
+                              });
+                          });
+                      });
+                  }
                 });
-              });
+            } else {
+              eventData
+                .update({
+                  title: title || eventData.title,
+                  description: description || eventData.description,
+                  date: date || eventData.date,
+                })
+                .then((newEventData) => {
+                  res.status(200).json({
+                    status: 'success',
+                    message: 'event updated',
+                    event: newEventData,
+                  });
+                });
+            }
+          } else {
+            res.status(401).json({
+              sucess: false,
+              message: 'Unauthorised to perform this action',
+            });
           }
-        } else {
-          res.status(401).json({
-            sucess: false,
-            message: 'Unauthorised to perform this action',
-          });
-        }
-      })
-      .catch((err) => {
-        res.status(400).json({ status: 'error', message: err.message });
-      });
+        })
+        .catch((err) => {
+          res.status(400).json({ status: 'error', message: err.message });
+        });
+    }
   },
 
   delete(req, res) {
