@@ -28,7 +28,6 @@ describe('Events', () => {
           .end((err, res) => {
             res.should.have.status(200);
             userToken = res.body.data.token;
-            console.log(userToken);
             centers
               .create({
                 name: 'havilla event center',
@@ -155,7 +154,7 @@ describe('Events', () => {
         token: userToken,
       };
       chai.request(app)
-        .post(`/api/v1/events/${eventId}`)
+        .put(`/api/v1/events/${eventId}`)
         .send(reqBody)
         .end((err, res) => {
           res.should.have.status(400);
@@ -172,7 +171,7 @@ describe('Events', () => {
         token: userToken,
       };
       chai.request(app)
-        .post(`/api/v1/events/${eventId}`)
+        .put(`/api/v1/events/${eventId}`)
         .send(reqBody)
         .end((err, res) => {
           res.should.have.status(400);
@@ -189,7 +188,7 @@ describe('Events', () => {
         token: userToken,
       };
       chai.request(app)
-        .post(`/api/v1/events/${eventId}`)
+        .put(`/api/v1/events/${eventId}`)
         .send(reqBody)
         .end((err, res) => {
           res.should.have.status(400);
