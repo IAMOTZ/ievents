@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import db from '../models/index';
-import validation from './validation/users';
+import validation from '../validation/users';
 
 const { users } = db;
 

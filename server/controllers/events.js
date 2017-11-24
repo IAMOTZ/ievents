@@ -1,5 +1,5 @@
 import db from '../models/index';
-import validation from './validation/events';
+import validation from '../validation/events';
 
 const { events, centers } = db;
 
