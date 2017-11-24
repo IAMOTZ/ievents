@@ -199,6 +199,38 @@ describe('Events', () => {
     });
   });
 
+  describe('DELETE: /api/v1/events/:id', () => {
+    it('should not delete event', (done) => {
+      const reqBody = {
+        token: userToken,
+      };
+      const wrongId = 1345;
+      chai.request(app)
+        .delete(`/api/v1/events/${wrongId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('event does not exist');
+          done();
+        });
+    });
+    it('should delete event', (done) => {
+      const reqBody = {
+        token: userToken,
+      };
+      chai.request(app)
+        .delete(`/api/v1/events/${eventId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('event deleted');
+          done();
+        });
+    });
+  });
+
   after((done) => {
     centers
       .destroy({
