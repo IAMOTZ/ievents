@@ -1,11 +1,15 @@
-export default {
-  create(inputData) {
-    const {
-      title,
-      description,
-      date,
-      centername,
-    } = inputData;
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  create: function create(inputData) {
+    var title = inputData.title,
+        description = inputData.description,
+        date = inputData.date,
+        centername = inputData.centername;
+
     if (title === undefined) {
       return 'title has to be given';
     }
@@ -18,11 +22,8 @@ export default {
     if (description !== undefined && description.length > 200) {
       return 'event description must be below 200 characters';
     }
-    if (date === undefined) {
-      return 'date must be given'
-    }
     if (date !== undefined) {
-      const dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      var dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
       if (!dateData) {
         return 'the date format should be dd/mm/yyyy';
       }
@@ -38,14 +39,12 @@ export default {
     }
     return 'success';
   },
+  update: function update(inputData) {
+    var title = inputData.title,
+        description = inputData.description,
+        date = inputData.date,
+        centername = inputData.centername;
 
-  update(inputData) {
-    const {
-      title,
-      description,
-      date,
-      centername,
-    } = inputData;
     if (title !== undefined && title === '') {
       return 'title cannot be empty';
     }
@@ -59,7 +58,7 @@ export default {
       return 'event description must be below 200 characters';
     }
     if (date !== undefined) {
-      const dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      var dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
       if (!dateData) {
         return 'the date format should be dd/mm/yyyy';
       }
@@ -74,5 +73,5 @@ export default {
       return 'date must be give if center is given';
     }
     return 'success';
-  },
+  }
 };

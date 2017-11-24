@@ -1,11 +1,15 @@
-export default {
-  signUp(inputData) {
-    const {
-      name,
-      email,
-      password,
-      confirmpassword,
-    } = inputData;
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  signUp: function signUp(inputData) {
+    var name = inputData.name,
+        email = inputData.email,
+        password = inputData.password,
+        confirmpassword = inputData.confirmpassword;
+
 
     if (name === undefined) {
       return 'User name has to be given';
@@ -18,9 +22,6 @@ export default {
     }
     if (name.match(/^\S+$/) === null) {
       return 'User name must not contain whitespaces';
-    }
-    if (name.match(/[$-/:-?{-~!"#^,._`\[\]]/) !== null) {
-      return 'User name can contain only numbers and letters';
     }
     if (email === undefined) {
       return 'User email has to be given';
@@ -57,12 +58,10 @@ export default {
     }
     return 'success';
   },
+  signin: function signin(inputData) {
+    var email = inputData.email,
+        password = inputData.password;
 
-  signin(inputData) {
-    const {
-      email,
-      password,
-    } = inputData;
 
     if (email === undefined) {
       return 'User email has to be given';
@@ -86,5 +85,5 @@ export default {
       return 'User password must not contain whitespaces';
     }
     return 'success';
-  },
+  }
 };

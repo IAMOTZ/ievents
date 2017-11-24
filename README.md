@@ -15,12 +15,11 @@ These instructions will get you a copy of the project up and running on your loc
 #### Installation
 Presently the application is in template development stage, so by installing this project you can only check out the template meant for the front end development.
 >- Clone the repository `$ git clone https://github.com/IAMOTZ/Ievents.git`
->- Change into the directory `$ cd/More-recipes`
+>- Change into the directory 
 >- Use `$ npm install` to install all required dependencies packages.
->- Start app with `$ npm run template:dev`
->- The home page of the template would open in your default browser and you can navigate the pages
+>- Start app with `$ npm server:dev` 
+>- The app should start on prot 3000 of your local host
 
-NOTE: The project is still in template development stage so the pages are not functional yet.
 
 ## Features
 * Users can create an account
@@ -34,14 +33,21 @@ NOTE: The project is still in template development stage so the pages are not fu
 
 ## API
 
-None for now
+`POST api/v1/users` to sign up users  
+`POST api/v1/users/login` to sign in users  
+`GET api/v1/centers` to get all centers  
+`GET api/v1/centers/<centerId>` to get a particulare center  
+`POST api/v1/events` to allow an authenticated user to create events  
+`PUT api/v1/events/<eventId>` to allow an authenticated user to modify an event   
+`DELETE api/v1/events<eventId>` to allow an authenticated user to delete event  
+`POST api/v1/centers` to allow an authenticated and authorized user to create centers  
+`PUT api/vi/centers/<centerId>` to allow an authenticated and authorized user to modify a center  
+
 
 ## Technologies and Services
-
-The templates was disgned with
->- Bootstrap 4(beta)
->- HTML
->- SASS for custom CSS
+>- Node
+>- Express
+>- Postgres
 
 
 ## Contributing
