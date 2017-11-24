@@ -4,6 +4,7 @@
   "description": "A web app to help manage and run commercial event centers",
   "main": "index.js",
   "scripts": {
+    "start": "node ./build/app",
     "build": "babel ./server -d ./build",
     "server:dev": "nodemon ./server/app --exec babel-node",
     "template:dev": "gulp",
