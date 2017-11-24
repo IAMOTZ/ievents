@@ -33,7 +33,6 @@ export default (sequelize, DataTypes) => {
     centerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      onDelete: 'CASCADE',
     },
   });
   return transaction;

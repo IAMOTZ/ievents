@@ -27,7 +27,7 @@ describe('Events', () => {
           .send({ email: 'user2@gmail.com', password: 'myPassword12' })
           .end((err, res) => {
             res.should.have.status(200);
-            userToken = res.body.data.token;
+            userToken = res.body.token;
             centers
               .create({
                 name: 'havilla event center',
@@ -61,13 +61,13 @@ describe('Events', () => {
         .post('/api/v1/events')
         .send(reqBody)
         .end((err, res) => {
-          eventId = res.body.data.id;
+          eventId = res.body.event.id;
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('event created');
-          res.body.data.title.should.be.eql(reqBody.title);
-          res.body.data.description.should.be.eql(reqBody.description);
-          res.body.data.date.should.be.eql(reqBody.date);
+          res.body.event.title.should.be.eql(reqBody.title);
+          res.body.event.description.should.be.eql(reqBody.description);
+          res.body.event.date.should.be.eql(reqBody.date);
           done();
         });
     });
@@ -140,9 +140,9 @@ describe('Events', () => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('event updated');
-          res.body.data.title.should.be.eql(reqBody.title);
-          res.body.data.description.should.be.eql(reqBody.description);
-          res.body.data.date.should.be.eql(reqBody.date);
+          res.body.event.title.should.be.eql(reqBody.title);
+          res.body.event.description.should.be.eql(reqBody.description);
+          res.body.event.date.should.be.eql(reqBody.date);
           done();
         });
     });
@@ -194,6 +194,38 @@ describe('Events', () => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
           res.body.message.should.be.eql('date must be give if center is given');
+          done();
+        });
+    });
+  });
+
+  describe('DELETE: /api/v1/events/:id', () => {
+    it('should not delete event', (done) => {
+      const reqBody = {
+        token: userToken,
+      };
+      const wrongId = 1345;
+      chai.request(app)
+        .delete(`/api/v1/events/${wrongId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('event does not exist');
+          done();
+        });
+    });
+    it('should delete event', (done) => {
+      const reqBody = {
+        token: userToken,
+      };
+      chai.request(app)
+        .delete(`/api/v1/events/${eventId}`)
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('event deleted');
           done();
         });
     });
