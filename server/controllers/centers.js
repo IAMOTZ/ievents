@@ -149,9 +149,7 @@ export default {
       .then((centerData) => {
         if (!centerData) {
           res.status(400).json({ sucess: 'failed', message: 'center does not exist' });
-          return;
-        }
-        if (centerData.userId === req.decoded.id) {
+        } else {
           centerData
             .update({
               name: name || centerData.name,
@@ -183,11 +181,6 @@ export default {
             .catch((err) => {
               res.status(400).json({ status: 'error', message: err.message });
             });
-        } else {
-          res.status(401).json({
-            sucess: false,
-            message: 'Unauthorised to perform this action',
-          });
         }
       })
       .catch((err) => {

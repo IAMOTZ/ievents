@@ -1,5 +1,6 @@
 import express from 'express';
 import userValidation from './middlewares/userValidaiton';
+import adminValidation from './middlewares/adminValidation';
 import controllers from './controllers/index';
 
 const router = express.Router();
@@ -19,6 +20,8 @@ router.post('/events', controllers.events.create);
 router.put('/events/:id', controllers.events.update);
 
 router.delete('/events/:id', controllers.events.delete);
+
+router.use(adminValidation);
 
 router.post('/centers', controllers.centers.create);
 
