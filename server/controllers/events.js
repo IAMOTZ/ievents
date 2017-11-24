@@ -73,7 +73,7 @@ export default {
                   res.status(201).json({
                     status: 'success',
                     message: 'event created',
-                    data: eventData,
+                    event: eventData,
                   });
                 });
             });
@@ -181,7 +181,7 @@ export default {
                                   res.status(201).json({
                                     status: 'success',
                                     message: 'event updated',
-                                    data: newEventData,
+                                    event: newEventData,
                                   });
                                 });
                             });
@@ -200,7 +200,7 @@ export default {
                 res.status(200).json({
                   status: 'success',
                   message: 'event updated',
-                  data: newEventData,
+                  event: newEventData,
                 });
               });
           }

@@ -27,8 +27,7 @@ describe('Centers', () => {
           .send({ email: 'user2@gmail.com', password: 'myPassword12' })
           .end((err, res) => {
             res.should.have.status(200);
-            adminToken = res.body.data.token;
-            console.log(adminToken);
+            adminToken = res.body.token;
             done();
           });
       })
@@ -53,19 +52,19 @@ describe('Centers', () => {
         .post('/api/v1/centers')
         .send(reqBody)
         .end((err, res) => {
-          centerId = res.body.data.id;
+          centerId = res.body.center.id;
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('center created');
-          res.body.data.name.should.be.eql(reqBody.name);
-          res.body.data.location.should.be.eql(reqBody.location);
-          res.body.data.details.should.be.eql(reqBody.details);
-          res.body.data.capacity.should.be.eql(Number(reqBody.capacity));
-          res.body.data.price.should.be.eql(Number(reqBody.price));
-          res.body.data.type.should.be.eql(reqBody.type);
-          res.body.data.facilities.should.be.a('array');
-          res.body.data.facilities[0].should.be.eql('table');
-          res.body.data.facilities[2].should.be.eql('projector');
+          res.body.center.name.should.be.eql(reqBody.name);
+          res.body.center.location.should.be.eql(reqBody.location);
+          res.body.center.details.should.be.eql(reqBody.details);
+          res.body.center.capacity.should.be.eql(Number(reqBody.capacity));
+          res.body.center.price.should.be.eql(Number(reqBody.price));
+          res.body.center.type.should.be.eql(reqBody.type);
+          res.body.center.facilities.should.be.a('array');
+          res.body.center.facilities[0].should.be.eql('table');
+          res.body.center.facilities[2].should.be.eql('projector');
           done();
         });
     });
@@ -164,13 +163,13 @@ describe('Centers', () => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('center updated');
-          res.body.data.name.should.be.eql(reqBody.name);
-          res.body.data.location.should.be.eql(reqBody.location);
-          res.body.data.details.should.be.eql(reqBody.details);
-          res.body.data.type.should.be.eql(reqBody.type);
-          res.body.data.facilities.should.be.a('array');
-          res.body.data.facilities[0].should.be.eql('table');
-          res.body.data.facilities[2].should.be.eql('projector');
+          res.body.center.name.should.be.eql(reqBody.name);
+          res.body.center.location.should.be.eql(reqBody.location);
+          res.body.center.details.should.be.eql(reqBody.details);
+          res.body.center.type.should.be.eql(reqBody.type);
+          res.body.center.facilities.should.be.a('array');
+          res.body.center.facilities[0].should.be.eql('table');
+          res.body.center.facilities[2].should.be.eql('projector');
           done();
         });
     });

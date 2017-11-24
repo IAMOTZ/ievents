@@ -93,7 +93,7 @@ export default {
               res.status(201).json({
                 status: 'success',
                 message: 'center created',
-                data: {
+                center: {
                   id: center.id,
                   name: center.name,
                   location: center.location,
@@ -167,7 +167,7 @@ export default {
               res.status(200).json({
                 status: 'success',
                 message: 'center updated',
-                data: {
+                center: {
                   id: updatedCenter.id,
                   name: updatedCenter.name,
                   location: updatedCenter.location,

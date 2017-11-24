@@ -22,13 +22,13 @@ describe('Authentication', () => {
         .post('/api/v1/users')
         .send(reqBody)
         .end((err, res) => {
-          console.log(res.body.message)
+          console.log(res.body.message);
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('user created');
-          res.body.data.token.should.be.a('string');
-          res.body.data.name.should.be.eql(reqBody.name);
-          res.body.data.email.should.be.eql(reqBody.email.toLowerCase());
+          res.body.token.should.be.a('string');
+          res.body.user.name.should.be.eql(reqBody.name);
+          res.body.user.email.should.be.eql(reqBody.email.toLowerCase());
           done();
         });
     });
@@ -192,12 +192,12 @@ describe('Authentication', () => {
         .post('/api/v1/users/login')
         .send(reqBody)
         .end((err, res) => {
-          console.log(res.body.message)
+          console.log(res.body.message);
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('Logged in');
-          res.body.data.token.should.be.a('string');
-          res.body.data.email.should.be.eql(reqBody.email.toLowerCase());
+          res.body.token.should.be.a('string');
+          res.body.user.email.should.be.eql(reqBody.email.toLowerCase());
           done();
         });
     });

@@ -57,13 +57,13 @@ export default {
               res.status(201).json({
                 status: 'success',
                 message: 'user created',
-                data: {
+                user: {
                   id: newUserData.id,
                   email: newUserData.email,
                   name: newUserData.name,
                   role: newUserData.role,
-                  token,
                 },
+                token,
               });
             });
         }
@@ -123,11 +123,11 @@ export default {
             res.status(200).json({
               status: 'success',
               message: 'Logged in',
-              data: {
+              user: {
                 name: userData.name,
                 email: userData.email,
-                token,
               },
+              token,
             });
           }
         }
