@@ -38,6 +38,8 @@ router.post('/events', controllers.events.create);
 
 router.put('/events/:id', controllers.events.update);
 
+router.delete('/events/:id', controllers.events.delete);
+
 router.post('/centers', controllers.centers.create);
 
 router.put('/centers/:id', controllers.centers.update);
