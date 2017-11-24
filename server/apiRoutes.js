@@ -34,11 +34,9 @@ router.use((req, res, next) => {
   }
 });
 
-router.get('/test', (req, res) => {
-  res.send('I am working');
-});
-
 router.post('/events', controllers.events.create);
+
+router.put('/events/:id', controllers.events.update);
 
 router.post('/centers', controllers.centers.create);
 
