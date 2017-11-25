@@ -84,7 +84,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('title has to be given');
+          res.body.message.should.be.eql('event title is required');
           done();
         });
     });
@@ -119,7 +119,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('date must be given');
+          res.body.message.should.be.eql('event date is required');
           done();
         });
     });
@@ -159,7 +159,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('title cannot be empty');
+          res.body.message.should.be.eql('event title cannot be empty');
           done();
         });
     });

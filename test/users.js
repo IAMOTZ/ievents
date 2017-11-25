@@ -44,7 +44,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User name has to be given');
+          res.body.message.should.be.eql('name is required');
           done();
         });
     });
@@ -60,7 +60,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User email has to be given');
+          res.body.message.should.be.eql('email is required');
           done();
         });
     });
@@ -76,7 +76,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User password has to be given');
+          res.body.message.should.be.eql('password is required');
           done();
         });
     });
@@ -92,7 +92,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User confirmpassword has to be given');
+          res.body.message.should.be.eql('confirmPassword field is required');
           done();
         });
     });
@@ -109,7 +109,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User name cannot be empty');
+          res.body.message.should.be.eql('name field cannot be empty');
           done();
         });
     });
@@ -126,7 +126,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User email cannot be empty');
+          res.body.message.should.be.eql('email field cannot be empty');
           done();
         });
     });
@@ -143,7 +143,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User password cannot be empty');
+          res.body.message.should.be.eql('password field cannot be empty');
           done();
         });
     });
@@ -160,7 +160,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('password and confirmpassword does not match');
+          res.body.message.should.be.eql('password and confirm password input does not match');
           done();
         });
     });
@@ -211,7 +211,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User email has to be given');
+          res.body.message.should.be.eql('email is required');
           done();
         });
     });
@@ -225,7 +225,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User password has to be given');
+          res.body.message.should.be.eql('password is required');
           done();
         });
     });
@@ -240,7 +240,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User email cannot be empty');
+          res.body.message.should.be.eql('email cannot be empty');
           done();
         });
     });
@@ -255,7 +255,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('User password cannot be empty');
+          res.body.message.should.be.eql('password cannot be empty');
           done();
         });
     });
