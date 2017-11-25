@@ -180,23 +180,6 @@ describe('Events', () => {
           done();
         });
     });
-    it('should not modify when center is given and date is not', (done) => {
-      const reqBody = {
-        title: 'Andela party',
-        description: 'Its gonna be epic',
-        centerName: 'Havilla event center',
-        token: userToken,
-      };
-      chai.request(app)
-        .put(`/api/v1/events/${eventId}`)
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('date must be give if center is given');
-          done();
-        });
-    });
   });
 
   describe('DELETE: /api/v1/events/:id', () => {

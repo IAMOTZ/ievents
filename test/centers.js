@@ -136,8 +136,8 @@ describe('Centers', () => {
       chai.request(app)
         .get('/api/v1/centers')
         .end((err, res) => {
-          res.body.should.be.a('array');
-          res.body.length.should.be.eql(1);
+          res.body.centers.should.be.a('array');
+          res.body.centers.length.should.be.eql(1);
           done();
         });
     });
@@ -201,7 +201,7 @@ describe('Centers', () => {
         .get(`/api/v1/centers/${centerId}`)
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.id.should.be.eql(centerId);
+          res.body.center.id.should.be.eql(centerId);
           done();
         });
     });
