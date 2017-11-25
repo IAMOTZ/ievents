@@ -4,7 +4,7 @@ export default {
       title,
       description,
       date,
-      centername,
+      centerid,
     } = inputData;
     if (title === undefined) {
       return 'event title is required';
@@ -33,9 +33,13 @@ export default {
         return 'month in the date cannot be more than 12';
       }
     }
-    if (centername !== undefined && date === undefined) {
-      return 'date is required if a center is choosen';
+    if (centerid === undefined) {
+      return 'centerId is required';
     }
+    if (!Number.isInteger(Number(centerid))) {
+      return 'cemter id must be and integer in a string format';
+    }
+
     return 'success';
   },
 
@@ -44,6 +48,7 @@ export default {
       title,
       description,
       date,
+      centerid,
     } = inputData;
     if (title !== undefined && title === '') {
       return 'event title cannot be empty';
@@ -68,6 +73,9 @@ export default {
       if (dateData[2] > 12) {
         return 'month in the date cannot be more than 12';
       }
+    }
+    if (centerid !== undefined && !Number.isInteger(Number(centerid))) {
+      return 'cemter id must be and integer in a string format';
     }
     return 'success';
   },

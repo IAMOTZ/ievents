@@ -16,9 +16,6 @@ export default (sequelize, DataTypes) => {
     date: {
       type: DataTypes.STRING,
     },
-    centerName: {
-      type: DataTypes.STRING,
-    },
     centerId: {
       type: DataTypes.INTEGER,
       allowNull: false,

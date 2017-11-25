@@ -18,7 +18,7 @@ export default {
       title,
       description,
       date,
-      centername,
+      centerid,
     } = inputData;
     const validationOutput = validation.create(inputData); // Validate the user inputs
     if (validationOutput !== 'success') {
@@ -31,11 +31,7 @@ export default {
       // If validation was successfull, check if the choosen center exists
       const userId = req.decoded.id;
       centers
-        .findOne({
-          where: {
-            name: centername.toLowerCase(),
-          },
-        })
+        .findById(Number(centerid))
         .then((centerData) => {
           if (!centerData) {
             // If the choosen center does not exist, send a failure response
@@ -43,47 +39,56 @@ export default {
               status: 'failed',
               message: 'the choosen center does not exist',
             });
-          } else if (centerData.bookedOn) {
-            // Check if the center has been booked for the choosed date
-            if (centerData.bookedOn.indexOf(date) >= 0) {
+          } else {
+            let check = false;
+            if (centerData.bookedOn) {
+              check = true;
+            }
+            if (check && centerData.bookedOn.indexOf(date) >= 0) {
               // If it has been booked, send a failure respose
               res.status(400).json({
                 status: 'failed',
                 message: 'the center has been booked for that date',
               });
-            }
-          } else {
-            // If it has not been booked, book it.
-            let newBookedOn;
-            if (centerData.bookedOn === null) {
-              newBookedOn = [date];
             } else {
-              newBookedOn = [date].concat(centerData.bookedOn);
-            }
-            centerData
-              .update({
-                bookedOn: newBookedOn,
-              })
-              .then(() => {
-                // After booking the center, create the event
-                events
-                  .create({
-                    title,
-                    description,
-                    date,
-                    centerName: centername,
-                    centerId: centerData.id,
-                    userId,
-                  })
-                  .then((eventData) => {
-                    // After creating the event, send a success response with the event datas
-                    res.status(201).json({
-                      status: 'success',
-                      message: 'event created',
-                      event: eventData,
+              let newBookedOn;
+              if (centerData.bookedOn === null) {
+                newBookedOn = [date];
+              } else {
+                newBookedOn = [date].concat(centerData.bookedOn);
+              }
+              centerData
+                .update({
+                  bookedOn: newBookedOn,
+                })
+                .then(() => {
+                  // After booking the center, create the event
+                  events
+                    .create({
+                      title,
+                      description,
+                      date,
+                      centerId: centerData.id,
+                      userId,
+                    })
+                    .then((eventData) => {
+                      // After creating the event, send a success response with the event datas
+                      res.status(201).json({
+                        status: 'success',
+                        message: 'event created',
+                        event: {
+                          id: eventData.id,
+                          title: eventData.title,
+                          description: eventData.description,
+                          date: eventData.date,
+                          centerName: eventData.name,
+                          centerId: eventData.centerId,
+                          userId: eventData.userId,
+                        },
+                      });
                     });
-                  });
-              });
+                });
+            }
           }
         })
         .catch((err) => {
@@ -101,14 +106,14 @@ export default {
     for (let i = 0; i < inputKeys.length; i += 1) {
       // Convert all the keys of request body to lowercase and trim spaces
       if (typeof (inputKeys[i]) === 'string') {
-        inputData[inputKeys[i].toLowerCase().trim()] = req.body[inputKeys[i]].trim();
+        inputData[inputKeys[i].toLowerCase().trim()] = (req.body[inputKeys[i]] === 'string') ? req.body[inputKeys[i]].trim() : req.body[inputKeys[i]];
       }
     }
     const {
       title,
       description,
       date,
-      centername,
+      centerid,
     } = inputData;
     const validationOutput = validation.update(inputData); // Validate the user inputs
     if (validationOutput !== 'success') {
@@ -120,26 +125,18 @@ export default {
     } else {
       // If validation was successfull, check if the event exists
       events
-        .findOne({
-          where: {
-            id: eventId,
-          },
-        })
+        .findById(eventId)
         .then((eventData) => {
           if (!eventData) {
             // If the event does not exist, send a filure response
             res.status(400).json({ sucess: 'failed', message: 'event does not exist' });
           } else if (eventData.userId === req.decoded.id) {
             // If the center exist, check if this user owns the event
-            if (centername && eventData.centerName !== centername) {
+            if (centerid && eventData.centerId !== centerid) {
               // If the user want to chang the center he choosed
               // Check if the new center he choose exist
               centers
-                .findOne({
-                  where: {
-                    name: centername.toLowerCase(),
-                  },
-                })
+                .findById(centerid)
                 .then((newCenterData) => {
                   if (!newCenterData) {
                     // Send a failed response if the new center does not exist
@@ -148,64 +145,68 @@ export default {
                       message: 'the new choosen center does not exist',
                     });
                   } else {
-                    // If the center exist, check if it has not been booked for the choosen date
-                    if (newCenterData.bookedOn !== null) {
-                      if (newCenterData.bookedOn.indexOf(date) >= 0) {
-                        // If it has been booked, send a fialed response
-                        res.status(400).json({
-                          status: 'failed',
-                          message: 'the new choose center has been booked for that date',
-                        });
-                        return;
-                      }
+                    let check = false;
+                    if (newCenterData.bookedOn) {
+                      check = true;
                     }
-                    // Add the new date to the booking register of the new center.
-                    let newBookedOn;
-                    if (newCenterData.bookedOn === null) {
-                      newBookedOn = [date || eventData.date];
-                    } else {
-                      newBookedOn = [date || eventData.date].concat(newCenterData.bookedOn);
-                    }
-                    newCenterData
-                      .update({
-                        bookedOn: newBookedOn,
-                      })
-                      .then(() => {
-                        // Remove the booking of the previous center
-                        centers
-                          .findOne({
-                            where: {
-                              id: eventData.centerId,
-                            },
-                          })
-                          .then((centerData) => {
-                            const centerRegister = centerData.bookedOn;
-                            centerRegister.splice(centerRegister.indexOf(eventData.date), 1);
-                            centerData
-                              .update({
-                                bookedOn: centerRegister,
-                              })
-                              .then(() => {
-                                // Update the event it self
-                                eventData
-                                  .update({
-                                    title: title || eventData.title,
-                                    description: description || eventData.description,
-                                    date: date || eventData.date,
-                                    centerName: centername,
-                                    centerId: newCenterData.id,
-                                  })
-                                  .then((newEventData) => {
-                                    // Send success response to the user with response data
-                                    res.status(201).json({
-                                      status: 'success',
-                                      message: 'event updated',
-                                      event: newEventData,
-                                    });
-                                  });
-                              });
-                          });
+                    if (check && newCenterData.bookedOn.indexOf(date) >= 0) {
+                      // If it has been booked, send a fialed response
+                      res.status(400).json({
+                        status: 'failed',
+                        message: 'the new choose center has been booked for that date',
                       });
+                    } else {
+                      // Add the new date to the booking register of the new center.
+                      let newBookedOn;
+                      if (newCenterData.bookedOn === null) {
+                        newBookedOn = [date || eventData.date];
+                      } else {
+                        newBookedOn = [date || eventData.date].concat(newCenterData.bookedOn);
+                      }
+                      newCenterData
+                        .update({
+                          bookedOn: newBookedOn,
+                        })
+                        .then(() => {
+                          // Remove the booking of the previous center
+                          centers
+                            .findById(eventData.centerId)
+                            .then((centerData) => {
+                              const centerRegister = centerData.bookedOn;
+                              centerRegister.splice(centerRegister.indexOf(eventData.date), 1);
+                              centerData
+                                .update({
+                                  bookedOn: centerRegister,
+                                })
+                                .then(() => {
+                                  // Update the event it self
+                                  eventData
+                                    .update({
+                                      title: title || eventData.title,
+                                      description: description || eventData.description,
+                                      date: date || eventData.date,
+                                      centerId: newCenterData.id,
+                                    })
+                                    .then((newEventData) => {
+                                      // Send success response to the user with response data
+                                      res.status(201).json({
+                                        status: 'success',
+                                        message: 'event updated',
+                                        event: {
+                                          id: newEventData.id,
+                                          title: newEventData.title,
+                                          description: newEventData.description,
+                                          date: newEventData.date,
+                                          centerName: newCenterData.name,
+                                          centerId: newEventData.centerId,
+                                          userId: newEventData.userId,
+                                        },
+                                      });
+                                    });
+                                });
+                            });
+                        });
+                    }
                   }
                 });
             } else {
@@ -217,11 +218,23 @@ export default {
                   date: date || eventData.date,
                 })
                 .then((newEventData) => {
-                  res.status(200).json({
-                    status: 'success',
-                    message: 'event updated',
-                    event: newEventData,
-                  });
+                  centers
+                    .findById(newEventData.centerId)
+                    .then((centerData) => {
+                      res.status(200).json({
+                        status: 'success',
+                        message: 'event updated',
+                        event: {
+                          id: newEventData.id,
+                          title: newEventData.title,
+                          description: newEventData.description,
+                          date: newEventData.date,
+                          centerName: centerData.name,
+                          centerId: newEventData.centerId,
+                          userId: newEventData.userId,
+                        },
+                      });
+                    });
                 });
             }
           } else {
@@ -243,11 +256,7 @@ export default {
     const eventId = req.params.id;
     // Check if the event exist
     return events
-      .findOne({
-        where: {
-          id: eventId,
-        },
-      })
+      .findById(eventId)
       .then((eventData) => {
         if (!eventData) {
           // If the event does not exist, send a failure response
@@ -258,11 +267,7 @@ export default {
         } else if (eventData.userId === req.decoded.id) {
           // If event exist, Remove its booking from the center it choosed
           centers
-            .findOne({
-              where: {
-                id: eventData.centerId,
-              },
-            })
+            .findById(eventData.centerId)
             .then((centerData) => {
               const centerRegister = centerData.bookedOn;
               centerRegister.splice(centerRegister.indexOf(eventData.date), 1);

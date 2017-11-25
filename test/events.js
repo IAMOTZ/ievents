@@ -12,6 +12,7 @@ const should = chai.should();
 describe('Events', () => {
   let userToken;
   let eventId;
+  let centerId;
   before((done) => {
     users
       .create({
@@ -38,7 +39,8 @@ describe('Events', () => {
                 facilities: ['table', 'chairs', 'projector'],
                 price: '4000',
               })
-              .then(() => {
+              .then((centerData) => {
+                centerId = centerData.id.toString();
                 done();
               });
           });
@@ -54,7 +56,7 @@ describe('Events', () => {
         title: 'Andela party',
         description: 'Its gonna be epic',
         date: '17/2/2017',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
@@ -75,7 +77,7 @@ describe('Events', () => {
       const reqBody = {
         description: 'Its gonna be epic',
         date: '17/2/2017',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
@@ -93,7 +95,7 @@ describe('Events', () => {
         title: 'Andela party',
         description: 'Its gonna be epic',
         date: '17-2/2017',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
@@ -110,7 +112,7 @@ describe('Events', () => {
       const reqBody = {
         title: 'Andela party',
         description: 'Its gonna be epic',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
