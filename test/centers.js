@@ -84,7 +84,7 @@ describe('Centers', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('center name has to be given');
+          res.body.message.should.be.eql('center name is required');
           done();
         });
     });
@@ -104,7 +104,7 @@ describe('Centers', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('center type has to be given');
+          res.body.message.should.be.eql('center type is required');
           done();
         });
     });
@@ -136,8 +136,8 @@ describe('Centers', () => {
       chai.request(app)
         .get('/api/v1/centers')
         .end((err, res) => {
-          res.body.should.be.a('array');
-          res.body.length.should.be.eql(1);
+          res.body.centers.should.be.a('array');
+          res.body.centers.length.should.be.eql(1);
           done();
         });
     });
@@ -201,7 +201,7 @@ describe('Centers', () => {
         .get(`/api/v1/centers/${centerId}`)
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.id.should.be.eql(centerId);
+          res.body.center.id.should.be.eql(centerId);
           done();
         });
     });

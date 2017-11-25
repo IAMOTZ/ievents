@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const transaction = sequelize.define('transaction', {
+  const transactions = sequelize.define('transactions', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -35,5 +35,5 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-  return transaction;
+  return transactions;
 };

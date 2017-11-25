@@ -9,7 +9,11 @@ export default {
     centers
       .all()
       .then((centersData) => {
-        res.status(200).json(centersData);
+        res.status(200).json({
+          status: 'success',
+          message: 'centers successfully retrieved',
+          centers: centersData,
+        });
       })
       .catch((err) => {
         res.status(400).json({ status: 'error', message: err.message });
@@ -35,7 +39,11 @@ export default {
           });
         } else {
           // If center exist, send it as a response
-          res.status(200).json(centerData);
+          res.status(200).json({
+            status: 'success',
+            message: 'center successfully retrieved',
+            center: centerData,
+          });
         }
       })
       .catch((err) => {
@@ -102,6 +110,7 @@ export default {
                 userId,
               })
               .then((center) => {
+                console.log(center.name);
                 // Send a success response with the center datas
                 res.status(201).json({
                   status: 'success',

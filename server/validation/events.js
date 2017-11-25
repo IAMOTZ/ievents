@@ -4,13 +4,13 @@ export default {
       title,
       description,
       date,
-      centername,
+      centerid,
     } = inputData;
     if (title === undefined) {
-      return 'title has to be given';
+      return 'event title is required';
     }
     if (title === '') {
-      return 'title cannot be empty';
+      return 'event title cannot be empty';
     }
     if (title.length < 5 || title.length > 20) {
       return 'event title must be between 5 and 20 characters';
@@ -19,7 +19,7 @@ export default {
       return 'event description must be below 200 characters';
     }
     if (date === undefined) {
-      return 'date must be given'
+      return 'event date is required';
     }
     if (date !== undefined) {
       const dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
@@ -33,9 +33,13 @@ export default {
         return 'month in the date cannot be more than 12';
       }
     }
-    if (centername !== undefined && date === undefined) {
-      return 'date must be give if center is given';
+    if (centerid === undefined) {
+      return 'centerId is required';
     }
+    if (!Number.isInteger(Number(centerid))) {
+      return 'cemter id must be and integer in a string format';
+    }
+
     return 'success';
   },
 
@@ -44,10 +48,10 @@ export default {
       title,
       description,
       date,
-      centername,
+      centerid,
     } = inputData;
     if (title !== undefined && title === '') {
-      return 'title cannot be empty';
+      return 'event title cannot be empty';
     }
     if (title !== undefined && title.length < 5) {
       return 'event title must be between 5 and 20 characters';
@@ -70,8 +74,8 @@ export default {
         return 'month in the date cannot be more than 12';
       }
     }
-    if (centername !== undefined && date === undefined) {
-      return 'date must be give if center is given';
+    if (centerid !== undefined && !Number.isInteger(Number(centerid))) {
+      return 'cemter id must be and integer in a string format';
     }
     return 'success';
   },

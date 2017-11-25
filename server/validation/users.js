@@ -8,40 +8,40 @@ export default {
     } = inputData;
 
     if (name === undefined) {
-      return 'User name has to be given';
+      return 'name is required';
     }
     if (name === '') {
-      return 'User name cannot be empty';
+      return 'name field cannot be empty';
     }
     if (name.length < 5) {
       return 'name must be equal or more than 5 characters';
     }
     if (name.match(/^\S+$/) === null) {
-      return 'User name must not contain whitespaces';
+      return 'name must not contain whitespaces';
     }
     if (name.match(/[$-/:-?{-~!"#^,._`\[\]]/) !== null) {
-      return 'User name can contain only numbers and letters';
+      return 'name can contain only numbers and letters';
     }
     if (email === undefined) {
-      return 'User email has to be given';
+      return 'email is required';
     }
     if (email === '') {
-      return 'User email cannot be empty';
+      return 'email field cannot be empty';
     }
     if (!email.match(/^\S+?@\S+.\S+$/)) {
       return 'email format is wrong';
     }
     if (email.match(/^\S+$/) === null) {
-      return 'User email must not contain whitespaces';
+      return 'email must not contain whitespaces';
     }
     if (password === undefined) {
-      return 'User password has to be given';
+      return 'password is required';
     }
     if (password === '') {
-      return 'User password cannot be empty';
+      return 'password field cannot be empty';
     }
     if (password.match(/^\S+$/) === null) {
-      return 'User password must not contain whitespaces';
+      return 'password must not contain whitespaces';
     }
     if (password.length < 7) {
       return 'password must be equal or more than 7 characters';
@@ -50,10 +50,10 @@ export default {
       return 'password must contain capital letters, small letters and numbers';
     }
     if (confirmpassword === undefined) {
-      return 'User confirmpassword has to be given';
+      return 'confirmPassword field is required';
     }
     if (password !== confirmpassword) {
-      return 'password and confirmpassword does not match';
+      return 'password and confirm password input does not match';
     }
     return 'success';
   },
@@ -65,25 +65,25 @@ export default {
     } = inputData;
 
     if (email === undefined) {
-      return 'User email has to be given';
+      return 'email is required';
     }
     if (email === '') {
-      return 'User email cannot be empty';
+      return 'email cannot be empty';
     }
     if (!email.match(/^\S+?@\S+.\S+$/)) {
       return 'email format is wrong';
     }
     if (email.match(/^\S+$/) === null) {
-      return 'User email must not contain whitespaces';
+      return 'email must not contain whitespaces';
     }
     if (password === undefined) {
-      return 'User password has to be given';
+      return 'password is required';
     }
     if (password === '') {
-      return 'User password cannot be empty';
+      return 'password cannot be empty';
     }
     if (password.match(/^\S+$/) === null) {
-      return 'User password must not contain whitespaces';
+      return 'password must not contain whitespaces';
     }
     return 'success';
   },

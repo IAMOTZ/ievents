@@ -12,6 +12,7 @@ const should = chai.should();
 describe('Events', () => {
   let userToken;
   let eventId;
+  let centerId;
   before((done) => {
     users
       .create({
@@ -38,7 +39,8 @@ describe('Events', () => {
                 facilities: ['table', 'chairs', 'projector'],
                 price: '4000',
               })
-              .then(() => {
+              .then((centerData) => {
+                centerId = centerData.id.toString();
                 done();
               });
           });
@@ -54,7 +56,7 @@ describe('Events', () => {
         title: 'Andela party',
         description: 'Its gonna be epic',
         date: '17/2/2017',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
@@ -75,7 +77,7 @@ describe('Events', () => {
       const reqBody = {
         description: 'Its gonna be epic',
         date: '17/2/2017',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
@@ -84,7 +86,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('title has to be given');
+          res.body.message.should.be.eql('event title is required');
           done();
         });
     });
@@ -93,7 +95,7 @@ describe('Events', () => {
         title: 'Andela party',
         description: 'Its gonna be epic',
         date: '17-2/2017',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
@@ -110,7 +112,7 @@ describe('Events', () => {
       const reqBody = {
         title: 'Andela party',
         description: 'Its gonna be epic',
-        centerName: 'Havilla event center',
+        centerId,
         token: userToken,
       };
       chai.request(app)
@@ -119,7 +121,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('date must be given');
+          res.body.message.should.be.eql('event date is required');
           done();
         });
     });
@@ -159,7 +161,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('title cannot be empty');
+          res.body.message.should.be.eql('event title cannot be empty');
           done();
         });
     });
@@ -177,23 +179,6 @@ describe('Events', () => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
           res.body.message.should.be.eql('the date format should be dd/mm/yyyy');
-          done();
-        });
-    });
-    it('should not modify when center is given and date is not', (done) => {
-      const reqBody = {
-        title: 'Andela party',
-        description: 'Its gonna be epic',
-        centerName: 'Havilla event center',
-        token: userToken,
-      };
-      chai.request(app)
-        .put(`/api/v1/events/${eventId}`)
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('date must be give if center is given');
           done();
         });
     });
