@@ -11,16 +11,19 @@ exports.default = {
         centername = inputData.centername;
 
     if (title === undefined) {
-      return 'title has to be given';
+      return 'event title is required';
     }
     if (title === '') {
-      return 'title cannot be empty';
+      return 'event title cannot be empty';
     }
     if (title.length < 5 || title.length > 20) {
       return 'event title must be between 5 and 20 characters';
     }
     if (description !== undefined && description.length > 200) {
       return 'event description must be below 200 characters';
+    }
+    if (date === undefined) {
+      return 'event date is required';
     }
     if (date !== undefined) {
       var dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
@@ -35,18 +38,17 @@ exports.default = {
       }
     }
     if (centername !== undefined && date === undefined) {
-      return 'date must be give if center is given';
+      return 'date is required if a center is choosen';
     }
     return 'success';
   },
   update: function update(inputData) {
     var title = inputData.title,
         description = inputData.description,
-        date = inputData.date,
-        centername = inputData.centername;
+        date = inputData.date;
 
     if (title !== undefined && title === '') {
-      return 'title cannot be empty';
+      return 'event title cannot be empty';
     }
     if (title !== undefined && title.length < 5) {
       return 'event title must be between 5 and 20 characters';
@@ -68,9 +70,6 @@ exports.default = {
       if (dateData[2] > 12) {
         return 'month in the date cannot be more than 12';
       }
-    }
-    if (centername !== undefined && date === undefined) {
-      return 'date must be give if center is given';
     }
     return 'success';
   }
