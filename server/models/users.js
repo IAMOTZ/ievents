@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 export default (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  const users = sequelize.define('users', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -35,5 +35,5 @@ export default (sequelize, DataTypes) => {
       },
     },
   });
-  return user;
+  return users;
 };

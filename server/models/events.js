@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const userEvent = sequelize.define('userEvent', {
+  const events = sequelize.define('events', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -28,5 +28,5 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-  return userEvent;
+  return events;
 };

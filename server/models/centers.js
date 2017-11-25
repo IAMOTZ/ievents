@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const center = sequelize.define('center', {
+  const centers = sequelize.define('centers', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -37,5 +37,5 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.ARRAY(DataTypes.BLOB),
     },
   });
-  return center;
+  return centers;
 };
