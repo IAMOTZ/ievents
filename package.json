@@ -4,8 +4,7 @@
   "description": "A web app to help manage and run commercial event centers",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/app",
-    "build": "babel ./server -d ./build",
+    "start": "./node_modules/.bin/babel ./server -d ./build && node ./build/app",
     "server:dev": "nodemon ./server/app --exec babel-node",
     "template:dev": "gulp",
     "test": "set NODE_ENV=test&& nyc mocha --compilers js:babel-core/register ./test/**/*.js --timeout 5000 --exit",
