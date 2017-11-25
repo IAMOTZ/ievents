@@ -140,6 +140,7 @@ export default {
                 user: {
                   name: userData.name,
                   email: userData.email,
+                  role: userData.role,
                 },
                 token,
               });
