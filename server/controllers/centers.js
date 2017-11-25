@@ -110,6 +110,7 @@ export default {
                 userId,
               })
               .then((center) => {
+                console.log(center.name);
                 // Send a success response with the center datas
                 res.status(201).json({
                   status: 'success',
