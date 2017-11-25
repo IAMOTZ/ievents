@@ -44,7 +44,6 @@ export default {
       title,
       description,
       date,
-      centername,
     } = inputData;
     if (title !== undefined && title === '') {
       return 'title cannot be empty';
