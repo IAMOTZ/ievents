@@ -19,7 +19,7 @@ export default {
       return 'event description must be below 200 characters';
     }
     if (date === undefined) {
-      return 'date must be given'
+      return 'date must be given';
     }
     if (date !== undefined) {
       const dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
@@ -69,9 +69,6 @@ export default {
       if (dateData[2] > 12) {
         return 'month in the date cannot be more than 12';
       }
-    }
-    if (centername !== undefined && date === undefined) {
-      return 'date must be give if center is given';
     }
     return 'success';
   },
