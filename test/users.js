@@ -48,6 +48,74 @@ describe('Authentication', () => {
           done();
         });
     });
+    it('should not sign up when name is an empty string', (done) => {
+      const reqBody = {
+        name: '',
+        email: 'OgunniyiTunmise@gmail.com',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+      };
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('name field cannot be empty');
+          done();
+        });
+    });
+    it('should not sign up when name contain special characer', (done) => {
+      const reqBody = {
+        name: 'tunmise#$',
+        email: 'OgunniyiTunmise@gmail.com',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+      };
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('name can contain only numbers and letters');
+          done();
+        });
+    });
+    it('should not sign up when name is less than 5 characters', (done) => {
+      const reqBody = {
+        name: 'tun',
+        email: 'OgunniyiTunmise@gmail.com',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+      };
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('name must be equal or more than 5 characters');
+          done();
+        });
+    });
+    it('should not sign up when name contain white spaces', (done) => {
+      const reqBody = {
+        name: 'tun mise',
+        email: 'OgunniyiTunmise@gmail.com',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+      };
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('name must not contain whitespaces');
+          done();
+        });
+    });
     it('should not sign up when email is not given', (done) => {
       const reqBody = {
         name: 'tunmise',
@@ -61,6 +129,57 @@ describe('Authentication', () => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
           res.body.message.should.be.eql('email is required');
+          done();
+        });
+    });
+    it('should not sign up when email is empty', (done) => {
+      const reqBody = {
+        name: 'tunmise',
+        email: '',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+      };
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('email field cannot be empty');
+          done();
+        });
+    });
+    it('should not sign up when email is of wrong format', (done) => {
+      const reqBody = {
+        name: 'tunmise',
+        email: 'tumise',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+      };
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('email format is wrong');
+          done();
+        });
+    });
+    it('should not sign up when email contain white spaces', (done) => {
+      const reqBody = {
+        name: 'tunmise',
+        email: 'tunm ise@gmail.com',
+        password: 'myPassword12',
+        confirmPassword: 'myPassword12',
+      };
+      chai.request(app)
+        .post('/api/v1/users')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.status.should.be.eql('failed');
+          res.body.message.should.be.eql('email format is wrong');
           done();
         });
     });
@@ -93,40 +212,6 @@ describe('Authentication', () => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
           res.body.message.should.be.eql('confirmPassword field is required');
-          done();
-        });
-    });
-    it('should not sign up when name is an empty string', (done) => {
-      const reqBody = {
-        name: '',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('name field cannot be empty');
-          done();
-        });
-    });
-    it('should not sign up when email is an empty string', (done) => {
-      const reqBody = {
-        name: 'Tunmise',
-        email: '',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('email field cannot be empty');
           done();
         });
     });
