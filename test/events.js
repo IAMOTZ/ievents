@@ -127,6 +127,23 @@ describe('Events', () => {
     });
   });
 
+  describe('GET: /api/v1/events', ()  => {
+    it('should get all event', (done) => {
+      const reqBody = {
+        token: userToken,
+      };
+      chai.request(app)
+        .get('/api/v1/events')
+        .send(reqBody)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.events.should.be.a('array');
+          res.body.events.length.should.be.eql(1);
+          done();
+        });
+    });
+  });
+
   describe('PUT: /api/v1/events/:id', () => {
     it('should modify the event', (done) => {
       const reqBody = {
