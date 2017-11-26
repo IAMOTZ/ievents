@@ -15,6 +15,8 @@ router.get('/centers/:id', controllers.centers.getOne);
 
 router.use(userValidation);
 
+router.get('/events', controllers.events.getAll);
+
 router.post('/events', controllers.events.create);
 
 router.put('/events/:id', controllers.events.update);
