@@ -4,6 +4,25 @@ import validation from '../validation/events';
 const { events, centers } = db;
 
 export default {
+  // Controller for getting all of a user events
+  getAll(req, res) {
+    const userId = req.decoded.id;
+    events
+      .all({
+        where: {
+          userId,
+        },
+      })
+      .then((eventData) => {
+        res.status(200).json({
+          events: eventData,
+        });
+      })
+      .catch((err) => {
+        res.status(400).json({ status: 'error', message: err.message });
+      });
+  },
+
   // Controller for creating an event
   create(req, res) {
     const inputData = {};
