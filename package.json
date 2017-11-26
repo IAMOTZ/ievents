@@ -4,10 +4,12 @@
   "description": "A web app to help manage and run commercial event centers",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/babel ./server -d ./build && node ./build/app",
+    "start": "node ./build/app",
+    "build": "babel ./server -d ./build",
     "server:dev": "nodemon ./server/app --exec babel-node",
     "template:dev": "gulp",
-    "test": "set NODE_ENV=test&& nyc mocha --compilers js:babel-core/register ./test/**/*.js --timeout 5000 --exit",
+    "setUpDb": "babel-node ./server/setUpDb",
+    "test": "set NODE_ENV=test&& babel-node ./server/setUpDb && nyc mocha --compilers js:babel-core/register ./test/**/*.js --timeout 5000 --exit",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint"
   },
