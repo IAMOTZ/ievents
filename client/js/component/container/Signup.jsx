@@ -5,7 +5,7 @@ import signupStyles from '../../../sass/signup.scss';
 import TopNavigation from '../layout/TopNavigation.jsx';
 import Footer from '../layout/Footer.jsx';
 
-import createUser from '../../actions/userActions';
+import { createUser } from '../../actions/userActions';
 
 @connect((store) => {
   return  {
