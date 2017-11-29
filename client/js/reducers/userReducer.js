@@ -4,27 +4,50 @@ export default function reducer(state = {
     email: null,
     password: null,
     role: null,
+    id: null,
+    token: null,
   },
-  fetching: false,
-  fetched: false,
-  error: false,
+  status: {
+    fetching: false,
+    fetched: false,
+    error: false,
+  }
 }, action) {
   switch (action.type) {
     case 'FETCH_USER': {
-      return { ...state, fetching: true };
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          fetching: true,
+          fetched: false,
+          error: false
+        }
+      };
     }
-    case 'FETCH_MYUSER_FULFILLED': {
-      const { name, email, role } = action.payload;
-      const newUser = { name, email, role };
+    case 'FETCH_USER_RESOLVED': {
+      const { name, email, role, id } = action.payload.user;
+      const token = action.payload.token;
+      const newUser = { name, email, role, id, token };
       return {
         ...state,
         user: newUser,
-        fetching: false,
-        fetched: true,
+        status: {
+          ...state.status,
+          fetching: false,
+          fetched: true,
+        }
       };
     }
-    case 'FETCH_MYUSER_REJECTED': {
-      return { ...state, fetching: false, error: action.payload };
+    case 'FETCH_USER_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          fetching: false,
+          error: action.payload
+        }
+      };
     }
     default: {
       return state;
