@@ -9,7 +9,6 @@ const { users } = db;
 export default {
   // Controller for signing up a user
   signup(req, res) {
-    console.log(req.body)
     const inputData = {};
     const inputKeys = Object.keys(req.body);
     for (let i = 0; i < inputKeys.length; i += 1) {
