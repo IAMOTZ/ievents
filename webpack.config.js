@@ -3,9 +3,9 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, 'src'),
-  devtool: debug ? 'inline-sourcemap' : null,
-  entry: './client/js/index.js',
+  entry: [
+    path.join(__dirname, '/client/js/index.jsx')
+  ],
   module: {
     loaders: [
       {
@@ -13,7 +13,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-0'],
+          presets: ['react', 'es2015'],
           plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
         },
       }, {
@@ -23,7 +23,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.join(__dirname, '/client/'),
+    path: path.resolve(__dirname, '/client/'),
     filename: 'bundle.js',
   },
   plugins: debug ? [] : [
@@ -31,4 +31,7 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
+  devServer: {
+    contentBase: path.join(__dirname, "client"),
+  }
 };
