@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   entry: [
-    path.join(__dirname, '/client/js/index.jsx')
+    path.join(__dirname, '/client/js/index.jsx'),
   ],
   module: {
     loaders: [
@@ -32,6 +32,6 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, "client"),
-  }
+    contentBase: path.join(__dirname, 'client'),
+  },
 };
