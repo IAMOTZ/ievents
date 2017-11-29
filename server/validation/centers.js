@@ -9,7 +9,7 @@ export default {
       price,
     } = inputData;
 
-    if (name === undefined) {
+    if (name === undefined || name === null) {
       return 'center name is required';
     }
     if (name === '') {
@@ -30,7 +30,7 @@ export default {
         return 'center capacity must be a number in string format';
       }
     }
-    if (type === undefined) {
+    if (type === undefined || type === null) {
       return 'center type is required';
     }
     if (type !== 'theater' && type !== 'banquet') {

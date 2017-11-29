@@ -1,16 +1,26 @@
 {
-    "extends": "airbnb",
-    "env": {
-        "node": true,
-        "es6": true,
-        "mocha": true
-    },
+    "root": true,
+    "extends": ["airbnb-base", "eslint:recommended", "plugin:import/errors", "plugin:import/warnings"],
+    "parser": "babel-eslint",
     "plugins": [
-        "react"
+      "react",
+      "jsx-a11y",
+      "import"
     ],
+    "env": {
+      "node": true,
+      "es6": true,
+      "mocha": true
+    },
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        }
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "no-unused-vars": 0,
+      "no-undef": 0
     }
 }

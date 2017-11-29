@@ -13,20 +13,16 @@ router.get('/centers', controllers.centers.getAll);
 
 router.get('/centers/:id', controllers.centers.getOne);
 
-router.use(userValidation);
+router.get('/events', userValidation, controllers.events.getAll);
 
-router.get('/events', controllers.events.getAll);
+router.post('/events', userValidation, controllers.events.create);
 
-router.post('/events', controllers.events.create);
+router.put('/events/:id', userValidation, controllers.events.update);
 
-router.put('/events/:id', controllers.events.update);
+router.delete('/events/:id', userValidation, controllers.events.delete);
 
-router.delete('/events/:id', controllers.events.delete);
+router.post('/centers', userValidation, adminValidation, controllers.centers.create);
 
-router.use(adminValidation);
-
-router.post('/centers', controllers.centers.create);
-
-router.put('/centers/:id', controllers.centers.update);
+router.put('/centers/:id', userValidation, adminValidation, controllers.centers.update);
 
 export default router;
