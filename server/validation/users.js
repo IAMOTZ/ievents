@@ -7,7 +7,7 @@ export default {
       confirmpassword,
     } = inputData;
 
-    if (name === undefined) {
+    if (name === undefined || name === null) {
       return 'name is required';
     }
     if (name === '') {
@@ -22,7 +22,7 @@ export default {
     if (name.match(/[$-/:-?{-~!"#^,._`\[\]]/) !== null) {
       return 'name can contain only numbers and letters';
     }
-    if (email === undefined) {
+    if (email === undefined || email === null) {
       return 'email is required';
     }
     if (email === '') {
@@ -34,7 +34,7 @@ export default {
     if (email.match(/^\S+$/) === null) {
       return 'email must not contain whitespaces';
     }
-    if (password === undefined) {
+    if (password === undefined || password === null) {
       return 'password is required';
     }
     if (password === '') {
@@ -49,7 +49,7 @@ export default {
     if (!/\d/.test(password) || !/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
       return 'password must contain capital letters, small letters and numbers';
     }
-    if (confirmpassword === undefined) {
+    if (confirmpassword === undefined || confirmpassword === null) {
       return 'confirmPassword field is required';
     }
     if (password !== confirmpassword) {
@@ -64,7 +64,7 @@ export default {
       password,
     } = inputData;
 
-    if (email === undefined) {
+    if (email === undefined || email === null) {
       return 'email is required';
     }
     if (email === '') {
@@ -76,7 +76,7 @@ export default {
     if (email.match(/^\S+$/) === null) {
       return 'email must not contain whitespaces';
     }
-    if (password === undefined) {
+    if (password === undefined || password === null) {
       return 'password is required';
     }
     if (password === '') {

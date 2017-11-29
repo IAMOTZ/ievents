@@ -6,7 +6,7 @@ export default {
       date,
       centerid,
     } = inputData;
-    if (title === undefined) {
+    if (title === undefined || title === null) {
       return 'event title is required';
     }
     if (title === '') {
@@ -18,7 +18,7 @@ export default {
     if (description !== undefined && description.length > 200) {
       return 'event description must be below 200 characters';
     }
-    if (date === undefined) {
+    if (date === undefined || date === null) {
       return 'event date is required';
     }
     if (date !== undefined) {
@@ -33,7 +33,7 @@ export default {
         return 'month in the date cannot be more than 12';
       }
     }
-    if (centerid === undefined) {
+    if (centerid === undefined || centerid === null) {
       return 'centerId is required';
     }
     if (!Number.isInteger(Number(centerid))) {
