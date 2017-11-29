@@ -49,6 +49,41 @@ export default function reducer(state = {
         }
       };
     }
+    case 'LOGGING_USER': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          fetching: true,
+          fetched: false,
+          error: false
+        }
+      }
+    }
+    case 'LOGGING_USER_RESOLVED': {
+      const { name, email, role, id } = action.payload.user;
+      const token = action.payload.token;
+      const newUser = { name, email, role, id, token };
+      return {
+        ...state,
+        user: newUser,
+        status: {
+          ...state.status,
+          fetching: false,
+          fetched: true,
+        }
+      };
+    }
+    case 'LOGGING_USER_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          fetching: false,
+          error: action.payload
+        }
+      };
+    }
     default: {
       return state;
     }
