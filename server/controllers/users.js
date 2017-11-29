@@ -87,12 +87,13 @@ export default {
 
   // Controllers for signing in a user
   signin(req, res) {
+    console.log(req.body);
     const inputData = {};
     const inputKeys = Object.keys(req.body);
     for (let i = 0; i < inputKeys.length; i += 1) {
       if (typeof (inputKeys[i]) === 'string') {
         // Convert all the keys of request body to lowercase and trim spaces
-        inputData[inputKeys[i].toLowerCase().trim()] = req.body[inputKeys[i]].trim();
+        inputData[inputKeys[i].toLowerCase().trim()] = typeof (req.body[inputKeys[i]]) === 'string' ? req.body[inputKeys[i]].trim() : req.body[inputKeys[i]];
       }
     }
     const validationOutput = validation.signin(inputData); // Validate the user inputs
