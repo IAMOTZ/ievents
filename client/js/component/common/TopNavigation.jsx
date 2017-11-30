@@ -40,7 +40,7 @@ export default () => {
 const UserTopNav = (props) => {
   return (
     <div>
-      <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
         <div class="container">
           <a href="#" class="navbar-brand">
             <strong>{props.name}</strong>
