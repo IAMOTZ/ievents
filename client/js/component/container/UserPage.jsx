@@ -10,7 +10,10 @@ import Footer from '../layout/Footer.jsx';
   }
 })
 
+// This is just a sample page to serve as a place holder for 
+// landing page after sign in or log in.
 export default class UserPage extends React.Component {
+  // This method logs the user state to the console
   checkStore = () => {
     console.log(this.props.user);
   }

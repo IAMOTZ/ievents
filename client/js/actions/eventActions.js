@@ -1,9 +1,7 @@
 import axios from 'axios';
-import dotEnv from 'dotenv';
 
-dotEnv.config();
-
-export default addEvent = (eventDetails, userToken) => {
+// This action contacts the server to add an event for a user
+export default (eventDetails, userToken) => {
   return (dispatch) => {
     dispatch({ type: 'ADDDING_EVENT' });
     const config = {
@@ -11,7 +9,7 @@ export default addEvent = (eventDetails, userToken) => {
         "access-token": userToken
       }
     }
-    axios.post(`${process.env.BASE_URL}/events`, eventDetails, config)
+    axios.post('http://localhost:3000/api/v1/events', eventDetails, config)
       .then((response) => {
         dispatch({ type: 'ADDING_EVENT_RESOLVED', payload: response.data })
       })

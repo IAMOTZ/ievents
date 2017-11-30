@@ -25,12 +25,14 @@ export default class Signup extends React.Component {
     };
   }
 
+  // This method uses user input to update the state
   getInput = (e) => {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
+  // This method fires the action to create a user
   register = () => {
     const {
       name, email, password, confirmPassword,
@@ -42,7 +44,7 @@ export default class Signup extends React.Component {
       confirmPassword,
     }));
   }
-  
+
   render() {
     return (
       <div>

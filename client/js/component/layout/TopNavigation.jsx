@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// The navigation that is returned by default
 export default () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark fixed-top">
@@ -35,6 +36,7 @@ export default () => {
   );
 }
 
+// The navigation that is specific to user page
 const UserTopNav = (props) => {
   return (
     <div>
@@ -70,6 +72,7 @@ const UserTopNav = (props) => {
   );
 };
 
+// The navigation that is specific to admin page  
 const AdminTopNav = (props) => {
   return (
     <div>

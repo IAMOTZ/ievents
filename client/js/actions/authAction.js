@@ -1,6 +1,7 @@
 import axios from 'axios';
 import history from '../index.jsx';
 
+// This action contacts the server to create a user
 export const createUser = (userDetails) => {
   return (dispatch) => {
     dispatch({ type: 'FETCH_USER' });
@@ -15,6 +16,7 @@ export const createUser = (userDetails) => {
   };
 };
 
+// This action contacts the server to log in a user
 export const loginUser = (userDetails) => {
   return (dispatch) => {
     dispatch({ type: 'LOGGING_USER' });

@@ -23,12 +23,14 @@ export default class Signin extends React.Component {
     };
   }
 
+  // This method uses user input to update the state
   getInput = (e) => {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
+  // This method fires the action to log in a user
   login = () => {
     const {
      email, password,
