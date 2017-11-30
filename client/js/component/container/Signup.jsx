@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import signupStyles from '../../../sass/signup.scss';
 import TopNavigation from '../layout/TopNavigation.jsx';
 import Footer from '../layout/Footer.jsx';
+import Alert from '../layout/Alert.jsx';
 
 import { createUser } from '../../actions/authAction';
 
 @connect((store) => {
-  return  {
+  return {
     user: store.user,
   }
 })
@@ -41,14 +42,14 @@ export default class Signup extends React.Component {
       confirmPassword,
     }));
   }
-
+  
   render() {
     return (
       <div>
         <TopNavigation />
-
         <div className="d-flex flex-column align-items-center">
           <div className="card card-form">
+            <Alert />
             <h1 className="card-header">Sign up</h1>
             <div className="card-body">
               <form>

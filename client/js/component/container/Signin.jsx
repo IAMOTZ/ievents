@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import signupStyles from '../../../sass/signup.scss';
 import TopNavigation from '../layout/TopNavigation.jsx';
 import Footer from '../layout/Footer.jsx';
+import Alert from '../layout/Alert.jsx';
 
 import { loginUser } from '../../actions/authAction';
 
@@ -44,6 +45,7 @@ export default class Signin extends React.Component {
         <TopNavigation />
         <div className="the-flex-box d-flex flex-column align-items-center">
           <div className="card card-form">
+            <Alert />
             <h1 className="card-header">Sign in</h1>
             <div className="card-body">
               <form>
@@ -53,7 +55,7 @@ export default class Signin extends React.Component {
                     <div className="input-group-addon">
                       <i className="fa fa-envelope"></i>
                     </div>
-                    <input type="email" className="form-control" id="email" placeholder="Your Email" name="email" onChange={this.getInput}/>
+                    <input type="email" className="form-control" id="email" placeholder="Your Email" name="email" onChange={this.getInput} />
                   </div>
                 </div>
                 <div className="form-group">
@@ -62,7 +64,7 @@ export default class Signin extends React.Component {
                     <div className="input-group-addon">
                       <i className="fa fa-user-secret"></i>
                     </div>
-                    <input type="password" className="form-control" id="password" placeholder="Password"name="password" onChange={this.getInput}/>
+                    <input type="password" className="form-control" id="password" placeholder="Password" name="password" onChange={this.getInput} />
                   </div>
                 </div>
                 <a className="btn btn-block dark-button text-white" onClick={this.login}>Log in</a>
