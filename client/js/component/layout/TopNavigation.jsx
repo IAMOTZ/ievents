@@ -13,7 +13,7 @@ export default () => {
         </button>
         <div className="collapse navbar-collapse" id="navMenu">
           <ul className="navbar-nav ml-auto">
-            
+
             <li className="nav-item">
               <a href="index.html" className="nav-link">Home</a>
             </li>
@@ -33,4 +33,76 @@ export default () => {
       </div>
     </nav>
   );
+}
+
+const UserTopNav = (props) => {
+  return (
+    <div>
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-sm-none">
+        <div class="container">
+          <a href="#" class="navbar-brand">
+            <strong>{props.name}</strong>
+            <br />
+            <p class="h6">{props.title}</p>
+          </a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link">My events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">Add Events</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">Centers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
 };
+
+const AdminTopNav = (props) => {
+  return (
+    <div>
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
+        <div class="container">
+          <a href="#" class="navbar-brand">
+            <strong>Admin</strong>
+            <br />
+            <p class="h6">{ props.title }</p>
+          </a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="adminCenters.html" class="nav-link">Centers</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">Add Center</a>
+              </li>
+              <li class="nav-item">
+                <a href="transactions.html" class="nav-link">Transactions</a>
+              </li>
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+export { UserTopNav, AdminTopNav };
