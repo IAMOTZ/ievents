@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default () => {
   return (
@@ -12,6 +13,7 @@ export default () => {
         </button>
         <div className="collapse navbar-collapse" id="navMenu">
           <ul className="navbar-nav ml-auto">
+            
             <li className="nav-item">
               <a href="index.html" className="nav-link">Home</a>
             </li>
@@ -19,10 +21,12 @@ export default () => {
               <a href="centers.html" className="nav-link">Centers</a>
             </li>
             <li className="nav-item">
-              <a href="signin.html" className="nav-link">Signin</a>
+              {/* <a href="signin.html" className="nav-link">Signin</a> */}
+              <Link to="users/login" className="nav-link"> Signin </Link>
             </li>
             <li className="nav-item">
-              <a href="#" className="nav-link">Signup</a>
+              {/* <a href="#" className="nav-link">Signup</a> */}
+              <Link to="/" className="nav-link"> Signup </Link>
             </li>
           </ul>
         </div>
