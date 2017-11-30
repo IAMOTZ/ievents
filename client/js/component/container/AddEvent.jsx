@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import addEventStyles from '../../../sass/addEvent.scss';
-import { UserSideNav } from '../layout/SideNavigation.jsx';
-import { UserTopNav } from '../layout/TopNavigation.jsx';
-import Header from '../layout/Header.jsx';
-import Footer from '../layout/Footer.jsx';
+import { UserSideNav } from '../common/SideNavigation.jsx';
+import { UserTopNav } from '../common/TopNavigation.jsx';
+import Header from '../common/Header.jsx';
+import Footer from '../common/Footer.jsx';
 
 @connect((store) => {
   return {

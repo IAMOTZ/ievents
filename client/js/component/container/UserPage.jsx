@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import TopNavigation from '../layout/TopNavigation.jsx';
-import Footer from '../layout/Footer.jsx';
+import TopNavigation from '../common/TopNavigation.jsx';
+import Footer from '../common/Footer.jsx';
 
 @connect((store) => {
   return {

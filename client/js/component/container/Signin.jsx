@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import signupStyles from '../../../sass/signup.scss';
-import TopNavigation from '../layout/TopNavigation.jsx';
-import Footer from '../layout/Footer.jsx';
-import Alert from '../layout/Alert.jsx';
+import TopNavigation from '../common/TopNavigation.jsx';
+import Footer from '../common/Footer.jsx';
+import Alert from '../common/Alert.jsx';
 
 import { loginUser } from '../../actions/authAction';
 
