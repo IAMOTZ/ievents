@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from '../index.jsx';
 
 export const createUser = (userDetails) => {
   return (dispatch) => {
@@ -6,6 +7,7 @@ export const createUser = (userDetails) => {
     axios.post('http://localhost:3000/api/v1/users', userDetails)
       .then((response) => {
         dispatch({ type: 'FETCH_USER_RESOLVED', payload: response.data });
+        history.push('/userpage');
       })
       .catch((err) => {
         dispatch({ type: 'FETCH_USER_REJECTED', payload: err.response.data });
@@ -19,6 +21,7 @@ export const loginUser = (userDetails) => {
     axios.post('http://localhost:3000/api/v1/users/login', userDetails)
       .then((response) => {
         dispatch({ type: 'LOGGING_USER_RESOLVED', payload: response.data });
+        history.push('/userpage');
       })
       .catch((err) => {
         dispatch({ type: 'LOGGING_USER_REJECTED', payload: err.response.data });
