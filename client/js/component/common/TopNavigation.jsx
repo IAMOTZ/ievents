@@ -6,27 +6,24 @@ export default () => {
   return (
     <nav className="navbar navbar-expand-sm navbar-dark fixed-top">
       <div className="container">
-        <a href="index.html" className="navbar-brand">
+        <Link to="/" className="navbar-brand">
           <strong>Ievents</strong>
-        </a>
+        </Link>
         <button className="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navMenu">
           <ul className="navbar-nav ml-auto">
-
             <li className="nav-item">
-              <a href="index.html" className="nav-link">Home</a>
+              <Link to="/" className="nav-link">Home</Link>
             </li>
             <li className="nav-item">
-              <a href="centers.html" className="nav-link">Centers</a>
+              <Link to="#" className="nav-link">Centers</Link>
             </li>
             <li className="nav-item">
-              {/* <a href="signin.html" className="nav-link">Signin</a> */}
-              <Link to="users/login" className="nav-link"> Signin </Link>
+              <Link to="/users/login" className="nav-link"> Signin </Link>
             </li>
             <li className="nav-item">
-              {/* <a href="#" className="nav-link">Signup</a> */}
               <Link to="/" className="nav-link"> Signup </Link>
             </li>
           </ul>
@@ -42,7 +39,7 @@ const UserTopNav = (props) => {
     <div>
       <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
         <div class="container">
-          <a href="#" class="navbar-brand">
+          <a href="" class="navbar-brand">
             <strong class="text-capitalize">{props.name}</strong>
             <br />
             <p class="h6">{props.title}</p>
@@ -53,16 +50,16 @@ const UserTopNav = (props) => {
           <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link">My events</a>
+                <Link to="/events" className="nav-link">My events</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Add Events</a>
+                <Link to="/addEvent" className="nav-link">Add Events</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Centers</a>
+                <Link to="#" className="nav-link">Centers</Link>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Logout</a>
+                <Link to="#" className="nav-link">Logout</Link>
               </li>
             </ul>
           </div>
@@ -78,10 +75,10 @@ const AdminTopNav = (props) => {
     <div>
       <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
         <div class="container">
-          <a href="#" class="navbar-brand">
+          <a href="" class="navbar-brand">
             <strong>Admin</strong>
             <br />
-            <p class="h6">{ props.title }</p>
+            <p class="h6">{props.title}</p>
           </a>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
             <span class="navbar-toggler-icon"></span>
@@ -89,16 +86,16 @@ const AdminTopNav = (props) => {
           <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a href="adminCenters.html" class="nav-link">Centers</a>
+                <Link to="#" class="nav-link">Centers</Link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">Add Center</a>
+                <Link to="#" class="nav-link">Add Center</Link>
               </li>
               <li class="nav-item">
-                <a href="transactions.html" class="nav-link">Transactions</a>
+                <Link to="#" class="nav-link">Transactions</Link>
               </li>
               <li class="nav-item">
-                <a href="index.html" class="nav-link">Logout</a>
+                <Link to="#" class="nav-link">Logout</Link>
               </li>
             </ul>
           </div>
