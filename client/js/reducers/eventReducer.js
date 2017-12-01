@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
       };
     }
     case 'ADDING_EVENT_RESOLVED': {
-      const { title, description, date, center } = action.payload.center;
+      const { title, description, date, center } = action.payload.event;
       const newEvent = { title, description, date, center };
       return {
         ...state,
@@ -42,6 +42,9 @@ export default (state = initialState, action) => {
           error: action.payload,
         },
       };
+    }
+    default: {
+      return state;
     }
   }
 }
