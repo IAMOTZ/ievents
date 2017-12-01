@@ -6,10 +6,10 @@ export default (props) => {
       <div class="card text-dark bg-white mb-3 mx-auto" style={{ maxWidth: 20 + 'rem' }} key={event.id}>
         <div class="card-header h4">
           {event.title}
-          <a class="ml-4 mr-2">
+          <a href="" class="ml-4 mr-2">
             <i class="fa fa-pencil"></i>
           </a>
-          <a class="">
+          <a href="">
             <i class="fa fa-trash"></i>
           </a>
         </div>
