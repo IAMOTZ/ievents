@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import signupStyles from '../../../sass/signup.scss';
@@ -46,60 +47,65 @@ export default class Signup extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <TopNavigation />
-        <div className="d-flex flex-column align-items-center">
-          <div className="card card-form">
-            <Alert />
-            <h1 className="card-header">Sign up</h1>
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <div className="input-group">
-                    <div className="input-group-addon">
-                      <i className="fa fa-user" />
+    if (this.props.user.status.fetched === true) {
+      return (<Redirect to="/addEvent" />);
+    } else {
+      return (
+        <div>
+          <TopNavigation />
+          <div className="d-flex flex-column align-items-center">
+            <div className="card card-form">
+              <Alert />
+              <h1 className="card-header">Sign up</h1>
+              <div className="card-body">
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <div className="input-group">
+                      <div className="input-group-addon">
+                        <i className="fa fa-user" />
+                      </div>
+                      <input type="text" className="form-control" id="name" placeholder="Name" name="name" onChange={this.getInput} />
                     </div>
-                    <input type="text" className="form-control" id="name" placeholder="Name" name="name" onChange={this.getInput} />
                   </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <div className="input-group">
-                    <div className="input-group-addon">
-                      <i className="fa fa-envelope" />
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <div className="input-group">
+                      <div className="input-group-addon">
+                        <i className="fa fa-envelope" />
+                      </div>
+                      <input type="email" className="form-control" id="email" name="email" placeholder="Your Email" onChange={this.getInput} />
                     </div>
-                    <input type="email" className="form-control" id="email" name="email" placeholder="Your Email" onChange={this.getInput} />
                   </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <div className="input-group">
-                    <div className="input-group-addon">
-                      <i className="fa fa-user-secret" />
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <div className="input-group">
+                      <div className="input-group-addon">
+                        <i className="fa fa-user-secret" />
+                      </div>
+                      <input type="password" className="form-control" id="password" name="password" placeholder="Password" onChange={this.getInput} />
                     </div>
-                    <input type="password" className="form-control" id="password" name="password" placeholder="Password" onChange={this.getInput} />
                   </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Confirm Password</label>
-                  <div className="input-group">
-                    <div className="input-group-addon">
-                      <i className="fa fa-user-secret" />
+                  <div className="form-group">
+                    <label htmlFor="password">Confirm Password</label>
+                    <div className="input-group">
+                      <div className="input-group-addon">
+                        <i className="fa fa-user-secret" />
+                      </div>
+                      <input type="password" className="form-control" id="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.getInput} />
                     </div>
-                    <input type="password" className="form-control" id="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.getInput} />
                   </div>
-                </div>
-                <a className="btn btn-block dark-button text-white" onClick={this.register} >Register</a>
-              </form>
+                  <a className="btn btn-block dark-button text-white" onClick={this.register} >Register</a>
+                </form>
+              </div>
             </div>
+
+            <Footer />
           </div>
-
-          <Footer />
         </div>
-      </div>
 
-    );
+      );
+    }
+
   }
 }

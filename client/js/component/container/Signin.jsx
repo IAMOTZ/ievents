@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import signupStyles from '../../../sass/signup.scss';
@@ -42,46 +43,54 @@ export default class Signin extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <TopNavigation />
-        <div className="the-flex-box d-flex flex-column align-items-center">
-          <div className="card card-form">
-            <Alert />
-            <h1 className="card-header">Sign in</h1>
-            <div className="card-body">
-              <form>
-                <div className="form-group">
-                  <label for="email">Email</label>
-                  <div className="input-group">
-                    <div className="input-group-addon">
-                      <i className="fa fa-envelope"></i>
+    if (this.props.user.status.fetched === true) {
+      return (
+        <div>
+          <Redirect to="/addEvent" />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <TopNavigation />
+          <div className="the-flex-box d-flex flex-column align-items-center">
+            <div className="card card-form">
+              <Alert />
+              <h1 className="card-header">Sign in</h1>
+              <div className="card-body">
+                <form>
+                  <div className="form-group">
+                    <label for="email">Email</label>
+                    <div className="input-group">
+                      <div className="input-group-addon">
+                        <i className="fa fa-envelope"></i>
+                      </div>
+                      <input type="email" className="form-control" id="email" placeholder="Your Email" name="email" onChange={this.getInput} />
                     </div>
-                    <input type="email" className="form-control" id="email" placeholder="Your Email" name="email" onChange={this.getInput} />
                   </div>
-                </div>
-                <div className="form-group">
-                  <label for="password">Password</label>
-                  <div className="input-group">
-                    <div className="input-group-addon">
-                      <i className="fa fa-user-secret"></i>
+                  <div className="form-group">
+                    <label for="password">Password</label>
+                    <div className="input-group">
+                      <div className="input-group-addon">
+                        <i className="fa fa-user-secret"></i>
+                      </div>
+                      <input type="password" className="form-control" id="password" placeholder="Password" name="password" onChange={this.getInput} />
                     </div>
-                    <input type="password" className="form-control" id="password" placeholder="Password" name="password" onChange={this.getInput} />
                   </div>
-                </div>
-                <a className="btn btn-block dark-button text-white" onClick={this.login}>Log in</a>
-                <div className="text-center mt-2">
-                  <a href="" className="text-muted">forgot password?</a>
-                </div>
-              </form>
+                  <a className="btn btn-block dark-button text-white" onClick={this.login}>Log in</a>
+                  <div className="text-center mt-2">
+                    <a href="" className="text-muted">forgot password?</a>
+                  </div>
+                </form>
+              </div>
             </div>
+
+            <Footer />
           </div>
 
-          <Footer />
         </div>
+      );
+    }
 
-      </div>
-
-    );
   }
 }
