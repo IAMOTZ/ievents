@@ -7,7 +7,7 @@ import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
 import Alert from '../common/Alert.jsx';
-import addEvent from '../../actions/eventActions';
+import { addEvent } from '../../actions/eventActions';
 
 @connect((store) => {
   return {
