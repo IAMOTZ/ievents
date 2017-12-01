@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // This is the side navigation that appears when a user is logged in(Large Screen)
 const UserSideNav = (props) => {
@@ -9,8 +10,8 @@ const UserSideNav = (props) => {
       </div>
       <div class="pt-3 navigation-links">
         <div class="list-group">
-          <a class="list-group-item">
-            <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>&nbsp; My Events</a>
+          <Link to='/events' class="list-group-item">
+            <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>&nbsp; My Events</Link>
           <a class="list-group-item">
             <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events</a>
           <a class="list-group-item">
