@@ -6,7 +6,7 @@ export default {
       date,
       centerid,
     } = inputData;
-    if (title === undefined || title === null) {
+    if (!title) {
       return 'event title is required';
     }
     if (title === '') {
@@ -15,13 +15,13 @@ export default {
     if (title.length < 5 || title.length > 20) {
       return 'event title must be between 5 and 20 characters';
     }
-    if (description !== undefined && description.length > 200) {
+    if (description && description.length > 200) {
       return 'event description must be below 200 characters';
     }
-    if (date === undefined || date === null) {
+    if (!date) {
       return 'event date is required';
     }
-    if (date !== undefined) {
+    if (date) {
       const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
       if (!dateData) {
         return 'the date format should be yyyy/mm/dd';
@@ -33,8 +33,8 @@ export default {
         return 'month in the date cannot be more than 12';
       }
     }
-    if (centerid === undefined || centerid === null) {
-      return 'centerId is required';
+    if (!centerid) {
+      return 'center is required';
     }
     if (!Number.isInteger(Number(centerid))) {
       return 'cemter id must be and integer in a string format';
