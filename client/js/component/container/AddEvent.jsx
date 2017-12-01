@@ -6,12 +6,13 @@ import { UserSideNav } from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
-import Footer from '../common/Footer.jsx';
+import Alert from '../common/Alert.jsx';
 import addEvent from '../../actions/eventActions';
 
 @connect((store) => {
   return {
     user: store.user.user,
+    error: store.events.status.error.message,    
     centers: store.centers.centers,
   }
 })
@@ -37,10 +38,12 @@ export default class AddEvent extends React.Component {
   // This method fires the action to create an event
   add = () => {
     const {
-     title, description, centerId
+     title,
+      description,
+      centerId
     } = this.state;
-    let date = this.state.date.replace(/-/g, '/');
-    const eventDetails = {title, description, date, centerId};
+    let date = this.state.date ? this.state.date.replace(/-/g, '/') : null;
+    const eventDetails = { title, description, date, centerId };
     this.props.dispatch(addEvent(eventDetails, this.props.user.token));
   }
 
@@ -63,10 +66,11 @@ export default class AddEvent extends React.Component {
               <Header text='Add Event' />
 
               {/* Input form */}
-              <form class="mt-lg-5 w-50">
+              <form class="mt-lg-5 w-lg-50">
+                <Alert message={this.props.error}/>
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="email" class="form-control"
+                  <input type="text" class="form-control"
                     id="title" placeholder="A short description of your event"
                     name="title" onChange={this.getInput} />
                   <small id="emailHelp"
@@ -92,7 +96,7 @@ export default class AddEvent extends React.Component {
                   <label for="centers">Choose a Center</label>
                   <select id="centers" class="form-control ml-md-3" name="centerId" onChange={this.getInput}>
                     <option>choose a center</option>
-                    <CenterOptions centers={this.props.centers}/>
+                    <CenterOptions centers={this.props.centers} />
                   </select>
                 </div>
               </form>
