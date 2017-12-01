@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import getAllCenters from '../../actions/centerActions';
 
 import addEventStyles from '../../../sass/addEvent.scss';
 import { UserSideNav } from '../common/SideNavigation.jsx';
@@ -7,7 +8,7 @@ import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
 import Alert from '../common/Alert.jsx';
-import addEvent from '../../actions/eventActions';
+import { addEvent } from '../../actions/eventActions';
 
 @connect((store) => {
   return {
@@ -26,6 +27,10 @@ export default class AddEvent extends React.Component {
       date: null,
       centerId: null,
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch(getAllCenters());
   }
 
   // This method uses user input to update the state

@@ -1,25 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // This is the side navigation that appears when a user is logged in(Large Screen)
 const UserSideNav = (props) => {
   return (
     <div class="col-lg-2 fixed-top  d-none d-lg-block" id="navigation-section">
       <div class="mt-5 text-center">
-        <p class="lead text-white pt-3" id="userName">{props.userName}</p>
+        <p class="lead text-white pt-3 text-capitalize" id="userName">{props.userName}</p>
       </div>
       <div class="pt-3 navigation-links">
         <div class="list-group">
-          <a class="list-group-item">
-            <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>&nbsp; My Events</a>
-          <a class="list-group-item">
-            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events</a>
-          <a class="list-group-item">
-            <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
-          <a class="list-group-item">
-            <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
+          <Link to='/events' class="list-group-item">
+            <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>&nbsp; My Events
+          </Link>
+          <Link to="addEvent" class="list-group-item">
+            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events
+          </Link>
+          <Link to="#" class="list-group-item">
+            <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
+          </Link>
+          <Link to="#" class="list-group-item">
+            <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
+          </Link>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
@@ -32,14 +37,18 @@ const AdminSideNav = (props) => {
       </div>
       <div class="pt-3 navigation-links">
         <div class="list-group">
-          <a class="list-group-item">
-            <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers</a>
-          <a class="list-group-item">
-            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center</a>
-          <a class="list-group-item">
-            <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions</a>
-          <a class="list-group-item">
-            <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>
+          <Link to="#" class="list-group-item">
+            <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
+        </Link>
+          <Link to="#" class="list-group-item">
+            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center
+        </Link>
+          <Link to="#" class="list-group-item">
+            <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions
+        </Link>
+          <Link to="#" class="list-group-item">
+            <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
+        </Link>
         </div>
       </div>
     </div>

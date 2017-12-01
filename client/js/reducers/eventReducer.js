@@ -1,5 +1,5 @@
 let initialState = {
-  event: [],
+  events: [],
   status: {
     fetching: false,
     fetched: false,
@@ -9,6 +9,39 @@ let initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'FETCHING_EVENTS': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          fetching: true,
+          fetched: false,
+          error: false
+        }
+      }
+    }
+    case 'FETCHING_EVENTS_RESOLVED': {
+      const { events } = action.payload;
+      return {
+        ...state,
+        events: events,
+        status: {
+          ...state.status,
+          fetching: false,
+          fetched: true,
+        },
+      }
+    }
+    case 'FETCHING_EVENTS_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          fetching: false,
+          error: action.payload,
+        },
+      };
+    }
     case 'ADDDING_EVENT': {
       return {
         ...state,
@@ -25,7 +58,7 @@ export default (state = initialState, action) => {
       const newEvent = { title, description, date, center };
       return {
         ...state,
-        event: [...state.event, newEvent],
+        events: [...state.events, newEvent],
         status: {
           ...state.status,
           fetching: false,
