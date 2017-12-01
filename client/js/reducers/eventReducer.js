@@ -58,7 +58,7 @@ export default (state = initialState, action) => {
       const newEvent = { title, description, date, center };
       return {
         ...state,
-        event: [...state.event, newEvent],
+        events: [...state.events, newEvent],
         status: {
           ...state.status,
           fetching: false,
