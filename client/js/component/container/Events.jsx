@@ -17,7 +17,7 @@ import { getAllEvents } from '../../actions/eventActions';
 })
 
 export default class Events extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch(getAllEvents(this.props.user.token));
   }
 
