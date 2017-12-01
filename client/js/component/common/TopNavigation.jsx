@@ -43,7 +43,7 @@ const UserTopNav = (props) => {
       <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
         <div class="container">
           <a href="#" class="navbar-brand">
-            <strong>{props.name}</strong>
+            <strong class="text-capitalize">{props.name}</strong>
             <br />
             <p class="h6">{props.title}</p>
           </a>

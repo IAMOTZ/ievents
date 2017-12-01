@@ -35,7 +35,7 @@ export default class Events extends React.Component {
             <div class="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
 
               {/* Content Header(navigation) on large screen */}
-              <Header text='Add Event' />
+              <Header text='My Events' />
 
               {/* Event Grid */}
               <div className="mt-5">

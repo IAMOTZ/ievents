@@ -6,7 +6,7 @@ const UserSideNav = (props) => {
   return (
     <div class="col-lg-2 fixed-top  d-none d-lg-block" id="navigation-section">
       <div class="mt-5 text-center">
-        <p class="lead text-white pt-3" id="userName">{props.userName}</p>
+        <p class="lead text-white pt-3 text-capitalize" id="userName">{props.userName}</p>
       </div>
       <div class="pt-3 navigation-links">
         <div class="list-group">

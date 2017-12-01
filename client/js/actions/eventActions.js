@@ -28,7 +28,6 @@ export const getAllEvents = (userToken) => {
         "access-token": userToken
       }
     }
-    console.log(userToken);
     axios.get('http://localhost:3000/api/v1/events', config)
       .then((response) => {
         dispatch({ type: 'FETCHING_EVENTS_RESOLVED', payload: response.data, });
