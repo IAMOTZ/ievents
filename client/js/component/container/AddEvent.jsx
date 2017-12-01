@@ -4,65 +4,110 @@ import { connect } from 'react-redux';
 import addEventStyles from '../../../sass/addEvent.scss';
 import { UserSideNav } from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
+import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
 import Footer from '../common/Footer.jsx';
+import addEvent from '../../actions/eventActions';
 
 @connect((store) => {
   return {
-    user: store.user,
+    user: store.user.user,
+    centers: store.centers.centers,
   }
 })
 
 export default class AddEvent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      title: null,
+      description: null,
+      date: null,
+      centerId: null,
+    };
+  }
+
+  // This method uses user input to update the state
+  getInput = (e) => {
+    const state = this.state;
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+  }
+
+  // This method fires the action to create an event
+  add = () => {
+    const {
+     title, description, centerId
+    } = this.state;
+    let date = this.state.date.replace(/-/g, '/');
+    const eventDetails = {title, description, date, centerId};
+    this.props.dispatch(addEvent(eventDetails, this.props.user.token));
+  }
+
   render() {
     return (
       <div>
-        <UserTopNav />
+        {/* Top navigation on small screen */}
+        <UserTopNav name={this.props.user.name} title='Add Event' />
+
         <div class="container-fluid">
           <div class="row">
 
             {/*  Side navigation on large screen */}
-            <UserSideNav userName='Tunmise' />
+            <UserSideNav userName={this.props.user.name} />
 
             {/* Main content */}
             <div class="col-lg-10 offset-md-2" id="add-event-section">
 
               {/* Content Header(navigation) on large screen */}
-              <Header text='Add Event'/>
+              <Header text='Add Event' />
 
               {/* Input form */}
-              <form class="mt-sm-5 w-50">
+              <form class="mt-lg-5 w-50">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="email" class="form-control" id="title" placeholder="A short description of your event" />
-                  <small id="emailHelp" class="form-text text-muted">Less than 20 characters</small>
+                  <input type="email" class="form-control"
+                    id="title" placeholder="A short description of your event"
+                    name="title" onChange={this.getInput} />
+                  <small id="emailHelp"
+                    class="form-text text-muted">Less than 20 characters</small>
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea class="form-control" id="description" rows="6" placeholder="More details about the event"></textarea>
-                  <small id="emailHelp" class="form-text text-muted">Less than 200 characters</small>                
+                  <textarea class="form-control" id="description"
+                    rows="6" placeholder="More details about the event"
+                    name="description" onChange={this.getInput}></textarea>
+                  <small id="emailHelp"
+                    class="form-text text-muted">Less than 200 characters</small>
                 </div>
               </form>
               <form class="my-3 form-inline">
                 <div class="form-group">
                   <label for="date">Date</label>
-                  <input type="date" id="date" class="form-control mx-sm-3" />
+                  <input type="date" id="date"
+                    class="form-control mx-sm-3"
+                    name="date" onChange={this.getInput} />
                 </div>
                 <div class="form-group">
                   <label for="centers">Choose a Center</label>
-                  <select id="centers" class="form-control ml-md-3">
-                    <option value="1">Ottawa Event center</option>
-                    <option value="2">Havilla hall</option>
-                    <option value="3">The five</option>
-                    <option value="4">Experience events</option>
+                  <select id="centers" class="form-control ml-md-3" name="centerId" onChange={this.getInput}>
+                    <option>choose a center</option>
+                    <CenterOptions centers={this.props.centers}/>
                   </select>
                 </div>
               </form>
-              <a class="btn btn-outline-dark">Add</a>
 
+              <a class="btn btn-outline-dark" onClick={this.add}>Add</a>
             </div>
           </div>
         </div>
+
+        <footer class="d-block d-sm-none mt-5">
+          <div class="container text-white text-center py-5">
+            <h1>Ievents</h1>
+            <p>Copyright &copy; 2017</p>
+          </div>
+        </footer>
       </div>
     )
   }
