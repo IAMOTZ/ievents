@@ -22,11 +22,11 @@ export default {
       return 'event date is required';
     }
     if (date !== undefined) {
-      const dateData = date.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
       if (!dateData) {
-        return 'the date format should be dd/mm/yyyy';
+        return 'the date format should be yyyy/mm/dd';
       }
-      if (dateData[1] > 31) {
+      if (dateData[3] > 31) {
         return 'days in the date cannot be more than 31';
       }
       if (dateData[2] > 12) {
