@@ -55,7 +55,7 @@ describe('Events', () => {
       const reqBody = {
         title: 'Andela party',
         description: 'Its gonna be epic',
-        date: '17/2/2017',
+        date: '2017/02/17',
         centerId,
         token: userToken,
       };
@@ -104,7 +104,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('the date format should be dd/mm/yyyy');
+          res.body.message.should.be.eql('the date format should be yyyy/mm/dd');
           done();
         });
     });
@@ -149,7 +149,7 @@ describe('Events', () => {
       const reqBody = {
         title: 'Tunmise party',
         description: 'Its gonna be special epic',
-        date: '13/2/2017',
+        date: '2017/02/13',
         token: userToken,
       };
       chai.request(app)
@@ -169,7 +169,7 @@ describe('Events', () => {
       const reqBody = {
         title: '',
         description: 'Its gonna be epic',
-        date: '17/2/2017',
+        date: '2017/02/13',
         token: userToken,
       };
       chai.request(app)
@@ -195,7 +195,7 @@ describe('Events', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('the date format should be dd/mm/yyyy');
+          res.body.message.should.be.eql('the date format should be yyyy/mm/dd');
           done();
         });
     });

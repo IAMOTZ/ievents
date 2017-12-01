@@ -87,7 +87,6 @@ export default {
 
   // Controllers for signing in a user
   signin(req, res) {
-    console.log(req.body);
     const inputData = {};
     const inputKeys = Object.keys(req.body);
     for (let i = 0; i < inputKeys.length; i += 1) {

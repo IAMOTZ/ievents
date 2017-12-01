@@ -1,0 +1,20 @@
+{
+  "name": "ievents",
+  "description": "A web app to help manage and run commercial event centers",
+  "main": "index.js",
+  "authors": [
+    "Ogunniyi Tunmise"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/IAMOTZ/Ievents",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}

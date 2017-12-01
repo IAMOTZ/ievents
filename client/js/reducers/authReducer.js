@@ -1,4 +1,4 @@
-export default function reducer(state = {
+let initialState = {
   user: {
     name: null,
     email: null,
@@ -12,7 +12,9 @@ export default function reducer(state = {
     fetched: false,
     error: false,
   }
-}, action) {
+};
+
+export default function reducer(state = initialState, action) {
   switch (action.type) {
     case 'FETCH_USER': {
       return {
@@ -80,9 +82,22 @@ export default function reducer(state = {
         status: {
           ...state.status,
           fetching: false,
-          error: action.payload
+          error: action.payload,
         }
       };
+    }
+    case 'CLEAR_ERROR': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          error: false,
+        }
+
+      }
+    }
+    case 'CLEAR_USER': {
+      return initialState;
     }
     default: {
       return state;
