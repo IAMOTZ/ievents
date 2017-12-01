@@ -31,3 +31,13 @@ export const loginUser = (userDetails) => {
       });
   };
 }
+
+// This action wipes the user store
+export const clearUser = () => {
+  return { type: 'CLEAR_USER', }
+}
+
+// This action wipes any error that was in the user store
+export const clearError = () => {
+  return { type: 'CLEAR_ERROR', }
+}

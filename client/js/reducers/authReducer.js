@@ -82,9 +82,22 @@ export default function reducer(state = initialState, action) {
         status: {
           ...state.status,
           fetching: false,
-          error: action.payload
+          error: action.payload,
         }
       };
+    }
+    case 'CLEAR_ERROR': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          error: false,
+        }
+
+      }
+    }
+    case 'CLEAR_USER': {
+      return initialState;
     }
     default: {
       return state;
