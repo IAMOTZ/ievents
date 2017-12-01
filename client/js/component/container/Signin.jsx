@@ -7,11 +7,12 @@ import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import Alert from '../common/Alert.jsx';
 
-import { loginUser } from '../../actions/authAction';
+import { loginUser, clearError } from '../../actions/authAction';
 
 @connect((store) => {
   return {
     user: store.user,
+    error: store.user.status.error.message,    
   }
 })
 
@@ -22,6 +23,10 @@ export default class Signin extends React.Component {
       email: null,
       password: null,
     };
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearError());
   }
 
   // This method uses user input to update the state
@@ -55,7 +60,7 @@ export default class Signin extends React.Component {
           <TopNavigation />
           <div className="the-flex-box d-flex flex-column align-items-center">
             <div className="card card-form">
-              <Alert />
+              <Alert message={this.props.error}/>
               <h1 className="card-header">Sign in</h1>
               <div className="card-body">
                 <form>

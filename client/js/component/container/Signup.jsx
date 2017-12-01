@@ -7,11 +7,12 @@ import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import Alert from '../common/Alert.jsx';
 
-import { createUser } from '../../actions/authAction';
+import { createUser, clearError } from '../../actions/authAction';
 
 @connect((store) => {
   return {
     user: store.user,
+    error: store.user.status.error.message
   }
 })
 
@@ -24,6 +25,10 @@ export default class Signup extends React.Component {
       password: null,
       confirmPassword: null,
     };
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearError());
   }
 
   // This method uses user input to update the state
@@ -55,7 +60,7 @@ export default class Signup extends React.Component {
           <TopNavigation />
           <div className="d-flex flex-column align-items-center">
             <div className="card card-form">
-              <Alert />
+              <Alert message={this.props.error}/>
               <h1 className="card-header">Sign up</h1>
               <div className="card-body">
                 <form>
