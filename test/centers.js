@@ -159,7 +159,6 @@ describe('Centers', () => {
         .put(`/api/v1/centers/${centerId}`)
         .send(reqBody)
         .end((err, res) => {
-          console.log(res.body.message);
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('center updated');

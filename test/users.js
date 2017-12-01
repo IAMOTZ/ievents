@@ -22,7 +22,6 @@ describe('Authentication', () => {
         .post('/api/v1/users')
         .send(reqBody)
         .end((err, res) => {
-          console.log(res.body.message);
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('user created');
@@ -277,7 +276,6 @@ describe('Authentication', () => {
         .post('/api/v1/users/login')
         .send(reqBody)
         .end((err, res) => {
-          console.log(res.body.message);
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('Logged in');
