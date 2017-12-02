@@ -117,6 +117,12 @@ export default (state = initialState, action) => {
         }
       }
     }
+    case 'CLEAR_STATUS': {
+      return {
+        ...state,
+        status: initialState.status,
+      }
+    }
     default: {
       return state;
     }
