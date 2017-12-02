@@ -24,7 +24,7 @@ export default () => {
               <Link to="/users/login" className="nav-link"> Signin </Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link"> Signup </Link>
+              <Link to="/users" className="nav-link"> Signup </Link>
             </li>
           </ul>
         </div>
