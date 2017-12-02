@@ -21,22 +21,33 @@ module.exports = {
         loader: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        loader: 'image-webpack-loader',
-        query: {
-          optipng: {
-            optimizationLevel: 7,
+        test: /\.(jpe?g|png|gif|svg|ico)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+            },
           },
-          mozjpeg: {
-            progressive: true,
+          {
+            loader: 'image-webpack-loader',
+            query: {
+              optipng: {
+                optimizationLevel: 7,
+              },
+              mozjpeg: {
+                progressive: true,
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              pngquant: {
+                quality: '75-90',
+                speed: 3,
+              },
+            },
           },
-          gifsicle: {
-            interlaced: false,
-          },
-          pngquant: {
-            quality: '75-90',
-            speed: 3,
-          },
-        },
+        ],
       }
     ],
   },
