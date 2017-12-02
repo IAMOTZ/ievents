@@ -1,12 +1,18 @@
+import _ from 'lodash';
+
 let initialState = {
   events: [],
+  toEdit: null,
   status: {
     fetching: false,
     fetched: false,
     fetchingError: false,
-    adding: false, 
+    adding: false,
     added: false,
     addingError: false,
+    updating: false,
+    updated: false,
+    updatingError: false,
     deleting: false,
     daleted: false,
     deletingError: false,
@@ -84,6 +90,52 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case 'INITIALIZE_EDIT': {
+      const event = _.find(state.events, { id: Number(action.payload) });
+      return {
+        ...state,
+        toEdit: event,
+      }
+    }
+    case 'UPDATING_EVENT': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          updating: true,
+          updated: false,
+          updatingError: false,
+        },
+      }
+    }
+    case 'UPDATING_EVENT_RESOLVED': {
+      const id = action.payload.event.id;
+      const index = _.findIndex(state.events, { id });
+      const newEvents = [...state.events];
+      newEvents[index] = action.payload.event;
+      return {
+        ...state,
+        events: newEvents,
+        status: {
+          ...state.status,
+          updating: false,
+          updated: true,
+          updatingError: false,
+        },
+
+      }
+    }
+    case 'UPDATING_EVENT_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          updating: false,
+          updated: false,
+          updatingError: action.payload,
+        },
+      }
+    }
     case 'DELETING_EVENT': {
       return {
         ...state,
@@ -103,7 +155,7 @@ export default (state = initialState, action) => {
           deleting: false,
           deleted: true,
           deletingError: false,
-        } 
+        }
       }
     }
     case 'DELETING_EVENT_REJECTED': {
