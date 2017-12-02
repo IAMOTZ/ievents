@@ -39,6 +39,7 @@ export const getAllEvents = (userToken) => {
   }
 }
 
+// This action contacts the server to delete an event
 export const deleteEvent = (id, userToken) => {
   return (dispatch) => {
     dispatch({ type: 'DELETING_EVENT' });
@@ -55,4 +56,9 @@ export const deleteEvent = (id, userToken) => {
         dispatch({ type: 'DELETING_EVENT_REJECTED', payload: err.response.data, });
       });
   };
+}
+
+// This action simply reset the status of the event store to its initial state
+export const clearStatus = () => {
+  return ({ type: 'CLEAR_STATUS', });
 }
