@@ -10,7 +10,7 @@ export const addEvent = (eventDetails, userToken) => {
         "access-token": userToken
       }
     }
-    axios.post(vz`${apiBaseUrl}/evnts`, eventDetails, config)
+    axios.post(`${apiBaseUrl}/events`, eventDetails, config)
       .then((response) => {
         dispatch({ type: 'ADDING_EVENT_RESOLVED', payload: response.data, })
       })
@@ -29,7 +29,7 @@ export const getAllEvents = (userToken) => {
         "access-token": userToken
       }
     }
-    axios.get(`${apiBaseUrl}/evnts`, config)
+    axios.get(`${apiBaseUrl}/events`, config)
       .then((response) => {
         dispatch({ type: 'FETCHING_EVENTS_RESOLVED', payload: response.data, });
       })
@@ -39,7 +39,7 @@ export const getAllEvents = (userToken) => {
   }
 }
 
-export default deleteEvent = (userToken) => {
+export const deleteEvent = (userToken) => {
   return (dispatch) => {
     dispatch({ type: 'DELETING_EVENT' });
     const config = {
@@ -47,7 +47,7 @@ export default deleteEvent = (userToken) => {
         "access-token": userToken
       }
     };
-    axios.delete(`${apiBaseUrl}/evnts`, config)
+    axios.delete(`${apiBaseUrl}/events`, config)
       .then((response) => {
         dispatch({ type: 'DELETING_EVENT_RESOLVED', payload: response.data, });
       })
