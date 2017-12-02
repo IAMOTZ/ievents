@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: false,
           fetched: true,
+          error: false,
         },
       };
     }
@@ -38,6 +39,7 @@ export default (state = initialState, action) => {
         status: {
           ...state.status,
           fetching: false,
+          fetched: false,
           error: action.payload,
         },
       };

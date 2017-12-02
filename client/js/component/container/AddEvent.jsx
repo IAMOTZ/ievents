@@ -13,7 +13,7 @@ import { addEvent } from '../../actions/eventActions';
 @connect((store) => {
   return {
     user: store.user.user,
-    error: store.events.status.error.message,    
+    error: store.events.status.addingError.message,    
     centers: store.centers.centers,
   }
 })
@@ -79,7 +79,7 @@ export default class AddEvent extends React.Component {
                     id="title" placeholder="A short description of your event"
                     name="title" onChange={this.getInput} />
                   <small id="emailHelp"
-                    class="form-text text-muted">Less than 20 characters</small>
+                    class="form-text text-muted">Less than 30 characters</small>
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
