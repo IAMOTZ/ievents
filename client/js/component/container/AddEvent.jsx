@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import getAllCenters from '../../actions/centerActions';
 
 import addEventStyles from '../../../sass/addEvent.scss';
@@ -7,14 +8,17 @@ import { UserSideNav } from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
-import Alert from '../common/Alert.jsx';
-import { addEvent } from '../../actions/eventActions';
+import { WarningAlert } from '../common/Alert';
+import { addEvent, clearStatus } from '../../actions/eventActions';
 
 @connect((store) => {
   return {
     user: store.user.user,
-    error: store.events.status.error.message,    
     centers: store.centers.centers,
+    status: {
+      error: store.events.status.addingError.message,
+      success: store.events.status.added,
+    }
   }
 })
 
@@ -32,6 +36,11 @@ export default class AddEvent extends React.Component {
   componentDidMount() {
     this.props.dispatch(getAllCenters());
   }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearStatus());
+  }
+
 
   // This method uses user input to update the state
   getInput = (e) => {
@@ -53,71 +62,76 @@ export default class AddEvent extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {/* Top navigation on small screen */}
-        <UserTopNav name={this.props.user.name} title='Add Event' />
 
-        <div class="container-fluid">
-          <div class="row">
+    if (this.props.status.success) {
+      return (<Redirect to="/events" />);
+    } else {
+      return (
+        <div>
+          {/* Top navigation on small screen */}
+          <UserTopNav name={this.props.user.name} title='Add Event' />
 
-            {/*  Side navigation on large screen */}
-            <UserSideNav userName={this.props.user.name} />
+          <div class="container-fluid">
+            <div class="row">
 
-            {/* Main content */}
-            <div class="col-lg-10 offset-md-2" id="add-event-section">
+              {/*  Side navigation on large screen */}
+              <UserSideNav userName={this.props.user.name} />
 
-              {/* Content Header(navigation) on large screen */}
-              <Header text='Add Event' />
+              {/* Main content */}
+              <div class="col-lg-10 offset-md-2" id="add-event-section">
 
-              {/* Input form */}
-              <form class="mt-lg-5 w-lg-50">
-                <Alert message={this.props.error}/>
-                <div class="form-group">
-                  <label for="title">Title</label>
-                  <input type="text" class="form-control"
-                    id="title" placeholder="A short description of your event"
-                    name="title" onChange={this.getInput} />
-                  <small id="emailHelp"
-                    class="form-text text-muted">Less than 20 characters</small>
-                </div>
-                <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea class="form-control" id="description"
-                    rows="6" placeholder="More details about the event"
-                    name="description" onChange={this.getInput}></textarea>
-                  <small id="emailHelp"
-                    class="form-text text-muted">Less than 200 characters</small>
-                </div>
-              </form>
-              <form class="my-3 form-inline">
-                <div class="form-group">
-                  <label for="date">Date</label>
-                  <input type="date" id="date"
-                    class="form-control mx-sm-3"
-                    name="date" onChange={this.getInput} />
-                </div>
-                <div class="form-group">
-                  <label for="centers">Choose a Center</label>
-                  <select id="centers" class="form-control ml-md-3" name="centerId" onChange={this.getInput}>
-                    <option>choose a center</option>
-                    <CenterOptions centers={this.props.centers} />
-                  </select>
-                </div>
-              </form>
+                {/* Content Header(navigation) on large screen */}
+                <Header text='Add Event' />
 
-              <a class="btn btn-outline-dark" onClick={this.add}>Add</a>
+                {/* Input form */}
+                <form class="mt-lg-5 w-lg-50">
+                  <WarningAlert message={this.props.status.error} />
+                  <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control"
+                      id="title" placeholder="A short description of your event"
+                      name="title" onChange={this.getInput} />
+                    <small id="emailHelp"
+                      class="form-text text-muted">Less than 30 characters</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description"
+                      rows="6" placeholder="More details about the event"
+                      name="description" onChange={this.getInput}></textarea>
+                    <small id="emailHelp"
+                      class="form-text text-muted">Less than 200 characters</small>
+                  </div>
+                </form>
+                <form class="my-3 form-inline">
+                  <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date"
+                      class="form-control mx-sm-3"
+                      name="date" onChange={this.getInput} />
+                  </div>
+                  <div class="form-group">
+                    <label for="centers">Choose a Center</label>
+                    <select id="centers" class="form-control ml-md-3" name="centerId" onChange={this.getInput}>
+                      <option>choose a center</option>
+                      <CenterOptions centers={this.props.centers} />
+                    </select>
+                  </div>
+                </form>
+
+                <a class="btn btn-outline-dark" onClick={this.add}>Add</a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <footer class="d-block d-sm-none mt-5">
-          <div class="container text-white text-center py-5">
-            <h1>Ievents</h1>
-            <p>Copyright &copy; 2017</p>
-          </div>
-        </footer>
-      </div>
-    )
+          <footer class="d-block d-sm-none mt-5">
+            <div class="container text-white text-center py-5">
+              <h1>Ievents</h1>
+              <p>Copyright &copy; 2017</p>
+            </div>
+          </footer>
+        </div>
+      );
+    }
   }
 }

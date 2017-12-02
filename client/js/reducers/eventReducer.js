@@ -3,7 +3,13 @@ let initialState = {
   status: {
     fetching: false,
     fetched: false,
-    error: false,
+    fetchingError: false,
+    adding: false, 
+    added: false,
+    addingError: false,
+    deleting: false,
+    daleted: false,
+    deletingError: false,
   },
 };
 
@@ -47,9 +53,9 @@ export default (state = initialState, action) => {
         ...state,
         status: {
           ...state.status,
-          fetching: true,
-          fetched: false,
-          error: false
+          adding: true,
+          added: false,
+          addingError: false
         },
       };
     }
@@ -61,8 +67,9 @@ export default (state = initialState, action) => {
         events: [...state.events, newEvent],
         status: {
           ...state.status,
-          fetching: false,
-          fetched: true,
+          adding: false,
+          added: true,
+          addingError: false,
         },
       };
     }
@@ -71,10 +78,50 @@ export default (state = initialState, action) => {
         ...state,
         status: {
           ...state.status,
-          fetching: false,
-          error: action.payload,
+          adding: false,
+          added: false,
+          addingError: action.payload,
         },
       };
+    }
+    case 'DELETING_EVENT': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleting: true,
+          deleted: false,
+          deletingError: false,
+        },
+      };
+    }
+    case 'DELETING_EVENT_RESOLVED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleting: false,
+          deleted: true,
+          deletingError: false,
+        } 
+      }
+    }
+    case 'DELETING_EVENT_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleting: false,
+          deleted: false,
+          deletingError: action.payload,
+        }
+      }
+    }
+    case 'CLEAR_STATUS': {
+      return {
+        ...state,
+        status: initialState.status,
+      }
     }
     default: {
       return state;
