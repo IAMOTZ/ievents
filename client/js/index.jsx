@@ -9,13 +9,14 @@ import Signin from './component/container/Signin.jsx';
 import AddEvent from './component/container/AddEvent.jsx';
 import Events from './component/container/Events.jsx';
 import EditEvent from './component/container/EditEvent.jsx';
-import userPage from './component/container/UserPage.jsx';
+import Home from './component/container/index.jsx';
 
 const history = createBrowserHistory();
 const App = () => {
     return (
         <Switch>
-            <Route exact path='/' component={Signup} />
+            <Route exact path='/' component={Home} />            
+            <Route exact path='/users' component={Signup} />
             <Route exact path='/users/login' component={Signin} />
             <Route exact path='/addEvent' component={AddEvent} />
             <Route exact path='/editEvent' component={EditEvent} />            

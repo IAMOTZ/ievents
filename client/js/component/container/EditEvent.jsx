@@ -14,6 +14,7 @@ import { updateEvent, clearStatus } from '../../actions/eventActions';
 @connect((store) => {
   return { 
     user: store.user.user,
+    authenticated: store.user.status.fetched,    
     centers: store.centers.centers,
     toEdit: store.events.toEdit,
     status: {
@@ -64,8 +65,9 @@ export default class EditEvent extends React.Component {
   }
 
   render() {
-
-    if (this.props.status.success) {
+    if(!this.props.authenticated) {
+      return (<Redirect to="/users/login" />)
+    } else if (this.props.status.success) {
       return (<Redirect to="/events" />);
     } else {
       return (

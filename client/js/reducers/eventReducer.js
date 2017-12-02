@@ -175,6 +175,9 @@ export default (state = initialState, action) => {
         status: initialState.status,
       }
     }
+    case 'CLEAR_USER': {
+      return initialState;
+    }
     default: {
       return state;
     }

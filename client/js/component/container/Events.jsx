@@ -13,6 +13,7 @@ import { getAllEvents, deleteEvent, initializeEdit } from '../../actions/eventAc
 @connect((store) => {
   return {
     user: store.user.user,
+    authenticated: store.user.status.fetched,
     events: store.events.events,
   }
 })
@@ -74,41 +75,45 @@ export default class Events extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <UserTopNav name={this.props.user.name} title='My Events' />
+    if (!this.props.authenticated) {
+      return (<Redirect to="/users/login" />)
+    } else {
+      return (
+        <div>
+          <UserTopNav name={this.props.user.name} title='My Events' />
 
-        <div className="container-fluid">
-          <div className="row">
+          <div className="container-fluid">
+            <div className="row">
 
-            <UserSideNav userName={this.props.user.name} />
+              <UserSideNav userName={this.props.user.name} />
 
-            {/* Main content */}
-            <div class="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
+              {/* Main content */}
+              <div class="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
 
-              {/* Content Header(navigation) on large screen */}
-              <Header text='My Events' />
+                {/* Content Header(navigation) on large screen */}
+                <Header text='My Events' />
 
-              {/* Event Grid */}
-              <div className="mt-5">
-                <div className="card-columns mx-auto">
-                  <EventCards events={this.props.events}
-                    startDelete={this.startDelete}
-                    remove={this.removeEvent}
-                    edit={this.onEdit} />
+                {/* Event Grid */}
+                <div className="mt-5">
+                  <div className="card-columns mx-auto">
+                    <EventCards events={this.props.events}
+                      startDelete={this.startDelete}
+                      remove={this.removeEvent}
+                      edit={this.onEdit} />
 
+                  </div>
                 </div>
+
+                <ConfirmModal visible={this.state.modalVisible}
+                  onCancel={this.cancelDelete}
+                  onOK={this.finishDelete}
+                  children="Are you sure you want to delete this event?" />
+
               </div>
-
-              <ConfirmModal visible={this.state.modalVisible}
-                onCancel={this.cancelDelete}
-                onOK={this.finishDelete}
-                children="Are you sure you want to delete this event?" />
-
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
