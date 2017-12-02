@@ -77,6 +77,10 @@ export const deleteEvent = (id, userToken) => {
   };
 }
 
+export const initializeEdit = (id) => {
+  return ({ type: 'INITIALIZE_EDIT', payload: id, });
+}
+
 // This action simply reset the status of the event store to its initial state
 export const clearStatus = () => {
   return ({ type: 'CLEAR_STATUS', });
