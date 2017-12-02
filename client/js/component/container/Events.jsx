@@ -8,7 +8,7 @@ import { ConfirmModal } from '../common/Modal';
 import Header from '../common/Header.jsx';
 import EventCards from '../common/EventCards.jsx';
 
-import { getAllEvents, deleteEvent } from '../../actions/eventActions';
+import { getAllEvents, deleteEvent, initializeEdit } from '../../actions/eventActions';
 
 @connect((store) => {
   return {
@@ -68,6 +68,11 @@ export default class Events extends React.Component {
     this.props.dispatch(deleteEvent(e.target.id, this.props.user.token));
   }
 
+  // This method initialize editing of an event
+  onEdit = (e) => {
+    this.props.dispatch(initializeEdit(e.target.id))
+  }
+
   render() {
     return (
       <div>
@@ -87,14 +92,18 @@ export default class Events extends React.Component {
               {/* Event Grid */}
               <div className="mt-5">
                 <div className="card-columns mx-auto">
-                  <EventCards events={this.props.events} startDelete={this.startDelete} remove={this.removeEvent}/>
+                  <EventCards events={this.props.events}
+                    startDelete={this.startDelete}
+                    remove={this.removeEvent}
+                    edit={this.onEdit} />
+
                 </div>
               </div>
 
               <ConfirmModal visible={this.state.modalVisible}
                 onCancel={this.cancelDelete}
-                onOK={this.finishDelete} 
-                children="Are you sure you want to delete this event?"/>
+                onOK={this.finishDelete}
+                children="Are you sure you want to delete this event?" />
 
             </div>
           </div>
