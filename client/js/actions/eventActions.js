@@ -20,6 +20,25 @@ export const addEvent = (eventDetails, userToken) => {
   }
 };
 
+// This action contacts the server to update an event after it has beed edited
+export const updateEvent = (id, eventDetails, userToken) => {
+  return (dispatch) => {
+    dispatch({ type: 'UPDATING_EVENT' });
+    const config = {
+      headers: {
+        "access-token": userToken
+      }
+    };
+    axios.put(`${apiBaseUrl}/events/${id}`, eventDetails, config)
+      .then((response) => {
+        dispatch({ type: 'UPDATING_EVENT_RESOLVED', payload: response.data, });
+      })
+      .catch((err) => {
+        dispatch({ type: 'UPDATING_EVENT_REJECTED', payload: err.response.data, });
+      });
+  };
+}
+
 // This action contacts the server to get all of a users event
 export const getAllEvents = (userToken) => {
   return (dispatch) => {
