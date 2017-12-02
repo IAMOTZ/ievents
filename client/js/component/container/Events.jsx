@@ -63,6 +63,11 @@ export default class Events extends React.Component {
     });
   }
 
+  // This method simply removes the event without any warning
+  removeEvent = (e) => {
+    this.props.dispatch(deleteEvent(e.target.id, this.props.user.token));
+  }
+
   render() {
     return (
       <div>
@@ -82,7 +87,7 @@ export default class Events extends React.Component {
               {/* Event Grid */}
               <div className="mt-5">
                 <div className="card-columns mx-auto">
-                  <EventCards events={this.props.events} startDelete={this.startDelete} />
+                  <EventCards events={this.props.events} startDelete={this.startDelete} remove={this.removeEvent}/>
                 </div>
               </div>
 

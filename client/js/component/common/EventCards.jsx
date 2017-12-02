@@ -16,7 +16,7 @@ export default (props) => {
         <div className="card-body">
           <p className="card-text">{event.description}</p>
           <span className="text-muted">{event.date}&nbsp;</span>
-          <a href="#" className="btn btn-block bg-dark text-white mt-2">Done</a>
+          <a href="#" className="btn btn-block bg-dark text-white mt-2" onClick={props.remove} id={event.id}>Done</a>
         </div>
       </div>
     );
