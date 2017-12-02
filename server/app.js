@@ -10,6 +10,24 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
 }
 
+const publicPath = express.static(path.join(__dirname, '../public'));
+app.use('/public', publicPath);
+
+if (process.env.NODE_ENV !== 'production') {
+  import webpack from 'webpack';
+  import webpackDevMiddleware from 'webpack-dev-middleware';
+  import webpackHotMiddleware from 'webpack-hot-middleware';
+  const config = require('../webpack.dev.config.js')
+  const compiler = webpack(config)
+
+  app.use(webpackHotMiddleware(compiler))
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  }))
+}
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

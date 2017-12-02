@@ -52,8 +52,9 @@ module.exports = {
     ],
   },
   output: {
-    path: __dirname +  '/client',
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
+    publicPath: '/public/'
   },
   plugins: debug ? [] : [
     new webpack.optimize.OccurrenceOrderPlugin(),
