@@ -39,7 +39,7 @@ export const getAllEvents = (userToken) => {
   }
 }
 
-export const deleteEvent = (userToken) => {
+export const deleteEvent = (id, userToken) => {
   return (dispatch) => {
     dispatch({ type: 'DELETING_EVENT' });
     const config = {
@@ -47,7 +47,7 @@ export const deleteEvent = (userToken) => {
         "access-token": userToken
       }
     };
-    axios.delete(`${apiBaseUrl}/events`, config)
+    axios.delete(`${apiBaseUrl}/events/${id}`, config)
       .then((response) => {
         dispatch({ type: 'DELETING_EVENT_RESOLVED', payload: response.data, });
       })
