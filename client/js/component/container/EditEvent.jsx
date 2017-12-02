@@ -71,7 +71,7 @@ export default class EditEvent extends React.Component {
       return (
         <div>
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title='Add Event' />
+          <UserTopNav name={this.props.user.name} title='Edit Event' />
 
           <div class="container-fluid">
             <div class="row">
@@ -83,7 +83,7 @@ export default class EditEvent extends React.Component {
               <div class="col-lg-10 offset-md-2" id="add-event-section">
 
                 {/* Content Header(navigation) on large screen */}
-                <Header text='Add Event' />
+                <Header text='Edit Event' />
 
                 {/* Input form */}
                 <form class="mt-lg-5 w-lg-50">
