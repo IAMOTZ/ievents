@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import eventStyles from '../../../sass/userEvents.scss';
 import { UserSideNav } from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
+import { ConfirmModal } from '../common/Modal';
 import Header from '../common/Header.jsx';
 import EventCards from '../common/EventCards.jsx';
 
-import { getAllEvents } from '../../actions/eventActions';
+import { getAllEvents, deleteEvent } from '../../actions/eventActions';
 
 @connect((store) => {
   return {
@@ -17,8 +18,49 @@ import { getAllEvents } from '../../actions/eventActions';
 })
 
 export default class Events extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      toDelete: null,
+      modalVisible: false,
+    }
+  }
+
+  // Getting all the events as soon as this component mount the DOM
   componentDidMount() {
     this.props.dispatch(getAllEvents(this.props.user.token));
+  }
+
+  // Getting all the events again as soon as this component is updated
+  componentDidUpdate() {
+    this.props.dispatch(getAllEvents(this.props.user.token));
+  }
+
+  // This method simply keep track of an event to be deleted and also 
+  // initiate a modal
+  startDelete = (e) => {
+    const id = e.target.id;
+    const state = this.state;
+    state.toDelete = id;
+    state.modalVisible = !this.state.modalVisible;
+    this.setState(state);
+  }
+
+  // This method eventually deletes the event and hides back the modal
+  finishDelete = (e) => {
+    this.props.dispatch(deleteEvent(this.state.toDelete, this.props.user.token));
+    this.setState({
+      toDelete: null,
+      modalVisible: !this.state.modalVisible,
+    })
+  }
+
+  // This method cancels the deleting and also hides back the modal
+  cancelDelete = () => {
+    this.setState({
+      toDelete: null,
+      modalVisible: !this.state.modalVisible,
+    });
   }
 
   render() {
@@ -40,28 +82,18 @@ export default class Events extends React.Component {
               {/* Event Grid */}
               <div className="mt-5">
                 <div className="card-columns mx-auto">
-                  <EventCards events={this.props.events} />
+                  <EventCards events={this.props.events} startDelete={this.startDelete} />
                 </div>
               </div>
 
-              <footer class="d-none d-md-block mt-5">
-                <div class="container text-white text-center py-5">
-                  <h1>Ievents</h1>
-                  <p>Copyright &copy; 2017</p>
-                </div>
-              </footer>
+              <ConfirmModal visible={this.state.modalVisible}
+                onCancel={this.cancelDelete}
+                onOK={this.finishDelete} 
+                children="Are you sure you want to delete this event?"/>
 
             </div>
           </div>
         </div>
-
-        <footer class="d-block d-lg-none mt-5">
-          <div class="container text-white text-center py-5">
-            <h1>Ievents</h1>
-            <p>Copyright &copy; 2017</p>
-          </div>
-        </footer>
-
       </div>
     )
   }
