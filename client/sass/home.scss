@@ -1,0 +1,42 @@
+$custom-black: rgba(0,0,0,0.9);
+$custom-blue: rgb(0, 142, 214);
+$background-color: #f6f7fa;
+
+body > nav {
+  background-color: $custom-black;
+  border-bottom: 2px solid $custom-blue;
+}
+
+#main-content-section {
+  background: url('../images/eventCenter1.jpeg') no-repeat;
+  min-height: 900px;
+  background-size: cover;
+  background-attachment: fixed;
+  border-bottom: 2px solid $custom-blue;
+
+  .dark-overlay {
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 900px;
+  }
+  
+  #main-content {
+    padding-top: 100px;
+    color: white;
+  }
+
+  .search-box {
+    .btn {
+      color: white;
+      background-color: $custom-black;
+    }
+  }
+}
+
+footer {
+  background-color: $custom-black;
+  border-top: 2px solid $custom-blue;
+}
