@@ -1,4 +1,5 @@
 import axios from 'axios';
+import apiBaseUrl from '../url';
 
 // This action contacts the server to add an event for a user
 export const addEvent = (eventDetails, userToken) => {
@@ -9,7 +10,7 @@ export const addEvent = (eventDetails, userToken) => {
         "access-token": userToken
       }
     }
-    axios.post('http://localhost:3000/api/v1/events', eventDetails, config)
+    axios.post(vz`${apiBaseUrl}/evnts`, eventDetails, config)
       .then((response) => {
         dispatch({ type: 'ADDING_EVENT_RESOLVED', payload: response.data, })
       })
@@ -28,7 +29,7 @@ export const getAllEvents = (userToken) => {
         "access-token": userToken
       }
     }
-    axios.get('http://localhost:3000/api/v1/events', config)
+    axios.get(`${apiBaseUrl}/evnts`, config)
       .then((response) => {
         dispatch({ type: 'FETCHING_EVENTS_RESOLVED', payload: response.data, });
       })
@@ -36,4 +37,22 @@ export const getAllEvents = (userToken) => {
         dispatch({ type: 'FETCHING_EVENTS_REJECTED', payload: err.response.data, });
       })
   }
+}
+
+export default deleteEvent = (userToken) => {
+  return (dispatch) => {
+    dispatch({ type: 'DELETING_EVENT' });
+    const config = {
+      headers: {
+        "access-token": userToken
+      }
+    };
+    axios.delete(`${apiBaseUrl}/evnts`, config)
+      .then((response) => {
+        dispatch({ type: 'DELETING_EVENT_RESOLVED', payload: response.data, });
+      })
+      .catch((err) => {
+        dispatch({ type: 'DELETING_EVENT_REJECTED', payload: err.response.data, });
+      });
+  };
 }
