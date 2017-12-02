@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import signupStyles from '../../../sass/signup.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
-import Alert from '../common/Alert.jsx';
+import { WarningAlert } from '../common/Alert';
 
 import { loginUser, clearError } from '../../actions/authAction';
 
@@ -60,7 +60,7 @@ export default class Signin extends React.Component {
           <TopNavigation />
           <div className="the-flex-box d-flex flex-column align-items-center">
             <div className="card card-form">
-              <Alert message={this.props.error}/>
+              <WarningAlert message={this.props.error}/>
               <h1 className="card-header">Sign in</h1>
               <div className="card-body">
                 <form>

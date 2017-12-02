@@ -7,7 +7,7 @@ import { UserSideNav } from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
-import Alert from '../common/Alert.jsx';
+import { WarningAlert } from '../common/Alert';
 import { addEvent } from '../../actions/eventActions';
 
 @connect((store) => {
@@ -72,7 +72,7 @@ export default class AddEvent extends React.Component {
 
               {/* Input form */}
               <form class="mt-lg-5 w-lg-50">
-                <Alert message={this.props.error}/>
+                <WarningAlert message={this.props.error}/>
                 <div class="form-group">
                   <label for="title">Title</label>
                   <input type="text" class="form-control"
