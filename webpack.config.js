@@ -52,12 +52,11 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, '/client/'),
+    path: __dirname +  '/client',
     filename: 'bundle.js',
   },
   plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
   devServer: {

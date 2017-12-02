@@ -32,7 +32,7 @@ class UserSideNav extends React.Component {
             <Link to="#" class="list-group-item">
               <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
             </Link>
-            <Link to="/" class="list-group-itsem" onClick={this.logout}>
+            <Link to="/" class="list-group-item" onClick={this.logout}>
               <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
             </Link>
           </div>

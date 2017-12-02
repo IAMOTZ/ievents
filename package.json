@@ -8,6 +8,7 @@
     "build": "babel ./server -d ./build",
     "server:dev": "nodemon ./server/app --exec babel-node",
     "react:dev": "webpack-dev-server --content-base src --inline --hot",
+    "react:production": "set NODE_ENV=production&& webpack",
     "template:dev": "gulp",
     "setUpDb": "babel-node ./server/setUpDb",
     "test": "set NODE_ENV=test&& babel-node ./server/setUpDb && nyc mocha --compilers js:babel-core/register ./test/**/*.js --timeout 5000 --exit",
