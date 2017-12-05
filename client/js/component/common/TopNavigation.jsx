@@ -68,7 +68,7 @@ export default () => {
               <Link to="/" className="nav-link">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="#" className="nav-link">Centers</Link>
+              <Link to="/centers1" className="nav-link">Centers</Link>
             </li>
             <li className="nav-item">
               <Link to="/users/login" className="nav-link"> Signin </Link>
