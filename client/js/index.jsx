@@ -10,32 +10,34 @@ import AddEvent from './component/container/AddEvent.jsx';
 import Events from './component/container/Events.jsx';
 import EditEvent from './component/container/EditEvent.jsx';
 import Centers1 from './component/container/Centers1.jsx';
+import Centers2 from './component/container/Centers2.jsx';
 import Home from './component/container/index.jsx';
 
 const history = createBrowserHistory();
 const App = () => {
-    return (
-        <Switch>
-            <Route exact path='/' component={Home} />            
-            <Route exact path='/users' component={Signup} />
-            <Route exact path='/users/login' component={Signin} />
-            <Route exact path='/addEvent' component={AddEvent} />
-            <Route exact path='/editEvent' component={EditEvent} />            
-            <Route exact path='/events' component={Events} />
-            <Route exact path='/centers1' component={Centers1} />
-        </Switch>
-    )
+  return (
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/users' component={Signup} />
+      <Route exact path='/users/login' component={Signin} />
+      <Route exact path='/addEvent' component={AddEvent} />
+      <Route exact path='/editEvent' component={EditEvent} />
+      <Route exact path='/events' component={Events} />
+      <Route exact path='/centers1' component={Centers1} />
+      <Route exact path='/centers2' component={Centers2} />
+    </Switch>
+  )
 }
 
 const app = document.getElementById('app')
 
 ReactDOM.render(
-<Provider store={store}>
+  <Provider store={store}>
     <Router history={history}>
-        <App />
+      <App />
     </Router>
-</Provider>, app
+  </Provider>, app
 );
-    
+
 export default history;
 
