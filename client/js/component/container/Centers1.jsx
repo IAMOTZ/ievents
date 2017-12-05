@@ -61,6 +61,9 @@ export default class Centers1 extends React.Component {
             </div>
           </div>
         </section>
+
+        <Footer />
+
       </div>
     )
   }
