@@ -9,6 +9,7 @@ import Signin from './component/container/Signin.jsx';
 import AddEvent from './component/container/AddEvent.jsx';
 import Events from './component/container/Events.jsx';
 import EditEvent from './component/container/EditEvent.jsx';
+import Centers1 from './component/container/Centers1.jsx';
 import Home from './component/container/index.jsx';
 
 const history = createBrowserHistory();
@@ -21,6 +22,7 @@ const App = () => {
             <Route exact path='/addEvent' component={AddEvent} />
             <Route exact path='/editEvent' component={EditEvent} />            
             <Route exact path='/events' component={Events} />
+            <Route exact path='/centers1' component={Centers1} />
         </Switch>
     )
 }
