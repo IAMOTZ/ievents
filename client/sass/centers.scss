@@ -22,6 +22,11 @@ body > nav {
 
   .card {
     margin: 5px;
+
+    .card-img-top {
+      height: 250px;
+    }
+
     .btn {
       background-color: rgba(0,0,0,0.9) !important;
     }

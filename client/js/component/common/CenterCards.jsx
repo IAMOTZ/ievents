@@ -1,11 +1,13 @@
 import React from 'react';
 
+const defaultImage = '../../../images/defaultImgx4.jpeg';
+
 export default (props) => {
   return props.centers.map((center) => (
       <div className="col-lg-4 col-md-6 col-sm-12" key={center.id}>
         <div className="card">
           <div>
-            <img className="card-img-top" src='../../../images/eventCenter1.jpeg' alt="" />
+            <img className="card-img-top" src={center.images ? center.images[0] : defaultImage} alt="" />
             <span className="badge text-white p-2 seat-badge ">{center.capacity} seats</span>
           </div>
           <div className="card-body d-flex flex-column">
@@ -19,3 +21,5 @@ export default (props) => {
       </div>
     )); 
 }
+
+
