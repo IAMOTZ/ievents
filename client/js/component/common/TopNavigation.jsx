@@ -37,7 +37,7 @@ class UserTopNav extends React.Component {
                   <Link to="/addEvent" className="nav-link">Add Events</Link>
                 </li>
                 <li class="nav-item">
-                  <Link to="#" className="nav-link">Centers</Link>
+                  <Link to="/centers2" className="nav-link">Centers</Link>
                 </li>
                 <li class="nav-item">
                   <Link to="/" className="nav-link" onClick={this.logout}>Logout</Link>
@@ -68,7 +68,7 @@ export default () => {
               <Link to="/" className="nav-link">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="#" className="nav-link">Centers</Link>
+              <Link to="/centers1" className="nav-link">Centers</Link>
             </li>
             <li className="nav-item">
               <Link to="/users/login" className="nav-link"> Signin </Link>
@@ -100,7 +100,7 @@ const AdminTopNav = (props) => {
           <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <Link to="#" class="nav-link">Centers</Link>
+                <Link to="/centers2" class="nav-link">Centers</Link>
               </li>
               <li class="nav-item">
                 <Link to="#" class="nav-link">Add Center</Link>

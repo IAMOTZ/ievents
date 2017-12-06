@@ -33,8 +33,8 @@ export default (sequelize, DataTypes) => {
     bookedOn: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
-    image: {
-      type: DataTypes.ARRAY(DataTypes.BLOB),
+    images: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
     },
   });
   return centers;

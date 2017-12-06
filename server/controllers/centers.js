@@ -70,7 +70,7 @@ export default {
       type,
       facilities,
       price,
-      image,
+      images,
     } = inputData;
     const validationOutput = validation.create(inputData); // Validate the user inputs
     if (validationOutput !== 'success') {
@@ -106,7 +106,7 @@ export default {
                 type,
                 facilities: facilities ? facilities.split(',') : null,
                 price,
-                image,
+                images: images ? images.split(',') : null,
                 userId,
               })
               .then((center) => {
@@ -123,7 +123,7 @@ export default {
                     type: center.type,
                     facilities: center.facilities,
                     price: center.price,
-                    image: center.image,
+                    images: center.images,
                   },
                 });
               });
@@ -154,7 +154,7 @@ export default {
       type,
       facilities,
       price,
-      image,
+      images,
     } = inputData;
     const validationOutput = validation.update(inputData); // Validate the user inputs
     if (validationOutput !== 'success') {
@@ -186,7 +186,7 @@ export default {
                 type: type || centerData.type,
                 facilities: facilities ? facilities.split(',') : centerData.facilities,
                 price: price || centerData.price,
-                image: image || centerData.image,
+                images: images ? images.split(',') : centerData.images,
               })
               .then((updatedCenter) => {
                 // Send a success response with the new center datas
@@ -202,7 +202,7 @@ export default {
                     type: updatedCenter.type,
                     facilities: updatedCenter.facilities,
                     price: updatedCenter.price,
-                    image: updatedCenter.image,
+                    images: updatedCenter.images,
                   },
                 });
               });

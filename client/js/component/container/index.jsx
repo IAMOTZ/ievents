@@ -18,7 +18,7 @@ export default class Home extends React.Component {
                 </h1>
               </div>
               <div>
-                <p class="display-4">Get the perfect center for you events</p>
+                <p class="display-4">Get the perfect center for your events</p>
               </div>
               <div class="search-box input-group w-50 mt-5">
                 <input type="text" class="form-control" placeholder="Search for a center" />

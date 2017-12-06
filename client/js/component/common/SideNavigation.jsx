@@ -29,10 +29,10 @@ class UserSideNav extends React.Component {
             <Link to="addEvent" class="list-group-item">
               <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events
             </Link>
-            <Link to="#" class="list-group-item">
+            <Link to="/centers2" class="list-group-item">
               <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
             </Link>
-            <Link to="/" class="list-group-itsem" onClick={this.logout}>
+            <Link to="/" class="list-group-item" onClick={this.logout}>
               <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
             </Link>
           </div>
@@ -51,7 +51,7 @@ const AdminSideNav = (props) => {
       </div>
       <div class="pt-3 navigation-links">
         <div class="list-group">
-          <Link to="#" class="list-group-item">
+          <Link to="/centers2" class="list-group-item">
             <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
         </Link>
           <Link to="#" class="list-group-item">
