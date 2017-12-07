@@ -1,21 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import getAllCenters from '../../actions/centerActions';
+import { showCenterModal } from '../../actions/centerActions';
 
 import centersStyles from '../../../sass/centers.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import CenterCards from '../common/CenterCards.jsx';
+import CenterModal from '../common/Modal/CenterModal.jsx';
 
 @connect((store) => {
   return {
     centers: store.centers.centers,
+    modalContent: store.centers.modalContent ? store.centers.modalContent : {
+      name: null,
+      images: [],
+      details: null,
+      capacity: null,
+      price: null,
+      bookedOn: [],
+      type: null,
+    },
   }
 })
 
 export default class Centers1 extends React.Component {
   componentWillMount() {
     this.props.dispatch(getAllCenters());
+  }
+
+  showModal = (e) => {
+    this.props.dispatch(showCenterModal(e.target.id));
   }
 
   render() {
@@ -56,11 +71,14 @@ export default class Centers1 extends React.Component {
             {/* Centers Grid */}
             <div className="mt-5">
               <div className="row">
-                <CenterCards centers={this.props.centers} />
+                <CenterCards centers={this.props.centers} btnAction={this.showModal} />
               </div>
             </div>
           </div>
         </section>
+
+        {/* Modal */}
+        <CenterModal modalContent={this.props.modalContent} />
 
         <Footer />
 
