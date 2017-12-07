@@ -1,5 +1,8 @@
+import _ from 'lodash';
+
 let initialState = {
   centers: [],
+  modalContent: null,
   status: {
     fetching: false,
     fetched: false,
@@ -44,8 +47,15 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case 'SHOW_CENTER_MODAL': {
+      const modalContent = _.find(state.centers, {id: Number(action.payload)});
+      return {
+        ...state,
+        modalContent: modalContent,
+      }
+    }
     default: {
-      return state;
+      return state; 
     }
   }
 }

@@ -15,4 +15,11 @@ const getAllCenters = () => {
   }
 }
 
+export const showCenterModal = (centerId) => {
+  return {
+    type: 'SHOW_CENTER_MODAL',
+    payload: centerId,
+  }
+}
+
 export default getAllCenters;
