@@ -52,7 +52,6 @@ body > nav {
   }
 
   .card {
-    margin: 5px;
     .btn {
       background-color: $custom-black !important;
     }
@@ -93,7 +92,7 @@ body > nav {
       width: 400px;
       .seat-badge {
         position: absolute;
-        top: 35%;
+        top: 45%;
         left: 65%;
         font-size: 20px;
         background-color: rgba(0,0,0,0.4);
@@ -103,7 +102,7 @@ body > nav {
 
   .seat-badge {
     position: absolute;
-    top: 30%;
+    top: 40%;
     left: 60%;
     font-size: 20px;
     background-color: rgba(0,0,0,0.4);

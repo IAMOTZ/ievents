@@ -37,8 +37,8 @@ const BookingTable = (props) => {
 
 };
 
-const checkForBooking = (condition) => {
-  if (condition) {
+const checkForBooking = (dates) => {
+  if (dates && dates.length !== 0) {
     return {
       element: (<a href=".multi-collapse"
         className="font-italic small"

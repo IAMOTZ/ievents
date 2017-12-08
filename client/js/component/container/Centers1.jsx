@@ -7,7 +7,7 @@ import centersStyles from '../../../sass/centers.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import CenterCards from '../common/CenterCards.jsx';
-import CenterModal from '../common/Modal/CenterModal.jsx';
+import { CenterModal } from '../common/Modal';
 
 @connect((store) => {
   return {
