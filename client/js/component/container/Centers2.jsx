@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Rediret } from 'react-router-dom';
 import getAllCenters from '../../actions/centerActions';
+import { showCenterModal } from '../../actions/centerActions';
 
 import styles from '../../../sass/centers2.scss';
-import CenterCards from '../common/CenterCards.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { UserSideNav } from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
+import CenterCards from '../common/CenterCards.jsx';
+import { CenterModal } from '../common/Modal';
 
 
 @connect((store) => {
@@ -15,12 +17,25 @@ import Header from '../common/Header.jsx';
     authenticated: store.user.status.fetched,
     user: store.user.user,
     centers: store.centers.centers,
+    modalContent: store.centers.modalContent ? store.centers.modalContent : {
+      name: null,
+      images: [],
+      details: null,
+      capacity: null,
+      price: null,
+      bookedOn: [],
+      type: null,
+    },
   }
 })
 
 export default class Centers2 extends React.Component {
   componentWillMount() {
     this.props.dispatch(getAllCenters());
+  }
+
+  showModal = (e) => {
+    this.props.dispatch(showCenterModal(e.target.id));
   }
 
   render() {
@@ -75,11 +90,14 @@ export default class Centers2 extends React.Component {
                     {/* Centers  Grid*/}
                     <div className="mt-5">
                       <div className="row">
-                        <CenterCards centers={this.props.centers} />
+                        <CenterCards centers={this.props.centers} btnAction={this.showModal}/>
                       </div>
                     </div>
                   </div>
                 </section>
+
+                {/* Modal */}
+                <CenterModal modalContent={this.props.modalContent} />
 
                 {/* Footer on large screen */}
                 <footer class="d-none d-lg-block mt-5">
