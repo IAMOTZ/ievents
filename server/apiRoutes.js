@@ -29,4 +29,6 @@ router.get('/transactions', userValidation, adminValidation, controllers.transac
 
 router.post('/transactions/:id', userValidation, adminValidation, controllers.transactions.changeStatus)
 
+router.delete('/transactions/:id', userValidation, adminValidation, controllers.transactions.delete);
+
 export default router;
