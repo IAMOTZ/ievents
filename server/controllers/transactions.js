@@ -83,5 +83,34 @@ export default {
     } else {
       next();
     }
+  },
+
+  delete(req, res) {
+    const transactionsId = req.params.id;
+    transactions
+      .findById(Number(transactionsId))
+      .then((transactionData) => {
+        if (!transactionData) {
+          res.status(400).json({
+            status: 'failed',
+            message: 'the transaction does not exist',
+          })
+        } else {
+          transactionData
+            .destroy()
+            .then(() => {
+              res.status(200).json({
+                status: 'success',
+                message: 'transaction successfully deleted',
+              })
+            })
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: 'error',
+          message: err.message,
+        })
+      })
   }
 }
