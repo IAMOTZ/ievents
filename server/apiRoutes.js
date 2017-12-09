@@ -25,4 +25,6 @@ router.post('/centers', userValidation, adminValidation, controllers.centers.cre
 
 router.put('/centers/:id', userValidation, adminValidation, controllers.centers.update);
 
+router.get('/transactions', userValidation, adminValidation, controllers.transactions.getAll);
+
 export default router;
