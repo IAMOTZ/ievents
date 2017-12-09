@@ -1,7 +1,7 @@
 import db from '../models/index';
 import validation from '../validation/events';
 
-const { events, centers } = db;
+const { events, centers, transactions } = db;
 
 export default {
   // Controller for getting all of a user events
@@ -81,7 +81,6 @@ export default {
                   bookedOn: newBookedOn,
                 })
                 .then(() => {
-                  // After booking the center, create the event
                   events
                     .create({
                       title,
@@ -105,6 +104,14 @@ export default {
                           userId: eventData.userId,
                         },
                       });
+                      transactions
+                        .create({
+                          centerId: centerData.id,
+                          eventId: eventData.id,
+                          userId: eventData.userId,
+                          date,
+                          decision: null,
+                        })
                     });
                 });
             }
@@ -151,8 +158,8 @@ export default {
             res.status(400).json({ sucess: 'failed', message: 'event does not exist' });
           } else if (eventData.userId === req.decoded.id) {
             // If the center exist, check if this user owns the event
-            if (centerid && eventData.centerId !== centerid) {
-              // If the user want to chang the center he choosed
+            if (centerid && eventData.centerId !== Number(centerid)) {           
+              // If the user want to change the center he choosed
               // Check if the new center he choose exist
               centers
                 .findById(centerid)
@@ -175,6 +182,26 @@ export default {
                         message: 'the new choose center has been booked for that date',
                       });
                     } else {
+                      // Delete the former transaction and create a new one
+                      transactions
+                        .findOne({
+                          where: {
+                            eventId: eventData.id,
+                          }
+                        })
+                        .then((transactionData) => {
+                          transactionData
+                            .destroy()
+                        });
+                      transactions
+                        .create({
+                          centerId: newCenterData.id,
+                          eventId: eventData.id,
+                          userId: eventData.userId,
+                          date: date || eventData.date,
+                          decision: null,
+                        });
+                        
                       // Add the new date to the booking register of the new center.
                       let newBookedOn;
                       if (newCenterData.bookedOn === null) {
