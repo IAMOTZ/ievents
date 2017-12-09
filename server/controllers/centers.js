@@ -174,7 +174,7 @@ export default {
         .then((centerData) => {
           if (!centerData) {
             // If center does not exist, send a failed response to the user
-            res.status(400).json({ sucess: 'failed', message: 'center does not exist' });
+            res.status(400).json({ status: 'failed', message: 'center does not exist' });
           } else {
             // If center exist, update the center data
             centerData
