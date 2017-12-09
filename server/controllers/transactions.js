@@ -8,10 +8,10 @@ export default {
       .findAll({
         include: [{
           model: transactions,
-          include: [
-            users,
-            events,
-          ]
+          include: [{
+            model: events,
+            include: [users]
+          }]
         }]
       })
       .then((data) => {
