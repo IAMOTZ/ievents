@@ -6,33 +6,21 @@ export default (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false,
     },
-    centerName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    clientNames: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-    },
-    clientEmails: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      defaultValue: [],
-    },
-    bookingDates: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      defaultValue: [],
-    },
-    days: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-      defaultValue: [],
-    },
-    allowed: {
-      type: DataTypes.ARRAY(DataTypes.BOOLEAN),
-      defaultValue: [],
-    },
     centerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    eventId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    decision: {
+      type: DataTypes.ENUM,
+      values: ['canceled', 'allowed'],
     },
   });
   return transactions;
