@@ -22,7 +22,7 @@ export default {
       return 'event date is required';
     }
     if (date) {
-      const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+      const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
       if (!dateData) {
         return 'the date format should be yyyy/mm/dd';
       }
@@ -63,7 +63,7 @@ export default {
       return 'event description must be below 200 characters';
     }
     if (date) {
-      const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+      const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
       if (!dateData) {
         return 'the date format should be yyyy/mm/dd';
       }
