@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import eventStyles from '../../../sass/userEvents.scss';
-import { UserSideNav } from '../common/SideNavigation.jsx';
+import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { ConfirmModal } from '../common/Modal';
 import Header from '../common/Header.jsx';

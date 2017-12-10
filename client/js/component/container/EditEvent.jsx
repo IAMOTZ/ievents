@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import getAllCenters from '../../actions/centerActions';
 
 import addEventStyles from '../../../sass/addEvent.scss';
-import { UserSideNav } from '../common/SideNavigation.jsx';
+import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
