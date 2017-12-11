@@ -15,6 +15,7 @@ const getAllCenters = () => {
   }
 }
 
+// This actions contacts the server to add a center
 export const addCenter = (centerDetails, userToken) => {
   return (dispatch) => {
     dispatch({ type: 'ADDDING_CENTER' });
@@ -33,6 +34,15 @@ export const addCenter = (centerDetails, userToken) => {
   }
 }
 
+// This actions initializes the editing of a center
+export const initializeEdit = (id) => {
+  return { 
+    type: 'INITIALIZE_EDIT', 
+    payload: id, 
+  };
+}
+
+// This action triggers the display of the modal that shows the details of a center
 export const showCenterModal = (centerId) => {
   return {
     type: 'SHOW_CENTER_MODAL',
@@ -42,7 +52,7 @@ export const showCenterModal = (centerId) => {
 
 // This action simply reset the status of the center store to its initial state
 export const clearStatus = () => {
-  return ({ type: 'CLEAR_STATUS', });
+  return { type: 'CLEAR_STATUS', };
 }
 
 export default getAllCenters;
