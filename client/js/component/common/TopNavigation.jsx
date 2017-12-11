@@ -88,9 +88,9 @@ export class UserTopNav extends React.Component {
 const AdminOptions = (props) => {
   if (props.isAdmin) {
     return (
-      <span class="d-flex flex-row">
+      <span class="d-flex flex-column flex-md-row">
         <li class="nav-item">
-          <Link to="#" class="nav-link">Add Center</Link>
+          <Link to="/addCenter" class="nav-link">Add Center</Link>
         </li>
         <li class="nav-item">
           <Link to="#" class="nav-link">Transactions</Link>

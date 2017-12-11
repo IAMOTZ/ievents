@@ -48,7 +48,7 @@ const AdminOptions = (props) => {
   if (props.isAdmin) {
     return (
       <div>
-        <Link to="#" class="list-group-item">
+        <Link to="/addCenter" class="list-group-item">
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center
         </Link>
         <Link to="#" class="list-group-item">
