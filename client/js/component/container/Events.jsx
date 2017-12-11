@@ -27,8 +27,8 @@ export default class Events extends React.Component {
     }
   }
 
-  // Getting all the events as soon as this component mount the DOM
-  componentDidMount() {
+  // Getting all the events as soon as this component is about to mount the DOM
+  componentWillMount() {
     this.props.dispatch(getAllEvents(this.props.user.token));
   }
 
