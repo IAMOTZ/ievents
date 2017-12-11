@@ -2,7 +2,6 @@ $custom-black: rgba(0,0,0,0.9);
 $custom-blue: rgb(0, 142, 214);
 $background-color: #f6f7fa;
 
-
 body {
   background-color: $background-color;
   overflow-x: hidden; 
@@ -10,9 +9,8 @@ body {
 
 body > nav {
   background-color: $custom-black;
-  border-bottom: 2px solid rgba(0, 143, 214, 0.873);
+  border-bottom: 2px solid $custom-blue;
 }
-
 
 #navigation-section {
   background-color: $custom-black;
@@ -33,18 +31,28 @@ body > nav {
       border-bottom: 1px solid $custom-blue;
     }
   }
-  
+
 }
 
-#centers-section {
-  min-height: 700px;
+#add-event-section {
+
   nav {
     background-color: $custom-black;
   }
-  
-  .search-box {
-    margin-top: 100px;
+  .dark-button {
+    background-color : $custom-black;
+    color: white;
+  }
 
+  form {
+    margin-top: 100px;
+  }
+}
+  
+#centers-section {
+  margin-top: 100px;
+
+  .search-box {
     .btn {
       color: white;
       background-color: $custom-black;
@@ -53,7 +61,6 @@ body > nav {
 
   .card {
     margin: 5px;
-    
     .btn {
       background-color: $custom-black !important;
     }
@@ -77,46 +84,8 @@ body > nav {
       }
     }
   }
-
 }
-
-#center-details-modal {
-
-  @media (min-width: 576px) {
-    .modal-dialog {
-      height: 400px;
-      width: 400px;
-    }
-  }
   
-  @media (min-width: 992px) {
-    .modal-dialog {
-      width: 400px;
-      .seat-badge {
-        position: absolute;
-        top: 45%;
-        left: 65%;
-        font-size: 20px;
-        background-color: rgba(0,0,0,0.4);
-      }
-    }
-  }
-
-  .seat-badge {
-    position: absolute;
-    top: 40%;
-    left: 60%;
-    font-size: 20px;
-    background-color: rgba(0,0,0,0.4);
-  }
-
-  .btn {
-    background-color: $custom-black;
-  }
-}
-
-
-
 footer {
   background-color: $custom-black;
   border-top: 2px solid $custom-blue;

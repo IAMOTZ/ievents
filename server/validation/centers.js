@@ -16,15 +16,15 @@ export default {
       return 'center name cannot be empty';
     }
     if (name.length < 5 || name.length > 30) {
-      return 'center name must be between 5 and 25 characters';
+      return 'center name must be between 5 and 30 characters';
     }
-    if (location !== undefined && location.length > 30) {
+    if (location && location.length > 30) {
       return 'center location must be below 30 characters';
     }
-    if (details !== undefined && details.length > 200) {
+    if (details && details.length > 200) {
       return 'center details must be below 200 characters';
     }
-    if (capacity !== undefined) {
+    if (capacity) {
       const noCapacity = Number(capacity);
       if (!Number.isFinite(noCapacity)) {
         return 'center capacity must be a number in string format';
@@ -44,6 +44,7 @@ export default {
     }
     return 'success';
   },
+
   update(inputData) {
     const {
       name,

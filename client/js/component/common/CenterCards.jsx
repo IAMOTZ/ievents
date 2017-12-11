@@ -2,7 +2,7 @@ import React from 'react';
 
 const defaultImage = '../../../images/defaultImgx4.jpeg';
 
-export default (props) => {
+const CenterCards = (props) => {
   return props.centers.map((center) => (
     <div className="col-lg-4 col-md-6 col-sm-12" key={center.id}>
       <div className="card">
@@ -15,16 +15,34 @@ export default (props) => {
             <h4 className="card-title text-capitalize">{center.name}</h4>
             <i className="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; <span className="text-capitalize">{center.location}</span>
           </div>
-          <a role="button"
-            class="btn text-white mt-3"
-            data-toggle="modal"
-            data-target="#center-details-modal"
+          <ActionBtn isAdmin={props.isAdmin || false}
             id={center.id}
-            onClick={props.btnAction}>Details</a>
+            editActions={props.editAction}
+            btnAction={props.btnAction} />
         </div>
       </div>
     </div>
   ));
 }
 
+const ActionBtn = (props) => {
+  if (props.isAdmin) {
+    return (
+      <a role="button"
+        class="btn text-white mt-3"
+        id={props.id}
+        onClick={props.editAction}>Edit</a>
+    );
+  } else {
+    return (
+      <a role="button"
+        class="btn text-white mt-3"
+        data-toggle="modal"
+        data-target="#center-details-modal"
+        id={props.id}
+        onClick={props.btnAction}>Details</a>
+    );
+  }
+}
 
+export default CenterCards;

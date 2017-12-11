@@ -6,7 +6,7 @@ import { showCenterModal } from '../../actions/centerActions';
 
 import styles from '../../../sass/centers2.scss';
 import { UserTopNav } from '../common/TopNavigation.jsx';
-import { UserSideNav } from '../common/SideNavigation.jsx';
+import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import CenterCards from '../common/CenterCards.jsx';
 import { CenterModal } from '../common/Modal';
@@ -26,6 +26,7 @@ import { CenterModal } from '../common/Modal';
       bookedOn: [],
       type: null,
     },
+    isAdmin: (store.user.user.role === 'admin') ? true : false,
   }
 })
 
@@ -90,7 +91,7 @@ export default class Centers2 extends React.Component {
                     {/* Centers  Grid*/}
                     <div className="mt-5">
                       <div className="row">
-                        <CenterCards centers={this.props.centers} btnAction={this.showModal}/>
+                        <CenterCards centers={this.props.centers} btnAction={this.showModal} isAdmin={this.props.isAdmin} />
                       </div>
                     </div>
                   </div>

@@ -66,11 +66,8 @@ export default (state = initialState, action) => {
       };
     }
     case 'ADDING_EVENT_RESOLVED': {
-      const { title, description, date, center } = action.payload.event;
-      const newEvent = { title, description, date, center };
       return {
         ...state,
-        events: [...state.events, newEvent],
         status: {
           ...state.status,
           adding: false,

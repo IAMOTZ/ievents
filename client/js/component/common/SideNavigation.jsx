@@ -6,12 +6,12 @@ import { clearUser } from '../../actions/authAction';
 
 @connect((store) => {
   return {
-
+    isAdmin: (store.user.user.role === 'admin') ? true : false,
   }
 })
 
 // This is the side navigation that appears when a user is logged in(Large Screen)
-class UserSideNav extends React.Component {
+export default class UserSideNav extends React.Component {
   logout = () => {
     this.props.dispatch(clearUser());
   }
@@ -32,6 +32,7 @@ class UserSideNav extends React.Component {
             <Link to="/centers2" class="list-group-item">
               <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
             </Link>
+            <AdminOptions isAdmin={this.props.isAdmin} />
             <Link to="/" class="list-group-item" onClick={this.logout}>
               <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
             </Link>
@@ -42,31 +43,21 @@ class UserSideNav extends React.Component {
   }
 }
 
-// This is the side navigation that appears when an admin is logged in(Large Screen)
-const AdminSideNav = (props) => {
-  return (
-    <div class="col-lg-2 fixed-top  d-none d-lg-block" id="navigation-section">
-      <div class="profile-pic mt-5 text-center">
-        <p class="lead text-white pt-3" id="userName">Admin</p>
+// The extra option that is displayed when an admin is logged in
+const AdminOptions = (props) => {
+  if (props.isAdmin) {
+    return (
+      <div>
+        <Link to="/addCenter" class="list-group-item">
+          <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center
+        </Link>
+        <Link to="#" class="list-group-item">
+          <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions
+        </Link>
       </div>
-      <div class="pt-3 navigation-links">
-        <div class="list-group">
-          <Link to="/centers2" class="list-group-item">
-            <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
-        </Link>
-          <Link to="#" class="list-group-item">
-            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center
-        </Link>
-          <Link to="#" class="list-group-item">
-            <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions
-        </Link>
-          <Link to="#" class="list-group-item">
-            <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
-        </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
+    );
+  } else {
+    return null;
+  }
+}
 
-export { UserSideNav, AdminSideNav };
