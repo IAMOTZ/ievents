@@ -6,7 +6,13 @@ let initialState = {
   status: {
     fetching: false,
     fetched: false,
-    error: false,
+    fetchingError: false,
+    adding: false,
+    added: false,
+    addingError: false,
+    updating: false,
+    updated: false,
+    updatingError: false,
   },
 }
 
@@ -19,7 +25,7 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: true,
           fetched: false,
-          error: false
+          fetchingError: false
         },
       };
     }
@@ -32,7 +38,7 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: false,
           fetched: true,
-          error: false,
+          fetchingError: false,
         },
       };
     }
@@ -43,19 +49,58 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: false,
           fetched: false,
-          error: action.payload,
+          fetchingError: action.payload,
         },
       };
     }
+    case 'ADDING_CENTER': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          adding: true,
+          added: false,
+          addingError: false
+        },
+      };
+    }
+    case 'ADDING_CENTER_RESOLVED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          adding: false,
+          added: true,
+          addingError: false,
+        },
+      }
+    }
+    case 'ADDING_CENTER_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          adding: false,
+          added: false,
+          addingError: action.payload,
+        },
+      }
+    }
     case 'SHOW_CENTER_MODAL': {
-      const modalContent = _.find(state.centers, {id: Number(action.payload)});
+      const modalContent = _.find(state.centers, { id: Number(action.payload) });
       return {
         ...state,
         modalContent: modalContent,
       }
     }
+    case 'CLEAR_STATUS': {
+      return {
+        ...state,
+        status: initialState.status,
+      }
+    }
     default: {
-      return state; 
+      return state;
     }
   }
 }
