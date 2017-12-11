@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import homeStyles from '../../../sass/home.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
@@ -33,7 +34,7 @@ export default class Home extends React.Component {
                   </div>
                 </div>
               </div>
-              <a href="centers.html" class="btn btn-secondary mt-3">Checkout Our Centers</a>
+              <Link to="/centers1" class="btn btn-secondary mt-3">Checkout Our Centers</Link>
             </div>
           </div>
         </section>
