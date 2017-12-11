@@ -16,7 +16,7 @@ export default {
       return 'center name cannot be empty';
     }
     if (name.length < 5 || name.length > 30) {
-      return 'center name must be between 5 and 25 characters';
+      return 'center name must be between 5 and 30 characters';
     }
     if (location && location.length > 30) {
       return 'center location must be below 30 characters';
@@ -44,7 +44,7 @@ export default {
     }
     return 'success';
   },
-  
+
   update(inputData) {
     const {
       name,
