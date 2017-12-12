@@ -36,7 +36,7 @@ export default {
     if (type !== 'theater' && type !== 'banquet') {
       return 'center type can either be theater or banquet';
     }
-    if (price !== undefined) {
+    if (price) {
       const noPrice = Number(price);
       if (!Number.isFinite(noPrice)) {
         return 'center price must be a number in string format';
@@ -57,19 +57,19 @@ export default {
     if (name !== undefined && name === '') {
       return 'center name cannot be empty';
     }
-    if (name !== undefined && name.length < 5) {
+    if (name && name.length < 5) {
       return 'center name must be between 5 and 30 characters';
     }
-    if (name !== undefined && name.length > 30) {
+    if (name && name.length > 30) {
       return 'center name must be between 5 and 30 characters';
     }
-    if (location !== undefined && location.length >= 50) {
+    if (location && location.length >= 50) {
       return 'center location must be below 50 characters';
     }
-    if (details !== undefined && details.length > 200) {
+    if (details && details.length > 200) {
       return 'center details must be below 200 characters';
     }
-    if (capacity !== undefined) {
+    if (capacity) {
       if (!Number.isFinite(Number(capacity))) {
         return 'center capacity must be a number in string format';
       }
@@ -77,7 +77,7 @@ export default {
     if (type !== undefined && type !== 'theater' && type !== 'banquet') {
       return 'center type can either be theater or banquet';
     }
-    if (price !== undefined) {
+    if (price) {
       if (!Number.isFinite(Number(price))) {
         return 'center price must be a number in string format';
       }
