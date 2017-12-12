@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const defaultImage = '../../../images/defaultImgx4.jpeg';
 
@@ -17,7 +18,7 @@ const CenterCards = (props) => {
           </div>
           <ActionBtn isAdmin={props.isAdmin || false}
             id={center.id}
-            editActions={props.editAction}
+            editAction={props.editAction}
             btnAction={props.btnAction} />
         </div>
       </div>
@@ -28,10 +29,10 @@ const CenterCards = (props) => {
 const ActionBtn = (props) => {
   if (props.isAdmin) {
     return (
-      <a role="button"
+      <Link to="/editCenter"
         class="btn text-white mt-3"
         id={props.id}
-        onClick={props.editAction}>Edit</a>
+        onClick={props.editAction}>Edit</Link>
     );
   } else {
     return (

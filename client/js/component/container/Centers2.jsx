@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Rediret } from 'react-router-dom';
+
 import getAllCenters from '../../actions/centerActions';
-import { showCenterModal } from '../../actions/centerActions';
+import { showCenterModal, initializeEdit } from '../../actions/centerActions';
 
 import styles from '../../../sass/centers2.scss';
 import { UserTopNav } from '../common/TopNavigation.jsx';
@@ -37,6 +38,10 @@ export default class Centers2 extends React.Component {
 
   showModal = (e) => {
     this.props.dispatch(showCenterModal(e.target.id));
+  }
+
+  onEdit = (e) => {
+    this.props.dispatch(initializeEdit(e.target.id));
   }
 
   render() {
@@ -91,7 +96,11 @@ export default class Centers2 extends React.Component {
                     {/* Centers  Grid*/}
                     <div className="mt-5">
                       <div className="row">
-                        <CenterCards centers={this.props.centers} btnAction={this.showModal} isAdmin={this.props.isAdmin} />
+                        <CenterCards
+                          centers={this.props.centers}
+                          btnAction={this.showModal}
+                          editAction={this.onEdit}
+                          isAdmin={this.props.isAdmin} />
                       </div>
                     </div>
                   </div>
