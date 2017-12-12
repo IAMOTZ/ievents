@@ -34,6 +34,24 @@ export const addCenter = (centerDetails, userToken) => {
   }
 }
 
+export const updateCenter = (id, centerDetails, userToken) => {
+  return (dispatch) => {
+    dispatch({ type: 'UPDATING_CENTER' });
+    const config = {
+      headers: {
+        "access-token": userToken,
+      }
+    }
+    axios.put(`${apiBaseUrl}/centers/${id}`, centerDetails, config)
+      .then((response) => {
+        dispatch({ type: 'UPDATING_CENTER_RESOLVED', payload: response.data, })
+      })
+      .catch((err) => {
+        dispatch({ type: 'UPDATING_CENTER_REJECTED', payload: err.response.data, });
+      })
+  }
+}
+
 // This actions initializes the editing of a center
 export const initializeEdit = (id) => {
   return { 
