@@ -49,37 +49,35 @@ export class UserTopNav extends React.Component {
   }
   render() {
     return (
-      <div>
-        <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
-          <div class="container">
-            <a href="" class="navbar-brand">
-              <strong class="text-capitalize">{this.props.name}</strong>
-              <br />
-              <p class="h6">{this.props.title}</p>
-            </a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMenu">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                  <Link to="/events" className="nav-link">My events</Link>
-                </li>
-                <li class="nav-item">
-                  <Link to="/addEvent" className="nav-link">Add Events</Link>
-                </li>
-                <li class="nav-item">
-                  <Link to="/centers2" className="nav-link">Centers</Link>
-                </li>
-                <AdminOptions isAdmin={this.props.isAdmin}/>
-                <li class="nav-item">
-                  <Link to="/" className="nav-link" onClick={this.logout}>Logout</Link>
-                </li>
-              </ul>
-            </div>
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
+        <div class="container">
+          <a href="" class="navbar-brand">
+            <strong class="text-capitalize">{this.props.name}</strong>
+            <br />
+            <p class="h6">{this.props.title}</p>
+          </a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <Link to="/events" className="nav-link">My events</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/addEvent" className="nav-link">Add Events</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/centers2" className="nav-link">Centers</Link>
+              </li>
+              <AdminOptions isAdmin={this.props.isAdmin}/>
+              <li class="nav-item">
+                <Link to="/" className="nav-link" onClick={this.logout}>Logout</Link>
+              </li>
+            </ul>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     );
   }
 }

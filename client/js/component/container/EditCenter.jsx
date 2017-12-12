@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { addCenter, clearStatus } from '../../actions/centerActions';
+import { updateCenter, clearStatus } from '../../actions/centerActions';
 
-// import styles from '../../../sass/addCenter.scss';
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
@@ -14,14 +13,15 @@ import { WarningAlert } from '../common/Alert';
   return {
     user: store.user.user,
     authenticated: store.user.status.fetched,
+    toEdit: store.centers.toEdit,
     status: {
-      error: store.centers.status.addingError.message,
-      success: store.centers.status.added,
+      error: store.centers.status.updatingError.message,
+      success: store.centers.status.updated,
     }
   }
 })
 
-export default class AddCenter extends React.Component {
+export default class EditCenter extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -30,7 +30,6 @@ export default class AddCenter extends React.Component {
       details: null,
       capacity: null,
       price: null,
-      type: null,
       image: null,
     }
   }
@@ -47,18 +46,18 @@ export default class AddCenter extends React.Component {
   }
 
   // This method fires the action to create an event
-  add = () => {
+  update = () => {
     const {
       name,
       location,
       details,
       capacity,
       price,
-      type,
       image,
     } = this.state;
-    const centerDetails = { name, location, details, capacity, price, type, image };
-    this.props.dispatch(addCenter(centerDetails, this.props.user.token));
+    const centerDetails = { name, location, details, capacity, price, image };
+    const centerId = this.props.toEdit.id;
+    this.props.dispatch(updateCenter(centerId, centerDetails, this.props.user.token));
   }
 
   render() {
@@ -68,12 +67,12 @@ export default class AddCenter extends React.Component {
       return (<Redirect to="/centers2" />);
     } else {
       return (
-        <div class="add-center-container">
+        <div className="add-center-container">
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title='Add a center' />
+          <UserTopNav name={this.props.user.name} title='Edit Center' />
 
-          <div className="container-fluid">
-            <div className="row">
+          <div class="container-fluid">
+            <div class="row">
 
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
@@ -82,68 +81,87 @@ export default class AddCenter extends React.Component {
               <div class="col-lg-10 offset-md-2" id="add-event-section">
 
                 {/* Content Header(navigation) on large screen */}
-                <Header text='Add a center' />
+                <Header text='Edit Center' />
 
                 {/* Input form */}
-                <form class="mt-lg-5 mb-md-5 w-lg-50">
+                <form class="mt-lg-5 mb-md-5">
+                  <div className="w-lg-50">
                     <WarningAlert message={this.props.status.error} />
-                  <div class="form-group">
-                    <label for="name">Name</label>
+                  </div>
+                  <div class="form-group row">
+                    <label for="name" class="col-sm-1 col-form-label">Name</label>
+                    <div class="col-sm-11">
                       <input type="email"
-                        className="form-control"
+                        defaultValue={this.props.toEdit.name}
+                        class="form-control w-lg-50"
                         id="name"
                         name="name"
                         placeholder="The name of the center"
                         onChange={this.getInput} />
                       <small class="form-text text-muted">Less than 30 characters</small>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="location">Location</label>
+                  <div class="form-group row">
+                    <label for="location" class="col-sm-1 col-form-label">Location</label>
+                    <div class="col-sm-11">
                       <input type="text"
-                        class="form-control"
+                        defaultValue={this.props.toEdit.location}
+                        class="form-control w-lg-50"
                         id="location"
                         name="location"
                         placeholder="The location of the center"
                         onChange={this.getInput} />
-                      <small class="form-text text-muted">Less than 30 characters</small>                        
+                      <small class="form-text text-muted">Less than 30 characters</small>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="description">Details</label>
+                  <div class="form-group row">
+                    <label for="details" class="col-sm-1 col-form-label">Details</label>
+                    <div class="col-sm-11">
                       <textarea
-                        class="form-control"
-                        id="description" rows="7"
-                        name="description"
+                        defaultValue={this.props.toEdit.details}
+                        class="form-control w-lg-50"
+                        id="datails" rows="7"
+                        name="details"
                         placeholder="More details about the center"
                         onChange={this.getInput}></textarea>
-                      <small class="form-text text-muted">Less than 200 characters</small>                        
+                      <small class="form-text text-muted">Less than 200 characters</small>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="capacity">Capacity</label>
+                  <div class="form-group row">
+                    <label for="capacity" class="col-sm-1 col-form-label">Capacity</label>
+                    <div class="col-sm-11">
                       <input type="number"
-                        class="form-control"
+                        defaultValue={this.props.toEdit.capacity}
+                        class="form-control w-lg-50"
                         id="capacity"
                         name="capacity"
                         placeholder="How many seats"
                         onChange={this.getInput} />
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="price">Price</label>
+                  <div class="form-group row">
+                    <label for="price" class="col-sm-1 col-form-label">Price</label>
+                    <div class="col-sm-11">
                       <input type="number"
-                        class="form-control"
+                        defaultValue={this.props.toEdit.price}
+                        class="form-control w-lg-50"
                         id="price"
                         name="price"
                         placeholder="Price"
                         onChange={this.getInput} />
+                    </div>
                   </div>
-                  <div class="form-group ">
-                    <label for="image" class="d-inline">Image</label>
+                  <div class="form-group row ">
+                    <label for="image" class="col-sm-1 col-form-label">Image</label>
+                    <div className="col-sm-11">
                       <input type="file"
-                        class="form-control-file pt-2 d-inline ml-3"
+                        class="form-control-file pt-2"
                         id="image"
                         name="image" />
+                    </div>
                   </div>
-                  <div class="ml-3 pt-3">
-                    <a class="btn btn-outline-dark" role="button" onClick={this.add}>Add</a>
+                  <div class="text-center w-25 pt-3">
+                    <a class="btn btn-outline-dark" onClick={this.update}>Update</a>
                   </div>
                 </form>
 

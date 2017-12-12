@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import getAllCenters from '../../actions/centerActions';
 
-import addEventStyles from '../../../sass/addEvent.scss';
+// import addEventStyles from '../../../sass/addEvent.scss';
 import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
@@ -71,7 +71,7 @@ export default class EditEvent extends React.Component {
       return (<Redirect to="/events" />);
     } else {
       return (
-        <div>
+        <div className="add-event-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Edit Event' />
 

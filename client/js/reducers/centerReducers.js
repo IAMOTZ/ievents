@@ -3,6 +3,7 @@ import _ from 'lodash';
 let initialState = {
   centers: [],
   modalContent: null,
+  toEdit: null,
   status: {
     fetching: false,
     fetched: false,
@@ -84,6 +85,46 @@ export default (state = initialState, action) => {
           added: false,
           addingError: action.payload,
         },
+      }
+    }
+    case 'UPDATING_CENTER': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          updating: true,
+          updated: false,
+          updatingError: false,
+        },
+      }
+    }
+    case 'UPDATING_CENTER_RESOLVED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          updating: false,
+          updated: true,
+          updatingError: false,
+        },
+      }
+    }
+    case 'UPDATING_CENTER_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          updating: false,
+          updated: false,
+          updatingError: action.payload,
+        },
+      }
+    }
+    case 'INITIALIZE_EDIT': {
+      const center = _.find(state.centers, { id: Number(action.payload) });
+      return {
+        ...state,
+        toEdit: center,
       }
     }
     case 'SHOW_CENTER_MODAL': {

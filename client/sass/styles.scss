@@ -1,0 +1,193 @@
+$custom-black: rgba(0,0,0,0.9);
+$custom-blue: rgb(0, 142, 214);
+$background-color: #f6f7fa;
+
+// General styles
+
+body {
+  background-color: $background-color;
+}
+nav {
+  background-color: $custom-black;
+  border-bottom: 2px solid $custom-blue;
+}
+.dark-button {
+  background-color: $custom-black;
+  color: white;
+}
+@media (min-width: 992px) {
+  .w-lg-50 {
+      width: 50% !important;
+    }
+}
+footer {
+  background-color: $custom-black;
+  border-top: 2px solid $custom-blue;
+}
+#side-navigation {
+  background-color: $custom-black;
+  min-height: 2000px;
+  .navigation-links {
+    a {
+      color: white;
+      font-weight: bold;
+    }
+    .list-group-item {
+      background-color: transparent;
+      border-top: 1px solid $custom-blue;
+    }
+    .list-group-item:last-child {
+      border-bottom: 1px solid $custom-blue;
+    }
+  }
+}
+
+// Styles specific to the some pages 
+
+#home-container {
+  #main-content-section {
+    background: url('../images/eventCenter1.jpeg') no-repeat;
+    min-height: 900px;
+    background-size: cover;
+    background-attachment: fixed;
+    border-bottom: 2px solid $custom-blue;
+    .dark-overlay {
+      background-color: rgba(0,0,0,0.7);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 900px;
+    }
+    #main-content {
+      padding-top: 100px;
+      color: white;
+    }
+    .search-box {
+      .btn {
+        color: white;
+        background-color: $custom-black;
+      }
+    }
+  }
+}
+
+#sign-up-container, #sign-in-container {
+  .card-form {
+    margin-top: 100px;
+    margin-bottom: 95px;
+    width: 350px;
+    .card-title {
+      background-color: $custom-black;
+      color: white;
+    }
+  }
+}
+
+#centers1-container, #centers2-container {
+  .search-box {
+    .btn {
+      color: white;
+      background-color: rgba(0,0,0,0.9);
+    }
+  }
+  .card {
+    margin: 5px;
+    .card-img-top {
+      height: 250px;
+    }
+    .btn {
+      background-color: $custom-black !important;
+    }
+  }
+  .seat-badge {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.4);
+  }
+  #center-details-modal {
+    @media (min-width: 576px) {
+      .modal-dialog {
+        height: 400px;
+        width: 400px;
+      }
+    }    
+    @media (min-width: 992px) {
+      .modal-dialog {
+        width: 400px;
+        .seat-badge {
+          position: absolute;
+          top: 45%;
+          left: 65%;
+          font-size: 20px;
+          background-color: rgba(0,0,0,0.4);
+        }
+      }
+    }
+    .seat-badge {
+      position: absolute;
+      top: 40%;
+      left: 60%;
+      font-size: 20px;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .btn {
+      background-color: $custom-black;
+    }
+  }
+  .pagination {
+    a {
+      font-weight: bold;
+    }
+    .active {
+      a {
+        background-color: rgba(0,0,0,1);
+      }
+    }
+  }
+}
+
+#centers1-container {
+  background-color: white;
+  #centers-section {
+    min-height: 1000px;
+    #center-section-header {
+      padding-top: 70px;
+    }
+  }
+}
+
+#centers2-container {
+  overflow-x: hidden; 
+  #main-content {
+    min-height: 700px;
+    nav {
+      background-color: $custom-black;
+    }
+  }
+}
+
+#events-container {
+  overflow-x: hidden;   
+  #main-content {
+    margin-top: 80px;
+    min-height: 700px;
+    nav {
+      background-color: $custom-black;
+    }
+  }
+}
+
+.add-center-container, .add-event-container {
+  overflow-x: hidden; 
+  form {
+    margin-top: 100px;
+  }
+  #main-content {
+    nav {
+      background-color: $custom-black;
+    }
+  }
+}

@@ -143,7 +143,7 @@ export default {
     for (let i = 0; i < inputKeys.length; i += 1) {
     // Convert all the keys of request body to lowercase and trim spaces
       if (typeof (inputKeys[i]) === 'string') {
-        inputData[inputKeys[i].toLowerCase().trim()] = req.body[inputKeys[i]].trim();
+        inputData[inputKeys[i].toLowerCase().trim()] = (req.body[inputKeys[i]] === 'string') ? req.body[inputKeys[i]].trim() : req.body[inputKeys[i]];
       }
     }
     const {

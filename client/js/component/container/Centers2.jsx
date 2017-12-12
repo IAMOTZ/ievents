@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Rediret } from 'react-router-dom';
-import getAllCenters from '../../actions/centerActions';
-import { showCenterModal } from '../../actions/centerActions';
+import { Redirect } from 'react-router-dom';
 
-import styles from '../../../sass/centers2.scss';
+import getAllCenters from '../../actions/centerActions';
+import { showCenterModal, initializeEdit } from '../../actions/centerActions';
+
+// import styles from '../../../sass/centers2.scss';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
@@ -39,12 +40,16 @@ export default class Centers2 extends React.Component {
     this.props.dispatch(showCenterModal(e.target.id));
   }
 
+  onEdit = (e) => {
+    this.props.dispatch(initializeEdit(e.target.id));
+  }
+
   render() {
     if (!this.props.authenticated) {
       return (<Redirect to="/users/login" />);
     } else {
       return (
-        <div>
+        <div id="centers2-container">
           {/* Top Navigarion on Small screen */}
           <UserTopNav name={this.props.user.name} title="Centers" />
 
@@ -55,7 +60,7 @@ export default class Centers2 extends React.Component {
               <UserSideNav userName={this.props.user.name} />
 
               {/* Main content */}
-              <div class="col-lg-10 offset-lg-2" id="centers-section">
+              <div class="col-lg-10 offset-lg-2" id="main-content">
                 {/* Content Headers */}
                 <Header text="Centers" />
 
@@ -91,7 +96,11 @@ export default class Centers2 extends React.Component {
                     {/* Centers  Grid*/}
                     <div className="mt-5">
                       <div className="row">
-                        <CenterCards centers={this.props.centers} btnAction={this.showModal} isAdmin={this.props.isAdmin} />
+                        <CenterCards
+                          centers={this.props.centers}
+                          btnAction={this.showModal}
+                          editAction={this.onEdit}
+                          isAdmin={this.props.isAdmin} />
                       </div>
                     </div>
                   </div>

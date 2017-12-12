@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import signupStyles from '../../../sass/signup.scss';
+// import signupStyles from '../../../sass/signup.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import { WarningAlert } from '../common/Alert';
@@ -56,7 +56,7 @@ export default class Signin extends React.Component {
       );
     } else {
       return (
-        <div>
+        <div id="sign-in-container">
           <TopNavigation />
           <div className="the-flex-box d-flex flex-column align-items-center">
             <div className="card card-form">
