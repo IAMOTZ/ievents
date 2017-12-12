@@ -37,7 +37,7 @@ export default class Centers1 extends React.Component {
     return (
       <div>
         <TopNavigation />
-        <section id="centers-section">
+        <section id="centers-section" className="mb-5">
           <div className="container">
             {/* Search Box */}
             <div id="center-section-content" class="d-flex flex-column align-items-center">

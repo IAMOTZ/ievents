@@ -70,7 +70,7 @@ export default class AddCenter extends React.Component {
       return (
         <div>
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title='Add Event' />
+          <UserTopNav name={this.props.user.name} title='Add a center' />
 
           <div className="container-fluid">
             <div className="row">
@@ -147,33 +147,6 @@ export default class AddCenter extends React.Component {
                         onChange={this.getInput} />
                     </div>
                   </div>
-                  <fieldset class="form-group">
-                    <div className="row">
-                      <legend class="col-form-legend col-sm-1">Type</legend>
-                      <div class="col-sm-11 pt-2">
-                        <div class="form-check form-check-inline">
-                          <label class="form-check-label">
-                            <input type="radio"
-                              class="form-check-input"
-                              name="type"
-                              id="inlineRadio1"
-                              value="theater"
-                              onClick={this.getInput} /> Theater
-                          </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                          <label class="form-check-label">
-                            <input type="radio"
-                              class="form-check-input"
-                              name="type"
-                              id="inlineRadio2"
-                              value="banquet"
-                              onClick={this.getInput} /> Banquet
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
                   <div class="form-group row ">
                     <label for="image" class="col-sm-1 col-form-label">Image</label>
                     <div className="col-sm-11">

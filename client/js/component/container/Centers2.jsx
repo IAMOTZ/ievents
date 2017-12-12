@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Rediret } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import getAllCenters from '../../actions/centerActions';
 import { showCenterModal, initializeEdit } from '../../actions/centerActions';
