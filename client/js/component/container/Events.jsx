@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import eventStyles from '../../../sass/userEvents.scss';
+// import eventStyles from '../../../sass/userEvents.scss';
 import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { ConfirmModal } from '../common/Modal';
@@ -79,7 +79,7 @@ export default class Events extends React.Component {
       return (<Redirect to="/users/login" />)
     } else {
       return (
-        <div>
+        <div id="events-container">
           <UserTopNav name={this.props.user.name} title='My Events' />
 
           <div className="container-fluid">
@@ -112,6 +112,13 @@ export default class Events extends React.Component {
               </div>
             </div>
           </div>
+
+          <footer class="d-block d-sm-none mt-5">
+            <div class="container text-white text-center py-5">
+              <h1>Ievents</h1>
+              <p>Copyright &copy; 2017</p>
+            </div>
+          </footer>
         </div>
       )
     }

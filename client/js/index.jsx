@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import store from "./store";
+
+import styles from '../sass/styles.scss'; 
 import Signup from './component/container/Signup.jsx';
 import Signin from './component/container/Signin.jsx';
 import AddEvent from './component/container/AddEvent.jsx';

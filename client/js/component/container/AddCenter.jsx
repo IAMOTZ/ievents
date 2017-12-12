@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { addCenter, clearStatus } from '../../actions/centerActions';
 
-import styles from '../../../sass/addCenter.scss';
+// import styles from '../../../sass/addCenter.scss';
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
@@ -68,7 +68,7 @@ export default class AddCenter extends React.Component {
       return (<Redirect to="/centers2" />);
     } else {
       return (
-        <div>
+        <div class="add-center-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Add a center' />
 
@@ -85,79 +85,65 @@ export default class AddCenter extends React.Component {
                 <Header text='Add a center' />
 
                 {/* Input form */}
-                <form class="mt-lg-5 mb-md-5">
-                  <div className="w-lg-50">
+                <form class="mt-lg-5 mb-md-5 w-lg-50">
                     <WarningAlert message={this.props.status.error} />
-                  </div>
-                  <div class="form-group row">
-                    <label for="name" class="col-sm-1 col-form-label">Name</label>
-                    <div class="col-sm-11">
+                  <div class="form-group">
+                    <label for="name">Name</label>
                       <input type="email"
-                        class="form-control w-lg-50"
+                        className="form-control"
                         id="name"
                         name="name"
                         placeholder="The name of the center"
                         onChange={this.getInput} />
                       <small class="form-text text-muted">Less than 30 characters</small>
-                    </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="location" class="col-sm-1 col-form-label">Location</label>
-                    <div class="col-sm-11">
+                  <div class="form-group">
+                    <label for="location">Location</label>
                       <input type="text"
-                        class="form-control w-lg-50"
+                        class="form-control"
                         id="location"
                         name="location"
                         placeholder="The location of the center"
                         onChange={this.getInput} />
                       <small class="form-text text-muted">Less than 30 characters</small>                        
-                    </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="description" class="col-sm-1 col-form-label">Details</label>
-                    <div class="col-sm-11">
+                  <div class="form-group">
+                    <label for="description">Details</label>
                       <textarea
-                        class="form-control w-lg-50"
+                        class="form-control"
                         id="description" rows="7"
                         name="description"
                         placeholder="More details about the center"
                         onChange={this.getInput}></textarea>
                       <small class="form-text text-muted">Less than 200 characters</small>                        
-                    </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="capacity" class="col-sm-1 col-form-label">Capacity</label>
-                    <div class="col-sm-11">
+                  <div class="form-group">
+                    <label for="capacity">Capacity</label>
                       <input type="number"
-                        class="form-control w-lg-50"
+                        class="form-control"
                         id="capacity"
                         name="capacity"
                         placeholder="How many seats"
                         onChange={this.getInput} />
-                    </div>
                   </div>
-                  <div class="form-group row">
-                    <label for="price" class="col-sm-1 col-form-label">Price</label>
-                    <div class="col-sm-11">
+                  <div class="form-group">
+                    <label for="price">Price</label>
                       <input type="number"
-                        class="form-control w-lg-50"
+                        class="form-control"
                         id="price"
                         name="price"
                         placeholder="Price"
                         onChange={this.getInput} />
-                    </div>
                   </div>
-                  <div class="form-group row ">
-                    <label for="image" class="col-sm-1 col-form-label">Image</label>
-                    <div className="col-sm-11">
+                  <div class="form-group ">
+                    <label for="image" class="d-inline">Image</label>
                       <input type="file"
-                        class="form-control-file pt-2"
+                        class="form-control-file pt-2 d-inline ml-3"
                         id="image"
                         name="image" />
-                    </div>
                   </div>
-                  <div class="text-center w-25 pt-3">
-                    <a class="btn btn-outline-dark" onClick={this.add}>Add</a>
+                  <div class="ml-3 pt-3">
+                    <a class="btn btn-outline-dark" role="button" onClick={this.add}>Add</a>
                   </div>
                 </form>
 

@@ -67,7 +67,7 @@ export default class EditCenter extends React.Component {
       return (<Redirect to="/centers2" />);
     } else {
       return (
-        <div>
+        <div className="add-center-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Edit Center' />
 

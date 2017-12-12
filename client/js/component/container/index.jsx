@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import homeStyles from '../../../sass/home.scss';
+// import homeStyles from '../../../sass/home.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 
 export default class Home extends React.Component {
   render() {
     return (
-      <div>
+      <div id="home-container">
         <TopNavigation />
         <section id="main-content-section">
           <div class="dark-overlay">

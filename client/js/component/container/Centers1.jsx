@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import getAllCenters from '../../actions/centerActions';
 import { showCenterModal } from '../../actions/centerActions';
 
-import centersStyles from '../../../sass/centers.scss';
+// import centersStyles from '../../../sass/centers.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import CenterCards from '../common/CenterCards.jsx';
@@ -35,7 +35,7 @@ export default class Centers1 extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="centers1-container">
         <TopNavigation />
         <section id="centers-section" className="mb-5">
           <div className="container">

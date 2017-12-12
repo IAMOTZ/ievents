@@ -17,7 +17,7 @@ export default class UserSideNav extends React.Component {
   }
   render() {
     return (
-      <div class="col-lg-2 fixed-top  d-none d-lg-block" id="navigation-section">
+      <div class="col-lg-2 fixed-top  d-none d-lg-block" id="side-navigation">
         <div class="mt-5 text-center">
           <p class="lead text-white pt-3 text-capitalize" id="userName">{this.props.userName}</p>
         </div>
