@@ -45,7 +45,6 @@ export default {
   // Controller for getting just one particular center
   getOne(req, res) {
     const centerId = req.params.id;
-    // Check if the center exist
     centers
       .findOne({
         where: {
@@ -57,7 +56,6 @@ export default {
         }],
       })
       .then((centerData) => {
-        // If center does not exist, send a failed response
         if (!centerData) {
           res.status(400).json({
             status: 'failed',
@@ -72,7 +70,6 @@ export default {
         }
       })
       .catch((err) => {
-        // Send an error respose if there was error in the whole process
         res.status(400).json({ status: 'error', message: err.message });
       });
   },
