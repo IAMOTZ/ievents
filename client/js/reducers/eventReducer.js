@@ -106,13 +106,8 @@ export default (state = initialState, action) => {
       }
     }
     case 'UPDATING_EVENT_RESOLVED': {
-      const id = action.payload.event.id;
-      const index = _.findIndex(state.events, { id });
-      const newEvents = [...state.events];
-      newEvents[index] = action.payload.event;
       return {
         ...state,
-        events: newEvents,
         status: {
           ...state.status,
           updating: false,
