@@ -3,6 +3,22 @@ import validation from '../validation/centers';
 
 const { centers, transactions } = db;
 
+const formatCenterData = (centerData) => {
+  return Object.assign(
+    {},
+    {
+      id: centerData.id,
+      name: centerData.name,
+      location: centerData.location,
+      details: centerData.details,
+      capacity: centerData.capacity,
+      price: centerData.price,
+      images: centerData.imags,
+      bookedOn: centerData.transactions.map((transaction) => { return transaction.date })
+    }
+  );
+};
+
 export default {
   // Controller for getting all centers
   getAll(req, res) {
@@ -14,21 +30,7 @@ export default {
         }],
       })
       .then((centersData) => {
-        const formattedData = centersData.map((centerData) => {
-          return Object.assign(
-            {},
-            {
-              id: centerData.id,
-              name: centerData.name,
-              location: centerData.location,
-              details: centerData.details,
-              capacity: centerData.capacity,
-              price: centerData.price,
-              images: centerData.imags,
-              bookedOn: centerData.transactions.map((transaction) => { return transaction.date })
-            }
-          );
-        });
+        const formattedData = centersData.map((centerData) => formatCenterData(centerData));
         res.status(200).json({
           status: 'success',
           message: 'centers successfully retrieved',
@@ -62,23 +64,10 @@ export default {
             message: 'center does not exist',
           });
         } else {
-          const formattedData = Object.assign(
-            {},
-            {
-              id: centerData.id,
-              name: centerData.name,
-              location: centerData.location,
-              details: centerData.details,
-              capacity: centerData.capacity,
-              price: centerData.price,
-              images: centerData.imags,
-              bookedOn: centerData.transactions.map((transaction) => { return transaction.date })
-            }
-          );
           res.status(200).json({
             status: 'success',
             message: 'center successfully retrieved',
-            center: formattedData,
+            center: formatCenterData(centerData),
           });
         }
       })
