@@ -36,7 +36,9 @@ class TransactionCards extends React.Component {
                     <div class="card-body">
                       <TransactionTable
                         transactions={center.transactions}
-                        btnAction={this.showEventModal} />
+                        btnAction={this.showEventModal}
+                        onAllow={this.props.onAllow}
+                        onCancel={this.props.onCancel} />
                     </div>
                   </div>
                 </div>
@@ -76,10 +78,11 @@ const TransactionTable = (props) => {
                   onClick={props.btnAction}>event details</a>
               </td>
               <td>{transaction.event.date}</td>
-              <td>
-                <button class="btn btn-outline-dark p-1 mb-1 mb-sm-0 mr-2">Allow</button>
-                <button class="btn btn-outline-danger p-1">Cancel</button>
-              </td>
+              <ActionButtons
+                decision={transaction.decision}
+                transactionId={transaction.id}
+                onAllow={props.onAllow}
+                onCancel={props.onCancel} />
             </tr>
           ))
         }
@@ -110,6 +113,29 @@ const EventModal = (props) => {
           </div>
         </div>
       </div>
+    )
+  }
+}
+
+const ActionButtons = (props) => {
+  if (!props.decision) {
+    return (
+      <td>
+        <button
+          class="btn btn-outline-dark p-1 mb-1 mb-sm-0 mr-2"
+          onClick={props.onAllow}
+          data-transaction-id={props.transactionId}>Allow</button>
+        <button
+          class="btn btn-outline-danger p-1"
+          onClick={props.onCancel}
+          data-transaction-id={props.transactionId}>Cancel</button>
+      </td>
+    )
+  } else {
+    return (
+      <td>
+        Delete icon
+      </td>
     )
   }
 }

@@ -2,7 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { getAllTransactions } from '../../actions/transactionActions';
+import {
+  getAllTransactions,
+  allowTransaction,
+  cancelTransaction,
+  clearTransactionStatus
+} from '../../actions/transactionActions';
 
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
@@ -22,6 +27,26 @@ export default class Transactions extends React.Component {
   componentWillMount() {
     const userToken = this.props.user.token;
     this.props.dispatch(getAllTransactions(userToken));
+  }
+
+  componentDidUpdate() {
+    if (this.props.transactions.status.allowed || this.props.transactions.status.canceled) {
+      const userToken = this.props.user.token;
+      this.props.dispatch(clearTransactionStatus());
+      this.props.dispatch(getAllTransactions(userToken));
+    }
+  }
+
+  cancelTransaction = (e) => {
+    const userToken = this.props.user.token;
+    const transactionId = e.target.dataset.transactionId;
+    this.props.dispatch(cancelTransaction(userToken, transactionId));
+  }
+
+  allowTransaction = (e) => {
+    const userToken = this.props.user.token;
+    const transactionId = e.target.dataset.transactionId;
+    this.props.dispatch(allowTransaction(userToken, transactionId));
   }
 
   render() {
@@ -48,8 +73,10 @@ export default class Transactions extends React.Component {
                 <div id="transactions" class="mt-lg-0">
                   <div id="accordion" role="tablist">
 
-                  <TransactionCards centers={this.props.transactions.centers}/>
-
+                    <TransactionCards
+                      centers={this.props.transactions.centers}
+                      onCancel={this.cancelTransaction}
+                      onAllow={this.allowTransaction} />
                   </div>
                 </div>
               </div>
