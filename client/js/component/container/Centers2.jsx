@@ -60,7 +60,7 @@ export default class Centers2 extends React.Component {
               <UserSideNav userName={this.props.user.name} />
 
               {/* Main content */}
-              <div class="col-lg-10 offset-lg-2" id="main-content">
+              <div class="col-lg-10 offset-lg-2 mt-lg-0" id="main-content">
                 {/* Content Headers */}
                 <Header text="Centers" />
 
