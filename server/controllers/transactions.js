@@ -9,7 +9,7 @@ export default {
         attributes: ['id', 'name'],
         include: [{
           model: transactions,
-          attributes: ['id'],
+          attributes: ['id', 'decision'],
           include: [{
             model: events,
             attributes: ['id', 'title', 'description', 'date'],
