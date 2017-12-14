@@ -59,28 +59,23 @@ export default {
               message: 'the choosen center does not exist',
             });
           } else {
-            let check = false;
-            if (centerData.bookedOn) {
-              check = true;
-            }
-            if (check && centerData.bookedOn.indexOf(date) >= 0) {
-              // If it has been booked, send a failure respose
-              res.status(400).json({
-                status: 'failed',
-                message: 'the center has been booked for that date',
-              });
-            } else {
-              let newBookedOn;
-              if (centerData.bookedOn === null) {
-                newBookedOn = [date];
-              } else {
-                newBookedOn = [date].concat(centerData.bookedOn);
-              }
-              centerData
-                .update({
-                  bookedOn: newBookedOn,
-                })
-                .then(() => {
+            // If the choosen center exist, check if it has not been booked
+            transactions
+              .findOne({
+                where: {
+                  centerId: centerid,
+                  date: date,
+                }
+              })
+              .then((transactionData) => {
+                // Send a failure response if the center has been booked
+                if (transactionData) {
+                  res.status(400).json({
+                    status: 'failed',
+                    message: 'the center has been booked for that date',
+                  });
+                } else {
+                  // Create the event if the center has not being booked
                   events
                     .create({
                       title,
@@ -90,7 +85,7 @@ export default {
                       userId,
                     })
                     .then((eventData) => {
-                      // After creating the event, send a success response with the event datas
+                      // After creating the event, send a success response with the event data
                       res.status(201).json({
                         status: 'success',
                         message: 'event created',
@@ -104,6 +99,7 @@ export default {
                           userId: eventData.userId,
                         },
                       });
+                      // Also create a transaction after creating the event
                       transactions
                         .create({
                           centerId: centerData.id,
@@ -113,8 +109,8 @@ export default {
                           decision: null,
                         })
                     });
-                });
-            }
+                }
+              });
           }
         })
         .catch((err) => {
@@ -157,8 +153,8 @@ export default {
             // If the event does not exist, send a filure response
             res.status(400).json({ sucess: 'failed', message: 'event does not exist' });
           } else if (eventData.userId === req.decoded.id) {
-            // If the center exist, check if this user owns the event
-            if (centerid && eventData.centerId !== Number(centerid)) {           
+            // If the event exist, check if this user owns the event
+            if (centerid && eventData.centerId !== Number(centerid)) {
               // If the user want to change the center he choosed
               // Check if the new center he choose exist
               centers
@@ -171,88 +167,68 @@ export default {
                       message: 'the new choosen center does not exist',
                     });
                   } else {
-                    let check = false;
-                    if (newCenterData.bookedOn) {
-                      check = true;
-                    }
-                    if (check && newCenterData.bookedOn.indexOf(date) >= 0) {
-                      // If it has been booked, send a fialed response
-                      res.status(400).json({
-                        status: 'failed',
-                        message: 'the new choose center has been booked for that date',
-                      });
-                    } else {
-                      // Delete the former transaction and create a new one
-                      transactions
-                        .findOne({
-                          where: {
-                            eventId: eventData.id,
-                          }
-                        })
-                        .then((transactionData) => {
-                          transactionData
-                            .destroy()
-                        });
-                      transactions
-                        .create({
-                          centerId: newCenterData.id,
-                          eventId: eventData.id,
-                          userId: eventData.userId,
-                          date: date || eventData.date,
-                          decision: null,
-                        });
-                        
-                      // Add the new date to the booking register of the new center.
-                      let newBookedOn;
-                      if (newCenterData.bookedOn === null) {
-                        newBookedOn = [date || eventData.date];
-                      } else {
-                        newBookedOn = [date || eventData.date].concat(newCenterData.bookedOn);
-                      }
-                      newCenterData
-                        .update({
-                          bookedOn: newBookedOn,
-                        })
-                        .then(() => {
-                          // Remove the booking of the previous center
-                          centers
-                            .findById(eventData.centerId)
-                            .then((centerData) => {
-                              const centerRegister = centerData.bookedOn;
-                              centerRegister.splice(centerRegister.indexOf(eventData.date), 1);
-                              centerData
-                                .update({
-                                  bookedOn: centerRegister,
+                    // If the choosen center exist, check if it has not been booked
+                    transactions
+                      .findOne({
+                        where: {
+                          centerId: centerid,
+                          date: date,
+                        }
+                      })
+                      .then((transactionData) => {
+                        // Send a failure response if the center has been booked
+                        if (transactionData) {
+                          res.status(400).json({
+                            status: 'failed',
+                            message: 'the center has been booked for that date',
+                          });
+                        }
+                        else {
+                          // Update the event it self
+                          eventData
+                            .update({
+                              title: title || eventData.title,
+                              description: description || eventData.description,
+                              date: date || eventData.date,
+                              centerId: newCenterData.id,
+                            })
+                            .then((newEventData) => {
+                              // Send success response to the user with response data
+                              res.status(201).json({
+                                status: 'success',
+                                message: 'event updated',
+                                event: {
+                                  id: newEventData.id,
+                                  title: newEventData.title,
+                                  description: newEventData.description,
+                                  date: newEventData.date,
+                                  centerName: newCenterData.name,
+                                  centerId: newEventData.centerId,
+                                  userId: newEventData.userId,
+                                },
+                              });
+                              // Delete the former transaction and create a new one
+                              transactions
+                                .findOne({
+                                  where: {
+                                    eventId: eventData.id,
+                                  }
                                 })
-                                .then(() => {
-                                  // Update the event it self
-                                  eventData
-                                    .update({
-                                      title: title || eventData.title,
-                                      description: description || eventData.description,
-                                      date: date || eventData.date,
-                                      centerId: newCenterData.id,
-                                    })
-                                    .then((newEventData) => {
-                                      // Send success response to the user with response data
-                                      res.status(201).json({
-                                        status: 'success',
-                                        message: 'event updated',
-                                        event: {
-                                          id: newEventData.id,
-                                          title: newEventData.title,
-                                          description: newEventData.description,
-                                          date: newEventData.date,
-                                          centerName: newCenterData.name,
-                                          centerId: newEventData.centerId,
-                                          userId: newEventData.userId,
-                                        },
-                                      });
-                                    });
+                                .then((transactionData) => {
+                                  transactionData
+                                    .destroy()
+                                });
+                              transactions
+                                .create({
+                                  centerId: newCenterData.id,
+                                  eventId: eventData.id,
+                                  userId: eventData.userId,
+                                  date: date || eventData.date,
+                                  decision: null,
                                 });
                             });
-                        });
-                    }
+                        }
+                      });
                   }
                 });
             } else {
@@ -311,26 +287,13 @@ export default {
             message: 'event does not exist',
           });
         } else if (eventData.userId === req.decoded.id) {
-          // If event exist, Remove its booking from the center it choosed
-          centers
-            .findById(eventData.centerId)
-            .then((centerData) => {
-              const centerRegister = centerData.bookedOn;
-              centerRegister.splice(centerRegister.indexOf(eventData.date), 1);
-              centerData
-                .update({
-                  bookedOn: centerRegister,
-                })
-                .then(() => {
-                  // After removing the booking, delete the event
-                  eventData.destroy()
-                    .then(() => {
-                      res.status(200).json({
-                        status: 'success',
-                        message: 'event deleted',
-                      });
-                    });
-                });
+          // If this user is the owner of this event
+          eventData.destroy()
+            .then(() => {
+              res.status(200).json({
+                status: 'success',
+                message: 'event deleted',
+              });
             });
         } else {
           // If the user is not the owner of this event

@@ -61,7 +61,6 @@ describe('Centers', () => {
           res.body.center.details.should.be.eql(reqBody.details);
           res.body.center.capacity.should.be.eql(Number(reqBody.capacity));
           res.body.center.price.should.be.eql(Number(reqBody.price));
-          res.body.center.type.should.be.eql(reqBody.type);
           res.body.center.facilities.should.be.a('array');
           res.body.center.facilities[0].should.be.eql('table');
           res.body.center.facilities[2].should.be.eql('projector');
@@ -150,7 +149,6 @@ describe('Centers', () => {
         location: 'new Ottawa USA',
         details: 'It is a beautiful place and I love it',
         capacity: '300',
-        type: 'theater',
         facilities: 'table,chairs,projector',
         price: '400',
         token: adminToken,
@@ -165,7 +163,6 @@ describe('Centers', () => {
           res.body.center.name.should.be.eql(reqBody.name);
           res.body.center.location.should.be.eql(reqBody.location);
           res.body.center.details.should.be.eql(reqBody.details);
-          res.body.center.type.should.be.eql(reqBody.type);
           res.body.center.facilities.should.be.a('array');
           res.body.center.facilities[0].should.be.eql('table');
           res.body.center.facilities[2].should.be.eql('projector');
