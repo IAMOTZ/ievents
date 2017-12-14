@@ -15,6 +15,7 @@ import Centers1 from './component/container/Centers1.jsx';
 import Centers2 from './component/container/Centers2.jsx';
 import AddCenter from './component/container/AddCenter.jsx';
 import EditCenter from './component/container/EditCenter.jsx';
+import Transactions from './component/container/Transactions.jsx';
 import Home from './component/container/index.jsx';
 
 const history = createBrowserHistory();
@@ -31,6 +32,7 @@ const App = () => {
       <Route exact path='/centers2' component={Centers2} />
       <Route exact path='/addCenter' component={AddCenter} />
       <Route exact path='/editCenter' component={EditCenter} />
+      <Route exact path='/transactions' component={Transactions} />
     </Switch>
   )
 }

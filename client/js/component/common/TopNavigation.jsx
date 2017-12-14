@@ -91,7 +91,7 @@ const AdminOptions = (props) => {
           <Link to="/addCenter" class="nav-link">Add Center</Link>
         </li>
         <li class="nav-item">
-          <Link to="#" class="nav-link">Transactions</Link>
+          <Link to="/transactions" class="nav-link">Transactions</Link>
         </li>
       </span>
     );

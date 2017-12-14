@@ -20,9 +20,10 @@ nav {
       width: 50% !important;
     }
 }
-footer {
-  background-color: $custom-black;
-  border-top: 2px solid $custom-blue;
+#main-content {
+  nav {
+    background-color: $custom-black;
+  }
 }
 #side-navigation {
   background-color: $custom-black;
@@ -40,6 +41,10 @@ footer {
       border-bottom: 1px solid $custom-blue;
     }
   }
+}
+footer {
+  background-color: $custom-black;
+  border-top: 2px solid $custom-blue;
 }
 
 // Styles specific to the some pages 
@@ -188,6 +193,21 @@ footer {
   #main-content {
     nav {
       background-color: $custom-black;
+    }
+  }
+}
+
+#transactions-container {
+  #transactions {
+    margin-top: 100px;
+    .card {
+      z-index: 4;
+      a:hover {
+        text-decoration: none;      
+      }
+      .card-header {
+        background-color: white;
+      }
     }
   }
 }

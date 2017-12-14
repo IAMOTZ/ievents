@@ -12,9 +12,9 @@ import { WarningAlert } from '../common/Alert';
 import { updateEvent, clearStatus } from '../../actions/eventActions';
 
 @connect((store) => {
-  return { 
+  return {
     user: store.user.user,
-    authenticated: store.user.status.fetched,    
+    authenticated: store.user.status.fetched,
     centers: store.centers.centers,
     toEdit: store.events.toEdit,
     status: {
@@ -65,7 +65,7 @@ export default class EditEvent extends React.Component {
   }
 
   render() {
-    if(!this.props.authenticated) {
+    if (!this.props.authenticated) {
       return (<Redirect to="/users/login" />)
     } else if (this.props.status.success) {
       return (<Redirect to="/events" />);
@@ -120,6 +120,7 @@ export default class EditEvent extends React.Component {
                   <div class="form-group">
                     <label for="centers">Choose a Center</label>
                     <select id="centers" class="form-control ml-md-3"
+                      name="centerId"
                       onChange={this.getInput}>
                       <option>choose a center</option>
                       <CenterOptions centers={this.props.centers} />

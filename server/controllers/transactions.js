@@ -6,11 +6,17 @@ export default {
   getAll(req, res) {
     centers
       .findAll({
+        attributes: ['id', 'name'],
         include: [{
           model: transactions,
+          attributes: ['id'],
           include: [{
             model: events,
-            include: [users]
+            attributes: ['id', 'title', 'description', 'date'],
+            include: [{
+              model: users,
+              attributes: ['id', 'email'],
+            }]
           }]
         }]
       })

@@ -51,7 +51,7 @@ const AdminOptions = (props) => {
         <Link to="/addCenter" class="list-group-item">
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center
         </Link>
-        <Link to="#" class="list-group-item">
+        <Link to="/transactions" class="list-group-item">
           <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions
         </Link>
       </div>
