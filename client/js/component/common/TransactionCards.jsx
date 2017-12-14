@@ -135,11 +135,15 @@ const ActionButtons = (props) => {
     )
   } else {
     return (
-      <td className="text-center text-md-left text-lg-left pl-lg-4 pl-md-4">
-        <i
-          className="fa fa-trash fw fa-2x"
-          data-transaction-id={props.transactionId}          
-          onClick={props.onDelete}></i>
+      <td>
+        <span className="text-muted">{props.decision}</span>
+        <span className="d-block d-lg-inline d-md-inline ml-lg-2 ml-md-2 text-center">
+          <i
+            className="fa fa-trash fw"
+            data-transaction-id={props.transactionId}
+            onClick={props.onDelete}></i>
+        </span>
+
       </td>
     )
   }
