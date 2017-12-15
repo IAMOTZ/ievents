@@ -38,7 +38,8 @@ class TransactionCards extends React.Component {
                         transactions={center.transactions}
                         btnAction={this.showEventModal}
                         onAllow={this.props.onAllow}
-                        onCancel={this.props.onCancel} />
+                        onCancel={this.props.onCancel}
+                        onDelete={this.props.onDelete} />
                     </div>
                   </div>
                 </div>
@@ -82,7 +83,8 @@ const TransactionTable = (props) => {
                 decision={transaction.decision}
                 transactionId={transaction.id}
                 onAllow={props.onAllow}
-                onCancel={props.onCancel} />
+                onCancel={props.onCancel}
+                onDelete={props.onDelete} />
             </tr>
           ))
         }
@@ -134,7 +136,14 @@ const ActionButtons = (props) => {
   } else {
     return (
       <td>
-        Delete icon
+        <span className="text-muted">{props.decision}</span>
+        <span className="d-block d-lg-inline d-md-inline ml-lg-2 ml-md-2 text-center">
+          <i
+            className="fa fa-trash fw"
+            data-transaction-id={props.transactionId}
+            onClick={props.onDelete}></i>
+        </span>
+
       </td>
     )
   }

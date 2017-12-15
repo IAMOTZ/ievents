@@ -124,6 +124,39 @@ export default (state = initialState, action) => {
         }
       }
     }
+    case 'DELETE_TRANSACTION': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleting: true,
+          deleted: false,
+          deletingError: false,
+        }
+      }
+    }
+    case 'DELETE_TRANSACTION_RESOLVED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleting: false,
+          deleted: true,
+          deletingError: false,
+        }
+      }
+    }
+    case 'DELETE_TRANSACTION_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deleting: false,
+          deleted: false,
+          deletingError: action.payload,
+        }
+      }
+    }
     case 'CLEAR_TRANSACTION_STATUS': {
       return {
         ...state,

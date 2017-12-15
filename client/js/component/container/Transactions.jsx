@@ -6,6 +6,7 @@ import {
   getAllTransactions,
   allowTransaction,
   cancelTransaction,
+  deleteTransaction,
   clearTransactionStatus
 } from '../../actions/transactionActions';
 
@@ -25,28 +26,32 @@ import { WarningAlert } from '../common/Alert';
 
 export default class Transactions extends React.Component {
   componentWillMount() {
-    const userToken = this.props.user.token;
-    this.props.dispatch(getAllTransactions(userToken));
+    this.props.dispatch(getAllTransactions(this.props.user.token));
+  }
+
+  refresh = () => {
+    this.props.dispatch(clearTransactionStatus());
+    this.props.dispatch(getAllTransactions(this.props.user.token));
   }
 
   componentDidUpdate() {
-    if (this.props.transactions.status.allowed || this.props.transactions.status.canceled) {
-      const userToken = this.props.user.token;
-      this.props.dispatch(clearTransactionStatus());
-      this.props.dispatch(getAllTransactions(userToken));
+    if (this.props.transactions.status.allowed ||
+      this.props.transactions.status.canceled ||
+      this.props.transactions.status.deleted) {
+      this.refresh();
     }
   }
 
   cancelTransaction = (e) => {
-    const userToken = this.props.user.token;
-    const transactionId = e.target.dataset.transactionId;
-    this.props.dispatch(cancelTransaction(userToken, transactionId));
+    this.props.dispatch(cancelTransaction(this.props.user.token, e.target.dataset.transactionId));
   }
 
   allowTransaction = (e) => {
-    const userToken = this.props.user.token;
-    const transactionId = e.target.dataset.transactionId;
-    this.props.dispatch(allowTransaction(userToken, transactionId));
+    this.props.dispatch(allowTransaction(this.props.user.token, e.target.dataset.transactionId));
+  }
+
+  deleteTransaction = (e) => {
+    this.props.dispatch(deleteTransaction(this.props.user.token, e.target.dataset.transactionId));
   }
 
   render() {
@@ -76,7 +81,8 @@ export default class Transactions extends React.Component {
                     <TransactionCards
                       centers={this.props.transactions.centers}
                       onCancel={this.cancelTransaction}
-                      onAllow={this.allowTransaction} />
+                      onAllow={this.allowTransaction}
+                      onDelete={this.deleteTransaction} />
                   </div>
                 </div>
               </div>
