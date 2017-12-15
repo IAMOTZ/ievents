@@ -20,18 +20,11 @@ export default (sequelize, DataTypes) => {
     capacity: {
       type: DataTypes.INTEGER,
     },
-    type: {
-      type: DataTypes.ENUM,
-      values: ['theater', 'banquet'],
-    },
     facilities: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
     price: {
       type: DataTypes.REAL,
-    },
-    bookedOn: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
     },
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),

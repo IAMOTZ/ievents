@@ -13,6 +13,12 @@ let initialState = {
     deleting: false,
     daleted: false,
     deletingError: false,
+    allowing: false,
+    allowed: false,
+    allowingError: false,
+    canceling: false,
+    canceled: false,
+    cancelingError: false,
   },
 }
 
@@ -52,7 +58,73 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case 'CLEAR_STATUS': {
+    case 'ALLOW_TRANSACTION': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          allowing: true,
+          allowed: false,
+          allowingError: false,
+        }
+      }
+    }
+    case 'ALLOW_TRANSACTION_RESOLVED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          allowing: false,
+          allowed: true,
+          allowingError: false,
+        }
+      }
+    }
+    case 'ALLOW_TRANSACTION_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          allowing: false,
+          allowed: false,
+          allowingError: action.payload,
+        }
+      }
+    }
+    case 'CANCEL_TRANSACTION': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          canceling: true,
+          canceled: false,
+          cancelingError: false,
+        }
+      }
+    }
+    case 'CANCEL_TRANSACTION_RESOLVED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          canceling: false,
+          canceled: true,
+          cancelingError: false,
+        }
+      }
+    }
+    case 'CANCEL_TRANSACTION_REJECTED': {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          canceling: false,
+          canceled: false,
+          cancelingError: action.payload,
+        }
+      }
+    }
+    case 'CLEAR_TRANSACTION_STATUS': {
       return {
         ...state,
         status: initialState.status,

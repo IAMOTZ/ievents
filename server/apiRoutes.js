@@ -27,7 +27,7 @@ router.put('/centers/:id', userValidation, adminValidation, controllers.centers.
 
 router.get('/transactions', userValidation, adminValidation, controllers.transactions.getAll);
 
-router.post('/transactions/:id', userValidation, adminValidation, controllers.transactions.changeStatus)
+router.put('/transactions/:id', userValidation, adminValidation, controllers.transactions.changeStatus)
 
 router.delete('/transactions/:id', userValidation, adminValidation, controllers.transactions.delete);
 

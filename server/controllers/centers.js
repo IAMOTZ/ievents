@@ -1,18 +1,40 @@
 import db from '../models/index';
 import validation from '../validation/centers';
 
-const { centers } = db;
+const { centers, transactions } = db;
+
+const formatCenterData = (centerData) => {
+  return Object.assign(
+    {},
+    {
+      id: centerData.id,
+      name: centerData.name,
+      location: centerData.location,
+      details: centerData.details,
+      capacity: centerData.capacity,
+      price: centerData.price,
+      images: centerData.imags,
+      bookedOn: centerData.transactions.map((transaction) => { return transaction.date })
+    }
+  );
+};
 
 export default {
   // Controller for getting all centers
   getAll(req, res) {
     centers
-      .all()
+      .all({
+        include: [{
+          model: transactions,
+          attributes: ['date'],
+        }],
+      })
       .then((centersData) => {
+        const formattedData = centersData.map((centerData) => formatCenterData(centerData));
         res.status(200).json({
           status: 'success',
           message: 'centers successfully retrieved',
-          centers: centersData,
+          centers: formattedData,
         });
       })
       .catch((err) => {
@@ -23,31 +45,31 @@ export default {
   // Controller for getting just one particular center
   getOne(req, res) {
     const centerId = req.params.id;
-    // Check if the center exist
     centers
       .findOne({
         where: {
           id: centerId,
         },
+        include: [{
+          model: transactions,
+          attributes: ['date'],
+        }],
       })
       .then((centerData) => {
-        // If center does not exist, send a failed response
         if (!centerData) {
           res.status(400).json({
             status: 'failed',
             message: 'center does not exist',
           });
         } else {
-          // If center exist, send it as a response
           res.status(200).json({
             status: 'success',
             message: 'center successfully retrieved',
-            center: centerData,
+            center: formatCenterData(centerData),
           });
         }
       })
       .catch((err) => {
-        // Send an error respose if there was error in the whole process
         res.status(400).json({ status: 'error', message: err.message });
       });
   },
@@ -130,7 +152,7 @@ export default {
           }
         })
         .catch((err) => {
-        // Send an error respose if there was error in the whole process
+          // Send an error respose if there was error in the whole process
           res.status(400).json({ status: 'error', message: err.message });
         });
     }
@@ -141,7 +163,7 @@ export default {
     const inputData = {};
     const inputKeys = Object.keys(req.body);
     for (let i = 0; i < inputKeys.length; i += 1) {
-    // Convert all the keys of request body to lowercase and trim spaces
+      // Convert all the keys of request body to lowercase and trim spaces
       if (typeof (inputKeys[i]) === 'string') {
         inputData[inputKeys[i].toLowerCase().trim()] = (req.body[inputKeys[i]] === 'string') ? req.body[inputKeys[i]].trim() : req.body[inputKeys[i]];
       }
@@ -209,7 +231,7 @@ export default {
           }
         })
         .catch((err) => {
-        // Send an error respose if there was error in the whole process
+          // Send an error respose if there was error in the whole process
           res.status(400).json({ status: 'error', message: err.message });
         });
     }
