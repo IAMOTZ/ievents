@@ -21,9 +21,10 @@ export const addCenter = (centerDetails, userToken) => {
     dispatch({ type: 'ADDDING_CENTER' });
     const config = {
       headers: {
-        "access-token": userToken,
-      }
-    }
+        'access-token': userToken,
+        'Content-type': 'multipart/form-data',
+      },
+    };
     axios.post(`${apiBaseUrl}/centers`, centerDetails, config)
       .then((response) => {
         dispatch({ type: 'ADDING_CENTER_RESOLVED', payload: response.data, })
@@ -52,11 +53,11 @@ export const updateCenter = (id, centerDetails, userToken) => {
   }
 }
 
-// This actions initializes the editing of a center
+// This action initializes the editing of a center
 export const initializeEdit = (id) => {
-  return { 
-    type: 'INITIALIZE_EDIT', 
-    payload: id, 
+  return {
+    type: 'INITIALIZE_EDIT',
+    payload: id,
   };
 }
 
@@ -68,9 +69,16 @@ export const showCenterModal = (centerId) => {
   }
 }
 
-// This action simply reset the status of the center store to its initial state
-export const clearStatus = () => {
-  return { type: 'CLEAR_STATUS', };
+// This action reset the status of a specific process in the  center store to its initial state
+export const clearStatus = (process) => {
+  switch (process) {
+    case ('ALL'): {
+      return { type: 'CLEAR_ALL_STATUS' }
+    }
+    case ('IMAGE_UPLOADING'): {
+      return { type: 'CLEAR_IMAGE_UPLOADING_STATUS', }
+    }
+  }
 }
 
 export default getAllCenters;
