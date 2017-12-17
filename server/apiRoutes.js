@@ -1,6 +1,7 @@
 import express from 'express';
 import userValidation from './middlewares/userValidaiton';
 import adminValidation from './middlewares/adminValidation';
+import handleImageUpload from './middlewares/fileUpload';
 import controllers from './controllers/index';
 
 const router = express.Router();
@@ -21,7 +22,7 @@ router.put('/events/:id', userValidation, controllers.events.update);
 
 router.delete('/events/:id', userValidation, controllers.events.delete);
 
-router.post('/centers', userValidation, adminValidation, controllers.centers.create);
+router.post('/centers', userValidation, adminValidation, handleImageUpload(), controllers.centers.create);
 
 router.put('/centers/:id', userValidation, adminValidation, controllers.centers.update);
 
