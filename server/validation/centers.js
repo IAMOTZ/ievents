@@ -5,7 +5,6 @@ export default {
       location,
       details,
       capacity,
-      type,
       price,
     } = inputData;
 
@@ -30,12 +29,6 @@ export default {
         return 'center capacity must be a number in string format';
       }
     }
-    if (type === undefined || type === null) {
-      return 'center type is required';
-    }
-    if (type !== 'theater' && type !== 'banquet') {
-      return 'center type can either be theater or banquet';
-    }
     if (price) {
       const noPrice = Number(price);
       if (!Number.isFinite(noPrice)) {
@@ -51,7 +44,6 @@ export default {
       location,
       details,
       capacity,
-      type,
       price,
     } = inputData;
     if (name !== undefined && name === '') {
@@ -73,9 +65,6 @@ export default {
       if (!Number.isFinite(Number(capacity))) {
         return 'center capacity must be a number in string format';
       }
-    }
-    if (type !== undefined && type !== 'theater' && type !== 'banquet') {
-      return 'center type can either be theater or banquet';
     }
     if (price) {
       if (!Number.isFinite(Number(price))) {

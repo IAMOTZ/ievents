@@ -1,7 +1,17 @@
+import dotenv from 'dotenv';
+import cloudinary from 'cloudinary';
 import db from '../models/index';
 import validation from '../validation/centers';
 
+dotenv.config();
+
 const { centers, transactions } = db;
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SERCRET,
+});
 
 const formatCenterData = (centerData) => {
   return Object.assign(
@@ -13,7 +23,7 @@ const formatCenterData = (centerData) => {
       details: centerData.details,
       capacity: centerData.capacity,
       price: centerData.price,
-      images: centerData.imags,
+      images: centerData.images,
       bookedOn: centerData.transactions.map((transaction) => { return transaction.date })
     }
   );
@@ -89,10 +99,8 @@ export default {
       location,
       details,
       capacity,
-      type,
       facilities,
       price,
-      images,
     } = inputData;
     const validationOutput = validation.create(inputData); // Validate the user inputs
     if (validationOutput !== 'success') {
@@ -119,35 +127,36 @@ export default {
             });
           } else {
             // If center does not exist, create it
-            return centers
-              .create({
-                name,
-                location,
-                details,
-                capacity,
-                type,
-                facilities: facilities ? facilities.split(',') : null,
-                price,
-                images: images ? images.split(',') : null,
-                userId,
-              })
-              .then((center) => {
-                // Send a success response with the center datas
-                res.status(201).json({
-                  status: 'success',
-                  message: 'center created',
-                  center: {
-                    id: center.id,
-                    name: center.name,
-                    location: center.location,
-                    details: center.details,
-                    capacity: center.capacity,
-                    type: center.type,
-                    facilities: center.facilities,
-                    price: center.price,
-                    images: center.images,
-                  },
-                });
+            uploadImages(req.files)
+              .then((result) => {
+                centers
+                  .create({
+                    name,
+                    location,
+                    details,
+                    capacity,
+                    facilities: facilities ? facilities.split(',') : null,
+                    price,
+                    images: result === null ? null : [result.secure_url],
+                    userId,
+                  })
+                  .then((center) => {
+                    // Send a success response with the center datas
+                    res.status(201).json({
+                      status: 'success',
+                      message: 'center created',
+                      center: {
+                        id: center.id,
+                        name: center.name,
+                        location: center.location,
+                        details: center.details,
+                        capacity: center.capacity,
+                        facilities: center.facilities,
+                        price: center.price,
+                        images: center.images,
+                      },
+                    });
+                  });
               });
           }
         })
@@ -173,10 +182,8 @@ export default {
       location,
       details,
       capacity,
-      type,
       facilities,
       price,
-      images,
     } = inputData;
     const validationOutput = validation.update(inputData); // Validate the user inputs
     if (validationOutput !== 'success') {
@@ -198,36 +205,69 @@ export default {
             // If center does not exist, send a failed response to the user
             res.status(400).json({ status: 'failed', message: 'center does not exist' });
           } else {
-            // If center exist, update the center data
-            centerData
-              .update({
-                name: name || centerData.name,
-                location: location || centerData.location,
-                details: details || centerData.details,
-                capacity: capacity || centerData.capacity,
-                type: type || centerData.type,
-                facilities: facilities ? facilities.split(',') : centerData.facilities,
-                price: price || centerData.price,
-                images: images ? images.split(',') : centerData.images,
-              })
-              .then((updatedCenter) => {
-                // Send a success response with the new center datas
-                res.status(200).json({
-                  status: 'success',
-                  message: 'center updated',
-                  center: {
-                    id: updatedCenter.id,
-                    name: updatedCenter.name,
-                    location: updatedCenter.location,
-                    details: updatedCenter.details,
-                    capacity: updatedCenter.capacity,
-                    type: updatedCenter.type,
-                    facilities: updatedCenter.facilities,
-                    price: updatedCenter.price,
-                    images: updatedCenter.images,
-                  },
+            if (req.files && req.files.length > 0) {
+              uploadImages(req.files)
+                .then((result) => {
+                  deleteImages(centerData.images)
+                    .then(() => {
+                      centerData
+                        .update({
+                          name: name || centerData.name,
+                          location: location || centerData.location,
+                          details: details || centerData.details,
+                          capacity: capacity || centerData.capacity,
+                          facilities: facilities ? facilities.split(',') : centerData.facilities,
+                          price: price || centerData.price,
+                          images: result ? [result.secure_url] : null,
+                        })
+                        .then((updatedCenter) => {
+                          // Send a success response with the new center datas
+                          res.status(200).json({
+                            status: 'success',
+                            message: 'center updated',
+                            center: {
+                              id: updatedCenter.id,
+                              name: updatedCenter.name,
+                              location: updatedCenter.location,
+                              details: updatedCenter.details,
+                              capacity: updatedCenter.capacity,
+                              facilities: updatedCenter.facilities,
+                              price: updatedCenter.price,
+                              images: updatedCenter.images,
+                            },
+                          });
+                        });
+                    });
+                })
+            } else {
+              centerData
+                .update({
+                  name: name || centerData.name,
+                  location: location || centerData.location,
+                  details: details || centerData.details,
+                  capacity: capacity || centerData.capacity,
+                  facilities: facilities ? facilities.split(',') : centerData.facilities,
+                  price: price || centerData.price,
+                  images: centerData.images,
+                })
+                .then((updatedCenter) => {
+                  // Send a success response with the new center datas
+                  res.status(200).json({
+                    status: 'success',
+                    message: 'center updated',
+                    center: {
+                      id: updatedCenter.id,
+                      name: updatedCenter.name,
+                      location: updatedCenter.location,
+                      details: updatedCenter.details,
+                      capacity: updatedCenter.capacity,
+                      facilities: updatedCenter.facilities,
+                      price: updatedCenter.price,
+                      images: updatedCenter.images,
+                    },
+                  });
                 });
-              });
+            }
           }
         })
         .catch((err) => {
@@ -236,4 +276,53 @@ export default {
         });
     }
   },
+};
+
+const uploadImages = (images) => {
+  return new Promise((resolve, reject) => {
+    if (type(images) === 'array' && images.length > 0) {
+      const image = images[0]; // Since the application is still using just one center image
+      cloudinary.v2.uploader.upload_stream({ resource_type: 'raw' }, function (error, result) {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }).end(image.buffer);
+    } else {
+      resolve(null);
+    }
+  });
+};
+
+// This function is used to delete a set of image from cloudinary
+const deleteImages = (imageUrls) => {
+  return new Promise((resolve, reject) => {
+    if (type(imageUrls) === 'array' && imageUrls.length > 0) {
+      const imageUrl = imageUrls[0]; // Since the application is still using just one image
+      const imagePublicId = imageUrl.slice(imageUrl.lastIndexOf('/') + 1);
+      cloudinary.v2.uploader.destroy(imagePublicId, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    } else {
+      resolve(null);
+    }
+  })
+}
+
+// This function is used to check the type of value
+const type = (value) => {
+  if (typeof (value) !== 'object') {
+    return typeof (value);
+  } else if (value === null) {
+    return null;
+  } else {
+    let text = value.constructor.toString()
+    let dataType = text.match(/function (.*)\(/)[1];
+    return dataType.toLowerCase();
+  }
 };

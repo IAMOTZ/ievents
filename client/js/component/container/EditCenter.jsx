@@ -1,4 +1,5 @@
 import React from 'react';
+import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -6,6 +7,7 @@ import { updateCenter, clearStatus } from '../../actions/centerActions';
 
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
+import ImageInput from '../common/ImageInput.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { WarningAlert } from '../common/Alert';
 
@@ -30,12 +32,12 @@ export default class EditCenter extends React.Component {
       details: null,
       capacity: null,
       price: null,
-      image: null,
+      newImages: null,
     }
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearStatus());
+    this.props.dispatch(clearStatus('ALL'));
   }
 
   // This method uses user input to update the state
@@ -43,6 +45,12 @@ export default class EditCenter extends React.Component {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
+  }
+
+  handleImageDrop = (files) => {
+    this.setState({
+      newImages: files,
+    });
   }
 
   // This method fires the action to create an event
@@ -53,11 +61,22 @@ export default class EditCenter extends React.Component {
       details,
       capacity,
       price,
-      image,
+      newImages,
     } = this.state;
-    const centerDetails = { name, location, details, capacity, price, image };
     const centerId = this.props.toEdit.id;
-    this.props.dispatch(updateCenter(centerId, centerDetails, this.props.user.token));
+    const centerDetails = { name, location, details, capacity, price, };
+    const fd = new FormData();
+    for (let detail in centerDetails) {
+      if (centerDetails[detail]) {
+        fd.append(`${detail}`, centerDetails[detail]);
+      }
+    }
+    if (newImages) {
+      for (let i = 0; i < newImages.length; i += 1) {
+        fd.append('images', newImages[i]);
+      }
+    }
+    this.props.dispatch(updateCenter(centerId, fd, this.props.user.token));
   }
 
   render() {
@@ -151,14 +170,14 @@ export default class EditCenter extends React.Component {
                         onChange={this.getInput} />
                     </div>
                   </div>
-                  <div class="form-group row ">
-                    <label for="image" class="col-sm-1 col-form-label">Image</label>
-                    <div className="col-sm-11">
-                      <input type="file"
-                        class="form-control-file pt-2"
-                        id="image"
-                        name="image" />
-                    </div>
+                  <div class="form-group">
+                    <label for="image">Image</label>
+                    <ImageInput
+                      id="image"
+                      onDrop={this.handleImageDrop}
+                      newImage={this.state.newImages ? this.state.newImages[0] : null}
+                      previousImage={this.props.toEdit.images ? this.props.toEdit.images[0] : null}
+                    />
                   </div>
                   <div class="text-center w-25 pt-3">
                     <a class="btn btn-outline-dark" onClick={this.update}>Update</a>

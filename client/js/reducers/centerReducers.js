@@ -134,7 +134,7 @@ export default (state = initialState, action) => {
         modalContent: modalContent,
       }
     }
-    case 'CLEAR_STATUS': {
+    case 'CLEAR_ALL_STATUS': {
       return {
         ...state,
         status: initialState.status,
