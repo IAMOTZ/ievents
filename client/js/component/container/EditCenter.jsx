@@ -171,7 +171,7 @@ export default class EditCenter extends React.Component {
                     </div>
                   </div>
                   <ImageInput
-                    handleImageDrop={this.handleImageDrop}
+                    onDrop={this.handleImageDrop}
                     newImage={this.state.newImages ? this.state.newImages[0] : null}
                     previousImage={this.props.toEdit.images ? this.props.toEdit.images[0] : null}
                   />
