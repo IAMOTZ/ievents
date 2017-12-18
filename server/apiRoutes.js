@@ -24,7 +24,7 @@ router.delete('/events/:id', userValidation, controllers.events.delete);
 
 router.post('/centers', userValidation, adminValidation, handleImageUpload(), controllers.centers.create);
 
-router.put('/centers/:id', userValidation, adminValidation, controllers.centers.update);
+router.put('/centers/:id', userValidation, adminValidation, handleImageUpload(), controllers.centers.update);
 
 router.get('/transactions', userValidation, adminValidation, controllers.transactions.getAll);
 
