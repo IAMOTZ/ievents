@@ -4,7 +4,7 @@
   "description": "A web app to help manage and run commercial event centers",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/app",
+    "start": "npm run build && node ./build/app",
     "build": "babel ./server -d ./build",
     "server:dev": "nodemon ./server/app --exec babel-node",
     "react:dev": "webpack-dev-server --content-base src --inline --hot",
@@ -14,7 +14,7 @@
     "test": "set NODE_ENV=test&& babel-node ./server/setUpDb && nyc mocha --compilers js:babel-core/register ./test/**/*.js --timeout 5000 --exit",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint",
-    "heroku-postbuild": "npm run react:pro"    
+    "heroku-postbuild": "npm run react:pro"  
   },
   "repository": {
     "type": "git",
