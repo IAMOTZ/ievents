@@ -40,8 +40,9 @@ export const updateCenter = (id, centerDetails, userToken) => {
     dispatch({ type: 'UPDATING_CENTER' });
     const config = {
       headers: {
-        "access-token": userToken,
-      }
+        'access-token': userToken,
+        'Content-type': 'multipart/form-data',
+      },
     }
     axios.put(`${apiBaseUrl}/centers/${id}`, centerDetails, config)
       .then((response) => {
