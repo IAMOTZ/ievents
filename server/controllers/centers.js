@@ -205,7 +205,7 @@ export default {
             // If center does not exist, send a failed response to the user
             res.status(400).json({ status: 'failed', message: 'center does not exist' });
           } else {
-            if (req.files.length > 0) {
+            if (req.files && req.files.length > 0) {
               uploadImages(req.files)
                 .then((result) => {
                   deleteImages(centerData.images)
