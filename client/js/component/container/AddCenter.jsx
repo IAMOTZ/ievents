@@ -1,5 +1,4 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -11,6 +10,7 @@ import {
 // import styles from '../../../sass/addCenter.scss';
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
+import ImageInput from '../common/ImageInput.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { WarningAlert } from '../common/Alert';
 
@@ -66,9 +66,9 @@ export default class AddCenter extends React.Component {
       images,
     } = this.state;
     const centerDetails = { name, location, details, capacity, price, };
-    const fd = new FormData();    
+    const fd = new FormData();
     for (let detail in centerDetails) {
-      if(centerDetails[detail]) {
+      if (centerDetails[detail]) {
         fd.append(`${detail}`, centerDetails[detail]);
       }
     }
@@ -155,16 +155,10 @@ export default class AddCenter extends React.Component {
                       placeholder="Price"
                       onChange={this.getInput} />
                   </div>
-                  <Dropzone
-                    multiple={false}
-                    accept="image/jpeg"
-                    onDrop={this.handleImageDrop}>
-                    {
-                      this.state.images === null ?
-                        <p>Drop an image or click to select a file to upload[.jpeg only]</p> :
-                        <a href={this.state.images[0].preview} target="blank">{this.state.images[0].name}</a>
-                    }
-                  </Dropzone>
+                  <ImageInput
+                    onDrop={this.handleImageDrop}
+                    newImage={this.state.images ? this.state.images[0] : null}
+                  />
                   <div class="ml-3 pt-3">
                     <a class="btn btn-outline-dark" role="button" onClick={this.add}>Add</a>
                   </div>
