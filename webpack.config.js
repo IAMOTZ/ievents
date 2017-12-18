@@ -52,7 +52,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, 'server/public'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
   plugins: debug ? [] : [
