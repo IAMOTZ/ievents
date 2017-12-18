@@ -155,10 +155,14 @@ export default class AddCenter extends React.Component {
                       placeholder="Price"
                       onChange={this.getInput} />
                   </div>
-                  <ImageInput
-                    onDrop={this.handleImageDrop}
-                    newImage={this.state.images ? this.state.images[0] : null}
-                  />
+                  <div class="form-group">
+                    <label for="image">Image</label>
+                    <ImageInput
+                      id="image"
+                      onDrop={this.handleImageDrop}
+                      newImage={this.state.images ? this.state.images[0] : null}
+                    />
+                  </div>
                   <div class="ml-3 pt-3">
                     <a class="btn btn-outline-dark" role="button" onClick={this.add}>Add</a>
                   </div>
