@@ -158,9 +158,21 @@ export default (state = initialState, action) => {
       }
     }
     case 'CLEAR_TRANSACTION_STATUS': {
-      return {
-        ...state,
-        status: initialState.status,
+      switch(action.payload) {
+        case('ALL'): {
+          return {
+            ...state,
+            status: initialState.status,
+          }
+        }
+        default: {
+          return {
+            ...state,
+            status: {
+              ...state.status,
+            }
+          };
+        }
       }
     }
     default: {

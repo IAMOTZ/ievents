@@ -72,12 +72,5 @@ export const showCenterModal = (centerId) => {
 
 // This action reset the status of a specific process in the  center store to its initial state
 export const clearStatus = (process) => {
-  switch (process) {
-    case ('ALL'): {
-      return { type: 'CLEAR_ALL_STATUS' }
-    }
-    case ('IMAGE_UPLOADING'): {
-      return { type: 'CLEAR_IMAGE_UPLOADING_STATUS', }
-    }
-  }
+  return { type: 'CLEAR_CENTER_STATUS', payload: process }
 }

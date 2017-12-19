@@ -7,7 +7,7 @@ import {
   allowTransaction,
   cancelTransaction,
   deleteTransaction,
-  clearTransactionStatus
+  clearStatus
 } from '../../actions/transactionActions';
 
 import UserSideNav from '../common/SideNavigation.jsx';
@@ -30,7 +30,7 @@ export default class Transactions extends React.Component {
   }
 
   refresh = () => {
-    this.props.dispatch(clearTransactionStatus());
+    this.props.dispatch(clearStatus('ALL'));
     this.props.dispatch(getAllTransactions(this.props.user.token));
   }
 
