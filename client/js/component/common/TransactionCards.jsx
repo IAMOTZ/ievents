@@ -102,12 +102,14 @@ const EventModal = (props) => {
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                {props.event.title}
-              </h5>
+              <span class="modal-title" id="exampleModalLabel">
+                <span className="h5">Title:&nbsp;</span> <br/>
+                <span>{props.event.title}</span>
+              </span>
             </div>
             <div class="modal-body">
-              {props.event.description}
+              <span className="h5">Description:&nbsp;</span> <br/>
+              <span>{props.event.description}</span>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
