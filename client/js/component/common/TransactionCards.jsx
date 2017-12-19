@@ -19,7 +19,7 @@ class TransactionCards extends React.Component {
 
   render() {
     return (
-      <div id="transactions" class="mt-lg-0">
+      <div>
         <div id="accordion" role="tablist">
           {
             this.props.centers.map((center, index) => {
