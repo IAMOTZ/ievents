@@ -2,7 +2,7 @@ import axios from 'axios';
 import apiBaseUrl from '../url';
 
 // This action contacts the server to get all centers
-const getAllCenters = () => {
+export const getAllCenters = () => {
   return (dispatch) => {
     dispatch({ type: 'GETTING_CENTERS' });
     axios.get(`${apiBaseUrl}/centers`)
@@ -81,5 +81,3 @@ export const clearStatus = (process) => {
     }
   }
 }
-
-export default getAllCenters;

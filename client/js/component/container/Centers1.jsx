@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import getAllCenters from '../../actions/centerActions';
-import { showCenterModal } from '../../actions/centerActions';
+import { getAllCenters, showCenterModal } from '../../actions/centerActions';
 
-// import centersStyles from '../../../sass/centers.scss';
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import CenterCards from '../common/CenterCards.jsx';
