@@ -25,7 +25,7 @@ app.all('*', function (req, res, next) {
 
 app.use('/api/v1', apiRoutes);
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
