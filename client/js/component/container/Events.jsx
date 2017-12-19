@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import {
+  getAllEvents,
+  deleteEvent,
+  initializeEdit,
+  clearStatus
+} from '../../actions/eventActions';
+
 // import eventStyles from '../../../sass/userEvents.scss';
 import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
@@ -8,13 +15,12 @@ import { ConfirmModal } from '../common/Modal';
 import Header from '../common/Header.jsx';
 import EventCards from '../common/EventCards.jsx';
 
-import { getAllEvents, deleteEvent, initializeEdit } from '../../actions/eventActions';
-
 @connect((store) => {
   return {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     events: store.events.events,
+    eventDeleted: store.events.status.deleted,
   }
 })
 
@@ -34,7 +40,10 @@ export default class Events extends React.Component {
 
   // Getting all the events again as soon as this component is updated
   componentDidUpdate() {
-    this.props.dispatch(getAllEvents(this.props.user.token));
+    if (this.props.eventDeleted) {
+      this.props.dispatch(getAllEvents(this.props.user.token));
+      this.props.dispatch(clearStatus('DELETE'));
+    }
   }
 
   // This method simply keep track of an event to be deleted and also 

@@ -14,7 +14,7 @@ let initialState = {
     updated: false,
     updatingError: false,
     deleting: false,
-    daleted: false,
+    deleted: false,
     deletingError: false,
   },
 };
@@ -161,10 +161,33 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case 'CLEAR_STATUS': {
-      return {
-        ...state,
-        status: initialState.status,
+    case 'CLEAR_EVENT_STATUS': {
+      switch(action.payload) {
+        case('ALL'): {
+          return {
+            ...state,
+            status: initialState.status,
+          }
+        }
+        case('DELETE'): {
+          return {
+            ...state,
+            status: {
+              ...state.status,
+              deleting: initialState.status.deleting,
+              deleted: initialState.status.deleted,
+              deletingError: initialState.status.deletingError,
+            }
+          }
+        }
+        default: {
+          return {
+            ...state,
+            status: {
+              ...state.status,
+            }
+          };
+        }
       }
     }
     case 'CLEAR_USER': {

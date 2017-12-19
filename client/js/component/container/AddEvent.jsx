@@ -39,7 +39,7 @@ export default class AddEvent extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearStatus());
+    this.props.dispatch(clearStatus('ALL'));
   }
 
 
