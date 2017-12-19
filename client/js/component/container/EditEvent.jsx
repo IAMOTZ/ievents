@@ -123,7 +123,9 @@ export default class EditEvent extends React.Component {
                       name="centerId"
                       onChange={this.getInput}>
                       <option>choose a center</option>
-                      <CenterOptions centers={this.props.centers} />
+                      <CenterOptions
+                        centers={this.props.centers}
+                        selected={this.props.toEdit.centerId} />
                     </select>
                   </div>
                 </form>
