@@ -119,13 +119,14 @@ export default class EditEvent extends React.Component {
                   </div>
                   <div class="form-group">
                     <label for="centers">Choose a Center</label>
-                    <select id="centers" class="form-control ml-md-3"
+                    <select id="centers"
+                      class="form-control ml-md-3"
                       name="centerId"
-                      onChange={this.getInput}>
+                      onChange={this.getInput}
+                      value={this.props.toEdit.centerId}>
                       <option>choose a center</option>
                       <CenterOptions
-                        centers={this.props.centers}
-                        selected={this.props.toEdit.centerId} />
+                        centers={this.props.centers} />
                     </select>
                   </div>
                 </form>
