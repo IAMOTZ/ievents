@@ -7,6 +7,7 @@ import {
   initializeEdit,
   clearStatus
 } from '../../actions/eventActions';
+import getAllCenters from '../../actions/centerActions';
 
 // import eventStyles from '../../../sass/userEvents.scss';
 import UserSideNav from '../common/SideNavigation.jsx';
@@ -20,6 +21,7 @@ import EventCards from '../common/EventCards.jsx';
     user: store.user.user,
     authenticated: store.user.status.fetched,
     events: store.events.events,
+    centers: store.centers.centers,
     eventDeleted: store.events.status.deleted,
   }
 })
@@ -36,6 +38,7 @@ export default class Events extends React.Component {
   // Getting all the events as soon as this component is about to mount the DOM
   componentWillMount() {
     this.props.dispatch(getAllEvents(this.props.user.token));
+    this.props.dispatch(getAllCenters());
   }
 
   // Getting all the events again as soon as this component is updated
@@ -105,7 +108,9 @@ export default class Events extends React.Component {
                 {/* Event Grid */}
                 <div className="mt-5">
                   <div className="card-columns mx-auto">
-                    <EventCards events={this.props.events}
+                    <EventCards
+                      events={this.props.events}
+                      centers={this.props.centers}
                       startDelete={this.startDelete}
                       remove={this.removeEvent}
                       edit={this.onEdit} />
