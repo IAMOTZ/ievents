@@ -40,7 +40,7 @@ export default class EditEvent extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearStatus());
+    this.props.dispatch(clearStatus('ALL'));
   }
 
 
@@ -123,7 +123,7 @@ export default class EditEvent extends React.Component {
                       class="form-control ml-md-3"
                       name="centerId"
                       onChange={this.getInput}
-                      value={this.props.toEdit.centerId}>
+                      defaultValue={this.props.toEdit.centerId}>
                       <option>choose a center</option>
                       <CenterOptions
                         centers={this.props.centers} />
