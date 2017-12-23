@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import getAllCenters from '../../actions/centerActions';
 
-// import addEventStyles from '../../../sass/addEvent.scss';
+import { getAllCenters } from '../../actions/centerActions';
+
 import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
@@ -39,7 +39,7 @@ export default class AddEvent extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearStatus());
+    this.props.dispatch(clearStatus('ALL'));
   }
 
 
@@ -63,7 +63,7 @@ export default class AddEvent extends React.Component {
   }
 
   render() {
-    if(!this.props.authenticated){
+    if (!this.props.authenticated) {
       return (<Redirect to="/users/login" />)
     } else if (this.props.status.success) {
       return (<Redirect to="/events" />);

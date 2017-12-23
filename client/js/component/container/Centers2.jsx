@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import getAllCenters from '../../actions/centerActions';
-import { showCenterModal, initializeEdit } from '../../actions/centerActions';
+import {
+  getAllCenters,
+  showCenterModal,
+  initializeEdit
+} from '../../actions/centerActions';
 
-// import styles from '../../../sass/centers2.scss';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';

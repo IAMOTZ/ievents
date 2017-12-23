@@ -52,15 +52,23 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, '/client/'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
   plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'client'),
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+      }
+    }
   },
 };

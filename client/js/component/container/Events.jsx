@@ -1,20 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-// import eventStyles from '../../../sass/userEvents.scss';
+import {
+  getAllEvents,
+  deleteEvent,
+  initializeEdit,
+  clearStatus
+} from '../../actions/eventActions';
+import { getAllCenters } from '../../actions/centerActions';
+
 import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { ConfirmModal } from '../common/Modal';
 import Header from '../common/Header.jsx';
 import EventCards from '../common/EventCards.jsx';
 
-import { getAllEvents, deleteEvent, initializeEdit } from '../../actions/eventActions';
-
 @connect((store) => {
   return {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     events: store.events.events,
+    centers: store.centers.centers,
+    eventDeleted: store.events.status.deleted,
   }
 })
 
@@ -30,11 +38,15 @@ export default class Events extends React.Component {
   // Getting all the events as soon as this component is about to mount the DOM
   componentWillMount() {
     this.props.dispatch(getAllEvents(this.props.user.token));
+    this.props.dispatch(getAllCenters());
   }
 
   // Getting all the events again as soon as this component is updated
   componentDidUpdate() {
-    this.props.dispatch(getAllEvents(this.props.user.token));
+    if (this.props.eventDeleted) {
+      this.props.dispatch(getAllEvents(this.props.user.token));
+      this.props.dispatch(clearStatus('DELETE'));
+    }
   }
 
   // This method simply keep track of an event to be deleted and also 
@@ -96,7 +108,9 @@ export default class Events extends React.Component {
                 {/* Event Grid */}
                 <div className="mt-5">
                   <div className="card-columns mx-auto">
-                    <EventCards events={this.props.events}
+                    <EventCards
+                      events={this.props.events}
+                      centers={this.props.centers}
                       startDelete={this.startDelete}
                       remove={this.removeEvent}
                       edit={this.onEdit} />

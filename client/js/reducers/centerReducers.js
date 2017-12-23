@@ -134,10 +134,22 @@ export default (state = initialState, action) => {
         modalContent: modalContent,
       }
     }
-    case 'CLEAR_ALL_STATUS': {
-      return {
-        ...state,
-        status: initialState.status,
+    case 'CLEAR_CENTER_STATUS': {
+      switch(action.payload) {
+        case('ALL'): {
+          return {
+            ...state,
+            status: initialState.status,
+          }
+        }
+        default: {
+          return {
+            ...state,
+            status: {
+              ...state.status,
+            }
+          };
+        }
       }
     }
     default: {

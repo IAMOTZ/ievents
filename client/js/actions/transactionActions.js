@@ -73,6 +73,6 @@ export const deleteTransaction = (userToken, id) => {
   }
 }
 
-export const clearTransactionStatus = () => {
-  return { type: 'CLEAR_TRANSACTION_STATUS', }
+export const clearStatus = (process) => {
+  return { type: 'CLEAR_TRANSACTION_STATUS', payload: process }
 }

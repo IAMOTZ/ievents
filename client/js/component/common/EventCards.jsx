@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import getCenterById from '../../helpers/getCenterById';
 
 export default (props) => {
   const eventCards = props.events.map((event => {
@@ -16,6 +17,9 @@ export default (props) => {
         </div>
         <div className="card-body">
           <p className="card-text">{event.description}</p>
+          <p class="mb-1">
+            <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>&nbsp; {getCenterById(props.centers, event.centerId).name}
+          </p>
           <span className="text-muted">{event.date}&nbsp;</span>
           <a href="#" className="btn btn-block bg-dark text-white mt-2" onClick={props.remove} id={event.id}>Done</a>
         </div>

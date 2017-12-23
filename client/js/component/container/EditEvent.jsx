@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import getAllCenters from '../../actions/centerActions';
 
-// import addEventStyles from '../../../sass/addEvent.scss';
+import { getAllCenters } from '../../actions/centerActions';
+
 import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
@@ -40,7 +40,7 @@ export default class EditEvent extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearStatus());
+    this.props.dispatch(clearStatus('ALL'));
   }
 
 
@@ -119,11 +119,14 @@ export default class EditEvent extends React.Component {
                   </div>
                   <div class="form-group">
                     <label for="centers">Choose a Center</label>
-                    <select id="centers" class="form-control ml-md-3"
+                    <select id="centers"
+                      class="form-control ml-md-3"
                       name="centerId"
-                      onChange={this.getInput}>
+                      onChange={this.getInput}
+                      defaultValue={this.props.toEdit.centerId}>
                       <option>choose a center</option>
-                      <CenterOptions centers={this.props.centers} />
+                      <CenterOptions
+                        centers={this.props.centers} />
                     </select>
                   </div>
                 </form>

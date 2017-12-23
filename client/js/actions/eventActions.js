@@ -81,7 +81,7 @@ export const initializeEdit = (id) => {
   return ({ type: 'INITIALIZE_EDIT', payload: id, });
 }
 
-// This action simply reset the status of the event store to its initial state
-export const clearStatus = () => {
-  return ({ type: 'CLEAR_STATUS', });
+// This action reset the status of a specific process in the  center store to its initial state
+export const clearStatus = (process) => {
+  return { type: 'CLEAR_EVENT_STATUS', payload: process }
 }
