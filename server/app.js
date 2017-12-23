@@ -2,7 +2,6 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
-import db from './models/index';
 import apiRoutes from './apiRoutes';
 
 const app = express();
@@ -35,11 +34,8 @@ app.use((req, res) => {
 
 app.set('port', process.env.PORT || 3000);
 
-db.sequelize.sync()
-  .then(() => {
-    app.listen(app.get('port'), () => {
-      console.log(`App started on port ${app.get('port')}`);
-    });
-  });
+app.listen(app.get('port'), () => {
+  console.log(`App started on port ${app.get('port')}`);
+});
 
 export default app;
