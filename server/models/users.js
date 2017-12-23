@@ -23,7 +23,7 @@ export default (sequelize, DataTypes) => {
     },
     role: {
       type: DataTypes.ENUM,
-      values: ['user', 'admin'],
+      values: ['user', 'admin', 'superAdmin'],
       defaultValue: 'user',
     },
   }, {
