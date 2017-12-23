@@ -1,5 +1,7 @@
 node_modules
+bower_components
 .env
 .nyc_output
 build
-bower_components
+public/bundle.js
+public/eventCenter1.jpeg
