@@ -1,13 +1,15 @@
 import express from 'express';
 import handleImageUpload from './middlewares/fileUpload';
 import controllers from './controllers/index';
-import { isUser, isAdmin } from './middlewares/userValidaiton';
+import { isUser, isAdmin, isSuperAdmin } from './middlewares/userValidaiton';
 
 const router = express.Router();
 
 router.post('/users', controllers.users.signup);
 
 router.post('/users/login', controllers.users.signin);
+
+router.post('/users/admin', isUser, isSuperAdmin, controllers.users.createAdmin);
 
 router.get('/centers', controllers.centers.getAll);
 
