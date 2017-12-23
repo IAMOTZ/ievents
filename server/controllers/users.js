@@ -58,6 +58,7 @@ export default {
               .then((newUserData) => {
                 const payLoad = {
                   id: newUserData.id,
+                  role: newUserData.role,
                 };
                 const token = jwt.sign(payLoad, process.env.JSON_WEB_TOKEN_SECRETE, { expiresIn: '5hr' });
                 res.status(201).json({
@@ -131,6 +132,7 @@ export default {
             } else {
               const payLoad = {
                 id: userData.id,
+                role: userData.role,
               };
               const token = jwt.sign(payLoad, process.env.JSON_WEB_TOKEN_SECRETE, { expiresIn: '5hr' });
               res.status(200).json({
