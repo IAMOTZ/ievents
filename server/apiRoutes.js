@@ -1,8 +1,7 @@
 import express from 'express';
-import userValidation from './middlewares/userValidaiton';
-import adminValidation from './middlewares/adminValidation';
 import handleImageUpload from './middlewares/fileUpload';
 import controllers from './controllers/index';
+import { isUser, isAdmin } from './middlewares/userValidaiton';
 
 const router = express.Router();
 
@@ -14,22 +13,22 @@ router.get('/centers', controllers.centers.getAll);
 
 router.get('/centers/:id', controllers.centers.getOne);
 
-router.get('/events', userValidation, controllers.events.getAll);
+router.get('/events', isUser, controllers.events.getAll);
 
-router.post('/events', userValidation, controllers.events.create);
+router.post('/events', isUser, controllers.events.create);
 
-router.put('/events/:id', userValidation, controllers.events.update);
+router.put('/events/:id', isUser, controllers.events.update);
 
-router.delete('/events/:id', userValidation, controllers.events.delete);
+router.delete('/events/:id', isUser, controllers.events.delete);
 
-router.post('/centers', userValidation, adminValidation, handleImageUpload(), controllers.centers.create);
+router.post('/centers', isUser, isAdmin, handleImageUpload(), controllers.centers.create);
 
-router.put('/centers/:id', userValidation, adminValidation, handleImageUpload(), controllers.centers.update);
+router.put('/centers/:id', isUser, isAdmin, handleImageUpload(), controllers.centers.update);
 
-router.get('/transactions', userValidation, adminValidation, controllers.transactions.getAll);
+router.get('/transactions', isUser, isAdmin, controllers.transactions.getAll);
 
-router.put('/transactions/:id', userValidation, adminValidation, controllers.transactions.changeStatus)
+router.put('/transactions/:id', isUser, isAdmin, controllers.transactions.changeStatus)
 
-router.delete('/transactions/:id', userValidation, adminValidation, controllers.transactions.delete);
+router.delete('/transactions/:id', isUser, isAdmin, controllers.transactions.delete);
 
 export default router;
