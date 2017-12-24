@@ -39,6 +39,7 @@ export default () => {
 @connect((store) => {
   return {
     isAdmin: (store.user.user.role === 'admin') ? true : false,
+    isSuperAdmin: (store.user.user.role === 'superAdmin') ? true : false,
   }
 })
 
@@ -70,7 +71,7 @@ export class UserTopNav extends React.Component {
               <li class="nav-item">
                 <Link to="/centers2" className="nav-link">Centers</Link>
               </li>
-              <AdminOptions isAdmin={this.props.isAdmin}/>
+              <AdminOptions isAdmin={this.props.isAdmin} isSuperAdmin={this.props.isSuperAdmin} />
               <li class="nav-item">
                 <Link to="/" className="nav-link" onClick={this.logout}>Logout</Link>
               </li>
@@ -84,12 +85,18 @@ export class UserTopNav extends React.Component {
 
 // The extra options that is displayed when an admin is logged in
 const AdminOptions = (props) => {
-  if (props.isAdmin) {
+  if (props.isAdmin || props.isSuperAdmin) {
     return (
       <span class="d-flex flex-column flex-md-row">
         <li class="nav-item">
           <Link to="/addCenter" class="nav-link">Add Center</Link>
         </li>
+        {
+          props.isSuperAdmin ?
+            <li class="nav-item">
+              <Link to="/addAdmin" class="nav-link">Add Admin</Link>
+            </li> : null
+        }
         <li class="nav-item">
           <Link to="/transactions" class="nav-link">Transactions</Link>
         </li>

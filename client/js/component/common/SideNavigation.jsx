@@ -7,6 +7,7 @@ import { clearUser } from '../../actions/authAction';
 @connect((store) => {
   return {
     isAdmin: (store.user.user.role === 'admin') ? true : false,
+    isSuperAdmin: (store.user.user.role === 'superAdmin') ? true : false
   }
 })
 
@@ -32,7 +33,7 @@ export default class UserSideNav extends React.Component {
             <Link to="/centers2" class="list-group-item">
               <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
             </Link>
-            <AdminOptions isAdmin={this.props.isAdmin} />
+            <AdminOptions isAdmin={this.props.isAdmin} isSuperAdmin={this.props.isSuperAdmin}/>
             <Link to="/" class="list-group-item" onClick={this.logout}>
               <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
             </Link>
@@ -45,12 +46,18 @@ export default class UserSideNav extends React.Component {
 
 // The extra option that is displayed when an admin is logged in
 const AdminOptions = (props) => {
-  if (props.isAdmin) {
+  if (props.isAdmin || props.isSuperAdmin) {
     return (
       <div>
         <Link to="/addCenter" class="list-group-item">
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center
         </Link>
+        {
+          props.isSuperAdmin ?
+            <Link to="/addAdmin" class="list-group-item">
+              <i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Add Admin
+          </Link> : null
+        }
         <Link to="/transactions" class="list-group-item">
           <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions
         </Link>

@@ -6,7 +6,7 @@ import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import { WarningAlert } from '../common/Alert';
 
-import { createUser, clearError } from '../../actions/authAction';
+import { createUser, clearStatus } from '../../actions/authAction';
 
 @connect((store) => {
   return {
@@ -27,7 +27,7 @@ export default class Signup extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearError());
+    this.props.dispatch(clearStatus('ERROR'));
   }
 
   // This method uses user input to update the state
@@ -96,7 +96,7 @@ export default class Signup extends React.Component {
                       <div className="input-group-addon">
                         <i className="fa fa-user-secret" />
                       </div>
-                      <input type="password" className="form-control" id="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.getInput} />
+                      <input type="password" className="form-control" id="confirm-password" name="confirmPassword" placeholder="Confirm Password" onChange={this.getInput} />
                     </div>
                   </div>
                   <a className="btn btn-block dark-button text-white" onClick={this.register} >Register</a>

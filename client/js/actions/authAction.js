@@ -29,12 +29,30 @@ export const loginUser = (userDetails) => {
   };
 }
 
+export const addAdmin = (email, superAdminToken) => {
+  return (dispatch) => {
+    dispatch({ type: 'ADDING_ADMIN' });
+    const config = {
+      headers: {
+        'access-token': superAdminToken
+      }
+    }
+    axios.post(`${apiBaseUrl}/users/admin`, {email}, config)
+      .then((response) => {
+        dispatch({ type: 'ADDING_ADMIN_RESOLVED', payload: response.data });
+      })
+      .catch((err) => {
+        dispatch({ type: 'ADDING_ADMIN_REJECTED', payload: err.response.data });
+      });
+  };
+}
+
 // This action wipes the user store
 export const clearUser = () => {
   return { type: 'CLEAR_USER', }
 }
 
-// This action wipes any error that was in the user store
-export const clearError = () => {
-  return { type: 'CLEAR_ERROR', }
+// This action reset the status of a specific process in the  user store to its initial state
+export const clearStatus = (process) => {
+  return { type: 'CLEAR_USER_STATUS', payload: process }
 }
