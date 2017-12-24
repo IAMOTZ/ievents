@@ -96,7 +96,7 @@ export default class Signup extends React.Component {
                       <div className="input-group-addon">
                         <i className="fa fa-user-secret" />
                       </div>
-                      <input type="password" className="form-control" id="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.getInput} />
+                      <input type="password" className="form-control" id="confirm-password" name="confirmPassword" placeholder="Confirm Password" onChange={this.getInput} />
                     </div>
                   </div>
                   <a className="btn btn-block dark-button text-white" onClick={this.register} >Register</a>
