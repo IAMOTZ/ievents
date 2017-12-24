@@ -52,11 +52,6 @@ export const clearUser = () => {
   return { type: 'CLEAR_USER', }
 }
 
-// This action wipes any error that was in the user store
-export const clearError = () => {
-  return { type: 'CLEAR_ERROR', }
-}
-
 // This action reset the status of a specific process in the  user store to its initial state
 export const clearStatus = (process) => {
   return { type: 'CLEAR_USER_STATUS', payload: process }

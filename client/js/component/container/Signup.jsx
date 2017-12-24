@@ -6,7 +6,7 @@ import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import { WarningAlert } from '../common/Alert';
 
-import { createUser, clearError } from '../../actions/authAction';
+import { createUser, clearStatus } from '../../actions/authAction';
 
 @connect((store) => {
   return {
@@ -27,7 +27,7 @@ export default class Signup extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearError());
+    this.props.dispatch(clearStatus('AUTHENTICATION'));
   }
 
   // This method uses user input to update the state
