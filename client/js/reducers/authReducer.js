@@ -137,13 +137,11 @@ export default function reducer(state = initialState, action) {
     }
     case 'CLEAR_USER_STATUS': {
       switch(action.payload) {
-        case('AUTHENTICATION'): {
+        case('ERROR'): {
           return {
             ...state,
             status: {
               ...state.status,
-              fetching: false,
-              fetched: false,
               error: false,
             }
           }
