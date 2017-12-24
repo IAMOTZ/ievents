@@ -11,6 +11,7 @@ import Centers2 from './component/container/Centers2.jsx';
 import AddCenter from './component/container/AddCenter.jsx';
 import EditCenter from './component/container/EditCenter.jsx';
 import Transactions from './component/container/Transactions.jsx';
+import AddAdmin from './component/container/AddAdmin.jsx';
 import Home from './component/container/index.jsx';
 
 export default () => {
@@ -27,6 +28,7 @@ export default () => {
       <Route exact path='/addCenter' component={AddCenter} />
       <Route exact path='/editCenter' component={EditCenter} />
       <Route exact path='/transactions' component={Transactions} />
+      <Route exact path='/addAdmin' component={AddAdmin} />
     </Switch>
   );
 }
