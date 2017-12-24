@@ -25,7 +25,7 @@ export default class Signin extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.dispatch(clearStatus('AUTHENTICATION'));
+    this.props.dispatch(clearStatus('ERROR'));
   }
 
   // This method uses user input to update the state
