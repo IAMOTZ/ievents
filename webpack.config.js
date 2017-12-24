@@ -63,7 +63,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'client'),
+    contentBase: path.join(__dirname, 'public'),
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
