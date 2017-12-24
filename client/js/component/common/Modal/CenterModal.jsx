@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MonthToString from '../../../helpers/Date';
 
-const defaultImage = '../../../../images/defaultImgx4.jpeg';
+const defaultImage = '/images/defaultImgx4.jpeg';
 
 const BookingTable = (props) => {
   if (!props.display) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const defaultImage = '../../../images/defaultImgx4.jpeg';
+const defaultImage = '/images/defaultImgx4.jpeg';
 
 const CenterCards = (props) => {
   return props.centers.map((center) => (

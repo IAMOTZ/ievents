@@ -30,7 +30,6 @@ export default {
         name,
         email,
         password,
-        role,
       } = inputData;
 
       users
@@ -53,11 +52,11 @@ export default {
                 name,
                 email: email.toLowerCase(),
                 password,
-                role,
               })
               .then((newUserData) => {
                 const payLoad = {
                   id: newUserData.id,
+                  role: newUserData.role,
                 };
                 const token = jwt.sign(payLoad, process.env.JSON_WEB_TOKEN_SECRETE, { expiresIn: '5hr' });
                 res.status(201).json({
@@ -131,6 +130,7 @@ export default {
             } else {
               const payLoad = {
                 id: userData.id,
+                role: userData.role,
               };
               const token = jwt.sign(payLoad, process.env.JSON_WEB_TOKEN_SECRETE, { expiresIn: '5hr' });
               res.status(200).json({
@@ -153,4 +153,52 @@ export default {
         });
     }
   },
+
+  createAdmin(req, res) {
+    const email = req.body.email
+    const validationOutput = validation.createAdminInput({email});
+    if (validationOutput !== 'success') {
+      res.status(400).json({
+        status: 'failed',
+        message: validationOutput,
+      });
+    } else {
+      users
+      .findOne({
+        where: { email }
+      })
+      .then((userData) => {
+        if(userData) { 
+          if (userData.role === 'admin' || userData.role === 'superAdmin') {
+            res.status(400).json({
+              status: 'failed',
+              message: 'the user is already an admin'
+            });
+          } else {
+            userData
+              .update({
+                role: 'admin'
+              })
+              .then(() => {
+                res.status(200).json({
+                  status: 'success',
+                  message: 'the user has been updated to become an admin'
+                })
+              })
+          }
+        } else {
+          res.status(400).json({
+            status: 'failed',
+            message: 'User not found',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: 'error',
+          message: err.message
+        });
+      });
+    }
+  }
 };

@@ -87,4 +87,24 @@ export default {
     }
     return 'success';
   },
+
+  createAdminInput(inputData) {
+    const { email } = inputData;
+    if (email === undefined || email === null) {
+      return 'email is required';
+    }
+    if (email === '') {
+      return 'email cannot be empty';
+    }
+    if (typeof (email) !== 'string') {
+      return 'email has to be a string'
+    }
+    if (!email.match(/^\S+?@\S+.\S+$/)) {
+      return 'email format is wrong';
+    }
+    if (email.match(/^\S+$/) === null) {
+      return 'email must not contain whitespaces';
+    }
+    return 'success';
+  }
 };
