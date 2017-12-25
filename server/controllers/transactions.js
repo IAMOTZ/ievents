@@ -42,12 +42,22 @@ export default {
                 decision: 'allowed',
               })
               .then((newTransactionData) => {
-                res.status(200).json({
-                  status: 'success',
-                  message: 'the transactions is successfully allowed',
-                  transaction: newTransactionData,
-                })
-              })
+                events
+                  .findById(Number(newTransactionData.eventId))
+                  .then((eventData) => {
+                    eventData
+                      .update({
+                        status: 'allowed',
+                      })
+                      .then(() => {
+                        res.status(200).json({
+                          status: 'success',
+                          message: 'the transactions is successfully allowed',
+                          transaction: newTransactionData,
+                        });
+                      });
+                  });
+              });
           }
         })
         .catch((err) => {
@@ -72,12 +82,22 @@ export default {
                 decision: 'canceled',
               })
               .then((newTransactionData) => {
-                res.status(200).json({
-                  status: 'success',
-                  message: 'the transactions is successfully canceled',
-                  transaction: newTransactionData,
-                })
-              })
+                events
+                  .findById(Number(newTransactionData.eventId))
+                  .then((eventData) => {
+                    eventData
+                      .update({
+                        status: 'canceled',
+                      })
+                      .then(() => {
+                        res.status(200).json({
+                          status: 'success',
+                          message: 'the transactions is successfully allowed',
+                          transaction: newTransactionData,
+                        });
+                      });
+                  });
+              });
           }
         })
         .catch((err) => {
