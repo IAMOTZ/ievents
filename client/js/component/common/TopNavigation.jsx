@@ -50,7 +50,7 @@ export class UserTopNav extends React.Component {
   }
   render() {
     return (
-      <nav class="navbar navbar-expand-sm navbar-dark fixed-top d-block d-lg-none">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top d-block d-lg-none">
         <div class="container">
           <a href="" class="navbar-brand">
             <strong class="text-capitalize">{this.props.name}</strong>
