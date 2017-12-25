@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./build/app",
     "build": "babel ./server -d ./build",
-    "server:dev": "npm run setUpDb && nodemon ./server/app --exec babel-node",
+    "server:dev": "npm run setUpDb && nodemon ./server/app --exec babel-node  --watch ./server",
     "react:dev": "webpack-dev-server --content-base src --inline --hot",
     "react:pro": "set NODE_ENV=production&& webpack",
     "template:dev": "gulp",
