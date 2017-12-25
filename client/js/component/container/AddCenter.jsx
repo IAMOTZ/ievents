@@ -131,7 +131,7 @@ export default class AddCenter extends React.Component {
                     <textarea
                       class="form-control"
                       id="description" rows="7"
-                      name="description"
+                      name="details"
                       placeholder="More details about the center"
                       onChange={this.getInput}></textarea>
                     <small class="form-text text-muted">Less than 200 characters</small>
