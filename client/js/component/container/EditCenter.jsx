@@ -172,12 +172,14 @@ export default class EditCenter extends React.Component {
                   </div>
                   <div class="form-group">
                     <label for="image">Image</label>
-                    <ImageInput
-                      id="image"
-                      onDrop={this.handleImageDrop}
-                      newImage={this.state.newImages ? this.state.newImages[0] : null}
-                      previousImage={this.props.toEdit.images ? this.props.toEdit.images[0] : null}
-                    />
+                    <div className="text-center">
+                      <ImageInput
+                        id="image"
+                        onDrop={this.handleImageDrop}
+                        newImage={this.state.newImages ? this.state.newImages[0] : null}
+                        previousImage={this.props.toEdit.images ? this.props.toEdit.images[0] : null}
+                      />
+                    </div>
                   </div>
                   <div class="text-center w-25 pt-3">
                     <a class="btn btn-outline-dark" onClick={this.update}>Update</a>
