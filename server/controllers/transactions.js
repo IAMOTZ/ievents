@@ -9,7 +9,7 @@ export default {
         attributes: ['id', 'name'],
         include: [{
           model: transactions,
-          attributes: ['id', 'decision'],
+          attributes: ['id'],
           include: [{
             model: events,
             attributes: ['id', 'title', 'description', 'date'],
@@ -20,95 +20,9 @@ export default {
           }]
         }]
       })
-      .then((data) => {
-        res.send(data);
+      .then((centers) => {
+        res.status(200).send(centers);
       })
-  },
-
-  changeStatus(req, res, next) {
-    if (req.query.decision.toLowerCase() === 'allow') {
-      const transactionsId = req.params.id;
-      transactions
-        .findById(Number(transactionsId))
-        .then((transactionData) => {
-          if (!transactionData) {
-            res.status(400).json({
-              status: 'failed',
-              message: 'the transactions does not exist',
-            })
-          } else {
-            transactionData
-              .update({
-                decision: 'allowed',
-              })
-              .then((newTransactionData) => {
-                events
-                  .findById(Number(newTransactionData.eventId))
-                  .then((eventData) => {
-                    eventData
-                      .update({
-                        status: 'allowed',
-                      })
-                      .then(() => {
-                        res.status(200).json({
-                          status: 'success',
-                          message: 'the transactions is successfully allowed',
-                          transaction: newTransactionData,
-                        });
-                      });
-                  });
-              });
-          }
-        })
-        .catch((err) => {
-          res.status(400).json({
-            status: 'error',
-            message: err.message
-          })
-        });
-    } else if (req.query.decision.toLowerCase() === 'cancel') {
-      const transactionsId = req.params.id;
-      transactions
-        .findById(Number(transactionsId))
-        .then((transactionData) => {
-          if (!transactionData) {
-            res.status(400).json({
-              status: 'failed',
-              message: 'the transactions does not exist',
-            })
-          } else {
-            transactionData
-              .update({
-                decision: 'canceled',
-              })
-              .then((newTransactionData) => {
-                events
-                  .findById(Number(newTransactionData.eventId))
-                  .then((eventData) => {
-                    eventData
-                      .update({
-                        status: 'canceled',
-                      })
-                      .then(() => {
-                        res.status(200).json({
-                          status: 'success',
-                          message: 'the transactions is successfully allowed',
-                          transaction: newTransactionData,
-                        });
-                      });
-                  });
-              });
-          }
-        })
-        .catch((err) => {
-          res.status(400).json({
-            status: 'error',
-            message: err.message,
-          })
-        })
-    } else {
-      next();
-    }
   },
 
   delete(req, res) {
@@ -120,23 +34,33 @@ export default {
           res.status(400).json({
             status: 'failed',
             message: 'the transaction does not exist',
-          })
+          });
         } else {
           transactionData
             .destroy()
             .then(() => {
-              res.status(200).json({
-                status: 'success',
-                message: 'transaction successfully deleted',
-              })
-            })
+              events
+                .update({
+                  status: 'canceled',
+                }, {
+                  where: {
+                    id: transactionData.eventId,
+                  }
+                })
+                .then(() => {
+                  res.status(200).json({
+                    status: 'success',
+                    message: 'transaction successfully deleted',
+                  });
+                });
+            });
         }
       })
       .catch((err) => {
         res.status(400).json({
           status: 'error',
           message: err.message,
-        })
-      })
+        });
+      });
   }
 }
