@@ -76,16 +76,16 @@ export default {
             });
           } else {
             // If the choosen center exist, check if it has not been booked
-            transactions
+            events
               .findOne({
                 where: {
                   centerId: centerid,
                   date: date,
                 }
               })
-              .then((transactionData) => {
+              .then((eventData) => {
                 // Send a failure response if the center has been booked
-                if (transactionData) {
+                if (eventData) {
                   res.status(400).json({
                     status: 'failed',
                     message: 'the center has been booked for that date',
@@ -100,19 +100,18 @@ export default {
                       centerId: centerData.id,
                       userId,
                     })
-                    .then((eventData) => {
+                    .then((newEventData) => {
                       transactions
                         .create({
                           centerId: centerData.id,
-                          eventId: eventData.id,
-                          userId: eventData.userId,
-                          date,
+                          eventId: newEventData.id,
+                          userId: newEventData.userId,
                         })
                         .then(() => {
                           res.status(201).json({
                             status: 'success',
                             message: 'event created',
-                            event: formatEventData(eventData),
+                            event: formatEventData(newEventData),
                           });
                         })
                     });
@@ -178,16 +177,16 @@ export default {
                     });
                   } else {
                     // If the choosen center exist, check if it has not been booked
-                    transactions
+                    events
                       .findOne({
                         where: {
                           centerId: centerid,
                           date: date,
                         }
                       })
-                      .then((transactionData) => {
+                      .then((result) => {
                         // Send a failure response if the center has been booked
-                        if (transactionData) {
+                        if (result) {
                           res.status(400).json({
                             status: 'failed',
                             message: 'the center has been booked for that date',

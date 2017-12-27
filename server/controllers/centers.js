@@ -5,7 +5,7 @@ import validation from '../validation/centers';
 
 dotenv.config();
 
-const { centers, transactions } = db;
+const { centers, events } = db;
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -24,7 +24,7 @@ const formatCenterData = (centerData) => {
       capacity: centerData.capacity,
       price: centerData.price,
       images: centerData.images,
-      bookedOn: centerData.transactions.map((transaction) => { return transaction.date })
+      bookedOn: centerData.events.map((event) => { return event.date })
     }
   );
 };
@@ -35,7 +35,7 @@ export default {
     centers
       .all({
         include: [{
-          model: transactions,
+          model: events,
           attributes: ['date'],
         }],
       })
@@ -61,7 +61,7 @@ export default {
           id: centerId,
         },
         include: [{
-          model: transactions,
+          model: events,
           attributes: ['date'],
         }],
       })
