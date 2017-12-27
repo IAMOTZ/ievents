@@ -1,3 +1,5 @@
+import { getCurrentDate } from '../helpers';
+
 export default {
   create(inputData) {
     const {
@@ -23,8 +25,12 @@ export default {
     }
     if (date) {
       const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
+      const currentDate = getCurrentDate(1).getDate();
       if (!dateData) {
         return 'the date format should be yyyy/mm/dd';
+      }
+      if (dateData[3] < currentDate) {
+        return 'you can only create event for today and upcoming days'
       }
       if (dateData[3] > 31) {
         return 'days in the date cannot be more than 31';
@@ -64,8 +70,12 @@ export default {
     }
     if (date) {
       const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
+      const currentDate = getCurrentDate(1).getDate();
       if (!dateData) {
         return 'the date format should be yyyy/mm/dd';
+      }
+      if (dateData[3] < currentDate) {
+        return 'you can only create event for today and upcoming days'
       }
       if (dateData[3] > 31) {
         return 'days in the date cannot be more than 31';
