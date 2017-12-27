@@ -18,8 +18,8 @@ export default (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.ENUM,
-      values: ['pending', 'allowed', 'canceled'],
-      defaultValue: 'pending',
+      values: ['allowed', 'canceled', 'done'],
+      defaultValue: 'allowed',
     },
     centerId: {
       type: DataTypes.INTEGER,
