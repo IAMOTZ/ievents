@@ -13,15 +13,7 @@ export default (sequelize, DataTypes) => {
     eventId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    date: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    decision: {
-      type: DataTypes.ENUM,
-      values: ['canceled', 'allowed'],
-    },
+    }
   });
   return transactions;
 };
