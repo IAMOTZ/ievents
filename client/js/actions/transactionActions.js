@@ -19,42 +19,6 @@ export const getAllTransactions = (userToken) => {
   }
 }
 
-export const cancelTransaction = (userToken, id) => {
-  return (dispatch) => {
-    dispatch({ type: 'CANCEL_TRANSACTION' })
-    const config = {
-      headers: {
-        "access-token": userToken,
-      }
-    }
-    axios.put(`${apiBaseUrl}/transactions/${id}?decision=cancel`, {}, config)
-      .then((response) => {
-        dispatch({ type: 'CANCEL_TRANSACTION_RESOLVED', payload: response.data, });
-      })
-      .catch((err) => {
-        dispatch({ type: 'CANCEL_TRANSACTION_REJECTED', payload: err.response.data, });
-      });
-  }
-}
-
-export const allowTransaction = (userToken, id) => {
-  return (dispatch) => {
-    dispatch({ type: 'ALLOW_TRANSACTION' });
-    const config = {
-      headers: {
-        "access-token": userToken
-      }
-    };
-    axios.put(`${apiBaseUrl}/transactions/${id}?decision=allow`, {}, config)
-      .then((response) => {
-        dispatch({ type: 'ALLOW_TRANSACTION_RESOLVED', payload: response.data, });
-      })
-      .catch((err) => {
-        dispatch({ type: 'ALLOW_TRANSACTION_REJECTED', payload: err.response.data, });
-      });
-  }
-}
-
 export const deleteTransaction = (userToken, id) => {
   return (dispatch) => {
     dispatch({ type: 'DELETE_TRANSACTION' });
