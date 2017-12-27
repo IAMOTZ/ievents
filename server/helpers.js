@@ -5,7 +5,7 @@ dotEnv.config();
 
 const Op = sequelize.Op;
 
-export const updateEventStatus = (eventModel) => {
+export const updateEventStatus = (eventModel, transactionModel) => {
   const currentDate = getCurrentDate(1); // Get the current time in Nigeria;
   return new Promise((resolve, reject) => {
     eventModel
@@ -27,7 +27,7 @@ export const updateEventStatus = (eventModel) => {
         return toUpdate;
       })
       .then((eventdIds) => {
-        resolve(eventModel
+        eventModel
           .update({ status: 'done' }, {
             where: {
               id: {
@@ -35,7 +35,19 @@ export const updateEventStatus = (eventModel) => {
               }
             }
           })
-        );
+          .then(() => {
+            transactionModel
+              .destroy({
+                where: {
+                  eventId: {
+                    [Op.in]: eventdIds
+                  }
+                }
+              })
+              .then(() => {
+                resolve('done');
+              });
+          });
       });
   });
 }
@@ -65,7 +77,6 @@ export const createSuperAdmin = (userModel) => {
       });
   });
 }
-
 
 // Add the extra time to the comparison
 const compareDate = (date1, date2, offset) => {
