@@ -3,8 +3,7 @@ import sequelize from 'sequelize';
 const Op = sequelize.Op;
 
 const updateEventStatus = (eventModel) => {
-  // I shoud utilize the time zone stuff
-  const currentDate = new Date();
+  const currentDate = getCurrentDate(1); // Get the current time in Nigeria;
   return new Promise((resolve, reject) => {
     eventModel
       .all({
@@ -45,6 +44,17 @@ const compareDate = (date1, date2, offset) => {
   } else {
     return false;
   }
+}
+
+// Get the current time in a particular timezone.
+export const getCurrentDate = (timeZoneOffset) => {
+  const localDate = new Date();
+  const UTCTime = new Date(
+    localDate.getUTCFullYear(), localDate.getUTCMonth(), localDate.getUTCDate(),
+    localDate.getUTCHours(), localDate.getUTCMinutes(), localDate.getUTCSeconds(),
+    localDate.getUTCMilliseconds()
+  ).getTime();
+  return new Date(UTCTime + (timeZoneOffset * 60 * 60 * 1000));
 }
 
 export default updateEventStatus;
