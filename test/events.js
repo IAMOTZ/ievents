@@ -55,7 +55,7 @@ describe('Events', () => {
       const reqBody = {
         title: 'Andela party',
         description: 'Its gonna be epic',
-        date: '2017/02/17',
+        date: '2030/02/17',
         centerId,
         token: userToken,
       };
@@ -149,7 +149,7 @@ describe('Events', () => {
       const reqBody = {
         title: 'Tunmise party',
         description: 'Its gonna be special epic',
-        date: '2017/02/13',
+        date: '2030/12/13',
         token: userToken,
       };
       chai.request(app)
