@@ -24,7 +24,7 @@ const formatCenterData = (centerData) => {
       capacity: centerData.capacity,
       price: centerData.price,
       images: centerData.images,
-      bookedOn: centerData.events.map((event) => { return event.date })
+      bookedOn: centerData.events.filter(event => event.status === 'allowed').map(event => event.date)
     }
   );
 };
@@ -36,7 +36,7 @@ export default {
       .all({
         include: [{
           model: events,
-          attributes: ['date'],
+          attributes: ['status', 'date'],
         }],
       })
       .then((centersData) => {
@@ -62,7 +62,7 @@ export default {
         },
         include: [{
           model: events,
-          attributes: ['date'],
+          attributes: ['status', 'date'],
         }],
       })
       .then((centerData) => {
@@ -280,8 +280,8 @@ export default {
 
 const uploadImages = (images) => {
   return new Promise((resolve, reject) => {
-    const cloudinaryOptions = { 
-      resource_type: 'raw', 
+    const cloudinaryOptions = {
+      resource_type: 'raw',
       format: 'jpg',
       folder: process.env.CLOUDINARY_CLOUD_FOLDER || '',
     }
@@ -303,8 +303,8 @@ const uploadImages = (images) => {
 // This function is used to delete a set of image from cloudinary
 const deleteImages = (imageUrls) => {
   return new Promise((resolve, reject) => {
-    const cloudinaryOptions = { 
-      resource_type: 'raw', 
+    const cloudinaryOptions = {
+      resource_type: 'raw',
       invalidate: true,
     }
     if (type(imageUrls) === 'array' && imageUrls.length > 0) {
