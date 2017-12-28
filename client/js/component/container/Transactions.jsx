@@ -4,14 +4,13 @@ import { Redirect } from 'react-router-dom';
 
 import {
   getAllTransactions,
-  allowTransaction,
-  cancelTransaction,
   deleteTransaction,
   clearStatus
 } from '../../actions/transactionActions';
 
 import UserSideNav from '../common/SideNavigation.jsx';
 import TransactionCards from '../common/TransactionCards.jsx';
+import { ConfirmModal } from '../common/Modal';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { WarningAlert } from '../common/Alert';
 
@@ -24,6 +23,14 @@ import { WarningAlert } from '../common/Alert';
 })
 
 export default class Transactions extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      toDelete: null,
+      confirmModalVisible: false,
+    }
+  }
+
   componentWillMount() {
     this.props.dispatch(getAllTransactions(this.props.user.token));
   }
@@ -34,23 +41,31 @@ export default class Transactions extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.transactions.status.allowed ||
-      this.props.transactions.status.canceled ||
-      this.props.transactions.status.deleted) {
+    if (this.props.transactions.status.deleted) {
       this.refresh();
     }
   }
 
-  cancelTransaction = (e) => {
-    this.props.dispatch(cancelTransaction(this.props.user.token, e.target.dataset.transactionId));
+  startDelete = (e) => {
+    this.setState({
+      toDelete: e.target.dataset.transactionId,
+      confirmModalVisible: !this.state.confirmModalVisible
+    });
   }
 
-  allowTransaction = (e) => {
-    this.props.dispatch(allowTransaction(this.props.user.token, e.target.dataset.transactionId));
+  finishDelete = () => {
+    this.props.dispatch(deleteTransaction(this.props.user.token, this.state.toDelete));
+    this.setState({
+      toDelete: null,
+      confirmModalVisible: !this.state.confirmModalVisible,
+    })
   }
 
-  deleteTransaction = (e) => {
-    this.props.dispatch(deleteTransaction(this.props.user.token, e.target.dataset.transactionId));
+  cancelDelete = () => {
+    this.setState({
+      toDelete: null,
+      confirmModalVisible: !this.state.confirmModalVisible,
+    });
   }
 
   render() {
@@ -61,16 +76,12 @@ export default class Transactions extends React.Component {
         <div id="transactions-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Transactions' />
-
           <div class="container-fluid">
             <div class="row">
-
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
-
               {/* Main content */}
               <div class="col-lg-10 offset-md-2" id="add-event-section">
-
                 {/* Content Header(navigation) on large screen */}
                 <nav className="navbar w-100 mt-3 d-none d-lg-flex justify-content-between">
                   <a className="navbar-brand text-white">
@@ -78,7 +89,6 @@ export default class Transactions extends React.Component {
                   </a>
                   <button className="btn btn-primary" onClick={this.refresh}>Refresh</button>
                 </nav>
-
                 <div id="transactions" class="mt-lg-0">
                   <div id="accordion" role="tablist">
                     <div className="text-center d-lg-none">
@@ -86,16 +96,18 @@ export default class Transactions extends React.Component {
                     </div>
                     <TransactionCards
                       centers={this.props.transactions.centers}
-                      onCancel={this.cancelTransaction}
-                      onAllow={this.allowTransaction}
-                      onDelete={this.deleteTransaction} />
+                      onCancel={this.startDelete} />
+                    <ConfirmModal visible={this.state.confirmModalVisible}
+                      onCancel={this.cancelDelete}
+                      onOK={this.finishDelete}
+                      children="Are you sure you want to cancel this event?" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      )
+      );
     }
   }
 }

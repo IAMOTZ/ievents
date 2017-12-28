@@ -104,7 +104,9 @@ export default class Events extends React.Component {
 
                 {/* Content Header(navigation) on large screen */}
                 <Header text='My Events' />
-
+                <div className="bg-primary rounded text-center mx-auto mt-2 w-lg-50">
+                  <span className="text-white">Events that their date has passed is considered done</span>
+                </div>
                 {/* Event Grid */}
                 <div className="mt-5">
                   <div className="card-columns mx-auto">

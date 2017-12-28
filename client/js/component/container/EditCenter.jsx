@@ -89,97 +89,82 @@ export default class EditCenter extends React.Component {
         <div className="add-center-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Edit Center' />
-
           <div class="container-fluid">
             <div class="row">
-
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
-
               {/* Main content */}
               <div class="col-lg-10 offset-md-2" id="add-event-section">
-
                 {/* Content Header(navigation) on large screen */}
                 <Header text='Edit Center' />
-
                 {/* Input form */}
-                <form class="mt-lg-5 mb-md-5">
-                  <div className="w-lg-50">
-                    <WarningAlert message={this.props.status.error} />
+                <form class="mt-lg-5 mb-md-5 w-lg-50">
+                  <WarningAlert message={this.props.status.error} />
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text"
+                      defaultValue={this.props.toEdit.name}
+                      className="form-control"
+                      id="name"
+                      name="name"
+                      placeholder="The name of the center"
+                      onChange={this.getInput} />
+                    <small class="form-text text-muted">Less than 30 characters</small>
                   </div>
-                  <div class="form-group row">
-                    <label for="name" class="col-sm-1 col-form-label">Name</label>
-                    <div class="col-sm-11">
-                      <input type="email"
-                        defaultValue={this.props.toEdit.name}
-                        class="form-control w-lg-50"
-                        id="name"
-                        name="name"
-                        placeholder="The name of the center"
-                        onChange={this.getInput} />
-                      <small class="form-text text-muted">Less than 30 characters</small>
-                    </div>
+                  <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text"
+                      defaultValue={this.props.toEdit.location}
+                      class="form-control"
+                      id="location"
+                      name="location"
+                      placeholder="The location of the center"
+                      onChange={this.getInput} />
+                    <small class="form-text text-muted">Less than 30 characters</small>
                   </div>
-                  <div class="form-group row">
-                    <label for="location" class="col-sm-1 col-form-label">Location</label>
-                    <div class="col-sm-11">
-                      <input type="text"
-                        defaultValue={this.props.toEdit.location}
-                        class="form-control w-lg-50"
-                        id="location"
-                        name="location"
-                        placeholder="The location of the center"
-                        onChange={this.getInput} />
-                      <small class="form-text text-muted">Less than 30 characters</small>
-                    </div>
+                  <div class="form-group">
+                    <label for="description">Details</label>
+                    <textarea
+                      defaultValue={this.props.toEdit.details}
+                      class="form-control"
+                      id="details" rows="7"
+                      name="details"
+                      placeholder="More details about the center"
+                      onChange={this.getInput}></textarea>
+                    <small class="form-text text-muted">Less than 200 characters</small>
                   </div>
-                  <div class="form-group row">
-                    <label for="details" class="col-sm-1 col-form-label">Details</label>
-                    <div class="col-sm-11">
-                      <textarea
-                        defaultValue={this.props.toEdit.details}
-                        class="form-control w-lg-50"
-                        id="datails" rows="7"
-                        name="details"
-                        placeholder="More details about the center"
-                        onChange={this.getInput}></textarea>
-                      <small class="form-text text-muted">Less than 200 characters</small>
-                    </div>
+                  <div class="form-group">
+                    <label for="capacity">Capacity</label>
+                    <input type="number"
+                      defaultValue={this.props.toEdit.capacity}
+                      class="form-control"
+                      id="capacity"
+                      name="capacity"
+                      placeholder="How many seats"
+                      onChange={this.getInput} />
                   </div>
-                  <div class="form-group row">
-                    <label for="capacity" class="col-sm-1 col-form-label">Capacity</label>
-                    <div class="col-sm-11">
-                      <input type="number"
-                        defaultValue={this.props.toEdit.capacity}
-                        class="form-control w-lg-50"
-                        id="capacity"
-                        name="capacity"
-                        placeholder="How many seats"
-                        onChange={this.getInput} />
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="price" class="col-sm-1 col-form-label">Price</label>
-                    <div class="col-sm-11">
-                      <input type="number"
-                        defaultValue={this.props.toEdit.price}
-                        class="form-control w-lg-50"
-                        id="price"
-                        name="price"
-                        placeholder="Price"
-                        onChange={this.getInput} />
-                    </div>
+                  <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number"
+                      defaultValue={this.props.toEdit.price}
+                      class="form-control"
+                      id="price"
+                      name="price"
+                      placeholder="Price"
+                      onChange={this.getInput} />
                   </div>
                   <div class="form-group">
                     <label for="image">Image</label>
-                    <ImageInput
-                      id="image"
-                      onDrop={this.handleImageDrop}
-                      newImage={this.state.newImages ? this.state.newImages[0] : null}
-                      previousImage={this.props.toEdit.images ? this.props.toEdit.images[0] : null}
-                    />
+                    <div className="text-center">
+                      <ImageInput
+                        id="image"
+                        onDrop={this.handleImageDrop}
+                        newImage={this.state.newImages ? this.state.newImages[0] : null}
+                        previousImage={this.props.toEdit.images ? this.props.toEdit.images[0] : null}
+                      />
+                    </div>
                   </div>
-                  <div class="text-center w-25 pt-3">
+                  <div class="ml-3 pt-3">
                     <a class="btn btn-outline-dark" onClick={this.update}>Update</a>
                   </div>
                 </form>

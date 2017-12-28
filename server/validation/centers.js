@@ -23,11 +23,17 @@ export default {
     if (details && details.length > 200) {
       return 'center details must be below 200 characters';
     }
+    if(!capacity) {
+      return 'capacity is required';
+    }
     if (capacity) {
       const noCapacity = Number(capacity);
       if (!Number.isFinite(noCapacity)) {
         return 'center capacity must be a number in string format';
       }
+    }
+    if(!price) {
+      return 'price is required';
     }
     if (price) {
       const noPrice = Number(price);

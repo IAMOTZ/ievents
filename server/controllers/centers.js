@@ -5,7 +5,7 @@ import validation from '../validation/centers';
 
 dotenv.config();
 
-const { centers, transactions } = db;
+const { centers, events } = db;
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -24,7 +24,7 @@ const formatCenterData = (centerData) => {
       capacity: centerData.capacity,
       price: centerData.price,
       images: centerData.images,
-      bookedOn: centerData.transactions.map((transaction) => { return transaction.date })
+      bookedOn: centerData.events.map((event) => { return event.date })
     }
   );
 };
@@ -35,7 +35,7 @@ export default {
     centers
       .all({
         include: [{
-          model: transactions,
+          model: events,
           attributes: ['date'],
         }],
       })
@@ -61,7 +61,7 @@ export default {
           id: centerId,
         },
         include: [{
-          model: transactions,
+          model: events,
           attributes: ['date'],
         }],
       })
@@ -280,9 +280,14 @@ export default {
 
 const uploadImages = (images) => {
   return new Promise((resolve, reject) => {
+    const cloudinaryOptions = { 
+      resource_type: 'raw', 
+      format: 'jpg',
+      folder: process.env.CLOUDINARY_CLOUD_FOLDER || '',
+    }
     if (type(images) === 'array' && images.length > 0) {
       const image = images[0]; // Since the application is still using just one center image
-      cloudinary.v2.uploader.upload_stream({ resource_type: 'raw' }, function (error, result) {
+      cloudinary.v2.uploader.upload_stream(cloudinaryOptions, function (error, result) {
         if (error) {
           reject(error);
         } else {
@@ -298,10 +303,15 @@ const uploadImages = (images) => {
 // This function is used to delete a set of image from cloudinary
 const deleteImages = (imageUrls) => {
   return new Promise((resolve, reject) => {
+    const cloudinaryOptions = { 
+      resource_type: 'raw', 
+      invalidate: true,
+    }
     if (type(imageUrls) === 'array' && imageUrls.length > 0) {
       const imageUrl = imageUrls[0]; // Since the application is still using just one image
-      const imagePublicId = imageUrl.slice(imageUrl.lastIndexOf('/') + 1);
-      cloudinary.v2.uploader.destroy(imagePublicId, (err, result) => {
+      const urlMatch = /https:\/\/res.cloudinary.com\/tunmise\/raw\/upload\/(.*?)\/(.*)/;
+      const imagePublicId = imageUrl.match(urlMatch)[2];
+      cloudinary.v2.uploader.destroy(imagePublicId, cloudinaryOptions, (err, result) => {
         if (err) {
           reject(err);
         } else {

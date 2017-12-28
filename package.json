@@ -6,12 +6,12 @@
   "scripts": {
     "start": "node ./build/app",
     "build": "babel ./server -d ./build",
-    "server:dev": "npm run setUpDb && nodemon ./server/app --exec babel-node",
+    "server:dev": "npm run setUpDb && nodemon ./server/app --exec babel-node  --watch ./server",
     "react:dev": "webpack-dev-server --content-base src --inline --hot",
     "react:pro": "set NODE_ENV=production&& webpack",
     "template:dev": "gulp",
     "setUpDb": "babel-node ./server/setUpDb",
-    "test": "set NODE_ENV=test&& babel-node ./server/setUpDb && nyc mocha --compilers js:babel-core/register ./test/**/*.js --timeout 5000 --exit",
+    "test": "set NODE_ENV=test&& npm run setUpDb && nyc mocha --compilers js:babel-core/register ./test/**/*.js --timeout 5000 --exit",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint",
     "heroku-postbuild": "npm run react:pro && npm run build && npm run setUpDb"  
@@ -91,5 +91,13 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.12.1",
     "nyc": "^11.3.0"
+  },
+  "nyc": {
+    "exclude": [
+      "server/config/*.js",
+      "server/models/*.js",
+      "server/setUpDb.js",
+      "test/**/*.js"
+    ]
   }
 }

@@ -131,7 +131,7 @@ export default class AddCenter extends React.Component {
                     <textarea
                       class="form-control"
                       id="description" rows="7"
-                      name="description"
+                      name="details"
                       placeholder="More details about the center"
                       onChange={this.getInput}></textarea>
                     <small class="form-text text-muted">Less than 200 characters</small>
@@ -156,11 +156,13 @@ export default class AddCenter extends React.Component {
                   </div>
                   <div class="form-group">
                     <label for="image">Image</label>
-                    <ImageInput
-                      id="image"
-                      onDrop={this.handleImageDrop}
-                      newImage={this.state.images ? this.state.images[0] : null}
-                    />
+                    <div className="text-center">
+                      <ImageInput
+                        id="image"
+                        onDrop={this.handleImageDrop}
+                        newImage={this.state.images ? this.state.images[0] : null}
+                      />
+                    </div>
                   </div>
                   <div class="ml-3 pt-3">
                     <a class="btn btn-outline-dark" role="button" onClick={this.add}>Add</a>

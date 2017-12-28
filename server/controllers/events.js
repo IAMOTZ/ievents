@@ -3,19 +3,35 @@ import validation from '../validation/events';
 
 const { events, centers, transactions } = db;
 
+const formatEventData = (eventData) => {
+  return Object.assign(
+    {},
+    {
+      id: eventData.id,
+      centerId: eventData.centerId,
+      userId: eventData.userId,
+      title: eventData.title,
+      description: eventData.description,
+      date: eventData.date,
+      status: eventData.status,
+    }
+  )
+}
+
 export default {
   // Controller for getting all of a user events
   getAll(req, res) {
     const userId = req.decoded.id;
     events
       .all({
-        where: {
-          userId,
-        },
+        where: { userId }
       })
-      .then((eventData) => {
+      .then((eventDatas) => {
+        const formattedData = eventDatas.map((eventData) => formatEventData(eventData));
         res.status(200).json({
-          events: eventData,
+          status: 'success',
+          message: 'events successfully retrieved',
+          events: formattedData,
         });
       })
       .catch((err) => {
@@ -60,16 +76,17 @@ export default {
             });
           } else {
             // If the choosen center exist, check if it has not been booked
-            transactions
+            events
               .findOne({
                 where: {
                   centerId: centerid,
                   date: date,
+                  status: 'allowed',
                 }
               })
-              .then((transactionData) => {
+              .then((eventData) => {
                 // Send a failure response if the center has been booked
-                if (transactionData) {
+                if (eventData) {
                   res.status(400).json({
                     status: 'failed',
                     message: 'the center has been booked for that date',
@@ -84,29 +101,19 @@ export default {
                       centerId: centerData.id,
                       userId,
                     })
-                    .then((eventData) => {
-                      // After creating the event, send a success response with the event data
-                      res.status(201).json({
-                        status: 'success',
-                        message: 'event created',
-                        event: {
-                          id: eventData.id,
-                          title: eventData.title,
-                          description: eventData.description,
-                          date: eventData.date,
-                          centerName: eventData.name,
-                          centerId: eventData.centerId,
-                          userId: eventData.userId,
-                        },
-                      });
-                      // Also create a transaction after creating the event
+                    .then((newEventData) => {
                       transactions
                         .create({
                           centerId: centerData.id,
-                          eventId: eventData.id,
-                          userId: eventData.userId,
-                          date,
-                          decision: null,
+                          eventId: newEventData.id,
+                          userId: newEventData.userId,
+                        })
+                        .then(() => {
+                          res.status(201).json({
+                            status: 'success',
+                            message: 'event created',
+                            event: formatEventData(newEventData),
+                          });
                         })
                     });
                 }
@@ -151,14 +158,17 @@ export default {
         .then((eventData) => {
           if (!eventData) {
             // If the event does not exist, send a filure response
-            res.status(400).json({ sucess: 'failed', message: 'event does not exist' });
+            res.status(400).json({
+              status: 'failed',
+              message: 'event does not exist'
+            });
           } else if (eventData.userId === req.decoded.id) {
             // If the event exist, check if this user owns the event
             if (centerid && eventData.centerId !== Number(centerid)) {
               // If the user want to change the center he choosed
               // Check if the new center he choose exist
               centers
-                .findById(centerid)
+                .findById(Number(centerid))
                 .then((newCenterData) => {
                   if (!newCenterData) {
                     // Send a failed response if the new center does not exist
@@ -168,16 +178,17 @@ export default {
                     });
                   } else {
                     // If the choosen center exist, check if it has not been booked
-                    transactions
+                    events
                       .findOne({
                         where: {
                           centerId: centerid,
                           date: date,
+                          status: 'allowed'
                         }
                       })
-                      .then((transactionData) => {
+                      .then((result) => {
                         // Send a failure response if the center has been booked
-                        if (transactionData) {
+                        if (result) {
                           res.status(400).json({
                             status: 'failed',
                             message: 'the center has been booked for that date',
@@ -193,21 +204,6 @@ export default {
                               centerId: newCenterData.id,
                             })
                             .then((newEventData) => {
-                              // Send success response to the user with response data
-                              res.status(201).json({
-                                status: 'success',
-                                message: 'event updated',
-                                event: {
-                                  id: newEventData.id,
-                                  title: newEventData.title,
-                                  description: newEventData.description,
-                                  date: newEventData.date,
-                                  centerName: newCenterData.name,
-                                  centerId: newEventData.centerId,
-                                  userId: newEventData.userId,
-                                },
-                              });
-                              // Delete the former transaction and create a new one
                               transactions
                                 .findOne({
                                   where: {
@@ -217,14 +213,22 @@ export default {
                                 .then((transactionData) => {
                                   transactionData
                                     .destroy()
-                                });
-                              transactions
-                                .create({
-                                  centerId: newCenterData.id,
-                                  eventId: eventData.id,
-                                  userId: eventData.userId,
-                                  date: date || eventData.date,
-                                  decision: null,
+                                    .then(() => {
+                                      transactions
+                                        .create({
+                                          centerId: newCenterData.id,
+                                          eventId: eventData.id,
+                                          userId: eventData.userId,
+                                          date: date || eventData.date,
+                                        })
+                                        .then(() => {
+                                          res.status(201).json({
+                                            status: 'success',
+                                            message: 'event updated',
+                                            event: formatEventData(newEventData),
+                                          });
+                                        });
+                                    });
                                 });
                             });
                         }
@@ -240,23 +244,11 @@ export default {
                   date: date || eventData.date,
                 })
                 .then((newEventData) => {
-                  centers
-                    .findById(newEventData.centerId)
-                    .then((centerData) => {
-                      res.status(200).json({
-                        status: 'success',
-                        message: 'event updated',
-                        event: {
-                          id: newEventData.id,
-                          title: newEventData.title,
-                          description: newEventData.description,
-                          date: newEventData.date,
-                          centerName: centerData.name,
-                          centerId: newEventData.centerId,
-                          userId: newEventData.userId,
-                        },
-                      });
-                    });
+                  res.status(200).json({
+                    status: 'success',
+                    message: 'event updated',
+                    event: formatEventData(newEventData),
+                  });
                 });
             }
           } else {

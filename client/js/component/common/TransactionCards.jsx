@@ -37,9 +37,7 @@ class TransactionCards extends React.Component {
                       <TransactionTable
                         transactions={center.transactions}
                         btnAction={this.showEventModal}
-                        onAllow={this.props.onAllow}
-                        onCancel={this.props.onCancel}
-                        onDelete={this.props.onDelete} />
+                        onCancel={this.props.onCancel} />
                     </div>
                   </div>
                 </div>
@@ -79,12 +77,12 @@ const TransactionTable = (props) => {
                   onClick={props.btnAction}>event details</a>
               </td>
               <td>{transaction.event.date}</td>
-              <ActionButtons
-                decision={transaction.decision}
-                transactionId={transaction.id}
-                onAllow={props.onAllow}
-                onCancel={props.onCancel}
-                onDelete={props.onDelete} />
+              <td>
+                <button
+                  class="btn btn-outline-danger p-1"
+                  onClick={props.onCancel}
+                  data-transaction-id={transaction.id}>Cancel</button>
+              </td>
             </tr>
           ))
         }
@@ -103,12 +101,12 @@ const EventModal = (props) => {
           <div class="modal-content">
             <div class="modal-header">
               <span class="modal-title" id="exampleModalLabel">
-                <span className="h5">Title:&nbsp;</span> <br/>
+                <span className="h5">Title:&nbsp;</span> <br />
                 <span>{props.event.title}</span>
               </span>
             </div>
             <div class="modal-body">
-              <span className="h5">Description:&nbsp;</span> <br/>
+              <span className="h5">Description:&nbsp;</span> <br />
               <span>{props.event.description}</span>
             </div>
             <div class="modal-footer">
@@ -121,33 +119,4 @@ const EventModal = (props) => {
   }
 }
 
-const ActionButtons = (props) => {
-  if (!props.decision) {
-    return (
-      <td>
-        <button
-          class="btn btn-outline-dark p-1 mb-1 mb-sm-0 mr-2"
-          onClick={props.onAllow}
-          data-transaction-id={props.transactionId}>Allow</button>
-        <button
-          class="btn btn-outline-danger p-1"
-          onClick={props.onCancel}
-          data-transaction-id={props.transactionId}>Cancel</button>
-      </td>
-    )
-  } else {
-    return (
-      <td>
-        <span className="text-muted">{props.decision}</span>
-        <span className="d-block d-lg-inline d-md-inline ml-lg-2 ml-md-2 text-center">
-          <i
-            className="fa fa-trash fw"
-            data-transaction-id={props.transactionId}
-            onClick={props.onDelete}></i>
-        </span>
-
-      </td>
-    )
-  }
-}
 export default TransactionCards;

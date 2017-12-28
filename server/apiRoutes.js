@@ -29,8 +29,6 @@ router.put('/centers/:id', isUser, isAdmin, handleImageUpload(), controllers.cen
 
 router.get('/transactions', isUser, isAdmin, controllers.transactions.getAll);
 
-router.put('/transactions/:id', isUser, isAdmin, controllers.transactions.changeStatus)
-
 router.delete('/transactions/:id', isUser, isAdmin, controllers.transactions.delete);
 
 export default router;

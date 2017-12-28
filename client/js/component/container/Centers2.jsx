@@ -29,7 +29,7 @@ import { CenterModal } from '../common/Modal';
       bookedOn: [],
       type: null,
     },
-    isAdmin: (store.user.user.role === 'admin') ? true : false,
+    isAdmin: (store.user.user.role === 'admin' || store.user.user.role === 'superAdmin') ? true : false,
   }
 })
 

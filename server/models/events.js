@@ -16,6 +16,11 @@ export default (sequelize, DataTypes) => {
     date: {
       type: DataTypes.STRING,
     },
+    status: {
+      type: DataTypes.ENUM,
+      values: ['allowed', 'canceled', 'done'],
+      defaultValue: 'allowed',
+    },
     centerId: {
       type: DataTypes.INTEGER,
       allowNull: false,

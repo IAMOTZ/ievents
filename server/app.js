@@ -3,8 +3,11 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import path from 'path';
 import apiRoutes from './apiRoutes';
+import db from './models';
+import { updateEventStatus } from './helpers';
 
 const app = express();
+const { events, transactions } = db;
 
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
@@ -36,6 +39,10 @@ app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'), () => {
   console.log(`App started on port ${app.get('port')}`);
+  const interval = 24 * 60 * 60 * 1000;  // One day
+  setInterval(() => {
+    updateEventStatus(events, transactions);
+  }, interval);
 });
 
 export default app;
