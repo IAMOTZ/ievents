@@ -25,18 +25,30 @@ export default {
     }
     if (date) {
       const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
-      const currentDate = getCurrentDate(1).getDate();
       if (!dateData) {
         return 'the date format should be yyyy/mm/dd';
       }
-      if (dateData[3] < currentDate) {
-        return 'you can only create event for today and upcoming days'
-      }
-      if (dateData[3] > 31) {
+      const currentTime = getCurrentDate(1);
+      const currentYear = currentTime.getFullYear();
+      const currentMonth = currentTime.getMonth() + 1;
+      const currentDate = currentTime.getDate();
+      const eventYear = Number(dateData[1]);
+      const eventMonth = Number(dateData[2]);
+      const eventDate = Number(dateData[3]);
+      if (eventDate > 31) {
         return 'days in the date cannot be more than 31';
       }
-      if (dateData[2] > 12) {
+      if (eventMonth > 12) {
         return 'month in the date cannot be more than 12';
+      }
+      if (eventYear < currentYear) {
+        return 'you can only create event for this year and upcoming years'
+      }
+      if (eventYear === currentYear && eventMonth < currentMonth) {
+        return 'you can only create event for this month and upcoming months'
+      }
+      if (eventYear === currentYear && eventMonth === currentMonth && eventDate < currentDate) {
+        return 'you can only create event for today and upcoming days'
       }
     }
     if (!centerid) {
@@ -70,18 +82,30 @@ export default {
     }
     if (date) {
       const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
-      const currentDate = getCurrentDate(1).getDate();
       if (!dateData) {
         return 'the date format should be yyyy/mm/dd';
       }
-      if (dateData[3] < currentDate) {
-        return 'you can only create event for today and upcoming days'
-      }
-      if (dateData[3] > 31) {
+      const currentTime = getCurrentDate(1);
+      const currentYear = currentTime.getFullYear();
+      const currentMonth = currentTime.getMonth() + 1;
+      const currentDate = currentTime.getDate();
+      const eventYear = Number(dateData[1]);
+      const eventMonth = Number(dateData[2]);
+      const eventDate = Number(dateData[3]);
+      if (eventDate > 31) {
         return 'days in the date cannot be more than 31';
       }
-      if (dateData[2] > 12) {
+      if (eventMonth > 12) {
         return 'month in the date cannot be more than 12';
+      }
+      if (eventYear < currentYear) {
+        return 'you can only create event for this year and upcoming years'
+      }
+      if (eventYear === currentYear && eventMonth < currentMonth) {
+        return 'you can only create event for this month and upcoming months'
+      }
+      if (eventYear === currentYear && eventMonth === currentMonth && eventDate < currentDate) {
+        return 'you can only create event for today and upcoming days'
       }
     }
     if (centerid && !Number.isInteger(Number(centerid))) {
