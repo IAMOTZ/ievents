@@ -81,6 +81,7 @@ export default {
                 where: {
                   centerId: centerid,
                   date: date,
+                  status: 'allowed',
                 }
               })
               .then((eventData) => {
@@ -182,6 +183,7 @@ export default {
                         where: {
                           centerId: centerid,
                           date: date,
+                          status: 'allowed'
                         }
                       })
                       .then((result) => {
