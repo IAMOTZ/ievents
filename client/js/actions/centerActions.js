@@ -70,6 +70,14 @@ export const showCenterModal = (centerId) => {
   }
 }
 
+// This action updates the state about a center that is about to be booked
+export const book = (centerId) => {
+  return {
+    type: 'BOOK',
+    payload: centerId
+  }
+}
+
 // This action reset the status of a specific process in the  center store to its initial state
 export const clearStatus = (process) => {
   return { type: 'CLEAR_CENTER_STATUS', payload: process }
