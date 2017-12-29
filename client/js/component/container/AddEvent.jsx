@@ -17,6 +17,7 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx'
     user: store.user.user,
     authenticated: store.user.status.fetched,
     centers: store.centers.centers,
+    defaultCenter: store.centers.toBook,
     status: {
       error: store.events.status.addingError.message,
       success: store.events.status.added,
@@ -38,6 +39,7 @@ export default class AddEvent extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(getAllCenters());
+    this.setState({ centerId: this.props.defaultCenter });
   }
 
   componentWillUnmount() {
@@ -113,7 +115,11 @@ export default class AddEvent extends React.Component {
                   </div>
                   <div class="form-group">
                     <label for="centers">Choose a Center</label>
-                    <select id="centers" class="form-control ml-md-3" name="centerId" onChange={this.getInput}>
+                    <select id="centers"
+                      class="form-control ml-md-3"
+                      name="centerId"
+                      onChange={this.getInput}
+                      defaultValue={this.props.defaultCenter}>
                       <option>choose a center</option>
                       <CenterOptions centers={this.props.centers} />
                     </select>
