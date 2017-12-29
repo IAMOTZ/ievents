@@ -9,7 +9,7 @@ import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import ImageInput from '../common/ImageInput.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
-import { WarningAlert } from '../common/Alert';
+import WarningAlert from '../common/WarningAlert.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
 @connect((store) => {

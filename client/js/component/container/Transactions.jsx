@@ -12,7 +12,7 @@ import UserSideNav from '../common/SideNavigation.jsx';
 import TransactionCards from '../common/TransactionCards.jsx';
 import { ConfirmModal } from '../common/Modal';
 import { UserTopNav } from '../common/TopNavigation.jsx';
-import { WarningAlert } from '../common/Alert';
+import WarningAlert from '../common/WarningAlert.jsx';
 import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
 
 @connect((store) => {
