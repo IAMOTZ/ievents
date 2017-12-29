@@ -82,7 +82,9 @@ export default class Centers1 extends React.Component {
             </section>
         }
         {/* Modal */}
-        <CenterModal modalContent={this.props.modalContent} />
+        <CenterModal
+          modalContent={this.props.modalContent}
+          redirectPath={'/users/login'} />
         <Footer />
       </div>
     )
