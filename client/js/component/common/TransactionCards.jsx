@@ -1,4 +1,5 @@
 import React from 'react';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
 class TransactionCards extends React.Component {
   constructor() {
@@ -37,7 +38,9 @@ class TransactionCards extends React.Component {
                       <TransactionTable
                         transactions={center.transactions}
                         btnAction={this.showEventModal}
-                        onCancel={this.props.onCancel} />
+                        onCancel={this.props.onCancel}
+                        toDelete={this.props.toDelete}
+                        deleting={this.props.deleting} />
                     </div>
                   </div>
                 </div>
@@ -78,10 +81,15 @@ const TransactionTable = (props) => {
               </td>
               <td>{transaction.event.date}</td>
               <td>
-                <button
-                  class="btn btn-outline-danger p-1"
-                  onClick={props.onCancel}
-                  data-transaction-id={transaction.id}>Cancel</button>
+                <div className="d-flex">
+                  <button
+                    class="btn btn-outline-danger p-1"
+                    onClick={props.onCancel}
+                    data-transaction-id={transaction.id}
+                    disabled={props.deleting}>Cancel</button>
+                    <LoadingIcon start={props.deleting && transaction.id === Number(props.toDelete)} size={1} />
+                </div>
+
               </td>
             </tr>
           ))

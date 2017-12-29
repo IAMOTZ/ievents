@@ -10,6 +10,7 @@ import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
 import { WarningAlert } from '../common/Alert';
 import { addEvent, clearStatus } from '../../actions/eventActions';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
 @connect((store) => {
   return {
@@ -19,6 +20,7 @@ import { addEvent, clearStatus } from '../../actions/eventActions';
     status: {
       error: store.events.status.addingError.message,
       success: store.events.status.added,
+      adding: store.events.status.adding,
     }
   }
 })
@@ -72,21 +74,17 @@ export default class AddEvent extends React.Component {
         <div class="add-event-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Add Event' />
-
           <div class="container-fluid">
             <div class="row">
-
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
-
               {/* Main content */}
               <div class="col-lg-10 offset-md-2" id="main-content">
-
                 {/* Content Header(navigation) on large screen */}
                 <Header text='Add Event' />
-
                 {/* Input form */}
                 <form class="mt-lg-5 w-lg-50">
+                  <LoadingIcon start={this.props.status.adding} size={2} />
                   <WarningAlert message={this.props.status.error} />
                   <div class="form-group">
                     <label for="title">Title</label>
@@ -120,12 +118,10 @@ export default class AddEvent extends React.Component {
                     </select>
                   </div>
                 </form>
-
-                <a class="btn btn-outline-dark" onClick={this.add}>Add</a>
+                <button class="btn btn-outline-dark" disabled={this.props.status.adding} onClick={this.add}>Add</button>
               </div>
             </div>
           </div>
-
           <footer class="d-block d-sm-none mt-5">
             <div class="container text-white text-center py-5">
               <h1>Ievents</h1>

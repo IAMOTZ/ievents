@@ -10,6 +10,7 @@ import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
 import { WarningAlert } from '../common/Alert';
 import { updateEvent, clearStatus } from '../../actions/eventActions';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
 @connect((store) => {
   return {
@@ -20,6 +21,7 @@ import { updateEvent, clearStatus } from '../../actions/eventActions';
     status: {
       error: store.events.status.updatingError.message,
       success: store.events.status.updated,
+      updating: store.events.status.updating,
     }
   }
 })
@@ -74,21 +76,17 @@ export default class EditEvent extends React.Component {
         <div className="add-event-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Edit Event' />
-
           <div class="container-fluid">
             <div class="row">
-
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
-
               {/* Main content */}
               <div class="col-lg-10 offset-md-2" id="add-event-section">
-
                 {/* Content Header(navigation) on large screen */}
                 <Header text='Edit Event' />
-
                 {/* Input form */}
                 <form class="mt-lg-5 w-lg-50">
+                  <LoadingIcon start={this.props.status.updating} size={2} />
                   <WarningAlert message={this.props.status.error} />
                   <div class="form-group">
                     <label for="title">Title</label>
@@ -130,12 +128,10 @@ export default class EditEvent extends React.Component {
                     </select>
                   </div>
                 </form>
-
-                <a class="btn btn-outline-dark" onClick={this.update}>Update</a>
+                <button class="btn btn-outline-dark" disabled={this.props.status.updating} onClick={this.update}>Update</button>
               </div>
             </div>
           </div>
-
           <footer class="d-block d-sm-none mt-5">
             <div class="container text-white text-center py-5">
               <h1>Ievents</h1>

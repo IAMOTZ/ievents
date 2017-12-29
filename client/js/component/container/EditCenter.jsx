@@ -10,6 +10,7 @@ import Header from '../common/Header.jsx';
 import ImageInput from '../common/ImageInput.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { WarningAlert } from '../common/Alert';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
 @connect((store) => {
   return {
@@ -19,6 +20,7 @@ import { WarningAlert } from '../common/Alert';
     status: {
       error: store.centers.status.updatingError.message,
       success: store.centers.status.updated,
+      updating: store.centers.status.updating,
     }
   }
 })
@@ -99,6 +101,7 @@ export default class EditCenter extends React.Component {
                 <Header text='Edit Center' />
                 {/* Input form */}
                 <form class="mt-lg-5 mb-md-5 w-lg-50">
+                  <LoadingIcon start={this.props.status.updating} size={2} />
                   <WarningAlert message={this.props.status.error} />
                   <div class="form-group">
                     <label for="name">Name</label>
@@ -165,7 +168,7 @@ export default class EditCenter extends React.Component {
                     </div>
                   </div>
                   <div class="ml-3 pt-3">
-                    <a class="btn btn-outline-dark" onClick={this.update}>Update</a>
+                    <button class="btn btn-outline-dark" disabled={this.props.status.updating} onClick={this.update}>Update</button>
                   </div>
                 </form>
 

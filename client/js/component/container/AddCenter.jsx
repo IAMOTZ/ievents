@@ -12,6 +12,7 @@ import Header from '../common/Header.jsx';
 import ImageInput from '../common/ImageInput.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { WarningAlert } from '../common/Alert';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
 @connect((store) => {
   return {
@@ -20,6 +21,7 @@ import { WarningAlert } from '../common/Alert';
     status: {
       error: store.centers.status.addingError.message,
       success: store.centers.status.added,
+      adding: store.centers.status.adding,
     }
   }
 })
@@ -79,7 +81,6 @@ export default class AddCenter extends React.Component {
     this.props.dispatch(addCenter(fd, this.props.user.token));
   }
 
-
   render() {
     if (!this.props.authenticated) {
       return (<Redirect to="/users/login" />)
@@ -90,21 +91,17 @@ export default class AddCenter extends React.Component {
         <div class="add-center-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Add a center' />
-
           <div className="container-fluid">
             <div className="row">
-
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
-
               {/* Main content */}
               <div class="col-lg-10 offset-md-2" id="add-event-section">
-
                 {/* Content Header(navigation) on large screen */}
                 <Header text='Add a center' />
-
                 {/* Input form */}
                 <form class="mt-lg-5 mb-md-5 w-lg-50">
+                  <LoadingIcon start={this.props.status.adding} size={2} />
                   <WarningAlert message={this.props.status.error} />
                   <div class="form-group">
                     <label for="name">Name</label>
@@ -165,14 +162,12 @@ export default class AddCenter extends React.Component {
                     </div>
                   </div>
                   <div class="ml-3 pt-3">
-                    <a class="btn btn-outline-dark" role="button" onClick={this.add}>Add</a>
+                    <button class="btn btn-outline-dark" disabled={this.props.status.adding} onClick={this.add}>Add</button>
                   </div>
                 </form>
-
               </div>
             </div>
           </div>
-
           <footer class="d-block d-sm-none mt-5">
             <div class="container text-white text-center py-5">
               <h1>Ievents</h1>

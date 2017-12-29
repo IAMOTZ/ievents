@@ -7,12 +7,14 @@ import { addAdmin, clearStatus } from '../../actions/authAction';
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
 @connect((store) => {
   return {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     status: {
+      adding: store.user.status.addingAdmin,
       success: store.user.status.adminAdded,
       error: store.user.status.addingAdminError.message
     }
@@ -66,38 +68,42 @@ export default class AddAdmin extends React.Component {
               <div className="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
                 {/* Content Header(navigation) on large screen */}
                 <Header text='Add an admin' />
-                <div className="card text-center align-items-center mt-5 w-75 mx-auto">
-                  <div className="card-body">
-                    <Alert
-                      inputError={this.state.inputError}
-                      addingError={this.props.status.error}
-                      success={this.props.status.success}
-                      newAmdin={this.state.email} />
-                    <div className="input-group px-3">
-                      <span className="input-group-addon">
-                        <i className="fa fa-user"></i>
-                      </span>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="The user's email"
-                        name="email"
-                        onChange={this.getInput} />
-                    </div>
-                    <ul className="text-left mt-2 text-muted">
-                      <li>The user must have signed up already</li>
-                      <li>If successful, the user would have access to:
+                <div className="d-flex flex-column align-items-center mt-5">
+                  <LoadingIcon start={this.props.status.adding} size={3} />
+                  <div className="card align-items-center text-center w-75">
+                    <div className="card-body">
+                      <Alert
+                        inputError={this.state.inputError}
+                        addingError={this.props.status.error}
+                        success={this.props.status.success}
+                        newAmdin={this.state.email} />
+                      <div className="input-group px-3">
+                        <span className="input-group-addon">
+                          <i className="fa fa-user"></i>
+                        </span>
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="The user's email"
+                          name="email"
+                          onChange={this.getInput} />
+                      </div>
+                      <ul className="text-left mt-2 text-muted">
+                        <li>The user must have signed up already</li>
+                        <li>If successful, the user would have access to:
                         <ol type="number">
-                          <li>Creating a Center</li>
-                          <li>Editing a Center</li>
-                          <li>Viewing transactions</li>
-                          <li>Making decisions on transactions</li>
-                        </ol>
-                      </li>
-                    </ul>
-                    <button
-                      className="btn btn-primary"
-                      onClick={this.add}>Add Admin</button>
+                            <li>Creating a Center</li>
+                            <li>Editing a Center</li>
+                            <li>Viewing transactions</li>
+                            <li>Making decisions on transactions</li>
+                          </ol>
+                        </li>
+                      </ul>
+                      <button
+                        className='btn btn-primary'
+                        disabled={this.props.status.adding}
+                        onClick={this.add}>Add Admin</button>
+                    </div>
                   </div>
                 </div>
               </div>
