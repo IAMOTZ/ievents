@@ -5,7 +5,8 @@ import { Redirect } from 'react-router-dom';
 import {
   getAllCenters,
   showCenterModal,
-  initializeEdit
+  initializeEdit,
+  book,
 } from '../../actions/centerActions';
 
 import UserSideNav from '../common/SideNavigation.jsx';
@@ -47,6 +48,10 @@ export default class Centers2 extends React.Component {
 
   onEdit = (e) => {
     this.props.dispatch(initializeEdit(e.target.id));
+  }
+
+  onBook = (centerId) => {
+    this.props.dispatch(book(centerId));
   }
 
   render() {
@@ -112,7 +117,10 @@ export default class Centers2 extends React.Component {
                     </section>
                 }
                 {/* Modal */}
-                <CenterModal modalContent={this.props.modalContent} />
+                <CenterModal
+                  modalContent={this.props.modalContent}
+                  onBook={this.onBook}
+                  redirectPath={'/addEvent'} />
 
                 {/* Footer on large screen */}
                 <footer class="d-none d-lg-block mt-5">
