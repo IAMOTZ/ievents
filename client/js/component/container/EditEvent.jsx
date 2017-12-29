@@ -64,6 +64,7 @@ export default class EditEvent extends React.Component {
     const eventDetails = { title, description, date, centerId };
     const eventId = this.props.toEdit.id;
     this.props.dispatch(updateEvent(eventId, eventDetails, this.props.user.token));
+    window.scrollTo(0, 0);
   }
 
   render() {

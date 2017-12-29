@@ -79,6 +79,7 @@ export default class AddCenter extends React.Component {
       }
     }
     this.props.dispatch(addCenter(fd, this.props.user.token));
+    window.scrollTo(0,0);
   }
 
   render() {

@@ -79,6 +79,7 @@ export default class EditCenter extends React.Component {
       }
     }
     this.props.dispatch(updateCenter(centerId, fd, this.props.user.token));
+    window.scrollTo(0, 0);
   }
 
   render() {

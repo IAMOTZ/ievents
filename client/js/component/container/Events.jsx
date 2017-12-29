@@ -70,7 +70,8 @@ export default class Events extends React.Component {
     this.setState({
       toDelete: null,
       modalVisible: !this.state.modalVisible,
-    })
+    });
+    window.scrollTo(0,0);
   }
 
   // This method cancels the deleting and also hides back the modal
@@ -79,11 +80,6 @@ export default class Events extends React.Component {
       toDelete: null,
       modalVisible: !this.state.modalVisible,
     });
-  }
-
-  // This method simply removes the event without any warning
-  removeEvent = (e) => {
-    this.props.dispatch(deleteEvent(e.target.id, this.props.user.token));
   }
 
   // This method initialize editing of an event

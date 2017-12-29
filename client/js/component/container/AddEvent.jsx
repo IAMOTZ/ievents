@@ -62,6 +62,7 @@ export default class AddEvent extends React.Component {
     let date = this.state.date ? this.state.date.replace(/-/g, '/') : null;
     const eventDetails = { title, description, date, centerId };
     this.props.dispatch(addEvent(eventDetails, this.props.user.token));
+    window.scrollTo(0, 0);
   }
 
   render() {
