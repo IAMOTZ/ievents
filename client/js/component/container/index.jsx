@@ -11,21 +11,14 @@ export default class Home extends React.Component {
         <TopNavigation />
         <section id="main-content-section">
           <div class="dark-overlay">
-            <div id="main-content" class="d-flex flex-column align-items-center">
-              <div>
-                <h1 class="display-2">Welcome to
-                        <strong> Ievents</strong>
-                </h1>
-              </div>
-              <div>
-                <p class="display-4">Get the perfect center for your events</p>
-              </div>
+            <div id="main-content" class="d-flex flex-column align-items-center text-center">
+              <h1 class="display-2 text-center">Welcome to<strong> Ievents</strong></h1>
+              <p class="display-4 d-none d-sm-block">Get the perfect center for your events</p>
+              <p className="display-4 d-block d-sm-none" style={{ fontSize: '2.0rem' }}>Get the perfect center for your events</p>
               <div class="search-box input-group w-50 mt-5">
                 <input type="text" class="form-control" placeholder="Search for a center" />
                 <div class="input-group-btn">
-                  <button type="button" class="btn dropdown-toggle d-none d-md-block" data-toggle="dropdown">
-                    Search with
-                        </button>
+                  <button type="button" class="btn dropdown-toggle d-none d-md-block" data-toggle="dropdown">Search with</button>
                   <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="#">Location</a>
                     <div role="separator" class="dropdown-divider"></div>
