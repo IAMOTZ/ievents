@@ -13,8 +13,8 @@ export default {
     if (name === '') {
       return 'name field cannot be empty';
     }
-    if (name.length < 5) {
-      return 'name must be equal or more than 5 characters';
+    if (name.length < 3) {
+      return 'name must be equal or more than 3 characters';
     }
     if (name.match(/^\S+$/) === null) {
       return 'name must not contain whitespaces';

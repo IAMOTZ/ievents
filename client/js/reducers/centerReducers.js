@@ -4,6 +4,7 @@ let initialState = {
   centers: [],
   modalContent: null,
   toEdit: null,
+  toBook: null,
   status: {
     fetching: false,
     fetched: false,
@@ -134,9 +135,15 @@ export default (state = initialState, action) => {
         modalContent: modalContent,
       }
     }
+    case 'BOOK': {
+      return {
+        ...state,
+        toBook: action.payload,
+      }
+    }
     case 'CLEAR_CENTER_STATUS': {
-      switch(action.payload) {
-        case('ALL'): {
+      switch (action.payload) {
+        case ('ALL'): {
           return {
             ...state,
             status: initialState.status,

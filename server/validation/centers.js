@@ -20,8 +20,8 @@ export default {
     if (location && location.length > 30) {
       return 'center location must be below 30 characters';
     }
-    if (details && details.length > 200) {
-      return 'center details must be below 200 characters';
+    if (details && details.length > 300) {
+      return 'center details must be below 300 characters';
     }
     if(!capacity) {
       return 'capacity is required';

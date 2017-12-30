@@ -8,17 +8,20 @@ import UserSideNav from '../common/SideNavigation.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
-import { WarningAlert } from '../common/Alert';
+import WarningAlert from '../common/WarningAlert.jsx';
 import { addEvent, clearStatus } from '../../actions/eventActions';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
 @connect((store) => {
   return {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     centers: store.centers.centers,
+    defaultCenter: store.centers.toBook,
     status: {
       error: store.events.status.addingError.message,
       success: store.events.status.added,
+      adding: store.events.status.adding,
     }
   }
 })
@@ -36,6 +39,7 @@ export default class AddEvent extends React.Component {
 
   componentDidMount() {
     this.props.dispatch(getAllCenters());
+    this.setState({ centerId: this.props.defaultCenter });
   }
 
   componentWillUnmount() {
@@ -60,6 +64,7 @@ export default class AddEvent extends React.Component {
     let date = this.state.date ? this.state.date.replace(/-/g, '/') : null;
     const eventDetails = { title, description, date, centerId };
     this.props.dispatch(addEvent(eventDetails, this.props.user.token));
+    window.scrollTo(0, 0);
   }
 
   render() {
@@ -72,21 +77,17 @@ export default class AddEvent extends React.Component {
         <div class="add-event-container">
           {/* Top navigation on small screen */}
           <UserTopNav name={this.props.user.name} title='Add Event' />
-
           <div class="container-fluid">
             <div class="row">
-
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
-
               {/* Main content */}
               <div class="col-lg-10 offset-md-2" id="main-content">
-
                 {/* Content Header(navigation) on large screen */}
                 <Header text='Add Event' />
-
                 {/* Input form */}
                 <form class="mt-lg-5 w-lg-50">
+                  <LoadingIcon start={this.props.status.adding} size={2} />
                   <WarningAlert message={this.props.status.error} />
                   <div class="form-group">
                     <label for="title">Title</label>
@@ -114,18 +115,20 @@ export default class AddEvent extends React.Component {
                   </div>
                   <div class="form-group">
                     <label for="centers">Choose a Center</label>
-                    <select id="centers" class="form-control ml-md-3" name="centerId" onChange={this.getInput}>
+                    <select id="centers"
+                      class="form-control ml-md-3"
+                      name="centerId"
+                      onChange={this.getInput}
+                      defaultValue={this.props.defaultCenter}>
                       <option>choose a center</option>
                       <CenterOptions centers={this.props.centers} />
                     </select>
                   </div>
                 </form>
-
-                <a class="btn btn-outline-dark" onClick={this.add}>Add</a>
+                <button class="btn btn-outline-dark" disabled={this.props.status.adding} onClick={this.add}>Add</button>
               </div>
             </div>
           </div>
-
           <footer class="d-block d-sm-none mt-5">
             <div class="container text-white text-center py-5">
               <h1>Ievents</h1>

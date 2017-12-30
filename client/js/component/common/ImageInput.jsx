@@ -6,6 +6,7 @@ const ImageInput = (props) => {
     // Note that the new image is an image file
     return (
       <Dropzone
+        style={style(props.style)}
         multiple={false}
         accept="image/jpeg"
         onDrop={props.onDrop}>
@@ -17,6 +18,7 @@ const ImageInput = (props) => {
     // [later] The previous image should also be displayed.
     return (
       <Dropzone
+        style={style(props.style)}
         multiple={false}
         accept="image/jpeg"
         onDrop={props.onDrop}>
@@ -28,6 +30,7 @@ const ImageInput = (props) => {
   } else {
     return (
       <Dropzone
+        style={style(props.style)}
         multiple={false}
         accept="image/jpeg"
         onDrop={props.onDrop}>
@@ -36,5 +39,21 @@ const ImageInput = (props) => {
     );
   }
 };
+
+const style = (extraStyles) => {
+  const defaultStyles = {
+    width: '200px',
+    height: '200px',
+    borderWidth: '2px',
+    borderColor: 'rgb(102, 102, 102)',
+    borderStyle: 'dashed',
+    borderRadius: '5px',
+  }; 
+  if(extraStyles) {
+    return Object.assign(defaultStyles, extraStyles) 
+  } else {
+    return defaultStyles;
+  }
+}
 
 export default ImageInput;

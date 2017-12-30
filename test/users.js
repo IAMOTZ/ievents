@@ -83,7 +83,7 @@ describe('Authentication', () => {
     });
     it('should not sign up when name is less than 5 characters', (done) => {
       const reqBody = {
-        name: 'tun',
+        name: 'tu',
         email: 'OgunniyiTunmise@gmail.com',
         password: 'myPassword12',
         confirmPassword: 'myPassword12',
@@ -94,7 +94,7 @@ describe('Authentication', () => {
         .end((err, res) => {
           res.should.have.status(400);
           res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('name must be equal or more than 5 characters');
+          res.body.message.should.be.eql('name must be equal or more than 3 characters');
           done();
         });
     });

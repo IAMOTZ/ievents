@@ -18,7 +18,7 @@ export const getAllCenters = () => {
 // This actions contacts the server to add a center
 export const addCenter = (centerDetails, userToken) => {
   return (dispatch) => {
-    dispatch({ type: 'ADDDING_CENTER' });
+    dispatch({ type: 'ADDING_CENTER' });
     const config = {
       headers: {
         'access-token': userToken,
@@ -67,6 +67,14 @@ export const showCenterModal = (centerId) => {
   return {
     type: 'SHOW_CENTER_MODAL',
     payload: centerId,
+  }
+}
+
+// This action updates the state about a center that is about to be booked
+export const book = (centerId) => {
+  return {
+    type: 'BOOK',
+    payload: centerId
   }
 }
 

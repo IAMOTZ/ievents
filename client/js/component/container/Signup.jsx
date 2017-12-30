@@ -2,11 +2,12 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { createUser, clearStatus } from '../../actions/authAction';
+
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
-import { WarningAlert } from '../common/Alert';
-
-import { createUser, clearStatus } from '../../actions/authAction';
+import WarningAlert from '../common/WarningAlert.jsx';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
 @connect((store) => {
   return {
@@ -57,9 +58,12 @@ export default class Signup extends React.Component {
       return (
         <div id="sign-up-container">
           <TopNavigation />
-          <div className="d-flex flex-column align-items-center">
+          <div className="d-flex flex-column align-items-center main-content">
+            <LoadingIcon start={this.props.user.status.fetching} size={3} />
+            <div className="m-2">
+              <WarningAlert message={this.props.error} />
+            </div>
             <div className="card card-form">
-              <WarningAlert message={this.props.error}/>
               <h1 className="card-header">Sign up</h1>
               <div className="card-body">
                 <form>

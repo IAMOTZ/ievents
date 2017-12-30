@@ -2,16 +2,21 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { loginUser, clearStatus } from '../../actions/authAction';
+
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
-import { WarningAlert } from '../common/Alert';
+import WarningAlert from '../common/WarningAlert.jsx';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx'
 
-import { loginUser, clearStatus } from '../../actions/authAction';
 
 @connect((store) => {
   return {
     user: store.user,
-    error: store.user.status.error.message,    
+    error: store.user.status.error.message,
+    status: {
+      fetching: store.user.status.fetching,
+    }
   }
 })
 
@@ -57,9 +62,12 @@ export default class Signin extends React.Component {
       return (
         <div id="sign-in-container">
           <TopNavigation />
-          <div className="the-flex-box d-flex flex-column align-items-center">
+          <div className="d-flex flex-column align-items-center main-content">
+            <LoadingIcon start={this.props.status.fetching} size={3} />
+            <div className="m-2">
+              <WarningAlert message={this.props.error} />
+            </div>
             <div className="card card-form">
-              <WarningAlert message={this.props.error}/>
               <h1 className="card-header">Sign in</h1>
               <div className="card-body">
                 <form>
@@ -81,14 +89,13 @@ export default class Signin extends React.Component {
                       <input type="password" className="form-control" id="password" placeholder="Password" name="password" onChange={this.getInput} />
                     </div>
                   </div>
-                  <a className="btn btn-block dark-button text-white" onClick={this.login}>Log in</a>
+                  <button className="btn btn-block dark-button text-white" disabled={this.props.status.fetching} onClick={this.login}>Log in</button>
                   <div className="text-center mt-2">
                     <a href="" className="text-muted">forgot password?</a>
                   </div>
                 </form>
               </div>
             </div>
-
             <Footer />
           </div>
 

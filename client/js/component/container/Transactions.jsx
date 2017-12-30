@@ -12,13 +12,18 @@ import UserSideNav from '../common/SideNavigation.jsx';
 import TransactionCards from '../common/TransactionCards.jsx';
 import { ConfirmModal } from '../common/Modal';
 import { UserTopNav } from '../common/TopNavigation.jsx';
-import { WarningAlert } from '../common/Alert';
+import WarningAlert from '../common/WarningAlert.jsx';
+import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
 
 @connect((store) => {
   return {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     transactions: store.transactions,
+    status: {
+      fetching: store.transactions.status.fetching,
+      deleting: store.transactions.status.deleting
+    }
   }
 })
 
@@ -42,6 +47,9 @@ export default class Transactions extends React.Component {
 
   componentDidUpdate() {
     if (this.props.transactions.status.deleted) {
+      this.setState({
+        toDelete: null,
+      });
       this.refresh();
     }
   }
@@ -56,7 +64,6 @@ export default class Transactions extends React.Component {
   finishDelete = () => {
     this.props.dispatch(deleteTransaction(this.props.user.token, this.state.toDelete));
     this.setState({
-      toDelete: null,
       confirmModalVisible: !this.state.confirmModalVisible,
     })
   }
@@ -87,16 +94,24 @@ export default class Transactions extends React.Component {
                   <a className="navbar-brand text-white">
                     <strong>Transactions</strong>
                   </a>
-                  <button className="btn btn-primary" onClick={this.refresh}>Refresh</button>
+                  <button className="btn btn-primary" disabled={this.props.status.fetching} onClick={this.refresh}>Refresh</button>
                 </nav>
                 <div id="transactions" class="mt-lg-0">
                   <div id="accordion" role="tablist">
-                    <div className="text-center d-lg-none">
-                      <button className="btn btn-primary" onClick={this.refresh}>Refresh</button>
-                    </div>
-                    <TransactionCards
-                      centers={this.props.transactions.centers}
-                      onCancel={this.startDelete} />
+                    {
+                      this.props.transactions.centers.length === 0 && this.props.status.fetching ? <LoadingContainer iconSize={4} /> :
+                        <div>
+                          <div className="text-center d-lg-none">
+                            <button className="btn btn-primary" disabled={this.props.status.fetching} onClick={this.refresh}>Refresh</button>
+                          </div>
+                          <LoadingIcon start={this.props.status.fetching} size={2} />
+                          <TransactionCards
+                            centers={this.props.transactions.centers}
+                            onCancel={this.startDelete}
+                            toDelete={this.state.toDelete}
+                            deleting={this.props.status.deleting} />
+                        </div>
+                    }
                     <ConfirmModal visible={this.state.confirmModalVisible}
                       onCancel={this.cancelDelete}
                       onOK={this.finishDelete}

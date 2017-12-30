@@ -15,6 +15,7 @@ import { UserTopNav } from '../common/TopNavigation.jsx';
 import { ConfirmModal } from '../common/Modal';
 import Header from '../common/Header.jsx';
 import EventCards from '../common/EventCards.jsx';
+import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
 
 @connect((store) => {
   return {
@@ -22,7 +23,11 @@ import EventCards from '../common/EventCards.jsx';
     authenticated: store.user.status.fetched,
     events: store.events.events,
     centers: store.centers.centers,
-    eventDeleted: store.events.status.deleted,
+    status: {
+      deleting: store.events.status.deleting,
+      deleted: store.events.status.deleted,
+      fetching: store.events.status.fetching,
+    }
   }
 })
 
@@ -41,9 +46,9 @@ export default class Events extends React.Component {
     this.props.dispatch(getAllCenters());
   }
 
-  // Getting all the events again as soon as this component is updated
+  // Getting all the events again when an event is deleted
   componentDidUpdate() {
-    if (this.props.eventDeleted) {
+    if (this.props.status.deleted) {
       this.props.dispatch(getAllEvents(this.props.user.token));
       this.props.dispatch(clearStatus('DELETE'));
     }
@@ -65,7 +70,8 @@ export default class Events extends React.Component {
     this.setState({
       toDelete: null,
       modalVisible: !this.state.modalVisible,
-    })
+    });
+    window.scrollTo(0,0);
   }
 
   // This method cancels the deleting and also hides back the modal
@@ -74,11 +80,6 @@ export default class Events extends React.Component {
       toDelete: null,
       modalVisible: !this.state.modalVisible,
     });
-  }
-
-  // This method simply removes the event without any warning
-  removeEvent = (e) => {
-    this.props.dispatch(deleteEvent(e.target.id, this.props.user.token));
   }
 
   // This method initialize editing of an event
@@ -93,33 +94,30 @@ export default class Events extends React.Component {
       return (
         <div id="events-container">
           <UserTopNav name={this.props.user.name} title='My Events' />
-
           <div className="container-fluid">
             <div className="row">
-
               <UserSideNav userName={this.props.user.name} />
-
               {/* Main content */}
               <div class="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
-
                 {/* Content Header(navigation) on large screen */}
                 <Header text='My Events' />
                 <div className="bg-primary rounded text-center mx-auto mt-2 w-lg-50">
                   <span className="text-white">Events that their date has passed is considered done</span>
                 </div>
-                {/* Event Grid */}
-                <div className="mt-5">
-                  <div className="card-columns mx-auto">
-                    <EventCards
-                      events={this.props.events}
-                      centers={this.props.centers}
-                      startDelete={this.startDelete}
-                      remove={this.removeEvent}
-                      edit={this.onEdit} />
-
-                  </div>
-                </div>
-
+                <LoadingIcon start={this.props.status.deleting} size={2} />
+                {
+                  this.props.events.length === 0 && this.props.status.fetching ? <LoadingContainer iconSize={4} /> :
+                    < div className="mt-5">
+                      <div className="card-columns mx-auto">
+                        <EventCards
+                          events={this.props.events}
+                          centers={this.props.centers}
+                          startDelete={this.startDelete}
+                          remove={this.removeEvent}
+                          edit={this.onEdit} />
+                      </div>
+                    </div>
+                }
                 <ConfirmModal visible={this.state.modalVisible}
                   onCancel={this.cancelDelete}
                   onOK={this.finishDelete}
@@ -135,7 +133,7 @@ export default class Events extends React.Component {
               <p>Copyright &copy; 2017</p>
             </div>
           </footer>
-        </div>
+        </div >
       )
     }
   }
