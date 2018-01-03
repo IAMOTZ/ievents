@@ -1,0 +1,9 @@
+version: "2"
+plugins:
+  eslint: 
+    enabled: true
+exclude_patterns:
+  - "template/"
+  - "test/"
+  - "public/"
+  
