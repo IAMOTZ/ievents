@@ -1,5 +1,5 @@
 import express from 'express';
-import handleImageUpload from './middlewares/fileUpload';
+import multer from 'multer';
 import controllers from './controllers/index';
 import {
   isUser, isAdmin, isSuperAdmin, isEventOwner,
@@ -10,6 +10,7 @@ import {
 } from './middlewares';
 
 const router = express.Router();
+const upload = multer();
 
 router.post('/users',
   validateSignUpInputs,
@@ -54,14 +55,14 @@ router.delete('/events/:id',
 router.post('/centers',
   isUser,
   isAdmin,
-  handleImageUpload(),
+  upload.single('image'),
   validateAddCenterInputs,
   controllers.centers.create
 );
 router.put('/centers/:id',
   isUser,
   isAdmin,
-  handleImageUpload(),
+  upload.single('image'),
   validateUpdateCenterInputs,
   controllers.centers.update
 );
