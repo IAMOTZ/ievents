@@ -5,18 +5,17 @@ import path from 'path';
 import apiRoutes from './apiRoutes';
 import db from './models';
 import { updateEventStatus } from './helpers';
+import formatInputDatas from './middlewares/helpers';
 
 const app = express();
 const { events, transactions } = db;
-
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
 }
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(formatInputDatas);
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
