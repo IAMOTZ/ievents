@@ -19,9 +19,6 @@ export default (sequelize, DataTypes) => {
     capacity: {
       type: DataTypes.INTEGER,
     },
-    facilities: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-    },
     price: {
       type: DataTypes.REAL,
     },
