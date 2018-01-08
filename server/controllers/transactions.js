@@ -2,65 +2,54 @@ import db from '../models/index';
 
 const { transactions, centers, users, events } = db;
 
+const getTransaction = async (transactionModel, transactionId) => {
+  const transaction = await transactionModel.findById(Number(transactionId));
+  return transaction;
+}
+
+const cancelEvent = async (eventModel, eventId) => {
+  const event = await eventModel.update(
+    { status: 'canceled', },
+    { where: { id: eventId, } }
+  );
+  return event;
+}
+
 export default {
-  getAll(req, res) {
-    centers
-      .findAll({
-        attributes: ['id', 'name'],
+  async getAll(req, res) {
+    const allCenters = await centers.all({
+      attributes: ['id', 'name'],
+      include: [{
+        model: transactions,
+        attributes: ['id'],
         include: [{
-          model: transactions,
-          attributes: ['id'],
+          model: events,
+          attributes: ['id', 'title', 'description', 'date'],
           include: [{
-            model: events,
-            attributes: ['id', 'title', 'description', 'date'],
-            include: [{
-              model: users,
-              attributes: ['id', 'email'],
-            }]
+            model: users,
+            attributes: ['id', 'email'],
           }]
         }]
-      })
-      .then((centers) => {
-        res.status(200).send(centers);
-      })
+      }]
+    });
+    return res.status(200).json(allCenters);
   },
 
-  delete(req, res) {
-    const transactionsId = req.params.id;
-    transactions
-      .findById(Number(transactionsId))
-      .then((transactionData) => {
-        if (!transactionData) {
-          res.status(400).json({
-            status: 'failed',
-            message: 'the transaction does not exist',
-          });
-        } else {
-          transactionData
-            .destroy()
-            .then(() => {
-              events
-                .update({
-                  status: 'canceled',
-                }, {
-                  where: {
-                    id: transactionData.eventId,
-                  }
-                })
-                .then(() => {
-                  res.status(200).json({
-                    status: 'success',
-                    message: 'transaction successfully deleted',
-                  });
-                });
-            });
-        }
-      })
-      .catch((err) => {
-        res.status(400).json({
-          status: 'error',
-          message: err.message,
-        });
+  async delete(req, res) {
+    const transactionId = req.params.id;
+    const transaction = getTransaction(transactions, transactionId);
+    if (!transaction) {
+      return res.status(400).json({
+        status: 'failed',
+        message: 'the transaction does not exist',
       });
+    } else {
+      await transaction.destroy();
+      await cancelEvent(events, transaction.eventId);
+      return res.status(200).json({
+        status: 'success',
+        message: 'transaction successfully deleted',
+      });
+    }
   }
 }
