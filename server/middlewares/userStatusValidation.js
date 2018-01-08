@@ -1,11 +1,14 @@
 import jwt from 'jsonwebtoken';
+import db from '../models';
+
+const { events } = db;
 
 export const isUser = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['access-token'];
   if (token) {
-    jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE, (err, decoded) => {
-      if (err) {
-        res.status(401).json({
+    jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE, (error, decoded) => {
+      if (error) {
+        return res.status(401).json({
           status: 'failed',
           message: 'Failed to authenticate token',
         });
@@ -22,9 +25,8 @@ export const isUser = (req, res, next) => {
   }
 };
 
-
 export const isAdmin = (req, res, next) => {
-  const { id, role } = req.decoded;
+  const { role } = req.decoded;
   if (role.toLowerCase() === 'admin' || role.toLowerCase() === 'superadmin') {
     next();
   } else {
@@ -36,7 +38,7 @@ export const isAdmin = (req, res, next) => {
 };
 
 export const isSuperAdmin = (req, res, next) => {
-  const { id, role } = req.decoded;
+  const { role } = req.decoded;
   if (role.toLowerCase() === 'superadmin') {
     next();
   } else {
@@ -44,5 +46,25 @@ export const isSuperAdmin = (req, res, next) => {
       status: 'failed',
       message: 'You are unauthorized to perform this action',
     });
+  }
+}
+
+export const isEventOwner = async (req, res, next) => {
+  const userId = req.decoded.id;
+  const eventId = req.params.id;
+  const event = await events.findById(Number(eventId));
+  if (!event) {
+    return res.status(400).json({
+      status: 'failed',
+      message: 'event does not exist',
+    });
+  } else if (event.userId !== userId) {
+    res.status(401).json({
+      status: 'failed',
+      message: 'Unauthorised to perform this action',
+    });
+  } else {
+    res.locals.event = event;
+    next();
   }
 }
