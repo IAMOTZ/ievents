@@ -9,7 +9,6 @@ export default (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     location: {
       type: DataTypes.STRING,
