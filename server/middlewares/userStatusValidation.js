@@ -3,6 +3,13 @@ import db from '../models';
 
 const { events } = db;
 
+/**
+ * A middleware
+ * Ensures that the user that sent the request is already registered.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const isUser = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['access-token'];
   if (token) {
@@ -25,6 +32,13 @@ export const isUser = (req, res, next) => {
   }
 };
 
+/**
+ * A middleware
+ * Ensures that the user that sent the request is an admin.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const isAdmin = (req, res, next) => {
   const { role } = req.decoded;
   if (role.toLowerCase() === 'admin' || role.toLowerCase() === 'superadmin') {
@@ -37,6 +51,13 @@ export const isAdmin = (req, res, next) => {
   }
 };
 
+/**
+ * A middleware
+ * Ensures that the user that sent the request is a super admin.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const isSuperAdmin = (req, res, next) => {
   const { role } = req.decoded;
   if (role.toLowerCase() === 'superadmin') {
@@ -49,6 +70,13 @@ export const isSuperAdmin = (req, res, next) => {
   }
 }
 
+/**
+ * A middleware
+ * Ensures that the user that sent the request is the owner of the event he is trying to process.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const isEventOwner = async (req, res, next) => {
   const userId = req.decoded.id;
   const eventId = req.params.id;

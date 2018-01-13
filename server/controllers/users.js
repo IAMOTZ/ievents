@@ -4,6 +4,11 @@ import db from '../models';
 
 const { users } = db;
 
+/**
+ * Format the user data to be returned to the user.
+ * @param {Object} userData The raw user data gotten from the database.
+ * @returns {Object} The formatted user data.
+ */
 const formatUserData = (userData) => {
   return {
     id: userData.id,
@@ -13,14 +18,31 @@ const formatUserData = (userData) => {
   };
 };
 
+/**
+ * Generates a token.
+ * @param {Object} payLoad The information to embed in the token.
+ * @returns {String} The token.
+ */
 const generateToken = (payLoad) => {
   return jwt.sign(payLoad, process.env.JSON_WEB_TOKEN_SECRETE, { expiresIn: '48hr' });
 }
 
+/**
+ * Checks if a user input password is correct.
+ * @param {String} textPassword The user input password.
+ * @param {String} hashedPassword The hashed password.
+ * @returns {Boolean} Truthy values representing if the password is correct or not.
+ */
 const verifyPassword = (textPassword, hashedPassword) => {
   return bcrypt.compareSync(textPassword, hashedPassword);
 }
 
+/**
+ * Get a single user from the database.
+ * @param {Object} userModel The query interface for users in the database.
+ * @param {String} userEmail The email of the user to get.
+ * @returns {Object} The user gotten from the database.
+ */
 const getUser = async (userModel, userEmail) => {
   const user = await userModel.findOne({
     where: {
@@ -31,6 +53,12 @@ const getUser = async (userModel, userEmail) => {
 }
 
 export default {
+  /**
+   * Creates a user.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async signup(req, res) {
     const {
       name, email, password,
@@ -56,6 +84,12 @@ export default {
     }
   },
 
+  /**
+   * Grants authentication to a registered user.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async signin(req, res) {
     const { email, password, } = res.locals.formattedInputs;
     const user = await getUser(users, email, );
@@ -79,6 +113,12 @@ export default {
     }
   },
 
+  /**
+   * Creates an admin user.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async createAdmin(req, res) {
     const { email } = res.locals.formattedInputs;
     const user = await getUser(users, email);

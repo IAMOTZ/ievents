@@ -2,6 +2,11 @@ import db from '../models/index';
 
 const { events, centers, transactions } = db;
 
+/**
+ * Format the event data to be returned to the user.
+ * @param {Object} eventData The raw event data gotten from the database.
+ * @returns {Object} The formatted event data.
+ */
 const formatEventData = (eventData) => {
   return Object.assign(
     {},
@@ -17,11 +22,24 @@ const formatEventData = (eventData) => {
   )
 }
 
+/**
+ * Get a single center from the database.
+ * @param {Object} centerModel The query interface for centers in the database.
+ * @param {String} centerId The ID of the center.
+ * @returns {Object} The center gotten from the database.
+ */
 const getCenter = async (centerModel, centerId) => {
   const center = await centerModel.findById(Number(centerId));
   return center;
 }
 
+/**
+ * Checks if a center is booked(has event) on a particular date.
+ * @param {Object} eventModel The query interface for events in the database.
+ * @param {Number} centerId The ID of the center.
+ * @param {String} date The date to be compared.
+ * @returns {Boolean} Truthy values representing if the center is booked or not.
+ */
 const isCenterBooked = async (eventModel, centerId, date) => {
   const event =
     await eventModel.findOne({
@@ -38,6 +56,12 @@ const isCenterBooked = async (eventModel, centerId, date) => {
   }
 }
 
+/**
+ * Creates a transaction.
+ * @param {Object} transactionModel The query interface for transactions in the database.
+ * @param {Object} event Event object containing the event details.
+ * @returns {Object} The transaction that is created.
+ */
 const createTransaction = async (transactionModel, event) => {
   const transaction = await transactionModel.create({
     eventId: event.id,
@@ -46,6 +70,11 @@ const createTransaction = async (transactionModel, event) => {
   return transaction;
 }
 
+/**
+ * Deletes a transaction.
+ * @param {Object} transactionModel The query interface for transactions in the database.
+ * @param {Object} event Event object containing the event details.
+ */
 const deleteTransaction = async (transactionModel, event) => {
   await transactionModel.destroy({
     where: {
@@ -55,6 +84,12 @@ const deleteTransaction = async (transactionModel, event) => {
 }
 
 export default {
+  /**
+   * Get all the events of a particular user.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async getAll(req, res) {
     const userId = req.decoded.id;
     const allEvents = await events.all({
@@ -67,6 +102,12 @@ export default {
     });
   },
 
+  /**
+   * Creates an event.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async create(req, res) {
     const {
       title, description, date, centerid,
@@ -103,6 +144,12 @@ export default {
     }
   },
 
+  /**
+   * Updates an event.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async update(req, res) {
     const {
       title, description, date, centerid,
@@ -146,10 +193,16 @@ export default {
     });
   },
 
+  /**
+   * Deletes an event.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async delete(req, res) {
     const event = res.locals.event; 
     await event.destroy();
-    res.status(200).json({
+    return res.status(200).json({
       status: 'success',
       message: 'event deleted',
     });

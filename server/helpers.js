@@ -11,6 +11,13 @@ dotEnv.config();
 
 const Op = sequelize.Op;
 
+/**
+ * Compares two date time to see which one is larger.
+ * @param {Date} date1 The first date.
+ * @param {Date} date2 The second date.
+ * @param {Number} [offset=0] An optional amount of time to offset the second date.
+ * @returns {Boolean} A truthy values representing if the first date is larger or not.
+ */
 const compareDate = (date1, date2, offset) => {
   if (date1.getTime() > date2.getTime() + offset) {
     return true;
@@ -19,6 +26,13 @@ const compareDate = (date1, date2, offset) => {
   }
 }
 
+/**
+ * Get the current date in a particular location in the world.
+ * This function is needed to handle the differences between where the app would be hosted and 
+ * where the app would be actully in use.
+ * @param {Number} timeZoneOffset The timezone offset of that particular location.
+ * @returns {Date} The date in that location.
+ */
 export const getCurrentDate = (timeZoneOffset) => {
   const localDate = new Date();
   const UTCTime = new Date(
@@ -29,6 +43,12 @@ export const getCurrentDate = (timeZoneOffset) => {
   return new Date(UTCTime + (timeZoneOffset * 60 * 60 * 1000));
 }
 
+/**
+ * Updates the status of all the event that their date is passed to DONE.
+ * It also deletes the transaction of such events.
+ * @param {Object} eventModel The query interface for events in the database.
+ * @param {Object} transactionModel The query interface for transactions in the database.
+ */
 export const updateEventStatus = async (eventModel, transactionModel) => {
   const currentDate = getCurrentDate(1); // Get the current time in Nigeria;
   const doneEvents = await eventModel.all({
@@ -62,6 +82,10 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
   return;
 }
 
+/**
+ * Creates a super admin user.
+ * @param {Object} userModel The query interface for the users in the database.
+ */
 export const createSuperAdmin = async (userModel) => {
   const user = await userModel.findOne({
     where: {
@@ -81,6 +105,11 @@ export const createSuperAdmin = async (userModel) => {
   }
 }
 
+/**
+ * Uploads an image to the cloud at cloudinary.
+ * @param {Object} image The image file.
+ * @returns  {Promise}  A promise that either resolves the respnose of cloudinary or reject any error that occured.
+ */
 export const uploadImage = async (image) => {
   const cloudinaryOptions = {
     resource_type: 'raw',
@@ -98,6 +127,11 @@ export const uploadImage = async (image) => {
   });
 }
 
+/**
+ * Deletes an image in the cloud.
+ * @param {String} imageUrl The url of the image.
+ * @returns {Promise} A promise that either resolves the respnose of cloudinary or reject any error that occured.
+ */
 export const deleteImage = (imageUrl) => {
   const cloudinaryOptions = {
     resource_type: 'raw',

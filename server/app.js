@@ -36,6 +36,7 @@ app.use((req, res) => {
 
 app.set('port', process.env.PORT || 3000);
 
+// After starting the app, updateEventStatus is set to run everyday.
 app.listen(app.get('port'), () => {
   console.log(`App started on port ${app.get('port')}`);
   const interval = 24 * 60 * 60 * 1000;  // One day

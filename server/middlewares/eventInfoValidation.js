@@ -1,5 +1,12 @@
 import { getCurrentDate } from '../helpers';
 
+/**
+ * A middleware.
+ * Ensures that the inputs given when adding an event are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const validateAddEventInputs = (req, res, next) => {
   const {
     title,
@@ -65,6 +72,13 @@ export const validateAddEventInputs = (req, res, next) => {
   next();
 }
 
+/**
+ * A middleware.
+ * Ensures that the inputs given when updating an event are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const validateUpdateEventInputs = (req, res, next) => {
   const {
     title,

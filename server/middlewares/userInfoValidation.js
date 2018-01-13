@@ -1,3 +1,10 @@
+/**
+ * A middleware.
+ * Ensures that the inputs given when creating a user are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const validateSignUpInputs = (req, res, next) => {
   const {
     name,
@@ -62,6 +69,13 @@ export const validateSignUpInputs = (req, res, next) => {
   next();
 }
 
+/**
+ * A middleware.
+ * Ensures that the inputs given when authenticating a user are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const validateSigninInputs = (req, res, next) => {
   const {
     email,
@@ -97,6 +111,13 @@ export const validateSigninInputs = (req, res, next) => {
   next();
 }
 
+/**
+ * A middleware.
+ * Ensures that the inputs given when creating an admin are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const validateCreateAdminInputs = (req, res, next) => {
   const { email } = res.locals.formattedInputs;
   try {

@@ -1,3 +1,10 @@
+/**
+ * A middleware.
+ * Ensures that the inputs given when adding a center are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const validateAddCenterInputs = (req, res, next) => {
   const {
     name,
@@ -42,6 +49,13 @@ export const validateAddCenterInputs = (req, res, next) => {
   next();
 }
 
+/**
+ * A middleware.
+ * Ensures that the inputs given when updating a center are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
 export const validateUpdateCenterInputs = (req, res, next) => {
   const {
     name,

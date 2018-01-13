@@ -3,15 +3,31 @@ import { uploadImage, deleteImage } from '../helpers';
 
 const { centers, events } = db;
 
+/**
+ * Map out the dates of allowed events.
+ * @param {Array} events an array of events.
+ * @returns {Array} an array of the date of allowed events.
+ */
 const getDatesFromEvents = (events) => {
   return events.filter(event => event.status === 'allowed').map(event => event.date);
 }
 
+/**
+ * Get a single center from the database.
+ * @param {Object} centerModel The query interface for centers in the database.
+ * @param {Number} centerId The ID of the center.
+ * @returns {Object} The center gotten from the database.
+ */
 const getCenter = async (centerModel, centerId) => {
   const center = await centerModel.findById(Number(centerId));
   return center;
 }
 
+/**
+ * Format the center data to be returned to the user.
+ * @param {Object} centerData The raw center data gotten from the database.
+ * @returns {Object} The formatted center data.
+ */
 const formatCenterData = (centerData) => {
   return Object.assign(
     {},
@@ -29,6 +45,12 @@ const formatCenterData = (centerData) => {
 };
 
 export default {
+  /**
+   * Get all centers
+   * @param {Object} req The request object.
+   * @param {Object} res The response objct.
+   * @returns {Object} The response object containing some response data.
+   */
   async getAll(req, res) {
     const allCenters = await centers.all({
       include: [{
@@ -43,6 +65,12 @@ export default {
     });
   },
 
+  /**
+   * Get a single center.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async getOne(req, res) {
     const centerId = req.params.id;
     const center = await centers.findOne({
@@ -68,6 +96,12 @@ export default {
     }
   },
 
+  /**
+   * Creates a center.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async create(req, res) {
     const {
       name, location, details, capacity, price,
@@ -94,6 +128,12 @@ export default {
     });
   },
 
+  /**
+   * Updates a center.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
   async update(req, res) {
     const {
       name, location, details, capacity, price,
