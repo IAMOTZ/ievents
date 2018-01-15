@@ -146,7 +146,7 @@ const Alert = (props) => {
     component = (
       <span>
         <p className="text-success">Admin Added!</p>
-        <span>{props.newAmdin} is now and admin</span>
+        <span>{props.newAmdin} is now an admin</span>
       </span>
     );
   } else {
