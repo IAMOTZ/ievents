@@ -79,7 +79,7 @@ export default {
         status: 'success',
         message: 'user created',
         user: formatUserData(newUser),
-        token: generateToken({ id: newUser.id, role: newUser.role, }),
+        token: generateToken(formatUserData(newUser)),
       });
     }
   },
@@ -103,7 +103,7 @@ export default {
         status: 'success',
         message: 'Logged in',
         user: formatUserData(user),
-        token: generateToken({ id: user.id, role: user.role, }),
+        token: generateToken(formatUserData(user)),
       });
     } else {
       res.status(400).json({
