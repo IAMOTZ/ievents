@@ -15,6 +15,7 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx';
     error: store.user.status.error.message,
     status: {
       fetching: store.user.status.fetching,
+      fetched: store.user.status.fetched,
     },
   }
 ))
@@ -53,11 +54,9 @@ export default class Signin extends React.Component {
 
   render() {
     let component;
-    if (this.props.user.status.fetched === true) {
+    if (this.props.status.fetched) {
       component = (
-        <div>
-          <Redirect to="/addEvent" />
-        </div>
+        <Redirect to="/addEvent" />
       );
     } else {
       component = (
