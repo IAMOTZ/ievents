@@ -1,5 +1,8 @@
-// This helper helps to convert a month
-// from its numeric representation to its actual name.
+/**
+ * It converts a month number to its corresponding name.
+ * @param {Number} monthNumber The month number.
+ * @returns {Object} The month name
+ */
 const MonthToString = (monthNumber) => {
   switch (monthNumber) {
     case 1: {

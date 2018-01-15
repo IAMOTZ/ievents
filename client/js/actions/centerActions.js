@@ -2,7 +2,10 @@ import axios from 'axios';
 
 const apiBaseUrl = process.env.API_BASE_URL;
 
-// This action get all centers
+/**
+ * A Thunk modeled action that eventually retrieves all the centers in the app.
+ * @returns {Function}
+ */
 export const getAllCenters = () => (dispatch) => {
   dispatch({ type: 'GETTING_CENTERS' });
   axios.get(`${apiBaseUrl}/centers`)
@@ -14,7 +17,12 @@ export const getAllCenters = () => (dispatch) => {
     });
 };
 
-// This action adds a center
+/**
+ * A Thunk modeled action that eventually adds a center.
+ * @param {Object} centerDetails The details of the center to be added.
+ * @param {String} userToken The token of the user that wants to add the center.
+ * @returns {Function}
+ */
 export const addCenter = (centerDetails, userToken) => (dispatch) => {
   dispatch({ type: 'ADDING_CENTER' });
   const config = {
@@ -32,6 +40,13 @@ export const addCenter = (centerDetails, userToken) => (dispatch) => {
     });
 };
 
+/**
+ * A Thunk modeled action that eventually updates a center.
+ * @param {Number} id The ID of the center to update.
+ * @param {Object} centerDetails The details of the center to update.
+ * @param {String} userToken The token of the user that wants to update the center.
+ * @returns {Function}
+ */
 export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
   dispatch({ type: 'UPDATING_CENTER' });
   const config = {
@@ -49,15 +64,31 @@ export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
     });
 };
 
-// This action initializes the editing of a center using its center id
+/**
+ * It informs a reducer to update the store about a center that is to be edited.
+ * @param {Number} centerId The ID of the center to be edited.
+ * @returns {Object}
+ */
 export const initializeEdit = centerId => ({ type: 'INITIALIZE_EDIT', payload: centerId });
 
-// This action triggers the display of the modal that shows the details of a center
+/**
+ * It informs a reducer to update the store with the details of a center to be shown on a modal.
+ * @param {Number} centerId The center ID.
+ * @returns {Object}
+ */
 export const showCenterModal = centerId => ({ type: 'SHOW_CENTER_MODAL', payload: centerId });
 
-// This action updates the state about a center that is about to be booked
+/**
+ * It informs a reducer to update the store about a center that is about to be booked.
+ * @param {Number} centerId The ID of the center.
+ * @returns {Object}
+ */
 export const book = centerId => ({ type: 'BOOK', payload: centerId });
 
-// This action reset the status of a specific process in the center store to its initial state
+/**
+ * It informs a reducer to Clear the status variables tracking a particular center process.
+ * @param {String} process The process to be cleared.
+ * @returns {Object}
+ */
 export const clearStatus = process => ({ type: 'CLEAR_CENTER_STATUS', payload: process });
 

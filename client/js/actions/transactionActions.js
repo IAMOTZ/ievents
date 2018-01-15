@@ -2,6 +2,11 @@ import axios from 'axios';
 
 const apiBaseUrl = process.env.API_BASE_URL;
 
+/**
+ * A Thunk modeled action that eventually gets all the transaction in the app.
+ * @param {String} userToken The token of the user that wants the transaction.
+ * @returns {Function}
+ */
 export const getAllTransactions = userToken => (dispatch) => {
   dispatch({ type: 'FETCHING_TRANSACTIONS' });
   const config = {
@@ -18,6 +23,12 @@ export const getAllTransactions = userToken => (dispatch) => {
     });
 };
 
+/**
+ * A Thunk modeled acion that eventuallly deletes a transaction.
+ * @param {String} userToken The token of the user that wants to delete the transaction.
+ * @param {Number} id The ID of the transaction.
+ * @returns {Function}
+ */
 export const deleteTransaction = (userToken, id) => (dispatch) => {
   dispatch({ type: 'DELETE_TRANSACTION' });
   const config = {
@@ -34,4 +45,8 @@ export const deleteTransaction = (userToken, id) => (dispatch) => {
     });
 };
 
+/**
+ * It informs a reducer to Clear the status variables tracking a particular transaction process.
+ * @param {String} process The process to be cleared.
+ */
 export const clearStatus = process => ({ type: 'CLEAR_TRANSACTION_STATUS', payload: process });

@@ -2,7 +2,11 @@ import axios from 'axios';
 
 const apiBaseUrl = process.env.API_BASE_URL;
 
-// This action contacts the server to get all of a users event
+/**
+ * A Thunk modeled action that eventually retrieves all the events of a user.
+ * @param {String} userToken The token of the user.
+ * @returns {Function}
+ */
 export const getAllEvents = userToken => (dispatch) => {
   dispatch({ type: 'FETCHING_EVENTS' });
   const config = {
@@ -19,7 +23,12 @@ export const getAllEvents = userToken => (dispatch) => {
     });
 };
 
-// This action adds an event for a user
+/**
+ * A Thunk modeled action that eventually adds an event.
+ * @param {Object} eventDetails The details of the event to add.
+ * @param {String} userToken The token of the user.
+ * @returns {Function}
+ */
 export const addEvent = (eventDetails, userToken) => (dispatch) => {
   dispatch({ type: 'ADDDING_EVENT' });
   const config = {
@@ -36,7 +45,13 @@ export const addEvent = (eventDetails, userToken) => (dispatch) => {
     });
 };
 
-// This action updates an event after it has beed edited
+/**
+ * A Thunk modeled action that eventually updates an event.
+ * @param {Number} id The event ID.
+ * @param {Object} eventDetails The details of the event to be updated.
+ * @param {String} userToken The token of the user.
+ * @returns {Function}
+ */
 export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
   dispatch({ type: 'UPDATING_EVENT' });
   const config = {
@@ -53,7 +68,12 @@ export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
     });
 };
 
-// This action contacts the server to delete an event
+/**
+ * A Thunk modeled action that eventually deletes an event.
+ * @param {Number} id The event ID.
+ * @param {String} userToken The token of the user.
+ * @returns {Function}
+ */
 export const deleteEvent = (id, userToken) => (dispatch) => {
   dispatch({ type: 'DELETING_EVENT' });
   const config = {
@@ -70,7 +90,16 @@ export const deleteEvent = (id, userToken) => (dispatch) => {
     });
 };
 
+/**
+ * It informs a reducer to update the store about an event that is to be edited.
+ * @param {Number} id The ID of the event.
+ * @returns {Object}
+ */
 export const initializeEdit = id => ({ type: 'INITIALIZE_EDIT', payload: id });
 
-// This action reset the status of a specific process in the  center store to its initial state
+/**
+ * It informs a reducer to Clear the status variables tracking a particular event process.
+ * @param {String} process The process to be cleared.
+ * @returns {Object}
+ */
 export const clearStatus = process => ({ type: 'CLEAR_EVENT_STATUS', payload: process });
