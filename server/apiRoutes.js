@@ -6,75 +6,90 @@ import {
   validateSignUpInputs, validateSigninInputs,
   validateCreateAdminInputs, validateAddCenterInputs,
   validateUpdateCenterInputs, validateAddEventInputs,
-  validateUpdateEventInputs,
+  validateUpdateEventInputs, formatInputDatas,
 } from './middlewares';
 
 const router = express.Router();
 const upload = multer();
 
-router.post('/users',
+router.post(
+  '/users',
   validateSignUpInputs,
-  controllers.users.signup
+  controllers.users.signup,
 );
-router.post('/users/login',
+router.post(
+  '/users/login',
   validateSigninInputs,
   controllers.users.signin,
 );
-router.post('/users/admin',
+router.post(
+  '/users/admin',
   isUser,
   isSuperAdmin,
   validateCreateAdminInputs,
-  controllers.users.createAdmin
+  controllers.users.createAdmin,
 );
-router.get('/centers',
-  controllers.centers.getAll
+router.get(
+  '/centers',
+  controllers.centers.getAll,
 );
-router.get('/centers/:id',
-  controllers.centers.getOne
+router.get(
+  '/centers/:id',
+  controllers.centers.getOne,
 );
-router.get('/events',
+router.get(
+  '/events',
   isUser,
-  controllers.events.getAll
+  controllers.events.getAll,
 );
-router.post('/events',
+router.post(
+  '/events',
   isUser,
   validateAddEventInputs,
   controllers.events.create,
 );
-router.put('/events/:id',
+router.put(
+  '/events/:id',
   isUser,
   isEventOwner,
   validateUpdateEventInputs,
   controllers.events.update,
 );
-router.delete('/events/:id',
+router.delete(
+  '/events/:id',
   isUser,
   isEventOwner,
   controllers.events.delete,
 );
-router.post('/centers',
+router.post(
+  '/centers',
   isUser,
   isAdmin,
   upload.single('image'),
+  formatInputDatas,
   validateAddCenterInputs,
-  controllers.centers.create
+  controllers.centers.create,
 );
-router.put('/centers/:id',
+router.put(
+  '/centers/:id',
   isUser,
   isAdmin,
   upload.single('image'),
+  formatInputDatas,
   validateUpdateCenterInputs,
-  controllers.centers.update
+  controllers.centers.update,
 );
-router.get('/transactions',
+router.get(
+  '/transactions',
   isUser,
   isAdmin,
-  controllers.transactions.getAll
+  controllers.transactions.getAll,
 );
-router.delete('/transactions/:id',
+router.delete(
+  '/transactions/:id',
   isUser,
   isAdmin,
-  controllers.transactions.delete
+  controllers.transactions.delete,
 );
 
 export default router;
