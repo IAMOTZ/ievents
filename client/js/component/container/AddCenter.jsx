@@ -71,7 +71,11 @@ export default class AddCenter extends React.Component {
     const fd = new FormData();
     const entries = Object.entries(centerDetails);
     entries.forEach((entry) => {
-      fd.append(`${entry[0]}`, entry[1]);
+      const key = entry[0];
+      const value = entry[1];
+      if (value) {
+        fd.append(key, value);
+      }
     });
     if (images) {
       fd.append('image', images[0]);
