@@ -62,7 +62,7 @@ export default {
    */
   async delete(req, res) {
     const transactionId = req.params.id;
-    const transaction = getTransaction(transactions, transactionId);
+    const transaction = await getTransaction(transactions, transactionId);
     if (!transaction) {
       return res.status(400).json({
         status: 'failed',
