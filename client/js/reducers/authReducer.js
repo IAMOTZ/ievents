@@ -1,15 +1,26 @@
+import jwtDecode from 'jwt-decode';
+
+let previousUser;
+let previousToken;
+try {
+  previousToken = localStorage.getItem('IEVENTS_USER_TOKEN');
+  previousUser = jwtDecode(previousToken);
+  previousUser = Object.assign({}, previousUser, { token: previousToken });
+} catch (e) {
+  console.log(e.message);
+}
+
 const initialState = {
-  user: {
+  user: previousUser || {
     name: null,
     email: null,
-    password: null,
     role: null,
     id: null,
     token: null,
   },
   status: {
     fetching: false,
-    fetched: false,
+    fetched: Boolean(previousUser),
     error: false,
     addingAdmin: false,
     adminAdded: false,
@@ -40,6 +51,7 @@ export default (state = initialState, action) => {
       const newUser = {
         name, email, role, id, token,
       };
+      localStorage.setItem('IEVENTS_USER_TOKEN', newUser.token);
       return {
         ...state,
         user: newUser,
@@ -83,6 +95,7 @@ export default (state = initialState, action) => {
       const newUser = {
         name, email, role, id, token,
       };
+      localStorage.setItem('IEVENTS_USER_TOKEN', newUser.token);
       return {
         ...state,
         user: newUser,
@@ -171,7 +184,20 @@ export default (state = initialState, action) => {
       }
     }
     case 'CLEAR_USER': {
-      return initialState;
+      localStorage.removeItem('IEVENTS_USER_TOKEN');
+      return {
+        user: {
+          name: null,
+          email: null,
+          role: null,
+          id: null,
+          token: null,
+        },
+        status: {
+          ...initialState.status,
+          fetched: false,
+        },
+      };
     }
     default: {
       return state;
