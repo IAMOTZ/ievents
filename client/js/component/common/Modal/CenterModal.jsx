@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import MonthToString from '../../../helpers/Date';
+import MonthToString from '../../../helpers/date';
 
 const defaultImage = '/images/defaultImgx4.jpeg';
 
