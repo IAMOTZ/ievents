@@ -1,19 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
+// Actions
 import { getAllCenters } from '../../actions/centerActions';
-
+import { addEvent, clearStatus } from '../../actions/eventActions';
+// Common Components
 import UserSideNav from '../common/SideNavigation.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
 import WarningAlert from '../common/WarningAlert.jsx';
-import { addEvent, clearStatus } from '../../actions/eventActions';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx'
+import { UserTopNav } from '../common/TopNavigation.jsx';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
-@connect((store) => {
-  return {
+@connect(store => (
+  {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     centers: store.centers.centers,
@@ -22,10 +22,9 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx'
       error: store.events.status.addingError.message,
       success: store.events.status.added,
       adding: store.events.status.adding,
-    }
+    },
   }
-})
-
+))
 export default class AddEvent extends React.Component {
   constructor() {
     super();
@@ -46,77 +45,103 @@ export default class AddEvent extends React.Component {
     this.props.dispatch(clearStatus('ALL'));
   }
 
-
-  // This method uses user input to update the state
+  /**
+   * Update some state variables with the user inputs.
+   * @param {Event} e The event object.
+   */
   getInput = (e) => {
-    const state = this.state;
+    const { state } = this;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
-  // This method fires the action to create an event
+  /**
+   * Dispatches the action to add the event.
+   */
   add = () => {
     const {
-     title,
-      description,
-      centerId
+      title, description, centerId,
     } = this.state;
-    let date = this.state.date ? this.state.date.replace(/-/g, '/') : null;
-    const eventDetails = { title, description, date, centerId };
+    const date = this.state.date ? this.state.date.replace(/-/g, '/') : null;
+    const eventDetails = {
+      title, description, date, centerId,
+    };
     this.props.dispatch(addEvent(eventDetails, this.props.user.token));
     window.scrollTo(0, 0);
   }
 
   render() {
+    let component;
     if (!this.props.authenticated) {
-      return (<Redirect to="/users/login" />)
+      component = (<Redirect to="/users/login" />)
     } else if (this.props.status.success) {
-      return (<Redirect to="/events" />);
+      component = (<Redirect to="/events" />);
     } else {
-      return (
-        <div class="add-event-container">
+      component = (
+        <div className="add-event-container">
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title='Add Event' />
-          <div class="container-fluid">
-            <div class="row">
+          <UserTopNav name={this.props.user.name} title="Add Event" />
+          <div className="container-fluid">
+            <div className="row">
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
               {/* Main content */}
-              <div class="col-lg-10 offset-md-2" id="main-content">
+              <div className="col-lg-10 offset-md-2" id="main-content">
                 {/* Content Header(navigation) on large screen */}
-                <Header text='Add Event' />
+                <Header text="Add Event" />
                 {/* Input form */}
-                <form class="mt-lg-5 w-lg-50">
+                <form className="mt-lg-5 w-lg-50">
                   <LoadingIcon start={this.props.status.adding} size={2} />
                   <WarningAlert message={this.props.status.error} />
-                  <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control"
-                      id="title" placeholder="A short description of your event"
-                      name="title" onChange={this.getInput} />
-                    <small id="emailHelp"
-                      class="form-text text-muted">Less than 30 characters</small>
+                  <div className="form-group">
+                    <label htmlFor="title">Title</label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      className="form-control"
+                      placeholder="A short description of your event"
+                      onChange={this.getInput}
+                    />
+                    <small
+                      id="emailHelp"
+                      className="form-text text-muted"
+                    >Less than 30 characters
+                    </small>
                   </div>
-                  <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description"
-                      rows="6" placeholder="More details about the event"
-                      name="description" onChange={this.getInput}></textarea>
-                    <small id="emailHelp"
-                      class="form-text text-muted">Less than 200 characters</small>
+                  <div className="form-group">
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                      rows="6"
+                      name="description"
+                      id="description"
+                      className="form-control"
+                      placeholder="More details about the event"
+                      onChange={this.getInput}
+                    />
+                    <small
+                      id="emailHelp"
+                      className="form-text text-muted"
+                    >Less than 200 characters
+                    </small>
                   </div>
                 </form>
-                <form class="my-3 form-inline">
-                  <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" id="date"
-                      class="form-control mx-sm-3"
-                      name="date" onChange={this.getInput} />
+                <form className="my-3 form-inline">
+                  <div className="form-group">
+                    <label htmlFor="date">Date</label>
+                    <input
+                      type="date"
+                      id="date"
+                      className="form-control mx-sm-3"
+                      name="date"
+                      onChange={this.getInput}
+                    />
                   </div>
-                  <div class="form-group">
-                    <label for="centers">Choose a Center</label>
-                    <select id="centers"
-                      class="form-control ml-md-3"
+                  <div className="form-group">
+                    <label htmlFor="centers">Choose a Center</label>
+                    <select
+                      id="centers"
+                      className="form-control ml-md-3"
                       name="centerId"
                       onChange={this.getInput}
                       defaultValue={this.props.defaultCenter}>
@@ -125,12 +150,17 @@ export default class AddEvent extends React.Component {
                     </select>
                   </div>
                 </form>
-                <button class="btn btn-outline-dark" disabled={this.props.status.adding} onClick={this.add}>Add</button>
+                <button
+                  className="btn btn-outline-dark"
+                  disabled={this.props.status.adding}
+                  onClick={this.add}
+                >Add
+                </button>
               </div>
             </div>
           </div>
-          <footer class="d-block d-sm-none mt-5">
-            <div class="container text-white text-center py-5">
+          <footer className="d-block d-sm-none mt-5">
+            <div className="container text-white text-center py-5">
               <h1>Ievents</h1>
               <p>Copyright &copy; 2017</p>
             </div>
@@ -138,5 +168,6 @@ export default class AddEvent extends React.Component {
         </div>
       );
     }
+    return component;
   }
 }

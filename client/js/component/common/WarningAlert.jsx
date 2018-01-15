@@ -1,15 +1,16 @@
 import React from 'react';
 
 export default (props) => {
+  let component;
   if (props.message) {
-    return (
+    component = (
       <div className="bg-danger text-white text-center p-1 rounded">
-        <i class="fa fa-times"></i>&nbsp;
+        <i className="fa fa-times" />&nbsp;
         <span>{props.message}</span>
       </div>
-    )
+    );
+  } else {
+    component = null;
   }
-  else {
-    return null;
-  }
+  return component;
 };

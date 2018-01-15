@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+// NOTE: I actually do not need this component, but it is needed by the ConfirmModal component(the one I actually need).
+// I got this component and the ConfirmModal component from a co-developer github repository.
+// Apart from this three line of comment, every other line of code is his.
+
 class Modal extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,

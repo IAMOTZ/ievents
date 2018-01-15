@@ -1,21 +1,20 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+// Actions.
 import { createUser, clearStatus } from '../../actions/authAction';
-
+// Common Components.
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
 import WarningAlert from '../common/WarningAlert.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
-@connect((store) => {
-  return {
+@connect(store => (
+  {
     user: store.user,
-    error: store.user.status.error.message
+    error: store.user.status.error.message,
   }
-})
-
+))
 export default class Signup extends React.Component {
   constructor() {
     super();
@@ -31,31 +30,34 @@ export default class Signup extends React.Component {
     this.props.dispatch(clearStatus('ERROR'));
   }
 
-  // This method uses user input to update the state
+  /**
+   * Update some state variables with the user inputs.
+   * @param {Event} e The event object.
+   */
   getInput = (e) => {
-    const state = this.state;
+    const { state } = this;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
-  // This method fires the action to create a user
+  /**
+   * It Dispatches an action to register a user.
+   */
   register = () => {
     const {
       name, email, password, confirmPassword,
     } = this.state;
     this.props.dispatch(createUser({
-      name,
-      email,
-      password,
-      confirmPassword,
+      name, email, password, confirmPassword,
     }));
   }
 
   render() {
+    let component;
     if (this.props.user.status.fetched === true) {
-      return (<Redirect to="/addEvent" />);
+      component = (<Redirect to="/addEvent" />);
     } else {
-      return (
+      component = (
         <div id="sign-up-container">
           <TopNavigation />
           <div className="d-flex flex-column align-items-center main-content">
@@ -73,7 +75,14 @@ export default class Signup extends React.Component {
                       <div className="input-group-addon">
                         <i className="fa fa-user" />
                       </div>
-                      <input type="text" className="form-control" id="name" placeholder="Name" name="name" onChange={this.getInput} />
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        className="form-control"
+                        placeholder="Name"
+                        onChange={this.getInput}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
@@ -82,7 +91,14 @@ export default class Signup extends React.Component {
                       <div className="input-group-addon">
                         <i className="fa fa-envelope" />
                       </div>
-                      <input type="email" className="form-control" id="email" name="email" placeholder="Your Email" onChange={this.getInput} />
+                      <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        className="form-control"
+                        placeholder="Your Email"
+                        onChange={this.getInput}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
@@ -91,7 +107,14 @@ export default class Signup extends React.Component {
                       <div className="input-group-addon">
                         <i className="fa fa-user-secret" />
                       </div>
-                      <input type="password" className="form-control" id="password" name="password" placeholder="Password" onChange={this.getInput} />
+                      <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        className="form-control"
+                        placeholder="Password"
+                        onChange={this.getInput}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
@@ -100,20 +123,29 @@ export default class Signup extends React.Component {
                       <div className="input-group-addon">
                         <i className="fa fa-user-secret" />
                       </div>
-                      <input type="password" className="form-control" id="confirm-password" name="confirmPassword" placeholder="Confirm Password" onChange={this.getInput} />
+                      <input
+                        id="confirm-password"
+                        name="confirmPassword"
+                        type="password"
+                        className="form-control"
+                        placeholder="Confirm Password"
+                        onChange={this.getInput}
+                      />
                     </div>
                   </div>
-                  <a className="btn btn-block dark-button text-white" onClick={this.register} >Register</a>
+                  <a
+                    className="btn btn-block dark-button text-white"
+                    onClick={this.register}
+                  >Register
+                  </a>
                 </form>
               </div>
             </div>
-
             <Footer />
           </div>
         </div>
-
       );
     }
-
+    return component;
   }
 }

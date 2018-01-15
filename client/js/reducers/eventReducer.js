@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-let initialState = {
+const initialState = {
   events: [],
   toEdit: null,
   status: {
@@ -28,21 +28,22 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: true,
           fetched: false,
-          error: false
-        }
-      }
+          error: false,
+        },
+      };
     }
     case 'FETCHING_EVENTS_RESOLVED': {
       const { events } = action.payload;
       return {
         ...state,
-        events: events,
+        events,
         status: {
           ...state.status,
           fetching: false,
           fetched: true,
+          error: false,
         },
-      }
+      };
     }
     case 'FETCHING_EVENTS_REJECTED': {
       return {
@@ -61,7 +62,7 @@ export default (state = initialState, action) => {
           ...state.status,
           adding: true,
           added: false,
-          addingError: false
+          addingError: false,
         },
       };
     }
@@ -87,13 +88,6 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'INITIALIZE_EDIT': {
-      const event = _.find(state.events, { id: Number(action.payload) });
-      return {
-        ...state,
-        toEdit: event,
-      }
-    }
     case 'UPDATING_EVENT': {
       return {
         ...state,
@@ -103,7 +97,7 @@ export default (state = initialState, action) => {
           updated: false,
           updatingError: false,
         },
-      }
+      };
     }
     case 'UPDATING_EVENT_RESOLVED': {
       return {
@@ -114,8 +108,7 @@ export default (state = initialState, action) => {
           updated: true,
           updatingError: false,
         },
-
-      }
+      };
     }
     case 'UPDATING_EVENT_REJECTED': {
       return {
@@ -126,7 +119,7 @@ export default (state = initialState, action) => {
           updated: false,
           updatingError: action.payload,
         },
-      }
+      };
     }
     case 'DELETING_EVENT': {
       return {
@@ -147,8 +140,8 @@ export default (state = initialState, action) => {
           deleting: false,
           deleted: true,
           deletingError: false,
-        }
-      }
+        },
+      };
     }
     case 'DELETING_EVENT_REJECTED': {
       return {
@@ -158,18 +151,25 @@ export default (state = initialState, action) => {
           deleting: false,
           deleted: false,
           deletingError: action.payload,
-        }
-      }
+        },
+      };
+    }
+    case 'INITIALIZE_EDIT': {
+      const event = _.find(state.events, { id: Number(action.payload) });
+      return {
+        ...state,
+        toEdit: event,
+      };
     }
     case 'CLEAR_EVENT_STATUS': {
-      switch(action.payload) {
-        case('ALL'): {
+      switch (action.payload) {
+        case ('ALL'): {
           return {
             ...state,
             status: initialState.status,
-          }
+          };
         }
-        case('DELETE'): {
+        case ('DELETE'): {
           return {
             ...state,
             status: {
@@ -177,24 +177,26 @@ export default (state = initialState, action) => {
               deleting: initialState.status.deleting,
               deleted: initialState.status.deleted,
               deletingError: initialState.status.deletingError,
-            }
-          }
+            },
+          };
         }
         default: {
           return {
             ...state,
             status: {
               ...state.status,
-            }
+            },
           };
         }
       }
     }
     case 'CLEAR_USER': {
+      // This action is not fired from the event actions but the user action.
+      // It would make sure to clear all the event information when the user logs out.
       return initialState;
     }
     default: {
       return state;
     }
   }
-}
+};

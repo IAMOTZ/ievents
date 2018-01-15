@@ -1,41 +1,49 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { clearUser } from '../../actions/authAction';
 
-@connect((store) => {
-  return {
-    isAdmin: (store.user.user.role === 'admin') ? true : false,
-    isSuperAdmin: (store.user.user.role === 'superAdmin') ? true : false
-  }
-})
+// NOTE: The side navigation is shown only on large screens,
+// it is replaced by top navigation on medium screens and below.
 
-// This is the side navigation that appears when a user is logged in(Large Screen)
+@connect(store => ({
+  isAdmin: (store.user.user.role === 'admin'),
+  isSuperAdmin: (store.user.user.role === 'superAdmin'),
+}))
+/**
+ * The side navigation that is shown after a user is authenticated.
+ * This component is stateful so that it can be able to dispatch the logout action.
+ * And also, to be able to differentiate between the type of users;
+ */
 export default class UserSideNav extends React.Component {
+
+  /**
+   * It simply wipes the user info from the store.
+   */
   logout = () => {
     this.props.dispatch(clearUser());
-  }
+  };
+
   render() {
     return (
-      <div class="col-lg-2 fixed-top  d-none d-lg-block" id="side-navigation">
-        <div class="mt-5 text-center">
-          <p class="lead text-white pt-3 text-capitalize" id="userName">{this.props.userName}</p>
+      <div className="col-lg-2 fixed-top  d-none d-lg-block" id="side-navigation">
+        <div className="mt-5 text-center">
+          <p className="lead text-white pt-3 text-capitalize" id="userName">{this.props.userName}</p>
         </div>
-        <div class="pt-3 navigation-links">
-          <div class="list-group">
-            <Link to='/events' class="list-group-item">
-              <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>&nbsp; My Events
+        <div className="pt-3 navigation-links">
+          <div className="list-group">
+            <Link to='/events' className="list-group-item">
+              <i className="fa fa-user-circle fa-fw" aria-hidden="true" />&nbsp; My Events
             </Link>
-            <Link to="addEvent" class="list-group-item">
-              <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Events
+            <Link to="addEvent" className="list-group-item">
+              <i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; Add Events
             </Link>
-            <Link to="/centers2" class="list-group-item">
-              <i class="fa fa-bank fa-fw" aria-hidden="true"></i>&nbsp; Centers
+            <Link to="/centers2" className="list-group-item">
+              <i className="fa fa-bank fa-fw" aria-hidden="true" />&nbsp; Centers
             </Link>
-            <AdminOptions isAdmin={this.props.isAdmin} isSuperAdmin={this.props.isSuperAdmin}/>
-            <Link to="/" class="list-group-item" onClick={this.logout}>
-              <i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp; Logout
+            <AdminOptions isAdmin={this.props.isAdmin} isSuperAdmin={this.props.isSuperAdmin} />
+            <Link to="/" className="list-group-item" onClick={this.logout}>
+              <i className="fa fa-power-off fa-fw" aria-hidden="true" />&nbsp; Logout
             </Link>
           </div>
         </div>
@@ -46,25 +54,26 @@ export default class UserSideNav extends React.Component {
 
 // The extra option that is displayed when an admin is logged in
 const AdminOptions = (props) => {
+  let component;
   if (props.isAdmin || props.isSuperAdmin) {
-    return (
+    component = (
       <div>
-        <Link to="/addCenter" class="list-group-item">
-          <i class="fa fa-plus fa-fw" aria-hidden="true"></i>&nbsp; Add Center
+        <Link to="/addCenter" className="list-group-item">
+          <i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; Add Center
         </Link>
         {
           props.isSuperAdmin ?
-            <Link to="/addAdmin" class="list-group-item">
-              <i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp; Add Admin
+            <Link to="/addAdmin" className="list-group-item">
+              <i className="fa fa-user fa-fw" aria-hidden="true" />&nbsp; Add Admin
           </Link> : null
         }
-        <Link to="/transactions" class="list-group-item">
-          <i class="fa fa-tasks fa-fw" aria-hidden="true"></i>&nbsp; Transactions
+        <Link to="/transactions" className="list-group-item">
+          <i className="fa fa-tasks fa-fw" aria-hidden="true" />&nbsp; Transactions
         </Link>
       </div>
     );
   } else {
-    return null;
+    component = null;
   }
-}
-
+  return component;
+};

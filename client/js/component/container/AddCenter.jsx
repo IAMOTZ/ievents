@@ -1,31 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
-import {
-  addCenter,
-  clearStatus,
-} from '../../actions/centerActions';
-
+// Actions.
+import { addCenter, clearStatus } from '../../actions/centerActions';
+// Common Components.
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import ImageInput from '../common/ImageInput.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
 import WarningAlert from '../common/WarningAlert.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx'
+import { UserTopNav } from '../common/TopNavigation.jsx';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
-@connect((store) => {
-  return {
+@connect(store => (
+  {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     status: {
       error: store.centers.status.addingError.message,
       success: store.centers.status.added,
       adding: store.centers.status.adding,
-    }
+    },
   }
-})
-
+))
 export default class AddCenter extends React.Component {
   constructor() {
     super();
@@ -37,71 +33,74 @@ export default class AddCenter extends React.Component {
       price: null,
       type: null,
       images: null,
-    }
+    };
   }
 
   componentWillUnmount() {
     this.props.dispatch(clearStatus('ALL'));
   }
 
-  // This method uses user input to update the state
+  /**
+   * Update some state variables with the user inputs.
+   * @param {Event} e The event object.
+   */
   getInput = (e) => {
-    const state = this.state;
+    const { state } = this;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
+  /**
+   * A callback to update the state after the user uploads an image.
+   * @param {File} files The image file.
+   */
   handleImageDrop = (files) => {
-    this.setState({
-      images: files,
-    });
+    this.setState({ images: files });
   }
 
+  /**
+   * Dispatches the action to add the center.
+   */
   add = () => {
     const {
-      name,
-      location,
-      details,
-      capacity,
-      price,
-      images,
+      name, location, details, capacity, price, images,
     } = this.state;
-    const centerDetails = { name, location, details, capacity, price, };
+    const centerDetails = {
+      name, location, details, capacity, price,
+    };
     const fd = new FormData();
-    for (let detail in centerDetails) {
-      if (centerDetails[detail]) {
-        fd.append(`${detail}`, centerDetails[detail]);
-      }
-    }
+    const entries = Object.entries(centerDetails);
+    entries.forEach((entry) => {
+      fd.append(`${entry[0]}`, entry[1]);
+    });
     if (images) {
-      for (let i = 0; i < images.length; i += 1) {
-        fd.append('images', images[i]);
-      }
+      fd.append('image', images[0]);
     }
     this.props.dispatch(addCenter(fd, this.props.user.token));
     window.scrollTo(0, 0);
   }
 
   render() {
+    let component;
     if (!this.props.authenticated) {
-      return (<Redirect to="/users/login" />)
+      component = (<Redirect to="/users/login" />);
     } else if (this.props.status.success) {
-      return (<Redirect to="/centers2" />);
+      component = (<Redirect to="/centers2" />);
     } else {
-      return (
-        <div class="add-center-container">
+      component = (
+        <div className="add-center-container">
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title='Add a center' />
+          <UserTopNav name={this.props.user.name} title="Add a center" />
           <div className="container-fluid">
             <div className="row">
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
               {/* Main content */}
-              <div class="col-lg-10 offset-md-2" id="add-event-section">
+              <div className="col-lg-10 offset-md-2" id="add-event-section">
                 {/* Content Header(navigation) on large screen */}
-                <Header text='Add a center' />
+                <Header text="Add a center" />
                 {/* Input form */}
-                <form class="mt-lg-5 mb-md-5">
+                <form className="mt-lg-5 mb-md-5">
                   <LoadingIcon start={this.props.status.adding} size={2} />
                   <div className="w-lg-50 mx-auto">
                     <WarningAlert message={this.props.status.error} />
@@ -109,74 +108,84 @@ export default class AddCenter extends React.Component {
                   <div className="container">
                     <div className="row">
                       <div className="col-12 col-lg-6">
-                        <div class="form-group">
-                          <label for="name">Name</label>
-                          <input type="email"
+                        <div className="form-group">
+                          <label htmlFor="name">Name</label>
+                          <input
+                            type="email"
                             className="form-control"
                             id="name"
                             name="name"
                             placeholder="The name of the center"
-                            onChange={this.getInput} />
-                          <small class="form-text text-muted">Less than 30 characters</small>
+                            onChange={this.getInput}
+                          />
+                          <small className="form-text text-muted">Less than 30 characters</small>
                         </div>
                       </div>
                       <div className="col-12 col-lg-6">
-                        <div class="form-group">
-                          <label for="location">Location</label>
-                          <input type="text"
-                            class="form-control"
+                        <div className="form-group">
+                          <label htmlFor="location">Location</label>
+                          <input
+                            type="text"
+                            className="form-control"
                             id="location"
                             name="location"
                             placeholder="The location of the center"
-                            onChange={this.getInput} />
-                          <small class="form-text text-muted">Less than 30 characters</small>
+                            onChange={this.getInput}
+                          />
+                          <small className="form-text text-muted">Less than 30 characters</small>
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-12 col-lg-6">
-                        <div class="form-group">
-                          <label for="description">Details</label>
+                        <div className="form-group">
+                          <label htmlFor="details">Details</label>
                           <textarea
-                            class="form-control"
-                            id="description" rows="7"
+                            className="form-control"
+                            id="details"
+                            rows="7"
                             name="details"
                             placeholder="More details about the center"
-                            onChange={this.getInput}></textarea>
-                          <small class="form-text text-muted">Less than 300 characters</small>
+                            onChange={this.getInput}
+                          />
+                          <small className="form-text text-muted">Less than 300 characters</small>
                         </div>
                       </div>
                       <div className="col-12 col-lg-6">
                         <div className="row">
                           <div className="col-12">
-                            <div class="form-group">
-                              <label for="capacity">Capacity</label>
-                              <input type="number"
-                                class="form-control"
+                            <div className="form-group">
+                              <label htmlFor="capacity">Capacity</label>
+                              <input
+                                type="number"
+                                className="form-control"
                                 id="capacity"
                                 name="capacity"
                                 placeholder="How many seats"
-                                onChange={this.getInput} />
+                                onChange={this.getInput}
+                              />
                             </div>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-12">
-                            <div class="form-group">
-                              <label for="price">Price</label>
-                              <input type="number"
-                                class="form-control"
+                            <div className="form-group">
+                              <label htmlFor="price">Price</label>
+                              <input
+                                type="number"
+                                className="form-control"
                                 id="price"
                                 name="price"
                                 placeholder="Price"
-                                onChange={this.getInput} />
+                                onChange={this.getInput}
+                              />
                             </div>
                           </div>
                         </div>
                         <div className="row">
                           <div className="col-12">
-                            <div class="form-group">
-                              <label for="image">Image</label>
+                            <div className="form-group">
+                              <label htmlFor="image">Image</label>
                               <div className="text-center">
                                 <ImageInput
                                   style={{ height: '100px' }}
@@ -187,8 +196,13 @@ export default class AddCenter extends React.Component {
                               </div>
                             </div>
                           </div>
-                          <div class="ml-3 pt-3">
-                            <button class="btn btn-outline-dark" disabled={this.props.status.adding} onClick={this.add}>Add</button>
+                          <div className="ml-3 pt-3">
+                            <button
+                              className="btn btn-outline-dark"
+                              disabled={this.props.status.adding}
+                              onClick={this.add}
+                            >Add
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -198,8 +212,8 @@ export default class AddCenter extends React.Component {
               </div>
             </div>
           </div>
-          <footer class="d-block d-sm-none mt-5">
-            <div class="container text-white text-center py-5">
+          <footer className="d-block d-sm-none mt-5">
+            <div className="container text-white text-center py-5">
               <h1>Ievents</h1>
               <p>Copyright &copy; 2017</p>
             </div>
@@ -207,5 +221,6 @@ export default class AddCenter extends React.Component {
         </div>
       );
     }
+    return component;
   }
 }

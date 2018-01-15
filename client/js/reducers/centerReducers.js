@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-let initialState = {
+const initialState = {
   centers: [],
   modalContent: null,
   toEdit: null,
@@ -16,7 +16,7 @@ let initialState = {
     updated: false,
     updatingError: false,
   },
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -27,7 +27,7 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: true,
           fetched: false,
-          fetchingError: false
+          fetchingError: false,
         },
       };
     }
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
       const { centers } = action.payload;
       return {
         ...state,
-        centers: centers,
+        centers,
         status: {
           ...state.status,
           fetching: false,
@@ -62,7 +62,7 @@ export default (state = initialState, action) => {
           ...state.status,
           adding: true,
           added: false,
-          addingError: false
+          addingError: false,
         },
       };
     }
@@ -75,7 +75,7 @@ export default (state = initialState, action) => {
           added: true,
           addingError: false,
         },
-      }
+      };
     }
     case 'ADDING_CENTER_REJECTED': {
       return {
@@ -86,7 +86,7 @@ export default (state = initialState, action) => {
           added: false,
           addingError: action.payload,
         },
-      }
+      };
     }
     case 'UPDATING_CENTER': {
       return {
@@ -97,7 +97,7 @@ export default (state = initialState, action) => {
           updated: false,
           updatingError: false,
         },
-      }
+      };
     }
     case 'UPDATING_CENTER_RESOLVED': {
       return {
@@ -108,7 +108,7 @@ export default (state = initialState, action) => {
           updated: true,
           updatingError: false,
         },
-      }
+      };
     }
     case 'UPDATING_CENTER_REJECTED': {
       return {
@@ -119,27 +119,27 @@ export default (state = initialState, action) => {
           updated: false,
           updatingError: action.payload,
         },
-      }
+      };
     }
     case 'INITIALIZE_EDIT': {
       const center = _.find(state.centers, { id: Number(action.payload) });
       return {
         ...state,
         toEdit: center,
-      }
+      };
     }
     case 'SHOW_CENTER_MODAL': {
       const modalContent = _.find(state.centers, { id: Number(action.payload) });
       return {
         ...state,
-        modalContent: modalContent,
-      }
+        modalContent,
+      };
     }
     case 'BOOK': {
       return {
         ...state,
         toBook: action.payload,
-      }
+      };
     }
     case 'CLEAR_CENTER_STATUS': {
       switch (action.payload) {
@@ -147,14 +147,14 @@ export default (state = initialState, action) => {
           return {
             ...state,
             status: initialState.status,
-          }
+          };
         }
         default: {
           return {
             ...state,
             status: {
               ...state.status,
-            }
+            },
           };
         }
       }
@@ -163,4 +163,4 @@ export default (state = initialState, action) => {
       return state;
     }
   }
-}
+};
