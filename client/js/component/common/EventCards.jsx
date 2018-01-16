@@ -2,6 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import getCenterById from '../../helpers/getCenterById';
 
+const centerName = (centers, centerId) => {
+  const center = getCenterById(centers, centerId);
+  let result;
+  if (center) {
+    result = center.name;
+  } else {
+    result = null;
+  }
+  return result;
+};
+
 const EventCards = props => props.events.map(event => (
   <div
     style={{ maxWidth: `${20}rem` }}
@@ -26,7 +37,8 @@ const EventCards = props => props.events.map(event => (
       <div className={event.status === 'allowed' ? '' : 'text-muted'}>
         <p className="card-text">{event.description}</p>
         <p className="mb-1">
-          <i className="fa fa-map-marker fa-fw" aria-hidden="true" />&nbsp; {getCenterById(props.centers, event.centerId).name}
+          <i className="fa fa-map-marker fa-fw" aria-hidden="true" />&nbsp;
+          {centerName(props.centers, event.centerId)}
         </p>
         <span>{event.date}&nbsp;</span>
       </div>
