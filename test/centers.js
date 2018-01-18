@@ -1,191 +1,312 @@
+import dotEnv from 'dotenv';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server/app';
-import db from '../server/models/index';
 
-const { centers, users } = db;
-
-chai.use(chaiHttp);
+dotEnv.config();
 
 const should = chai.should();
 
-describe('Centers', () => {
-  let adminToken;
-  let centerId;
-  before((done) => {
-    users
-      .create({
-        name: 'user2',
-        email: 'user2@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-        role: 'admin',
-      })
-      .then(() => {
-        chai.request(app)
-          .post('/api/v1/users/login')
-          .send({ email: 'user2@gmail.com', password: 'myPassword12' })
-          .end((err, res) => {
-            res.should.have.status(200);
-            adminToken = res.body.token;
-            done();
-          });
-      })
-      .catch((err) => {
-        console.log({ status: 'creating user error', message: err.message });
-      });
-  });
+chai.use(chaiHttp);
 
-  describe('POST: /api/v1/centers', () => {
-    it('post when all fields is given', (done) => {
-      const reqBody = {
-        name: 'ottawa event center',
-        location: 'Ottawa USA',
-        details: 'It is a beautiful place',
-        capacity: '3000',
-        type: 'theater',
-        price: '4000',
-        token: adminToken,
-      };
-      chai.request(app)
-        .post('/api/v1/centers')
-        .send(reqBody)
-        .end((err, res) => {
-          centerId = res.body.center.id;
+let centerId;
+let adminToken;
+let regularUserToken;
+
+let normalCenterDetails = {
+  name: 'test center',
+  location: 'test location',
+  details: 'test description',
+  capacity: '3000',
+  price: '4000',
+  token: null,
+};
+
+const emptyCenterDetails = {
+  name: null,
+  location: null,
+  details: null,
+  capacity: null,
+  price: null,
+};
+
+const adminUserDetails = {
+  email: 'test@gmail.com',
+  password: 'Password123',
+};
+
+const regularUserDetails = {
+  email: 'test2@gmail.com',
+  password: 'Password123',
+};
+
+const alterCenterDetails = newCenterDetails => (
+  Object.assign({}, normalCenterDetails, newCenterDetails)
+);
+
+const createCenter = (centerDetails, assertions) => {
+  chai.request(app)
+    .post('/api/v1/centers')
+    .send(centerDetails)
+    .end(assertions);
+};
+
+const modifyCenter = (centerDetails, assertions, id = centerId) => {
+  chai.request(app)
+    .put(`/api/v1/centers/${id}`)
+    .send(centerDetails)
+    .end(assertions);
+};
+
+const getCenters = (assertions) => {
+  chai.request(app)
+    .get('/api/v1/centers')
+    .end(assertions);
+};
+
+const getOneCenter = (id, assertions) => {
+  chai.request(app)
+    .get(`/api/v1/centers/${id}`)
+    .end(assertions);
+};
+
+const loginUser = (userDetails, assertions) => {
+  chai.request(app)
+    .post('/api/v1/users/login')
+    .send(userDetails)
+    .end(assertions);
+};
+
+const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
+  res.should.have.status(statusCode);
+  res.body.message.toLowerCase().should.be.eql(message.toLowerCase());
+  res.body.status.should.be.eql('failed');
+  done();
+};
+
+const randomCharacters = length => Array.from({ length }, (e, i) => i).splice(0, length).join('');
+
+describe('Centers Endpoint', () => {
+  before('login the users', (done) => {
+    loginUser(
+      // login the amdin.
+      adminUserDetails,
+      (err, res) => {
+        adminToken = res.body.token;
+        normalCenterDetails.token = adminToken; // Set the token to the admin's own by default
+        loginUser(
+          // login a regualr user.
+          regularUserDetails,
+          (error, response) => {
+            regularUserToken = response.body.token;
+            done();
+          },
+        );
+      },
+    );
+  });
+  describe('Creating Center', () => {
+    it('should not create center without name', (done) => {
+      createCenter(
+        alterCenterDetails({ name: null }),
+        failureAssertions('center name is required', 400, done),
+      );
+    });
+    it('should not create center with empty name', (done) => {
+      createCenter(
+        alterCenterDetails({ name: '' }),
+        failureAssertions('center name cannot be empty', 400, done),
+      );
+    });
+    it('should not create center with name less than 5 char', (done) => {
+      createCenter(
+        alterCenterDetails({ name: 'tes' }),
+        failureAssertions('center name must be between 5 and 30 characters', 400, done),
+      );
+    });
+    it('should not create center with location greater that 50 char', (done) => {
+      createCenter(
+        alterCenterDetails({ location: randomCharacters(55) }),
+        failureAssertions('center location must be below 50 characters', 400, done),
+      );
+    });
+    it('should not create center with details greater that 300 char', (done) => {
+      createCenter(
+        alterCenterDetails({ details: randomCharacters(302) }),
+        failureAssertions('center details must be below 300 characters', 400, done),
+      );
+    });
+    it('should not create center without capacity', (done) => {
+      createCenter(
+        alterCenterDetails({ capacity: null }),
+        failureAssertions('capacity is required', 400, done),
+      );
+    });
+    it('should not create center if capacity value is not a number', (done) => {
+      createCenter(
+        alterCenterDetails({ capacity: 'str' }),
+        failureAssertions('center capacity must be a number in string format', 400, done),
+      );
+    });
+    it('should not create center without price', (done) => {
+      createCenter(
+        alterCenterDetails({ price: null }),
+        failureAssertions('price is required', 400, done),
+      );
+    });
+    it('should not create center if price value is not a number', (done) => {
+      createCenter(
+        alterCenterDetails({ price: 'str' }),
+        failureAssertions('center price must be a number in string format', 400, done),
+      );
+    });
+    it('should not create a center from a regular user', (done) => {
+      createCenter(
+        alterCenterDetails({ token: regularUserToken }),
+        failureAssertions('you are unauthorized to perform this action', 401, done),
+      );
+    });
+    it('should create a center', (done) => {
+      createCenter(
+        alterCenterDetails({ token: adminToken }),
+        (err, res) => {
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('center created');
-          res.body.center.name.should.be.eql(reqBody.name);
-          res.body.center.location.should.be.eql(reqBody.location);
-          res.body.center.details.should.be.eql(reqBody.details);
-          res.body.center.capacity.should.be.eql(Number(reqBody.capacity));
-          res.body.center.price.should.be.eql(Number(reqBody.price));
+          res.body.center.name.should.be.eql(normalCenterDetails.name);
+          res.body.center.location.should.be.eql(normalCenterDetails.location);
+          res.body.center.details.should.be.eql(normalCenterDetails.details);
+          res.body.center.capacity.should.be.eql(Number(normalCenterDetails.capacity));
+          res.body.center.price.should.be.eql(Number(normalCenterDetails.price));
+          centerId = res.body.center.id;
           done();
-        });
+        },
+      );
     });
-    it('should not post when name fields is not given', (done) => {
-      const reqBody = {
-        location: 'Ottawa USA',
-        details: 'It is a beautiful place',
-        capacity: '3000',
-        type: 'theater',
-        price: '4000',
-        token: adminToken,
-      };
-      chai.request(app)
-        .post('/api/v1/centers')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('center name is required');
+    it('should create another center', (done) => {
+      createCenter(
+        alterCenterDetails({
+          name: 'test center2', details: 'I am test center2',
+        }),
+        (err, res) => {
+          res.should.have.status(201);
           done();
-        });
+        },
+      );
     });
   });
-
-  describe('GET /api/v1/centers', () => {
-    it('get one center', (done) => {
-      chai.request(app)
-        .get('/api/v1/centers')
-        .end((err, res) => {
-          res.body.centers.should.be.a('array');
-          res.body.centers.length.should.be.eql(1);
-          done();
-        });
+  describe('Modifying Center', () => {
+    before(() => {
+      normalCenterDetails = Object.assign({}, normalCenterDetails, emptyCenterDetails);
     });
-  });
-
-  describe('PUT /api/v1/centers/:id', () => {
-    it('should update a center', (done) => {
-      const reqBody = {
-        name: 'new ottawa event center',
-        location: 'new Ottawa USA',
-        details: 'It is a beautiful place and I love it',
-        capacity: '300',
-        price: '400',
-        token: adminToken,
-      };
-      chai.request(app)
-        .put(`/api/v1/centers/${centerId}`)
-        .send(reqBody)
-        .end((err, res) => {
+    it('should not modify a center with empty name', (done) => {
+      modifyCenter(
+        alterCenterDetails({ name: '' }),
+        failureAssertions('center name cannot be empty', 400, done),
+      );
+    });
+    it('should not modify a center with name less than 5 chars', (done) => {
+      modifyCenter(
+        alterCenterDetails({ name: 'tes' }),
+        failureAssertions('center name must be between 5 and 30 characters', 400, done),
+      );
+    });
+    it('should not modify a center with name above 30 chars', (done) => {
+      modifyCenter(
+        alterCenterDetails({ name: randomCharacters(35) }),
+        failureAssertions('center name must be between 5 and 30 characters', 400, done),
+      );
+    });
+    it('should not modify a center with location above 50 chars', (done) => {
+      modifyCenter(
+        alterCenterDetails({ location: randomCharacters(53) }),
+        failureAssertions('center location must be below 50 characters', 400, done),
+      );
+    });
+    it('should not modify a center with details above 300 chars', (done) => {
+      modifyCenter(
+        alterCenterDetails({ details: randomCharacters(301) }),
+        failureAssertions('center details must be below 300 characters', 400, done),
+      );
+    });
+    it('should not create center if capacity value is not a number', (done) => {
+      modifyCenter(
+        alterCenterDetails({ capacity: 'str' }),
+        failureAssertions('center capacity must be a number in string format', 400, done),
+      );
+    });
+    it('should not create center if price value is not a number', (done) => {
+      modifyCenter(
+        alterCenterDetails({ price: 'str' }),
+        failureAssertions('center price must be a number in string format', 400, done),
+      );
+    });
+    it('should not modify a center that does not exist', (done) => {
+      modifyCenter(
+        alterCenterDetails({ name: 'modified name' }),
+        failureAssertions('center does not exist', 400, done),
+        1000,
+      );
+    });
+    it('should modify a center', (done) => {
+      modifyCenter(
+        alterCenterDetails({
+          name: 'modified name',
+          location: 'modified location',
+          details: 'modified details',
+          capacity: '500',
+          price: '1000',
+        }),
+        (err, res) => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('center updated');
-          res.body.center.name.should.be.eql(reqBody.name);
-          res.body.center.location.should.be.eql(reqBody.location);
-          res.body.center.details.should.be.eql(reqBody.details);
+          res.body.center.name.should.be.eql('modified name');
+          res.body.center.location.should.be.eql('modified location');
+          res.body.center.details.should.be.eql('modified details');
+          res.body.center.capacity.should.be.eql('500');
+          res.body.center.price.should.be.eql('1000');
           done();
-        });
-    });
-    it('should not update when new name is an empty string', (done) => {
-      const reqBody = {
-        name: '',
-        location: 'new Ottawa USA',
-        details: 'It is a beautiful place and I love it',
-        capacity: '300',
-        type: 'theater',
-        price: '400',
-        token: adminToken,
-      };
-      chai.request(app)
-        .put(`/api/v1/centers/${centerId}`)
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.message.should.be.eql('center name cannot be empty');
-          done();
-        });
+        },
+      );
     });
   });
-
-  describe('GET /api/v1/centers/:id', () => {
-    it('should get a single', (done) => {
-      chai.request(app)
-        .get(`/api/v1/centers/${centerId}`)
-        .end((err, res) => {
+  describe('Getting One Center', () => {
+    it('should not get a center that does not exist', (done) => {
+      getOneCenter(
+        1000,
+        failureAssertions('center does not exist', 400, done),
+      );
+    });
+    it('should get the first center', (done) => {
+      getOneCenter(
+        1,
+        (err, res) => {
           res.should.have.status(200);
-          res.body.center.id.should.be.eql(centerId);
+          res.body.center.id.should.be.eql(1);
           done();
-        });
+        },
+      );
     });
-    it('should not get a single center', (done) => {
-      const wrongId = 4;
-      chai.request(app)
-        .get(`/api/v1/centers/${wrongId}`)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('center does not exist');
+    it('should get the second center', (done) => {
+      getOneCenter(
+        2,
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.center.id.should.be.eql(2);
           done();
-        });
+        },
+      );
     });
   });
-
-  after((done) => {
-    centers
-      .destroy({
-        cascade: true,
-        truncate: true,
-        restartIdentity: true,
-      })
-      .then(() => {
-        users
-          .destroy({
-            cascade: true,
-            truncate: true,
-            restartIdentity: true,
-          })
-          .then(() => {
-            done();
-          });
-      })
-      .catch((err) => {
-        console.log({
-          status: 'error',
-          message: err.message,
-        });
+  describe('Getting All Centers', () => {
+    it('should get all the center', (done) => {
+      getCenters((err, res) => {
+        res.should.have.status(200);
+        res.body.centers.should.be.a('array');
+        res.body.centers.length.should.be.eql(2);
+        done();
       });
+    });
   });
 });
