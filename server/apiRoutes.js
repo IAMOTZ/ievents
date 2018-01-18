@@ -63,18 +63,18 @@ router.delete(
 );
 router.post(
   '/centers',
+  upload.single('image'),
   isUser,
   isAdmin,
-  upload.single('image'),
   formatInputDatas,
   validateAddCenterInputs,
   controllers.centers.create,
 );
 router.put(
   '/centers/:id',
+  upload.single('image'),
   isUser,
   isAdmin,
-  upload.single('image'),
   formatInputDatas,
   validateUpdateCenterInputs,
   controllers.centers.update,
