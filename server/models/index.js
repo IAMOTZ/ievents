@@ -47,7 +47,7 @@ db.events.belongsTo(db.centers);
 db.events.hasOne(db.transactions);
 
 db.transactions.belongsTo(db.users);
-db.transactions.belongsTo(db.events, {onDelete: 'cascade'});
+db.transactions.belongsTo(db.events, { onDelete: 'cascade' });
 db.transactions.belongsTo(db.centers);
 
 export default db;

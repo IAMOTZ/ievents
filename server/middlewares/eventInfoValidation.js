@@ -13,7 +13,7 @@ export const validateAddEventInputs = (req, res, next) => {
     description,
     date,
     centerid,
-    } = res.locals.formattedInputs;
+  } = res.locals.formattedInputs;
   try {
     if (title === undefined || title === null) {
       throw new Error('event title is required');
@@ -31,7 +31,7 @@ export const validateAddEventInputs = (req, res, next) => {
       throw new Error('event date is required');
     }
     if (date) {
-      const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
+      const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
       if (!dateData) {
         throw new Error('the date format should be yyyy/mm/dd');
       }
@@ -62,15 +62,14 @@ export const validateAddEventInputs = (req, res, next) => {
       throw new Error('center is required');
     }
     if (!Number.isInteger(Number(centerid))) {
-      throw new Error('cemter id must be and integer in a string format');
+      throw new Error('center id must be an integer in a string format');
     }
-  }
-  catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message, });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error.message });
     return;
   }
   next();
-}
+};
 
 /**
  * A middleware.
@@ -91,7 +90,7 @@ export const validateUpdateEventInputs = (req, res, next) => {
       throw new Error('event title cannot be empty');
     }
     if (title && title.length < 5) {
-      throw new Error('event title must be between 5 and 20 characters');
+      throw new Error('event title must be between 5 and 30 characters');
     }
     if (title && title.length > 30) {
       throw new Error('event title must be between 5 and 30 characters');
@@ -100,7 +99,7 @@ export const validateUpdateEventInputs = (req, res, next) => {
       throw new Error('event description must be below 200 characters');
     }
     if (date) {
-      const dateData = date.match(/^(\d{4})\/(\d{2})\/(\d{2})$/);
+      const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
       if (!dateData) {
         throw new Error('the date format should be yyyy/mm/dd');
       }
@@ -128,12 +127,11 @@ export const validateUpdateEventInputs = (req, res, next) => {
       }
     }
     if (centerid && !Number.isInteger(Number(centerid))) {
-      throw new Error('cemter id must be and integer in a string format');
+      throw new Error('center id must be an integer in a string format');
     }
-  }
-  catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message, });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error.message });
     return;
   }
   next();
-}
+};

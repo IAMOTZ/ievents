@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import db from '../models';
 import { uploadImage, deleteImage } from '../helpers';
 
@@ -8,9 +9,9 @@ const { centers, events } = db;
  * @param {Array} events an array of events.
  * @returns {Array} an array of the date of allowed events.
  */
-const getDatesFromEvents = (events) => {
-  return events.filter(event => event.status === 'allowed').map(event => event.date);
-}
+const getDatesFromEvents = eventsArray => (
+  eventsArray.filter(event => event.status === 'allowed').map(event => event.date)
+);
 
 /**
  * Get a single center from the database.
@@ -21,15 +22,15 @@ const getDatesFromEvents = (events) => {
 const getCenter = async (centerModel, centerId) => {
   const center = await centerModel.findById(Number(centerId));
   return center;
-}
+};
 
 /**
  * Format the center data to be returned to the user.
  * @param {Object} centerData The raw center data gotten from the database.
  * @returns {Object} The formatted center data.
  */
-const formatCenterData = (centerData) => {
-  return Object.assign(
+const formatCenterData = centerData => (
+  Object.assign(
     {},
     {
       id: centerData.id,
@@ -40,9 +41,9 @@ const formatCenterData = (centerData) => {
       price: centerData.price,
       images: centerData.images,
       bookedOn: centerData.events ? getDatesFromEvents(centerData.events) : null,
-    }
-  );
-};
+    },
+  )
+);
 
 export default {
   /**
@@ -61,7 +62,7 @@ export default {
     return res.status(200).json({
       status: 'success',
       message: 'centers successfully retrieved',
-      centers: allCenters.map((center) => formatCenterData(center)),
+      centers: allCenters.map(center => formatCenterData(center)),
     });
   },
 
@@ -143,7 +144,7 @@ export default {
     if (!center) {
       return res.status(400).json({
         status: 'failed',
-        message: 'center does not exist'
+        message: 'center does not exist',
       });
     } else {
       let image = null;
@@ -158,7 +159,7 @@ export default {
           details: details || center.details,
           capacity: capacity || center.capacity,
           price: price || center.price,
-          images: image ? [image.secure_url] : center.images
+          images: image ? [image.secure_url] : center.images,
         });
       return res.status(200).json({
         status: 'success',
@@ -166,5 +167,5 @@ export default {
         center: formatCenterData(updatedCenter),
       });
     }
-  }
-}
+  },
+};

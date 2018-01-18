@@ -1,3 +1,5 @@
+/* eslint-disable no-else-return */
+/* eslint-disable consistent-return */
 import jwt from 'jsonwebtoken';
 import db from '../models';
 
@@ -68,7 +70,7 @@ export const isSuperAdmin = (req, res, next) => {
       message: 'You are unauthorized to perform this action',
     });
   }
-}
+};
 
 /**
  * A middleware
@@ -87,7 +89,7 @@ export const isEventOwner = async (req, res, next) => {
       message: 'event does not exist',
     });
   } else if (event.userId !== userId) {
-    res.status(401).json({
+    return res.status(401).json({
       status: 'failed',
       message: 'Unauthorised to perform this action',
     });
@@ -95,4 +97,4 @@ export const isEventOwner = async (req, res, next) => {
     res.locals.event = event;
     next();
   }
-}
+};

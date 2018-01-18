@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(formatInputDatas);
 
-app.all('*', function (req, res, next) {
+app.all('*', (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', '*');
@@ -37,9 +37,10 @@ app.use((req, res) => {
 app.set('port', process.env.PORT || 3000);
 
 // After starting the app, updateEventStatus is set to run everyday.
+/* eslint-disable no-console */
 app.listen(app.get('port'), () => {
   console.log(`App started on port ${app.get('port')}`);
-  const interval = 24 * 60 * 60 * 1000;  // One day
+  const interval = 24 * 60 * 60 * 1000; // One day
   setInterval(() => {
     updateEventStatus(events, transactions);
   }, interval);

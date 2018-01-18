@@ -16,6 +16,6 @@ const formatInputDatas = (req, res, next) => {
   }
   res.locals.formattedInputs = inputData;
   next();
-}
+};
 
 export default formatInputDatas;

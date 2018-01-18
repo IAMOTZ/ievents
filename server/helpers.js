@@ -1,15 +1,17 @@
+/* eslint-disable no-else-return */
 import sequelize from 'sequelize';
 import dotEnv from 'dotenv';
 import cloudinary from 'cloudinary';
 
+dotEnv.config();
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SERCRET,
 });
-dotEnv.config();
 
-const Op = sequelize.Op;
+
+const { Op } = sequelize;
 
 /**
  * Compares two date time to see which one is larger.
@@ -24,11 +26,11 @@ const compareDate = (date1, date2, offset) => {
   } else {
     return false;
   }
-}
+};
 
 /**
  * Get the current date in a particular location in the world.
- * This function is needed to handle the differences between where the app would be hosted and 
+ * This function is needed to handle the differences between where the app would be hosted and
  * where the app would be actully in use.
  * @param {Number} timeZoneOffset The timezone offset of that particular location.
  * @returns {Date} The date in that location.
@@ -38,10 +40,10 @@ export const getCurrentDate = (timeZoneOffset) => {
   const UTCTime = new Date(
     localDate.getUTCFullYear(), localDate.getUTCMonth(), localDate.getUTCDate(),
     localDate.getUTCHours(), localDate.getUTCMinutes(), localDate.getUTCSeconds(),
-    localDate.getUTCMilliseconds()
+    localDate.getUTCMilliseconds(),
   ).getTime();
   return new Date(UTCTime + (timeZoneOffset * 60 * 60 * 1000));
-}
+};
 
 /**
  * Updates the status of all the event that their date is passed to DONE.
@@ -56,8 +58,8 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
     where: {
       status: {
         [Op.ne]: 'done',
-      }
-    }
+      },
+    },
   });
   const doneEventIds = [];
   doneEvents.forEach((event) => {
@@ -68,19 +70,19 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
   await eventModel.update({ status: 'done' }, {
     where: {
       id: {
-        [Op.in]: doneEventIds
-      }
-    }
+        [Op.in]: doneEventIds,
+      },
+    },
   });
   await transactionModel.destroy({
     where: {
       eventId: {
-        [Op.in]: doneEventIds
-      }
-    }
+        [Op.in]: doneEventIds,
+      },
+    },
   });
   return;
-}
+};
 
 /**
  * Creates a super admin user.
@@ -89,8 +91,8 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
 export const createSuperAdmin = async (userModel) => {
   const user = await userModel.findOne({
     where: {
-      email: process.env.SUPER_ADMIN_EMAIL
-    }
+      email: process.env.SUPER_ADMIN_EMAIL,
+    },
   });
   if (user) {
     return;
@@ -103,12 +105,13 @@ export const createSuperAdmin = async (userModel) => {
     });
     return;
   }
-}
+};
 
 /**
  * Uploads an image to the cloud at cloudinary.
  * @param {Object} image The image file.
- * @returns  {Promise}  A promise that either resolves the respnose of cloudinary or reject any error that occured.
+ * @returns  {Promise}  A promise that either resolves
+ * the respnose of cloudinary or reject any error that occured.
  */
 export const uploadImage = async (image) => {
   const cloudinaryOptions = {
@@ -125,18 +128,19 @@ export const uploadImage = async (image) => {
       }
     }).end(image.buffer);
   });
-}
+};
 
 /**
  * Deletes an image in the cloud.
  * @param {String} imageUrl The url of the image.
- * @returns {Promise} A promise that either resolves the respnose of cloudinary or reject any error that occured.
+ * @returns {Promise} A promise that either resolves the
+ * respnose of cloudinary or reject any error that occured.
  */
 export const deleteImage = (imageUrl) => {
   const cloudinaryOptions = {
     resource_type: 'raw',
     invalidate: true,
-  }
+  };
   const urlMatch = /https:\/\/res.cloudinary.com\/tunmise\/raw\/upload\/(.*?)\/(.*)/;
   const imagePublicId = imageUrl.match(urlMatch)[2];
   return new Promise((resolve, reject) => {
@@ -148,4 +152,4 @@ export const deleteImage = (imageUrl) => {
       }
     });
   });
-}
+};

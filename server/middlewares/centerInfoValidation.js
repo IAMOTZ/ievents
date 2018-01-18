@@ -23,8 +23,8 @@ export const validateAddCenterInputs = (req, res, next) => {
     if (name.length < 5 || name.length > 30) {
       throw new Error('center name must be between 5 and 30 characters');
     }
-    if (location && location.length > 30) {
-      throw new Error('center location must be below 30 characters');
+    if (location && location.length > 50) {
+      throw new Error('center location must be below 50 characters');
     }
     if (details && details.length > 300) {
       throw new Error('center details must be below 300 characters');
@@ -41,13 +41,12 @@ export const validateAddCenterInputs = (req, res, next) => {
     if (!Number.isFinite(Number(price))) {
       throw new Error('center price must be a number in string format');
     }
-  }
-  catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message, });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error.message });
     return;
   }
   next();
-}
+};
 
 /**
  * A middleware.
@@ -77,8 +76,8 @@ export const validateUpdateCenterInputs = (req, res, next) => {
     if (location && location.length >= 50) {
       throw new Error('center location must be below 50 characters');
     }
-    if (details && details.length > 200) {
-      throw new Error('center details must be below 200 characters');
+    if (details && details.length > 300) {
+      throw new Error('center details must be below 300 characters');
     }
     if (capacity) {
       if (!Number.isFinite(Number(capacity))) {
@@ -90,10 +89,9 @@ export const validateUpdateCenterInputs = (req, res, next) => {
         throw new Error('center price must be a number in string format');
       }
     }
-  }
-  catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message, });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error.message });
     return;
   }
   next();
-}
+};

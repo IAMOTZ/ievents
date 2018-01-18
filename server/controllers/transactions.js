@@ -1,6 +1,9 @@
+/* eslint-disable no-else-return */
 import db from '../models/index';
 
-const { transactions, centers, users, events } = db;
+const {
+  transactions, centers, users, events,
+} = db;
 
 /**
  * Get a single transaction from the database.
@@ -11,7 +14,7 @@ const { transactions, centers, users, events } = db;
 const getTransaction = async (transactionModel, transactionId) => {
   const transaction = await transactionModel.findById(Number(transactionId));
   return transaction;
-}
+};
 
 /**
  * Cancels an event.
@@ -21,11 +24,11 @@ const getTransaction = async (transactionModel, transactionId) => {
  */
 const cancelEvent = async (eventModel, eventId) => {
   const event = await eventModel.update(
-    { status: 'canceled', },
-    { where: { id: eventId, } }
+    { status: 'canceled' },
+    { where: { id: eventId } },
   );
   return event;
-}
+};
 
 export default {
   /**
@@ -47,9 +50,9 @@ export default {
           include: [{
             model: users,
             attributes: ['id', 'email'],
-          }]
-        }]
-      }]
+          }],
+        }],
+      }],
     });
     return res.status(200).json(allCenters);
   },
@@ -66,7 +69,7 @@ export default {
     if (!transaction) {
       return res.status(400).json({
         status: 'failed',
-        message: 'the transaction does not exist',
+        message: 'transaction does not exist',
       });
     } else {
       await transaction.destroy();
@@ -76,5 +79,5 @@ export default {
         message: 'transaction successfully deleted',
       });
     }
-  }
-}
+  },
+};

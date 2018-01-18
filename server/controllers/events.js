@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import db from '../models/index';
 
 const { events, centers, transactions } = db;
@@ -7,8 +8,8 @@ const { events, centers, transactions } = db;
  * @param {Object} eventData The raw event data gotten from the database.
  * @returns {Object} The formatted event data.
  */
-const formatEventData = (eventData) => {
-  return Object.assign(
+const formatEventData = eventData => (
+  Object.assign(
     {},
     {
       id: eventData.id,
@@ -18,9 +19,9 @@ const formatEventData = (eventData) => {
       description: eventData.description,
       date: eventData.date,
       status: eventData.status,
-    }
+    },
   )
-}
+);
 
 /**
  * Get a single center from the database.
@@ -31,7 +32,7 @@ const formatEventData = (eventData) => {
 const getCenter = async (centerModel, centerId) => {
   const center = await centerModel.findById(Number(centerId));
   return center;
-}
+};
 
 /**
  * Checks if a center is booked(has event) on a particular date.
@@ -47,14 +48,14 @@ const isCenterBooked = async (eventModel, centerId, date) => {
         date,
         centerId,
         status: 'allowed',
-      }
+      },
     });
   if (event) {
     return true;
   } else {
     return false;
   }
-}
+};
 
 /**
  * Creates a transaction.
@@ -68,7 +69,7 @@ const createTransaction = async (transactionModel, event) => {
     centerId: event.centerId,
   });
   return transaction;
-}
+};
 
 /**
  * Deletes a transaction.
@@ -79,9 +80,9 @@ const deleteTransaction = async (transactionModel, event) => {
   await transactionModel.destroy({
     where: {
       eventId: event.id,
-    }
+    },
   });
-}
+};
 
 export default {
   /**
@@ -98,7 +99,7 @@ export default {
     return res.status(200).json({
       status: 'success',
       message: 'events successfully retrieved',
-      events: allEvents.map((event) => formatEventData(event)),
+      events: allEvents.map(event => formatEventData(event)),
     });
   },
 
@@ -154,7 +155,7 @@ export default {
     const {
       title, description, date, centerid,
     } = res.locals.formattedInputs;
-    const event = res.locals.event;    
+    const { event } = res.locals;
     let updatedEvent = null;
     if (centerid && event.centerId !== Number(centerid)) {
       const newChoosenCenter = await getCenter(centers, centerid);
@@ -200,7 +201,7 @@ export default {
    * @returns {Object} The response object containing some response data.
    */
   async delete(req, res) {
-    const event = res.locals.event; 
+    const { event } = res.locals;
     await event.destroy();
     return res.status(200).json({
       status: 'success',

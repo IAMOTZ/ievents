@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import db from '../models';
@@ -9,23 +10,23 @@ const { users } = db;
  * @param {Object} userData The raw user data gotten from the database.
  * @returns {Object} The formatted user data.
  */
-const formatUserData = (userData) => {
-  return {
+const formatUserData = userData => (
+  {
     id: userData.id,
     email: userData.email,
     name: userData.name,
     role: userData.role,
-  };
-};
+  }
+);
 
 /**
  * Generates a token.
  * @param {Object} payLoad The information to embed in the token.
  * @returns {String} The token.
  */
-const generateToken = (payLoad) => {
-  return jwt.sign(payLoad, process.env.JSON_WEB_TOKEN_SECRETE, { expiresIn: '48hr' });
-}
+const generateToken = payLoad => (
+  jwt.sign(payLoad, process.env.JSON_WEB_TOKEN_SECRETE, { expiresIn: '48hr' })
+);
 
 /**
  * Checks if a user input password is correct.
@@ -33,9 +34,9 @@ const generateToken = (payLoad) => {
  * @param {String} hashedPassword The hashed password.
  * @returns {Boolean} Truthy values representing if the password is correct or not.
  */
-const verifyPassword = (textPassword, hashedPassword) => {
-  return bcrypt.compareSync(textPassword, hashedPassword);
-}
+const verifyPassword = (textPassword, hashedPassword) => (
+  bcrypt.compareSync(textPassword, hashedPassword)
+);
 
 /**
  * Get a single user from the database.
@@ -46,11 +47,11 @@ const verifyPassword = (textPassword, hashedPassword) => {
 const getUser = async (userModel, userEmail) => {
   const user = await userModel.findOne({
     where: {
-      email: userEmail.toLowerCase()
-    }
+      email: userEmail.toLowerCase(),
+    },
   });
   return user;
-}
+};
 
 export default {
   /**
@@ -62,12 +63,12 @@ export default {
   async signup(req, res) {
     const {
       name, email, password,
-      } = res.locals.formattedInputs;
+    } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (user) {
       return res.status(400).json({
         status: 'failed',
-        message: 'User already exist',
+        message: 'user already exist',
       });
     } else {
       const newUser = await users.create({
@@ -91,8 +92,8 @@ export default {
    * @returns {Object} The response object containing some response data.
    */
   async signin(req, res) {
-    const { email, password, } = res.locals.formattedInputs;
-    const user = await getUser(users, email, );
+    const { email, password } = res.locals.formattedInputs;
+    const user = await getUser(users, email);
     if (!user) {
       return res.status(400).json({
         status: 'failed',
@@ -106,7 +107,7 @@ export default {
         token: generateToken(formatUserData(user)),
       });
     } else {
-      res.status(400).json({
+      return res.status(400).json({
         status: 'failed',
         message: 'password incorrect',
       });
@@ -139,5 +140,5 @@ export default {
         message: 'the user has been updated to become an admin',
       });
     }
-  }
+  },
 };

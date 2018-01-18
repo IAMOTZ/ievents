@@ -37,9 +37,6 @@ export const validateSignUpInputs = (req, res, next) => {
     if (!email.match(/^\S+?@\S+.\S+$/)) {
       throw new Error('email format is wrong');
     }
-    if (email.match(/^\S+$/) === null) {
-      throw new Error('email must not contain whitespaces');
-    }
     if (password === undefined || password === null) {
       throw new Error('password is required');
     }
@@ -61,13 +58,12 @@ export const validateSignUpInputs = (req, res, next) => {
     if (password !== confirmpassword) {
       throw new Error('password and confirm password input does not match');
     }
-  }
-  catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message, });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error.message });
     return;
   }
   next();
-}
+};
 
 /**
  * A middleware.
@@ -91,25 +87,18 @@ export const validateSigninInputs = (req, res, next) => {
     if (!email.match(/^\S+?@\S+.\S+$/)) {
       throw new Error('email format is wrong');
     }
-    if (email.match(/^\S+$/) === null) {
-      throw new Error('email must not contain whitespaces');
-    }
     if (password === undefined || password === null) {
       throw new Error('password is required');
     }
     if (password === '') {
       throw new Error('password cannot be empty');
     }
-    if (password.match(/^\S+$/) === null) {
-      throw new Error('password must not contain whitespaces');
-    }
-  }
-  catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message, });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error.message });
     return;
   }
   next();
-}
+};
 
 /**
  * A middleware.
@@ -127,19 +116,12 @@ export const validateCreateAdminInputs = (req, res, next) => {
     if (email === '') {
       throw new Error('email cannot be empty');
     }
-    if (typeof (email) !== 'string') {
-      throw new Error('email has to be a string');
-    }
     if (!email.match(/^\S+?@\S+.\S+$/)) {
       throw new Error('email format is wrong');
     }
-    if (email.match(/^\S+$/) === null) {
-      throw new Error('email must not contain whitespaces');
-    }
-  }
-  catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message, });
+  } catch (error) {
+    res.status(400).json({ status: 'failed', message: error.message });
     return;
   }
   next();
-}
+};
