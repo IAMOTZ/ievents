@@ -9,7 +9,6 @@ export default (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     location: {
       type: DataTypes.STRING,
@@ -19,9 +18,6 @@ export default (sequelize, DataTypes) => {
     },
     capacity: {
       type: DataTypes.INTEGER,
-    },
-    facilities: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
     },
     price: {
       type: DataTypes.REAL,

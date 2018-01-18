@@ -1,19 +1,18 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
+// Actions.
 import { updateCenter, clearStatus } from '../../actions/centerActions';
-
+// Common Components.
 import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import ImageInput from '../common/ImageInput.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
 import WarningAlert from '../common/WarningAlert.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx'
+import { UserTopNav } from '../common/TopNavigation.jsx';
+import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
-@connect((store) => {
-  return {
+@connect(store => (
+  {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     toEdit: store.centers.toEdit,
@@ -21,10 +20,9 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx'
       error: store.centers.status.updatingError.message,
       success: store.centers.status.updated,
       updating: store.centers.status.updating,
-    }
+    },
   }
-})
-
+))
 export default class EditCenter extends React.Component {
   constructor() {
     super();
@@ -42,143 +40,165 @@ export default class EditCenter extends React.Component {
     this.props.dispatch(clearStatus('ALL'));
   }
 
-  // This method uses user input to update the state
+  /**
+   * Update some state variables with the user inputs.
+   * @param {Event} e The event object.
+   */
   getInput = (e) => {
-    const state = this.state;
+    const { state } = this;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
+  /**
+   * A callback to update the state after the user uploads an image.
+   * @param {File} files The image file.
+   */
   handleImageDrop = (files) => {
     this.setState({
       newImages: files,
     });
   }
 
-  // This method fires the action to create an event
+  /**
+   * Dispatches the action to update the center.
+   */
   update = () => {
     const {
-      name,
-      location,
-      details,
-      capacity,
-      price,
-      newImages,
+      name, location, details, capacity, price, newImages,
     } = this.state;
     const centerId = this.props.toEdit.id;
-    const centerDetails = { name, location, details, capacity, price, };
+    const centerDetails = {
+      name, location, details, capacity, price,
+    };
     const fd = new FormData();
-    for (let detail in centerDetails) {
-      if (centerDetails[detail]) {
-        fd.append(`${detail}`, centerDetails[detail]);
+    const entries = Object.entries(centerDetails);
+    entries.forEach((entry) => {
+      const key = entry[0];
+      const value = entry[1];
+      if (value) {
+        fd.append(key, value);
       }
-    }
+    });
     if (newImages) {
-      for (let i = 0; i < newImages.length; i += 1) {
-        fd.append('images', newImages[i]);
-      }
+      fd.append('image', newImages[0]);
     }
     this.props.dispatch(updateCenter(centerId, fd, this.props.user.token));
     window.scrollTo(0, 0);
   }
 
   render() {
+    let component;
     if (!this.props.authenticated) {
-      return (<Redirect to="/users/login" />)
+      component = (<Redirect to="/users/login" />);
     } else if (this.props.status.success) {
-      return (<Redirect to="/centers2" />);
+      component = (<Redirect to="/centers2" />);
     } else {
-      return (
+      component = (
         <div className="add-center-container">
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title='Edit Center' />
-          <div class="container-fluid">
-            <div class="row">
+          <UserTopNav name={this.props.user.name} title="Edit Center" />
+          <div className="container-fluid">
+            <div className="row">
               {/*  Side navigation on large screen */}
               <UserSideNav userName={this.props.user.name} />
               {/* Main content */}
-              <div class="col-lg-10 offset-md-2" id="add-event-section">
+              <div className="col-lg-10 offset-md-2" id="add-event-section">
                 {/* Content Header(navigation) on large screen */}
-                <Header text='Edit Center' />
+                <Header text="Edit Center" />
                 {/* Input form */}
-                <form class="mt-lg-5 mb-md-5 w-lg-50">
+                <form className="mt-lg-5 mb-md-5 w-lg-50">
                   <LoadingIcon start={this.props.status.updating} size={2} />
                   <WarningAlert message={this.props.status.error} />
-                  <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text"
-                      defaultValue={this.props.toEdit.name}
-                      className="form-control"
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
                       id="name"
                       name="name"
+                      type="text"
+                      defaultValue={this.props.toEdit.name}
+                      className="form-control"
                       placeholder="The name of the center"
-                      onChange={this.getInput} />
-                    <small class="form-text text-muted">Less than 30 characters</small>
+                      onChange={this.getInput}
+                    />
+                    <small className="form-text text-muted">Less than 30 characters</small>
                   </div>
-                  <div class="form-group">
-                    <label for="location">Location</label>
-                    <input type="text"
-                      defaultValue={this.props.toEdit.location}
-                      class="form-control"
+                  <div className="form-group">
+                    <label htmlFor="location">Location</label>
+                    <input
                       id="location"
                       name="location"
+                      type="text"
+                      defaultValue={this.props.toEdit.location}
+                      className="form-control"
                       placeholder="The location of the center"
-                      onChange={this.getInput} />
-                    <small class="form-text text-muted">Less than 30 characters</small>
+                      onChange={this.getInput}
+                    />
+                    <small className="form-text text-muted">Less than 30 characters</small>
                   </div>
-                  <div class="form-group">
-                    <label for="description">Details</label>
+                  <div className="form-group">
+                    <label htmlFor="description">Details</label>
                     <textarea
                       defaultValue={this.props.toEdit.details}
-                      class="form-control"
-                      id="details" rows="7"
+                      className="form-control"
+                      id="details"
+                      rows="7"
                       name="details"
                       placeholder="More details about the center"
-                      onChange={this.getInput}></textarea>
-                    <small class="form-text text-muted">Less than 200 characters</small>
+                      onChange={this.getInput} />
+                    <small className="form-text text-muted">Less than 200 characters</small>
                   </div>
-                  <div class="form-group">
-                    <label for="capacity">Capacity</label>
-                    <input type="number"
-                      defaultValue={this.props.toEdit.capacity}
-                      class="form-control"
+                  <div className="form-group">
+                    <label htmlFor="capacity">Capacity</label>
+                    <input
                       id="capacity"
                       name="capacity"
+                      type="number"
+                      defaultValue={this.props.toEdit.capacity}
+                      className="form-control"
                       placeholder="How many seats"
-                      onChange={this.getInput} />
+                      onChange={this.getInput}
+                    />
                   </div>
-                  <div class="form-group">
-                    <label for="price">Price</label>
-                    <input type="number"
-                      defaultValue={this.props.toEdit.price}
-                      class="form-control"
+                  <div className="form-group">
+                    <label htmlFor="price">Price</label>
+                    <input
                       id="price"
                       name="price"
+                      type="number"
+                      defaultValue={this.props.toEdit.price}
+                      className="form-control"
                       placeholder="Price"
-                      onChange={this.getInput} />
+                      onChange={this.getInput}
+                    />
                   </div>
-                  <div class="form-group">
-                    <label for="image">Image</label>
+                  <div className="form-group">
+                    <label htmlFor="image">Image</label>
                     <div className="text-center">
                       <ImageInput
                         id="image"
                         onDrop={this.handleImageDrop}
                         newImage={this.state.newImages ? this.state.newImages[0] : null}
-                        previousImage={this.props.toEdit.images ? this.props.toEdit.images[0] : null}
+                        previousImage={
+                          this.props.toEdit.images ? this.props.toEdit.images[0] : null
+                        }
                       />
                     </div>
                   </div>
-                  <div class="ml-3 pt-3">
-                    <button class="btn btn-outline-dark" disabled={this.props.status.updating} onClick={this.update}>Update</button>
+                  <div className="ml-3 pt-3">
+                    <button
+                      className="btn btn-outline-dark"
+                      disabled={this.props.status.updating}
+                      onClick={this.update}
+                    >Update
+                    </button>
                   </div>
                 </form>
-
               </div>
             </div>
           </div>
-
-          <footer class="d-block d-sm-none mt-5">
-            <div class="container text-white text-center py-5">
+          <footer className="d-block d-sm-none mt-5">
+            <div className="container text-white text-center py-5">
               <h1>Ievents</h1>
               <p>Copyright &copy; 2017</p>
             </div>
@@ -186,5 +206,6 @@ export default class EditCenter extends React.Component {
         </div>
       );
     }
+    return component;
   }
 }

@@ -1,24 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
+// Actions.
 import {
-  getAllEvents,
-  deleteEvent,
-  initializeEdit,
-  clearStatus
+  getAllEvents, deleteEvent, initializeEdit, clearStatus,
 } from '../../actions/eventActions';
 import { getAllCenters } from '../../actions/centerActions';
-
+// Common Componnets.
 import UserSideNav from '../common/SideNavigation.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import { ConfirmModal } from '../common/Modal';
 import Header from '../common/Header.jsx';
 import EventCards from '../common/EventCards.jsx';
+import { UserTopNav } from '../common/TopNavigation.jsx';
+import { ConfirmModal } from '../common/Modal';
 import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
 
-@connect((store) => {
-  return {
+@connect(store => (
+  {
     user: store.user.user,
     authenticated: store.user.status.fetched,
     events: store.events.events,
@@ -27,10 +24,9 @@ import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
       deleting: store.events.status.deleting,
       deleted: store.events.status.deleted,
       fetching: store.events.status.fetching,
-    }
+    },
   }
-})
-
+))
 export default class Events extends React.Component {
   constructor() {
     super();
@@ -54,27 +50,42 @@ export default class Events extends React.Component {
     }
   }
 
-  // This method simply keep track of an event to be deleted and also 
-  // initiate a modal
+  /**
+   * It updates the store about an event that is to be edited.
+   * @param {Event} e The event object.
+   */
+  onEdit = (e) => {
+    this.props.dispatch(initializeEdit(e.target.id));
+  }
+
+  /**
+   * It updates the state about an event that is to be deleted.
+   * It also initiates the confirmation modal.
+   * @param {Event} e The event object.
+   */
   startDelete = (e) => {
-    const id = e.target.id;
-    const state = this.state;
+    const { id } = e.target;
+    const { state } = this;
     state.toDelete = id;
     state.modalVisible = !this.state.modalVisible;
     this.setState(state);
   }
 
-  // This method eventually deletes the event and hides back the modal
-  finishDelete = (e) => {
+  /**
+   * It eventually deletes the event and hides back the modal.
+   */
+  finishDelete = () => {
     this.props.dispatch(deleteEvent(this.state.toDelete, this.props.user.token));
     this.setState({
       toDelete: null,
       modalVisible: !this.state.modalVisible,
     });
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
-  // This method cancels the deleting and also hides back the modal
+  /**
+   * This method cancels the deleting and also hides back the modal.
+   */
   cancelDelete = () => {
     this.setState({
       toDelete: null,
@@ -82,59 +93,58 @@ export default class Events extends React.Component {
     });
   }
 
-  // This method initialize editing of an event
-  onEdit = (e) => {
-    this.props.dispatch(initializeEdit(e.target.id))
-  }
-
   render() {
+    let component;
     if (!this.props.authenticated) {
-      return (<Redirect to="/users/login" />)
+      component = (<Redirect to="/users/login" />);
     } else {
-      return (
+      component = (
         <div id="events-container">
-          <UserTopNav name={this.props.user.name} title='My Events' />
+          <UserTopNav name={this.props.user.name} title="My Events" />
           <div className="container-fluid">
             <div className="row">
               <UserSideNav userName={this.props.user.name} />
               {/* Main content */}
-              <div class="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
+              <div className="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
                 {/* Content Header(navigation) on large screen */}
-                <Header text='My Events' />
+                <Header text="My Events" />
                 <div className="bg-primary rounded text-center mx-auto mt-2 w-lg-50">
                   <span className="text-white">Events that their date has passed is considered done</span>
                 </div>
                 <LoadingIcon start={this.props.status.deleting} size={2} />
                 {
-                  this.props.events.length === 0 && this.props.status.fetching ? <LoadingContainer iconSize={4} /> :
-                    < div className="mt-5">
+                  this.props.events.length === 0 && this.props.status.fetching ?
+                    <LoadingContainer iconSize={4} /> :
+                    <div className="mt-5">
                       <div className="card-columns mx-auto">
                         <EventCards
                           events={this.props.events}
                           centers={this.props.centers}
                           startDelete={this.startDelete}
                           remove={this.removeEvent}
-                          edit={this.onEdit} />
+                          edit={this.onEdit}
+                        />
                       </div>
                     </div>
                 }
-                <ConfirmModal visible={this.state.modalVisible}
+                <ConfirmModal
+                  visible={this.state.modalVisible}
                   onCancel={this.cancelDelete}
                   onOK={this.finishDelete}
-                  children="Are you sure you want to delete this event?" />
-
+                ><span>Are you sure you want to delete this event?</span>
+                </ConfirmModal>
               </div>
             </div>
           </div>
-
-          <footer class="d-block d-sm-none mt-5">
-            <div class="container text-white text-center py-5">
+          <footer className="d-block d-sm-none mt-5">
+            <div className="container text-white text-center py-5">
               <h1>Ievents</h1>
               <p>Copyright &copy; 2017</p>
             </div>
           </footer>
-        </div >
-      )
+        </div>
+      );
     }
+    return component;
   }
 }

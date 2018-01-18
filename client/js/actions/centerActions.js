@@ -1,84 +1,94 @@
 import axios from 'axios';
-import apiBaseUrl from '../url';
 
-// This action contacts the server to get all centers
-export const getAllCenters = () => {
-  return (dispatch) => {
-    dispatch({ type: 'GETTING_CENTERS' });
-    axios.get(`${apiBaseUrl}/centers`)
-      .then((response) => {
-        dispatch({ type: 'GETTING_CENTERS_RESOLVED', payload: response.data })
-      })
-      .catch((err) => {
-        dispatch({ type: 'GETTING_CENTERS_REJECTED', payload: err.response.data });
-      })
-  }
-}
+const apiBaseUrl = process.env.API_BASE_URL;
 
-// This actions contacts the server to add a center
-export const addCenter = (centerDetails, userToken) => {
-  return (dispatch) => {
-    dispatch({ type: 'ADDING_CENTER' });
-    const config = {
-      headers: {
-        'access-token': userToken,
-        'Content-type': 'multipart/form-data',
-      },
-    };
-    axios.post(`${apiBaseUrl}/centers`, centerDetails, config)
-      .then((response) => {
-        dispatch({ type: 'ADDING_CENTER_RESOLVED', payload: response.data, })
-      })
-      .catch((err) => {
-        dispatch({ type: 'ADDING_CENTER_REJECTED', payload: err.response.data, });
-      })
-  }
-}
+/**
+ * A Thunk modeled action that eventually retrieves all the centers in the app.
+ * @returns {Function}
+ */
+export const getAllCenters = () => (dispatch) => {
+  dispatch({ type: 'GETTING_CENTERS' });
+  axios.get(`${apiBaseUrl}/centers`)
+    .then((response) => {
+      dispatch({ type: 'GETTING_CENTERS_RESOLVED', payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: 'GETTING_CENTERS_REJECTED', payload: err.response.data });
+    });
+};
 
-export const updateCenter = (id, centerDetails, userToken) => {
-  return (dispatch) => {
-    dispatch({ type: 'UPDATING_CENTER' });
-    const config = {
-      headers: {
-        'access-token': userToken,
-        'Content-type': 'multipart/form-data',
-      },
-    }
-    axios.put(`${apiBaseUrl}/centers/${id}`, centerDetails, config)
-      .then((response) => {
-        dispatch({ type: 'UPDATING_CENTER_RESOLVED', payload: response.data, })
-      })
-      .catch((err) => {
-        dispatch({ type: 'UPDATING_CENTER_REJECTED', payload: err.response.data, });
-      })
-  }
-}
-
-// This action initializes the editing of a center
-export const initializeEdit = (id) => {
-  return {
-    type: 'INITIALIZE_EDIT',
-    payload: id,
+/**
+ * A Thunk modeled action that eventually adds a center.
+ * @param {Object} centerDetails The details of the center to be added.
+ * @param {String} userToken The token of the user that wants to add the center.
+ * @returns {Function}
+ */
+export const addCenter = (centerDetails, userToken) => (dispatch) => {
+  dispatch({ type: 'ADDING_CENTER' });
+  const config = {
+    headers: {
+      'access-token': userToken,
+      'Content-type': 'multipart/form-data',
+    },
   };
-}
+  axios.post(`${apiBaseUrl}/centers`, centerDetails, config)
+    .then((response) => {
+      dispatch({ type: 'ADDING_CENTER_RESOLVED', payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: 'ADDING_CENTER_REJECTED', payload: err.response.data });
+    });
+};
 
-// This action triggers the display of the modal that shows the details of a center
-export const showCenterModal = (centerId) => {
-  return {
-    type: 'SHOW_CENTER_MODAL',
-    payload: centerId,
-  }
-}
+/**
+ * A Thunk modeled action that eventually updates a center.
+ * @param {Number} id The ID of the center to update.
+ * @param {Object} centerDetails The details of the center to update.
+ * @param {String} userToken The token of the user that wants to update the center.
+ * @returns {Function}
+ */
+export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
+  dispatch({ type: 'UPDATING_CENTER' });
+  const config = {
+    headers: {
+      'access-token': userToken,
+      'Content-type': 'multipart/form-data',
+    },
+  };
+  axios.put(`${apiBaseUrl}/centers/${id}`, centerDetails, config)
+    .then((response) => {
+      dispatch({ type: 'UPDATING_CENTER_RESOLVED', payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: 'UPDATING_CENTER_REJECTED', payload: err.response.data });
+    });
+};
 
-// This action updates the state about a center that is about to be booked
-export const book = (centerId) => {
-  return {
-    type: 'BOOK',
-    payload: centerId
-  }
-}
+/**
+ * It informs a reducer to update the store about a center that is to be edited.
+ * @param {Number} centerId The ID of the center to be edited.
+ * @returns {Object}
+ */
+export const initializeEdit = centerId => ({ type: 'INITIALIZE_EDIT', payload: centerId });
 
-// This action reset the status of a specific process in the  center store to its initial state
-export const clearStatus = (process) => {
-  return { type: 'CLEAR_CENTER_STATUS', payload: process }
-}
+/**
+ * It informs a reducer to update the store with the details of a center to be shown on a modal.
+ * @param {Number} centerId The center ID.
+ * @returns {Object}
+ */
+export const showCenterModal = centerId => ({ type: 'SHOW_CENTER_MODAL', payload: centerId });
+
+/**
+ * It informs a reducer to update the store about a center that is about to be booked.
+ * @param {Number} centerId The ID of the center.
+ * @returns {Object}
+ */
+export const book = centerId => ({ type: 'BOOK', payload: centerId });
+
+/**
+ * It informs a reducer to Clear the status variables tracking a particular center process.
+ * @param {String} process The process to be cleared.
+ * @returns {Object}
+ */
+export const clearStatus = process => ({ type: 'CLEAR_CENTER_STATUS', payload: process });
+

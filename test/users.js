@@ -1,364 +1,312 @@
+import dotEnv from 'dotenv';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server/app';
-import db from '../server/models/index';
 
-const { users } = db;
-
-chai.use(chaiHttp);
+dotEnv.config();
 
 const should = chai.should();
 
-describe('Authentication', () => {
-  describe('POST /api/v1/users', () => {
-    it('sign up when all input fields are given', (done) => {
-      const reqBody = {
-        name: 'Tunmise',
-        email: 'OgunniyiTunmis@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
+chai.use(chaiHttp);
+
+// The name and confirmPassword are only needed for signup.
+const normalUserDetails = {
+  name: 'test',
+  email: 'test@gmail.com',
+  password: 'Password123',
+  confirmPassword: 'Password123',
+};
+
+const superAdminDetails = {
+  email: process.env.SUPER_ADMIN_EMAIL,
+  password: process.env.SUPER_ADMIN_PASSWORD,
+};
+
+const alterUserDetails = newUserDetails => (
+  Object.assign({}, normalUserDetails, newUserDetails)
+);
+
+const createUser = (userDetails, assertions) => {
+  chai.request(app)
+    .post('/api/v1/users')
+    .send(userDetails)
+    .end(assertions);
+};
+
+const createAdmin = (adminDetails, assertions) => {
+  chai.request(app)
+    .post('/api/v1/users/admin')
+    .send(adminDetails)
+    .end(assertions);
+};
+
+const loginUser = (userDetails, assertions) => {
+  chai.request(app)
+    .post('/api/v1/users/login')
+    .send(userDetails)
+    .end(assertions);
+};
+
+const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
+  res.should.have.status(statusCode);
+  res.body.message.toLowerCase().should.be.eql(message.toLowerCase());
+  res.body.status.should.be.eql('failed');
+  done();
+};
+
+describe('User Endpoints', () => {
+  describe('Signup Endpoint', () => {
+    it('should not create a user without name', (done) => {
+      createUser(
+        alterUserDetails({ name: null }),
+        failureAssertions('name is required', 400, done),
+      );
+    });
+    it('should not create a user with empty name', (done) => {
+      createUser(
+        alterUserDetails({ name: '' }),
+        failureAssertions('name field cannot be empty', 400, done),
+      );
+    });
+    it('should not create a user with name less that 3 char', (done) => {
+      createUser(
+        alterUserDetails({ name: 'te' }),
+        failureAssertions('name must be equal or more than 3 characters', 400, done),
+      );
+    });
+    it('should not create a user with name containing white spaces', (done) => {
+      createUser(
+        alterUserDetails({ name: 'te st' }),
+        failureAssertions('name must not contain whitespaces', 400, done),
+      );
+    });
+    it('should not create a user with name containing symbols', (done) => {
+      createUser(
+        alterUserDetails({ name: 'te&st' }),
+        failureAssertions('name can contain only numbers and letters', 400, done),
+      );
+    });
+    it('should not create a user without email', (done) => {
+      createUser(
+        alterUserDetails({ email: null }),
+        failureAssertions('email is required', 400, done),
+      );
+    });
+    it('shoulld not create a user with empty email', (done) => {
+      createUser(
+        alterUserDetails({ email: '' }),
+        failureAssertions('email field cannot be empty', 400, done),
+      );
+    });
+    it('should not create a user with wrong email format', (done) => {
+      createUser(
+        alterUserDetails({ email: 'test.com' }),
+        failureAssertions('email format is wrong', 400, done),
+      );
+    });
+    it('should not create user without password', (done) => {
+      createUser(
+        alterUserDetails({ password: null }),
+        failureAssertions('password is required', 400, done),
+      );
+    });
+    it('should not create user with empty password', (done) => {
+      createUser(
+        alterUserDetails({ password: '' }),
+        failureAssertions('password field cannot be empty', 400, done),
+      );
+    });
+    it('should not create a user with password containing white spaces', (done) => {
+      createUser(
+        alterUserDetails({ password: 'Pass word123' }),
+        failureAssertions('password must not contain whitespaces', 400, done),
+      );
+    });
+    it('should not create user with password less than 7 char', (done) => {
+      createUser(
+        alterUserDetails({ password: 'Passw' }),
+        failureAssertions('password must be equal or more than 7 characters', 400, done),
+      );
+    });
+    it('should not create user when password do not contain capital-small letters and numbers', (done) => {
+      createUser(
+        alterUserDetails({ password: 'paswword' }),
+        failureAssertions('password must contain capital letters, small letters and numbers', 400, done),
+      );
+    });
+    it('should not create user without confirm password field', (done) => {
+      createUser(
+        alterUserDetails({ confirmPassword: null }),
+        failureAssertions('confirmPassword field is required', 400, done),
+      );
+    });
+    it('should not create a user if password and confirmPassword field don\'t match', (done) => {
+      createUser(
+        alterUserDetails({ confirmPassword: 'AnotherPass123' }),
+        failureAssertions('password and confirm password input does not match', 400, done),
+      );
+    });
+    it('should create a new user', (done) => {
+      createUser(
+        normalUserDetails,
+        (err, res) => {
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('user created');
           res.body.token.should.be.a('string');
-          res.body.user.name.should.be.eql(reqBody.name);
-          res.body.user.email.should.be.eql(reqBody.email.toLowerCase());
+          res.body.user.name.should.be.eql('test');
+          res.body.user.email.should.be.eql('test@gmail.com');
+          res.body.user.role.should.be.eql('user');
           done();
-        });
+        },
+      );
     });
-    it('should not sign up when name is not given', (done) => {
-      const reqBody = {
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('name is required');
+    it('should create a another new user', (done) => {
+      createUser(
+        alterUserDetails({ email: 'test2@gmail.com' }),
+        (err, res) => {
+          res.should.have.status(201);
+          res.body.status.should.be.eql('success');
+          res.body.token.should.be.a('string');
+          res.body.user.name.should.be.eql('test');
+          res.body.user.email.should.be.eql('test2@gmail.com');
+          res.body.user.role.should.be.eql('user');
           done();
-        });
+        },
+      );
     });
-    it('should not sign up when name is an empty string', (done) => {
-      const reqBody = {
-        name: '',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('name field cannot be empty');
-          done();
-        });
-    });
-    it('should not sign up when name contain special characer', (done) => {
-      const reqBody = {
-        name: 'tunmise#$',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('name can contain only numbers and letters');
-          done();
-        });
-    });
-    it('should not sign up when name is less than 5 characters', (done) => {
-      const reqBody = {
-        name: 'tu',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('name must be equal or more than 3 characters');
-          done();
-        });
-    });
-    it('should not sign up when name contain white spaces', (done) => {
-      const reqBody = {
-        name: 'tun mise',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('name must not contain whitespaces');
-          done();
-        });
-    });
-    it('should not sign up when email is not given', (done) => {
-      const reqBody = {
-        name: 'tunmise',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('email is required');
-          done();
-        });
-    });
-    it('should not sign up when email is empty', (done) => {
-      const reqBody = {
-        name: 'tunmise',
-        email: '',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('email field cannot be empty');
-          done();
-        });
-    });
-    it('should not sign up when email is of wrong format', (done) => {
-      const reqBody = {
-        name: 'tunmise',
-        email: 'tumise',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('email format is wrong');
-          done();
-        });
-    });
-    it('should not sign up when email contain white spaces', (done) => {
-      const reqBody = {
-        name: 'tunmise',
-        email: 'tunm ise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('email format is wrong');
-          done();
-        });
-    });
-    it('should not sign up when pasword is not given', (done) => {
-      const reqBody = {
-        name: 'Tunmise',
-        email: 'OgunniyiTunmise@gmail.com',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('password is required');
-          done();
-        });
-    });
-    it('should not sign up when confirm pasword is not given', (done) => {
-      const reqBody = {
-        name: 'Tunmise',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('confirmPassword field is required');
-          done();
-        });
-    });
-    it('should not sign up when pasword is an empty string', (done) => {
-      const reqBody = {
-        name: 'Tunmise',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: '',
-        confirmPassword: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('password field cannot be empty');
-          done();
-        });
-    });
-    it('should not sign up when password is not equal to confirm password', (done) => {
-      const reqBody = {
-        name: 'Tunmise',
-        email: 'OgunniyiTunmise@gmail.com',
-        password: 'myPassword12',
-        confirmPassword: 'anotherPassword',
-      };
-      chai.request(app)
-        .post('/api/v1/users')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('password and confirm password input does not match');
-          done();
-        });
+    it('should not create a user that already exist', (done) => {
+      createUser(
+        normalUserDetails,
+        failureAssertions('user already exist', 400, done),
+      );
     });
   });
-
-  describe('POST /api/v1/users/login', () => {
-    before((done) => {
-      users
-        .create({
-          name: 'user1',
-          email: 'user1@gmail.com',
-          password: 'myPassword12',
-          confirmPassword: 'myPassword12',
-          role: 'admin',
-        })
-        .then(() => {
-          done();
-        })
-        .catch((err) => {
-          console.log({ status: 'creating user error', message: err.message });
-        });
+  describe('Signin Endpoint', () => {
+    it('should not signin a user without email', (done) => {
+      loginUser(
+        alterUserDetails({ email: null }),
+        failureAssertions('email is required', 400, done),
+      );
     });
-    it('sign in when all input fields are given', (done) => {
-      const reqBody = {
-        email: 'user1@gmail.com',
-        password: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users/login')
-        .send(reqBody)
-        .end((err, res) => {
+    it('should not signin a user with empty email', (done) => {
+      loginUser(
+        alterUserDetails({ email: '' }),
+        failureAssertions('email cannot be empty', 400, done),
+      );
+    });
+    it('should not signin a user with wrong email format', (done) => {
+      loginUser(
+        alterUserDetails({ email: 'test.com' }),
+        failureAssertions('email format is wrong', 400, done),
+      );
+    });
+    it('should not signin a user without password', (done) => {
+      loginUser(
+        alterUserDetails({ password: null }),
+        failureAssertions('password is required', 400, done),
+      );
+    });
+    it('should not signin a user with empty password', (done) => {
+      loginUser(
+        alterUserDetails({ password: '' }),
+        failureAssertions('password cannot be empty', 400, done),
+      );
+    });
+    it('should not signin a user if password is wrong', (done) => {
+      loginUser(
+        alterUserDetails({ password: 'WrongPassword123' }),
+        failureAssertions('password incorrect', 400, done),
+      );
+    });
+    it('should not signin a user that does not exist', (done) => {
+      loginUser(
+        alterUserDetails({ email: 'notRegistered@gmail.com' }),
+        failureAssertions('user not found', 400, done),
+      );
+    });
+    it('should signin a user', (done) => {
+      loginUser(
+        normalUserDetails,
+        (err, res) => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('Logged in');
           res.body.token.should.be.a('string');
-          res.body.user.email.should.be.eql(reqBody.email.toLowerCase());
+          res.body.user.name.should.be.eql('test');
+          res.body.user.email.should.be.eql('test@gmail.com');
+          res.body.user.role.should.be.eql('user');
           done();
-        });
-    });
-    it('should not sign in when email is not given', (done) => {
-      const reqBody = {
-        password: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users/login')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('email is required');
-          done();
-        });
-    });
-    it('should not sign in when pasword is not given', (done) => {
-      const reqBody = {
-        email: 'user1@gmail.com',
-      };
-      chai.request(app)
-        .post('/api/v1/users/login')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('password is required');
-          done();
-        });
-    });
-    it('should not sign in when email is an empty string', (done) => {
-      const reqBody = {
-        email: '',
-        password: 'myPassword12',
-      };
-      chai.request(app)
-        .post('/api/v1/users/login')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('email cannot be empty');
-          done();
-        });
-    });
-    it('should not sign in when pasword is an empty string', (done) => {
-      const reqBody = {
-        email: 'user1@gmail.com',
-        password: '',
-      };
-      chai.request(app)
-        .post('/api/v1/users/login')
-        .send(reqBody)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.status.should.be.eql('failed');
-          res.body.message.should.be.eql('password cannot be empty');
-          done();
-        });
+        },
+      );
     });
   });
-
-  after((done) => {
-    users
-      .destroy({
-        cascade: true,
-        truncate: true,
-        restartIdentity: true,
-      })
-      .then(() => {
-        done();
-      })
-      .catch((err) => {
-        console.log({
-          status: 'error',
-          message: err.message,
-        });
-      });
+  describe('Admin Endpoint', () => {
+    let superAdminToken;
+    const adminDetails = {
+      email: 'test@gmail.com',
+      token: null,
+    };
+    const alterAdminDetails = newAdminDetails => (
+      Object.assign({}, adminDetails, newAdminDetails)
+    );
+    before((done) => {
+      loginUser(
+        superAdminDetails,
+        (err, res) => {
+          superAdminToken = res.body.token;
+          adminDetails.token = superAdminToken;
+          done();
+        },
+      );
+    });
+    it('should not create admin without email', (done) => {
+      createAdmin(
+        alterAdminDetails({ email: null }),
+        failureAssertions('email is required', 400, done),
+      );
+    });
+    it('should not create admin with empty email', (done) => {
+      createAdmin(
+        alterAdminDetails({ email: '' }),
+        failureAssertions('email cannot be empty', 400, done),
+      );
+    });
+    it('should not create admin with wrong email format', (done) => {
+      createAdmin(
+        alterAdminDetails({ email: 'test.com' }),
+        failureAssertions('email format is wrong', 400, done),
+      );
+    });
+    it('should not create admin, if the user is not registered', (done) => {
+      createAdmin(
+        alterAdminDetails({ email: 'notRegistered@gmail.com' }),
+        failureAssertions('user not found', 400, done),
+      );
+    });
+    it('should create admin', (done) => {
+      createAdmin(
+        adminDetails,
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('the user has been updated to become an admin');
+          done();
+        },
+      );
+    });
+    it('should not create admin if he already exist', (done) => {
+      createAdmin(
+        adminDetails,
+        failureAssertions('the user is already an admin', 200, done),
+      );
+    });
   });
+  // after((done) => {
+  //   users
+  //     .destroy({
+  //       cascade: true,
+  //       truncate: true,
+  //       restartIdentity: true,
+  //     })
+  //     .then(() => { done(); });
+  // });
 });

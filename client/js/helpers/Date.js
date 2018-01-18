@@ -1,42 +1,50 @@
+/**
+ * It converts a month number to its corresponding name.
+ * @param {Number} monthNumber The month number.
+ * @returns {Object} The month name
+ */
 const MonthToString = (monthNumber) => {
-  switch(monthNumber){
+  switch (monthNumber) {
     case 1: {
-      return { monthNo: 1, monthName: 'January' };
+      return { monthName: 'January' };
     }
     case 2: {
-      return { monthNo: 2, monthName: 'February' };
+      return { monthName: 'February' };
     }
     case 3: {
-      return { monthNo: 3, monthName: 'March' };
+      return { monthName: 'March' };
     }
     case 4: {
-      return { monthNo: 4, monthName: 'April' };
+      return { monthName: 'April' };
     }
     case 5: {
-      return { monthNo: 5, monthName: 'May' };
+      return { monthName: 'May' };
     }
     case 6: {
-      return { monthNo: 6, monthName: 'June' };
+      return { monthName: 'June' };
     }
     case 7: {
-      return { monthNo: 7, monthName: 'July' };
+      return { monthName: 'July' };
     }
     case 8: {
-      return { monthNo: 8 , monthName: 'August' };
+      return { monthName: 'August' };
     }
     case 9: {
-      return { monthNo: 9, monthName: 'September' };
+      return { monthName: 'September' };
     }
     case 10: {
-      return { monthNo: 10, monthName: 'October' };
+      return { monthName: 'October' };
     }
     case 11: {
-      return { monthNo: 11, monthName: 'November' };
+      return { monthName: 'November' };
     }
     case 12: {
-      return { monthNo: 12, monthName: 'December' };
+      return { monthName: 'December' };
+    }
+    default: {
+      return {};
     }
   }
-}
+};
 
 export default MonthToString;

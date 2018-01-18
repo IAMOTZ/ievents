@@ -1,23 +1,10 @@
-engines:
-  duplication:
+version: "2"
+plugins:
+  eslint: 
     enabled: true
-    checks:
-      Similar code:
-        enabled: false
-    config:
-      languages:
-      - javascript
-  fixme:
-    enabled: true
-  eslint:
-    enabled: true
-ratings:
-  paths:
-  - "server/*.js"
-  - "server/**/*.js"
-exclude_paths:
-- client/
-- server/src/models/
-- test/
-- server/test/
-- template/
+exclude_patterns:
+  - "client/"
+  - "template/"
+  - "test/"
+  - "public/"
+  

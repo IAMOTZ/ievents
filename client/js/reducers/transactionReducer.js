@@ -1,4 +1,4 @@
-let initialState = {
+const initialState = {
   centers: [],
   status: {
     fetching: false,
@@ -8,10 +8,10 @@ let initialState = {
     daleted: false,
     deletingError: false,
   },
-}
+};
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'FETCHING_TRANSACTIONS': {
       return {
         ...state,
@@ -20,8 +20,8 @@ export default (state = initialState, action) => {
           fetching: true,
           fetched: false,
           fetchingError: false,
-        }
-      }
+        },
+      };
     }
     case 'FETCHING_TRANSACTIONS_RESOLVED': {
       return {
@@ -32,8 +32,8 @@ export default (state = initialState, action) => {
           fetching: false,
           fetched: true,
           fetchingError: false,
-        }
-      }
+        },
+      };
     }
     case 'FETCHING_TRANSACTIONS_REJECTED': {
       return {
@@ -43,8 +43,8 @@ export default (state = initialState, action) => {
           fetching: false,
           fetched: false,
           fetchingError: action.payload,
-        }
-      }
+        },
+      };
     }
     case 'DELETE_TRANSACTION': {
       return {
@@ -54,8 +54,8 @@ export default (state = initialState, action) => {
           deleting: true,
           deleted: false,
           deletingError: false,
-        }
-      }
+        },
+      };
     }
     case 'DELETE_TRANSACTION_RESOLVED': {
       return {
@@ -65,8 +65,8 @@ export default (state = initialState, action) => {
           deleting: false,
           deleted: true,
           deletingError: false,
-        }
-      }
+        },
+      };
     }
     case 'DELETE_TRANSACTION_REJECTED': {
       return {
@@ -76,23 +76,23 @@ export default (state = initialState, action) => {
           deleting: false,
           deleted: false,
           deletingError: action.payload,
-        }
-      }
+        },
+      };
     }
     case 'CLEAR_TRANSACTION_STATUS': {
-      switch(action.payload) {
-        case('ALL'): {
+      switch (action.payload) {
+        case ('ALL'): {
           return {
             ...state,
             status: initialState.status,
-          }
+          };
         }
         default: {
           return {
             ...state,
             status: {
               ...state.status,
-            }
+            },
           };
         }
       }
@@ -101,4 +101,4 @@ export default (state = initialState, action) => {
       return state;
     }
   }
-}
+};

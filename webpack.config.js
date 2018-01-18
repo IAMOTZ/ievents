@@ -1,6 +1,14 @@
-const debug = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 const path = require('path');
+
+const debugMode = process.env.NODE_ENV !== 'production';
+
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    'process.env.API_BASE_URL': JSON.stringify('/api/v1'),
+  }),
+];
 
 module.exports = {
   entry: [
@@ -55,15 +63,13 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
-  plugins: debug ? [] : [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
-    }),
+  plugins: debugMode ? plugins : plugins.concat([
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-  ],
+  ]),
   devServer: {
     contentBase: path.join(__dirname, 'public'),
+    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3000',

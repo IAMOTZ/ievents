@@ -109,7 +109,7 @@ footer {
   }
   .seat-badge {
     position: absolute;
-    top: 50%;
+    top: 200px;
     left: 60%;
     font-size: 20px;
     background-color: rgba(0,0,0,0.4);
@@ -120,26 +120,7 @@ footer {
         height: 400px;
         width: 400px;
       }
-    }    
-    @media (min-width: 992px) {
-      .modal-dialog {
-        width: 400px;
-        .seat-badge {
-          position: absolute;
-          top: 45%;
-          left: 65%;
-          font-size: 20px;
-          background-color: rgba(0,0,0,0.4);
-        }
-      }
-    }
-    .seat-badge {
-      position: absolute;
-      top: 40%;
-      left: 60%;
-      font-size: 20px;
-      background-color: rgba(0,0,0,0.4);
-    }
+    } 
     .btn {
       background-color: $custom-black;
     }
