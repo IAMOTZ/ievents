@@ -3,6 +3,7 @@ plugins:
   eslint: 
     enabled: true
 exclude_patterns:
+  - "client/"
   - "template/"
   - "test/"
   - "public/"
