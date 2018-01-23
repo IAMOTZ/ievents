@@ -1,3 +1,5 @@
+import * as actionTypes from '../actions/actionTypes';
+
 const initialState = {
   centers: [],
   status: {
@@ -12,7 +14,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCHING_TRANSACTIONS': {
+    case actionTypes.FETCHING_TRANSACTIONS: {
       return {
         ...state,
         status: {
@@ -23,7 +25,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'FETCHING_TRANSACTIONS_RESOLVED': {
+    case actionTypes.FETCHING_TRANSACTIONS_RESOLVED: {
       return {
         ...state,
         centers: action.payload,
@@ -35,7 +37,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'FETCHING_TRANSACTIONS_REJECTED': {
+    case actionTypes.FETCHING_TRANSACTIONS_REJECTED: {
       return {
         ...state,
         status: {
@@ -46,7 +48,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'DELETE_TRANSACTION': {
+    case actionTypes.DELETING_TRANSACTION: {
       return {
         ...state,
         status: {
@@ -57,7 +59,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'DELETE_TRANSACTION_RESOLVED': {
+    case actionTypes.DELETING_TRANSACTION_RESOLVED: {
       return {
         ...state,
         status: {
@@ -68,7 +70,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'DELETE_TRANSACTION_REJECTED': {
+    case actionTypes.DELETING_TRANSACTION_REJECTED: {
       return {
         ...state,
         status: {
@@ -79,7 +81,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'CLEAR_TRANSACTION_STATUS': {
+    case actionTypes.CLEAR_TRANSACTION_STATUS: {
       switch (action.payload) {
         case ('ALL'): {
           return {

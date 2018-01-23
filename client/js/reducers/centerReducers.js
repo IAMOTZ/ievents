@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   centers: [],
@@ -20,7 +21,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'GETTING_CENTERS': {
+    case actionTypes.FETCHING_CENTERS: {
       return {
         ...state,
         status: {
@@ -31,7 +32,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'GETTING_CENTERS_RESOLVED': {
+    case actionTypes.FETCHING_CENTERS_RESOLVED: {
       const { centers } = action.payload;
       return {
         ...state,
@@ -44,7 +45,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'GETTING_CENTERS_REJECTED': {
+    case actionTypes.FETCHING_CENTERS_REJECTED: {
       return {
         ...state,
         status: {
@@ -55,7 +56,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_CENTER': {
+    case actionTypes.ADDING_CENTER: {
       return {
         ...state,
         status: {
@@ -66,7 +67,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_CENTER_RESOLVED': {
+    case actionTypes.ADDING_CENTER_RESOLVED: {
       return {
         ...state,
         status: {
@@ -77,7 +78,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_CENTER_REJECTED': {
+    case actionTypes.ADDING_CENTER_REJECTED: {
       return {
         ...state,
         status: {
@@ -88,7 +89,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'UPDATING_CENTER': {
+    case actionTypes.UPDATING_CENTER: {
       return {
         ...state,
         status: {
@@ -99,7 +100,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'UPDATING_CENTER_RESOLVED': {
+    case actionTypes.UPDATING_CENTER_RESOLVED: {
       return {
         ...state,
         status: {
@@ -110,7 +111,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'UPDATING_CENTER_REJECTED': {
+    case actionTypes.UPDATING_CENTER_REJECTED: {
       return {
         ...state,
         status: {
@@ -121,27 +122,27 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'INITIALIZE_EDIT': {
+    case actionTypes.INITIALIZE_EDIT: {
       const center = _.find(state.centers, { id: Number(action.payload) });
       return {
         ...state,
         toEdit: center,
       };
     }
-    case 'SHOW_CENTER_MODAL': {
+    case actionTypes.SHOW_CENTER_MODAL: {
       const modalContent = _.find(state.centers, { id: Number(action.payload) });
       return {
         ...state,
         modalContent,
       };
     }
-    case 'BOOK': {
+    case actionTypes.BOOK: {
       return {
         ...state,
         toBook: action.payload,
       };
     }
-    case 'CLEAR_CENTER_STATUS': {
+    case actionTypes.CLEAR_CENTER_STATUS: {
       switch (action.payload) {
         case ('ALL'): {
           return {

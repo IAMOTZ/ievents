@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as actionTypes from './actionTypes';
 
 const apiBaseUrl = process.env.API_BASE_URL;
 
@@ -8,7 +9,7 @@ const apiBaseUrl = process.env.API_BASE_URL;
  * @returns {Function}
  */
 export const getAllEvents = userToken => (dispatch) => {
-  dispatch({ type: 'FETCHING_EVENTS' });
+  dispatch({ type: actionTypes.FETCHING_EVENTS });
   const config = {
     headers: {
       'access-token': userToken,
@@ -16,10 +17,10 @@ export const getAllEvents = userToken => (dispatch) => {
   };
   axios.get(`${apiBaseUrl}/events`, config)
     .then((response) => {
-      dispatch({ type: 'FETCHING_EVENTS_RESOLVED', payload: response.data });
+      dispatch({ type: actionTypes.FETCHING_EVENTS_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'FETCHING_EVENTS_REJECTED', payload: err.response.data });
+      dispatch({ type: actionTypes.FETCHING_EVENTS_REJECTED, payload: err.response.data });
     });
 };
 
@@ -30,7 +31,7 @@ export const getAllEvents = userToken => (dispatch) => {
  * @returns {Function}
  */
 export const addEvent = (eventDetails, userToken) => (dispatch) => {
-  dispatch({ type: 'ADDDING_EVENT' });
+  dispatch({ type: actionTypes.ADDING_EVENT });
   const config = {
     headers: {
       'access-token': userToken,
@@ -38,10 +39,10 @@ export const addEvent = (eventDetails, userToken) => (dispatch) => {
   };
   axios.post(`${apiBaseUrl}/events`, eventDetails, config)
     .then((response) => {
-      dispatch({ type: 'ADDING_EVENT_RESOLVED', payload: response.data });
+      dispatch({ type: actionTypes.ADDING_EVENT_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'ADDING_EVENT_REJECTED', payload: err.response.data });
+      dispatch({ type: actionTypes.ADDING_EVENT_REJECTED, payload: err.response.data });
     });
 };
 
@@ -53,7 +54,7 @@ export const addEvent = (eventDetails, userToken) => (dispatch) => {
  * @returns {Function}
  */
 export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
-  dispatch({ type: 'UPDATING_EVENT' });
+  dispatch({ type: actionTypes.UPDATING_EVENT });
   const config = {
     headers: {
       'access-token': userToken,
@@ -61,10 +62,10 @@ export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
   };
   axios.put(`${apiBaseUrl}/events/${id}`, eventDetails, config)
     .then((response) => {
-      dispatch({ type: 'UPDATING_EVENT_RESOLVED', payload: response.data });
+      dispatch({ type: actionTypes.UPDATING_EVENT_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'UPDATING_EVENT_REJECTED', payload: err.response.data });
+      dispatch({ type: actionTypes.UPDATING_EVENT_REJECTED, payload: err.response.data });
     });
 };
 
@@ -75,7 +76,7 @@ export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
  * @returns {Function}
  */
 export const deleteEvent = (id, userToken) => (dispatch) => {
-  dispatch({ type: 'DELETING_EVENT' });
+  dispatch({ type: actionTypes.DELETING_EVENT });
   const config = {
     headers: {
       'access-token': userToken,
@@ -83,10 +84,10 @@ export const deleteEvent = (id, userToken) => (dispatch) => {
   };
   axios.delete(`${apiBaseUrl}/events/${id}`, config)
     .then((response) => {
-      dispatch({ type: 'DELETING_EVENT_RESOLVED', payload: response.data });
+      dispatch({ type: actionTypes.DELETING_EVENT_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'DELETING_EVENT_REJECTED', payload: err.response.data });
+      dispatch({ type: actionTypes.DELETING_EVENT_REJECTED, payload: err.response.data });
     });
 };
 
@@ -95,11 +96,11 @@ export const deleteEvent = (id, userToken) => (dispatch) => {
  * @param {Number} id The ID of the event.
  * @returns {Object}
  */
-export const initializeEdit = id => ({ type: 'INITIALIZE_EDIT', payload: id });
+export const initializeEdit = id => ({ type: actionTypes.INITIALIZE_EDIT, payload: id });
 
 /**
  * It informs a reducer to Clear the status variables tracking a particular event process.
  * @param {String} process The process to be cleared.
  * @returns {Object}
  */
-export const clearStatus = process => ({ type: 'CLEAR_EVENT_STATUS', payload: process });
+export const clearStatus = process => ({ type: actionTypes.CLEAR_EVENT_STATUS, payload: process });

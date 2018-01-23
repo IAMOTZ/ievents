@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as actionTypes from './actionTypes';
 
 const apiBaseUrl = process.env.API_BASE_URL;
 
@@ -8,7 +9,7 @@ const apiBaseUrl = process.env.API_BASE_URL;
  * @returns {Function}
  */
 export const getAllTransactions = userToken => (dispatch) => {
-  dispatch({ type: 'FETCHING_TRANSACTIONS' });
+  dispatch({ type: actionTypes.FETCHING_TRANSACTIONS });
   const config = {
     headers: {
       'access-token': userToken,
@@ -16,10 +17,10 @@ export const getAllTransactions = userToken => (dispatch) => {
   };
   axios.get(`${apiBaseUrl}/transactions`, config)
     .then((response) => {
-      dispatch({ type: 'FETCHING_TRANSACTIONS_RESOLVED', payload: response.data });
+      dispatch({ type: actionTypes.FETCHING_TRANSACTIONS_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'FETCHING_TRANSACTIONS_REJECTED', payload: err.response.data });
+      dispatch({ type: actionTypes.FETCHING_TRANSACTIONS_REJECTED, payload: err.response.data });
     });
 };
 
@@ -30,7 +31,7 @@ export const getAllTransactions = userToken => (dispatch) => {
  * @returns {Function}
  */
 export const deleteTransaction = (userToken, id) => (dispatch) => {
-  dispatch({ type: 'DELETE_TRANSACTION' });
+  dispatch({ type: actionTypes.DELETING_TRANSACTION });
   const config = {
     headers: {
       'access-token': userToken,
@@ -38,10 +39,10 @@ export const deleteTransaction = (userToken, id) => (dispatch) => {
   };
   axios.delete(`${apiBaseUrl}/transactions/${id}`, config)
     .then((response) => {
-      dispatch({ type: 'DELETE_TRANSACTION_RESOLVED', payload: response.data });
+      dispatch({ type: actionTypes.DELETING_TRANSACTION_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: 'DELETE_TRANSACTION_REJECTED', payload: err.response.data });
+      dispatch({ type: actionTypes.DELETING_TRANSACTION_REJECTED, payload: err.response.data });
     });
 };
 
@@ -49,4 +50,6 @@ export const deleteTransaction = (userToken, id) => (dispatch) => {
  * It informs a reducer to Clear the status variables tracking a particular transaction process.
  * @param {String} process The process to be cleared.
  */
-export const clearStatus = process => ({ type: 'CLEAR_TRANSACTION_STATUS', payload: process });
+export const clearStatus = process => (
+  { type: actionTypes.CLEAR_TRANSACTION_STATUS, payload: process }
+);

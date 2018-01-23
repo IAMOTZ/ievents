@@ -1,9 +1,11 @@
 import jwtDecode from 'jwt-decode';
+import * as actionTypes from '../actions/actionTypes';
 
+const TOKEN_NAME = 'IEVENTS_USER_TOKEN';
 let previousUser;
 let previousToken;
 try {
-  previousToken = localStorage.getItem('IEVENTS_USER_TOKEN');
+  previousToken = localStorage.getItem(TOKEN_NAME);
   previousUser = jwtDecode(previousToken);
   previousUser = Object.assign({}, previousUser, { token: previousToken });
 } catch (e) {
@@ -30,7 +32,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'ADDING_USER': {
+    case actionTypes.ADDING_USER: {
       // Adding a user or logging in a user does thesame thing(getting the needed user information).
       // That is why they are modifying thesame status variables.
       return {
@@ -43,7 +45,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_USER_RESOLVED': {
+    case actionTypes.ADDING_USER_RESOLVED: {
       const {
         name, email, role, id,
       } = action.payload.user;
@@ -51,7 +53,7 @@ export default (state = initialState, action) => {
       const newUser = {
         name, email, role, id, token,
       };
-      localStorage.setItem('IEVENTS_USER_TOKEN', newUser.token);
+      localStorage.setItem(TOKEN_NAME, newUser.token);
       return {
         ...state,
         user: newUser,
@@ -63,7 +65,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_USER_REJECTED': {
+    case actionTypes.ADDING_USER_REJECTED: {
       return {
         ...state,
         status: {
@@ -74,7 +76,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'LOGGING_USER': {
+    case actionTypes.LOGGING_USER: {
       // Adding a user or logging in a user does thesame thing(getting the needed user information).
       // That is why they are modifying thesame status variables.
       return {
@@ -87,7 +89,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'LOGGING_USER_RESOLVED': {
+    case actionTypes.LOGGING_USER_RESOLVED: {
       const {
         name, email, role, id,
       } = action.payload.user;
@@ -95,7 +97,7 @@ export default (state = initialState, action) => {
       const newUser = {
         name, email, role, id, token,
       };
-      localStorage.setItem('IEVENTS_USER_TOKEN', newUser.token);
+      localStorage.setItem(TOKEN_NAME, newUser.token);
       return {
         ...state,
         user: newUser,
@@ -107,7 +109,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'LOGGING_USER_REJECTED': {
+    case actionTypes.LOGGING_USER_REJECTED: {
       return {
         ...state,
         status: {
@@ -118,7 +120,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_ADMIN': {
+    case actionTypes.ADDING_ADMIN: {
       return {
         ...state,
         status: {
@@ -129,7 +131,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_ADMIN_RESOLVED': {
+    case actionTypes.ADDING_ADMIN_RESOLVED: {
       return {
         ...state,
         status: {
@@ -140,7 +142,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_ADMIN_REJECTED': {
+    case actionTypes.ADDING_ADMIN_REJECTED: {
       return {
         ...state,
         status: {
@@ -151,7 +153,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'CLEAR_USER_STATUS': {
+    case actionTypes.CLEAR_USER_STATUS: {
       switch (action.payload) {
         case ('ERROR'): {
           return {
@@ -183,8 +185,8 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case 'CLEAR_USER': {
-      localStorage.removeItem('IEVENTS_USER_TOKEN');
+    case actionTypes.CLEAR_USER: {
+      localStorage.removeItem(TOKEN_NAME);
       return {
         user: {
           name: null,
