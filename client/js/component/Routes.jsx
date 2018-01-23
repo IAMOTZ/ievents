@@ -1,18 +1,18 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // The containers.
-import Signup from './component/container/Signup.jsx';
-import Signin from './component/container/Signin.jsx';
-import AddEvent from './component/container/AddEvent.jsx';
-import Events from './component/container/Events.jsx';
-import EditEvent from './component/container/EditEvent.jsx';
-import Centers1 from './component/container/Centers1.jsx';
-import Centers2 from './component/container/Centers2.jsx';
-import AddCenter from './component/container/AddCenter.jsx';
-import EditCenter from './component/container/EditCenter.jsx';
-import Transactions from './component/container/Transactions.jsx';
-import AddAdmin from './component/container/AddAdmin.jsx';
-import Home from './component/container/index.jsx';
+import Signup from './container/Signup.jsx';
+import Signin from './container/Signin.jsx';
+import AddEvent from './container/AddEvent.jsx';
+import Events from './container/Events.jsx';
+import EditEvent from './container/EditEvent.jsx';
+import Centers1 from './container/Centers1.jsx';
+import Centers2 from './container/Centers2.jsx';
+import AddCenter from './container/AddCenter.jsx';
+import EditCenter from './container/EditCenter.jsx';
+import Transactions from './container/Transactions.jsx';
+import AddAdmin from './container/AddAdmin.jsx';
+import Home from './container/index.jsx';
 
 export default () => (
   <Switch>
