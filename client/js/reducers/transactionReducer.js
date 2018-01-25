@@ -7,7 +7,7 @@ const initialState = {
     fetched: false,
     fetchingError: false,
     deleting: false,
-    daleted: false,
+    deleted: false,
     deletingError: false,
   },
 };

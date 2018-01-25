@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: true,
           fetched: false,
-          error: false,
+          fetchingError: false,
         },
       };
     }
@@ -42,17 +42,17 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: false,
           fetched: true,
-          error: false,
+          fetchingError: false,
         },
       };
     }
-    case actionTypes.FETCHING_TRANSACTIONS_REJECTED: {
+    case actionTypes.FETCHING_EVENTS_REJECTED: {
       return {
         ...state,
         status: {
           ...state.status,
           fetching: false,
-          error: action.payload,
+          fetchingError: action.payload,
         },
       };
     }
