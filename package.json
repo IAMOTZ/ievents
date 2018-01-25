@@ -12,7 +12,7 @@
     "template:dev": "gulp",
     "setUpDb": "babel-node ./server/setUpDb",
     "test": "set NODE_ENV=test&& npm run setUpDb && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./test/testPath.js --timeout 5000 --exit",
-    "test:client": "jest",
+    "test:client": "jest --coverage",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint",
     "heroku-postbuild": "npm run react:pro && npm run build && npm run setUpDb"
@@ -105,6 +105,12 @@
       "server/models/*.js",
       "server/setUpDb.js",
       "test/**/*.js"
+    ]
+  },
+  "jest": {
+    "setupFiles" : [
+      "./client/js/config/browserMock.js",
+      "./client/js/config/enzymeSetup.js"
     ]
   }
 }
