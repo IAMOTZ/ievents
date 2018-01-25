@@ -5,3 +5,4 @@ bower_components
 build
 public/bundle.js
 public/eventCenter1.jpeg
+coverage
