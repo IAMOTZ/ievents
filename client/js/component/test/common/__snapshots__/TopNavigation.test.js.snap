@@ -1,0 +1,407 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TopNavigation /> should render correctly 1`] = `
+<nav
+  className="navbar navbar-expand-sm navbar-dark fixed-top"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="navbar-brand"
+      href="/"
+      onClick={[Function]}
+    >
+      <strong>
+        Ievents
+      </strong>
+    </a>
+    <button
+      className="navbar-toggler"
+      data-target="#navMenu"
+      data-toggle="collapse"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navMenu"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/centers1"
+            onClick={[Function]}
+          >
+            Centers
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/users/login"
+            onClick={[Function]}
+          >
+             Signin 
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/users"
+            onClick={[Function]}
+          >
+             Signup 
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`<UserTopNav /> should render correctly for admin user 1`] = `
+<nav
+  className="navbar navbar-expand-md navbar-dark fixed-top d-block d-lg-none"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="navbar-brand"
+      href=""
+    >
+      <strong
+        className="text-capitalize"
+      >
+        test-name
+      </strong>
+      <br />
+      <p
+        className="h6"
+      />
+    </a>
+    <button
+      className="navbar-toggler"
+      data-target="#navMenu"
+      data-toggle="collapse"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navMenu"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/events"
+            onClick={[Function]}
+          >
+            My events
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/addEvent"
+            onClick={[Function]}
+          >
+            Add Events
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/centers2"
+            onClick={[Function]}
+          >
+            Centers
+          </a>
+        </li>
+        <span
+          className="d-flex flex-column flex-md-row"
+        >
+          <li
+            className="nav-item"
+          >
+            <a
+              className="nav-link"
+              href="/addCenter"
+              onClick={[Function]}
+            >
+              Add Center
+            </a>
+          </li>
+          <li
+            className="nav-item"
+          >
+            <a
+              className="nav-link"
+              href="/transactions"
+              onClick={[Function]}
+            >
+              Transactions
+            </a>
+          </li>
+        </span>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/"
+            onClick={[Function]}
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`<UserTopNav /> should render correctly for normal user 1`] = `
+<nav
+  className="navbar navbar-expand-md navbar-dark fixed-top d-block d-lg-none"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="navbar-brand"
+      href=""
+    >
+      <strong
+        className="text-capitalize"
+      >
+        test-name
+      </strong>
+      <br />
+      <p
+        className="h6"
+      />
+    </a>
+    <button
+      className="navbar-toggler"
+      data-target="#navMenu"
+      data-toggle="collapse"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navMenu"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/events"
+            onClick={[Function]}
+          >
+            My events
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/addEvent"
+            onClick={[Function]}
+          >
+            Add Events
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/centers2"
+            onClick={[Function]}
+          >
+            Centers
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/"
+            onClick={[Function]}
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`<UserTopNav /> should render correctly for super admin user 1`] = `
+<nav
+  className="navbar navbar-expand-md navbar-dark fixed-top d-block d-lg-none"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="navbar-brand"
+      href=""
+    >
+      <strong
+        className="text-capitalize"
+      >
+        test-name
+      </strong>
+      <br />
+      <p
+        className="h6"
+      />
+    </a>
+    <button
+      className="navbar-toggler"
+      data-target="#navMenu"
+      data-toggle="collapse"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navMenu"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/events"
+            onClick={[Function]}
+          >
+            My events
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/addEvent"
+            onClick={[Function]}
+          >
+            Add Events
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/centers2"
+            onClick={[Function]}
+          >
+            Centers
+          </a>
+        </li>
+        <span
+          className="d-flex flex-column flex-md-row"
+        >
+          <li
+            className="nav-item"
+          >
+            <a
+              className="nav-link"
+              href="/addCenter"
+              onClick={[Function]}
+            >
+              Add Center
+            </a>
+          </li>
+          <li
+            className="nav-item"
+          >
+            <a
+              className="nav-link"
+              href="/addAdmin"
+              onClick={[Function]}
+            >
+              Add Admin
+            </a>
+          </li>
+          <li
+            className="nav-item"
+          >
+            <a
+              className="nav-link"
+              href="/transactions"
+              onClick={[Function]}
+            >
+              Transactions
+            </a>
+          </li>
+        </span>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="/"
+            onClick={[Function]}
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;
