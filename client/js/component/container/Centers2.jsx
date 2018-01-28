@@ -27,7 +27,8 @@ import { UserTopNav } from '../common/TopNavigation.jsx';
       bookedOn: [],
       type: null,
     },
-    isAdmin: store.user.user.role === 'admin' || store.user.user.role === 'superAdmin',
+    isAdmin: store.user.user.role === 'admin',
+    isSuperAdmin: (store.user.user.role === 'superAdmin'),
     status: {
       fetching: store.centers.status.fetching,
     },
@@ -71,11 +72,22 @@ export default class Centers2 extends React.Component {
       component = (
         <div id="centers2-container">
           {/* Top Navigarion on Small screen */}
-          <UserTopNav name={this.props.user.name} title="Centers" />
+          <UserTopNav
+            name={this.props.user.name}
+            title="Centers"
+            isAdmin={this.props.isAdmin}
+            isSuperAdmin={this.props.isSuperAdmin}
+            dispatch={this.props.dispatch}
+          />
           <div className="container-fluid">
             <div className="row">
               {/* Side Navigation on large screen */}
-              <UserSideNav userName={this.props.user.name} />
+              <UserSideNav
+                name={this.props.user.name}
+                isAdmin={this.props.isAdmin}
+                isSuperAdmin={this.props.isSuperAdmin}
+                dispatch={this.props.dispatch}
+              />
               {/* Main content */}
               <div className="col-lg-10 offset-lg-2 mt-lg-0" id="main-content">
                 {/* Content Headers */}
@@ -131,7 +143,7 @@ export default class Centers2 extends React.Component {
                               centers={this.props.centers}
                               btnAction={this.showModal}
                               editAction={this.onEdit}
-                              isAdmin={this.props.isAdmin} 
+                              isAdmin={this.props.isAdmin || this.props.isSuperAdmin}
                             />
                           </div>
                         </div>

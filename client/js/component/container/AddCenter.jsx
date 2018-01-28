@@ -15,6 +15,8 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx';
   {
     user: store.user.user,
     authenticated: store.user.status.fetched,
+    isAdmin: (store.user.user.role === 'admin'),
+    isSuperAdmin: (store.user.user.role === 'superAdmin'),
     status: {
       error: store.centers.status.addingError.message,
       success: store.centers.status.added,
@@ -94,11 +96,22 @@ export default class AddCenter extends React.Component {
       component = (
         <div className="add-center-container">
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title="Add a center" />
+          <UserTopNav
+            name={this.props.user.name}
+            title="Add a center"
+            isAdmin={this.props.isAdmin}
+            isSuperAdmin={this.props.isSuperAdmin}
+            dispatch={this.props.dispatch}
+          />
           <div className="container-fluid">
             <div className="row">
               {/*  Side navigation on large screen */}
-              <UserSideNav userName={this.props.user.name} />
+              <UserSideNav
+                name={this.props.user.name}
+                isAdmin={this.props.isAdmin}
+                isSuperAdmin={this.props.isSuperAdmin}
+                dispatch={this.props.dispatch}
+              />
               {/* Main content */}
               <div className="col-lg-10 offset-md-2" id="add-event-section">
                 {/* Content Header(navigation) on large screen */}

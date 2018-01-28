@@ -13,6 +13,8 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx';
   {
     user: store.user.user,
     authenticated: store.user.status.fetched,
+    isAdmin: (store.user.user.role === 'admin'),
+    isSuperAdmin: (store.user.user.role === 'superAdmin'),
     status: {
       adding: store.user.status.addingAdmin,
       success: store.user.status.adminAdded,
@@ -20,7 +22,7 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx';
     },
   }
 ))
-export default class AddAdmin extends React.Component {
+class AddAdmin extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -69,11 +71,22 @@ export default class AddAdmin extends React.Component {
       component = (
         <div id="add-admin-container">
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title="Add an admin" />
+          <UserTopNav
+            name={this.props.user.name}
+            title="Add an admin"
+            isAdmin={this.props.isAdmin}
+            isSuperAdmin={this.props.isSuperAdmin}
+            dispatch={this.props.dispatch}
+          />
           <div className="container-fluid">
             <div className="row">
               {/*  Side navigation on large screen */}
-              <UserSideNav userName={this.props.user.name} />
+              <UserSideNav
+                name={this.props.user.name}
+                isAdmin={this.props.isAdmin}
+                isSuperAdmin={this.props.isSuperAdmin}
+                dispatch={this.props.dispatch}
+              />
               {/* Main content */}
               <div className="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
                 {/* Content Header(navigation) on large screen */}
@@ -154,3 +167,6 @@ const Alert = (props) => {
   }
   return component;
 };
+
+export default AddAdmin;
+export { Alert };
