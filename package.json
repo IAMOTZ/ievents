@@ -11,7 +11,7 @@
     "react:pro": "set NODE_ENV=production&& webpack",
     "template:dev": "gulp",
     "setUpDb": "babel-node ./server/setUpDb",
-    "test": "set NODE_ENV=test&& npm run setUpDb && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./test/testPath.js --timeout 5000 --exit",
+    "test": "set NODE_ENV=test&& npm run setUpDb && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --timeout 5000 --exit",
     "test:client": "jest",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint",

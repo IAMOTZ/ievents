@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import db from '../server/models';
-import app from '../server/app';
+import db from '../models';
+import app from '../app';
 
 const {
   users, centers, events, transactions,

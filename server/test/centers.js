@@ -1,7 +1,7 @@
 import dotEnv from 'dotenv';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../server/app';
+import app from '../app';
 
 dotEnv.config();
 
