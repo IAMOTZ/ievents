@@ -1,5 +1,6 @@
+/* global shallow */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import renderer from 'react-test-renderer';
 import WarningAlert from '../../common/WarningAlert.jsx';
 
 describe('<WarningAlert />', () => {
@@ -8,7 +9,7 @@ describe('<WarningAlert />', () => {
     expect(wrapper.html()).toBeNull();
   });
   it('should render the component if a message was passed in', () => {
-    const tree = renderer.create(<WarningAlert message="Testing WarningAlert" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(<WarningAlert message="Testing WarningAlert" />);
+    expect(wrapper).toMatchSnapshot();
   });
 });

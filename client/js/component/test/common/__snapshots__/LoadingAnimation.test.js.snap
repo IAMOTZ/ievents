@@ -16,13 +16,10 @@ exports[`<LoadingContainer /> should render the LoadingContainer with icon size 
       }
     }
   >
-    <div
-      className="d-flex flex-column align-items-center m-3"
-    >
-      <i
-        className="fa fa-spinner fa-pulse fa-3x"
-      />
-    </div>
+    <LoadingIcon
+      size={3}
+      start={true}
+    />
   </div>
 </div>
 `;

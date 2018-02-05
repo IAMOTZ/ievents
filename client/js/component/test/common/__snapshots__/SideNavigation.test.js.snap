@@ -21,74 +21,55 @@ exports[`<SideNavigation /> should render correctly for admin user 1`] = `
     <div
       className="list-group"
     >
-      <a
+      <Link
         className="list-group-item"
-        href="/events"
-        onClick={[Function]}
+        replace={false}
+        to="/events"
       >
         <i
           aria-hidden="true"
           className="fa fa-user-circle fa-fw"
         />
           My Events
-      </a>
-      <a
+      </Link>
+      <Link
         className="list-group-item"
-        href="addEvent"
-        onClick={[Function]}
+        replace={false}
+        to="addEvent"
       >
         <i
           aria-hidden="true"
           className="fa fa-plus fa-fw"
         />
           Add Events
-      </a>
-      <a
+      </Link>
+      <Link
         className="list-group-item"
-        href="/centers2"
-        onClick={[Function]}
+        replace={false}
+        to="/centers2"
       >
         <i
           aria-hidden="true"
           className="fa fa-bank fa-fw"
         />
           Centers
-      </a>
-      <div>
-        <a
-          className="list-group-item"
-          href="/addCenter"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="fa fa-plus fa-fw"
-          />
-            Add Center
-        </a>
-        <a
-          className="list-group-item"
-          href="/transactions"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="fa fa-tasks fa-fw"
-          />
-            Transactions
-        </a>
-      </div>
-      <a
+      </Link>
+      <AdminOptions
+        isAdmin={true}
+        isSuperAdmin={false}
+      />
+      <Link
         className="list-group-item"
-        href="/"
         onClick={[Function]}
+        replace={false}
+        to="/"
       >
         <i
           aria-hidden="true"
           className="fa fa-power-off fa-fw"
         />
           Logout
-      </a>
+      </Link>
     </div>
   </div>
 </div>
@@ -115,50 +96,55 @@ exports[`<SideNavigation /> should render correctly for normal user 1`] = `
     <div
       className="list-group"
     >
-      <a
+      <Link
         className="list-group-item"
-        href="/events"
-        onClick={[Function]}
+        replace={false}
+        to="/events"
       >
         <i
           aria-hidden="true"
           className="fa fa-user-circle fa-fw"
         />
           My Events
-      </a>
-      <a
+      </Link>
+      <Link
         className="list-group-item"
-        href="addEvent"
-        onClick={[Function]}
+        replace={false}
+        to="addEvent"
       >
         <i
           aria-hidden="true"
           className="fa fa-plus fa-fw"
         />
           Add Events
-      </a>
-      <a
+      </Link>
+      <Link
         className="list-group-item"
-        href="/centers2"
-        onClick={[Function]}
+        replace={false}
+        to="/centers2"
       >
         <i
           aria-hidden="true"
           className="fa fa-bank fa-fw"
         />
           Centers
-      </a>
-      <a
+      </Link>
+      <AdminOptions
+        isAdmin={false}
+        isSuperAdmin={false}
+      />
+      <Link
         className="list-group-item"
-        href="/"
         onClick={[Function]}
+        replace={false}
+        to="/"
       >
         <i
           aria-hidden="true"
           className="fa fa-power-off fa-fw"
         />
           Logout
-      </a>
+      </Link>
     </div>
   </div>
 </div>
@@ -185,85 +171,55 @@ exports[`<SideNavigation /> should render correctly for super admin user 1`] = `
     <div
       className="list-group"
     >
-      <a
+      <Link
         className="list-group-item"
-        href="/events"
-        onClick={[Function]}
+        replace={false}
+        to="/events"
       >
         <i
           aria-hidden="true"
           className="fa fa-user-circle fa-fw"
         />
           My Events
-      </a>
-      <a
+      </Link>
+      <Link
         className="list-group-item"
-        href="addEvent"
-        onClick={[Function]}
+        replace={false}
+        to="addEvent"
       >
         <i
           aria-hidden="true"
           className="fa fa-plus fa-fw"
         />
           Add Events
-      </a>
-      <a
+      </Link>
+      <Link
         className="list-group-item"
-        href="/centers2"
-        onClick={[Function]}
+        replace={false}
+        to="/centers2"
       >
         <i
           aria-hidden="true"
           className="fa fa-bank fa-fw"
         />
           Centers
-      </a>
-      <div>
-        <a
-          className="list-group-item"
-          href="/addCenter"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="fa fa-plus fa-fw"
-          />
-            Add Center
-        </a>
-        <a
-          className="list-group-item"
-          href="/addAdmin"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="fa fa-user fa-fw"
-          />
-            Add Admin
-        </a>
-        <a
-          className="list-group-item"
-          href="/transactions"
-          onClick={[Function]}
-        >
-          <i
-            aria-hidden="true"
-            className="fa fa-tasks fa-fw"
-          />
-            Transactions
-        </a>
-      </div>
-      <a
+      </Link>
+      <AdminOptions
+        isAdmin={false}
+        isSuperAdmin={true}
+      />
+      <Link
         className="list-group-item"
-        href="/"
         onClick={[Function]}
+        replace={false}
+        to="/"
       >
         <i
           aria-hidden="true"
           className="fa fa-power-off fa-fw"
         />
           Logout
-      </a>
+      </Link>
     </div>
   </div>
 </div>

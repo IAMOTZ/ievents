@@ -7,15 +7,15 @@ exports[`<TopNavigation /> should render correctly 1`] = `
   <div
     className="container"
   >
-    <a
+    <Link
       className="navbar-brand"
-      href="/"
-      onClick={[Function]}
+      replace={false}
+      to="/"
     >
       <strong>
         Ievents
       </strong>
-    </a>
+    </Link>
     <button
       className="navbar-toggler"
       data-target="#navMenu"
@@ -35,46 +35,46 @@ exports[`<TopNavigation /> should render correctly 1`] = `
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/"
-            onClick={[Function]}
+            replace={false}
+            to="/"
           >
             Home
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/centers1"
-            onClick={[Function]}
+            replace={false}
+            to="/centers1"
           >
             Centers
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/users/login"
-            onClick={[Function]}
+            replace={false}
+            to="/users/login"
           >
              Signin 
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/users"
-            onClick={[Function]}
+            replace={false}
+            to="/users"
           >
              Signup 
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
@@ -122,72 +122,51 @@ exports[`<UserTopNav /> should render correctly for admin user 1`] = `
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/events"
-            onClick={[Function]}
+            replace={false}
+            to="/events"
           >
             My events
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/addEvent"
-            onClick={[Function]}
+            replace={false}
+            to="/addEvent"
           >
             Add Events
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/centers2"
-            onClick={[Function]}
+            replace={false}
+            to="/centers2"
           >
             Centers
-          </a>
+          </Link>
         </li>
-        <span
-          className="d-flex flex-column flex-md-row"
-        >
-          <li
-            className="nav-item"
-          >
-            <a
-              className="nav-link"
-              href="/addCenter"
-              onClick={[Function]}
-            >
-              Add Center
-            </a>
-          </li>
-          <li
-            className="nav-item"
-          >
-            <a
-              className="nav-link"
-              href="/transactions"
-              onClick={[Function]}
-            >
-              Transactions
-            </a>
-          </li>
-        </span>
+        <AdminOptions
+          isAdmin={true}
+          isSuperAdmin={false}
+        />
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/"
             onClick={[Function]}
+            replace={false}
+            to="/"
           >
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
@@ -235,46 +214,51 @@ exports[`<UserTopNav /> should render correctly for normal user 1`] = `
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/events"
-            onClick={[Function]}
+            replace={false}
+            to="/events"
           >
             My events
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/addEvent"
-            onClick={[Function]}
+            replace={false}
+            to="/addEvent"
           >
             Add Events
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/centers2"
-            onClick={[Function]}
+            replace={false}
+            to="/centers2"
           >
             Centers
-          </a>
+          </Link>
         </li>
+        <AdminOptions
+          isAdmin={false}
+          isSuperAdmin={false}
+        />
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/"
             onClick={[Function]}
+            replace={false}
+            to="/"
           >
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
@@ -322,83 +306,51 @@ exports[`<UserTopNav /> should render correctly for super admin user 1`] = `
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/events"
-            onClick={[Function]}
+            replace={false}
+            to="/events"
           >
             My events
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/addEvent"
-            onClick={[Function]}
+            replace={false}
+            to="/addEvent"
           >
             Add Events
-          </a>
+          </Link>
         </li>
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/centers2"
-            onClick={[Function]}
+            replace={false}
+            to="/centers2"
           >
             Centers
-          </a>
+          </Link>
         </li>
-        <span
-          className="d-flex flex-column flex-md-row"
-        >
-          <li
-            className="nav-item"
-          >
-            <a
-              className="nav-link"
-              href="/addCenter"
-              onClick={[Function]}
-            >
-              Add Center
-            </a>
-          </li>
-          <li
-            className="nav-item"
-          >
-            <a
-              className="nav-link"
-              href="/addAdmin"
-              onClick={[Function]}
-            >
-              Add Admin
-            </a>
-          </li>
-          <li
-            className="nav-item"
-          >
-            <a
-              className="nav-link"
-              href="/transactions"
-              onClick={[Function]}
-            >
-              Transactions
-            </a>
-          </li>
-        </span>
+        <AdminOptions
+          isAdmin={false}
+          isSuperAdmin={true}
+        />
         <li
           className="nav-item"
         >
-          <a
+          <Link
             className="nav-link"
-            href="/"
             onClick={[Function]}
+            replace={false}
+            to="/"
           >
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

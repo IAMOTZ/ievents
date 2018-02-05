@@ -1,5 +1,6 @@
+/* global shallow */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { LoadingIcon, LoadingContainer } from '../../common/LoadingAnimation.jsx';
 
 describe('<LoadingIcon />', () => {
@@ -8,14 +9,14 @@ describe('<LoadingIcon />', () => {
     expect(wrapper.html()).toBeNull();
   });
   it('should render a LoadingIcon of size 4', () => {
-    const tree = renderer.create(<LoadingIcon start size={4} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(<LoadingIcon start size={4} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });
 
 describe('<LoadingContainer />', () => {
   it('should render the LoadingContainer with icon size of 3', () => {
-    const tree = renderer.create(<LoadingContainer iconSize={3} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(<LoadingContainer iconSize={3} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });

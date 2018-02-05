@@ -51,7 +51,7 @@ describe('<CenterCards />', () => {
   });
   it('should render with the default image if no image was passed in', () => {
     const newProps = alterProps({
-      centers: [{ ...props.centers, images: null }],
+      centers: [{ ...props.centers[0], images: null }],
     });
     const tree = renderer.create(
       <Router>
