@@ -12,7 +12,7 @@
     "template:dev": "gulp",
     "setUpDb": "babel-node ./server/setUpDb",
     "test": "set NODE_ENV=test&& npm run setUpDb && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./test/testPath.js --timeout 5000 --exit",
-    "test:client": "jest --coverage",
+    "test:client": "jest",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint",
     "heroku-postbuild": "npm run react:pro && npm run build && npm run setUpDb"
@@ -79,12 +79,14 @@
   "devDependencies": {
     "babel-eslint": "^8.0.2",
     "babel-jest": "^22.1.0",
+    "babel-plugin-remove-decorator": "^1.0.0",
     "browser-sync": "^2.18.13",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
@@ -108,9 +110,10 @@
     ]
   },
   "jest": {
-    "setupFiles" : [
-      "./client/js/config/browserMock.js",
-      "./client/js/config/enzymeSetup.js"
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "setupFiles": [
+      "./client/js/testSetup/browserMock.js",
+      "./client/js/testSetup/enzymeSetup.js"
     ]
   }
 }
