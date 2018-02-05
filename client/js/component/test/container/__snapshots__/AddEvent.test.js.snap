@@ -1,0 +1,687 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddEvent /> Rendering: should redirect to events page if event is successfully added 1`] = `
+<Redirect
+  push={false}
+  to="/events"
+/>
+`;
+
+exports[`<AddEvent /> Rendering: should redirect to login page if user is not authenticated 1`] = `
+<Redirect
+  push={false}
+  to="/users/login"
+/>
+`;
+
+exports[`<AddEvent /> Rendering: should render correctly if there is a default center 1`] = `
+<div
+  className="add-event-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Add Event"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+        id="main-content"
+      >
+        <Header
+          text="Add Event"
+        />
+        <form
+          className="mt-lg-5 w-lg-50"
+        >
+          <LoadingIcon
+            size={2}
+            start={false}
+          />
+          <Component
+            message={false}
+          />
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <input
+              className="form-control"
+              id="title"
+              name="title"
+              onChange={[Function]}
+              placeholder="A short description of your event"
+              type="text"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 30 characters
+            </small>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              id="description"
+              name="description"
+              onChange={[Function]}
+              placeholder="More details about the event"
+              rows="6"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 200 characters
+            </small>
+          </div>
+        </form>
+        <form
+          className="my-3 form-inline"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="date"
+            >
+              Date
+            </label>
+            <input
+              className="form-control mx-sm-3"
+              id="date"
+              name="date"
+              onChange={[Function]}
+              type="date"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="centers"
+            >
+              Choose a Center
+            </label>
+            <select
+              className="form-control ml-md-3"
+              defaultValue={1}
+              id="centers"
+              name="centerId"
+              onChange={[Function]}
+            >
+              <option>
+                choose a center
+              </option>
+              <DropDown
+                centers={
+                  Array [
+                    Object {
+                      "id": 1,
+                      "name": "test-center1",
+                    },
+                    Object {
+                      "id": 2,
+                      "name": "test-center2",
+                    },
+                  ]
+                }
+              />
+            </select>
+          </div>
+        </form>
+        <button
+          className="btn btn-outline-dark"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="d-block d-sm-none mt-5"
+  >
+    <div
+      className="container text-white text-center py-5"
+    >
+      <h1>
+        Ievents
+      </h1>
+      <p>
+        Copyright © 2017
+      </p>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
+<div
+  className="add-event-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Add Event"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+        id="main-content"
+      >
+        <Header
+          text="Add Event"
+        />
+        <form
+          className="mt-lg-5 w-lg-50"
+        >
+          <LoadingIcon
+            size={2}
+            start={false}
+          />
+          <Component
+            message={false}
+          />
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <input
+              className="form-control"
+              id="title"
+              name="title"
+              onChange={[Function]}
+              placeholder="A short description of your event"
+              type="text"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 30 characters
+            </small>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              id="description"
+              name="description"
+              onChange={[Function]}
+              placeholder="More details about the event"
+              rows="6"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 200 characters
+            </small>
+          </div>
+        </form>
+        <form
+          className="my-3 form-inline"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="date"
+            >
+              Date
+            </label>
+            <input
+              className="form-control mx-sm-3"
+              id="date"
+              name="date"
+              onChange={[Function]}
+              type="date"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="centers"
+            >
+              Choose a Center
+            </label>
+            <select
+              className="form-control ml-md-3"
+              defaultValue={null}
+              id="centers"
+              name="centerId"
+              onChange={[Function]}
+            >
+              <option>
+                choose a center
+              </option>
+              <DropDown
+                centers={
+                  Array [
+                    Object {
+                      "id": 1,
+                      "name": "test-center1",
+                    },
+                    Object {
+                      "id": 2,
+                      "name": "test-center2",
+                    },
+                  ]
+                }
+              />
+            </select>
+          </div>
+        </form>
+        <button
+          className="btn btn-outline-dark"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="d-block d-sm-none mt-5"
+  >
+    <div
+      className="container text-white text-center py-5"
+    >
+      <h1>
+        Ievents
+      </h1>
+      <p>
+        Copyright © 2017
+      </p>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
+<div
+  className="add-event-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Add Event"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+        id="main-content"
+      >
+        <Header
+          text="Add Event"
+        />
+        <form
+          className="mt-lg-5 w-lg-50"
+        >
+          <LoadingIcon
+            size={2}
+            start={true}
+          />
+          <Component
+            message={false}
+          />
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <input
+              className="form-control"
+              id="title"
+              name="title"
+              onChange={[Function]}
+              placeholder="A short description of your event"
+              type="text"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 30 characters
+            </small>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              id="description"
+              name="description"
+              onChange={[Function]}
+              placeholder="More details about the event"
+              rows="6"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 200 characters
+            </small>
+          </div>
+        </form>
+        <form
+          className="my-3 form-inline"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="date"
+            >
+              Date
+            </label>
+            <input
+              className="form-control mx-sm-3"
+              id="date"
+              name="date"
+              onChange={[Function]}
+              type="date"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="centers"
+            >
+              Choose a Center
+            </label>
+            <select
+              className="form-control ml-md-3"
+              defaultValue={null}
+              id="centers"
+              name="centerId"
+              onChange={[Function]}
+            >
+              <option>
+                choose a center
+              </option>
+              <DropDown
+                centers={
+                  Array [
+                    Object {
+                      "id": 1,
+                      "name": "test-center1",
+                    },
+                    Object {
+                      "id": 2,
+                      "name": "test-center2",
+                    },
+                  ]
+                }
+              />
+            </select>
+          </div>
+        </form>
+        <button
+          className="btn btn-outline-dark"
+          disabled={true}
+          onClick={[Function]}
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="d-block d-sm-none mt-5"
+  >
+    <div
+      className="container text-white text-center py-5"
+    >
+      <h1>
+        Ievents
+      </h1>
+      <p>
+        Copyright © 2017
+      </p>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`<AddEvent /> Rendering: should render correctly when there is an error 1`] = `
+<div
+  className="add-event-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Add Event"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+        id="main-content"
+      >
+        <Header
+          text="Add Event"
+        />
+        <form
+          className="mt-lg-5 w-lg-50"
+        >
+          <LoadingIcon
+            size={2}
+            start={false}
+          />
+          <Component
+            message="there was an error"
+          />
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <input
+              className="form-control"
+              id="title"
+              name="title"
+              onChange={[Function]}
+              placeholder="A short description of your event"
+              type="text"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 30 characters
+            </small>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="description"
+            >
+              Description
+            </label>
+            <textarea
+              className="form-control"
+              id="description"
+              name="description"
+              onChange={[Function]}
+              placeholder="More details about the event"
+              rows="6"
+            />
+            <small
+              className="form-text text-muted"
+              id="emailHelp"
+            >
+              Less than 200 characters
+            </small>
+          </div>
+        </form>
+        <form
+          className="my-3 form-inline"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="date"
+            >
+              Date
+            </label>
+            <input
+              className="form-control mx-sm-3"
+              id="date"
+              name="date"
+              onChange={[Function]}
+              type="date"
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="centers"
+            >
+              Choose a Center
+            </label>
+            <select
+              className="form-control ml-md-3"
+              defaultValue={null}
+              id="centers"
+              name="centerId"
+              onChange={[Function]}
+            >
+              <option>
+                choose a center
+              </option>
+              <DropDown
+                centers={
+                  Array [
+                    Object {
+                      "id": 1,
+                      "name": "test-center1",
+                    },
+                    Object {
+                      "id": 2,
+                      "name": "test-center2",
+                    },
+                  ]
+                }
+              />
+            </select>
+          </div>
+        </form>
+        <button
+          className="btn btn-outline-dark"
+          disabled={false}
+          onClick={[Function]}
+        >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="d-block d-sm-none mt-5"
+  >
+    <div
+      className="container text-white text-center py-5"
+    >
+      <h1>
+        Ievents
+      </h1>
+      <p>
+        Copyright © 2017
+      </p>
+    </div>
+  </footer>
+</div>
+`;

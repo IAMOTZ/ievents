@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Centers2 /> Rendering: should redirect to login page is user is not authenticated 1`] = `
+<Redirect
+  push={false}
+  to="/users/login"
+/>
+`;
+
+exports[`<Centers2 /> Rendering: should render well on page load 1`] = `
+<div
+  id="centers2-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Centers"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-lg-2 mt-lg-0"
+        id="main-content"
+      >
+        <Header
+          text="Centers"
+        />
+        <section
+          id="centers-section"
+        >
+          <div
+            className="container"
+          >
+            <div
+              className="d-flex flex-column align-items-center"
+              id="center-section-content"
+            >
+              <div
+                className="input-group w-50 mt-lg-5 search-box"
+              >
+                <input
+                  className="form-control"
+                  placeholder="Search for a center"
+                  type="text"
+                />
+                <div
+                  className="input-group-btn d-none d-sm-block"
+                >
+                  <button
+                    className="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown"
+                    type="button"
+                  >
+                    Search with
+                  </button>
+                  <div
+                    className="dropdown-menu dropdown-menu-right"
+                  >
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                    >
+                      Location
+                    </a>
+                    <div
+                      className="dropdown-divider"
+                      role="separator"
+                    />
+                    <a
+                      className="dropdown-item"
+                      href="#"
+                    >
+                      Name
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="search-box mt-3 d-block d-sm-none"
+              >
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  data-toggle="dropdown"
+                  type="button"
+                >
+                  Search with
+                </button>
+                <div
+                  className="dropdown-menu"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                  >
+                    Location
+                  </a>
+                  <div
+                    className="dropdown-divider"
+                    role="separator"
+                  />
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                  >
+                    Name
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              className="mt-5"
+            >
+              <div
+                className="row"
+              >
+                <CenterCards
+                  btnAction={[Function]}
+                  centers={
+                    Array [
+                      Object {
+                        "id": 1,
+                        "name": "test-center1",
+                      },
+                      Object {
+                        "id": 2,
+                        "name": "test-center2",
+                      },
+                    ]
+                  }
+                  editAction={[Function]}
+                  isAdmin={true}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+        <CenterModal
+          modalContent={
+            Object {
+              "bookedOn": Array [],
+              "capacity": null,
+              "details": null,
+              "images": Array [],
+              "name": null,
+              "price": null,
+              "type": null,
+            }
+          }
+          onBook={[Function]}
+          redirectPath="/addEvent"
+        />
+        <footer
+          className="d-none d-lg-block mt-5"
+        >
+          <div
+            className="container text-white text-center py-5"
+          >
+            <h1>
+              Ievents
+            </h1>
+            <p>
+              Copyright © 2017
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="d-block d-lg-none mt-5"
+  >
+    <div
+      className="container text-white text-center py-5"
+    >
+      <h1>
+        Ievents
+      </h1>
+      <p>
+        Copyright © 2017
+      </p>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`<Centers2 /> Rendering: should render well when fetching centers 1`] = `
+<div
+  id="centers2-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Centers"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-lg-2 mt-lg-0"
+        id="main-content"
+      >
+        <Header
+          text="Centers"
+        />
+        <LoadingContainer
+          iconSize={4}
+        />
+        <CenterModal
+          modalContent={
+            Object {
+              "bookedOn": Array [],
+              "capacity": null,
+              "details": null,
+              "images": Array [],
+              "name": null,
+              "price": null,
+              "type": null,
+            }
+          }
+          onBook={[Function]}
+          redirectPath="/addEvent"
+        />
+        <footer
+          className="d-none d-lg-block mt-5"
+        >
+          <div
+            className="container text-white text-center py-5"
+          >
+            <h1>
+              Ievents
+            </h1>
+            <p>
+              Copyright © 2017
+            </p>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="d-block d-lg-none mt-5"
+  >
+    <div
+      className="container text-white text-center py-5"
+    >
+      <h1>
+        Ievents
+      </h1>
+      <p>
+        Copyright © 2017
+      </p>
+    </div>
+  </footer>
+</div>
+`;

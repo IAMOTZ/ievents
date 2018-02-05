@@ -1,0 +1,344 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Signin /> Rendering: should redirect if user is already logged in 1`] = `
+<Redirect
+  push={false}
+  to="/addEvent"
+/>
+`;
+
+exports[`<Signin /> Rendering: should render correctly on page load 1`] = `
+<div
+  id="sign-in-container"
+>
+  <TopNav />
+  <div
+    className="d-flex flex-column align-items-center main-content"
+  >
+    <LoadingIcon
+      size={3}
+      start={false}
+    />
+    <div
+      className="m-2"
+    >
+      <Component
+        message={null}
+      />
+    </div>
+    <div
+      className="card card-form"
+    >
+      <h1
+        className="card-header"
+      >
+        Sign in
+      </h1>
+      <div
+        className="card-body"
+      >
+        <form>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-envelope"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="email"
+                name="email"
+                onChange={[Function]}
+                placeholder="Your Email"
+                type="email"
+              />
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-user-secret"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                placeholder="Password"
+                type="password"
+              />
+            </div>
+          </div>
+          <button
+            className="btn btn-block dark-button text-white"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Log in
+          </button>
+          <div
+            className="text-center mt-2"
+          >
+            <a
+              className="text-muted"
+              href=""
+            >
+              forgot password?
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</div>
+`;
+
+exports[`<Signin /> Rendering: should render correctly when logging in a user 1`] = `
+<div
+  id="sign-in-container"
+>
+  <TopNav />
+  <div
+    className="d-flex flex-column align-items-center main-content"
+  >
+    <LoadingIcon
+      size={3}
+      start={true}
+    />
+    <div
+      className="m-2"
+    >
+      <Component
+        message={null}
+      />
+    </div>
+    <div
+      className="card card-form"
+    >
+      <h1
+        className="card-header"
+      >
+        Sign in
+      </h1>
+      <div
+        className="card-body"
+      >
+        <form>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-envelope"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="email"
+                name="email"
+                onChange={[Function]}
+                placeholder="Your Email"
+                type="email"
+              />
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-user-secret"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                placeholder="Password"
+                type="password"
+              />
+            </div>
+          </div>
+          <button
+            className="btn btn-block dark-button text-white"
+            disabled={true}
+            onClick={[Function]}
+          >
+            Log in
+          </button>
+          <div
+            className="text-center mt-2"
+          >
+            <a
+              className="text-muted"
+              href=""
+            >
+              forgot password?
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</div>
+`;
+
+exports[`<Signin /> Rendering: should render correctly when there is an error 1`] = `
+<div
+  id="sign-in-container"
+>
+  <TopNav />
+  <div
+    className="d-flex flex-column align-items-center main-content"
+  >
+    <LoadingIcon
+      size={3}
+      start={false}
+    />
+    <div
+      className="m-2"
+    >
+      <Component
+        message="there was an error"
+      />
+    </div>
+    <div
+      className="card card-form"
+    >
+      <h1
+        className="card-header"
+      >
+        Sign in
+      </h1>
+      <div
+        className="card-body"
+      >
+        <form>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-envelope"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="email"
+                name="email"
+                onChange={[Function]}
+                placeholder="Your Email"
+                type="email"
+              />
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-user-secret"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="password"
+                name="password"
+                onChange={[Function]}
+                placeholder="Password"
+                type="password"
+              />
+            </div>
+          </div>
+          <button
+            className="btn btn-block dark-button text-white"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Log in
+          </button>
+          <div
+            className="text-center mt-2"
+          >
+            <a
+              className="text-muted"
+              href=""
+            >
+              forgot password?
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <Footer />
+  </div>
+</div>
+`;
