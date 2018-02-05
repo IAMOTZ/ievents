@@ -65,7 +65,7 @@ export default class Signup extends React.Component {
         <div id="sign-up-container">
           <TopNavigation />
           <div className="d-flex flex-column align-items-center main-content">
-            <LoadingIcon start={this.props.user.status.fetching} size={3} />
+            <LoadingIcon start={this.props.status.fetching} size={3} />
             <div className="m-2">
               <WarningAlert message={this.props.error} />
             </div>

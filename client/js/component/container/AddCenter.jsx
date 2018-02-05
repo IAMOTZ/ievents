@@ -215,6 +215,7 @@ export default class AddCenter extends React.Component {
                           </div>
                           <div className="ml-3 pt-3">
                             <button
+                              id="add-btn"
                               className="btn btn-outline-dark"
                               disabled={this.props.status.adding}
                               onClick={this.add}

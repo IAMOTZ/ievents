@@ -99,13 +99,14 @@ class AddAdmin extends React.Component {
                         inputError={this.state.inputError}
                         addingError={this.props.status.error}
                         success={this.props.status.success}
-                        newAmdin={this.state.email}
+                        newAdmin={this.state.email}
                       />
                       <div className="input-group px-3">
                         <span className="input-group-addon">
                           <i className="fa fa-user" />
                         </span>
                         <input
+                          id="input-email"
                           type="text"
                           className="form-control"
                           placeholder="The user's email"
@@ -125,6 +126,7 @@ class AddAdmin extends React.Component {
                         </li>
                       </ul>
                       <button
+                        id="add-btn"
                         className="btn btn-primary"
                         disabled={this.props.status.adding}
                         onClick={this.add}
@@ -159,7 +161,7 @@ const Alert = (props) => {
     component = (
       <span>
         <p className="text-success">Admin Added!</p>
-        <span>{props.newAmdin} is now an admin</span>
+        <span>{props.newAdmin} is now an admin</span>
       </span>
     );
   } else {
