@@ -150,7 +150,7 @@ export default class EditCenter extends React.Component {
                     <small className="form-text text-muted">Less than 30 characters</small>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="description">Details</label>
+                    <label htmlFor="details">Details</label>
                     <textarea
                       defaultValue={this.props.toEdit.details}
                       className="form-control"
