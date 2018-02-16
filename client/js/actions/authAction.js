@@ -15,7 +15,7 @@ export const createUser = userDetails => (dispatch) => {
       dispatch({ type: actionTypes.ADDING_USER_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: actionTypes.ADDING_ADMIN_REJECTED, payload: err.response.data });
+      dispatch({ type: actionTypes.ADDING_USER_REJECTED, payload: err.response.data });
     });
 };
 
