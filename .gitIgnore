@@ -6,3 +6,5 @@ build
 public/bundle.js
 public/eventCenter1.jpeg
 coverage
+selenium-debug.log
+reports
