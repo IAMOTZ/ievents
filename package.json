@@ -14,6 +14,7 @@
     "test": "set NODE_ENV=test&& npm run setUpDb && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --timeout 5000 --exit",
     "test:client": "jest",
     "test:e2e": "nightwatch",
+    "e2e:setup": "selenium-standalone install",
     "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint",
     "heroku-postbuild": "npm run react:pro && npm run build && npm run setUpDb"
@@ -101,7 +102,8 @@
     "nightwatch": "^0.9.19",
     "nodemon": "^1.12.1",
     "nyc": "^11.3.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "selenium-standalone": "^6.12.0"
   },
   "nyc": {
     "exclude": [
