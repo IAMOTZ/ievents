@@ -18,6 +18,8 @@ import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
   {
     user: store.user.user,
     authenticated: store.user.status.fetched,
+    isAdmin: (store.user.user.role === 'admin'),
+    isSuperAdmin: (store.user.user.role === 'superAdmin'),
     events: store.events.events,
     centers: store.centers.centers,
     status: {
@@ -100,10 +102,21 @@ export default class Events extends React.Component {
     } else {
       component = (
         <div id="events-container">
-          <UserTopNav name={this.props.user.name} title="My Events" />
+          <UserTopNav
+            name={this.props.user.name}
+            title="My Events"
+            isAdmin={this.props.isAdmin}
+            isSuperAdmin={this.props.isSuperAdmin}
+            dispatch={this.props.dispatch}
+          />
           <div className="container-fluid">
             <div className="row">
-              <UserSideNav userName={this.props.user.name} />
+              <UserSideNav
+                userName={this.props.user.name}
+                isAdmin={this.props.isAdmin}
+                isSuperAdmin={this.props.isSuperAdmin}
+                dispatch={this.props.dispatch}
+              />
               {/* Main content */}
               <div className="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
                 {/* Content Header(navigation) on large screen */}

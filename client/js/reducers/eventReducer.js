@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   events: [],
@@ -21,18 +22,18 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCHING_EVENTS': {
+    case actionTypes.FETCHING_EVENTS: {
       return {
         ...state,
         status: {
           ...state.status,
           fetching: true,
           fetched: false,
-          error: false,
+          fetchingError: false,
         },
       };
     }
-    case 'FETCHING_EVENTS_RESOLVED': {
+    case actionTypes.FETCHING_EVENTS_RESOLVED: {
       const { events } = action.payload;
       return {
         ...state,
@@ -41,21 +42,21 @@ export default (state = initialState, action) => {
           ...state.status,
           fetching: false,
           fetched: true,
-          error: false,
+          fetchingError: false,
         },
       };
     }
-    case 'FETCHING_EVENTS_REJECTED': {
+    case actionTypes.FETCHING_EVENTS_REJECTED: {
       return {
         ...state,
         status: {
           ...state.status,
           fetching: false,
-          error: action.payload,
+          fetchingError: action.payload,
         },
       };
     }
-    case 'ADDDING_EVENT': {
+    case actionTypes.ADDING_EVENT: {
       return {
         ...state,
         status: {
@@ -66,7 +67,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_EVENT_RESOLVED': {
+    case actionTypes.ADDING_EVENT_RESOLVED: {
       return {
         ...state,
         status: {
@@ -77,7 +78,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'ADDING_EVENT_REJECTED': {
+    case actionTypes.ADDING_EVENT_REJECTED: {
       return {
         ...state,
         status: {
@@ -88,7 +89,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'UPDATING_EVENT': {
+    case actionTypes.UPDATING_EVENT: {
       return {
         ...state,
         status: {
@@ -99,7 +100,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'UPDATING_EVENT_RESOLVED': {
+    case actionTypes.UPDATING_EVENT_RESOLVED: {
       return {
         ...state,
         status: {
@@ -110,7 +111,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'UPDATING_EVENT_REJECTED': {
+    case actionTypes.UPDATING_EVENT_REJECTED: {
       return {
         ...state,
         status: {
@@ -121,7 +122,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'DELETING_EVENT': {
+    case actionTypes.DELETING_EVENT: {
       return {
         ...state,
         status: {
@@ -132,7 +133,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'DELETING_EVENT_RESOLVED': {
+    case actionTypes.DELETING_EVENT_RESOLVED: {
       return {
         ...state,
         status: {
@@ -143,7 +144,7 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'DELETING_EVENT_REJECTED': {
+    case actionTypes.DELETING_EVENT_REJECTED: {
       return {
         ...state,
         status: {
@@ -154,14 +155,14 @@ export default (state = initialState, action) => {
         },
       };
     }
-    case 'INITIALIZE_EDIT': {
+    case actionTypes.INITIALIZE_EDIT: {
       const event = _.find(state.events, { id: Number(action.payload) });
       return {
         ...state,
         toEdit: event,
       };
     }
-    case 'CLEAR_EVENT_STATUS': {
+    case actionTypes.CLEAR_EVENT_STATUS: {
       switch (action.payload) {
         case ('ALL'): {
           return {
@@ -190,8 +191,8 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case 'CLEAR_USER': {
-      // This action is not fired from the event actions but the user action.
+    case actionTypes.CLEAR_USER: {
+      // The action is not fired from the event actions but the user action.
       // It would make sure to clear all the event information when the user logs out.
       return initialState;
     }

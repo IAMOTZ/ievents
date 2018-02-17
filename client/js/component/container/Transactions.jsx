@@ -16,6 +16,8 @@ import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
   {
     user: store.user.user,
     authenticated: store.user.status.fetched,
+    isAdmin: (store.user.user.role === 'admin'),
+    isSuperAdmin: (store.user.user.role === 'superAdmin'),
     transactions: store.transactions,
     status: {
       fetching: store.transactions.status.fetching,
@@ -89,11 +91,22 @@ export default class Transactions extends React.Component {
       component = (
         <div id="transactions-container">
           {/* Top navigation on small screen */}
-          <UserTopNav name={this.props.user.name} title="Transactions" />
+          <UserTopNav
+            name={this.props.user.name}
+            title="Transactions"
+            isAdmin={this.props.isAdmin}
+            isSuperAdmin={this.props.isSuperAdmin}
+            dispatch={this.props.dispatch}
+          />
           <div className="container-fluid">
             <div className="row">
               {/*  Side navigation on large screen */}
-              <UserSideNav userName={this.props.user.name} />
+              <UserSideNav
+                name={this.props.user.name}
+                isAdmin={this.props.isAdmin}
+                isSuperAdmin={this.props.isSuperAdmin}
+                dispatch={this.props.dispatch}
+              />
               {/* Main content */}
               <div className="col-lg-10 offset-md-2" id="add-event-section">
                 {/* Content Header(navigation) on large screen */}
@@ -131,7 +144,7 @@ export default class Transactions extends React.Component {
                           />
                         </div>
                     }
-                    <ConfirmModal 
+                    <ConfirmModal
                       visible={this.state.confirmModalVisible}
                       onCancel={this.cancelDelete}
                       onOK={this.finishDelete}

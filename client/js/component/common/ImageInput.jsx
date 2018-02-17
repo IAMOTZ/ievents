@@ -16,7 +16,7 @@ const ImageInput = (props) => {
       <CustomDropZone
         style={props.style}
         onDrop={props.onDrop}
-      ><p>Drop a new image or click to select a new image to upload[.jpeg only] </p>
+      ><p>Drop a new image or click to select a new image to upload[.jpeg only]</p>
       </CustomDropZone>
     );
   } else {

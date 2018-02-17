@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import user from './authReducer';
-import centers from './centerReducers';
+import centers from './centerReducer';
 import events from './eventReducer';
 import transactions from './transactionReducer';
 

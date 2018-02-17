@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Centers1 /> Rendering: should redirect to addEvent page if user is already logged in 1`] = `
+<Redirect
+  push={false}
+  to="/addEvent"
+/>
+`;
+
+exports[`<Centers1 /> Rendering: should render well on page load 1`] = `
+<div
+  id="centers1-container"
+>
+  <TopNav />
+  <section
+    className="mb-5"
+    id="centers-section"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="d-flex flex-column align-items-center"
+        id="center-section-content"
+      >
+        <div
+          id="center-section-header"
+        >
+          <h1
+            className="display-4"
+          >
+            A special center for a special event
+          </h1>
+        </div>
+        <div
+          className="search-box input-group w-50 mt-5"
+        >
+          <input
+            className="form-control"
+            placeholder="Search for a center"
+            type="text"
+          />
+          <div
+            className="input-group-btn d-none d-sm-block"
+          >
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              data-toggle="dropdown"
+              type="button"
+            >
+              Search with
+            </button>
+            <div
+              className="dropdown-menu dropdown-menu-right"
+            >
+              <a
+                className="dropdown-item"
+                href="#"
+              >
+                Location
+              </a>
+              <div
+                className="dropdown-divider"
+                role="separator"
+              />
+              <a
+                className="dropdown-item"
+                href="#"
+              >
+                Name
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          className="search-box mt-3 d-block d-sm-none"
+        >
+          <button
+            className="btn btn-secondary dropdown-toggle"
+            data-toggle="dropdown"
+            type="button"
+          >
+            Search with
+          </button>
+          <div
+            className="dropdown-menu"
+          >
+            <a
+              className="dropdown-item"
+              href="#"
+            >
+              Location
+            </a>
+            <div
+              className="dropdown-divider"
+              role="separator"
+            />
+            <a
+              className="dropdown-item"
+              href="#"
+            >
+              Name
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        className="mt-5"
+      >
+        <div
+          className="row"
+        >
+          <CenterCards
+            btnAction={[Function]}
+            centers={
+              Array [
+                Object {
+                  "id": 1,
+                  "name": "test-center1",
+                },
+                Object {
+                  "id": 2,
+                  "name": "test-center2",
+                },
+              ]
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  <CenterModal
+    modalContent={
+      Object {
+        "bookedOn": Array [],
+        "capacity": null,
+        "details": null,
+        "images": Array [],
+        "name": null,
+        "price": null,
+        "type": null,
+      }
+    }
+    redirectPath="/users/login"
+  />
+  <Footer />
+</div>
+`;
+
+exports[`<Centers1 /> Rendering: should render well when fetching centers 1`] = `
+<div
+  id="centers1-container"
+>
+  <TopNav />
+  <LoadingContainer
+    iconSize={4}
+  />
+  <CenterModal
+    modalContent={
+      Object {
+        "bookedOn": Array [],
+        "capacity": null,
+        "details": null,
+        "images": Array [],
+        "name": null,
+        "price": null,
+        "type": null,
+      }
+    }
+    redirectPath="/users/login"
+  />
+  <Footer />
+</div>
+`;

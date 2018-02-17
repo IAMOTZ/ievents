@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Transactions /> Rendering: should redirect to login page if the user is not authenticated 1`] = `
+<Redirect
+  push={false}
+  to="/users/login"
+/>
+`;
+
+exports[`<Transactions /> Rendering: should render well on page load 1`] = `
+<div
+  id="transactions-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Transactions"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+        id="add-event-section"
+      >
+        <nav
+          className="navbar w-100 mt-3 d-none d-lg-flex justify-content-between"
+        >
+          <a
+            className="navbar-brand text-white"
+          >
+            <strong>
+              Transactions
+            </strong>
+          </a>
+          <button
+            className="btn btn-primary"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Refresh
+          </button>
+        </nav>
+        <div
+          className="mt-lg-0"
+          id="transactions"
+        >
+          <div
+            id="accordion"
+            role="tablist"
+          >
+            <div>
+              <div
+                className="text-center d-lg-none"
+              >
+                <button
+                  className="btn btn-primary"
+                  disabled={false}
+                  onClick={[Function]}
+                >
+                  Refresh
+                </button>
+              </div>
+              <LoadingIcon
+                size={2}
+                start={false}
+              />
+              <TransactionCards
+                centers={
+                  Array [
+                    Object {
+                      "id": 1,
+                      "name": "test-center1",
+                    },
+                    Object {
+                      "id": 2,
+                      "name": "test-center2",
+                    },
+                  ]
+                }
+                deleting={false}
+                onCancel={[Function]}
+                toDelete={null}
+              />
+            </div>
+            <ConfirmModal
+              onCancel={[Function]}
+              onOK={[Function]}
+              visible={false}
+            >
+              <span>
+                Are you sure you want to cancel this event?
+              </span>
+            </ConfirmModal>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Transactions /> Rendering: should render well when fetching transactions 1`] = `
+<div
+  id="transactions-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={true}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Transactions"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={true}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+        id="add-event-section"
+      >
+        <nav
+          className="navbar w-100 mt-3 d-none d-lg-flex justify-content-between"
+        >
+          <a
+            className="navbar-brand text-white"
+          >
+            <strong>
+              Transactions
+            </strong>
+          </a>
+          <button
+            className="btn btn-primary"
+            disabled={true}
+            onClick={[Function]}
+          >
+            Refresh
+          </button>
+        </nav>
+        <div
+          className="mt-lg-0"
+          id="transactions"
+        >
+          <div
+            id="accordion"
+            role="tablist"
+          >
+            <LoadingContainer
+              iconSize={4}
+            />
+            <ConfirmModal
+              onCancel={[Function]}
+              onOK={[Function]}
+              visible={false}
+            >
+              <span>
+                Are you sure you want to cancel this event?
+              </span>
+            </ConfirmModal>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -5,7 +5,6 @@ const debugMode = process.env.NODE_ENV !== 'production';
 
 const plugins = [
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production'),
     'process.env.API_BASE_URL': JSON.stringify('/api/v1'),
   }),
 ];
@@ -66,15 +65,16 @@ module.exports = {
   plugins: debugMode ? plugins : plugins.concat([
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') })    
   ]),
   devServer: {
     contentBase: path.join(__dirname, 'public'),
-    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
         secure: false,
       }
-    }
+    },
+    historyApiFallback: true
   },
 };

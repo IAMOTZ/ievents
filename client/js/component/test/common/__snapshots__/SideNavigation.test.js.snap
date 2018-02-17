@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SideNavigation /> should render correctly for admin user 1`] = `
+<div
+  className="col-lg-2 fixed-top  d-none d-lg-block"
+  id="side-navigation"
+>
+  <div
+    className="mt-5 text-center"
+  >
+    <p
+      className="lead text-white pt-3 text-capitalize"
+      id="name"
+    >
+      test-name
+    </p>
+  </div>
+  <div
+    className="pt-3 navigation-links"
+  >
+    <div
+      className="list-group"
+    >
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/events"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-user-circle fa-fw"
+        />
+          My Events
+      </Link>
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="addEvent"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-plus fa-fw"
+        />
+          Add Events
+      </Link>
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/centers2"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-bank fa-fw"
+        />
+          Centers
+      </Link>
+      <AdminOptions
+        isAdmin={true}
+        isSuperAdmin={false}
+      />
+      <Link
+        className="list-group-item"
+        onClick={[Function]}
+        replace={false}
+        to="/"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-power-off fa-fw"
+        />
+          Logout
+      </Link>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<SideNavigation /> should render correctly for normal user 1`] = `
+<div
+  className="col-lg-2 fixed-top  d-none d-lg-block"
+  id="side-navigation"
+>
+  <div
+    className="mt-5 text-center"
+  >
+    <p
+      className="lead text-white pt-3 text-capitalize"
+      id="name"
+    >
+      test-name
+    </p>
+  </div>
+  <div
+    className="pt-3 navigation-links"
+  >
+    <div
+      className="list-group"
+    >
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/events"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-user-circle fa-fw"
+        />
+          My Events
+      </Link>
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="addEvent"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-plus fa-fw"
+        />
+          Add Events
+      </Link>
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/centers2"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-bank fa-fw"
+        />
+          Centers
+      </Link>
+      <AdminOptions
+        isAdmin={false}
+        isSuperAdmin={false}
+      />
+      <Link
+        className="list-group-item"
+        onClick={[Function]}
+        replace={false}
+        to="/"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-power-off fa-fw"
+        />
+          Logout
+      </Link>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<SideNavigation /> should render correctly for super admin user 1`] = `
+<div
+  className="col-lg-2 fixed-top  d-none d-lg-block"
+  id="side-navigation"
+>
+  <div
+    className="mt-5 text-center"
+  >
+    <p
+      className="lead text-white pt-3 text-capitalize"
+      id="name"
+    >
+      test-name
+    </p>
+  </div>
+  <div
+    className="pt-3 navigation-links"
+  >
+    <div
+      className="list-group"
+    >
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/events"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-user-circle fa-fw"
+        />
+          My Events
+      </Link>
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="addEvent"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-plus fa-fw"
+        />
+          Add Events
+      </Link>
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/centers2"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-bank fa-fw"
+        />
+          Centers
+      </Link>
+      <AdminOptions
+        isAdmin={false}
+        isSuperAdmin={true}
+      />
+      <Link
+        className="list-group-item"
+        onClick={[Function]}
+        replace={false}
+        to="/"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-power-off fa-fw"
+        />
+          Logout
+      </Link>
+    </div>
+  </div>
+</div>
+`;
