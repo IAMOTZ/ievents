@@ -112,7 +112,7 @@ export default class Events extends React.Component {
           <div className="container-fluid">
             <div className="row">
               <UserSideNav
-                userName={this.props.user.name}
+                name={this.props.user.name}
                 isAdmin={this.props.isAdmin}
                 isSuperAdmin={this.props.isSuperAdmin}
                 dispatch={this.props.dispatch}

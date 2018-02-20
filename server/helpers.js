@@ -2,6 +2,7 @@
 import sequelize from 'sequelize';
 import dotEnv from 'dotenv';
 import cloudinary from 'cloudinary';
+import nodemailer from 'nodemailer';
 
 dotEnv.config();
 cloudinary.config({
@@ -151,5 +152,34 @@ export const deleteImage = (imageUrl) => {
         resolve(result);
       }
     });
+  });
+};
+
+/**
+ * Sends email.
+ * @param {Object} details The detials of the email to send.
+ */
+export const sendMail = (details) => {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.MAILER_ID,
+      pass: process.env.MAILER_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+    secure: false,
+  });
+  const mailOptions = {
+    from: 'admin@ievents.com',
+    to: details.recipient,
+    subject: details.subject,
+    html: details.body,
+  };
+  transporter.sendMail(mailOptions, (err) => {
+    if (err) {
+      console.log('Error Sending Email: ', err);
+    }
   });
 };
