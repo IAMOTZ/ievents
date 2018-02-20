@@ -1,5 +1,6 @@
 /* eslint-disable no-else-return */
 import db from '../models/index';
+import { sendMail } from '../helpers';
 
 const {
   transactions, centers, users, events,
@@ -15,6 +16,54 @@ const getTransaction = async (transactionModel, transactionId) => {
   const transaction = await transactionModel.findById(Number(transactionId));
   return transaction;
 };
+
+
+/**
+ * Get the details of an event from the transaction attached to it.
+ * @param {Object} transactionModel The query interface for transactions in the database.
+ * @param {Number} transactionId The ID of the transaction.
+ * @returns {Object} The details of the event.
+ */
+const getEventFromTransaction = async (transactionModel, transactionId) => {
+  const transaction = await transactionModel.findOne({
+    where: {
+      id: transactionId,
+    },
+    include: [{
+      model: events,
+      attributes: ['title', 'date'],
+      include: [{
+        model: users,
+        attributes: ['email'],
+      }],
+    }],
+  });
+  return Object.assign(
+    {},
+    {
+      title: transaction.event.title,
+      date: transaction.event.date,
+      owner: transaction.event.user.email,
+    },
+  );
+};
+
+/**
+ * Creates the email body to send to the user whoose event is to be deleted.
+ * @param {String} eventTitle The title of the event.
+ * @param {String} eventDate The date the event is supposed to occur.
+ * @returns {String} The email constructed.
+ */
+const createEmailBody = (eventTitle, eventDate) => (
+  `<h3>Ievents</h3>
+  <p>Your event, <b>${eventTitle}</b> ,that is supposed to come up on <b>${eventDate}</b> has been canceled!!
+    <br> Consequently, the center would not be available for your event.
+    <br> <br>
+    <b>NOTE:</b>This email terminates the transaction we created with you on this event.
+    <br> <br> We are very sorry for any inconvinience that this might have caused you.
+    <br> For more details, you can always contact us at admin@ievents.com.
+  </p>`
+);
 
 /**
  * Cancels an event.
@@ -72,7 +121,13 @@ export default {
         message: 'transaction does not exist',
       });
     } else {
+      const eventDetails = await getEventFromTransaction(transactions, transactionId);
       await transaction.destroy();
+      sendMail({
+        recipient: eventDetails.owner,
+        subject: 'Your Event Has Been Canceled',
+        body: createEmailBody(eventDetails.title, eventDetails.date),
+      });
       await cancelEvent(events, transaction.eventId);
       return res.status(200).json({
         status: 'success',
