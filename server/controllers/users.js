@@ -114,6 +114,26 @@ export default {
     }
   },
 
+  async changePassword(req, res) {
+    const { formerpassword, newpassword } = res.locals.formattedInputs;
+    const userEmail = req.decoded.email;
+    const user = await getUser(users, userEmail);
+    if (verifyPassword(formerpassword, user.password)) {
+      await user.update({
+        password: newpassword,
+      });
+      return res.status(200).json({
+        status: 'success',
+        message: 'password changed',
+      });
+    } else {
+      return res.status(400).json({
+        status: 'failed',
+        message: 'the former password is incorrect',
+      });
+    }
+  },
+
   /**
    * Creates an admin user.
    * @param {Object} req The request object.
