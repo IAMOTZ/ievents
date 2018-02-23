@@ -6,7 +6,8 @@ import {
   validateSignUpInputs, validateSigninInputs,
   validateCreateAdminInputs, validateAddCenterInputs,
   validateUpdateCenterInputs, validateAddEventInputs,
-  validateUpdateEventInputs, formatInputDatas,
+  validateUpdateEventInputs, formatInputDatas, 
+  validateChangePasswordInputs,
 } from './middlewares';
 
 const router = express.Router();
@@ -28,6 +29,12 @@ router.post(
   isSuperAdmin,
   validateCreateAdminInputs,
   controllers.users.createAdmin,
+);
+router.put(
+  '/users/changePassword',
+  isUser,
+  validateChangePasswordInputs,
+  controllers.users.changePassword,
 );
 router.get(
   '/centers',
