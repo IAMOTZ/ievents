@@ -94,8 +94,7 @@ export const validateSigninInputs = (req, res, next) => {
       throw new Error('password cannot be empty');
     }
   } catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message });
-    return;
+    return res.status(400).json({ status: 'failed', message: error.message });
   }
   next();
 };
@@ -120,8 +119,39 @@ export const validateCreateAdminInputs = (req, res, next) => {
       throw new Error('email format is wrong');
     }
   } catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message });
-    return;
+    return res.status(400).json({ status: 'failed', message: error.message });
   }
   next();
 };
+
+export const validateChangePasswordInputs = (req, res, next) => {
+  const {
+    formerpassword, newpassword, confirmnewpassword
+  } = res.locals.formattedInputs;
+  try {
+    if (!formerpassword) {
+      throw new Error('the former password is required');
+    }
+    if (!newpassword) {
+      throw new Error('the new password is required');
+    }
+    if (!confirmnewpassword) {
+      throw new Error('confirm password field is required');
+    }
+    if (newpassword.match(/^\S+$/) === null) {
+      throw new Error('the new password must not contain whitespaces');
+    }
+    if (newpassword.length < 7) {
+      throw new Error('the new password must be equal or more than 7 characters');
+    }
+    if (!/\d/.test(newpassword) || !/[A-Z]/.test(newpassword) || !/[a-z]/.test(newpassword)) {
+      throw new Error('the new password must contain capital letters, small letters and numbers');
+    }
+    if (newpassword !== confirmnewpassword) {
+      throw new Error('the new password and confirm password input does not match');
+    }
+  } catch (error) {
+    return res.status(400).json({ status: 'failed', message: error.message });
+  }
+  next();
+}
