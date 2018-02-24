@@ -37,11 +37,8 @@ export default (sequelize, DataTypes) => {
           theUser.password = hashPassword(theUser.password);
         },
         beforeUpdate: (theUser) => {
-          if (theUser.password) {
-            const newPassword = hashPassword(theUser.password);
-            if( theUser._previousDataValues.password !== newPassword) {
-              theUser.password = newPassword;
-            }
+          if (theUser.changed('password')) {
+            theUser.password = hashPassword(theUser.password);
           }
         }
       },
