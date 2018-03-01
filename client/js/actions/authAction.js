@@ -58,6 +58,22 @@ export const addAdmin = (email, superAdminToken) => (dispatch) => {
     });
 };
 
+export const changePassword = (passwordDetails, userToken) => (dispatch) => {
+  dispatch({ type: actionTypes.CHANGING_PASSWORD });
+  const config = {
+    headers: {
+      'access-token': userToken,
+    },
+  };
+  axios.put(`${apiBaseUrl}/users/changePassword`, passwordDetails, config)
+    .then((response) => {
+      dispatch({ type: actionTypes.CHANGING_PASSWORD_RESOLVED, payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: actionTypes.CHANGING_PASSWORD_REJECTRED, payload: err.response.data });
+    });
+};
+
 /**
  * Clears the status variables tracking a particular user process.
  * @param {String} process The process to be cleared.
