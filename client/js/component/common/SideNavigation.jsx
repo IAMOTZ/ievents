@@ -13,7 +13,7 @@ const UserSideNav = props => (
     <div className="pt-3 navigation-links">
       <div className="list-group">
         <Link to='/events' className="list-group-item">
-          <i className="fa fa-user-circle fa-fw" aria-hidden="true" />&nbsp; My Events
+          <i className="fa fa-book fa-fw" aria-hidden="true" />&nbsp; My Events
         </Link>
         <Link to="addEvent" className="list-group-item">
           <i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; Add Events
@@ -22,6 +22,9 @@ const UserSideNav = props => (
           <i className="fa fa-bank fa-fw" aria-hidden="true" />&nbsp; Centers
         </Link>
         <AdminOptions isAdmin={props.isAdmin} isSuperAdmin={props.isSuperAdmin} />
+        <Link to="/profile" className="list-group-item">
+          <i className="fa fa-user-circle fa-fw" aria-hidden="true" />&nbsp; Profile
+        </Link>
         <Link to="/" className="list-group-item" onClick={() => props.dispatch(clearUser())}>
           <i className="fa fa-power-off fa-fw" aria-hidden="true" />&nbsp; Logout
         </Link>
