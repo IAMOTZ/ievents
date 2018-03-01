@@ -47,7 +47,7 @@ class Profile extends React.Component {
   }
 
   /**
-   * Update some state variables with the user inputs.
+   * Gets user inputs and update the component's state with it.
    * @param {Event} e The event object.
    */
   getInput = (e) => {
@@ -56,6 +56,9 @@ class Profile extends React.Component {
     this.setState(state);
   }
 
+  /**
+   * It dispatches an action to change password.
+   */
   changePassword = () => {
     const {
       formerPassword, newPassword, confirmNewPassword,
@@ -67,6 +70,9 @@ class Profile extends React.Component {
     this.props.dispatch(changePassword(passwordDetials, userToken));
   }
 
+  /**
+   * It clears the inputs of the forms in the modals.
+   */
   clearInputs = () => {
     const state = { ...this.state };
     state.formerPassword = '';
@@ -75,10 +81,16 @@ class Profile extends React.Component {
     this.setState(state);
   }
 
+  /**
+   * It clears all the status in the state relating to changing password.
+   */
   clearStateStatus = () => {
     this.props.dispatch(clearStatus('CHANGING_PASSWORD'));
   }
 
+  /**
+   * Perform some actions when the modal is closed.
+   */
   closeModalEffects = () => {
     this.clearInputs();
     this.clearStateStatus();

@@ -58,6 +58,12 @@ export const addAdmin = (email, superAdminToken) => (dispatch) => {
     });
 };
 
+/**
+ * A Thnk modeled action that eventually change the password of a user.
+ * @param {Object} passwordDetails The detials needed for changing the password.
+ * @param {String} userToken The token of the user.
+ * @returns {Function}
+ */
 export const changePassword = (passwordDetails, userToken) => (dispatch) => {
   dispatch({ type: actionTypes.CHANGING_PASSWORD });
   const config = {
