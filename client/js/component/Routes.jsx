@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 // The containers.
 import Signup from './container/Signup.jsx';
 import Signin from './container/Signin.jsx';
+import Profile from './container/Profile.jsx';
 import AddEvent from './container/AddEvent.jsx';
 import Events from './container/Events.jsx';
 import EditEvent from './container/EditEvent.jsx';
@@ -28,5 +29,6 @@ export default () => (
     <Route exact path="/editCenter" component={EditCenter} />
     <Route exact path="/transactions" component={Transactions} />
     <Route exact path="/addAdmin" component={AddAdmin} />
+    <Route exact path="/profile" component={Profile} />
   </Switch>
 );
