@@ -8,7 +8,7 @@ import { updateEvent, clearStatus } from '../../actions/eventActions';
 import UserSideNav from '../common/SideNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
-import WarningAlert from '../common/WarningAlert.jsx';
+import { WarningAlert } from '../common/Alert.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
