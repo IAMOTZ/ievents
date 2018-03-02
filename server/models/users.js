@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 const hashPassword = (password) => {
   const salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync(password, salt);
-}
+};
 
 export default (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
@@ -31,17 +31,19 @@ export default (sequelize, DataTypes) => {
       values: ['user', 'admin', 'superAdmin'],
       defaultValue: 'user',
     },
-  }, {
-      hooks: {
-        beforeCreate: (theUser) => {
+  },
+  {
+    hooks: {
+      beforeCreate: (theUser) => {
+        theUser.password = hashPassword(theUser.password);
+      },
+      beforeUpdate: (theUser) => {
+        if (theUser.changed('password')) {
           theUser.password = hashPassword(theUser.password);
-        },
-        beforeUpdate: (theUser) => {
-          if (theUser.changed('password')) {
-            theUser.password = hashPassword(theUser.password);
-          }
         }
       },
-    });
+    },
+  },
+  );
   return users;
 };
