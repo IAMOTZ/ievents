@@ -22,7 +22,7 @@ exports[`<Signin /> Rendering: should render correctly on page load 1`] = `
     <div
       className="m-2"
     >
-      <Component
+      <WarningAlert
         message={null}
       />
     </div>
@@ -134,7 +134,7 @@ exports[`<Signin /> Rendering: should render correctly when logging in a user 1`
     <div
       className="m-2"
     >
-      <Component
+      <WarningAlert
         message={null}
       />
     </div>
@@ -246,7 +246,7 @@ exports[`<Signin /> Rendering: should render correctly when there is an error 1`
     <div
       className="m-2"
     >
-      <Component
+      <WarningAlert
         message="there was an error"
       />
     </div>

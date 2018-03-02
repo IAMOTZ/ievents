@@ -25,6 +25,9 @@ const initialState = {
     addingAdmin: false,
     adminAdded: false,
     addingAdminError: false,
+    changingPassword: false,
+    changingPasswordResolved: false,
+    changingPasswordRejected: false,
   },
 };
 const alterInitialState = (newUser, newStatus) => ({
@@ -101,6 +104,25 @@ describe('Auth Reducer', () => {
     });
   });
 
+  describe('Changing Password', () => {
+    it('should update the changingPassword status to true', () => {
+      expect(reducer(undefined, {
+        type: actionTypes.CHANGING_PASSWORD,
+      })).toEqual(alterInitialState({}, { changingPassword: true }));
+    });
+    it('should update the changingPasswordResolved status to true', () => {
+      expect(reducer(undefined, {
+        type: actionTypes.CHANGING_PASSWORD_RESOLVED,
+      })).toEqual(alterInitialState({}, { changingPasswordResolved: true }));
+    });
+    it('should update the changingPasswordRejected status with some error message', () => {
+      expect(reducer(undefined, {
+        type: actionTypes.CHANGING_PASSWORD_REJECTRED,
+        payload: errorMessage,
+      })).toEqual(alterInitialState({}, { changingPasswordRejected: errorMessage }));
+    });
+  });
+
   describe('Clearing all or part of the state', () => {
     it('should clear all the error status', () => {
       expect(reducer(alterInitialState({}, { fetching: true, error: errorMessage }), {
@@ -112,6 +134,12 @@ describe('Auth Reducer', () => {
       expect(reducer(alterInitialState({}, { fetching: true, adminAdded: true }), {
         type: actionTypes.CLEAR_USER_STATUS,
         payload: 'ADD_ADMIN',
+      })).toEqual(alterInitialState({}, { fetching: true }));
+    });
+    it('should clear all the changing pasword related status', () => {
+      expect(reducer(alterInitialState({}, { fetching: true, changingPassword: true }), {
+        type: actionTypes.CLEAR_USER_STATUS,
+        payload: 'CHANGING_PASSWORD',
       })).toEqual(alterInitialState({}, { fetching: true }));
     });
     it('should not clear any status', () => {

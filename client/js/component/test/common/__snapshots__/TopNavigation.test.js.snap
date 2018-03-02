@@ -161,6 +161,17 @@ exports[`<UserTopNav /> should render correctly for admin user 1`] = `
         >
           <Link
             className="nav-link"
+            replace={false}
+            to="/profile"
+          >
+            Profile
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
             onClick={[Function]}
             replace={false}
             to="/"
@@ -253,6 +264,17 @@ exports[`<UserTopNav /> should render correctly for normal user 1`] = `
         >
           <Link
             className="nav-link"
+            replace={false}
+            to="/profile"
+          >
+            Profile
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
             onClick={[Function]}
             replace={false}
             to="/"
@@ -340,6 +362,17 @@ exports[`<UserTopNav /> should render correctly for super admin user 1`] = `
           isAdmin={false}
           isSuperAdmin={true}
         />
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/profile"
+          >
+            Profile
+          </Link>
+        </li>
         <li
           className="nav-item"
         >

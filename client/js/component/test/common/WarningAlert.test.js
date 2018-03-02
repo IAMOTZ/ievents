@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import WarningAlert from '../../common/WarningAlert.jsx';
+import { WarningAlert } from '../../common/Alert.jsx';
 
 describe('<WarningAlert />', () => {
   it('should render nothing if no message was passed in', () => {

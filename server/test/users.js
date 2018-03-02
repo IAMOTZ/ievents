@@ -40,6 +40,13 @@ const createAdmin = (adminDetails, assertions) => {
     .end(assertions);
 };
 
+const changePassword = (passwordDetials, assertions) => {
+  chai.request(app)
+    .put('/api/v1/users/changePassword')
+    .send(passwordDetials)
+    .end(assertions);
+}
+
 const loginUser = (userDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users/login')
@@ -297,6 +304,115 @@ describe('User Endpoints', () => {
       createAdmin(
         adminDetails,
         failureAssertions('the user is already an admin', 200, done),
+      );
+    });
+  });
+  describe('Changing Password Endpoint', () => {
+    const passwordDetials = {
+      formerPassword: normalUserDetails.password,
+      newPassword: 'Password567',
+      confirmNewPassword: 'Password567',
+      token: null,
+    };
+    const alterPasswordDetails = newPasswordDetails => (
+      Object.assign({}, passwordDetials, newPasswordDetails)
+    );
+    before('login the users', (done) => {
+      loginUser(
+        normalUserDetails,
+        (err, res) => {
+          passwordDetials.token = res.body.token;
+          done();
+        },
+      );
+    });
+    it('should not change password without the former password', (done) => {
+      changePassword(
+        alterPasswordDetails({ formerPassword: null }),
+        failureAssertions('the former password is required', 400, done),
+      );
+    });
+    it('should not change password without a new password', (done) => {
+      changePassword(
+        alterPasswordDetails({ newPassword: null }),
+        failureAssertions('the new password is required', 400, done),
+      );
+    });
+    it('should not change password without a confirm password field', (done) => {
+      changePassword(
+        alterPasswordDetails({ confirmNewPassword: null }),
+        failureAssertions('confirm password field is required', 400, done),
+      );
+    });
+    it('should not change password if the new password contains whitespace', (done) => {
+      const badPassword = 'Passwo rd567';
+      changePassword(
+        alterPasswordDetails({
+          newPassword: badPassword,
+          confirmNewPassword: badPassword,
+        }),
+        failureAssertions('the new password must not contain whitespaces', 400, done)
+      );
+    });
+    it('should not change password if the new password is less than 7 char', (done) => {
+      const badPassword = 'Pass12'
+      changePassword(
+        alterPasswordDetails({
+          newPassword: badPassword,
+          confirmNewPassword: badPassword,
+        }),
+        failureAssertions('the new password must be equal or more than 7 characters', 400, done),
+      );
+    });
+    it('should not change the password if the new password does not contain capital, small letters and number', (done) => {
+      const badPassword = 'password';
+      changePassword(
+        alterPasswordDetails({
+          newPassword: badPassword,
+          confirmNewPassword: badPassword,
+        }),
+        failureAssertions('the new password must contain capital letters, small letters and numbers', 400, done),
+      );
+    });
+    it('should not change password if password do not match confirm password', (done) => {
+      changePassword(
+        alterPasswordDetails({
+          newPassword: 'Password567',
+          confirmNewPassword: 'Password897',
+        }),
+        failureAssertions('the new password and confirm password input does not match', 400, done),
+      );
+    });
+    it('should not change password if former password is incorrect', (done) => {
+      changePassword(
+        alterPasswordDetails({ formerPassword: 'WrongPassword12' }),
+        failureAssertions('the former password is incorrect', 400, done),
+      );
+    });
+    it('should change the password', (done) => {
+      changePassword(
+        passwordDetials,
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success')
+          res.body.message.should.be.eql('password changed');
+          done();
+        },
+      );
+    });
+    it('should change the password again', (done) => {
+      changePassword(
+        alterPasswordDetails({
+          formerPassword: 'Password567',
+          newPassword: 'Password123',
+          confirmNewPassword: 'Password123',
+        }),
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success')
+          res.body.message.should.be.eql('password changed');
+          done();
+        },
       );
     });
   });

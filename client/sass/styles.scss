@@ -91,6 +91,34 @@ footer {
   }
 }
 
+#profile-container {
+  .just-link {
+    text-decoration: none;
+    color: black;
+  }
+
+  .just-link:hover {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .just-link:hover span {
+    text-decoration: none;
+  }
+
+  .text-grey {
+    color: grey;
+  }
+
+  #content li {
+    color: gray;
+  }
+
+  #content li:hover {
+    color: black;
+  }
+}
+
 #centers1-container, #centers2-container {
   .search-box {
     .btn {

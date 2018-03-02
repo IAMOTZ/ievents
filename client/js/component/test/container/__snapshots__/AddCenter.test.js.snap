@@ -54,7 +54,7 @@ exports[`<AddCenter /> Rendering: should render correctly on page load 1`] = `
           <div
             className="w-lg-50 mx-auto"
           >
-            <Component
+            <WarningAlert
               message={false}
             />
           </div>
@@ -306,7 +306,7 @@ exports[`<AddCenter /> Rendering: should render correctly when there is an error
           <div
             className="w-lg-50 mx-auto"
           >
-            <Component
+            <WarningAlert
               message="there was an error"
             />
           </div>
@@ -558,7 +558,7 @@ exports[`<AddCenter /> Rendering: should render correcty when adding 1`] = `
           <div
             className="w-lg-50 mx-auto"
           >
-            <Component
+            <WarningAlert
               message={false}
             />
           </div>

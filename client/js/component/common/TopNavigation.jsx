@@ -64,6 +64,9 @@ const UserTopNav = props => (
           </li>
           <AdminOptions isAdmin={props.isAdmin} isSuperAdmin={props.isSuperAdmin} />
           <li className="nav-item">
+            <Link to="/profile" className="nav-link">Profile</Link>
+          </li>
+          <li className="nav-item">
             <Link to="/" className="nav-link" onClick={() => props.dispatch(clearUser())}>Logout</Link>
           </li>
         </ul>

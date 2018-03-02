@@ -51,7 +51,7 @@ exports[`<EditEvent /> Rendering: should render correctly on page load 1`] = `
             size={2}
             start={false}
           />
-          <Component
+          <WarningAlert
             message={false}
           />
           <div
@@ -221,7 +221,7 @@ exports[`<EditEvent /> Rendering: should render correctly when there is an error
           <LoadingIcon
             size={2}
           />
-          <Component
+          <WarningAlert
             message="there was an error"
           />
           <div
@@ -390,7 +390,7 @@ exports[`<EditEvent /> Rendering: should render correctly when updating 1`] = `
           <LoadingIcon
             size={2}
           />
-          <Component
+          <WarningAlert
             message={false}
           />
           <div

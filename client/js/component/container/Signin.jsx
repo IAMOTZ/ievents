@@ -6,7 +6,7 @@ import { loginUser, clearStatus } from '../../actions/authAction';
 // Common components.
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
-import WarningAlert from '../common/WarningAlert.jsx';
+import { WarningAlert } from '../common/Alert.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 
 @connect(store => (

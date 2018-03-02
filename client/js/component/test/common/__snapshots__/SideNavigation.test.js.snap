@@ -28,7 +28,7 @@ exports[`<SideNavigation /> should render correctly for admin user 1`] = `
       >
         <i
           aria-hidden="true"
-          className="fa fa-user-circle fa-fw"
+          className="fa fa-book fa-fw"
         />
           My Events
       </Link>
@@ -58,6 +58,17 @@ exports[`<SideNavigation /> should render correctly for admin user 1`] = `
         isAdmin={true}
         isSuperAdmin={false}
       />
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/profile"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-user-circle fa-fw"
+        />
+          Profile
+      </Link>
       <Link
         className="list-group-item"
         onClick={[Function]}
@@ -103,7 +114,7 @@ exports[`<SideNavigation /> should render correctly for normal user 1`] = `
       >
         <i
           aria-hidden="true"
-          className="fa fa-user-circle fa-fw"
+          className="fa fa-book fa-fw"
         />
           My Events
       </Link>
@@ -133,6 +144,17 @@ exports[`<SideNavigation /> should render correctly for normal user 1`] = `
         isAdmin={false}
         isSuperAdmin={false}
       />
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/profile"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-user-circle fa-fw"
+        />
+          Profile
+      </Link>
       <Link
         className="list-group-item"
         onClick={[Function]}
@@ -178,7 +200,7 @@ exports[`<SideNavigation /> should render correctly for super admin user 1`] = `
       >
         <i
           aria-hidden="true"
-          className="fa fa-user-circle fa-fw"
+          className="fa fa-book fa-fw"
         />
           My Events
       </Link>
@@ -208,6 +230,17 @@ exports[`<SideNavigation /> should render correctly for super admin user 1`] = `
         isAdmin={false}
         isSuperAdmin={true}
       />
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/profile"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-user-circle fa-fw"
+        />
+          Profile
+      </Link>
       <Link
         className="list-group-item"
         onClick={[Function]}

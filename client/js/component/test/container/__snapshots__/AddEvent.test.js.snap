@@ -51,7 +51,7 @@ exports[`<AddEvent /> Rendering: should render correctly if there is a default c
             size={2}
             start={false}
           />
-          <Component
+          <WarningAlert
             message={false}
           />
           <div
@@ -219,7 +219,7 @@ exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
             size={2}
             start={false}
           />
-          <Component
+          <WarningAlert
             message={false}
           />
           <div
@@ -387,7 +387,7 @@ exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
             size={2}
             start={true}
           />
-          <Component
+          <WarningAlert
             message={false}
           />
           <div
@@ -555,7 +555,7 @@ exports[`<AddEvent /> Rendering: should render correctly when there is an error 
             size={2}
             start={false}
           />
-          <Component
+          <WarningAlert
             message="there was an error"
           />
           <div

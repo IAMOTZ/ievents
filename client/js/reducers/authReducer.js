@@ -27,6 +27,9 @@ const initialState = {
     addingAdmin: false,
     adminAdded: false,
     addingAdminError: false,
+    changingPassword: false,
+    changingPasswordResolved: false,
+    changingPasswordRejected: false,
   },
 };
 
@@ -153,6 +156,39 @@ export default (state = initialState, action) => {
         },
       };
     }
+    case actionTypes.CHANGING_PASSWORD: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          changingPassword: true,
+          changingPasswordResolved: false,
+          changingPasswordRejected: false,
+        },
+      };
+    }
+    case actionTypes.CHANGING_PASSWORD_RESOLVED: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          changingPassword: false,
+          changingPasswordResolved: true,
+          changingPasswordRejected: false,
+        },
+      };
+    }
+    case actionTypes.CHANGING_PASSWORD_REJECTRED: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          changingPassword: false,
+          changingPasswordResolved: false,
+          changingPasswordRejected: action.payload,
+        },
+      };
+    }
     case actionTypes.CLEAR_USER_STATUS: {
       switch (action.payload) {
         case ('ERROR'): {
@@ -172,6 +208,17 @@ export default (state = initialState, action) => {
               addingAdmin: false,
               adminAdded: false,
               addingAdminError: false,
+            },
+          };
+        }
+        case ('CHANGING_PASSWORD'): {
+          return {
+            ...state,
+            status: {
+              ...state.status,
+              changingPassword: false,
+              changingPasswordResolved: false,
+              changingPasswordRejected: false,
             },
           };
         }

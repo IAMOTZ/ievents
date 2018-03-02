@@ -51,7 +51,7 @@ exports[`<EditCenter /> Rendering: Rendering: should render correctly on page lo
             size={2}
             start={false}
           />
-          <Component
+          <WarningAlert
             message={false}
           />
           <div
@@ -247,7 +247,7 @@ exports[`<EditCenter /> Rendering: Rendering: should render correctly when there
             size={2}
             start={false}
           />
-          <Component
+          <WarningAlert
             message="there was an error"
           />
           <div
@@ -443,7 +443,7 @@ exports[`<EditCenter /> Rendering: Rendering: should render correcty when updati
             size={2}
             start={true}
           />
-          <Component
+          <WarningAlert
             message={false}
           />
           <div
