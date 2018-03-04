@@ -154,4 +154,16 @@ export const validateChangePasswordInputs = (req, res, next) => {
     return res.status(400).json({ status: 'failed', message: error.message });
   }
   next();
-}
+};
+
+export const validateDeleteUserInputs = (req, res, next) => {
+  const { password } = res.locals.formattedInputs;
+  try {
+    if (!password) {
+      throw new Error('password is required');
+    }
+  } catch (error) {
+    return res.status(400).json({ status: 'failed', message: error.message });
+  }
+  next();
+};
