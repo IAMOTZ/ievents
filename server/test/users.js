@@ -45,11 +45,18 @@ const changePassword = (passwordDetials, assertions) => {
     .put('/api/v1/users/changePassword')
     .send(passwordDetials)
     .end(assertions);
-}
+};
 
 const loginUser = (userDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users/login')
+    .send(userDetails)
+    .end(assertions);
+};
+
+const deleteUser = (userDetails, assertions) => {
+  chai.request(app)
+    .delete('/api/v1/users/deleteUser')
     .send(userDetails)
     .end(assertions);
 };
@@ -157,6 +164,7 @@ describe('User Endpoints', () => {
       createUser(
         normalUserDetails,
         (err, res) => {
+          console.log('=====>', res.body);
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.token.should.be.a('string');
@@ -416,13 +424,62 @@ describe('User Endpoints', () => {
       );
     });
   });
-  // after((done) => {
-  //   users
-  //     .destroy({
-  //       cascade: true,
-  //       truncate: true,
-  //       restartIdentity: true,
-  //     })
-  //     .then(() => { done(); });
-  // });
+  describe('Delete User Endpoint', () => {
+    const userInfo = {
+      password: 'Password123',
+      token: null,
+    };
+    const alterUserInfo = newUserInfo => (
+      Object.assign({}, userInfo, newUserInfo)
+    );
+    before('login the user', (done) => {
+      loginUser(
+        {
+          email: 'test2@gmail.com',
+          password: userInfo.password,
+        },
+        (err, res) => {
+          userInfo.token = res.body.token;
+          done();
+        },
+      );
+    });
+    it('should not delete user if password is not given', (done) => {
+      deleteUser(
+        alterUserInfo({ password: null }),
+        failureAssertions('password is required', 400, done),
+      );
+    });
+    it('should not delete user if password is incorrect', (done) => {
+      deleteUser(
+        alterUserInfo({ password: 'WrongPassword12' }),
+        failureAssertions('password incorrect', 400, done),
+      );
+    });
+    it('should delete user', (done) => {
+      deleteUser(
+        userInfo,
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('user deleted');
+          done();
+        },
+      );
+    });
+    it('should create the user back', (done) => {
+      createUser(
+        alterUserDetails({ email: 'test2@gmail.com' }),
+        (err, res) => {
+          res.should.have.status(201);
+          res.body.status.should.be.eql('success');
+          res.body.token.should.be.a('string');
+          res.body.user.name.should.be.eql('test');
+          res.body.user.email.should.be.eql('test2@gmail.com');
+          res.body.user.role.should.be.eql('user');
+          done();
+        },
+      );
+    });
+  });
 });
