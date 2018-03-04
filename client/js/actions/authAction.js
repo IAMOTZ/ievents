@@ -81,18 +81,18 @@ export const changePassword = (passwordDetails, userToken) => (dispatch) => {
 };
 
 export const deleteUser = (userPassword, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.DELTEING_USER });
+  dispatch({ type: actionTypes.DELETING_USER });
   const config = {
     headers: {
       'access-token': userToken,
     },
   };
-  axios.delete(`${apiBaseUrl}/users/deleteUser`, userPassword, config)
+  axios.post(`${apiBaseUrl}/users/deleteUser`, { password: userPassword }, config)
     .then((response) => {
-      dispatch({ type: actionTypes.DELTEING_USER_RESOLVED, payload: response.data });
+      dispatch({ type: actionTypes.DELETING_USER_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: actionTypes.DELTEING_USER_REJECTED, payload: err.response.data });
+      dispatch({ type: actionTypes.DELETING_USER_REJECTED, payload: err.response.data });
     });
 };
 
