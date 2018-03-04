@@ -161,4 +161,32 @@ export default {
       });
     }
   },
+
+  /**
+   * Deletes a user.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some resonse data.
+   */
+  async deleteUser(req, res) {
+    const userEmail = req.decoded.email;
+    const userPassword = res.locals.formattedInputs.password;
+    const user = await getUser(users, userEmail);
+    if (verifyPassword(userPassword, user.password)) {
+      await users.destroy({
+        where: {
+          email: userEmail,
+        },
+      });
+      res.status(200).json({
+        status: 'success',
+        message: 'user deleted',
+      });
+    } else {
+      res.status(400).json({
+        status: 'failed',
+        message: 'password incorrect',
+      });
+    }
+  },
 };
