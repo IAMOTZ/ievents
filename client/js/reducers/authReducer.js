@@ -30,6 +30,9 @@ const initialState = {
     changingPassword: false,
     changingPasswordResolved: false,
     changingPasswordRejected: false,
+    deletingUser: false,
+    deletingUserResolved: false,
+    deletingUserRejected: false,
   },
 };
 
@@ -186,6 +189,39 @@ export default (state = initialState, action) => {
           changingPassword: false,
           changingPasswordResolved: false,
           changingPasswordRejected: action.payload,
+        },
+      };
+    }
+    case actionTypes.DELETING_USER: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deletingUser: true,
+          deletingUserResolved: false,
+          deletingUserRejected: false,
+        },
+      };
+    }
+    case actionTypes.DELETING_USER_RESOLVED: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deletingUser: false,
+          deletingUserResolved: true,
+          deletingUserRejected: false,
+        },
+      };
+    }
+    case actionTypes.DELETING_USER_REJECTED: {
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          deletingUser: false,
+          deletingUserResolved: false,
+          deletingUserRejected: action.payload,
         },
       };
     }
