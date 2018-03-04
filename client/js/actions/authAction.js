@@ -80,6 +80,22 @@ export const changePassword = (passwordDetails, userToken) => (dispatch) => {
     });
 };
 
+export const deleteUser = (userPassword, userToken) => (dispatch) => {
+  dispatch({ type: actionTypes.DELTEING_USER });
+  const config = {
+    headers: {
+      'access-token': userToken,
+    },
+  };
+  axios.delete(`${apiBaseUrl}/users/deleteUser`, userPassword, config)
+    .then((response) => {
+      dispatch({ type: actionTypes.DELTEING_USER_RESOLVED, payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: actionTypes.DELTEING_USER_REJECTED, payload: err.response.data });
+    });
+};
+
 /**
  * Clears the status variables tracking a particular user process.
  * @param {String} process The process to be cleared.
