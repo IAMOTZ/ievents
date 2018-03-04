@@ -21,6 +21,7 @@ if (presentConfg.use_env_variable) {
       host: presentConfg.host,
       port: presentConfg.port,
       dialect: 'postgres',
+      logging: () => {},
     },
   );
 }
