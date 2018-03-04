@@ -124,9 +124,16 @@ export const validateCreateAdminInputs = (req, res, next) => {
   next();
 };
 
+/**
+ * A middleware.
+ * Ensures that the inputs given when changing password are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res  The response objcet.
+ * @param {Object} next The function that transfers to the next middleware.
+ */
 export const validateChangePasswordInputs = (req, res, next) => {
   const {
-    formerpassword, newpassword, confirmnewpassword
+    formerpassword, newpassword, confirmnewpassword,
   } = res.locals.formattedInputs;
   try {
     if (!formerpassword) {
@@ -156,6 +163,13 @@ export const validateChangePasswordInputs = (req, res, next) => {
   next();
 };
 
+/**
+ * A middleware.
+ * Ensures that the inputs given when deleting a user are valid.
+ * @param {Object} req The request object.
+ * @param {Object} res  The response objcet.
+ * @param {Object} next The function that transfers to the next middleware.
+ */
 export const validateDeleteUserInputs = (req, res, next) => {
   const { password } = res.locals.formattedInputs;
   try {
