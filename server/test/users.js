@@ -56,7 +56,7 @@ const loginUser = (userDetails, assertions) => {
 
 const deleteUser = (userDetails, assertions) => {
   chai.request(app)
-    .delete('/api/v1/users/deleteUser')
+    .post('/api/v1/users/deleteUser')
     .send(userDetails)
     .end(assertions);
 };

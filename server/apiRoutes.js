@@ -36,7 +36,7 @@ router.put(
   validateChangePasswordInputs,
   controllers.users.changePassword,
 );
-router.delete(
+router.post(
   '/users/deleteUser',
   isUser,
   validateDeleteUserInputs,
