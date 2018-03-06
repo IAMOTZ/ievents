@@ -164,6 +164,12 @@ describe('Auth Reducer', () => {
         payload: 'CHANGING_PASSWORD',
       })).toEqual(alterInitialState({}, { fetching: true }));
     });
+    it('should clear all the deleting account related status', () => {
+      expect(reducer(alterInitialState({}, { fetching: true, deletingUser: true }), {
+        type: actionTypes.CLEAR_USER_STATUS,
+        payload: 'DELETING_USER',
+      })).toEqual(alterInitialState({}, { fetching: true }));
+    });
     it('should not clear any status', () => {
       expect(reducer(alterInitialState({}, { fetching: true }), {
         type: actionTypes.CLEAR_USER_STATUS,
