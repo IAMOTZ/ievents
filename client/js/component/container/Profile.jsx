@@ -1,3 +1,4 @@
+/* global $ */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
@@ -48,15 +49,16 @@ class Profile extends React.Component {
     this.props.dispatch(getAllEvents(this.props.user.token));
   }
 
-  componentWillUnmount() {
-    this.props.dispatch(clearStatus('CHANGING_PASSWORD'));
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.status.deletingUserResolved) {
       this.props.dispatch(clearUser());
       $('#delete-account-modal').modal('hide');
     }
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(clearStatus('CHANGING_PASSWORD'));
+    this.props.dispatch(clearStatus('DELETING_USER'));
   }
 
   /**
@@ -83,6 +85,9 @@ class Profile extends React.Component {
     this.props.dispatch(changePassword(passwordDetials, userToken));
   }
 
+  /**
+   * It dispatches an action to delete the user's account.
+   */
   deleteUser = () => {
     const { password } = this.state;
     const userToken = this.props.user.token;
@@ -106,6 +111,7 @@ class Profile extends React.Component {
    */
   clearStateStatus = () => {
     this.props.dispatch(clearStatus('CHANGING_PASSWORD'));
+    this.props.dispatch(clearStatus('DELETING_USER'));
   }
 
   /**
@@ -206,6 +212,7 @@ class Profile extends React.Component {
                           data-dismiss="modal"
                           aria-label="Close"
                           onClick={this.closeModalEffects}
+                          disabled={this.props.status.changingPassword}
                         ><span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -284,6 +291,8 @@ class Profile extends React.Component {
                           className="close"
                           data-dismiss="modal"
                           aria-label="Close"
+                          onClick={this.closeModalEffects}
+                          disabled={this.props.status.deletingUser}
                         ><span aria-hidden="true">&times;</span>
                         </button>
                       </div>
