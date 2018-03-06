@@ -258,6 +258,17 @@ export default (state = initialState, action) => {
             },
           };
         }
+        case ('DELETING_USER'): {
+          return {
+            ...state,
+            status: {
+              ...state.status,
+              deletingUser: false,
+              deletingUserResolved: false,
+              deletingUserRejected: false,
+            },
+          };
+        }
         default: {
           return {
             ...state,
