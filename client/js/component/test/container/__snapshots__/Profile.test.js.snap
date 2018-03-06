@@ -55,7 +55,7 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
             }
           >
             <p
-              className="h1 text-center"
+              className="h1 text-center text-capitalize"
               style={
                 Object {
                   "fontSize": "3rem",
@@ -193,6 +193,7 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                   aria-label="Close"
                   className="close"
                   data-dismiss="modal"
+                  disabled={false}
                   onClick={[Function]}
                   type="button"
                 >
@@ -296,6 +297,7 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
         </div>
         <div
           className="modal fade"
+          data-backdrop="static"
           id="delete-account-modal"
           role="dialog"
           tabIndex="-1"
@@ -319,6 +321,8 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                   aria-label="Close"
                   className="close"
                   data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   <span
@@ -353,9 +357,17 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                   <input
                     className="form-control"
                     id="password"
+                    name="password"
+                    onChange={[Function]}
                     placeholder="Input you password to continue"
                     type="password"
+                    value=""
                   />
+                  <LoadingIcon
+                    size={3}
+                    start={false}
+                  />
+                  <WarningAlert />
                 </div>
               </div>
               <div
@@ -364,12 +376,16 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                 <button
                   className="btn btn-dark"
                   data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   Cancel
                 </button>
                 <button
                   className="btn btn-danger"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   Delete
@@ -432,7 +448,7 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
             }
           >
             <p
-              className="h1 text-center"
+              className="h1 text-center text-capitalize"
               style={
                 Object {
                   "fontSize": "3rem",
@@ -570,6 +586,7 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                   aria-label="Close"
                   className="close"
                   data-dismiss="modal"
+                  disabled={true}
                   onClick={[Function]}
                   type="button"
                 >
@@ -673,6 +690,7 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
         </div>
         <div
           className="modal fade"
+          data-backdrop="static"
           id="delete-account-modal"
           role="dialog"
           tabIndex="-1"
@@ -696,6 +714,8 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                   aria-label="Close"
                   className="close"
                   data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   <span
@@ -730,9 +750,17 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                   <input
                     className="form-control"
                     id="password"
+                    name="password"
+                    onChange={[Function]}
                     placeholder="Input you password to continue"
                     type="password"
+                    value=""
                   />
+                  <LoadingIcon
+                    size={3}
+                    start={false}
+                  />
+                  <WarningAlert />
                 </div>
               </div>
               <div
@@ -741,12 +769,16 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                 <button
                   className="btn btn-dark"
                   data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   Cancel
                 </button>
                 <button
                   className="btn btn-danger"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   Delete
@@ -761,7 +793,7 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
 </div>
 `;
 
-exports[`<Profile /> Rendering should render correctly when there is a changing password error 1`] = `
+exports[`<Profile /> Rendering should render correctly when deleting user 1`] = `
 <div
   id="profile-container"
 >
@@ -809,7 +841,7 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
             }
           >
             <p
-              className="h1 text-center"
+              className="h1 text-center text-capitalize"
               style={
                 Object {
                   "fontSize": "3rem",
@@ -947,6 +979,400 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                   aria-label="Close"
                   className="close"
                   data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    aria-hidden="true"
+                  >
+                    ×
+                  </span>
+                </button>
+              </div>
+              <div
+                className="modal-body"
+              >
+                <LoadingIcon
+                  size={3}
+                  start={false}
+                />
+                <WarningAlert />
+                <SuccessAlert
+                  message={null}
+                />
+                <form
+                  className="mt-0"
+                >
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="former-password"
+                    >
+                      Former Password
+                    </label>
+                    <input
+                      className="form-control"
+                      id="former-password"
+                      name="formerPassword"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="new-password"
+                    >
+                      New Password
+                    </label>
+                    <input
+                      className="form-control"
+                      id="new-password"
+                      name="newPassword"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="confirm-new-password"
+                    >
+                      Confirm New Password
+                    </label>
+                    <input
+                      className="form-control"
+                      id="confirm-new-password"
+                      name="confirmNewPassword"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
+                </form>
+              </div>
+              <div
+                className="modal-footer"
+              >
+                <button
+                  className="btn btn-dark"
+                  data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Change
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="modal fade"
+          data-backdrop="static"
+          id="delete-account-modal"
+          role="dialog"
+          tabIndex="-1"
+        >
+          <div
+            className="modal-dialog"
+            role="document"
+          >
+            <div
+              className="modal-content"
+            >
+              <div
+                className="modal-header"
+              >
+                <h5
+                  className="modal-title"
+                >
+                  Delete Account
+                </h5>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  disabled={true}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    aria-hidden="true"
+                  >
+                    ×
+                  </span>
+                </button>
+              </div>
+              <div
+                className="modal-body"
+              >
+                <p
+                  className="h6"
+                >
+                  Are you sure you wan't to delete your account? 
+                </p>
+                <span
+                  className="text-grey"
+                >
+                  This action is irreversible, you would loose all your data on this platform.
+                </span>
+                <div
+                  className="form-group mt-3"
+                >
+                  <label
+                    className="h6"
+                    htmlFor="password"
+                  >
+                    Your Password
+                  </label>
+                  <input
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="Input you password to continue"
+                    type="password"
+                    value=""
+                  />
+                  <LoadingIcon
+                    size={3}
+                    start={true}
+                  />
+                  <WarningAlert />
+                </div>
+              </div>
+              <div
+                className="modal-footer"
+              >
+                <button
+                  className="btn btn-dark"
+                  data-dismiss="modal"
+                  disabled={true}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-danger"
+                  disabled={true}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Profile /> Rendering should render correctly when there is a changing password error 1`] = `
+<div
+  id="profile-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Profile"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-lg-2"
+      >
+        <Header
+          text="Profile"
+        />
+        <div
+          className="d-flex align-items-center justify-content-center"
+          id="content"
+          style={
+            Object {
+              "marginTop": "70px",
+              "minHeight": "500px",
+            }
+          }
+        >
+          <div
+            className="bg-white p-3"
+            style={
+              Object {
+                "width": "500px",
+              }
+            }
+          >
+            <p
+              className="h1 text-center text-capitalize"
+              style={
+                Object {
+                  "fontSize": "3rem",
+                  "fontWeight": "lighter",
+                }
+              }
+            >
+              test-user
+            </p>
+            <p
+              className="h3 mt-3"
+              style={
+                Object {
+                  "fontWeight": "normal",
+                }
+              }
+            >
+              Events
+            </p>
+            <ul
+              className="list-group"
+            >
+              <Link
+                className="just-link"
+                replace={false}
+                to="/events"
+              >
+                <li
+                  className="list-group-item d-flex justify-content-between align-items-center text-grey"
+                >
+                  Done
+                  <span
+                    className="badge badge-primary badge-pill"
+                  >
+                    2
+                  </span>
+                </li>
+              </Link>
+              <Link
+                className="just-link"
+                replace={false}
+                to="/events"
+              >
+                <li
+                  className="list-group-item d-flex justify-content-between align-items-center text-grey"
+                >
+                  Pending
+                  <span
+                    className="badge badge-primary badge-pill"
+                  >
+                    1
+                  </span>
+                </li>
+              </Link>
+              <Link
+                className="just-link"
+                replace={false}
+                to="/events"
+              >
+                <li
+                  className="list-group-item d-flex justify-content-between align-items-center text-grey"
+                >
+                  Canceled
+                  <span
+                    className="badge badge-primary badge-pill"
+                  >
+                    1
+                  </span>
+                </li>
+              </Link>
+            </ul>
+            <p
+              className="h3 mt-3"
+              style={
+                Object {
+                  "fontWeight": "normal",
+                }
+              }
+            >
+              Account Settings
+            </p>
+            <ul
+              className="list-group"
+            >
+              <a
+                className="just-link"
+                data-target="#change-password-modal"
+                data-toggle="modal"
+                href=""
+              >
+                <li
+                  className="list-group-item"
+                >
+                  Change Password
+                </li>
+              </a>
+              <a
+                className="just-link"
+                data-target="#delete-account-modal"
+                data-toggle="modal"
+                href=""
+              >
+                <li
+                  className="list-group-item"
+                >
+                  Delete Account
+                </li>
+              </a>
+            </ul>
+          </div>
+        </div>
+        <div
+          className="modal fade"
+          data-backdrop="static"
+          id="change-password-modal"
+          role="dialog"
+          tabIndex="-1"
+        >
+          <div
+            className="modal-dialog"
+            role="document"
+          >
+            <div
+              className="modal-content"
+            >
+              <div
+                className="modal-header"
+              >
+                <h5
+                  className="modal-title"
+                >
+                  Change Password
+                </h5>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  disabled={false}
                   onClick={[Function]}
                   type="button"
                 >
@@ -1052,6 +1478,7 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
         </div>
         <div
           className="modal fade"
+          data-backdrop="static"
           id="delete-account-modal"
           role="dialog"
           tabIndex="-1"
@@ -1075,6 +1502,8 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                   aria-label="Close"
                   className="close"
                   data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   <span
@@ -1109,8 +1538,411 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                   <input
                     className="form-control"
                     id="password"
+                    name="password"
+                    onChange={[Function]}
                     placeholder="Input you password to continue"
                     type="password"
+                    value=""
+                  />
+                  <LoadingIcon
+                    size={3}
+                    start={false}
+                  />
+                  <WarningAlert />
+                </div>
+              </div>
+              <div
+                className="modal-footer"
+              >
+                <button
+                  className="btn btn-dark"
+                  data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-danger"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Profile /> Rendering should render correctly when there is a deleting user error 1`] = `
+<div
+  id="profile-container"
+>
+  <UserTopNav
+    dispatch={[Function]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="test-user"
+    title="Profile"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <UserSideNav
+        dispatch={[Function]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="test-user"
+      />
+      <div
+        className="col-lg-10 offset-lg-2"
+      >
+        <Header
+          text="Profile"
+        />
+        <div
+          className="d-flex align-items-center justify-content-center"
+          id="content"
+          style={
+            Object {
+              "marginTop": "70px",
+              "minHeight": "500px",
+            }
+          }
+        >
+          <div
+            className="bg-white p-3"
+            style={
+              Object {
+                "width": "500px",
+              }
+            }
+          >
+            <p
+              className="h1 text-center text-capitalize"
+              style={
+                Object {
+                  "fontSize": "3rem",
+                  "fontWeight": "lighter",
+                }
+              }
+            >
+              test-user
+            </p>
+            <p
+              className="h3 mt-3"
+              style={
+                Object {
+                  "fontWeight": "normal",
+                }
+              }
+            >
+              Events
+            </p>
+            <ul
+              className="list-group"
+            >
+              <Link
+                className="just-link"
+                replace={false}
+                to="/events"
+              >
+                <li
+                  className="list-group-item d-flex justify-content-between align-items-center text-grey"
+                >
+                  Done
+                  <span
+                    className="badge badge-primary badge-pill"
+                  >
+                    2
+                  </span>
+                </li>
+              </Link>
+              <Link
+                className="just-link"
+                replace={false}
+                to="/events"
+              >
+                <li
+                  className="list-group-item d-flex justify-content-between align-items-center text-grey"
+                >
+                  Pending
+                  <span
+                    className="badge badge-primary badge-pill"
+                  >
+                    1
+                  </span>
+                </li>
+              </Link>
+              <Link
+                className="just-link"
+                replace={false}
+                to="/events"
+              >
+                <li
+                  className="list-group-item d-flex justify-content-between align-items-center text-grey"
+                >
+                  Canceled
+                  <span
+                    className="badge badge-primary badge-pill"
+                  >
+                    1
+                  </span>
+                </li>
+              </Link>
+            </ul>
+            <p
+              className="h3 mt-3"
+              style={
+                Object {
+                  "fontWeight": "normal",
+                }
+              }
+            >
+              Account Settings
+            </p>
+            <ul
+              className="list-group"
+            >
+              <a
+                className="just-link"
+                data-target="#change-password-modal"
+                data-toggle="modal"
+                href=""
+              >
+                <li
+                  className="list-group-item"
+                >
+                  Change Password
+                </li>
+              </a>
+              <a
+                className="just-link"
+                data-target="#delete-account-modal"
+                data-toggle="modal"
+                href=""
+              >
+                <li
+                  className="list-group-item"
+                >
+                  Delete Account
+                </li>
+              </a>
+            </ul>
+          </div>
+        </div>
+        <div
+          className="modal fade"
+          data-backdrop="static"
+          id="change-password-modal"
+          role="dialog"
+          tabIndex="-1"
+        >
+          <div
+            className="modal-dialog"
+            role="document"
+          >
+            <div
+              className="modal-content"
+            >
+              <div
+                className="modal-header"
+              >
+                <h5
+                  className="modal-title"
+                >
+                  Change Password
+                </h5>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    aria-hidden="true"
+                  >
+                    ×
+                  </span>
+                </button>
+              </div>
+              <div
+                className="modal-body"
+              >
+                <LoadingIcon
+                  size={3}
+                  start={false}
+                />
+                <WarningAlert />
+                <SuccessAlert
+                  message={null}
+                />
+                <form
+                  className="mt-0"
+                >
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="former-password"
+                    >
+                      Former Password
+                    </label>
+                    <input
+                      className="form-control"
+                      id="former-password"
+                      name="formerPassword"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="new-password"
+                    >
+                      New Password
+                    </label>
+                    <input
+                      className="form-control"
+                      id="new-password"
+                      name="newPassword"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
+                      htmlFor="confirm-new-password"
+                    >
+                      Confirm New Password
+                    </label>
+                    <input
+                      className="form-control"
+                      id="confirm-new-password"
+                      name="confirmNewPassword"
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
+                </form>
+              </div>
+              <div
+                className="modal-footer"
+              >
+                <button
+                  className="btn btn-dark"
+                  data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn btn-primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Change
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="modal fade"
+          data-backdrop="static"
+          id="delete-account-modal"
+          role="dialog"
+          tabIndex="-1"
+        >
+          <div
+            className="modal-dialog"
+            role="document"
+          >
+            <div
+              className="modal-content"
+            >
+              <div
+                className="modal-header"
+              >
+                <h5
+                  className="modal-title"
+                >
+                  Delete Account
+                </h5>
+                <button
+                  aria-label="Close"
+                  className="close"
+                  data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <span
+                    aria-hidden="true"
+                  >
+                    ×
+                  </span>
+                </button>
+              </div>
+              <div
+                className="modal-body"
+              >
+                <p
+                  className="h6"
+                >
+                  Are you sure you wan't to delete your account? 
+                </p>
+                <span
+                  className="text-grey"
+                >
+                  This action is irreversible, you would loose all your data on this platform.
+                </span>
+                <div
+                  className="form-group mt-3"
+                >
+                  <label
+                    className="h6"
+                    htmlFor="password"
+                  >
+                    Your Password
+                  </label>
+                  <input
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="Input you password to continue"
+                    type="password"
+                    value=""
+                  />
+                  <LoadingIcon
+                    size={3}
+                    start={false}
+                  />
+                  <WarningAlert
+                    message="there was an error"
                   />
                 </div>
               </div>
@@ -1120,12 +1952,16 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                 <button
                   className="btn btn-dark"
                   data-dismiss="modal"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   Cancel
                 </button>
                 <button
                   className="btn btn-danger"
+                  disabled={false}
+                  onClick={[Function]}
                   type="button"
                 >
                   Delete
