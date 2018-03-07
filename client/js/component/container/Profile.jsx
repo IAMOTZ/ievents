@@ -15,7 +15,7 @@ import Header from '../common/Header.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
 import { SuccessAlert, WarningAlert } from '../common/Alert.jsx';
 // Helpers
-import countCollections from '../../helpers/counter';
+import { countCollection } from '../../helpers/helpers';
 
 @connect(store => (
   {
@@ -166,7 +166,7 @@ class Profile extends React.Component {
                         <li className="list-group-item d-flex justify-content-between align-items-center text-grey">
                           Done
                           <span className="badge badge-primary badge-pill">
-                            {countCollections(this.props.events, event => event.status === 'done')}
+                            {countCollection(this.props.events, event => event.status === 'done')}
                           </span>
                         </li>
                       </Link>
@@ -174,7 +174,7 @@ class Profile extends React.Component {
                         <li className="list-group-item d-flex justify-content-between align-items-center text-grey">
                           Pending
                           <span className="badge badge-primary badge-pill">
-                            {countCollections(this.props.events, event => event.status === 'allowed')}
+                            {countCollection(this.props.events, event => event.status === 'allowed')}
                           </span>
                         </li>
                       </Link>
@@ -182,7 +182,7 @@ class Profile extends React.Component {
                         <li className="list-group-item d-flex justify-content-between align-items-center text-grey">
                           Canceled
                           <span className="badge badge-primary badge-pill">
-                            {countCollections(this.props.events, event => event.status === 'canceled')}
+                            {countCollection(this.props.events, event => event.status === 'canceled')}
                           </span>
                         </li>
                       </Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import getCenterById from '../../helpers/getCenterById';
+import { getCenterById } from '../../helpers/helpers';
 
 const centerName = (centers, centerId) => {
   const center = getCenterById(centers, centerId);

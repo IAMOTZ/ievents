@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import MonthToString from '../../../helpers/date';
+import { monthToString } from '../../../helpers/helpers';
 
 const defaultImage = '/images/defaultImgx4.jpeg';
 
@@ -137,7 +137,7 @@ const BookingTable = (props) => {
               return (
                 <tr key={index}>
                   <td>{dateData[1]}</td>
-                  <td>{MonthToString(Number(dateData[2])).monthName}</td>
+                  <td>{monthToString(Number(dateData[2])).monthName}</td>
                   <td>{dateData[3]}</td>
                 </tr>
               );
