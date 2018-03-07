@@ -35,7 +35,7 @@ const checkForBooking = (dates) => {
 class CenterModal extends React.Component {
   constructor() {
     super();
-    this.state = { redirect: false }
+    this.state = { redirect: false };
   }
 
   /**
