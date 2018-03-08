@@ -86,12 +86,10 @@ export default class Signin extends React.Component {
           <TopNavigation />
           <div className="d-flex flex-column align-items-center main-content">
             <LoadingIcon start={this.props.status.fetching} size={3} />
-            <div className="m-2">
-            </div>
             <div className="card card-form">
               <h1 className="card-header">Sign in</h1>
               <div className="card-body">
-                <BigAlert message={this.props.error} />
+                <BigAlert message={this.props.error ? 'email or password incorrect' : null} />
                 <form>
                   <div className="form-group">
                     <label htmlFor="email">Email</label>

@@ -1,18 +1,19 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { validateSignupInputs } from '../../helpers/inputValidators';
 // Actions.
 import { createUser, clearStatus } from '../../actions/authAction';
 // Common Components.
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
-import { WarningAlert } from '../common/Alert.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
+import { BigAlert, SmallAlert } from '../common/Alert.jsx';
 
 @connect(store => (
   {
     user: store.user,
-    error: store.user.status.error.message,
+    error: store.user.status.error,
     status: {
       fetching: store.user.status.fetching,
       fetched: store.user.status.fetched,
@@ -27,6 +28,12 @@ export default class Signup extends React.Component {
       email: null,
       password: null,
       confirmPassword: null,
+      inputErrors: {
+        nameError: null,
+        emailError: null,
+        passwordError: null,
+        confirmPasswordError: null,
+      },
     };
   }
 
@@ -39,21 +46,42 @@ export default class Signup extends React.Component {
    * @param {Event} e The event object.
    */
   getInput = (e) => {
-    const { state } = this;
+    const state = { ...this.state };
     state[e.target.name] = e.target.value;
+    this.setState(state);
+  }
+
+  clearInputErrors = () => {
+    const state = { ...this.state };
+    state.inputErrors = {
+      nameError: null,
+      emailError: null,
+      passwordError: null,
+      confirmPasswordError: null,
+    };
     this.setState(state);
   }
 
   /**
    * It Dispatches an action to register a user.
    */
-  register = () => {
+  register = (e) => {
+    e.preventDefault();
+    this.props.dispatch(clearStatus('ERROR'));
     const {
       name, email, password, confirmPassword,
     } = this.state;
-    this.props.dispatch(createUser({
-      name, email, password, confirmPassword,
-    }));
+    const inputErrors = validateSignupInputs(this.state);
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
+    } else {
+      this.clearInputErrors();
+      this.props.dispatch(createUser({
+        name, email, password, confirmPassword,
+      }));
+    }
   }
 
   render() {
@@ -66,12 +94,10 @@ export default class Signup extends React.Component {
           <TopNavigation />
           <div className="d-flex flex-column align-items-center main-content">
             <LoadingIcon start={this.props.status.fetching} size={3} />
-            <div className="m-2">
-              <WarningAlert message={this.props.error} />
-            </div>
             <div className="card card-form">
               <h1 className="card-header">Sign up</h1>
               <div className="card-body">
+                <BigAlert message={this.props.error.message} />
                 <form>
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -88,6 +114,11 @@ export default class Signup extends React.Component {
                         onChange={this.getInput}
                       />
                     </div>
+                    <small
+                      className="form-text text-muted"
+                    >Can contain letters and numbers alone
+                    </small>
+                    <SmallAlert message={this.state.inputErrors.nameError} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
@@ -104,6 +135,11 @@ export default class Signup extends React.Component {
                         onChange={this.getInput}
                       />
                     </div>
+                    <small
+                      className="form-text text-muted"
+                    >eg: you@yourDomain.com
+                    </small>
+                    <SmallAlert message={this.state.inputErrors.emailError} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
@@ -120,6 +156,11 @@ export default class Signup extends React.Component {
                         onChange={this.getInput}
                       />
                     </div>
+                    <small
+                      className="form-text text-muted"
+                    >Must contain capital, small letters and numbers
+                    </small>
+                    <SmallAlert message={this.state.inputErrors.passwordError} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Confirm Password</label>
@@ -136,12 +177,14 @@ export default class Signup extends React.Component {
                         onChange={this.getInput}
                       />
                     </div>
+                    <SmallAlert message={this.state.inputErrors.confirmPasswordError} />
                   </div>
-                  <a
+                  <button
                     className="btn btn-block dark-button text-white"
+                    disabled={this.props.status.fetching}
                     onClick={this.register}
                   >Register
-                  </a>
+                  </button>
                 </form>
               </div>
             </div>
