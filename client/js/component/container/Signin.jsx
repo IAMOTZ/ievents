@@ -1,18 +1,19 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { validateSigninInputs } from '../../helpers/inputValidators';
 // Actions.
 import { loginUser, clearStatus } from '../../actions/authAction';
 // Common components.
 import TopNavigation from '../common/TopNavigation.jsx';
 import Footer from '../common/Footer.jsx';
-import { WarningAlert } from '../common/Alert.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
+import { BigAlert, SmallAlert } from '../common/Alert.jsx';
 
 @connect(store => (
   {
     user: store.user,
-    error: store.user.status.error.message,
+    error: store.user.status.error,
     status: {
       fetching: store.user.status.fetching,
       fetched: store.user.status.fetched,
@@ -25,6 +26,10 @@ export default class Signin extends React.Component {
     this.state = {
       email: null,
       password: null,
+      inputErrors: {
+        emailError: null,
+        passwordError: null,
+      },
     };
   }
 
@@ -37,7 +42,7 @@ export default class Signin extends React.Component {
    * @param {Event} e The event object.
    */
   getInput = (e) => {
-    const { state } = this;
+    const state = { ...this.state };
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
@@ -45,11 +50,28 @@ export default class Signin extends React.Component {
   /**
    * Dispatches an action to authenticate a user.
    */
-  login = () => {
-    const {
-      email, password,
-    } = this.state;
-    this.props.dispatch(loginUser({ email, password }));
+  login = (e) => {
+    e.preventDefault();
+    this.props.dispatch(clearStatus('ERROR'));
+    const { email, password } = this.state;
+    const inputErrors = validateSigninInputs(this.state);
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
+    } else {
+      this.clearInputErrors();
+      this.props.dispatch(loginUser({ email, password }));
+    }
+  }
+
+  clearInputErrors = () => {
+    const state = { ...this.state };
+    state.inputErrors = {
+      emailError: null,
+      passwordError: null,
+    };
+    this.setState(state);
   }
 
   render() {
@@ -65,11 +87,11 @@ export default class Signin extends React.Component {
           <div className="d-flex flex-column align-items-center main-content">
             <LoadingIcon start={this.props.status.fetching} size={3} />
             <div className="m-2">
-              <WarningAlert message={this.props.error} />
             </div>
             <div className="card card-form">
               <h1 className="card-header">Sign in</h1>
               <div className="card-body">
+                <BigAlert message={this.props.error} />
                 <form>
                   <div className="form-group">
                     <label htmlFor="email">Email</label>
@@ -86,6 +108,7 @@ export default class Signin extends React.Component {
                         onChange={this.getInput}
                       />
                     </div>
+                    <SmallAlert message={this.state.inputErrors.emailError} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
@@ -102,11 +125,14 @@ export default class Signin extends React.Component {
                         onChange={this.getInput}
                       />
                     </div>
+                    <SmallAlert message={this.state.inputErrors.passwordError} />
                   </div>
                   <button
                     className="btn btn-block dark-button text-white"
                     disabled={this.props.status.fetching}
-                    onClick={this.login}>Log in</button>
+                    onClick={this.login}
+                  >Log in
+                  </button>
                   <div className="text-center mt-2">
                     <a href="" className="text-muted">forgot password?</a>
                   </div>
