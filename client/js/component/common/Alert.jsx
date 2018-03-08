@@ -30,4 +30,18 @@ const SuccessAlert = (props) => {
   return component;
 };
 
-export { SuccessAlert, WarningAlert };
+const SmallAlert = (props) => {
+  const component = props.message ? (
+    <span className="text-danger text-center small">{props.message}</span>
+  ) : null;
+  return component;
+};
+
+const BigAlert = (props) => {
+  const component = props.message ? (
+    <div className="alert alert-danger" role="alert">email or password incorrect</div>
+  ) : null;
+  return component;
+};
+
+export { SuccessAlert, WarningAlert, BigAlert, SmallAlert };
