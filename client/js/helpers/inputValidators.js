@@ -123,7 +123,7 @@ export const validateAddEventInputs = (inputs) => {
 };
 
 /**
- * Ensures that user inputs when updating an event is correct.
+ * Ensures that user inputs when updating an event are correct.
  * @param {Object} inputs The user inputs.
  * @returns {Object} All the errors identified.
  */
@@ -173,6 +173,11 @@ export const validateUpdateEventInputs = (inputs) => {
   return errors;
 };
 
+/**
+ * Ensures that user inputs when adding admin are correct.
+ * @param {Object} inputs The user inputs.
+ * @returns {Object} All the errors identified.
+ */
 export const validateAddAdminInputs = (inputs) => {
   const { email } = inputs;
   const errors = { emailError: null, errorFound: false };
@@ -183,6 +188,66 @@ export const validateAddAdminInputs = (inputs) => {
     errors.emailError = 'Email format is wrong';
   }
   if (errors.emailError) {
+    errors.errorFound = true;
+  }
+  return errors;
+};
+
+/**
+ * Ensures that user inputs when changing password are correct.
+ * @param {Object} inputs The user inputs.
+ * @returns {Object} All the errors identified.
+ */
+export const validateChangePasswordInputs = (inputs) => {
+  const {
+    formerPassword, newPassword, confirmNewPassword,
+  } = inputs;
+  const errors = {
+    formerPasswordError: null,
+    newPasswordError: null,
+    confirmNewPasswordError: null,
+  };
+  // Validating formerPassword.
+  if (!utils.isNotEmpty(formerPassword) || !utils.isDefined(formerPassword)) {
+    errors.formerPasswordError = 'Former password is required';
+  }
+  // Validating newPassword.
+  if (!utils.isNotEmpty(newPassword) || !utils.isDefined(newPassword)) {
+    errors.newPasswordError = 'New password is required';
+  } else if (!utils.minCharLength(newPassword, 7)) {
+    errors.newPasswordError = 'New password has to be more than 6 characters';
+  } else if (!utils.isStrongPassword(newPassword)) {
+    errors.newPasswordError = 'New password must contain capital letters, small letters and numbers';
+  }
+  // Validating confirmNewPassword
+  if (!utils.isNotEmpty(confirmNewPassword) || !utils.isDefined(confirmNewPassword)) {
+    errors.confirmNewPasswordError = 'Confirm new password field is required';
+  } else if (!utils.isAMatch(newPassword, confirmNewPassword)) {
+    errors.confirmNewPasswordError = 'New password and confirm password does not match';
+  }
+  if (errors.formerPasswordError || errors.newPasswordError
+    || errors.confirmNewPasswordError) {
+    errors.errorFound = true;
+  }
+  return errors;
+};
+
+/**
+ * Ensures that user inputs when deleting account are correct.
+ * @param {Object} inputs The user inputs.
+ * @returns {Object} All the errors identified.
+ */
+export const validateDeleteAccountInputs = (inputs) => {
+  const { password } = inputs;
+  const errors = {
+    passwordError: null,
+    errorFound: false,
+  };
+  // Validating password.
+  if (!utils.isNotEmpty(password) || !utils.isDefined(password)) {
+    errors.passwordError = 'Password is required';
+  }
+  if (errors.passwordError) {
     errors.errorFound = true;
   }
   return errors;

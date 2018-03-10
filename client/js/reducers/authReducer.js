@@ -233,6 +233,9 @@ export default (state = initialState, action) => {
             status: {
               ...state.status,
               error: false,
+              deletingUserRejected: false,
+              changingPasswordRejected: false,
+              addingAdminError: false,
             },
           };
         }
