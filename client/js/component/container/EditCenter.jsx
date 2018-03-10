@@ -52,7 +52,7 @@ export default class EditCenter extends React.Component {
 
   /**
    * Update some state variables with the user inputs.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
   getInput = (event) => {
     const state = { ...this.state };
@@ -87,6 +87,7 @@ export default class EditCenter extends React.Component {
 
   /**
    * Dispatches the action to update the center.
+   *    * @param {Event} event The event object.
    */
   update = (event) => {
     event.preventDefault();

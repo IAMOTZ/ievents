@@ -85,6 +85,7 @@ export default class AddCenter extends React.Component {
 
   /**
    * Dispatches the action to add the center.
+   * @param {Event} event The event object.
    */
   add = (event) => {
     event.preventDefault();

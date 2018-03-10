@@ -37,14 +37,14 @@ class AddAdmin extends React.Component {
 
   /**
    * Update some state variables with the user inputs.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  getInput = (e) => {
+  getInput = (event) => {
     if (this.props.status.success) {
       this.refresh();
     }
     const state = { ...this.state };
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
 
@@ -149,7 +149,7 @@ class AddAdmin extends React.Component {
                       </ul>
                       <button
                         id="add-btn"
-                        className="btn btn-primary"
+                        className="btn btn-primary pointer-button"
                         disabled={this.props.status.adding}
                         onClick={this.add}
                       >Add Admin

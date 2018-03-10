@@ -36,10 +36,10 @@ export default class Centers1 extends React.Component {
   /**
    * Displays the center modal.
    * It uses the center ID to get the details of the center to show.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  showModal = (e) => {
-    this.props.dispatch(showCenterModal(e.target.id));
+  showModal = (event) => {
+    this.props.dispatch(showCenterModal(event.target.id));
   }
 
   render() {

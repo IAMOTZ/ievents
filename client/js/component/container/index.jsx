@@ -3,7 +3,6 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // Common components.
 import TopNavigation from '../common/TopNavigation.jsx';
-import Footer from '../common/Footer.jsx';
 
 @connect(store => (
   {
@@ -59,7 +58,6 @@ class Home extends React.Component {
               </div>
             </div>
           </section>
-          <Footer />
         </div>
       );
     }

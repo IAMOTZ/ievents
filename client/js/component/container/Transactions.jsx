@@ -58,9 +58,9 @@ export default class Transactions extends React.Component {
    * It also initiates the confirmation modal.
    * @param {Event} e The event object.
    */
-  startDelete = (e) => {
+  startDelete = (event) => {
     this.setState({
-      toDelete: e.target.dataset.transactionId,
+      toDelete: event.target.dataset.transactionId,
       confirmModalVisible: !this.state.confirmModalVisible,
     });
   }
@@ -115,7 +115,7 @@ export default class Transactions extends React.Component {
                     <strong>Transactions</strong>
                   </a>
                   <button
-                    className="btn btn-primary"
+                    className="btn btn-primary pointer-button"
                     disabled={this.props.status.fetching}
                     onClick={this.refresh}
                   >Refresh

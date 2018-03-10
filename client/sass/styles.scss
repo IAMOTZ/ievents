@@ -14,6 +14,10 @@ nav {
 .dark-button {
   background-color: $custom-black;
   color: white;
+  cursor: pointer;
+}
+.pointer-button {
+  cursor: pointer;
 }
 @media (min-width: 992px) {
   .w-lg-50 {
@@ -52,7 +56,7 @@ footer {
 #home-container {
   #main-content-section {
     background: url('/images/eventCenter1.jpeg') no-repeat;
-    min-height: 900px;
+    min-height: 100vh;
     background-size: cover;
     background-attachment: fixed;
     border-bottom: 2px solid $custom-blue;
@@ -62,16 +66,20 @@ footer {
       top: 0;
       left: 0;
       width: 100%;
-      min-height: 900px;
+      min-height: 100vh;
     }
     #main-content {
       padding-top: 100px;
       color: white;
     }
     .search-box {
+      input {
+        padding: 10px;
+      }
       .btn {
         color: white;
         background-color: $custom-black;
+        padding: 10px;
       }
     }
   }
@@ -80,6 +88,7 @@ footer {
 #sign-up-container, #sign-in-container {
   .main-content {
     margin-top: 100px;
+    min-height: 100vh;
   }
   .card-form {
     margin-bottom: 95px;
@@ -121,9 +130,13 @@ footer {
 
 #centers1-container, #centers2-container {
   .search-box {
+    input {
+      padding: 10px;
+    }
     .btn {
       color: white;
       background-color: rgba(0,0,0,0.9);
+      padding: 10px;
     }
   }
   .card {
@@ -167,7 +180,7 @@ footer {
 
 #centers1-container {
   #centers-section {
-    min-height: 1000px;
+    min-height: 100vh;
     #center-section-header {
       padding-top: 70px;
     }
@@ -178,7 +191,7 @@ footer {
   overflow-x: hidden; 
   #main-content {
     margin-top: 100px;
-    min-height: 700px;
+    min-height: 100vh;
     nav {
       background-color: $custom-black;
     }

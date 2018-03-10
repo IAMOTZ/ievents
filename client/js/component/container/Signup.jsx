@@ -43,11 +43,11 @@ export default class Signup extends React.Component {
 
   /**
    * Update some state variables with the user inputs.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  getInput = (e) => {
+  getInput = (event) => {
     const state = { ...this.state };
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
 
@@ -67,9 +67,10 @@ export default class Signup extends React.Component {
 
   /**
    * It Dispatches an action to register a user.
+   * @param {Event} event The event object.
    */
-  register = (e) => {
-    e.preventDefault();
+  register = (event) => {
+    event.preventDefault();
     this.props.dispatch(clearStatus('ERROR'));
     const {
       name, email, password, confirmPassword,
@@ -138,10 +139,6 @@ export default class Signup extends React.Component {
                         onChange={this.getInput}
                       />
                     </div>
-                    <small
-                      className="form-text text-muted"
-                    >eg: you@yourDomain.com
-                    </small>
                     <SmallAlert message={this.state.inputErrors.emailError} />
                   </div>
                   <div className="form-group">
@@ -183,7 +180,7 @@ export default class Signup extends React.Component {
                     <SmallAlert message={this.state.inputErrors.confirmPasswordError} />
                   </div>
                   <button
-                    className="btn btn-block dark-button text-white"
+                    className="btn btn-block dark-button text-white mt-4"
                     disabled={this.props.status.fetching}
                     onClick={this.register}
                   >Register

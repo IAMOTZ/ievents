@@ -55,11 +55,11 @@ export default class EditEvent extends React.Component {
 
   /**
    * Update some state variables with the user inputs.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  getInput = (e) => {
+  getInput = (event) => {
     const state = { ...this.state };
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
 

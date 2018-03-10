@@ -308,7 +308,7 @@ class Profile extends React.Component {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-dark"
+                          className="btn btn-dark pointer-button"
                           data-dismiss="modal"
                           onClick={this.closeModalEffects}
                           disabled={this.props.status.changingPassword}
@@ -316,7 +316,7 @@ class Profile extends React.Component {
                         </button>
                         <button
                           type="button"
-                          className="btn btn-primary"
+                          className="btn btn-primary pointer-button"
                           onClick={this.changePassword}
                           disabled={this.props.status.changingPassword}
                         >Change
@@ -366,7 +366,7 @@ class Profile extends React.Component {
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-dark"
+                          className="btn btn-dark pointer-button"
                           data-dismiss="modal"
                           onClick={this.closeModalEffects}
                           disabled={this.props.status.deletingUser}
@@ -374,7 +374,7 @@ class Profile extends React.Component {
                         </button>
                         <button
                           type="button"
-                          className="btn btn-danger"
+                          className="btn btn-danger pointer-button"
                           onClick={this.deleteAccount}
                           disabled={this.props.status.deletingUser}
                         >Delete

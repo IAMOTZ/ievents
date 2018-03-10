@@ -41,17 +41,17 @@ export default class Signin extends React.Component {
    * Update some state variables with the user inputs.
    * @param {Event} e The event object.
    */
-  getInput = (e) => {
+  getInput = (event) => {
     const state = { ...this.state };
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
 
   /**
    * Dispatches an action to authenticate a user.
    */
-  login = (e) => {
-    e.preventDefault();
+  login = (event) => {
+    event.preventDefault();
     this.props.dispatch(clearStatus('ERROR'));
     const { email, password } = this.state;
     const inputErrors = validateSigninInputs(this.state);

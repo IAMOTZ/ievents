@@ -41,10 +41,10 @@ export default class Centers2 extends React.Component {
 
   /**
    * It updates the store about a center that is to be edited.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  onEdit = (e) => {
-    this.props.dispatch(initializeEdit(e.target.id));
+  onEdit = (event) => {
+    this.props.dispatch(initializeEdit(event.target.id));
   }
 
   /**
@@ -58,10 +58,10 @@ export default class Centers2 extends React.Component {
   /**
    * Displays the center modal.
    * It uses the center ID to get the details of the center to show.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  showModal = (e) => {
-    this.props.dispatch(showCenterModal(e.target.id));
+  showModal = (event) => {
+    this.props.dispatch(showCenterModal(event.target.id));
   }
 
   render() {
@@ -156,23 +156,9 @@ export default class Centers2 extends React.Component {
                   onBook={this.onBook}
                   redirectPath="/addEvent"
                 />
-                {/* Footer on large screen */}
-                <footer className="d-none d-lg-block mt-5">
-                  <div className="container text-white text-center py-5">
-                    <h1>Ievents</h1>
-                    <p>Copyright &copy; 2017</p>
-                  </div>
-                </footer>
               </div>
             </div>
           </div>
-          {/* Footer on small screen */}
-          <footer className="d-block d-lg-none mt-5">
-            <div className="container text-white text-center py-5">
-              <h1>Ievents</h1>
-              <p>Copyright &copy; 2017</p>
-            </div>
-          </footer>
         </div>
       );
     }

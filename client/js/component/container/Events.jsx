@@ -35,7 +35,7 @@ export default class Events extends React.Component {
     this.state = {
       toDelete: null,
       modalVisible: false,
-    }
+    };
   }
 
   // Getting all the events as soon as this component is about to mount the DOM
@@ -54,20 +54,20 @@ export default class Events extends React.Component {
 
   /**
    * It updates the store about an event that is to be edited.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  onEdit = (e) => {
-    this.props.dispatch(initializeEdit(e.target.id));
+  onEdit = (event) => {
+    this.props.dispatch(initializeEdit(event.target.id));
   }
 
   /**
    * It updates the state about an event that is to be deleted.
    * It also initiates the confirmation modal.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  startDelete = (e) => {
-    const { id } = e.target;
-    const { state } = this;
+  startDelete = (event) => {
+    const { id } = event.target;
+    const state = { ...this.state };
     state.toDelete = id;
     state.modalVisible = !this.state.modalVisible;
     this.setState(state);
