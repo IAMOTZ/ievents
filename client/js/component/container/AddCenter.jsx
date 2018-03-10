@@ -150,7 +150,7 @@ export default class AddCenter extends React.Component {
                 <Header text="Add a center" />
                 {/* Input form */}
                 <form className="mt-lg-5 mb-md-5">
-                  <LoadingIcon start={this.props.status.adding} size={2} />
+                  <LoadingIcon start={this.props.status.adding} size={3} />
                   <div className="w-lg-50 mx-auto">
                     <BigAlert message={this.props.status.error} />
                   </div>
@@ -160,7 +160,7 @@ export default class AddCenter extends React.Component {
                         <div className="form-group">
                           <label htmlFor="name">Name</label>
                           <input
-                            type="email"
+                            type="text"
                             className="form-control"
                             id="name"
                             name="name"

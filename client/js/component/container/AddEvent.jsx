@@ -133,7 +133,7 @@ export default class AddEvent extends React.Component {
                 <Header text="Add Event" />
                 {/* Input form */}
                 <form className="mt-lg-5 w-lg-50">
-                  <LoadingIcon start={this.props.status.adding} size={2} />
+                  <LoadingIcon start={this.props.status.adding} size={3} />
                   <BigAlert message={this.props.status.error} />
                   <div className="form-group">
                     <label htmlFor="title">Title</label>

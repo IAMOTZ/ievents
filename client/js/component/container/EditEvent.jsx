@@ -132,7 +132,7 @@ export default class EditEvent extends React.Component {
                 <Header text="Edit Event" />
                 {/* Input form */}
                 <form className="mt-lg-5 w-lg-50">
-                  <LoadingIcon start={this.props.status.updating} size={2} />
+                  <LoadingIcon start={this.props.status.updating} size={3} />
                   <BigAlert message={this.props.status.error} />
                   <div className="form-group">
                     <label htmlFor="title">Title</label>

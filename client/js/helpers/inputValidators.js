@@ -307,3 +307,59 @@ export const validateAddCenterInputs = (inputs) => {
   }
   return errors;
 };
+
+export const validateUpdateCenterInputs = (inputs) => {
+  const {
+    name, location, details, capacity, price,
+  } = inputs;
+  const errors = {
+    nameError: null,
+    locationError: null,
+    detailsError: null,
+    capacityError: null,
+    priceError: null,
+    errorFound: false,
+  };
+  // Validating name.
+  if (utils.isDefined(name)) {
+    if (!utils.isNotEmpty(name)) {
+      errors.nameError = 'Name is required';
+    } else if (!utils.minCharLength(name, 5) || !utils.maxCharLength(name, 30)) {
+      errors.nameError = 'Name must be between 5 and 30 characters';
+    }
+  }
+  // Validating location.
+  if (utils.isDefined(location) && utils.isNotEmpty(location)) {
+    if (!utils.maxCharLength(location, 50)) {
+      errors.locationError = 'Location must be below 50 characters';
+    }
+  }
+  // Validating details.
+  if (utils.isDefined(details) && utils.isNotEmpty(details)) {
+    if (!utils.maxCharLength(details, 300)) {
+      errors.detailsError = 'Details must be below 300 characters';
+    }
+  }
+  // Validating capacity.
+  if (utils.isDefined(capacity)) {
+    if (!utils.isNotEmpty(capacity) || !utils.isDefined(capacity)) {
+      errors.capacityError = 'Capacity is required';
+    } else if (!utils.isInteger(capacity)) {
+      errors.capacityError = 'Capacity is not valid';
+    }
+  }
+  // Validating price.
+  if (utils.isDefined(price)) {
+    if (!utils.isNotEmpty(price) || !utils.isDefined(price)) {
+      errors.priceError = 'Price is required';
+    } else if (!utils.isInteger(price)) {
+      errors.priceError = 'Price is not valid';
+    }
+  }
+  if (errors.nameError || errors.locationError ||
+    errors.detailsError || errors.capacityError ||
+    errors.priceError) {
+    errors.errorFound = true;
+  }
+  return errors;
+};
