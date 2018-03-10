@@ -59,7 +59,7 @@ export default class AddEvent extends React.Component {
    * @param {Event} e The event object.
    */
   getInput = (e) => {
-    const { state } = this;
+    const state = { ...this.state };
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
@@ -191,7 +191,11 @@ export default class AddEvent extends React.Component {
                       onChange={this.getInput}
                       defaultValue={this.props.defaultCenter}
                     >
-                      <option>choose a center</option>
+                      <option
+                        value=""
+                        name="centerId"
+                      >choose a center
+                      </option>
                       <CenterOptions centers={this.props.centers} />
                     </select>
                     <SmallAlert message={this.state.inputErrors.centerIdError} />

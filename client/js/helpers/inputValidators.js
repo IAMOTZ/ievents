@@ -121,3 +121,49 @@ export const validateAddEventInputs = (inputs) => {
   }
   return errors;
 };
+
+export const validateUpdateEventInputs = (inputs) => {
+  const {
+    title, description, date, centerId,
+  } = inputs;
+  const errors = {
+    titleError: null,
+    descriptionError: null,
+    dateError: null,
+    centerIdError: null,
+    errorFound: false,
+  };
+  // Validating title.
+  if (utils.isDefined(title)) {
+    if (!utils.isNotEmpty(title)) {
+      errors.titleError = 'Title is required';
+    } else if (!utils.minCharLength(title, 5) || !utils.maxCharLength(title, 30)) {
+      errors.titleError = 'Title must be between 5 and 30 characters';
+    }
+  }
+  // Validating description.
+  if (utils.isDefined(description) && utils.isNotEmpty(description)) {
+    if (!utils.maxCharLength(description, 200)) {
+      errors.descriptionError = 'Description must be less that 200 characters';
+    }
+  }
+  // Validating date.
+  if (utils.isDefined(date)) {
+    if (!utils.isNotEmpty(date)) {
+      errors.dateError = 'date is required';
+    } else if (!utils.isCorrectDate(date)) {
+      errors.dateError = 'Choose today or upcoming days';
+    }
+  }
+  // Validating center.
+  if (utils.isDefined(centerId)) {
+    if (!utils.isNotEmpty(centerId)) {
+      errors.centerIdError = 'Center is required';
+    }
+  }
+  if (errors.titleError || errors.descriptionError
+    || errors.dateError || errors.centerIdError) {
+    errors.errorFound = true;
+  }
+  return errors;
+};
