@@ -107,7 +107,7 @@ export const validateAddEventInputs = (inputs) => {
   }
   // Validating date.
   if (!utils.isNotEmpty(date) || !utils.isDefined(date)) {
-    errors.dateError = 'date is required';
+    errors.dateError = 'Date is required';
   } else if (!utils.isCorrectDate(date)) {
     errors.dateError = 'Choose today or upcoming days';
   }
@@ -122,6 +122,11 @@ export const validateAddEventInputs = (inputs) => {
   return errors;
 };
 
+/**
+ * Ensures that user inputs when updating an event is correct.
+ * @param {Object} inputs The user inputs.
+ * @returns {Object} All the errors identified.
+ */
 export const validateUpdateEventInputs = (inputs) => {
   const {
     title, description, date, centerId,
@@ -150,7 +155,7 @@ export const validateUpdateEventInputs = (inputs) => {
   // Validating date.
   if (utils.isDefined(date)) {
     if (!utils.isNotEmpty(date)) {
-      errors.dateError = 'date is required';
+      errors.dateError = 'Date is required';
     } else if (!utils.isCorrectDate(date)) {
       errors.dateError = 'Choose today or upcoming days';
     }
@@ -163,6 +168,21 @@ export const validateUpdateEventInputs = (inputs) => {
   }
   if (errors.titleError || errors.descriptionError
     || errors.dateError || errors.centerIdError) {
+    errors.errorFound = true;
+  }
+  return errors;
+};
+
+export const validateAddAdminInputs = (inputs) => {
+  const { email } = inputs;
+  const errors = { emailError: null, errorFound: false };
+  // Validateing email.
+  if (!utils.isDefined(email) || !utils.isNotEmpty(email)) {
+    errors.emailError = 'Email is required';
+  } else if (!utils.isEmail(email)) {
+    errors.emailError = 'Email format is wrong';
+  }
+  if (errors.emailError) {
     errors.errorFound = true;
   }
   return errors;

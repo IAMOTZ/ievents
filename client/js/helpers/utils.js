@@ -11,7 +11,7 @@ export const isDefined = input => input !== undefined && input !== null;
  * @param {String} input The string to verify.
  * @returns {Boolean} Truthy value to tell if the check is successsful or not.
  */
-export const isNotEmpty = input => input !== '';
+export const isNotEmpty = input => input.trim() !== '';
 
 /**
  * Ensures that a string is of a minimum length.
@@ -39,7 +39,7 @@ export const isAlphanumeric = input => /^[a-z0-9]+$/i.test(input);
  * @param {String} input The email string to verify.
  * @returns {Boolean} Truthy value to tell if the check is successsful or not.
  */
-export const isEmail = input => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(input);
+export const isEmail = input => /^.+?@.+?\..+$/.test(input);
 
 /**
  * Ensures that a string representing password is strong.

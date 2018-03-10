@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { validateAddAdminInputs } from '../../helpers/inputValidators';
 // Actions.
 import { addAdmin, clearStatus } from '../../actions/authAction';
 // Common components.
@@ -8,6 +9,7 @@ import UserSideNav from '../common/SideNavigation.jsx';
 import Header from '../common/Header.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
+import { BigAlert, SmallAlert } from '../common/Alert.jsx';
 
 @connect(store => (
   {
@@ -18,7 +20,7 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx';
     status: {
       adding: store.user.status.addingAdmin,
       success: store.user.status.adminAdded,
-      error: store.user.status.addingAdminError.message,
+      error: store.user.status.addingAdminError,
     },
   }
 ))
@@ -27,7 +29,9 @@ class AddAdmin extends React.Component {
     super();
     this.state = {
       email: null,
-      inputError: null,
+      inputErrors: {
+        emailError: null,
+      },
     };
   }
 
@@ -39,13 +43,24 @@ class AddAdmin extends React.Component {
     if (this.props.status.success) {
       this.refresh();
     }
-    const { state } = this;
+    const state = { ...this.state };
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
 
   /**
-   * Refresh the page by clearing all created info eg Error Messages.
+   * Clears all the inputErrors in the state.
+   */
+  clearInputErrors = () => {
+    const state = { ...this.state };
+    state.inputErrors = {
+      emailError: null,
+    };
+    this.setState(state);
+  }
+
+  /**
+   * Refresh the page by clearing all created info in the store
    */
   refresh() {
     this.props.dispatch(clearStatus('ADD_ADMIN'));
@@ -55,11 +70,15 @@ class AddAdmin extends React.Component {
    * Dispatches the action to add the admin.
    */
   add = () => {
-    if (this.state.email) {
-      this.setState({ inputError: null });
-      this.props.dispatch(addAdmin(this.state.email, this.props.user.token));
+    const { email } = this.state;
+    const inputErrors = validateAddAdminInputs({ email });
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
     } else {
-      this.setState({ inputError: 'Email is required' });
+      this.clearInputErrors();
+      this.props.dispatch(addAdmin(this.state.email, this.props.user.token));
     }
   }
 
@@ -95,12 +114,14 @@ class AddAdmin extends React.Component {
                   <LoadingIcon start={this.props.status.adding} size={3} />
                   <div className="card align-items-center text-center w-75">
                     <div className="card-body">
-                      <Alert
-                        inputError={this.state.inputError}
-                        addingError={this.props.status.error}
-                        success={this.props.status.success}
-                        newAdmin={this.state.email}
-                      />
+                      <BigAlert message={this.props.status.error.message} />
+                      {
+                        this.props.status.success ?
+                          <BigAlert
+                            message={`${this.state.email} is now an admin`}
+                            type="success"
+                          /> : null
+                      }
                       <div className="input-group px-3">
                         <span className="input-group-addon">
                           <i className="fa fa-user" />
@@ -114,6 +135,7 @@ class AddAdmin extends React.Component {
                           onChange={this.getInput}
                         />
                       </div>
+                      <SmallAlert message={this.state.inputErrors.emailError} />
                       <ul className="text-left mt-2 text-muted">
                         <li>The user must have signed up already</li>
                         <li>If successful, the user would have access to:
@@ -151,24 +173,4 @@ class AddAdmin extends React.Component {
   }
 }
 
-const Alert = (props) => {
-  let component;
-  if (props.addingError || props.inputError) {
-    component = (
-      <p className="text-danger">{props.inputError || props.addingError}</p>
-    );
-  } else if (props.success) {
-    component = (
-      <span>
-        <p className="text-success">Admin Added!</p>
-        <span>{props.newAdmin} is now an admin</span>
-      </span>
-    );
-  } else {
-    component = null;
-  }
-  return component;
-};
-
 export default AddAdmin;
-export { Alert };

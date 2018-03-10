@@ -39,7 +39,11 @@ const SmallAlert = (props) => {
 
 const BigAlert = (props) => {
   const component = props.message ? (
-    <div className="alert alert-danger" role="alert">{props.message}</div>
+    <div
+      className={`alert ${props.type === 'success' ? 'alert-success' : 'alert-danger'}`}
+      role="alert"
+    >{props.message}
+    </div>
   ) : null;
   return component;
 };

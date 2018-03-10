@@ -51,6 +51,9 @@ export default class Signup extends React.Component {
     this.setState(state);
   }
 
+  /**
+   * Clears all the inputErrors in the state.
+   */
   clearInputErrors = () => {
     const state = { ...this.state };
     state.inputErrors = {
