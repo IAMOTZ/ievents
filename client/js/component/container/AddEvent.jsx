@@ -4,13 +4,14 @@ import { Redirect } from 'react-router-dom';
 // Actions
 import { getAllCenters } from '../../actions/centerActions';
 import { addEvent, clearStatus } from '../../actions/eventActions';
+import { validateAddEventInputs } from '../../helpers/inputValidators';
 // Common Components
 import UserSideNav from '../common/SideNavigation.jsx';
 import CenterOptions from '../common/CenterDropDown.jsx';
 import Header from '../common/Header.jsx';
-import { WarningAlert } from '../common/Alert.jsx';
 import { UserTopNav } from '../common/TopNavigation.jsx';
 import { LoadingIcon } from '../common/LoadingAnimation.jsx';
+import { BigAlert, SmallAlert } from '../common/Alert.jsx';
 
 @connect(store => (
   {
@@ -35,10 +36,16 @@ export default class AddEvent extends React.Component {
       description: null,
       date: null,
       centerId: null,
+      inputErrors: {
+        titleError: null,
+        descriptionError: null,
+        dateError: null,
+        centerIdError: null,
+      },
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.dispatch(getAllCenters());
     this.setState({ centerId: this.props.defaultCenter });
   }
@@ -58,6 +65,20 @@ export default class AddEvent extends React.Component {
   }
 
   /**
+   * Clears all the inputErros in the state.
+   */
+  clearInputErrors = () => {
+    const state = { ...this.state };
+    state.inputErrors = {
+      titleError: null,
+      descriptionError: null,
+      dateError: null,
+      centerIdError: null,
+    };
+    this.setState(state);
+  }
+
+  /**
    * Dispatches the action to add the event.
    */
   add = () => {
@@ -68,14 +89,22 @@ export default class AddEvent extends React.Component {
     const eventDetails = {
       title, description, date, centerId,
     };
-    this.props.dispatch(addEvent(eventDetails, this.props.user.token));
-    window.scrollTo(0, 0);
+    const inputErrors = validateAddEventInputs(eventDetails);
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
+    } else {
+      this.clearInputErrors();
+      this.props.dispatch(addEvent(eventDetails, this.props.user.token));
+      window.scrollTo(0, 0);
+    }
   }
 
   render() {
     let component;
     if (!this.props.authenticated) {
-      component = (<Redirect to="/users/login" />)
+      component = (<Redirect to="/users/login" />);
     } else if (this.props.status.success) {
       component = (<Redirect to="/events" />);
     } else {
@@ -105,7 +134,7 @@ export default class AddEvent extends React.Component {
                 {/* Input form */}
                 <form className="mt-lg-5 w-lg-50">
                   <LoadingIcon start={this.props.status.adding} size={2} />
-                  <WarningAlert message={this.props.status.error} />
+                  <BigAlert message={this.props.status.error} />
                   <div className="form-group">
                     <label htmlFor="title">Title</label>
                     <input
@@ -119,8 +148,9 @@ export default class AddEvent extends React.Component {
                     <small
                       id="emailHelp"
                       className="form-text text-muted"
-                    >Less than 30 characters
+                    >Between 5 and 30 characters
                     </small>
+                    <SmallAlert message={this.state.inputErrors.titleError} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="description">Description</label>
@@ -137,6 +167,7 @@ export default class AddEvent extends React.Component {
                       className="form-text text-muted"
                     >Less than 200 characters
                     </small>
+                    <SmallAlert message={this.state.inputErrors.descriptionError} />
                   </div>
                 </form>
                 <form className="my-3 form-inline">
@@ -145,22 +176,25 @@ export default class AddEvent extends React.Component {
                     <input
                       type="date"
                       id="date"
-                      className="form-control mx-sm-3"
+                      className="form-control ml-sm-3"
                       name="date"
                       onChange={this.getInput}
                     />
+                    <SmallAlert message={this.state.inputErrors.dateError} />
                   </div>
-                  <div className="form-group">
+                  <div className="form-group ml-md-3">
                     <label htmlFor="centers">Choose a Center</label>
                     <select
                       id="centers"
                       className="form-control ml-md-3"
                       name="centerId"
                       onChange={this.getInput}
-                      defaultValue={this.props.defaultCenter}>
+                      defaultValue={this.props.defaultCenter}
+                    >
                       <option>choose a center</option>
                       <CenterOptions centers={this.props.centers} />
                     </select>
+                    <SmallAlert message={this.state.inputErrors.centerIdError} />
                   </div>
                 </form>
                 <button
