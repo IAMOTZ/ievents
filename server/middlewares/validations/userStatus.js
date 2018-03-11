@@ -1,7 +1,7 @@
 /* eslint-disable no-else-return */
 /* eslint-disable consistent-return */
 import jwt from 'jsonwebtoken';
-import db from '../models';
+import db from '../../models';
 
 const { events } = db;
 
