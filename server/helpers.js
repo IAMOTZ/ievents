@@ -177,9 +177,5 @@ export const sendMail = (details) => {
     subject: details.subject,
     html: details.body,
   };
-  transporter.sendMail(mailOptions, (err) => {
-    if (err) {
-      console.log('Error Sending Email: ', err);
-    }
-  });
+  transporter.sendMail(mailOptions);
 };

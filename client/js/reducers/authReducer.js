@@ -8,9 +8,7 @@ try {
   previousToken = localStorage.getItem(TOKEN_NAME);
   previousUser = jwtDecode(previousToken);
   previousUser = Object.assign({}, previousUser, { token: previousToken });
-} catch (e) {
-  console.log(e.message);
-}
+} catch (e) {}
 
 const initialState = {
   user: previousUser || {
