@@ -1,5 +1,5 @@
 import React from 'react';
-import SideNavigation from '../../common/SideNavigation.jsx';
+import SideNavigation from '../../common/SideNavigation';
 
 const props = {
   name: 'test-name',

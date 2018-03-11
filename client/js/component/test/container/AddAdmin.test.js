@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import AddAdmin from '../../container/AddAdmin.jsx';
+import AddAdmin from '../../container/AddAdmin';
 
 const props = {
   user: { name: 'test-user' },

@@ -6,12 +6,12 @@ import {
   getAllCenters, showCenterModal, initializeEdit, book,
 } from '../../actions/centerActions';
 // Common Components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import Header from '../common/Header.jsx';
-import CenterCards from '../common/CenterCards.jsx';
+import UserSideNav from '../common/SideNavigation';
+import Header from '../common/Header';
+import CenterCards from '../common/CenterCards';
 import { CenterModal } from '../common/Modal';
-import { LoadingContainer } from '../common/LoadingAnimation.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
+import { LoadingContainer } from '../common/LoadingAnimation';
+import { UserTopNav } from '../common/TopNavigation';
 
 @connect(store => (
   {

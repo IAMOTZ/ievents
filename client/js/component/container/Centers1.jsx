@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 // Actions.
 import { getAllCenters, showCenterModal } from '../../actions/centerActions';
 // Common components.
-import TopNavigation from '../common/TopNavigation.jsx';
-import Footer from '../common/Footer.jsx';
-import CenterCards from '../common/CenterCards.jsx';
+import TopNavigation from '../common/TopNavigation';
+import Footer from '../common/Footer';
+import CenterCards from '../common/CenterCards';
 import { CenterModal } from '../common/Modal';
-import { LoadingContainer } from '../common/LoadingAnimation.jsx';
+import { LoadingContainer } from '../common/LoadingAnimation';
 
 @connect(store => (
   {

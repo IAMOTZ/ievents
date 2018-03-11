@@ -6,11 +6,11 @@ import {
   getAllTransactions, deleteTransaction, clearStatus,
 } from '../../actions/transactionActions';
 // Common components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import TransactionCards from '../common/TransactionCards.jsx';
+import UserSideNav from '../common/SideNavigation';
+import TransactionCards from '../common/TransactionCards';
 import { ConfirmModal } from '../common/Modal';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
+import { UserTopNav } from '../common/TopNavigation';
+import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation';
 
 @connect(store => (
   {

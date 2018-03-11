@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 // Common components.
-import TopNavigation from '../common/TopNavigation.jsx';
+import TopNavigation from '../common/TopNavigation';
 
 @connect(store => (
   {

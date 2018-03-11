@@ -5,12 +5,12 @@ import { validateAddCenterInputs } from '../../helpers/inputValidators';
 // Actions.
 import { addCenter, clearStatus } from '../../actions/centerActions';
 // Common Components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import Header from '../common/Header.jsx';
-import ImageInput from '../common/ImageInput.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
-import { BigAlert, SmallAlert } from '../common/Alert.jsx';
+import UserSideNav from '../common/SideNavigation';
+import Header from '../common/Header';
+import ImageInput from '../common/ImageInput';
+import { UserTopNav } from '../common/TopNavigation';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
 
 
 @connect(store => (

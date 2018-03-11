@@ -5,11 +5,11 @@ import { validateAddAdminInputs } from '../../helpers/inputValidators';
 // Actions.
 import { addAdmin, clearStatus } from '../../actions/authAction';
 // Common components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import Header from '../common/Header.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
-import { BigAlert, SmallAlert } from '../common/Alert.jsx';
+import UserSideNav from '../common/SideNavigation';
+import Header from '../common/Header';
+import { UserTopNav } from '../common/TopNavigation';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
 
 @connect(store => (
   {

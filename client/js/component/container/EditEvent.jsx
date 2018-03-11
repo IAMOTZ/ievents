@@ -6,12 +6,12 @@ import { getAllCenters } from '../../actions/centerActions';
 import { updateEvent, clearStatus } from '../../actions/eventActions';
 import { validateUpdateEventInputs } from '../../helpers/inputValidators';
 // Common Components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import CenterOptions from '../common/CenterDropDown.jsx';
-import Header from '../common/Header.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
-import { BigAlert, SmallAlert } from '../common/Alert.jsx';
+import UserSideNav from '../common/SideNavigation';
+import CenterOptions from '../common/CenterDropDown';
+import Header from '../common/Header';
+import { UserTopNav } from '../common/TopNavigation';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
 
 @connect(store => (
   {

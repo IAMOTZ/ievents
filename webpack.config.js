@@ -67,6 +67,9 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
     new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') })    
   ]),
+  resolve: {
+    extensions: ['.jsx', '.js'],
+  },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     proxy: {

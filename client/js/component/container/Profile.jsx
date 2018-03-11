@@ -12,11 +12,11 @@ import {
 } from '../../actions/authAction';
 import { getAllEvents } from '../../actions/eventActions';
 // Common components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import Header from '../common/Header.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
-import { BigAlert, SmallAlert } from '../common/Alert.jsx';
+import UserSideNav from '../common/SideNavigation';
+import { UserTopNav } from '../common/TopNavigation';
+import Header from '../common/Header';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
 // Helpers
 import { countCollection } from '../../helpers/helpers';
 

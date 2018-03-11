@@ -7,12 +7,12 @@ import {
 } from '../../actions/eventActions';
 import { getAllCenters } from '../../actions/centerActions';
 // Common Componnets.
-import UserSideNav from '../common/SideNavigation.jsx';
-import Header from '../common/Header.jsx';
-import EventCards from '../common/EventCards.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
+import UserSideNav from '../common/SideNavigation';
+import Header from '../common/Header';
+import EventCards from '../common/EventCards';
+import { UserTopNav } from '../common/TopNavigation';
 import { ConfirmModal } from '../common/Modal';
-import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation.jsx';
+import { LoadingContainer, LoadingIcon } from '../common/LoadingAnimation';
 
 @connect(store => (
   {

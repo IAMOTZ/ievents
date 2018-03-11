@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../../common/Footer.jsx';
+import Footer from '../../common/Footer';
 
 describe('<Footer />', () => {
   it('should render correctly', () => {

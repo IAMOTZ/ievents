@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../common/Header.jsx';
+import Header from '../../common/Header';
 
 
 describe('<Header />', () => {

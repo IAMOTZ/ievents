@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import EditEvent from '../../container/EditEvent.jsx';
+import EditEvent from '../../container/EditEvent';
 
 const props = {
   user: { name: 'test-user' },

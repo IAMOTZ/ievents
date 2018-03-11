@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import Centers1 from '../../container/Centers1.jsx';
+import Centers1 from '../../container/Centers1';
 
 const props = {
   centers: [

@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import Signup from '../../container/Signup.jsx';
+import Signup from '../../container/Signup';
 
 const props = {
   user: {},

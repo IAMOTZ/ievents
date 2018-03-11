@@ -5,10 +5,10 @@ import { validateSignupInputs } from '../../helpers/inputValidators';
 // Actions.
 import { createUser, clearStatus } from '../../actions/authAction';
 // Common Components.
-import TopNavigation from '../common/TopNavigation.jsx';
-import Footer from '../common/Footer.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
-import { BigAlert, SmallAlert } from '../common/Alert.jsx';
+import TopNavigation from '../common/TopNavigation';
+import Footer from '../common/Footer';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
 
 @connect(store => (
   {
