@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import AddEvent from '../../container/AddEvent.jsx';
+import AddEvent from '../../container/AddEvent';
 
 const props = {
   user: { name: 'test-user' },

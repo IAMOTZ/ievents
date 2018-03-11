@@ -1,11 +1,11 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import Signup from '../../container/Signup.jsx';
+import Signup from '../../container/Signup';
 
 const props = {
   user: {},
-  error: null,
+  error: { message: null },
   status: {
     fetching: false,
     fetched: false,
@@ -15,7 +15,7 @@ const props = {
 
 const alterPorps = newProps => ({
   user: {},
-  error: newProps.error || null,
+  error: newProps.error || { message: null },
   status: {
     fetching: newProps.fetching || false,
     fetched: newProps.fetched || false,

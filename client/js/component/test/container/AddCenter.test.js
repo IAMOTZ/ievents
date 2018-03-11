@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import AddCenter from '../../container/AddCenter.jsx';
+import AddCenter from '../../container/AddCenter';
 
 const props = {
   user: { name: 'test-user' },

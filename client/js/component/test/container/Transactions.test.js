@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import Transactions from '../../container/Transactions.jsx';
+import Transactions from '../../container/Transactions';
 
 const props = {
   user: { name: 'test-user' },

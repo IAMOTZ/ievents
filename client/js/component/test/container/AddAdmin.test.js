@@ -1,9 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
-import AddAdmin, { Alert } from '../../container/AddAdmin.jsx';
+import AddAdmin from '../../container/AddAdmin';
 
 const props = {
   user: { name: 'test-user' },
@@ -64,43 +62,19 @@ describe('<AddAdmin />', () => {
     });
     it('should update inputError state when user tries to add without email', () => {
       wrapper.find('#add-btn').simulate('click');
-      expect(wrapper.state('inputError')).toEqual('Email is required');
+      expect(wrapper.state('inputErrors').emailError).toEqual('Email is required');
     });
     it('should clear inputError state when user tries to add with email', () => {
-      wrapper.setState({ inputError: 'Just any error' });
+      wrapper.setState({
+        inputErrors: {
+          emailError: 'error message',
+        },
+      });
       wrapper
         .find('#input-email')
         .simulate('change', { target: { name: 'email', value: 'test@gmail.com' } });
       wrapper.find('#add-btn').simulate('click');
-      expect(wrapper.state('inputError')).toBeNull();
-    });
-  });
-
-  describe('<Alert />', () => {
-    const alertProps = {
-      addingError: null,
-      inputError: null,
-      sucess: false,
-      newAdmin: null,
-    };
-    let wrapper;
-    beforeEach(() => {
-      wrapper = shallow(<Alert {...alertProps} />);
-    });
-    it('should render nothing if there is no error or success message', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-    it('should render correctly if there is an addingError', () => {
-      wrapper.setProps({ addingError: 'there was an error' });
-      expect(wrapper).toMatchSnapshot();
-    });
-    it('should render correctly if there is an inputError', () => {
-      wrapper.setProps({ inputError: 'there was an error' });
-      expect(wrapper).toMatchSnapshot();
-    });
-    it('should render correctly if there is a success', () => {
-      wrapper.setProps({ success: true, newAdmin: 'test-user' });
-      expect(wrapper).toMatchSnapshot();
+      expect(wrapper.state('inputErrors').emailError).toBeNull();
     });
   });
 });

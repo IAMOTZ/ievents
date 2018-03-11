@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
+import { LoadingIcon } from '../common/LoadingAnimation';
 
 class TransactionCards extends React.Component {
   constructor() {

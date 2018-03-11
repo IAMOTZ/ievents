@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import CenterDropDown from '../../common/CenterDropDown.jsx';
+import CenterDropDown from '../../common/CenterDropDown';
 
 const props = {
   centers: [

@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { validateUpdateCenterInputs } from '../../helpers/inputValidators';
 // Actions.
 import { updateCenter, clearStatus } from '../../actions/centerActions';
 // Common Components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import Header from '../common/Header.jsx';
-import ImageInput from '../common/ImageInput.jsx';
-import { WarningAlert } from '../common/Alert.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
+import UserSideNav from '../common/SideNavigation';
+import Header from '../common/Header';
+import ImageInput from '../common/ImageInput';
+import { UserTopNav } from '../common/TopNavigation';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
 
 @connect(store => (
   {
@@ -19,7 +20,7 @@ import { LoadingIcon } from '../common/LoadingAnimation.jsx';
     isSuperAdmin: (store.user.user.role === 'superAdmin'),
     toEdit: store.centers.toEdit,
     status: {
-      error: store.centers.status.updatingError.message,
+      error: store.centers.status.updatingError,
       success: store.centers.status.updated,
       updating: store.centers.status.updating,
     },
@@ -35,6 +36,13 @@ export default class EditCenter extends React.Component {
       capacity: null,
       price: null,
       newImages: null,
+      inputErrors: {
+        nameError: null,
+        locationError: null,
+        detailsError: null,
+        capacityError: null,
+        priceError: null,
+      },
     };
   }
 
@@ -44,11 +52,26 @@ export default class EditCenter extends React.Component {
 
   /**
    * Update some state variables with the user inputs.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  getInput = (e) => {
-    const { state } = this;
-    state[e.target.name] = e.target.value;
+  getInput = (event) => {
+    const state = { ...this.state };
+    state[event.target.name] = event.target.value;
+    this.setState(state);
+  }
+
+  /**
+   * Clears all the inputErrors in the state.
+   */
+  clearInputErrors = () => {
+    const state = { ...this.state };
+    state.inputErrors = {
+      nameError: null,
+      locationError: null,
+      detailsError: null,
+      capacityError: null,
+      priceError: null,
+    };
     this.setState(state);
   }
 
@@ -64,8 +87,10 @@ export default class EditCenter extends React.Component {
 
   /**
    * Dispatches the action to update the center.
+   *    * @param {Event} event The event object.
    */
-  update = () => {
+  update = (event) => {
+    event.preventDefault();
     const {
       name, location, details, capacity, price, newImages,
     } = this.state;
@@ -73,19 +98,26 @@ export default class EditCenter extends React.Component {
     const centerDetails = {
       name, location, details, capacity, price,
     };
-    const fd = new FormData();
-    const entries = Object.entries(centerDetails);
-    entries.forEach((entry) => {
-      const key = entry[0];
-      const value = entry[1];
-      if (value) {
-        fd.append(key, value);
+    const inputErrors = validateUpdateCenterInputs(centerDetails);
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
+    } else {
+      const fd = new FormData();
+      const entries = Object.entries(centerDetails);
+      entries.forEach((entry) => {
+        const key = entry[0];
+        const value = entry[1];
+        if (value) {
+          fd.append(key, value);
+        }
+      });
+      if (newImages) {
+        fd.append('image', newImages[0]);
       }
-    });
-    if (newImages) {
-      fd.append('image', newImages[0]);
+      this.props.dispatch(updateCenter(centerId, fd, this.props.user.token));
     }
-    this.props.dispatch(updateCenter(centerId, fd, this.props.user.token));
     window.scrollTo(0, 0);
   }
 
@@ -120,91 +152,127 @@ export default class EditCenter extends React.Component {
                 {/* Content Header(navigation) on large screen */}
                 <Header text="Edit Center" />
                 {/* Input form */}
-                <form className="mt-lg-5 mb-md-5 w-lg-50">
-                  <LoadingIcon start={this.props.status.updating} size={2} />
-                  <WarningAlert message={this.props.status.error} />
-                  <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      defaultValue={this.props.toEdit.name}
-                      className="form-control"
-                      placeholder="The name of the center"
-                      onChange={this.getInput}
-                    />
-                    <small className="form-text text-muted">Less than 30 characters</small>
+                <form className="mt-lg-5 mb-md-5">
+                  <LoadingIcon start={this.props.status.updating} size={3} />
+                  <div className="w-lg-50 mx-auto">
+                    <BigAlert message={this.props.status.error.message} />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="location">Location</label>
-                    <input
-                      id="location"
-                      name="location"
-                      type="text"
-                      defaultValue={this.props.toEdit.location}
-                      className="form-control"
-                      placeholder="The location of the center"
-                      onChange={this.getInput}
-                    />
-                    <small className="form-text text-muted">Less than 30 characters</small>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="details">Details</label>
-                    <textarea
-                      defaultValue={this.props.toEdit.details}
-                      className="form-control"
-                      id="details"
-                      rows="7"
-                      name="details"
-                      placeholder="More details about the center"
-                      onChange={this.getInput} />
-                    <small className="form-text text-muted">Less than 200 characters</small>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="capacity">Capacity</label>
-                    <input
-                      id="capacity"
-                      name="capacity"
-                      type="number"
-                      defaultValue={this.props.toEdit.capacity}
-                      className="form-control"
-                      placeholder="How many seats"
-                      onChange={this.getInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="price">Price</label>
-                    <input
-                      id="price"
-                      name="price"
-                      type="number"
-                      defaultValue={this.props.toEdit.price}
-                      className="form-control"
-                      placeholder="Price"
-                      onChange={this.getInput}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="image">Image</label>
-                    <div className="text-center">
-                      <ImageInput
-                        id="image"
-                        onDrop={this.handleImageDrop}
-                        newImage={this.state.newImages ? this.state.newImages[0] : null}
-                        previousImage={
-                          this.props.toEdit.images ? this.props.toEdit.images[0] : null
-                        }
-                      />
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-12 col-lg-6">
+                        <div className="form-group">
+                          <label htmlFor="name">Name</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            name="name"
+                            placeholder="The name of the center"
+                            defaultValue={this.props.toEdit.name}
+                            onChange={this.getInput}
+                          />
+                          <small className="form-text text-muted">Between 5 and 30 characters</small>
+                          <SmallAlert message={this.state.inputErrors.nameError} />
+                        </div>
+                      </div>
+                      <div className="col-12 col-lg-6">
+                        <div className="form-group">
+                          <label htmlFor="location">Location</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="location"
+                            name="location"
+                            placeholder="The location of the center"
+                            defaultValue={this.props.toEdit.location}
+                            onChange={this.getInput}
+                          />
+                          <small className="form-text text-muted">Less than 50 characters</small>
+                          <SmallAlert message={this.state.inputErrors.locationError} />
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="ml-3 pt-3">
-                    <button
-                      className="btn btn-outline-dark"
-                      disabled={this.props.status.updating}
-                      onClick={this.update}
-                    >Update
-                    </button>
+                    <div className="row">
+                      <div className="col-12 col-lg-6">
+                        <div className="form-group">
+                          <label htmlFor="details">Details</label>
+                          <textarea
+                            className="form-control"
+                            id="details"
+                            rows="7"
+                            name="details"
+                            placeholder="More details about the center"
+                            defaultValue={this.props.toEdit.details}
+                            onChange={this.getInput}
+                          />
+                          <small className="form-text text-muted">Less than 300 characters</small>
+                          <SmallAlert message={this.state.inputErrors.detailsError} />
+                        </div>
+                      </div>
+                      <div className="col-12 col-lg-6">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="form-group">
+                              <label htmlFor="capacity">Capacity</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="capacity"
+                                name="capacity"
+                                placeholder="How many seats"
+                                defaultValue={this.props.toEdit.capacity}
+                                onChange={this.getInput}
+                              />
+                              <SmallAlert message={this.state.inputErrors.capacityError} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="form-group">
+                              <label htmlFor="price">Price</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                id="price"
+                                name="price"
+                                placeholder="Price"
+                                defaultValue={this.props.toEdit.price}
+                                onChange={this.getInput}
+                              />
+                              <SmallAlert message={this.state.inputErrors.priceError} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="form-group">
+                              <label htmlFor="image">Image</label>
+                              <div className="text-center">
+                                <ImageInput
+                                  style={{ height: '100px' }}
+                                  id="image"
+                                  onDrop={this.handleImageDrop}
+                                  newImage={this.state.newImages ? this.state.newImages[0] : null}
+                                  previousImage={
+                                    this.props.toEdit.images ? this.props.toEdit.images[0] : null
+                                  }
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="ml-3 pt-3">
+                            <button
+                              id="update-btn"
+                              className="btn btn-outline-dark"
+                              disabled={this.props.status.updating}
+                              onClick={this.update}
+                            >Update
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>

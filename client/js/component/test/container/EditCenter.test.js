@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import EditCenter from '../../container/EditCenter.jsx';
+import EditCenter from '../../container/EditCenter';
 
 const props = {
   user: { name: 'test-user' },

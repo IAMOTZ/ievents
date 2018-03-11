@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import TopNavigation, { UserTopNav } from '../../common/TopNavigation.jsx';
+import TopNavigation, { UserTopNav } from '../../common/TopNavigation';
 
 const props = {
   name: 'test-name',

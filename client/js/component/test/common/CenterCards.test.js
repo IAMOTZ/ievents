@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import renderer from 'react-test-renderer';
-import CenterCards from '../../common/CenterCards.jsx';
+import CenterCards from '../../common/CenterCards';
 
 const props = {
   centers: [

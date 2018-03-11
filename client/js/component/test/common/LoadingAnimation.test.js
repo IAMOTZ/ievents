@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { LoadingIcon, LoadingContainer } from '../../common/LoadingAnimation.jsx';
+import { LoadingIcon, LoadingContainer } from '../../common/LoadingAnimation';
 
 describe('<LoadingIcon />', () => {
   it('should render nothing if start prop is not given', () => {

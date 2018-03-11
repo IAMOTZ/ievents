@@ -28,6 +28,9 @@ const initialState = {
     changingPassword: false,
     changingPasswordResolved: false,
     changingPasswordRejected: false,
+    deletingUser: false,
+    deletingUserResolved: false,
+    deletingUserRejected: false,
   },
 };
 const alterInitialState = (newUser, newStatus) => ({
@@ -104,6 +107,25 @@ describe('Auth Reducer', () => {
     });
   });
 
+  describe('Deleting User', () => {
+    it('should update the deletingUser status to true', () => {
+      expect(reducer(undefined, {
+        type: actionTypes.DELETING_USER,
+      })).toEqual(alterInitialState({}, { deletingUser: true }));
+    });
+    it('should update the deletingUserResolved status to true', () => {
+      expect(reducer(undefined, {
+        type: actionTypes.DELETING_USER_RESOLVED,
+      })).toEqual(alterInitialState({}, { deletingUserResolved: true }));
+    });
+    it('should update the deletingUserRejected status with some error message', () => {
+      expect(reducer(undefined, {
+        type: actionTypes.DELETING_USER_REJECTED,
+        payload: errorMessage,
+      })).toEqual(alterInitialState({}, { deletingUserRejected: errorMessage }));
+    });
+  });
+
   describe('Changing Password', () => {
     it('should update the changingPassword status to true', () => {
       expect(reducer(undefined, {
@@ -140,6 +162,12 @@ describe('Auth Reducer', () => {
       expect(reducer(alterInitialState({}, { fetching: true, changingPassword: true }), {
         type: actionTypes.CLEAR_USER_STATUS,
         payload: 'CHANGING_PASSWORD',
+      })).toEqual(alterInitialState({}, { fetching: true }));
+    });
+    it('should clear all the deleting account related status', () => {
+      expect(reducer(alterInitialState({}, { fetching: true, deletingUser: true }), {
+        type: actionTypes.CLEAR_USER_STATUS,
+        payload: 'DELETING_USER',
       })).toEqual(alterInitialState({}, { fetching: true }));
     });
     it('should not clear any status', () => {

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 // Actions.
 import { getAllCenters, showCenterModal } from '../../actions/centerActions';
 // Common components.
-import TopNavigation from '../common/TopNavigation.jsx';
-import Footer from '../common/Footer.jsx';
-import CenterCards from '../common/CenterCards.jsx';
+import TopNavigation from '../common/TopNavigation';
+import Footer from '../common/Footer';
+import CenterCards from '../common/CenterCards';
 import { CenterModal } from '../common/Modal';
-import { LoadingContainer } from '../common/LoadingAnimation.jsx';
+import { LoadingContainer } from '../common/LoadingAnimation';
 
 @connect(store => (
   {
@@ -36,10 +36,10 @@ export default class Centers1 extends React.Component {
   /**
    * Displays the center modal.
    * It uses the center ID to get the details of the center to show.
-   * @param {Event} e The event object.
+   * @param {Event} event The event object.
    */
-  showModal = (e) => {
-    this.props.dispatch(showCenterModal(e.target.id));
+  showModal = (event) => {
+    this.props.dispatch(showCenterModal(event.target.id));
   }
 
   render() {

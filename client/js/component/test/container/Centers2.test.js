@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import Centers2 from '../../container/Centers2.jsx';
+import Centers2 from '../../container/Centers2';
 
 const props = {
   authenticated: true,

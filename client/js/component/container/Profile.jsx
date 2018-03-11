@@ -1,18 +1,24 @@
+/* global $ */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {
+  validateChangePasswordInputs, validateDeleteAccountInputs,
+} from '../../helpers/inputValidators';
 // Actions.
-import { changePassword, clearStatus } from '../../actions/authAction';
+import {
+  changePassword, deleteUser, clearStatus, clearUser,
+} from '../../actions/authAction';
 import { getAllEvents } from '../../actions/eventActions';
 // Common components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import Header from '../common/Header.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
-import { SuccessAlert, WarningAlert } from '../common/Alert.jsx';
+import UserSideNav from '../common/SideNavigation';
+import { UserTopNav } from '../common/TopNavigation';
+import Header from '../common/Header';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
 // Helpers
-import countCollections from '../../helpers/counter';
+import { countCollection } from '../../helpers/helpers';
 
 @connect(store => (
   {
@@ -25,6 +31,9 @@ import countCollections from '../../helpers/counter';
       changingPassword: store.user.status.changingPassword,
       changingPasswordResolved: store.user.status.changingPasswordResolved,
       changingPasswordRejected: store.user.status.changingPasswordRejected,
+      deletingUser: store.user.status.deletingUser,
+      deletingUserResolved: store.user.status.deletingUserResolved,
+      deletingUserRejected: store.user.status.deletingUserRejected,
     },
   }
 ))
@@ -35,6 +44,13 @@ class Profile extends React.Component {
       formerPassword: '',
       newPassword: '',
       confirmNewPassword: '',
+      password: '',
+      inputErrors: {
+        passwordError: null,
+        formerPasswordError: null,
+        newPasswordError: null,
+        confirmNewPasswordError: null,
+      },
     };
   }
 
@@ -42,8 +58,18 @@ class Profile extends React.Component {
     this.props.dispatch(getAllEvents(this.props.user.token));
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.status.deletingUserResolved) {
+      this.props.dispatch(clearUser());
+      $('#delete-account-modal').modal('hide');
+    }
+  }
+
   componentWillUnmount() {
     this.props.dispatch(clearStatus('CHANGING_PASSWORD'));
+    this.props.dispatch(clearStatus('DELETING_USER'));
+    $('#delete-account-modal').modal('hide');
+    $('#change-password-modal').modal('hide');
   }
 
   /**
@@ -57,20 +83,6 @@ class Profile extends React.Component {
   }
 
   /**
-   * It dispatches an action to change password.
-   */
-  changePassword = () => {
-    const {
-      formerPassword, newPassword, confirmNewPassword,
-    } = this.state;
-    const passwordDetials = {
-      formerPassword, newPassword, confirmNewPassword,
-    };
-    const userToken = this.props.user.token;
-    this.props.dispatch(changePassword(passwordDetials, userToken));
-  }
-
-  /**
    * It clears the inputs of the forms in the modals.
    */
   clearInputs = () => {
@@ -78,6 +90,21 @@ class Profile extends React.Component {
     state.formerPassword = '';
     state.newPassword = '';
     state.confirmNewPassword = '';
+    state.password = '';
+    this.setState(state);
+  }
+
+  /**
+   * Clears all the inputErrors in the state.
+   */
+  clearInputErrors = () => {
+    const state = { ...this.state };
+    state.inputErrors = {
+      passwordError: null,
+      formerPasswordError: null,
+      newPasswordError: null,
+      confirmNewPasswordError: null,
+    };
     this.setState(state);
   }
 
@@ -86,6 +113,7 @@ class Profile extends React.Component {
    */
   clearStateStatus = () => {
     this.props.dispatch(clearStatus('CHANGING_PASSWORD'));
+    this.props.dispatch(clearStatus('DELETING_USER'));
   }
 
   /**
@@ -96,9 +124,49 @@ class Profile extends React.Component {
     this.clearStateStatus();
   }
 
+  /**
+   * It dispatches an action to change password.
+   */
+  changePassword = () => {
+    this.props.dispatch(clearStatus('ERROR'));
+    const {
+      formerPassword, newPassword, confirmNewPassword,
+    } = this.state;
+    const passwordDetials = {
+      formerPassword, newPassword, confirmNewPassword,
+    };
+    const inputErrors = validateChangePasswordInputs(passwordDetials);
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
+    } else {
+      this.clearInputErrors();
+      const userToken = this.props.user.token;
+      this.props.dispatch(changePassword(passwordDetials, userToken));
+    }
+  }
+
+  /**
+   * It dispatches an action to delete the user's account.
+   */
+  deleteAccount = () => {
+    this.props.dispatch(clearStatus('ERROR'));
+    const { password } = this.state;
+    const inputErrors = validateDeleteAccountInputs({ password });
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
+    } else {
+      this.clearInputErrors();
+      const userToken = this.props.user.token;
+      this.props.dispatch(deleteUser(password, userToken));
+    }
+  }
+
   render() {
     let component;
-
     if (!this.props.authenticated) {
       component = <Redirect to="/users/login" />;
     } else {
@@ -134,14 +202,14 @@ class Profile extends React.Component {
                 {/* <!-- Profile Detials --> */}
                 <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '500px', marginTop: '70px' }} id="content">
                   <div className="bg-white p-3" style={{ width: '500px' }}>
-                    <p className="h1 text-center" style={{ fontWeight: 'lighter', fontSize: '3rem' }}>{this.props.user.name}</p>
+                    <p className="h1 text-center text-capitalize" style={{ fontWeight: 'lighter', fontSize: '3rem' }}>{this.props.user.name}</p>
                     <p className="h3 mt-3" style={{ fontWeight: 'normal' }}>Events</p>
                     <ul className="list-group">
                       <Link to='/events' className="just-link">
                         <li className="list-group-item d-flex justify-content-between align-items-center text-grey">
                           Done
                           <span className="badge badge-primary badge-pill">
-                            {countCollections(this.props.events, event => event.status === 'done')}
+                            {countCollection(this.props.events, event => event.status === 'done')}
                           </span>
                         </li>
                       </Link>
@@ -149,7 +217,7 @@ class Profile extends React.Component {
                         <li className="list-group-item d-flex justify-content-between align-items-center text-grey">
                           Pending
                           <span className="badge badge-primary badge-pill">
-                            {countCollections(this.props.events, event => event.status === 'allowed')}
+                            {countCollection(this.props.events, event => event.status === 'allowed')}
                           </span>
                         </li>
                       </Link>
@@ -157,7 +225,7 @@ class Profile extends React.Component {
                         <li className="list-group-item d-flex justify-content-between align-items-center text-grey">
                           Canceled
                           <span className="badge badge-primary badge-pill">
-                            {countCollections(this.props.events, event => event.status === 'canceled')}
+                            {countCollection(this.props.events, event => event.status === 'canceled')}
                           </span>
                         </li>
                       </Link>
@@ -187,14 +255,16 @@ class Profile extends React.Component {
                           data-dismiss="modal"
                           aria-label="Close"
                           onClick={this.closeModalEffects}
+                          disabled={this.props.status.changingPassword}
                         ><span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div className="modal-body">
                         <LoadingIcon start={this.props.status.changingPassword} size={3} />
-                        <WarningAlert message={this.props.status.changingPasswordRejected.message} />
-                        <SuccessAlert
+                        <BigAlert message={this.props.status.changingPasswordRejected.message} />
+                        <BigAlert
                           message={this.props.status.changingPasswordResolved ? 'Password Changed!!' : null}
+                          type="success"
                         />
                         <form className="mt-0">
                           <div className="form-group">
@@ -207,6 +277,7 @@ class Profile extends React.Component {
                               value={this.state.formerPassword}
                               onChange={this.getInput}
                             />
+                            <SmallAlert message={this.state.inputErrors.formerPasswordError} />
                           </div>
                           <div className="form-group">
                             <label htmlFor="new-password">New Password</label>
@@ -218,6 +289,7 @@ class Profile extends React.Component {
                               value={this.state.newPassword}
                               onChange={this.getInput}
                             />
+                            <SmallAlert message={this.state.inputErrors.newPasswordError} />
                           </div>
                           <div className="form-group">
                             <label htmlFor="confirm-new-password">Confirm New Password</label>
@@ -229,13 +301,14 @@ class Profile extends React.Component {
                               value={this.state.confirmNewPassword}
                               onChange={this.getInput}
                             />
+                            <SmallAlert message={this.state.inputErrors.confirmNewPasswordError} />
                           </div>
                         </form>
                       </div>
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-dark"
+                          className="btn btn-dark pointer-button"
                           data-dismiss="modal"
                           onClick={this.closeModalEffects}
                           disabled={this.props.status.changingPassword}
@@ -243,7 +316,7 @@ class Profile extends React.Component {
                         </button>
                         <button
                           type="button"
-                          className="btn btn-primary"
+                          className="btn btn-primary pointer-button"
                           onClick={this.changePassword}
                           disabled={this.props.status.changingPassword}
                         >Change
@@ -255,7 +328,7 @@ class Profile extends React.Component {
                 {/* <!-- /.Change Password Modal --> */}
 
                 {/* <!-- Delete Account Modal --> */}
-                <div className="modal fade" id="delete-account-modal" tabIndex="-1" role="dialog">
+                <div className="modal fade" id="delete-account-modal" tabIndex="-1" role="dialog" data-backdrop="static">
                   <div className="modal-dialog" role="document">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -265,6 +338,8 @@ class Profile extends React.Component {
                           className="close"
                           data-dismiss="modal"
                           aria-label="Close"
+                          onClick={this.closeModalEffects}
+                          disabled={this.props.status.deletingUser}
                         ><span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -278,19 +353,30 @@ class Profile extends React.Component {
                             className="form-control"
                             id="password"
                             placeholder="Input you password to continue"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.getInput}
                           />
+                          <SmallAlert message={this.state.inputErrors.passwordError} />
+                          <LoadingIcon start={this.props.status.deletingUser} size={3} />
+                          <br />
+                          <BigAlert message={this.props.status.deletingUserRejected.message} />
                         </div>
                       </div>
                       <div className="modal-footer">
                         <button
                           type="button"
-                          className="btn btn-dark"
+                          className="btn btn-dark pointer-button"
                           data-dismiss="modal"
+                          onClick={this.closeModalEffects}
+                          disabled={this.props.status.deletingUser}
                         >Cancel
                         </button>
                         <button
                           type="button"
-                          className="btn btn-danger"
+                          className="btn btn-danger pointer-button"
+                          onClick={this.deleteAccount}
+                          disabled={this.props.status.deletingUser}
                         >Delete
                         </button>
                       </div>

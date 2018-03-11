@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { validateAddCenterInputs } from '../../helpers/inputValidators';
 // Actions.
 import { addCenter, clearStatus } from '../../actions/centerActions';
 // Common Components.
-import UserSideNav from '../common/SideNavigation.jsx';
-import Header from '../common/Header.jsx';
-import ImageInput from '../common/ImageInput.jsx';
-import { WarningAlert } from '../common/Alert.jsx';
-import { UserTopNav } from '../common/TopNavigation.jsx';
-import { LoadingIcon } from '../common/LoadingAnimation.jsx';
+import UserSideNav from '../common/SideNavigation';
+import Header from '../common/Header';
+import ImageInput from '../common/ImageInput';
+import { UserTopNav } from '../common/TopNavigation';
+import { LoadingIcon } from '../common/LoadingAnimation';
+import { BigAlert, SmallAlert } from '../common/Alert';
+
 
 @connect(store => (
   {
@@ -33,8 +35,14 @@ export default class AddCenter extends React.Component {
       details: null,
       capacity: null,
       price: null,
-      type: null,
       images: null,
+      inputErrors: {
+        nameError: null,
+        locationError: null,
+        detailsError: null,
+        capacityError: null,
+        priceError: null,
+      },
     };
   }
 
@@ -46,9 +54,24 @@ export default class AddCenter extends React.Component {
    * Update some state variables with the user inputs.
    * @param {Event} e The event object.
    */
-  getInput = (e) => {
-    const { state } = this;
-    state[e.target.name] = e.target.value;
+  getInput = (event) => {
+    const state = { ...this.state };
+    state[event.target.name] = event.target.value;
+    this.setState(state);
+  }
+
+  /**
+   * Clears all the inputErrors in the state.
+   */
+  clearInputErrors = () => {
+    const state = { ...this.state };
+    state.inputErrors = {
+      nameError: null,
+      locationError: null,
+      detailsError: null,
+      capacityError: null,
+      priceError: null,
+    };
     this.setState(state);
   }
 
@@ -62,27 +85,37 @@ export default class AddCenter extends React.Component {
 
   /**
    * Dispatches the action to add the center.
+   * @param {Event} event The event object.
    */
-  add = () => {
+  add = (event) => {
+    event.preventDefault();
     const {
       name, location, details, capacity, price, images,
     } = this.state;
     const centerDetails = {
       name, location, details, capacity, price,
     };
-    const fd = new FormData();
-    const entries = Object.entries(centerDetails);
-    entries.forEach((entry) => {
-      const key = entry[0];
-      const value = entry[1];
-      if (value) {
-        fd.append(key, value);
+    const inputErrors = validateAddCenterInputs(centerDetails);
+    if (inputErrors.errorFound) {
+      const state = { ...this.state };
+      state.inputErrors = inputErrors;
+      this.setState(state);
+    } else {
+      this.clearInputErrors();
+      const fd = new FormData();
+      const entries = Object.entries(centerDetails);
+      entries.forEach((entry) => {
+        const key = entry[0];
+        const value = entry[1];
+        if (value) {
+          fd.append(key, value);
+        }
+      });
+      if (images) {
+        fd.append('image', images[0]);
       }
-    });
-    if (images) {
-      fd.append('image', images[0]);
+      this.props.dispatch(addCenter(fd, this.props.user.token));
     }
-    this.props.dispatch(addCenter(fd, this.props.user.token));
     window.scrollTo(0, 0);
   }
 
@@ -118,9 +151,9 @@ export default class AddCenter extends React.Component {
                 <Header text="Add a center" />
                 {/* Input form */}
                 <form className="mt-lg-5 mb-md-5">
-                  <LoadingIcon start={this.props.status.adding} size={2} />
+                  <LoadingIcon start={this.props.status.adding} size={3} />
                   <div className="w-lg-50 mx-auto">
-                    <WarningAlert message={this.props.status.error} />
+                    <BigAlert message={this.props.status.error} />
                   </div>
                   <div className="container">
                     <div className="row">
@@ -128,14 +161,15 @@ export default class AddCenter extends React.Component {
                         <div className="form-group">
                           <label htmlFor="name">Name</label>
                           <input
-                            type="email"
+                            type="text"
                             className="form-control"
                             id="name"
                             name="name"
                             placeholder="The name of the center"
                             onChange={this.getInput}
                           />
-                          <small className="form-text text-muted">Less than 30 characters</small>
+                          <small className="form-text text-muted">Between 5 and 30 characters</small>
+                          <SmallAlert message={this.state.inputErrors.nameError} />
                         </div>
                       </div>
                       <div className="col-12 col-lg-6">
@@ -150,6 +184,7 @@ export default class AddCenter extends React.Component {
                             onChange={this.getInput}
                           />
                           <small className="form-text text-muted">Less than 30 characters</small>
+                          <SmallAlert message={this.state.inputErrors.locationError} />
                         </div>
                       </div>
                     </div>
@@ -166,6 +201,7 @@ export default class AddCenter extends React.Component {
                             onChange={this.getInput}
                           />
                           <small className="form-text text-muted">Less than 300 characters</small>
+                          <SmallAlert message={this.state.inputErrors.detailsError} />
                         </div>
                       </div>
                       <div className="col-12 col-lg-6">
@@ -175,12 +211,14 @@ export default class AddCenter extends React.Component {
                               <label htmlFor="capacity">Capacity</label>
                               <input
                                 type="number"
+                                pattern="\d*"
                                 className="form-control"
                                 id="capacity"
                                 name="capacity"
                                 placeholder="How many seats"
                                 onChange={this.getInput}
                               />
+                              <SmallAlert message={this.state.inputErrors.capacityError} />
                             </div>
                           </div>
                         </div>
@@ -196,6 +234,7 @@ export default class AddCenter extends React.Component {
                                 placeholder="Price"
                                 onChange={this.getInput}
                               />
+                              <SmallAlert message={this.state.inputErrors.priceError} />
                             </div>
                           </div>
                         </div>

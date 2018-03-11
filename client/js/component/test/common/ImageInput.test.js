@@ -1,7 +1,7 @@
 /* global shallow */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import ImageInput from '../../common/ImageInput.jsx';
+import ImageInput from '../../common/ImageInput';
 
 const props = {
   previousImage: null,

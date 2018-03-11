@@ -45,7 +45,7 @@ exports[`<Transactions /> Rendering: should render well on page load 1`] = `
             </strong>
           </a>
           <button
-            className="btn btn-primary"
+            className="btn btn-primary pointer-button"
             disabled={false}
             onClick={[Function]}
           >
@@ -149,7 +149,7 @@ exports[`<Transactions /> Rendering: should render well when fetching transactio
             </strong>
           </a>
           <button
-            className="btn btn-primary"
+            className="btn btn-primary pointer-button"
             disabled={true}
             onClick={[Function]}
           >

@@ -6,8 +6,8 @@ import {
   validateSignUpInputs, validateSigninInputs,
   validateCreateAdminInputs, validateAddCenterInputs,
   validateUpdateCenterInputs, validateAddEventInputs,
-  validateUpdateEventInputs, formatInputDatas, 
-  validateChangePasswordInputs,
+  validateUpdateEventInputs, formatInputDatas,
+  validateChangePasswordInputs, validateDeleteUserInputs
 } from './middlewares';
 
 const router = express.Router();
@@ -35,6 +35,12 @@ router.put(
   isUser,
   validateChangePasswordInputs,
   controllers.users.changePassword,
+);
+router.post(
+  '/users/deleteUser',
+  isUser,
+  validateDeleteUserInputs,
+  controllers.users.deleteUser,
 );
 router.get(
   '/centers',

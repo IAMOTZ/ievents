@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
-import EventCards from '../../common/EventCards.jsx';
+import EventCards from '../../common/EventCards';
 
 
 const props = {

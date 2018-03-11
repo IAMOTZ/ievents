@@ -18,6 +18,9 @@ const props = {
     changingPassword: false,
     changingPasswordResolved: false,
     changingPasswordRejected: false,
+    deletingUser: false,
+    deletingUserResolved: false,
+    deletingUserRejected: false,
   },
   dispatch: () => { },
 };
@@ -32,6 +35,9 @@ const alterProps = newProps => ({
     changingPassword: newProps.changingPassword || false,
     changingPasswordResolved: newProps.changingPasswordResolved || false,
     changingPasswordRejected: newProps.changingPasswordRejected || false,
+    deletingUser: newProps.deletingUser || false,
+    deletingUserResolved: newProps.deletingUserResolved || false,
+    deletingUserRejected: newProps.deletingUserRejected || false,
   },
   dispatch: () => { },
 });
@@ -55,6 +61,14 @@ describe('<Profile />', () => {
     });
     it('should render correctly when there is a changing password error', () => {
       wrapper.setProps(alterProps({ changingPasswordRejected: { message: 'there was an error' } }));
+      expect(wrapper).toMatchSnapshot();
+    });
+    it('should render correctly when deleting user', () => {
+      wrapper.setProps(alterProps({ deletingUser: true }));
+      expect(wrapper).toMatchSnapshot();
+    });
+    it('should render correctly when there is a deleting user error', () => {
+      wrapper.setProps(alterProps({ deletingUserRejected: { message: 'there was an error' } }));
       expect(wrapper).toMatchSnapshot();
     });
   });
@@ -94,6 +108,28 @@ describe('<Profile />', () => {
           .find('#change-password-modal button[data-dismiss="modal"].close')
           .simulate('click');
         expect(wrapper.find('input#former-password').props().value).toEqual('');
+      });
+    });
+    describe('Deleting Account', () => {
+      const password = 'Password123';
+      let wrapper;
+      beforeEach(() => {
+        wrapper = shallow(<Profile {...props} />);
+      });
+      it('should update the state when the user keys in the password', () => {
+        wrapper
+          .find('input#password')
+          .simulate('change', { target: { name: 'password', value: password } });
+        expect(wrapper.state('password')).toEqual(password);
+      });
+      it('should clear the input when the user closes the modal', () => {
+        wrapper
+          .find('input#password')
+          .simulate('change', { target: { name: 'password', value: password } });
+        wrapper
+          .find('#delete-account-modal button[data-dismiss="modal"].close')
+          .simulate('click');
+        expect(wrapper.find('input#password').props().value).toEqual('');
       });
     });
   });

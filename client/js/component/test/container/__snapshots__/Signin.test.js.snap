@@ -20,13 +20,6 @@ exports[`<Signin /> Rendering: should render correctly on page load 1`] = `
       start={false}
     />
     <div
-      className="m-2"
-    >
-      <WarningAlert
-        message={null}
-      />
-    </div>
-    <div
       className="card card-form"
     >
       <h1
@@ -37,6 +30,9 @@ exports[`<Signin /> Rendering: should render correctly on page load 1`] = `
       <div
         className="card-body"
       >
+        <BigAlert
+          message={null}
+        />
         <form>
           <div
             className="form-group"
@@ -65,6 +61,9 @@ exports[`<Signin /> Rendering: should render correctly on page load 1`] = `
                 type="email"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -93,6 +92,9 @@ exports[`<Signin /> Rendering: should render correctly on page load 1`] = `
                 type="password"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <button
             className="btn btn-block dark-button text-white"
@@ -132,13 +134,6 @@ exports[`<Signin /> Rendering: should render correctly when logging in a user 1`
       start={true}
     />
     <div
-      className="m-2"
-    >
-      <WarningAlert
-        message={null}
-      />
-    </div>
-    <div
       className="card card-form"
     >
       <h1
@@ -149,6 +144,9 @@ exports[`<Signin /> Rendering: should render correctly when logging in a user 1`
       <div
         className="card-body"
       >
+        <BigAlert
+          message={null}
+        />
         <form>
           <div
             className="form-group"
@@ -177,6 +175,9 @@ exports[`<Signin /> Rendering: should render correctly when logging in a user 1`
                 type="email"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -205,6 +206,9 @@ exports[`<Signin /> Rendering: should render correctly when logging in a user 1`
                 type="password"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <button
             className="btn btn-block dark-button text-white"
@@ -244,13 +248,6 @@ exports[`<Signin /> Rendering: should render correctly when there is an error 1`
       start={false}
     />
     <div
-      className="m-2"
-    >
-      <WarningAlert
-        message="there was an error"
-      />
-    </div>
-    <div
       className="card card-form"
     >
       <h1
@@ -261,6 +258,9 @@ exports[`<Signin /> Rendering: should render correctly when there is an error 1`
       <div
         className="card-body"
       >
+        <BigAlert
+          message="email or password incorrect"
+        />
         <form>
           <div
             className="form-group"
@@ -289,6 +289,9 @@ exports[`<Signin /> Rendering: should render correctly when there is an error 1`
                 type="email"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -317,6 +320,9 @@ exports[`<Signin /> Rendering: should render correctly when there is an error 1`
                 type="password"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <button
             className="btn btn-block dark-button text-white"

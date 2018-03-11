@@ -161,37 +161,9 @@ exports[`<Centers2 /> Rendering: should render well on page load 1`] = `
           onBook={[Function]}
           redirectPath="/addEvent"
         />
-        <footer
-          className="d-none d-lg-block mt-5"
-        >
-          <div
-            className="container text-white text-center py-5"
-          >
-            <h1>
-              Ievents
-            </h1>
-            <p>
-              Copyright © 2017
-            </p>
-          </div>
-        </footer>
       </div>
     </div>
   </div>
-  <footer
-    className="d-block d-lg-none mt-5"
-  >
-    <div
-      className="container text-white text-center py-5"
-    >
-      <h1>
-        Ievents
-      </h1>
-      <p>
-        Copyright © 2017
-      </p>
-    </div>
-  </footer>
 </div>
 `;
 
@@ -243,36 +215,8 @@ exports[`<Centers2 /> Rendering: should render well when fetching centers 1`] = 
           onBook={[Function]}
           redirectPath="/addEvent"
         />
-        <footer
-          className="d-none d-lg-block mt-5"
-        >
-          <div
-            className="container text-white text-center py-5"
-          >
-            <h1>
-              Ievents
-            </h1>
-            <p>
-              Copyright © 2017
-            </p>
-          </div>
-        </footer>
       </div>
     </div>
   </div>
-  <footer
-    className="d-block d-lg-none mt-5"
-  >
-    <div
-      className="container text-white text-center py-5"
-    >
-      <h1>
-        Ievents
-      </h1>
-      <p>
-        Copyright © 2017
-      </p>
-    </div>
-  </footer>
 </div>
 `;
