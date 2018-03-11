@@ -211,9 +211,10 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                   size={3}
                   start={false}
                 />
-                <WarningAlert />
-                <SuccessAlert
+                <BigAlert />
+                <BigAlert
                   message={null}
+                  type="success"
                 />
                 <form
                   className="mt-0"
@@ -234,6 +235,9 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                   <div
                     className="form-group"
@@ -250,6 +254,9 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                       onChange={[Function]}
                       type="password"
                       value=""
+                    />
+                    <SmallAlert
+                      message={null}
                     />
                   </div>
                   <div
@@ -268,6 +275,9 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                 </form>
               </div>
@@ -275,7 +285,7 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -284,7 +294,7 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                   Cancel
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"
@@ -363,18 +373,22 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                     type="password"
                     value=""
                   />
+                  <SmallAlert
+                    message={null}
+                  />
                   <LoadingIcon
                     size={3}
                     start={false}
                   />
-                  <WarningAlert />
+                  <br />
+                  <BigAlert />
                 </div>
               </div>
               <div
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -383,7 +397,7 @@ exports[`<Profile /> Rendering should render correctly on page load 1`] = `
                   Cancel
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"
@@ -604,9 +618,10 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                   size={3}
                   start={true}
                 />
-                <WarningAlert />
-                <SuccessAlert
+                <BigAlert />
+                <BigAlert
                   message={null}
+                  type="success"
                 />
                 <form
                   className="mt-0"
@@ -627,6 +642,9 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                   <div
                     className="form-group"
@@ -643,6 +661,9 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                       onChange={[Function]}
                       type="password"
                       value=""
+                    />
+                    <SmallAlert
+                      message={null}
                     />
                   </div>
                   <div
@@ -661,6 +682,9 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                 </form>
               </div>
@@ -668,7 +692,7 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={true}
                   onClick={[Function]}
@@ -677,7 +701,7 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                   Cancel
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary pointer-button"
                   disabled={true}
                   onClick={[Function]}
                   type="button"
@@ -756,18 +780,22 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                     type="password"
                     value=""
                   />
+                  <SmallAlert
+                    message={null}
+                  />
                   <LoadingIcon
                     size={3}
                     start={false}
                   />
-                  <WarningAlert />
+                  <br />
+                  <BigAlert />
                 </div>
               </div>
               <div
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -776,7 +804,7 @@ exports[`<Profile /> Rendering should render correctly when changing password 1`
                   Cancel
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"
@@ -997,9 +1025,10 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                   size={3}
                   start={false}
                 />
-                <WarningAlert />
-                <SuccessAlert
+                <BigAlert />
+                <BigAlert
                   message={null}
+                  type="success"
                 />
                 <form
                   className="mt-0"
@@ -1020,6 +1049,9 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                   <div
                     className="form-group"
@@ -1036,6 +1068,9 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                       onChange={[Function]}
                       type="password"
                       value=""
+                    />
+                    <SmallAlert
+                      message={null}
                     />
                   </div>
                   <div
@@ -1054,6 +1089,9 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                 </form>
               </div>
@@ -1061,7 +1099,7 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -1070,7 +1108,7 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                   Cancel
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"
@@ -1149,18 +1187,22 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                     type="password"
                     value=""
                   />
+                  <SmallAlert
+                    message={null}
+                  />
                   <LoadingIcon
                     size={3}
                     start={true}
                   />
-                  <WarningAlert />
+                  <br />
+                  <BigAlert />
                 </div>
               </div>
               <div
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={true}
                   onClick={[Function]}
@@ -1169,7 +1211,7 @@ exports[`<Profile /> Rendering should render correctly when deleting user 1`] = 
                   Cancel
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger pointer-button"
                   disabled={true}
                   onClick={[Function]}
                   type="button"
@@ -1390,11 +1432,12 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                   size={3}
                   start={false}
                 />
-                <WarningAlert
+                <BigAlert
                   message="there was an error"
                 />
-                <SuccessAlert
+                <BigAlert
                   message={null}
+                  type="success"
                 />
                 <form
                   className="mt-0"
@@ -1415,6 +1458,9 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                   <div
                     className="form-group"
@@ -1431,6 +1477,9 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                       onChange={[Function]}
                       type="password"
                       value=""
+                    />
+                    <SmallAlert
+                      message={null}
                     />
                   </div>
                   <div
@@ -1449,6 +1498,9 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                 </form>
               </div>
@@ -1456,7 +1508,7 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -1465,7 +1517,7 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                   Cancel
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"
@@ -1544,18 +1596,22 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                     type="password"
                     value=""
                   />
+                  <SmallAlert
+                    message={null}
+                  />
                   <LoadingIcon
                     size={3}
                     start={false}
                   />
-                  <WarningAlert />
+                  <br />
+                  <BigAlert />
                 </div>
               </div>
               <div
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -1564,7 +1620,7 @@ exports[`<Profile /> Rendering should render correctly when there is a changing 
                   Cancel
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"
@@ -1785,9 +1841,10 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                   size={3}
                   start={false}
                 />
-                <WarningAlert />
-                <SuccessAlert
+                <BigAlert />
+                <BigAlert
                   message={null}
+                  type="success"
                 />
                 <form
                   className="mt-0"
@@ -1808,6 +1865,9 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                   <div
                     className="form-group"
@@ -1824,6 +1884,9 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                       onChange={[Function]}
                       type="password"
                       value=""
+                    />
+                    <SmallAlert
+                      message={null}
                     />
                   </div>
                   <div
@@ -1842,6 +1905,9 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                       type="password"
                       value=""
                     />
+                    <SmallAlert
+                      message={null}
+                    />
                   </div>
                 </form>
               </div>
@@ -1849,7 +1915,7 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -1858,7 +1924,7 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                   Cancel
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"
@@ -1937,11 +2003,15 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                     type="password"
                     value=""
                   />
+                  <SmallAlert
+                    message={null}
+                  />
                   <LoadingIcon
                     size={3}
                     start={false}
                   />
-                  <WarningAlert
+                  <br />
+                  <BigAlert
                     message="there was an error"
                   />
                 </div>
@@ -1950,7 +2020,7 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                 className="modal-footer"
               >
                 <button
-                  className="btn btn-dark"
+                  className="btn btn-dark pointer-button"
                   data-dismiss="modal"
                   disabled={false}
                   onClick={[Function]}
@@ -1959,7 +2029,7 @@ exports[`<Profile /> Rendering should render correctly when there is a deleting 
                   Cancel
                 </button>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger pointer-button"
                   disabled={false}
                   onClick={[Function]}
                   type="button"

@@ -20,13 +20,6 @@ exports[`<Signup /> Rendering: should render correctly on page load 1`] = `
       start={false}
     />
     <div
-      className="m-2"
-    >
-      <WarningAlert
-        message={null}
-      />
-    </div>
-    <div
       className="card card-form"
     >
       <h1
@@ -37,6 +30,9 @@ exports[`<Signup /> Rendering: should render correctly on page load 1`] = `
       <div
         className="card-body"
       >
+        <BigAlert
+          message={null}
+        />
         <form>
           <div
             className="form-group"
@@ -65,6 +61,14 @@ exports[`<Signup /> Rendering: should render correctly on page load 1`] = `
                 type="text"
               />
             </div>
+            <small
+              className="form-text text-muted"
+            >
+              Can contain letters and numbers alone
+            </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -93,6 +97,9 @@ exports[`<Signup /> Rendering: should render correctly on page load 1`] = `
                 type="email"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -121,6 +128,14 @@ exports[`<Signup /> Rendering: should render correctly on page load 1`] = `
                 type="password"
               />
             </div>
+            <small
+              className="form-text text-muted"
+            >
+              Must contain capital, small letters and numbers
+            </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -149,13 +164,17 @@ exports[`<Signup /> Rendering: should render correctly on page load 1`] = `
                 type="password"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
-          <a
-            className="btn btn-block dark-button text-white"
+          <button
+            className="btn btn-block dark-button text-white mt-4"
+            disabled={false}
             onClick={[Function]}
           >
             Register
-          </a>
+          </button>
         </form>
       </div>
     </div>
@@ -177,13 +196,6 @@ exports[`<Signup /> Rendering: should render correctly when registering a user 1
       start={true}
     />
     <div
-      className="m-2"
-    >
-      <WarningAlert
-        message={null}
-      />
-    </div>
-    <div
       className="card card-form"
     >
       <h1
@@ -194,6 +206,9 @@ exports[`<Signup /> Rendering: should render correctly when registering a user 1
       <div
         className="card-body"
       >
+        <BigAlert
+          message={null}
+        />
         <form>
           <div
             className="form-group"
@@ -222,6 +237,14 @@ exports[`<Signup /> Rendering: should render correctly when registering a user 1
                 type="text"
               />
             </div>
+            <small
+              className="form-text text-muted"
+            >
+              Can contain letters and numbers alone
+            </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -250,6 +273,9 @@ exports[`<Signup /> Rendering: should render correctly when registering a user 1
                 type="email"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -278,6 +304,14 @@ exports[`<Signup /> Rendering: should render correctly when registering a user 1
                 type="password"
               />
             </div>
+            <small
+              className="form-text text-muted"
+            >
+              Must contain capital, small letters and numbers
+            </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -306,13 +340,17 @@ exports[`<Signup /> Rendering: should render correctly when registering a user 1
                 type="password"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
-          <a
-            className="btn btn-block dark-button text-white"
+          <button
+            className="btn btn-block dark-button text-white mt-4"
+            disabled={true}
             onClick={[Function]}
           >
             Register
-          </a>
+          </button>
         </form>
       </div>
     </div>
@@ -334,13 +372,6 @@ exports[`<Signup /> Rendering: should render correctly when there is an error 1`
       start={false}
     />
     <div
-      className="m-2"
-    >
-      <WarningAlert
-        message="there was an error"
-      />
-    </div>
-    <div
       className="card card-form"
     >
       <h1
@@ -351,6 +382,7 @@ exports[`<Signup /> Rendering: should render correctly when there is an error 1`
       <div
         className="card-body"
       >
+        <BigAlert />
         <form>
           <div
             className="form-group"
@@ -379,6 +411,14 @@ exports[`<Signup /> Rendering: should render correctly when there is an error 1`
                 type="text"
               />
             </div>
+            <small
+              className="form-text text-muted"
+            >
+              Can contain letters and numbers alone
+            </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -407,6 +447,9 @@ exports[`<Signup /> Rendering: should render correctly when there is an error 1`
                 type="email"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -435,6 +478,14 @@ exports[`<Signup /> Rendering: should render correctly when there is an error 1`
                 type="password"
               />
             </div>
+            <small
+              className="form-text text-muted"
+            >
+              Must contain capital, small letters and numbers
+            </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -463,13 +514,17 @@ exports[`<Signup /> Rendering: should render correctly when there is an error 1`
                 type="password"
               />
             </div>
+            <SmallAlert
+              message={null}
+            />
           </div>
-          <a
-            className="btn btn-block dark-button text-white"
+          <button
+            className="btn btn-block dark-button text-white mt-4"
+            disabled={false}
             onClick={[Function]}
           >
             Register
-          </a>
+          </button>
         </form>
       </div>
     </div>

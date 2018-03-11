@@ -95,6 +95,5 @@ exports[`<Home /> Rendering: should render correctly on page load 1`] = `
       </div>
     </div>
   </section>
-  <Footer />
 </div>
 `;

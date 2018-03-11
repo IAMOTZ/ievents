@@ -48,10 +48,10 @@ exports[`<EditEvent /> Rendering: should render correctly on page load 1`] = `
           className="mt-lg-5 w-lg-50"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={false}
           />
-          <WarningAlert
+          <BigAlert
             message={false}
           />
           <div
@@ -75,8 +75,11 @@ exports[`<EditEvent /> Rendering: should render correctly on page load 1`] = `
               className="form-text text-muted"
               id="emailHelp"
             >
-              Less than 30 characters
+              Between 5 and 30 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -101,6 +104,9 @@ exports[`<EditEvent /> Rendering: should render correctly on page load 1`] = `
             >
               Less than 200 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <form
@@ -115,16 +121,19 @@ exports[`<EditEvent /> Rendering: should render correctly on page load 1`] = `
               Date
             </label>
             <input
-              className="form-control mx-sm-3"
+              className="form-control ml-sm-3"
               defaultValue="02-3-2017"
               id="date"
               name="date"
               onChange={[Function]}
               type="date"
             />
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
-            className="form-group"
+            className="form-group ml-md-3"
           >
             <label
               htmlFor="centers"
@@ -138,7 +147,10 @@ exports[`<EditEvent /> Rendering: should render correctly on page load 1`] = `
               name="centerId"
               onChange={[Function]}
             >
-              <option>
+              <option
+                name="centerId"
+                value=""
+              >
                 choose a center
               </option>
               <DropDown
@@ -156,6 +168,9 @@ exports[`<EditEvent /> Rendering: should render correctly on page load 1`] = `
                 }
               />
             </select>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <button
@@ -219,9 +234,9 @@ exports[`<EditEvent /> Rendering: should render correctly when there is an error
           className="mt-lg-5 w-lg-50"
         >
           <LoadingIcon
-            size={2}
+            size={3}
           />
-          <WarningAlert
+          <BigAlert
             message="there was an error"
           />
           <div
@@ -245,8 +260,11 @@ exports[`<EditEvent /> Rendering: should render correctly when there is an error
               className="form-text text-muted"
               id="emailHelp"
             >
-              Less than 30 characters
+              Between 5 and 30 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -271,6 +289,9 @@ exports[`<EditEvent /> Rendering: should render correctly when there is an error
             >
               Less than 200 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <form
@@ -285,16 +306,19 @@ exports[`<EditEvent /> Rendering: should render correctly when there is an error
               Date
             </label>
             <input
-              className="form-control mx-sm-3"
+              className="form-control ml-sm-3"
               defaultValue="02-3-2017"
               id="date"
               name="date"
               onChange={[Function]}
               type="date"
             />
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
-            className="form-group"
+            className="form-group ml-md-3"
           >
             <label
               htmlFor="centers"
@@ -308,7 +332,10 @@ exports[`<EditEvent /> Rendering: should render correctly when there is an error
               name="centerId"
               onChange={[Function]}
             >
-              <option>
+              <option
+                name="centerId"
+                value=""
+              >
                 choose a center
               </option>
               <DropDown
@@ -326,6 +353,9 @@ exports[`<EditEvent /> Rendering: should render correctly when there is an error
                 }
               />
             </select>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <button
@@ -388,9 +418,9 @@ exports[`<EditEvent /> Rendering: should render correctly when updating 1`] = `
           className="mt-lg-5 w-lg-50"
         >
           <LoadingIcon
-            size={2}
+            size={3}
           />
-          <WarningAlert
+          <BigAlert
             message={false}
           />
           <div
@@ -414,8 +444,11 @@ exports[`<EditEvent /> Rendering: should render correctly when updating 1`] = `
               className="form-text text-muted"
               id="emailHelp"
             >
-              Less than 30 characters
+              Between 5 and 30 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -440,6 +473,9 @@ exports[`<EditEvent /> Rendering: should render correctly when updating 1`] = `
             >
               Less than 200 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <form
@@ -454,16 +490,19 @@ exports[`<EditEvent /> Rendering: should render correctly when updating 1`] = `
               Date
             </label>
             <input
-              className="form-control mx-sm-3"
+              className="form-control ml-sm-3"
               defaultValue="02-3-2017"
               id="date"
               name="date"
               onChange={[Function]}
               type="date"
             />
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
-            className="form-group"
+            className="form-group ml-md-3"
           >
             <label
               htmlFor="centers"
@@ -477,7 +516,10 @@ exports[`<EditEvent /> Rendering: should render correctly when updating 1`] = `
               name="centerId"
               onChange={[Function]}
             >
-              <option>
+              <option
+                name="centerId"
+                value=""
+              >
                 choose a center
               </option>
               <DropDown
@@ -495,6 +537,9 @@ exports[`<EditEvent /> Rendering: should render correctly when updating 1`] = `
                 }
               />
             </select>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <button

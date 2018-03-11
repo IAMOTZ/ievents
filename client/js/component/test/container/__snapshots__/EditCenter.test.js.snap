@@ -45,149 +45,224 @@ exports[`<EditCenter /> Rendering: Rendering: should render correctly on page lo
           text="Edit Center"
         />
         <form
-          className="mt-lg-5 mb-md-5 w-lg-50"
+          className="mt-lg-5 mb-md-5"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={false}
           />
-          <WarningAlert
-            message={false}
-          />
           <div
-            className="form-group"
+            className="w-lg-50 mx-auto"
           >
-            <label
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="form-control"
-              defaultValue="test-center"
-              id="name"
-              name="name"
-              onChange={[Function]}
-              placeholder="The name of the center"
-              type="text"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 30 characters
-            </small>
+            <BigAlert />
           </div>
           <div
-            className="form-group"
+            className="container"
           >
-            <label
-              htmlFor="location"
-            >
-              Location
-            </label>
-            <input
-              className="form-control"
-              defaultValue="test-location"
-              id="location"
-              name="location"
-              onChange={[Function]}
-              placeholder="The location of the center"
-              type="text"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 30 characters
-            </small>
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="details"
-            >
-              Details
-            </label>
-            <textarea
-              className="form-control"
-              defaultValue="test-details"
-              id="details"
-              name="details"
-              onChange={[Function]}
-              placeholder="More details about the center"
-              rows="7"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 200 characters
-            </small>
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="capacity"
-            >
-              Capacity
-            </label>
-            <input
-              className="form-control"
-              defaultValue={200}
-              id="capacity"
-              name="capacity"
-              onChange={[Function]}
-              placeholder="How many seats"
-              type="number"
-            />
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="price"
-            >
-              Price
-            </label>
-            <input
-              className="form-control"
-              defaultValue={100}
-              id="price"
-              name="price"
-              onChange={[Function]}
-              placeholder="Price"
-              type="number"
-            />
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="image"
-            >
-              Image
-            </label>
             <div
-              className="text-center"
+              className="row"
             >
-              <ImageInput
-                id="image"
-                newImage={null}
-                onDrop={[Function]}
-                previousImage={null}
-              />
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    className="form-control"
+                    defaultValue="test-center"
+                    id="name"
+                    name="name"
+                    onChange={[Function]}
+                    placeholder="The name of the center"
+                    type="text"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Between 5 and 30 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="location"
+                  >
+                    Location
+                  </label>
+                  <input
+                    className="form-control"
+                    defaultValue="test-location"
+                    id="location"
+                    name="location"
+                    onChange={[Function]}
+                    placeholder="The location of the center"
+                    type="text"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Less than 50 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div
-            className="ml-3 pt-3"
-          >
-            <button
-              className="btn btn-outline-dark"
-              disabled={false}
-              onClick={[Function]}
+            <div
+              className="row"
             >
-              Update
-            </button>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="details"
+                  >
+                    Details
+                  </label>
+                  <textarea
+                    className="form-control"
+                    defaultValue="test-details"
+                    id="details"
+                    name="details"
+                    onChange={[Function]}
+                    placeholder="More details about the center"
+                    rows="7"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Less than 300 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="capacity"
+                      >
+                        Capacity
+                      </label>
+                      <input
+                        className="form-control"
+                        defaultValue={200}
+                        id="capacity"
+                        name="capacity"
+                        onChange={[Function]}
+                        placeholder="How many seats"
+                        type="number"
+                      />
+                      <SmallAlert
+                        message={null}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="price"
+                      >
+                        Price
+                      </label>
+                      <input
+                        className="form-control"
+                        defaultValue={100}
+                        id="price"
+                        name="price"
+                        onChange={[Function]}
+                        placeholder="Price"
+                        type="number"
+                      />
+                      <SmallAlert
+                        message={null}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="image"
+                      >
+                        Image
+                      </label>
+                      <div
+                        className="text-center"
+                      >
+                        <ImageInput
+                          id="image"
+                          newImage={null}
+                          onDrop={[Function]}
+                          previousImage={null}
+                          style={
+                            Object {
+                              "height": "100px",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="ml-3 pt-3"
+                  >
+                    <button
+                      className="btn btn-outline-dark"
+                      disabled={false}
+                      id="update-btn"
+                      onClick={[Function]}
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -241,149 +316,224 @@ exports[`<EditCenter /> Rendering: Rendering: should render correctly when there
           text="Edit Center"
         />
         <form
-          className="mt-lg-5 mb-md-5 w-lg-50"
+          className="mt-lg-5 mb-md-5"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={false}
           />
-          <WarningAlert
-            message="there was an error"
-          />
           <div
-            className="form-group"
+            className="w-lg-50 mx-auto"
           >
-            <label
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="form-control"
-              defaultValue="test-center"
-              id="name"
-              name="name"
-              onChange={[Function]}
-              placeholder="The name of the center"
-              type="text"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 30 characters
-            </small>
+            <BigAlert />
           </div>
           <div
-            className="form-group"
+            className="container"
           >
-            <label
-              htmlFor="location"
-            >
-              Location
-            </label>
-            <input
-              className="form-control"
-              defaultValue="test-location"
-              id="location"
-              name="location"
-              onChange={[Function]}
-              placeholder="The location of the center"
-              type="text"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 30 characters
-            </small>
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="details"
-            >
-              Details
-            </label>
-            <textarea
-              className="form-control"
-              defaultValue="test-details"
-              id="details"
-              name="details"
-              onChange={[Function]}
-              placeholder="More details about the center"
-              rows="7"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 200 characters
-            </small>
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="capacity"
-            >
-              Capacity
-            </label>
-            <input
-              className="form-control"
-              defaultValue={200}
-              id="capacity"
-              name="capacity"
-              onChange={[Function]}
-              placeholder="How many seats"
-              type="number"
-            />
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="price"
-            >
-              Price
-            </label>
-            <input
-              className="form-control"
-              defaultValue={100}
-              id="price"
-              name="price"
-              onChange={[Function]}
-              placeholder="Price"
-              type="number"
-            />
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="image"
-            >
-              Image
-            </label>
             <div
-              className="text-center"
+              className="row"
             >
-              <ImageInput
-                id="image"
-                newImage={null}
-                onDrop={[Function]}
-                previousImage={null}
-              />
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    className="form-control"
+                    defaultValue="test-center"
+                    id="name"
+                    name="name"
+                    onChange={[Function]}
+                    placeholder="The name of the center"
+                    type="text"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Between 5 and 30 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="location"
+                  >
+                    Location
+                  </label>
+                  <input
+                    className="form-control"
+                    defaultValue="test-location"
+                    id="location"
+                    name="location"
+                    onChange={[Function]}
+                    placeholder="The location of the center"
+                    type="text"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Less than 50 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div
-            className="ml-3 pt-3"
-          >
-            <button
-              className="btn btn-outline-dark"
-              disabled={false}
-              onClick={[Function]}
+            <div
+              className="row"
             >
-              Update
-            </button>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="details"
+                  >
+                    Details
+                  </label>
+                  <textarea
+                    className="form-control"
+                    defaultValue="test-details"
+                    id="details"
+                    name="details"
+                    onChange={[Function]}
+                    placeholder="More details about the center"
+                    rows="7"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Less than 300 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="capacity"
+                      >
+                        Capacity
+                      </label>
+                      <input
+                        className="form-control"
+                        defaultValue={200}
+                        id="capacity"
+                        name="capacity"
+                        onChange={[Function]}
+                        placeholder="How many seats"
+                        type="number"
+                      />
+                      <SmallAlert
+                        message={null}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="price"
+                      >
+                        Price
+                      </label>
+                      <input
+                        className="form-control"
+                        defaultValue={100}
+                        id="price"
+                        name="price"
+                        onChange={[Function]}
+                        placeholder="Price"
+                        type="number"
+                      />
+                      <SmallAlert
+                        message={null}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="image"
+                      >
+                        Image
+                      </label>
+                      <div
+                        className="text-center"
+                      >
+                        <ImageInput
+                          id="image"
+                          newImage={null}
+                          onDrop={[Function]}
+                          previousImage={null}
+                          style={
+                            Object {
+                              "height": "100px",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="ml-3 pt-3"
+                  >
+                    <button
+                      className="btn btn-outline-dark"
+                      disabled={false}
+                      id="update-btn"
+                      onClick={[Function]}
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -437,149 +587,224 @@ exports[`<EditCenter /> Rendering: Rendering: should render correcty when updati
           text="Edit Center"
         />
         <form
-          className="mt-lg-5 mb-md-5 w-lg-50"
+          className="mt-lg-5 mb-md-5"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={true}
           />
-          <WarningAlert
-            message={false}
-          />
           <div
-            className="form-group"
+            className="w-lg-50 mx-auto"
           >
-            <label
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="form-control"
-              defaultValue="test-center"
-              id="name"
-              name="name"
-              onChange={[Function]}
-              placeholder="The name of the center"
-              type="text"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 30 characters
-            </small>
+            <BigAlert />
           </div>
           <div
-            className="form-group"
+            className="container"
           >
-            <label
-              htmlFor="location"
-            >
-              Location
-            </label>
-            <input
-              className="form-control"
-              defaultValue="test-location"
-              id="location"
-              name="location"
-              onChange={[Function]}
-              placeholder="The location of the center"
-              type="text"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 30 characters
-            </small>
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="details"
-            >
-              Details
-            </label>
-            <textarea
-              className="form-control"
-              defaultValue="test-details"
-              id="details"
-              name="details"
-              onChange={[Function]}
-              placeholder="More details about the center"
-              rows="7"
-            />
-            <small
-              className="form-text text-muted"
-            >
-              Less than 200 characters
-            </small>
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="capacity"
-            >
-              Capacity
-            </label>
-            <input
-              className="form-control"
-              defaultValue={200}
-              id="capacity"
-              name="capacity"
-              onChange={[Function]}
-              placeholder="How many seats"
-              type="number"
-            />
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="price"
-            >
-              Price
-            </label>
-            <input
-              className="form-control"
-              defaultValue={100}
-              id="price"
-              name="price"
-              onChange={[Function]}
-              placeholder="Price"
-              type="number"
-            />
-          </div>
-          <div
-            className="form-group"
-          >
-            <label
-              htmlFor="image"
-            >
-              Image
-            </label>
             <div
-              className="text-center"
+              className="row"
             >
-              <ImageInput
-                id="image"
-                newImage={null}
-                onDrop={[Function]}
-                previousImage={null}
-              />
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="name"
+                  >
+                    Name
+                  </label>
+                  <input
+                    className="form-control"
+                    defaultValue="test-center"
+                    id="name"
+                    name="name"
+                    onChange={[Function]}
+                    placeholder="The name of the center"
+                    type="text"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Between 5 and 30 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="location"
+                  >
+                    Location
+                  </label>
+                  <input
+                    className="form-control"
+                    defaultValue="test-location"
+                    id="location"
+                    name="location"
+                    onChange={[Function]}
+                    placeholder="The location of the center"
+                    type="text"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Less than 50 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div
-            className="ml-3 pt-3"
-          >
-            <button
-              className="btn btn-outline-dark"
-              disabled={true}
-              onClick={[Function]}
+            <div
+              className="row"
             >
-              Update
-            </button>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="details"
+                  >
+                    Details
+                  </label>
+                  <textarea
+                    className="form-control"
+                    defaultValue="test-details"
+                    id="details"
+                    name="details"
+                    onChange={[Function]}
+                    placeholder="More details about the center"
+                    rows="7"
+                  />
+                  <small
+                    className="form-text text-muted"
+                  >
+                    Less than 300 characters
+                  </small>
+                  <SmallAlert
+                    message={null}
+                  />
+                </div>
+              </div>
+              <div
+                className="col-12 col-lg-6"
+              >
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="capacity"
+                      >
+                        Capacity
+                      </label>
+                      <input
+                        className="form-control"
+                        defaultValue={200}
+                        id="capacity"
+                        name="capacity"
+                        onChange={[Function]}
+                        placeholder="How many seats"
+                        type="number"
+                      />
+                      <SmallAlert
+                        message={null}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="price"
+                      >
+                        Price
+                      </label>
+                      <input
+                        className="form-control"
+                        defaultValue={100}
+                        id="price"
+                        name="price"
+                        onChange={[Function]}
+                        placeholder="Price"
+                        type="number"
+                      />
+                      <SmallAlert
+                        message={null}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="row"
+                >
+                  <div
+                    className="col-12"
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="image"
+                      >
+                        Image
+                      </label>
+                      <div
+                        className="text-center"
+                      >
+                        <ImageInput
+                          id="image"
+                          newImage={null}
+                          onDrop={[Function]}
+                          previousImage={null}
+                          style={
+                            Object {
+                              "height": "100px",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="ml-3 pt-3"
+                  >
+                    <button
+                      className="btn btn-outline-dark"
+                      disabled={true}
+                      id="update-btn"
+                      onClick={[Function]}
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>

@@ -1,37 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AddAdmin /> <Alert /> should render correctly if there is a success 1`] = `
-<span>
-  <p
-    className="text-success"
-  >
-    Admin Added!
-  </p>
-  <span>
-    test-user
-     is now an admin
-  </span>
-</span>
-`;
-
-exports[`<AddAdmin /> <Alert /> should render correctly if there is an addingError 1`] = `
-<p
-  className="text-danger"
->
-  there was an error
-</p>
-`;
-
-exports[`<AddAdmin /> <Alert /> should render correctly if there is an inputError 1`] = `
-<p
-  className="text-danger"
->
-  there was an error
-</p>
-`;
-
-exports[`<AddAdmin /> <Alert /> should render nothing if there is no error or success message 1`] = `""`;
-
 exports[`<AddAdmin /> Rendering: should redirect to login page if user is not authenticated 1`] = `
 <Redirect
   push={false}
@@ -78,12 +46,7 @@ exports[`<AddAdmin /> Rendering: should render correctly on page load 1`] = `
             <div
               className="card-body"
             >
-              <Alert
-                addingError={false}
-                inputError={null}
-                newAdmin={null}
-                success={false}
-              />
+              <BigAlert />
               <div
                 className="input-group px-3"
               >
@@ -103,6 +66,9 @@ exports[`<AddAdmin /> Rendering: should render correctly on page load 1`] = `
                   type="text"
                 />
               </div>
+              <SmallAlert
+                message={null}
+              />
               <ul
                 className="text-left mt-2 text-muted"
               >
@@ -130,7 +96,7 @@ exports[`<AddAdmin /> Rendering: should render correctly on page load 1`] = `
                 </li>
               </ul>
               <button
-                className="btn btn-primary"
+                className="btn btn-primary pointer-button"
                 disabled={false}
                 id="add-btn"
                 onClick={[Function]}
@@ -199,12 +165,7 @@ exports[`<AddAdmin /> Rendering: should render correctly when adding 1`] = `
             <div
               className="card-body"
             >
-              <Alert
-                addingError={false}
-                inputError={null}
-                newAdmin={null}
-                success={false}
-              />
+              <BigAlert />
               <div
                 className="input-group px-3"
               >
@@ -224,6 +185,9 @@ exports[`<AddAdmin /> Rendering: should render correctly when adding 1`] = `
                   type="text"
                 />
               </div>
+              <SmallAlert
+                message={null}
+              />
               <ul
                 className="text-left mt-2 text-muted"
               >
@@ -251,7 +215,7 @@ exports[`<AddAdmin /> Rendering: should render correctly when adding 1`] = `
                 </li>
               </ul>
               <button
-                className="btn btn-primary"
+                className="btn btn-primary pointer-button"
                 disabled={true}
                 id="add-btn"
                 onClick={[Function]}

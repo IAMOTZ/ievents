@@ -62,15 +62,19 @@ describe('<AddAdmin />', () => {
     });
     it('should update inputError state when user tries to add without email', () => {
       wrapper.find('#add-btn').simulate('click');
-      expect(wrapper.state('inputError')).toEqual('Email is required');
+      expect(wrapper.state('inputErrors').emailError).toEqual('Email is required');
     });
     it('should clear inputError state when user tries to add with email', () => {
-      wrapper.setState({ inputError: 'Just any error' });
+      wrapper.setState({
+        inputErrors: {
+          emailError: 'error message',
+        },
+      });
       wrapper
         .find('#input-email')
         .simulate('change', { target: { name: 'email', value: 'test@gmail.com' } });
       wrapper.find('#add-btn').simulate('click');
-      expect(wrapper.state('inputError')).toBeNull();
+      expect(wrapper.state('inputErrors').emailError).toBeNull();
     });
   });
 });

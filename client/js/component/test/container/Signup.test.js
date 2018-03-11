@@ -5,7 +5,7 @@ import Signup from '../../container/Signup.jsx';
 
 const props = {
   user: {},
-  error: null,
+  error: { message: null },
   status: {
     fetching: false,
     fetched: false,
@@ -15,7 +15,7 @@ const props = {
 
 const alterPorps = newProps => ({
   user: {},
-  error: newProps.error || null,
+  error: newProps.error || { message: null },
   status: {
     fetching: newProps.fetching || false,
     fetched: newProps.fetched || false,

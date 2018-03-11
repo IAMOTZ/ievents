@@ -48,10 +48,10 @@ exports[`<AddEvent /> Rendering: should render correctly if there is a default c
           className="mt-lg-5 w-lg-50"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={false}
           />
-          <WarningAlert
+          <BigAlert
             message={false}
           />
           <div
@@ -74,8 +74,11 @@ exports[`<AddEvent /> Rendering: should render correctly if there is a default c
               className="form-text text-muted"
               id="emailHelp"
             >
-              Less than 30 characters
+              Between 5 and 30 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -99,6 +102,9 @@ exports[`<AddEvent /> Rendering: should render correctly if there is a default c
             >
               Less than 200 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <form
@@ -113,15 +119,18 @@ exports[`<AddEvent /> Rendering: should render correctly if there is a default c
               Date
             </label>
             <input
-              className="form-control mx-sm-3"
+              className="form-control ml-sm-3"
               id="date"
               name="date"
               onChange={[Function]}
               type="date"
             />
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
-            className="form-group"
+            className="form-group ml-md-3"
           >
             <label
               htmlFor="centers"
@@ -135,7 +144,10 @@ exports[`<AddEvent /> Rendering: should render correctly if there is a default c
               name="centerId"
               onChange={[Function]}
             >
-              <option>
+              <option
+                name="centerId"
+                value=""
+              >
                 choose a center
               </option>
               <DropDown
@@ -153,6 +165,9 @@ exports[`<AddEvent /> Rendering: should render correctly if there is a default c
                 }
               />
             </select>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <button
@@ -216,10 +231,10 @@ exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
           className="mt-lg-5 w-lg-50"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={false}
           />
-          <WarningAlert
+          <BigAlert
             message={false}
           />
           <div
@@ -242,8 +257,11 @@ exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
               className="form-text text-muted"
               id="emailHelp"
             >
-              Less than 30 characters
+              Between 5 and 30 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -267,6 +285,9 @@ exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
             >
               Less than 200 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <form
@@ -281,15 +302,18 @@ exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
               Date
             </label>
             <input
-              className="form-control mx-sm-3"
+              className="form-control ml-sm-3"
               id="date"
               name="date"
               onChange={[Function]}
               type="date"
             />
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
-            className="form-group"
+            className="form-group ml-md-3"
           >
             <label
               htmlFor="centers"
@@ -303,7 +327,10 @@ exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
               name="centerId"
               onChange={[Function]}
             >
-              <option>
+              <option
+                name="centerId"
+                value=""
+              >
                 choose a center
               </option>
               <DropDown
@@ -321,6 +348,9 @@ exports[`<AddEvent /> Rendering: should render correctly on page load 1`] = `
                 }
               />
             </select>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <button
@@ -384,10 +414,10 @@ exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
           className="mt-lg-5 w-lg-50"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={true}
           />
-          <WarningAlert
+          <BigAlert
             message={false}
           />
           <div
@@ -410,8 +440,11 @@ exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
               className="form-text text-muted"
               id="emailHelp"
             >
-              Less than 30 characters
+              Between 5 and 30 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -435,6 +468,9 @@ exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
             >
               Less than 200 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <form
@@ -449,15 +485,18 @@ exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
               Date
             </label>
             <input
-              className="form-control mx-sm-3"
+              className="form-control ml-sm-3"
               id="date"
               name="date"
               onChange={[Function]}
               type="date"
             />
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
-            className="form-group"
+            className="form-group ml-md-3"
           >
             <label
               htmlFor="centers"
@@ -471,7 +510,10 @@ exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
               name="centerId"
               onChange={[Function]}
             >
-              <option>
+              <option
+                name="centerId"
+                value=""
+              >
                 choose a center
               </option>
               <DropDown
@@ -489,6 +531,9 @@ exports[`<AddEvent /> Rendering: should render correctly when adding 1`] = `
                 }
               />
             </select>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <button
@@ -552,10 +597,10 @@ exports[`<AddEvent /> Rendering: should render correctly when there is an error 
           className="mt-lg-5 w-lg-50"
         >
           <LoadingIcon
-            size={2}
+            size={3}
             start={false}
           />
-          <WarningAlert
+          <BigAlert
             message="there was an error"
           />
           <div
@@ -578,8 +623,11 @@ exports[`<AddEvent /> Rendering: should render correctly when there is an error 
               className="form-text text-muted"
               id="emailHelp"
             >
-              Less than 30 characters
+              Between 5 and 30 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
             className="form-group"
@@ -603,6 +651,9 @@ exports[`<AddEvent /> Rendering: should render correctly when there is an error 
             >
               Less than 200 characters
             </small>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <form
@@ -617,15 +668,18 @@ exports[`<AddEvent /> Rendering: should render correctly when there is an error 
               Date
             </label>
             <input
-              className="form-control mx-sm-3"
+              className="form-control ml-sm-3"
               id="date"
               name="date"
               onChange={[Function]}
               type="date"
             />
+            <SmallAlert
+              message={null}
+            />
           </div>
           <div
-            className="form-group"
+            className="form-group ml-md-3"
           >
             <label
               htmlFor="centers"
@@ -639,7 +693,10 @@ exports[`<AddEvent /> Rendering: should render correctly when there is an error 
               name="centerId"
               onChange={[Function]}
             >
-              <option>
+              <option
+                name="centerId"
+                value=""
+              >
                 choose a center
               </option>
               <DropDown
@@ -657,6 +714,9 @@ exports[`<AddEvent /> Rendering: should render correctly when there is an error 
                 }
               />
             </select>
+            <SmallAlert
+              message={null}
+            />
           </div>
         </form>
         <button
