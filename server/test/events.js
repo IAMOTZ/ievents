@@ -86,7 +86,7 @@ const loginUser = (userDetails, assertions) => {
 
 const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   res.should.have.status(statusCode);
-  res.body.message.toLowerCase().should.be.eql(message.toLowerCase());
+  res.body.message.should.be.eql(message);
   res.body.status.should.be.eql('failed');
   done();
 };
@@ -114,96 +114,96 @@ describe('Events Endpoint', () => {
     it('should not create event without title', (done) => {
       createEvent(
         alterEventDetails({ title: null }),
-        failureAssertions('event title is required', 400, done),
+        failureAssertions('Event title is required', 400, done),
       );
     });
     it('should not create event with empty title', (done) => {
       createEvent(
         alterEventDetails({ title: '' }),
-        failureAssertions('event title cannot be empty', 400, done),
+        failureAssertions('Event title cannot be empty', 400, done),
       );
     });
     it('should not create event with title less than 5 char', (done) => {
       createEvent(
         alterEventDetails({ title: 'tes' }),
-        failureAssertions('event title must be between 5 and 30 characters', 400, done),
+        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
       );
     });
     it('should not create event with title above than 30 char', (done) => {
       createEvent(
         alterEventDetails({ title: randomCharacters(31) }),
-        failureAssertions('event title must be between 5 and 30 characters', 400, done),
+        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
       );
     });
     it('should not create event with description above 200 chars', (done) => {
       createEvent(
         alterEventDetails({ description: randomCharacters(201) }),
-        failureAssertions('event description must be below 200 characters', 400, done),
+        failureAssertions('Event description must be below 200 characters', 400, done),
       );
     });
     it('should not create event without date', (done) => {
       createEvent(
         alterEventDetails({ date: null }),
-        failureAssertions('event date is required', 400, done),
+        failureAssertions('Event date is required', 400, done),
       );
     });
     it('should not create event with wrog date format', (done) => {
       createEvent(
         alterEventDetails({ date: '2017-2-56' }),
-        failureAssertions('the date format should be yyyy/mm/dd', 400, done),
+        failureAssertions('The date format should be yyyy/mm/dd', 400, done),
       );
     });
     it('should not create event if days in the date is more that 31', (done) => {
       const wrongDate = `${currentYear}/${currentMonth}/40`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('days in the date cannot be more than 31', 400, done),
+        failureAssertions('Days in the date cannot be more than 31', 400, done),
       );
     });
     it('should not create event if month in date is more than 12', (done) => {
       const wrongDate = `${currentYear}/15/${currentDay}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('month in the date cannot be more than 12', 400, done),
+        failureAssertions('Month in the date cannot be more than 12', 400, done),
       );
     });
     it('should not create event for past years', (done) => {
       const wrongDate = `${currentYear - 10}/${currentMonth}/${currentDay}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('you can only create event for this year and upcoming years', 400, done),
+        failureAssertions('You can only create event for this year and upcoming years', 400, done),
       );
     });
     it('should not create event for past months', (done) => {
       const wrongDate = `${currentYear}/${currentMonth - 1}/${currentDay}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('you can only create event for this month and upcoming months', 400, done),
+        failureAssertions('You can only create event for this month and upcoming months', 400, done),
       );
     });
     it('should not create event for past days', (done) => {
       const wrongDate = `${currentYear}/${currentMonth}/${currentDay - 1}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('you can only create event for today and upcoming days', 400, done),
+        failureAssertions('You can only create event for today and upcoming days', 400, done),
       );
     });
     it('should not create event without a center', (done) => {
       createEvent(
         alterEventDetails({ centerId: null }),
-        failureAssertions('center is required', 400, done),
+        failureAssertions('Center is required', 400, done),
       );
     });
     it('should not create event if center value is not an integer', (done) => {
       createEvent(
         alterEventDetails({ centerId: 'str' }),
-        failureAssertions('center id must be an integer in a string format', 400, done),
+        failureAssertions('Center id must be an integer in a string format', 400, done),
       );
     });
     it('should not create an event if the choosen center does not exist', (done) => {
       createEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('the choosen center does not exist', 400, done),
+        failureAssertions('The choosen center does not exist', 400, done),
       );
     });
     it('should create an event', (done) => {
@@ -213,7 +213,7 @@ describe('Events Endpoint', () => {
           eventId = res.body.event.id;
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('event created');
+          res.body.message.should.be.eql('Event created');
           res.body.event.title.should.be.eql(normalEventDetails.title);
           res.body.event.description.should.be.eql(normalEventDetails.description);
           res.body.event.date.should.be.eql(normalEventDetails.date);
@@ -230,7 +230,7 @@ describe('Events Endpoint', () => {
         (err, res) => {
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('event created');
+          res.body.message.should.be.eql('Event created');
           done();
         },
       );
@@ -239,7 +239,7 @@ describe('Events Endpoint', () => {
     it('should not create event for date that is already booked for a center', (done) => {
       createEvent(
         normalEventDetails,
-        failureAssertions('the center has been booked for that date', 400, done),
+        failureAssertions('The center has been booked for that date', 400, done),
       );
     });
   });
@@ -250,91 +250,91 @@ describe('Events Endpoint', () => {
     it('should not modify event with empty title', (done) => {
       modifyEvent(
         alterEventDetails({ title: '' }),
-        failureAssertions('event title cannot be empty', 400, done),
+        failureAssertions('Event title cannot be empty', 400, done),
       );
     });
     it('should not modify event with title less than 5 char', (done) => {
       modifyEvent(
         alterEventDetails({ title: 'tes' }),
-        failureAssertions('event title must be between 5 and 30 characters', 400, done),
+        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
       );
     });
     it('should not modify event with title above than 30 char', (done) => {
       modifyEvent(
         alterEventDetails({ title: randomCharacters(31) }),
-        failureAssertions('event title must be between 5 and 30 characters', 400, done),
+        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
       );
     });
     it('should not modify event with description above 200 chars', (done) => {
       modifyEvent(
         alterEventDetails({ description: randomCharacters(202) }),
-        failureAssertions('event description must be below 200 characters', 400, done),
+        failureAssertions('Event description must be below 200 characters', 400, done),
       );
     });
     it('should not modify event with wrong date format', (done) => {
       modifyEvent(
         alterEventDetails({ date: '2017-2-56' }),
-        failureAssertions('the date format should be yyyy/mm/dd', 400, done),
+        failureAssertions('The date format should be yyyy/mm/dd', 400, done),
       );
     });
     it('should not modify event if days in the date is more than 31', (done) => {
       const wrongDate = `${currentYear}/${currentMonth}/40`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('days in the date cannot be more than 31', 400, done),
+        failureAssertions('Days in the date cannot be more than 31', 400, done),
       );
     });
     it('should not modify event if month in date is more than 12', (done) => {
       const wrongDate = `${currentYear}/15/${currentDay}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('month in the date cannot be more than 12', 400, done),
+        failureAssertions('Month in the date cannot be more than 12', 400, done),
       );
     });
     it('should not modify event for past years', (done) => {
       const wrongDate = `${currentYear - 10}/${currentMonth}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('you can only create event for this year and upcoming years', 400, done),
+        failureAssertions('You can only create event for this year and upcoming years', 400, done),
       );
     });
     it('should not modify event for past months', (done) => {
       const wrongDate = `${currentYear}/${currentMonth - 1}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('you can only create event for this month and upcoming months', 400, done),
+        failureAssertions('You can only create event for this month and upcoming months', 400, done),
       );
     });
     it('should not modify event for past days', (done) => {
       const wrongDate = `${currentYear}/${currentMonth}/${currentDay - 1}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('you can only create event for today and upcoming days', 400, done),
+        failureAssertions('You can only create event for today and upcoming days', 400, done),
       );
     });
     it('should not modify event if center value is not an integer', (done) => {
       modifyEvent(
         alterEventDetails({ centerId: 'str' }),
-        failureAssertions('center id must be an integer in a string format', 400, done),
+        failureAssertions('Center id must be an integer in a string format', 400, done),
       );
     });
     it('should not modify event if user is not the event owner', (done) => {
       modifyEvent(
         alterEventDetails({ token: userToken2 }),
-        failureAssertions('unauthorised to perform this action', 401, done),
+        failureAssertions('Unauthorised to perform this action', 401, done),
       );
     });
     it('should not modify event if the new choosen center does not exist', (done) => {
       modifyEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('the new choosen center does not exist', 400, done),
+        failureAssertions('The new choosen center does not exist', 400, done),
       );
     });
     it('should not modify event if the new choosen center is booked for the date', (done) => {
       const date = `${currentYear + 1}/${currentMonth}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ centerId: 2, date }),
-        failureAssertions('the center has been booked for that date', 400, done),
+        failureAssertions('The center has been booked for that date', 400, done),
       );
     });
     it('should modify event', (done) => {
@@ -347,7 +347,7 @@ describe('Events Endpoint', () => {
         (err, res) => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('event updated');
+          res.body.message.should.be.eql('Event updated');
           res.body.event.title.should.be.eql('modified title');
           res.body.event.description.should.be.eql('modified description');
           res.body.event.centerId.should.be.eql(2);
@@ -374,13 +374,13 @@ describe('Events Endpoint', () => {
     it('should not delete event if the user is not the event owner', (done) => {
       deleteEvent(
         { token: userToken2 },
-        failureAssertions('unauthorised to perform this action', 401, done),
+        failureAssertions('Unauthorised to perform this action', 401, done),
       );
     });
     it('should not delete an event that does not exist', (done) => {
       deleteEvent(
         { token: userToken1 },
-        failureAssertions('event does not exist', 400, done),
+        failureAssertions('Event does not exist', 400, done),
         1000,
       );
     });
@@ -389,7 +389,7 @@ describe('Events Endpoint', () => {
         { token: userToken1 },
         (err, res) => {
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('event deleted');
+          res.body.message.should.be.eql('Event deleted');
           done();
         },
       );

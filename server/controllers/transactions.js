@@ -118,7 +118,7 @@ export default {
     if (!transaction) {
       return res.status(400).json({
         status: 'failed',
-        message: 'transaction does not exist',
+        message: 'Transaction does not exist',
       });
     } else {
       const eventDetails = await getEventFromTransaction(transactions, transactionId);
@@ -131,7 +131,7 @@ export default {
       await cancelEvent(events, transaction.eventId);
       return res.status(200).json({
         status: 'success',
-        message: 'transaction successfully deleted',
+        message: 'Transaction successfully deleted',
       });
     }
   },

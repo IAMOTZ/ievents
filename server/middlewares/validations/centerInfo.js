@@ -15,35 +15,34 @@ export const validateAddCenterInputs = (req, res, next) => {
   } = res.locals.formattedInputs;
   try {
     if (name === undefined || name === null) {
-      throw new Error('center name is required');
+      throw new Error('Center name is required');
     }
     if (name === '') {
-      throw new Error('center name cannot be empty');
+      throw new Error('Center name cannot be empty');
     }
     if (name.length < 5 || name.length > 30) {
-      throw new Error('center name must be between 5 and 30 characters');
+      throw new Error('Center name must be between 5 and 30 characters');
     }
     if (location && location.length > 50) {
-      throw new Error('center location must be below 50 characters');
+      throw new Error('Center location must be below 50 characters');
     }
     if (details && details.length > 300) {
-      throw new Error('center details must be below 300 characters');
+      throw new Error('Center details must be below 300 characters');
     }
     if (!capacity) {
-      throw new Error('capacity is required');
+      throw new Error('Capacity is required');
     }
     if (!Number.isFinite(Number(capacity))) {
-      throw new Error('center capacity must be a number in string format');
+      throw new Error('Center capacity must be a number in string format');
     }
     if (!price) {
-      throw new Error('price is required');
+      throw new Error('Price is required');
     }
     if (!Number.isFinite(Number(price))) {
-      throw new Error('center price must be a number in string format');
+      throw new Error('Center price must be a number in string format');
     }
   } catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message });
-    return;
+    return res.status(400).json({ status: 'failed', message: error.message });
   }
   next();
 };
@@ -65,33 +64,32 @@ export const validateUpdateCenterInputs = (req, res, next) => {
   } = res.locals.formattedInputs;
   try {
     if (name !== undefined && name === '') {
-      throw new Error('center name cannot be empty');
+      throw new Error('Center name cannot be empty');
     }
     if (name && name.length < 5) {
-      throw new Error('center name must be between 5 and 30 characters');
+      throw new Error('Center name must be between 5 and 30 characters');
     }
     if (name && name.length > 30) {
-      throw new Error('center name must be between 5 and 30 characters');
+      throw new Error('Center name must be between 5 and 30 characters');
     }
     if (location && location.length >= 50) {
-      throw new Error('center location must be below 50 characters');
+      throw new Error('Center location must be below 50 characters');
     }
     if (details && details.length > 300) {
-      throw new Error('center details must be below 300 characters');
+      throw new Error('Center details must be below 300 characters');
     }
     if (capacity) {
       if (!Number.isFinite(Number(capacity))) {
-        throw new Error('center capacity must be a number in string format');
+        throw new Error('Center capacity must be a number in string format');
       }
     }
     if (price) {
       if (!Number.isFinite(Number(price))) {
-        throw new Error('center price must be a number in string format');
+        throw new Error('Center price must be a number in string format');
       }
     }
   } catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message });
-    return;
+    return res.status(400).json({ status: 'failed', message: error.message });
   }
   next();
 };

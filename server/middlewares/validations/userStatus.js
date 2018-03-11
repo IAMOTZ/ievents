@@ -86,7 +86,7 @@ export const isEventOwner = async (req, res, next) => {
   if (!event) {
     return res.status(400).json({
       status: 'failed',
-      message: 'event does not exist',
+      message: 'Event does not exist',
     });
   } else if (event.userId !== userId) {
     return res.status(401).json({

@@ -61,7 +61,7 @@ export default {
     });
     return res.status(200).json({
       status: 'success',
-      message: 'centers successfully retrieved',
+      message: 'Centers successfully retrieved',
       centers: allCenters.map(center => formatCenterData(center)),
     });
   },
@@ -86,12 +86,12 @@ export default {
     if (!center) {
       return res.status(400).json({
         status: 'failed',
-        message: 'center does not exist',
+        message: 'Center does not exist',
       });
     } else {
       return res.status(200).json({
         status: 'success',
-        message: 'center successfully retrieved',
+        message: 'Center successfully retrieved',
         center: formatCenterData(center),
       });
     }
@@ -124,7 +124,7 @@ export default {
       });
     return res.status(201).json({
       status: 'success',
-      message: 'center created',
+      message: 'Center created',
       center: formatCenterData(newCenter),
     });
   },
@@ -144,7 +144,7 @@ export default {
     if (!center) {
       return res.status(400).json({
         status: 'failed',
-        message: 'center does not exist',
+        message: 'Center does not exist',
       });
     } else {
       let image = null;
@@ -163,7 +163,7 @@ export default {
         });
       return res.status(200).json({
         status: 'success',
-        message: 'center updated',
+        message: 'Center updated',
         center: formatCenterData(updatedCenter),
       });
     }

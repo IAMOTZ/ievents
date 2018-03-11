@@ -68,7 +68,7 @@ export default {
     if (user) {
       return res.status(400).json({
         status: 'failed',
-        message: 'user already exist',
+        message: 'User already exist',
       });
     } else {
       const newUser = await users.create({
@@ -78,7 +78,7 @@ export default {
       });
       return res.status(201).json({
         status: 'success',
-        message: 'user created',
+        message: 'User created',
         user: formatUserData(newUser),
         token: generateToken(formatUserData(newUser)),
       });
@@ -97,7 +97,7 @@ export default {
     if (!user) {
       return res.status(400).json({
         status: 'failed',
-        message: 'user not found',
+        message: 'User not found',
       });
     } else if (verifyPassword(password, user.password)) {
       return res.status(200).json({
@@ -109,7 +109,7 @@ export default {
     } else {
       return res.status(400).json({
         status: 'failed',
-        message: 'password incorrect',
+        message: 'Password incorrect',
       });
     }
   },
@@ -124,12 +124,12 @@ export default {
       });
       return res.status(200).json({
         status: 'success',
-        message: 'password changed',
+        message: 'Password changed',
       });
     } else {
       return res.status(400).json({
         status: 'failed',
-        message: 'the former password is incorrect',
+        message: 'The former password is incorrect',
       });
     }
   },
@@ -146,18 +146,18 @@ export default {
     if (!user) {
       return res.status(400).json({
         status: 'failed',
-        message: 'user not found',
+        message: 'User not found',
       });
     } else if (user.role === 'admin' || user.role === 'superAdmin') {
       return res.status(200).json({
         status: 'failed',
-        message: 'the user is already an admin',
+        message: 'The user is already an admin',
       });
     } else {
       await user.update({ role: 'admin' });
       return res.status(200).json({
         status: 'success',
-        message: 'the user has been updated to become an admin',
+        message: 'The user has been updated to become an admin',
       });
     }
   },

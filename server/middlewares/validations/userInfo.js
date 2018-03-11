@@ -14,53 +14,52 @@ export const validateSignUpInputs = (req, res, next) => {
   } = res.locals.formattedInputs;
   try {
     if (name === undefined || name === null) {
-      throw new Error('name is required');
+      throw new Error('Name is required');
     }
     if (name === '') {
-      throw new Error('name field cannot be empty');
+      throw new Error('Name field cannot be empty');
     }
     if (name.length < 3) {
-      throw new Error('name must be equal or more than 3 characters');
+      throw new Error('Name must be equal or more than 3 characters');
     }
     if (name.match(/^\S+$/) === null) {
-      throw new Error('name must not contain whitespaces');
+      throw new Error('Name must not contain whitespaces');
     }
     if (name.match(/[$-/:-?{-~!"#^,._`[\]]/) !== null) {
-      throw new Error('name can contain only numbers and letters');
+      throw new Error('Name can contain only numbers and letters');
     }
     if (email === undefined || email === null) {
-      throw new Error('email is required');
+      throw new Error('Email is required');
     }
     if (email === '') {
-      throw new Error('email field cannot be empty');
+      throw new Error('Email field cannot be empty');
     }
     if (!email.match(/^\S+?@\S+.\S+$/)) {
-      throw new Error('email format is wrong');
+      throw new Error('Email format is wrong');
     }
     if (password === undefined || password === null) {
-      throw new Error('password is required');
+      throw new Error('Password is required');
     }
     if (password === '') {
-      throw new Error('password field cannot be empty');
+      throw new Error('Password field cannot be empty');
     }
     if (password.match(/^\S+$/) === null) {
-      throw new Error('password must not contain whitespaces');
+      throw new Error('Password must not contain whitespaces');
     }
     if (password.length < 7) {
-      throw new Error('password must be equal or more than 7 characters');
+      throw new Error('Password must be equal or more than 7 characters');
     }
     if (!/\d/.test(password) || !/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
-      throw new Error('password must contain capital letters, small letters and numbers');
+      throw new Error('Password must contain capital letters, small letters and numbers');
     }
     if (confirmpassword === undefined || confirmpassword === null) {
-      throw new Error('confirmPassword field is required');
+      throw new Error('ConfirmPassword field is required');
     }
     if (password !== confirmpassword) {
-      throw new Error('password and confirm password input does not match');
+      throw new Error('Password and confirm password input does not match');
     }
   } catch (error) {
-    res.status(400).json({ status: 'failed', message: error.message });
-    return;
+    return res.status(400).json({ status: 'failed', message: error.message });
   }
   next();
 };
@@ -79,19 +78,19 @@ export const validateSigninInputs = (req, res, next) => {
   } = res.locals.formattedInputs;
   try {
     if (email === undefined || email === null) {
-      throw new Error('email is required');
+      throw new Error('Email is required');
     }
     if (email === '') {
-      throw new Error('email cannot be empty');
+      throw new Error('Email cannot be empty');
     }
     if (!email.match(/^\S+?@\S+.\S+$/)) {
-      throw new Error('email format is wrong');
+      throw new Error('Email format is wrong');
     }
     if (password === undefined || password === null) {
-      throw new Error('password is required');
+      throw new Error('Password is required');
     }
     if (password === '') {
-      throw new Error('password cannot be empty');
+      throw new Error('Password cannot be empty');
     }
   } catch (error) {
     return res.status(400).json({ status: 'failed', message: error.message });
@@ -110,13 +109,13 @@ export const validateCreateAdminInputs = (req, res, next) => {
   const { email } = res.locals.formattedInputs;
   try {
     if (email === undefined || email === null) {
-      throw new Error('email is required');
+      throw new Error('Email is required');
     }
     if (email === '') {
-      throw new Error('email cannot be empty');
+      throw new Error('Email cannot be empty');
     }
     if (!email.match(/^\S+?@\S+.\S+$/)) {
-      throw new Error('email format is wrong');
+      throw new Error('Email format is wrong');
     }
   } catch (error) {
     return res.status(400).json({ status: 'failed', message: error.message });
@@ -137,25 +136,25 @@ export const validateChangePasswordInputs = (req, res, next) => {
   } = res.locals.formattedInputs;
   try {
     if (!formerpassword) {
-      throw new Error('the former password is required');
+      throw new Error('The former password is required');
     }
     if (!newpassword) {
-      throw new Error('the new password is required');
+      throw new Error('The new password is required');
     }
     if (!confirmnewpassword) {
-      throw new Error('confirm password field is required');
+      throw new Error('Confirm password field is required');
     }
     if (newpassword.match(/^\S+$/) === null) {
-      throw new Error('the new password must not contain whitespaces');
+      throw new Error('The new password must not contain whitespaces');
     }
     if (newpassword.length < 7) {
-      throw new Error('the new password must be equal or more than 7 characters');
+      throw new Error('The new password must be equal or more than 7 characters');
     }
     if (!/\d/.test(newpassword) || !/[A-Z]/.test(newpassword) || !/[a-z]/.test(newpassword)) {
-      throw new Error('the new password must contain capital letters, small letters and numbers');
+      throw new Error('The new password must contain capital letters, small letters and numbers');
     }
     if (newpassword !== confirmnewpassword) {
-      throw new Error('the new password and confirm password input does not match');
+      throw new Error('The new password and confirm password input does not match');
     }
   } catch (error) {
     return res.status(400).json({ status: 'failed', message: error.message });
