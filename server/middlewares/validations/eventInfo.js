@@ -1,4 +1,4 @@
-import { getCurrentDate } from '../helpers';
+import { getCurrentDate } from '../../helpers';
 
 /**
  * A middleware.
