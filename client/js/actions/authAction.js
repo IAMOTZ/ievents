@@ -9,7 +9,7 @@ const apiBaseUrl = process.env.API_BASE_URL;
  * @returns {Function}
  */
 export const createUser = userDetails => (dispatch) => {
-  dispatch({ type: actionTypes.ADDING_USER });
+  dispatch({ type: actionTypes.ADDING_USER_STARTED });
   axios.post(`${apiBaseUrl}/users`, userDetails)
     .then((response) => {
       dispatch({ type: actionTypes.ADDING_USER_RESOLVED, payload: response.data });
@@ -25,7 +25,7 @@ export const createUser = userDetails => (dispatch) => {
  * @returns {Function}
  */
 export const loginUser = userDetails => (dispatch) => {
-  dispatch({ type: actionTypes.LOGGING_USER });
+  dispatch({ type: actionTypes.LOGGING_USER_STARTED });
   axios.post(`${apiBaseUrl}/users/login`, userDetails)
     .then((response) => {
       dispatch({ type: actionTypes.LOGGING_USER_RESOLVED, payload: response.data });
@@ -43,7 +43,7 @@ export const loginUser = userDetails => (dispatch) => {
  * @returns {Function}
  */
 export const addAdmin = (email, superAdminToken) => (dispatch) => {
-  dispatch({ type: actionTypes.ADDING_ADMIN });
+  dispatch({ type: actionTypes.ADDING_ADMIN_STARTED });
   const config = {
     headers: {
       'access-token': superAdminToken,
@@ -65,7 +65,7 @@ export const addAdmin = (email, superAdminToken) => (dispatch) => {
  * @returns {Function}
  */
 export const changePassword = (passwordDetails, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.CHANGING_PASSWORD });
+  dispatch({ type: actionTypes.CHANGING_PASSWORD_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -81,7 +81,7 @@ export const changePassword = (passwordDetails, userToken) => (dispatch) => {
 };
 
 export const deleteUser = (userPassword, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.DELETING_USER });
+  dispatch({ type: actionTypes.DELETING_ACCOUNT_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -89,23 +89,16 @@ export const deleteUser = (userPassword, userToken) => (dispatch) => {
   };
   axios.post(`${apiBaseUrl}/users/deleteUser`, { password: userPassword }, config)
     .then((response) => {
-      dispatch({ type: actionTypes.DELETING_USER_RESOLVED, payload: response.data });
+      dispatch({ type: actionTypes.DELETING_ACCOUNT_RESOLVED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: actionTypes.DELETING_USER_REJECTED, payload: err.response.data });
+      dispatch({ type: actionTypes.DELETING_ACCOUNT_REJECTED, payload: err.response.data });
     });
 };
-
-/**
- * Clears the status variables tracking a particular user process.
- * @param {String} process The process to be cleared.
- * @returns {Object}
- */
-export const clearStatus = process => ({ type: actionTypes.CLEAR_USER_STATUS, payload: process });
 
 /**
  * Clears the storage that the user info is stored along with his authentication token.
  * This would cause the user to be logged out.
  * @returns {Object}
  */
-export const clearUser = () => ({ type: actionTypes.CLEAR_USER });
+export const clearUser = () => ({ type: actionTypes.LOG_OUT });

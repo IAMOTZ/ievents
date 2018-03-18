@@ -9,7 +9,7 @@ const apiBaseUrl = process.env.API_BASE_URL;
  * @returns {Function}
  */
 export const getAllEvents = userToken => (dispatch) => {
-  dispatch({ type: actionTypes.FETCHING_EVENTS });
+  dispatch({ type: actionTypes.FETCHING_EVENTS_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -31,7 +31,7 @@ export const getAllEvents = userToken => (dispatch) => {
  * @returns {Function}
  */
 export const addEvent = (eventDetails, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.ADDING_EVENT });
+  dispatch({ type: actionTypes.ADDING_EVENT_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -54,7 +54,7 @@ export const addEvent = (eventDetails, userToken) => (dispatch) => {
  * @returns {Function}
  */
 export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.UPDATING_EVENT });
+  dispatch({ type: actionTypes.UPDATING_EVENT_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -76,7 +76,7 @@ export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
  * @returns {Function}
  */
 export const deleteEvent = (id, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.DELETING_EVENT });
+  dispatch({ type: actionTypes.DELETING_EVENT_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -92,15 +92,19 @@ export const deleteEvent = (id, userToken) => (dispatch) => {
 };
 
 /**
- * It informs a reducer to update the store about an event that is to be edited.
- * @param {Number} id The ID of the event.
+ * It informs the reducer about an event that is about to be updated/edited.
+ * @param {Number} eventId The event ID.
  * @returns {Object}
  */
-export const initializeEdit = id => ({ type: actionTypes.INITIALIZE_EDIT, payload: id });
+export const setEventToUpdate = eventId => (
+  { type: actionTypes.SET_EVENT_TO_UPDATE, payload: { eventId } }
+);
 
 /**
- * It informs a reducer to Clear the status variables tracking a particular event process.
- * @param {String} process The process to be cleared.
+ * It informs the reducer about a center that is about to be booked.
+ * @param {Number} centerId The ID of the center to be booked.
  * @returns {Object}
  */
-export const clearStatus = process => ({ type: actionTypes.CLEAR_EVENT_STATUS, payload: process });
+export const setCenterToBook = centerId => (
+  { type: actionTypes.SET_CENTER_TO_BOOK, payload: { centerId } }
+);

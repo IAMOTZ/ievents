@@ -1,13 +1,32 @@
 import { combineReducers } from 'redux';
-
-import user from './authReducer';
-import centers from './centerReducer';
-import events from './eventReducer';
-import transactions from './transactionReducer';
+import {
+  authReducer, addAdminReducer,
+  changePasswordReducer, deleteAccountReducer,
+} from './user';
+import {
+  fetchEventsReducer, addEventReducer,
+  updateEventReducer, deleteEventReducer,
+} from './event';
+import {
+  fetchCentersReducer, addCenterReducer,
+  updateCenterReducer,
+} from './center';
+import {
+  fetchTransactionsReducer, deleteTransactionReducer,
+} from './transaction';
 
 export default combineReducers({
-  user,
-  centers,
-  events,
-  transactions,
+  authReducer,
+  addAdminReducer,
+  changePasswordReducer,
+  deleteAccountReducer,
+  fetchEventsReducer,
+  addEventReducer,
+  updateEventReducer,
+  deleteEventReducer,
+  fetchCentersReducer,
+  addCenterReducer,
+  updateCenterReducer,
+  fetchTransactionsReducer,
+  deleteTransactionReducer,
 });

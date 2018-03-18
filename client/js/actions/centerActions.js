@@ -8,7 +8,7 @@ const apiBaseUrl = process.env.API_BASE_URL;
  * @returns {Function}
  */
 export const getAllCenters = () => (dispatch) => {
-  dispatch({ type: actionTypes.FETCHING_CENTERS });
+  dispatch({ type: actionTypes.FETCHING_CENTERS_STARTED });
   axios.get(`${apiBaseUrl}/centers`)
     .then((response) => {
       dispatch({ type: actionTypes.FETCHING_CENTERS_RESOLVED, payload: response.data });
@@ -25,7 +25,7 @@ export const getAllCenters = () => (dispatch) => {
  * @returns {Function}
  */
 export const addCenter = (centerDetails, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.ADDING_CENTER });
+  dispatch({ type: actionTypes.ADDING_CENTER_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -49,7 +49,7 @@ export const addCenter = (centerDetails, userToken) => (dispatch) => {
  * @returns {Function}
  */
 export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
-  dispatch({ type: actionTypes.UPDATING_CENTER });
+  dispatch({ type: actionTypes.UPDATING_CENTER_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -66,34 +66,10 @@ export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
 };
 
 /**
- * It informs a reducer to update the store about a center that is to be edited.
- * @param {Number} centerId The ID of the center to be edited.
+ * It informs the reducer about a center that is about to be updated/edited.
+ * @param {Number} centerId The ID of the center to update.
  * @returns {Object}
  */
-export const initializeEdit = centerId => (
-  { type: actionTypes.INITIALIZE_EDIT, payload: centerId }
+export const setCenterToUpdate = centerId => (
+  { type: actionTypes.SET_CENTER_TO_UPDATE, payload: centerId }
 );
-
-/**
- * It informs a reducer to update the store with the details of a center to be shown on a modal.
- * @param {Number} centerId The center ID.
- * @returns {Object}
- */
-export const showCenterModal = centerId => (
-  { type: actionTypes.SHOW_CENTER_MODAL, payload: centerId }
-);
-
-/**
- * It informs a reducer to update the store about a center that is about to be booked.
- * @param {Number} centerId The ID of the center.
- * @returns {Object}
- */
-export const book = centerId => ({ type: actionTypes.BOOK, payload: centerId });
-
-/**
- * It informs a reducer to Clear the status variables tracking a particular center process.
- * @param {String} process The process to be cleared.
- * @returns {Object}
- */
-export const clearStatus = process => ({ type: actionTypes.CLEAR_CENTER_STATUS, payload: process });
-
