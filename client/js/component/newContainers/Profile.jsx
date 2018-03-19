@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import {
   validateChangePasswordInputs, validateDeleteAccountInputs,
 } from '../../helpers/inputValidators';
-import {
-  changePassword, deleteUser, clearUser,
-} from '../../actions/authAction';
+import { logOut } from '../../actions/authAction';
+import { changePassword, deleteAccount } from '../../actions/userActions';
 import { getAllEvents } from '../../actions/eventActions';
 import { stopAsyncProcess } from '../../actions/commonActions';
 import * as asyncProcess from '../../actions/asyncProcess';
@@ -57,7 +56,7 @@ class Profile extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.deletingUserResolved) {
-      this.props.dispatch(clearUser());
+      this.props.dispatch(logOut());
       $('#delete-account-modal').modal('hide');
     }
   }
@@ -161,7 +160,7 @@ class Profile extends React.Component {
     } else {
       this.clearInputErrors();
       const userToken = this.props.user.token;
-      this.props.dispatch(deleteUser(password, userToken));
+      this.props.dispatch(deleteAccount(password, userToken));
     }
   }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { clearUser } from '../../actions/authAction';
+import { logOut } from '../../actions/authAction';
 
 // NOTE: The user specific top navigation is shown only on medium screens and below,
 // it is replaced by side navigation on large screens.
@@ -67,7 +67,7 @@ const UserTopNav = props => (
             <Link to="/profile" className="nav-link">Profile</Link>
           </li>
           <li className="nav-item">
-            <Link to="/" className="nav-link" onClick={() => props.dispatch(clearUser())}>Logout</Link>
+            <Link to="/" className="nav-link" onClick={() => props.dispatch(logOut())}>Logout</Link>
           </li>
         </ul>
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { validateAddAdminInputs } from '../../helpers/inputValidators';
-import { addAdmin } from '../../actions/authAction';
+import { addAdmin } from '../../actions/userActions';
 import { stopAsyncProcess } from '../../actions/commonActions';
 import * as asyncProcess from '../../actions/asyncProcess';
 import UserSideNav from '../common/SideNavigation';
