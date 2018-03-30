@@ -1,3 +1,4 @@
+import * as utils from './utils';
 /**
  * A middleware.
  * Ensures that the inputs given when creating a user are valid.
@@ -7,55 +8,44 @@
  */
 export const validateSignUpInputs = (req, res, next) => {
   const {
-    name,
-    email,
-    password,
-    confirmpassword,
+    name, email, password, confirmpassword,
   } = res.locals.formattedInputs;
   try {
-    if (name === undefined || name === null) {
+    // Validating Name.
+    if (!utils.isNotEmpty(name) || !utils.isDefined(name)) {
       throw new Error('Name is required');
     }
-    if (name === '') {
-      throw new Error('Name field cannot be empty');
-    }
-    if (name.length < 3) {
+    if (!utils.minCharLength(name, 3)) {
       throw new Error('Name must be equal or more than 3 characters');
     }
-    if (name.match(/^\S+$/) === null) {
-      throw new Error('Name must not contain whitespaces');
-    }
-    if (name.match(/[$-/:-?{-~!"#^,._`[\]]/) !== null) {
+    if (!utils.isAlphanumeric(name)) {
       throw new Error('Name can contain only numbers and letters');
     }
-    if (email === undefined || email === null) {
+    // Validating email.
+    if (!utils.isNotEmpty(email) || !utils.isDefined(email)) {
       throw new Error('Email is required');
     }
-    if (email === '') {
-      throw new Error('Email field cannot be empty');
-    }
-    if (!email.match(/^\S+?@\S+.\S+$/)) {
+    if (!utils.isEmail(email)) {
       throw new Error('Email format is wrong');
     }
-    if (password === undefined || password === null) {
+    // Validating password.
+    if (!utils.isNotEmpty(password) || !utils.isDefined(password)) {
       throw new Error('Password is required');
-    }
-    if (password === '') {
-      throw new Error('Password field cannot be empty');
     }
     if (password.match(/^\S+$/) === null) {
       throw new Error('Password must not contain whitespaces');
     }
-    if (password.length < 7) {
+    if (!utils.minCharLength(password, 7)) {
       throw new Error('Password must be equal or more than 7 characters');
     }
-    if (!/\d/.test(password) || !/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
+    if (!utils.isStrongPassword(password)) {
       throw new Error('Password must contain capital letters, small letters and numbers');
     }
-    if (confirmpassword === undefined || confirmpassword === null) {
+    // Validating confirm password.
+    if (!utils.isNotEmpty(confirmpassword) || !utils.isDefined(confirmpassword)) {
       throw new Error('ConfirmPassword field is required');
     }
-    if (password !== confirmpassword) {
+    if (!utils.isAMatch(password, confirmpassword)) {
       throw new Error('Password and confirm password input does not match');
     }
   } catch (error) {
@@ -73,24 +63,19 @@ export const validateSignUpInputs = (req, res, next) => {
  */
 export const validateSigninInputs = (req, res, next) => {
   const {
-    email,
-    password,
+    email, password,
   } = res.locals.formattedInputs;
   try {
-    if (email === undefined || email === null) {
+    // Validating Email.
+    if (!utils.isNotEmpty(email) || !utils.isDefined(email)) {
       throw new Error('Email is required');
     }
-    if (email === '') {
-      throw new Error('Email cannot be empty');
-    }
-    if (!email.match(/^\S+?@\S+.\S+$/)) {
+    if (!utils.isEmail(email)) {
       throw new Error('Email format is wrong');
     }
-    if (password === undefined || password === null) {
+    // Validating Password.
+    if (!utils.isNotEmpty(password) || !utils.isDefined(password)) {
       throw new Error('Password is required');
-    }
-    if (password === '') {
-      throw new Error('Password cannot be empty');
     }
   } catch (error) {
     return res.status(400).json({ status: 'failed', message: error.message });
@@ -108,13 +93,10 @@ export const validateSigninInputs = (req, res, next) => {
 export const validateCreateAdminInputs = (req, res, next) => {
   const { email } = res.locals.formattedInputs;
   try {
-    if (email === undefined || email === null) {
+    if (!utils.isDefined(email) || !utils.isNotEmpty(email)) {
       throw new Error('Email is required');
     }
-    if (email === '') {
-      throw new Error('Email cannot be empty');
-    }
-    if (!email.match(/^\S+?@\S+.\S+$/)) {
+    if (!utils.isEmail(email)) {
       throw new Error('Email format is wrong');
     }
   } catch (error) {
@@ -135,25 +117,29 @@ export const validateChangePasswordInputs = (req, res, next) => {
     formerpassword, newpassword, confirmnewpassword,
   } = res.locals.formattedInputs;
   try {
-    if (!formerpassword) {
+    // Validating Former password.
+    if (!utils.isNotEmpty(formerpassword) || !utils.isDefined(formerpassword)) {
       throw new Error('The former password is required');
     }
-    if (!newpassword) {
+    // Validating New password.
+    if (!utils.isNotEmpty(newpassword) || !utils.isDefined(newpassword)) {
       throw new Error('The new password is required');
     }
-    if (!confirmnewpassword) {
+    // Validating Confirm new password.
+    if (!utils.isNotEmpty(confirmnewpassword) || !utils.isDefined(confirmnewpassword)) {
       throw new Error('Confirm password field is required');
     }
+    // Validating New Password.
     if (newpassword.match(/^\S+$/) === null) {
       throw new Error('The new password must not contain whitespaces');
     }
-    if (newpassword.length < 7) {
+    if (!utils.minCharLength(newpassword, 7)) {
       throw new Error('The new password must be equal or more than 7 characters');
     }
-    if (!/\d/.test(newpassword) || !/[A-Z]/.test(newpassword) || !/[a-z]/.test(newpassword)) {
+    if (!utils.isStrongPassword(newpassword)) {
       throw new Error('The new password must contain capital letters, small letters and numbers');
     }
-    if (newpassword !== confirmnewpassword) {
+    if (!utils.isAMatch(newpassword, confirmnewpassword)) {
       throw new Error('The new password and confirm password input does not match');
     }
   } catch (error) {
@@ -172,7 +158,7 @@ export const validateChangePasswordInputs = (req, res, next) => {
 export const validateDeleteUserInputs = (req, res, next) => {
   const { password } = res.locals.formattedInputs;
   try {
-    if (!password) {
+    if (!utils.isNotEmpty(password) || !utils.isDefined(password)) {
       throw new Error('password is required');
     }
   } catch (error) {

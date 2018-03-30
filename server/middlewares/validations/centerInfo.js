@@ -1,3 +1,4 @@
+import * as utils from './utils';
 /**
  * A middleware.
  * Ensures that the inputs given when adding a center are valid.
@@ -7,39 +8,41 @@
  */
 export const validateAddCenterInputs = (req, res, next) => {
   const {
-    name,
-    location,
-    details,
-    capacity,
-    price,
+    name, location, details, capacity, price,
   } = res.locals.formattedInputs;
   try {
-    if (name === undefined || name === null) {
+    // Validating Name.
+    if (!utils.isNotEmpty(name) || !utils.isDefined(name)) {
       throw new Error('Center name is required');
     }
-    if (name === '') {
-      throw new Error('Center name cannot be empty');
+    if (!utils.minCharLength(name, 2) || !utils.maxCharLength(name, 30)) {
+      throw new Error('Center name must be between 2 and 30 characters');
     }
-    if (name.length < 5 || name.length > 30) {
-      throw new Error('Center name must be between 5 and 30 characters');
+    // Validating Location.
+    if (utils.isDefined(location) && utils.isNotEmpty(location)) {
+      if (!utils.maxCharLength(location, 50)) {
+        throw new Error('Center location must be below 50 characters');
+      }
     }
-    if (location && location.length > 50) {
-      throw new Error('Center location must be below 50 characters');
+    // Validating Details.
+    if (utils.isDefined(details) && utils.isNotEmpty(details)) {
+      if (!utils.maxCharLength(details, 300)) {
+        throw new Error('Center details must be below 300 characters');
+      }
     }
-    if (details && details.length > 300) {
-      throw new Error('Center details must be below 300 characters');
-    }
-    if (!capacity) {
+    // Validating Capacity.
+    if (!utils.isNotEmpty(capacity) || !utils.isDefined(capacity)) {
       throw new Error('Capacity is required');
     }
-    if (!Number.isFinite(Number(capacity))) {
-      throw new Error('Center capacity must be a number in string format');
+    if (!utils.isInteger(capacity)) {
+      throw new Error('Center capacity must be an integer in string format');
     }
-    if (!price) {
+    // Validating Price.
+    if (!utils.isNotEmpty(price) || !utils.isDefined(price)) {
       throw new Error('Price is required');
     }
-    if (!Number.isFinite(Number(price))) {
-      throw new Error('Center price must be a number in string format');
+    if (!utils.isInteger(price)) {
+      throw new Error('Center price must be an integer in string format');
     }
   } catch (error) {
     return res.status(400).json({ status: 'failed', message: error.message });
@@ -56,36 +59,46 @@ export const validateAddCenterInputs = (req, res, next) => {
  */
 export const validateUpdateCenterInputs = (req, res, next) => {
   const {
-    name,
-    location,
-    details,
-    capacity,
-    price,
+    name, location, details, capacity, price,
   } = res.locals.formattedInputs;
   try {
-    if (name !== undefined && name === '') {
-      throw new Error('Center name cannot be empty');
-    }
-    if (name && name.length < 5) {
-      throw new Error('Center name must be between 5 and 30 characters');
-    }
-    if (name && name.length > 30) {
-      throw new Error('Center name must be between 5 and 30 characters');
-    }
-    if (location && location.length >= 50) {
-      throw new Error('Center location must be below 50 characters');
-    }
-    if (details && details.length > 300) {
-      throw new Error('Center details must be below 300 characters');
-    }
-    if (capacity) {
-      if (!Number.isFinite(Number(capacity))) {
-        throw new Error('Center capacity must be a number in string format');
+    // Validating Name.
+    if (utils.isDefined(name)) {
+      if (!utils.isNotEmpty(name)) {
+        throw new Error('Center name is required');
+      }
+      if (!utils.minCharLength(name, 2) || !utils.maxCharLength(name, 30)) {
+        throw new Error('Center name must be between 2 and 30 characters');
       }
     }
-    if (price) {
-      if (!Number.isFinite(Number(price))) {
-        throw new Error('Center price must be a number in string format');
+    // Validating Location.
+    if (utils.isDefined(location) && utils.isNotEmpty(location)) {
+      if (!utils.maxCharLength(location, 50)) {
+        throw new Error('Center location must be below 50 characters');
+      }
+    }
+    // Validating Details.
+    if (utils.isDefined(details) && utils.isNotEmpty(details)) {
+      if (!utils.maxCharLength(details, 300)) {
+        throw new Error('Center details must be below 300 characters');
+      }
+    }
+    // Validating Capacity.
+    if (utils.isDefined(capacity)) {
+      if (!utils.isNotEmpty(capacity) || !utils.isDefined(capacity)) {
+        throw new Error('Capacity is required');
+      }
+      if (!utils.isInteger(capacity)) {
+        throw new Error('Center capacity must be an integer in string format');
+      }
+    }
+    // Validating Price.
+    if (utils.isDefined(price)) {
+      if (!utils.isNotEmpty(price) || !utils.isDefined(price)) {
+        throw new Error('Price is required');
+      }
+      if (!utils.isInteger(price)) {
+        throw new Error('Center price must be an integer in string format');
       }
     }
   } catch (error) {

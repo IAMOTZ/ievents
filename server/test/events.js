@@ -120,19 +120,19 @@ describe('Events Endpoint', () => {
     it('should not create event with empty title', (done) => {
       createEvent(
         alterEventDetails({ title: '' }),
-        failureAssertions('Event title cannot be empty', 400, done),
+        failureAssertions('Event title is required', 400, done),
       );
     });
-    it('should not create event with title less than 5 char', (done) => {
+    it('should not create event with title less than 3 char', (done) => {
       createEvent(
-        alterEventDetails({ title: 'tes' }),
-        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
+        alterEventDetails({ title: 'te' }),
+        failureAssertions('Event title must be between 3 and 30 characters', 400, done),
       );
     });
     it('should not create event with title above than 30 char', (done) => {
       createEvent(
         alterEventDetails({ title: randomCharacters(31) }),
-        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
+        failureAssertions('Event title must be between 3 and 30 characters', 400, done),
       );
     });
     it('should not create event with description above 200 chars', (done) => {
@@ -250,19 +250,19 @@ describe('Events Endpoint', () => {
     it('should not modify event with empty title', (done) => {
       modifyEvent(
         alterEventDetails({ title: '' }),
-        failureAssertions('Event title cannot be empty', 400, done),
+        failureAssertions('Event title is required', 400, done),
       );
     });
-    it('should not modify event with title less than 5 char', (done) => {
+    it('should not modify event with title less than 3 char', (done) => {
       modifyEvent(
-        alterEventDetails({ title: 'tes' }),
-        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
+        alterEventDetails({ title: 'te' }),
+        failureAssertions('Event title must be between 3 and 30 characters', 400, done),
       );
     });
     it('should not modify event with title above than 30 char', (done) => {
       modifyEvent(
         alterEventDetails({ title: randomCharacters(31) }),
-        failureAssertions('Event title must be between 5 and 30 characters', 400, done),
+        failureAssertions('Event title must be between 3 and 30 characters', 400, done),
       );
     });
     it('should not modify event with description above 200 chars', (done) => {

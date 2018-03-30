@@ -115,13 +115,13 @@ describe('Centers Endpoint', () => {
     it('should not create center with empty name', (done) => {
       createCenter(
         alterCenterDetails({ name: '' }),
-        failureAssertions('Center name cannot be empty', 400, done),
+        failureAssertions('Center name is required', 400, done),
       );
     });
-    it('should not create center with name less than 5 char', (done) => {
+    it('should not create center with name less than 2 char', (done) => {
       createCenter(
-        alterCenterDetails({ name: 'tes' }),
-        failureAssertions('Center name must be between 5 and 30 characters', 400, done),
+        alterCenterDetails({ name: 't' }),
+        failureAssertions('Center name must be between 2 and 30 characters', 400, done),
       );
     });
     it('should not create center with location greater that 50 char', (done) => {
@@ -145,7 +145,7 @@ describe('Centers Endpoint', () => {
     it('should not create center if capacity value is not a number', (done) => {
       createCenter(
         alterCenterDetails({ capacity: 'str' }),
-        failureAssertions('Center capacity must be a number in string format', 400, done),
+        failureAssertions('Center capacity must be an integer in string format', 400, done),
       );
     });
     it('should not create center without price', (done) => {
@@ -157,7 +157,7 @@ describe('Centers Endpoint', () => {
     it('should not create center if price value is not a number', (done) => {
       createCenter(
         alterCenterDetails({ price: 'str' }),
-        failureAssertions('Center price must be a number in string format', 400, done),
+        failureAssertions('Center price must be an integer in string format', 400, done),
       );
     });
     it('should not create a center from a regular user', (done) => {
@@ -202,19 +202,19 @@ describe('Centers Endpoint', () => {
     it('should not modify a center with empty name', (done) => {
       modifyCenter(
         alterCenterDetails({ name: '' }),
-        failureAssertions('Center name cannot be empty', 400, done),
+        failureAssertions('Center name is required', 400, done),
       );
     });
-    it('should not modify a center with name less than 5 chars', (done) => {
+    it('should not modify a center with name less than 2 chars', (done) => {
       modifyCenter(
-        alterCenterDetails({ name: 'tes' }),
-        failureAssertions('Center name must be between 5 and 30 characters', 400, done),
+        alterCenterDetails({ name: 't' }),
+        failureAssertions('Center name must be between 2 and 30 characters', 400, done),
       );
     });
     it('should not modify a center with name above 30 chars', (done) => {
       modifyCenter(
         alterCenterDetails({ name: randomCharacters(35) }),
-        failureAssertions('Center name must be between 5 and 30 characters', 400, done),
+        failureAssertions('Center name must be between 2 and 30 characters', 400, done),
       );
     });
     it('should not modify a center with location above 50 chars', (done) => {
@@ -229,16 +229,16 @@ describe('Centers Endpoint', () => {
         failureAssertions('Center details must be below 300 characters', 400, done),
       );
     });
-    it('should not create center if capacity value is not a number', (done) => {
+    it('should not modify center if capacity value is not a number', (done) => {
       modifyCenter(
         alterCenterDetails({ capacity: 'str' }),
-        failureAssertions('Center capacity must be a number in string format', 400, done),
+        failureAssertions('Center capacity must be an integer in string format', 400, done),
       );
     });
-    it('should not create center if price value is not a number', (done) => {
+    it('should not modify center if price value is not a number', (done) => {
       modifyCenter(
         alterCenterDetails({ price: 'str' }),
-        failureAssertions('Center price must be a number in string format', 400, done),
+        failureAssertions('Center price must be an integer in string format', 400, done),
       );
     });
     it('should not modify a center that does not exist', (done) => {

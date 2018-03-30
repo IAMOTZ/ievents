@@ -79,7 +79,6 @@ export default {
       return res.status(201).json({
         status: 'success',
         message: 'User created',
-        user: formatUserData(newUser),
         token: generateToken(formatUserData(newUser)),
       });
     }
@@ -103,7 +102,6 @@ export default {
       return res.status(200).json({
         status: 'success',
         message: 'Logged in',
-        user: formatUserData(user),
         token: generateToken(formatUserData(user)),
       });
     } else {

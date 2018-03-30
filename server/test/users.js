@@ -79,7 +79,7 @@ describe('User Endpoints', () => {
     it('should not create a user with empty name', (done) => {
       createUser(
         alterUserDetails({ name: '' }),
-        failureAssertions('Name field cannot be empty', 400, done),
+        failureAssertions('Name is required', 400, done),
       );
     });
     it('should not create a user with name less that 3 char', (done) => {
@@ -91,7 +91,7 @@ describe('User Endpoints', () => {
     it('should not create a user with name containing white spaces', (done) => {
       createUser(
         alterUserDetails({ name: 'te st' }),
-        failureAssertions('Name must not contain whitespaces', 400, done),
+        failureAssertions('Name can contain only numbers and letters', 400, done),
       );
     });
     it('should not create a user with name containing symbols', (done) => {
@@ -106,10 +106,10 @@ describe('User Endpoints', () => {
         failureAssertions('Email is required', 400, done),
       );
     });
-    it('shoulld not create a user with empty email', (done) => {
+    it('should not create a user with empty email', (done) => {
       createUser(
         alterUserDetails({ email: '' }),
-        failureAssertions('Email field cannot be empty', 400, done),
+        failureAssertions('Email is required', 400, done),
       );
     });
     it('should not create a user with wrong email format', (done) => {
@@ -124,10 +124,10 @@ describe('User Endpoints', () => {
         failureAssertions('Password is required', 400, done),
       );
     });
-    it('should not create user with empty password', (done) => {
+    it('should not create a user with empty password', (done) => {
       createUser(
         alterUserDetails({ password: '' }),
-        failureAssertions('Password field cannot be empty', 400, done),
+        failureAssertions('Password is required', 400, done),
       );
     });
     it('should not create a user with password containing white spaces', (done) => {
@@ -164,13 +164,9 @@ describe('User Endpoints', () => {
       createUser(
         normalUserDetails,
         (err, res) => {
-          console.log('=====>', res.body);
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.token.should.be.a('string');
-          res.body.user.name.should.be.eql('test');
-          res.body.user.email.should.be.eql('test@gmail.com');
-          res.body.user.role.should.be.eql('user');
           done();
         },
       );
@@ -182,9 +178,6 @@ describe('User Endpoints', () => {
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.token.should.be.a('string');
-          res.body.user.name.should.be.eql('test');
-          res.body.user.email.should.be.eql('test2@gmail.com');
-          res.body.user.role.should.be.eql('user');
           done();
         },
       );
@@ -206,7 +199,7 @@ describe('User Endpoints', () => {
     it('should not signin a user with empty email', (done) => {
       loginUser(
         alterUserDetails({ email: '' }),
-        failureAssertions('Email cannot be empty', 400, done),
+        failureAssertions('Email is required', 400, done),
       );
     });
     it('should not signin a user with wrong email format', (done) => {
@@ -224,7 +217,7 @@ describe('User Endpoints', () => {
     it('should not signin a user with empty password', (done) => {
       loginUser(
         alterUserDetails({ password: '' }),
-        failureAssertions('Password cannot be empty', 400, done),
+        failureAssertions('Password is required', 400, done),
       );
     });
     it('should not signin a user if password is wrong', (done) => {
@@ -246,9 +239,6 @@ describe('User Endpoints', () => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.token.should.be.a('string');
-          res.body.user.name.should.be.eql('test');
-          res.body.user.email.should.be.eql('test@gmail.com');
-          res.body.user.role.should.be.eql('user');
           done();
         },
       );
@@ -282,7 +272,7 @@ describe('User Endpoints', () => {
     it('should not create admin with empty email', (done) => {
       createAdmin(
         alterAdminDetails({ email: '' }),
-        failureAssertions('Email cannot be empty', 400, done),
+        failureAssertions('Email is required', 400, done),
       );
     });
     it('should not create admin with wrong email format', (done) => {
@@ -474,9 +464,6 @@ describe('User Endpoints', () => {
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
           res.body.token.should.be.a('string');
-          res.body.user.name.should.be.eql('test');
-          res.body.user.email.should.be.eql('test2@gmail.com');
-          res.body.user.role.should.be.eql('user');
           done();
         },
       );

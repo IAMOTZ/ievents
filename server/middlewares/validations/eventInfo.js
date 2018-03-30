@@ -1,4 +1,5 @@
 import { getCurrentDate } from '../../helpers';
+import * as utils from './utils';
 
 /**
  * A middleware.
@@ -9,28 +10,27 @@ import { getCurrentDate } from '../../helpers';
  */
 export const validateAddEventInputs = (req, res, next) => {
   const {
-    title,
-    description,
-    date,
-    centerid,
+    title, description, date, centerid,
   } = res.locals.formattedInputs;
   try {
-    if (title === undefined || title === null) {
+    // Validating Title.
+    if (!utils.isNotEmpty(title) || !utils.isDefined(title)) {
       throw new Error('Event title is required');
     }
-    if (title === '') {
-      throw new Error('Event title cannot be empty');
+    if (!utils.minCharLength(title, 3) || !utils.maxCharLength(title, 30)) {
+      throw new Error('Event title must be between 3 and 30 characters');
     }
-    if (title.length < 5 || title.length > 30) {
-      throw new Error('Event title must be between 5 and 30 characters');
+    // Validating Description.
+    if (utils.isDefined(description) && utils.isNotEmpty(description)) {
+      if (!utils.maxCharLength(description, 200)) {
+        throw new Error('Event description must be below 200 characters');
+      }
     }
-    if (description && description.length > 200) {
-      throw new Error('Event description must be below 200 characters');
-    }
-    if (!date) {
+    // Validating Date.
+    if (!utils.isNotEmpty(date) || !utils.isDefined(date)) {
       throw new Error('Event date is required');
     }
-    if (date) {
+    if (utils.isDefined(date)) {
       const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
       if (!dateData) {
         throw new Error('The date format should be yyyy/mm/dd');
@@ -58,10 +58,11 @@ export const validateAddEventInputs = (req, res, next) => {
         throw new Error('You can only create event for today and upcoming days');
       }
     }
+    // Validating Center ID.
     if (!centerid) {
       throw new Error('Center is required');
     }
-    if (!Number.isInteger(Number(centerid))) {
+    if (!utils.isInteger(centerid)) {
       throw new Error('Center id must be an integer in a string format');
     }
   } catch (error) {
@@ -79,24 +80,25 @@ export const validateAddEventInputs = (req, res, next) => {
  */
 export const validateUpdateEventInputs = (req, res, next) => {
   const {
-    title,
-    description,
-    date,
-    centerid,
+    title, description, date, centerid,
   } = res.locals.formattedInputs;
   try {
-    if (title !== undefined && title === '') {
-      throw new Error('Event title cannot be empty');
+    // Validating Title.
+    if (utils.isDefined(title)) {
+      if (!utils.isNotEmpty(title)) {
+        throw new Error('Event title is required');
+      }
+      if (!utils.minCharLength(title, 3) || !utils.maxCharLength(title, 30)) {
+        throw new Error('Event title must be between 3 and 30 characters');
+      }
     }
-    if (title && title.length < 5) {
-      throw new Error('Event title must be between 5 and 30 characters');
+    // Validating Description.
+    if (utils.isDefined(description) && utils.isNotEmpty(description)) {
+      if (!utils.maxCharLength(description, 200)) {
+        throw new Error('Event description must be below 200 characters');
+      }
     }
-    if (title && title.length > 30) {
-      throw new Error('Event title must be between 5 and 30 characters');
-    }
-    if (description && description.length > 200) {
-      throw new Error('Event description must be below 200 characters');
-    }
+    // Validating Date.
     if (date) {
       const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
       if (!dateData) {
@@ -125,7 +127,8 @@ export const validateUpdateEventInputs = (req, res, next) => {
         throw new Error('You can only create event for today and upcoming days');
       }
     }
-    if (centerid && !Number.isInteger(Number(centerid))) {
+    // Validating Center ID
+    if (centerid && !utils.isInteger(centerid)) {
       throw new Error('Center id must be an integer in a string format');
     }
   } catch (error) {

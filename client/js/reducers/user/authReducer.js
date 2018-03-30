@@ -1,19 +1,22 @@
-import jwtDecode from 'jwt-decode';
+import jwt from 'jsonwebtoken';
 import * as actionTypes from '../../actions/actionTypes';
 
 const TOKEN_NAME = 'IEVENTS_USER_TOKEN';
 let previousUser;
-let previousToken;
-try {
-  previousToken = localStorage.getItem(TOKEN_NAME);
-  previousUser = jwtDecode(previousToken);
-  previousUser = Object.assign({}, previousUser, { token: previousToken });
-} catch (e) { }
+const previousToken = localStorage.getItem(TOKEN_NAME);
+if (previousToken) {
+  try {
+    previousUser = jwt.verify(previousToken, process.env.JSON_WEB_TOKEN_SECRETE);
+    previousUser = { ...previousUser, token: previousToken };
+  } catch (e) {
+    previousUser = null;
+  }
+}
 
 const initailSatate = {
   user: previousUser || null,
   loggingUserStarted: false,
-  loggingUserResolved: false,
+  loggingUserResolved: Boolean(previousUser),
   loggingUserError: null,
 };
 
@@ -28,9 +31,10 @@ export default (state = initailSatate, action) => {
       };
     }
     case actionTypes.LOGGING_USER_RESOLVED: {
-      const { user } = action.payload;
-      user.token = action.payload.token;
-      localStorage.setItem(TOKEN_NAME, action.payload.token);
+      const { token } = action.payload;
+      localStorage.setItem(TOKEN_NAME, token);
+      let user = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE);
+      user = { ...user, token };
       return {
         ...state,
         user,
@@ -57,8 +61,10 @@ export default (state = initailSatate, action) => {
       };
     }
     case actionTypes.ADDING_USER_RESOLVED: {
-      const { user } = action.payload;
-      localStorage.setItem(TOKEN_NAME, action.payload.token);
+      const { token } = action.payload;
+      localStorage.setItem(TOKEN_NAME, token);
+      let user = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE);
+      user = { ...user, token };
       return {
         ...state,
         user,
