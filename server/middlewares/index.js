@@ -1,4 +1,4 @@
-import formatInputDatas from './helpers';
+import formatInputDatas from './formatInputDatas';
 
 export * from './validations/userInfo';
 export * from './validations/eventInfo';

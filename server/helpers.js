@@ -47,7 +47,7 @@ export const getCurrentDate = (timeZoneOffset) => {
 };
 
 /**
- * Updates the status of all the event that their date is passed to DONE.
+ * Updates the status of all the event that their date is passed to become DONE.
  * It also deletes the transaction of such events.
  * @param {Object} eventModel The query interface for events in the database.
  * @param {Object} transactionModel The query interface for transactions in the database.

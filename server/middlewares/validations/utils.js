@@ -64,7 +64,12 @@ export const isEmail = input => /^.+?@.+?\..+$/.test(input);
  * @param {String} input The password string to verify.
  * @returns {Boolean} Truthy value to tell if the check is successsful or not.
  */
-export const isStrongPassword = input => /\d/.test(input) && /[A-Z]/.test(input) && /[a-z]/.test(input) && input.length > 7;
+export const isStrongPassword = input => (
+  /\d/.test(input) &&
+  /[A-Z]/.test(input) &&
+  /[a-z]/.test(input) &&
+  input.length > 7
+);
 
 /**
  * Ensures that two values matches themselves.

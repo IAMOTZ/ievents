@@ -7,7 +7,7 @@ import {
   validateCreateAdminInputs, validateAddCenterInputs,
   validateUpdateCenterInputs, validateAddEventInputs,
   validateUpdateEventInputs, formatInputDatas,
-  validateChangePasswordInputs, validateDeleteUserInputs
+  validateChangePasswordInputs, validateDeleteUserInputs,
 } from './middlewares';
 
 const router = express.Router();
