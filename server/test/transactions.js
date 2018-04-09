@@ -110,7 +110,7 @@ describe('Transactions Endpoint', () => {
     it('should not delete transaction that does not exist', (done) => {
       deleteTransaction(
         { token: adminToken },
-        failureAssertions('Transaction does not exist', 400, done),
+        failureAssertions('Transaction does not exist', 404, done),
         1000,
       );
     });

@@ -94,7 +94,7 @@ export default {
     const { email, password } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
         message: 'User not found',
       });
@@ -142,7 +142,7 @@ export default {
     const { email } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
         message: 'User not found',
       });

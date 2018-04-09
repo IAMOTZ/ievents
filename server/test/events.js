@@ -203,7 +203,7 @@ describe('Events Endpoint', () => {
     it('should not create an event if the choosen center does not exist', (done) => {
       createEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('The choosen center does not exist', 400, done),
+        failureAssertions('The choosen center does not exist', 404, done),
       );
     });
     it('should create an event', (done) => {
@@ -327,7 +327,7 @@ describe('Events Endpoint', () => {
     it('should not modify event if the new choosen center does not exist', (done) => {
       modifyEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('The new choosen center does not exist', 400, done),
+        failureAssertions('The new choosen center does not exist', 404, done),
       );
     });
     it('should not modify event if the new choosen center is booked for the date', (done) => {
@@ -380,7 +380,7 @@ describe('Events Endpoint', () => {
     it('should not delete an event that does not exist', (done) => {
       deleteEvent(
         { token: userToken1 },
-        failureAssertions('Event does not exist', 400, done),
+        failureAssertions('Event does not exist', 404, done),
         1000,
       );
     });

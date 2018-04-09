@@ -84,7 +84,7 @@ export const isEventOwner = async (req, res, next) => {
   const eventId = req.params.id;
   const event = await events.findById(Number(eventId));
   if (!event) {
-    return res.status(400).json({
+    return res.status(404).json({
       status: 'failed',
       message: 'Event does not exist',
     });

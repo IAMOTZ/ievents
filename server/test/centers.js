@@ -244,7 +244,7 @@ describe('Centers Endpoint', () => {
     it('should not modify a center that does not exist', (done) => {
       modifyCenter(
         alterCenterDetails({ name: 'modified name' }),
-        failureAssertions('Center does not exist', 400, done),
+        failureAssertions('Center does not exist', 404, done),
         1000,
       );
     });
@@ -275,7 +275,7 @@ describe('Centers Endpoint', () => {
     it('should not get a center that does not exist', (done) => {
       getOneCenter(
         1000,
-        failureAssertions('Center does not exist', 400, done),
+        failureAssertions('Center does not exist', 404, done),
       );
     });
     it('should get the first center', (done) => {

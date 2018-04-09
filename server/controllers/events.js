@@ -116,7 +116,7 @@ export default {
     const userId = req.decoded.id;
     const choosenCenter = await getCenter(centers, centerid);
     if (!choosenCenter) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
         message: 'The choosen center does not exist',
       });
@@ -161,7 +161,7 @@ export default {
       const newChoosenCenter = await getCenter(centers, centerid);
       const centerIsBooked = await isCenterBooked(events, centerid, date);
       if (!newChoosenCenter) {
-        return res.status(400).json({
+        return res.status(404).json({
           status: 'failed',
           message: 'The new choosen center does not exist',
         });

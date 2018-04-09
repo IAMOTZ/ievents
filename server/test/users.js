@@ -229,7 +229,7 @@ describe('User Endpoints', () => {
     it('should not signin a user that does not exist', (done) => {
       loginUser(
         alterUserDetails({ email: 'notRegistered@gmail.com' }),
-        failureAssertions('User not found', 400, done),
+        failureAssertions('User not found', 404, done),
       );
     });
     it('should signin a user', (done) => {
@@ -284,7 +284,7 @@ describe('User Endpoints', () => {
     it('should not create admin, if the user is not registered', (done) => {
       createAdmin(
         alterAdminDetails({ email: 'notRegistered@gmail.com' }),
-        failureAssertions('User not found', 400, done),
+        failureAssertions('User not found', 404, done),
       );
     });
     it('should create admin', (done) => {
