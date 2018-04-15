@@ -6,7 +6,7 @@ import {
   validateSignUpInputs, validateSigninInputs,
   validateCreateAdminInputs, validateAddCenterInputs,
   validateUpdateCenterInputs, validateAddEventInputs,
-  validateUpdateEventInputs, formatInputDatas,
+  validateUpdateEventInputs, formatInputDatas, validateResourceID,
   validateChangePasswordInputs, validateDeleteUserInputs,
 } from './middlewares';
 
@@ -48,6 +48,7 @@ router.get(
 );
 router.get(
   '/centers/:id',
+  validateResourceID,
   controllers.centers.getOne,
 );
 router.get(
@@ -63,6 +64,7 @@ router.post(
 );
 router.put(
   '/events/:id',
+  validateResourceID,
   isUser,
   isEventOwner,
   validateUpdateEventInputs,
@@ -70,6 +72,7 @@ router.put(
 );
 router.delete(
   '/events/:id',
+  validateResourceID,
   isUser,
   isEventOwner,
   controllers.events.delete,
@@ -85,6 +88,7 @@ router.post(
 );
 router.put(
   '/centers/:id',
+  validateResourceID,
   upload.single('image'),
   isUser,
   isAdmin,
@@ -100,6 +104,7 @@ router.get(
 );
 router.delete(
   '/transactions/:id',
+  validateResourceID,
   isUser,
   isAdmin,
   controllers.transactions.delete,

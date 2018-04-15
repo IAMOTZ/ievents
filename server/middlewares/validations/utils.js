@@ -46,8 +46,10 @@ export const isAlphanumeric = input => /^[a-z0-9]+$/i.test(input);
  * @returns {Boolean} Truthy value to tell if the check is successsful or not.
  */
 export const isInteger = (input) => {
-  const result = input ? Number.isInteger(Number(input)) : false;
-  return result;
+  if (typeof input === 'string' || typeof input === 'number') {
+    return Number.isInteger(Number(input)) || false;
+  }
+  return false;
 };
 
 /**

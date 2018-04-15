@@ -248,6 +248,13 @@ describe('Centers Endpoint', () => {
         1000,
       );
     });
+    it('should not modify a center if the center ID is not given as an integer', (done) => {
+      modifyCenter(
+        alterCenterDetails({ name: 'modified name' }),
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'nonIntegerId',
+      );
+    });
     it('should modify a center', (done) => {
       modifyCenter(
         alterCenterDetails({
@@ -276,6 +283,12 @@ describe('Centers Endpoint', () => {
       getOneCenter(
         1000,
         failureAssertions('Center does not exist', 404, done),
+      );
+    });
+    it('should not get a center with non integer ID', (done) => {
+      getOneCenter(
+        'nonIntegerID',
+        failureAssertions('Resource ID must be an integer', 400, done),
       );
     });
     it('should get the first center', (done) => {

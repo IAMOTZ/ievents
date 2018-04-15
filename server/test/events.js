@@ -337,6 +337,13 @@ describe('Events Endpoint', () => {
         failureAssertions('The center has been booked for that date', 400, done),
       );
     });
+    it('should not modify event if the event ID is not given as an integer', (done) => {
+      modifyEvent(
+        alterEventDetails({ title: 'modified title' }),
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'nonIntegerID',
+      );
+    });
     it('should modify event', (done) => {
       modifyEvent(
         alterEventDetails({
@@ -382,6 +389,13 @@ describe('Events Endpoint', () => {
         { token: userToken1 },
         failureAssertions('Event does not exist', 404, done),
         1000,
+      );
+    });
+    it('should not delete event if the event ID is not given as an integer', (done) => {
+      deleteEvent(
+        { token: userToken1 },
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'nonIntegerID',
       );
     });
     it('should delete event', (done) => {

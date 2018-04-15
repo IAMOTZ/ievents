@@ -110,7 +110,7 @@ export const validateCreateAdminInputs = (req, res, next) => {
  * Ensures that the inputs given when changing password are valid.
  * @param {Object} req The request object.
  * @param {Object} res  The response objcet.
- * @param {Object} next The function that transfers to the next middleware.
+ * @param {Function} next The function that transfers to the next middleware.
  */
 export const validateChangePasswordInputs = (req, res, next) => {
   const {
@@ -165,4 +165,20 @@ export const validateDeleteUserInputs = (req, res, next) => {
     return res.status(400).json({ status: 'failed', message: error.message });
   }
   next();
+};
+
+/**
+ * A middleware.
+ * Ensures that the ID of a resource specified in a request is valid.
+ * @param {Object} req The request object.
+ * @param {Object} res The response object.
+ * @param {Function} next The function that transfers to the next middleware.
+ */
+export const validateResourceID = (req, res, next) => {
+  const resourceID = req.params.id;
+  if (utils.isInteger(resourceID)) {
+    next();
+  } else {
+    return res.status(400).json({ status: 'failed', message: 'Resource ID must be an integer' });
+  }
 };

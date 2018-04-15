@@ -114,6 +114,13 @@ describe('Transactions Endpoint', () => {
         1000,
       );
     });
+    it('should not delete a transaction if its ID is not given as an integer', (done) => {
+      deleteTransaction(
+        { token: adminToken },
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'nonIntegerID',
+      );
+    });
     it('should delete transaction', (done) => {
       deleteTransaction(
         { token: adminToken },
