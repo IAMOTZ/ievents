@@ -96,7 +96,7 @@ export default {
     if (!user) {
       return res.status(404).json({
         status: 'failed',
-        message: 'User not found',
+        message: 'Email or password incorrect',
       });
     } else if (verifyPassword(password, user.password)) {
       return res.status(200).json({
@@ -107,7 +107,7 @@ export default {
     } else {
       return res.status(400).json({
         status: 'failed',
-        message: 'Password incorrect',
+        message: 'Email or password incorrect',
       });
     }
   },

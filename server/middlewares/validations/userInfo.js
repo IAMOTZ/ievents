@@ -71,7 +71,7 @@ export const validateSigninInputs = (req, res, next) => {
       throw new Error('Email is required');
     }
     if (!utils.isEmail(email)) {
-      throw new Error('Email format is wrong');
+      throw new Error('Email or password incorrect');
     }
     // Validating Password.
     if (!utils.isNotEmpty(password) || !utils.isDefined(password)) {

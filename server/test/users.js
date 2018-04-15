@@ -205,7 +205,7 @@ describe('User Endpoints', () => {
     it('should not signin a user with wrong email format', (done) => {
       loginUser(
         alterUserDetails({ email: 'test.com' }),
-        failureAssertions('Email format is wrong', 400, done),
+        failureAssertions('Email or password incorrect', 400, done),
       );
     });
     it('should not signin a user without password', (done) => {
@@ -223,13 +223,13 @@ describe('User Endpoints', () => {
     it('should not signin a user if password is wrong', (done) => {
       loginUser(
         alterUserDetails({ password: 'WrongPassword123' }),
-        failureAssertions('Password incorrect', 400, done),
+        failureAssertions('Email or password incorrect', 400, done),
       );
     });
     it('should not signin a user that does not exist', (done) => {
       loginUser(
         alterUserDetails({ email: 'notRegistered@gmail.com' }),
-        failureAssertions('User not found', 404, done),
+        failureAssertions('Email or password incorrect', 404, done),
       );
     });
     it('should signin a user', (done) => {
