@@ -8,7 +8,7 @@ node_js:
 before_script: 
    - npm install
    - psql -c 'create database travis;' -U postgres   
-   - "./node_modules/.bin/babel-node ./server/setUpDatabase"
+   - "export NODE_ENV=test && ./node_modules/.bin/babel-node ./server/setUpDatabase"
    
 script: 
    -  "./node_modules/.bin/mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --exit"

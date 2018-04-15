@@ -3,7 +3,7 @@
 import jwt from 'jsonwebtoken';
 import db from '../../models';
 
-const { events } = db;
+const { events, users } = db;
 
 /**
  * A middleware
@@ -15,7 +15,7 @@ const { events } = db;
 export const isUser = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['access-token'];
   if (token) {
-    jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE, (error, decoded) => {
+    jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE, async (error, decoded) => {
       if (error) {
         return res.status(401).json({
           status: 'failed',
@@ -23,6 +23,13 @@ export const isUser = (req, res, next) => {
         });
       } else {
         req.decoded = decoded;
+        const user = await users.findById(Number(req.decoded.id));
+        if (!user) {
+          return res.status(401).json({
+            status: 'failed',
+            message: 'Failed to authenticate token',
+          });
+        } else res.locals.currentUser = user;
         next();
       }
     });

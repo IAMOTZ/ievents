@@ -114,8 +114,7 @@ export default {
 
   async changePassword(req, res) {
     const { formerpassword, newpassword } = res.locals.formattedInputs;
-    const userEmail = req.decoded.email;
-    const user = await getUser(users, userEmail);
+    const user = res.locals.currentUser;
     if (verifyPassword(formerpassword, user.password)) {
       await user.update({
         password: newpassword,
@@ -167,13 +166,12 @@ export default {
    * @returns {Object} The response object containing some resonse data.
    */
   async deleteUser(req, res) {
-    const userEmail = req.decoded.email;
     const userPassword = res.locals.formattedInputs.password;
-    const user = await getUser(users, userEmail);
+    const user = res.locals.currentUser;
     if (verifyPassword(userPassword, user.password)) {
       await users.destroy({
         where: {
-          email: userEmail,
+          email: user.email,
         },
       });
       res.status(200).json({
