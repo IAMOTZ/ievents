@@ -82,7 +82,7 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
       },
     },
   });
-  return;
+  return; // eslint-disable-line no-useless-return
 };
 
 /**
@@ -95,16 +95,14 @@ export const createSuperAdmin = async (userModel) => {
       email: process.env.SUPER_ADMIN_EMAIL,
     },
   });
-  if (user) {
-    return;
-  } else {
-    await userModel.create({
+  if (!user) {
+    const superAdmin = await userModel.create({
       name: process.env.SUPER_ADMIN_NAME,
       email: process.env.SUPER_ADMIN_EMAIL,
       password: process.env.SUPER_ADMIN_PASSWORD,
       role: 'superAdmin',
     });
-    return;
+    return superAdmin;
   }
 };
 
