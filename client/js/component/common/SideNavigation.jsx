@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { clearUser } from '../../actions/authAction';
+import { logOut } from '../../actions/authAction';
 
 // NOTE: The side navigation is shown only on large screens,
 // it is replaced by top navigation on medium screens and below.
@@ -25,7 +25,7 @@ const UserSideNav = props => (
         <Link to="/profile" className="list-group-item">
           <i className="fa fa-user-circle fa-fw" aria-hidden="true" />&nbsp; Profile
         </Link>
-        <Link to="/" className="list-group-item" onClick={() => props.dispatch(clearUser())}>
+        <Link to="/" className="list-group-item" onClick={() => props.dispatch(logOut())}>
           <i className="fa fa-power-off fa-fw" aria-hidden="true" />&nbsp; Logout
         </Link>
       </div>

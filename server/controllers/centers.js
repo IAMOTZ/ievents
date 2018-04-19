@@ -9,7 +9,7 @@ const { centers, events } = db;
  * @param {Array} events an array of events.
  * @returns {Array} an array of the date of allowed events.
  */
-const getDatesFromEvents = eventsArray => (
+const getDatesFromAllowedEvents = eventsArray => (
   eventsArray.filter(event => event.status === 'allowed').map(event => event.date)
 );
 
@@ -40,7 +40,7 @@ const formatCenterData = centerData => (
       capacity: centerData.capacity,
       price: centerData.price,
       images: centerData.images,
-      bookedOn: centerData.events ? getDatesFromEvents(centerData.events) : null,
+      bookedOn: centerData.events ? getDatesFromAllowedEvents(centerData.events) : null,
     },
   )
 );
@@ -61,7 +61,7 @@ export default {
     });
     return res.status(200).json({
       status: 'success',
-      message: 'centers successfully retrieved',
+      message: 'Centers successfully retrieved',
       centers: allCenters.map(center => formatCenterData(center)),
     });
   },
@@ -84,14 +84,14 @@ export default {
       }],
     });
     if (!center) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
-        message: 'center does not exist',
+        message: 'Center does not exist',
       });
     } else {
       return res.status(200).json({
         status: 'success',
-        message: 'center successfully retrieved',
+        message: 'Center successfully retrieved',
         center: formatCenterData(center),
       });
     }
@@ -107,7 +107,6 @@ export default {
     const {
       name, location, details, capacity, price,
     } = res.locals.formattedInputs;
-    const userId = req.decoded.id;
     let image = null;
     if (req.file) {
       image = await uploadImage(req.file);
@@ -120,11 +119,10 @@ export default {
         capacity,
         price,
         images: image ? [image.secure_url] : null,
-        userId,
       });
     return res.status(201).json({
       status: 'success',
-      message: 'center created',
+      message: 'Center created',
       center: formatCenterData(newCenter),
     });
   },
@@ -142,9 +140,9 @@ export default {
     const centerId = req.params.id;
     const center = await getCenter(centers, centerId);
     if (!center) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
-        message: 'center does not exist',
+        message: 'Center does not exist',
       });
     } else {
       let image = null;
@@ -163,7 +161,7 @@ export default {
         });
       return res.status(200).json({
         status: 'success',
-        message: 'center updated',
+        message: 'Center updated',
         center: formatCenterData(updatedCenter),
       });
     }

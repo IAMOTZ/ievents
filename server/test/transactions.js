@@ -48,7 +48,7 @@ const loginUser = (userDetails, assertions) => {
 
 const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   res.should.have.status(statusCode);
-  res.body.message.toLowerCase().should.be.eql(message.toLowerCase());
+  res.body.message.should.be.eql(message);
   res.body.status.should.be.eql('failed');
   done();
 };
@@ -84,7 +84,7 @@ describe('Transactions Endpoint', () => {
     it('should not give transaction to a user that is not an admin', (done) => {
       getTransactions(
         { token: regularUserToken },
-        failureAssertions('you are unauthorized to perform this action', 401, done),
+        failureAssertions('You are unauthorized to perform this action', 401, done),
       );
     });
     it('should get all transactions', (done) => {
@@ -104,14 +104,21 @@ describe('Transactions Endpoint', () => {
     it('should not delete transaction if the user is not an admin', (done) => {
       deleteTransaction(
         { token: regularUserToken },
-        failureAssertions('you are unauthorized to perform this action', 401, done),
+        failureAssertions('You are unauthorized to perform this action', 401, done),
       );
     });
     it('should not delete transaction that does not exist', (done) => {
       deleteTransaction(
         { token: adminToken },
-        failureAssertions('transaction does not exist', 400, done),
+        failureAssertions('Transaction does not exist', 404, done),
         1000,
+      );
+    });
+    it('should not delete a transaction if its ID is not given as an integer', (done) => {
+      deleteTransaction(
+        { token: adminToken },
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'nonIntegerID',
       );
     });
     it('should delete transaction', (done) => {
@@ -120,7 +127,7 @@ describe('Transactions Endpoint', () => {
         (err, res) => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('transaction successfully deleted');
+          res.body.message.should.be.eql('Transaction successfully deleted');
           done();
         },
       );

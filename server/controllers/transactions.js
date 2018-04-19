@@ -49,14 +49,15 @@ const getEventFromTransaction = async (transactionModel, transactionId) => {
 };
 
 /**
- * Creates the email body to send to the user whoose event is to be deleted.
+ * Creates the email body to send to the user whoose event is to be canceled.
  * @param {String} eventTitle The title of the event.
  * @param {String} eventDate The date the event is supposed to occur.
  * @returns {String} The email constructed.
  */
 const createEmailBody = (eventTitle, eventDate) => (
   `<h3>Ievents</h3>
-  <p>Your event, <b>${eventTitle}</b> ,that is supposed to come up on <b>${eventDate}</b> has been canceled!!
+  <p>Your event, <b>${eventTitle}</b> ,that is supposed to come up on <b>
+    ${eventDate}</b> has been canceled!!
     <br> Consequently, the center would not be available for your event.
     <br> <br>
     <b>NOTE:</b>This email terminates the transaction we created with you on this event.
@@ -116,9 +117,9 @@ export default {
     const transactionId = req.params.id;
     const transaction = await getTransaction(transactions, transactionId);
     if (!transaction) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
-        message: 'transaction does not exist',
+        message: 'Transaction does not exist',
       });
     } else {
       const eventDetails = await getEventFromTransaction(transactions, transactionId);
@@ -131,7 +132,7 @@ export default {
       await cancelEvent(events, transaction.eventId);
       return res.status(200).json({
         status: 'success',
-        message: 'transaction successfully deleted',
+        message: 'Transaction successfully deleted',
       });
     }
   },

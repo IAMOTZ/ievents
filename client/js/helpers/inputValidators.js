@@ -96,8 +96,8 @@ export const validateAddEventInputs = (inputs) => {
   // Validating title.
   if (!utils.isNotEmpty(title) || !utils.isDefined(title)) {
     errors.titleError = 'Title is required';
-  } else if (!utils.minCharLength(title, 5) || !utils.maxCharLength(title, 30)) {
-    errors.titleError = 'Title must be between 5 and 30 characters';
+  } else if (!utils.minCharLength(title, 3) || !utils.maxCharLength(title, 30)) {
+    errors.titleError = 'Title must be between 3 and 30 characters';
   }
   // Validating description.
   if (utils.isDefined(description) && utils.isNotEmpty(description)) {
@@ -142,8 +142,8 @@ export const validateUpdateEventInputs = (inputs) => {
   if (utils.isDefined(title)) {
     if (!utils.isNotEmpty(title)) {
       errors.titleError = 'Title is required';
-    } else if (!utils.minCharLength(title, 5) || !utils.maxCharLength(title, 30)) {
-      errors.titleError = 'Title must be between 5 and 30 characters';
+    } else if (!utils.minCharLength(title, 3) || !utils.maxCharLength(title, 30)) {
+      errors.titleError = 'Title must be between 3 and 30 characters';
     }
   }
   // Validating description.
@@ -273,8 +273,8 @@ export const validateAddCenterInputs = (inputs) => {
   // Validating name.
   if (!utils.isNotEmpty(name) || !utils.isDefined(name)) {
     errors.nameError = 'Name is required';
-  } else if (!utils.minCharLength(name, 5) || !utils.maxCharLength(name, 30)) {
-    errors.nameError = 'Name must be between 5 and 30 characters';
+  } else if (!utils.minCharLength(name, 2) || !utils.maxCharLength(name, 30)) {
+    errors.nameError = 'Name must be between 2 and 30 characters';
   }
   // Validating location.
   if (utils.isDefined(location) && utils.isNotEmpty(location)) {
@@ -324,8 +324,8 @@ export const validateUpdateCenterInputs = (inputs) => {
   if (utils.isDefined(name)) {
     if (!utils.isNotEmpty(name)) {
       errors.nameError = 'Name is required';
-    } else if (!utils.minCharLength(name, 5) || !utils.maxCharLength(name, 30)) {
-      errors.nameError = 'Name must be between 5 and 30 characters';
+    } else if (!utils.minCharLength(name, 2) || !utils.maxCharLength(name, 30)) {
+      errors.nameError = 'Name must be between 2 and 30 characters';
     }
   }
   // Validating location.

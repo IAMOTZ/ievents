@@ -68,7 +68,7 @@ export default {
     if (user) {
       return res.status(400).json({
         status: 'failed',
-        message: 'user already exist',
+        message: 'User already exist',
       });
     } else {
       const newUser = await users.create({
@@ -78,8 +78,7 @@ export default {
       });
       return res.status(201).json({
         status: 'success',
-        message: 'user created',
-        user: formatUserData(newUser),
+        message: 'User created',
         token: generateToken(formatUserData(newUser)),
       });
     }
@@ -95,41 +94,39 @@ export default {
     const { email, password } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
-        message: 'user not found',
+        message: 'Email or password incorrect',
       });
     } else if (verifyPassword(password, user.password)) {
       return res.status(200).json({
         status: 'success',
         message: 'Logged in',
-        user: formatUserData(user),
         token: generateToken(formatUserData(user)),
       });
     } else {
       return res.status(400).json({
         status: 'failed',
-        message: 'password incorrect',
+        message: 'Email or password incorrect',
       });
     }
   },
 
   async changePassword(req, res) {
     const { formerpassword, newpassword } = res.locals.formattedInputs;
-    const userEmail = req.decoded.email;
-    const user = await getUser(users, userEmail);
+    const user = res.locals.currentUser;
     if (verifyPassword(formerpassword, user.password)) {
       await user.update({
         password: newpassword,
       });
       return res.status(200).json({
         status: 'success',
-        message: 'password changed',
+        message: 'Password changed',
       });
     } else {
       return res.status(400).json({
         status: 'failed',
-        message: 'the former password is incorrect',
+        message: 'The former password is incorrect',
       });
     }
   },
@@ -144,20 +141,20 @@ export default {
     const { email } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (!user) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
-        message: 'user not found',
+        message: 'User not found',
       });
     } else if (user.role === 'admin' || user.role === 'superAdmin') {
       return res.status(200).json({
         status: 'failed',
-        message: 'the user is already an admin',
+        message: 'The user is already an admin',
       });
     } else {
       await user.update({ role: 'admin' });
       return res.status(200).json({
         status: 'success',
-        message: 'the user has been updated to become an admin',
+        message: 'The user has been updated to become an admin',
       });
     }
   },
@@ -169,13 +166,12 @@ export default {
    * @returns {Object} The response object containing some resonse data.
    */
   async deleteUser(req, res) {
-    const userEmail = req.decoded.email;
     const userPassword = res.locals.formattedInputs.password;
-    const user = await getUser(users, userEmail);
+    const user = res.locals.currentUser;
     if (verifyPassword(userPassword, user.password)) {
       await users.destroy({
         where: {
-          email: userEmail,
+          email: user.email,
         },
       });
       res.status(200).json({

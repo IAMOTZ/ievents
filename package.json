@@ -4,20 +4,20 @@
   "description": "A web app to help manage and run commercial event centers",
   "main": "index.js",
   "scripts": {
-    "start": "node ./build/app",
-    "build": "babel ./server -d ./build",
-    "server:dev": "npm run setUpDb && nodemon ./server/app --exec babel-node  --watch ./server",
-    "react:dev": "webpack-dev-server --content-base src --inline --hot",
-    "react:pro": "set NODE_ENV=production&& webpack",
-    "template:dev": "gulp",
-    "setUpDb": "babel-node ./server/setUpDb",
-    "test": "set NODE_ENV=test&& npm run setUpDb && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --timeout 5000 --exit",
+    "start": "forever ./build/app.js",
+    "prod:server": "babel ./server -d ./build",
+    "prod:client": "set NODE_ENV=production&& webpack",
+    "dev:server": "npm run database:setup && nodemon ./server/app --exec babel-node  --watch ./server",
+    "dev:client": "webpack-dev-server --content-base src --inline --hot",
+    "dev:template": "gulp",
+    "test:server": "export NODE_ENV=test && npm run database:setup && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --timeout 5000 --exit",
     "test:client": "jest",
-    "test:e2e": "nightwatch",
+    "e2e:test": "nightwatch",
     "e2e:setup": "selenium-standalone install",
-    "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "./node_modules/.bin/eslint",
-    "heroku-postbuild": "npm run react:pro && npm run build && npm run setUpDb"
+    "coverage": "npm run test:server && nyc report --reporter=text-lcov | coveralls",
+    "heroku-postbuild": "npm run prod:client && npm run build && npm run database:setup",
+    "database:setup": "babel-node ./server/setUpDatabase"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "express": "^4.16.2",
     "file-loader": "^1.1.5",
     "font-awesome": "^4.7.0",
+    "forever": "^0.15.3",
     "history": "^4.7.2",
     "image-webpack-loader": "^3.4.2",
     "jquery": "^3.2.1",
@@ -111,7 +112,7 @@
     "exclude": [
       "server/config/*.js",
       "server/models/*.js",
-      "server/setUpDb.js",
+      "server/setUpDatabase.js",
       "test/**/*.js"
     ]
   },

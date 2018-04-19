@@ -9,7 +9,7 @@ const apiBaseUrl = process.env.API_BASE_URL;
  * @returns {Function}
  */
 export const getAllTransactions = userToken => (dispatch) => {
-  dispatch({ type: actionTypes.FETCHING_TRANSACTIONS });
+  dispatch({ type: actionTypes.FETCHING_TRANSACTIONS_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -31,7 +31,7 @@ export const getAllTransactions = userToken => (dispatch) => {
  * @returns {Function}
  */
 export const deleteTransaction = (userToken, id) => (dispatch) => {
-  dispatch({ type: actionTypes.DELETING_TRANSACTION });
+  dispatch({ type: actionTypes.DELETING_TRANSACTION_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
@@ -46,10 +46,3 @@ export const deleteTransaction = (userToken, id) => (dispatch) => {
     });
 };
 
-/**
- * It informs a reducer to Clear the status variables tracking a particular transaction process.
- * @param {String} process The process to be cleared.
- */
-export const clearStatus = process => (
-  { type: actionTypes.CLEAR_TRANSACTION_STATUS, payload: process }
-);

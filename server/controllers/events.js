@@ -98,7 +98,7 @@ export default {
     });
     return res.status(200).json({
       status: 'success',
-      message: 'events successfully retrieved',
+      message: 'Events successfully retrieved',
       events: allEvents.map(event => formatEventData(event)),
     });
   },
@@ -116,16 +116,16 @@ export default {
     const userId = req.decoded.id;
     const choosenCenter = await getCenter(centers, centerid);
     if (!choosenCenter) {
-      return res.status(400).json({
+      return res.status(404).json({
         status: 'failed',
-        message: 'the choosen center does not exist',
+        message: 'The choosen center does not exist',
       });
     } else {
       const centerIsBooked = await isCenterBooked(events, centerid, date);
       if (centerIsBooked) {
         return res.status(400).json({
           status: 'failed',
-          message: 'the center has been booked for that date',
+          message: 'The center has been booked for that date',
         });
       } else {
         const newEvent = await events.create({
@@ -138,7 +138,7 @@ export default {
         await createTransaction(transactions, newEvent);
         return res.status(201).json({
           status: 'success',
-          message: 'event created',
+          message: 'Event created',
           event: formatEventData(newEvent),
         });
       }
@@ -161,14 +161,14 @@ export default {
       const newChoosenCenter = await getCenter(centers, centerid);
       const centerIsBooked = await isCenterBooked(events, centerid, date);
       if (!newChoosenCenter) {
-        return res.status(400).json({
+        return res.status(404).json({
           status: 'failed',
-          message: 'the new choosen center does not exist',
+          message: 'The new choosen center does not exist',
         });
       } else if (centerIsBooked) {
         return res.status(400).json({
           status: 'failed',
-          message: 'the center has been booked for that date',
+          message: 'The center has been booked for that date',
         });
       } else {
         updatedEvent = await event.update({
@@ -189,7 +189,7 @@ export default {
     }
     return res.status(200).json({
       status: 'success',
-      message: 'event updated',
+      message: 'Event updated',
       event: formatEventData(updatedEvent),
     });
   },
@@ -205,7 +205,7 @@ export default {
     await event.destroy();
     return res.status(200).json({
       status: 'success',
-      message: 'event deleted',
+      message: 'Event deleted',
     });
   },
 };

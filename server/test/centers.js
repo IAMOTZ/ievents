@@ -79,7 +79,7 @@ const loginUser = (userDetails, assertions) => {
 
 const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   res.should.have.status(statusCode);
-  res.body.message.toLowerCase().should.be.eql(message.toLowerCase());
+  res.body.message.should.be.eql(message);
   res.body.status.should.be.eql('failed');
   done();
 };
@@ -109,61 +109,61 @@ describe('Centers Endpoint', () => {
     it('should not create center without name', (done) => {
       createCenter(
         alterCenterDetails({ name: null }),
-        failureAssertions('center name is required', 400, done),
+        failureAssertions('Center name is required', 400, done),
       );
     });
     it('should not create center with empty name', (done) => {
       createCenter(
         alterCenterDetails({ name: '' }),
-        failureAssertions('center name cannot be empty', 400, done),
+        failureAssertions('Center name is required', 400, done),
       );
     });
-    it('should not create center with name less than 5 char', (done) => {
+    it('should not create center with name less than 2 char', (done) => {
       createCenter(
-        alterCenterDetails({ name: 'tes' }),
-        failureAssertions('center name must be between 5 and 30 characters', 400, done),
+        alterCenterDetails({ name: 't' }),
+        failureAssertions('Center name must be between 2 and 30 characters', 400, done),
       );
     });
     it('should not create center with location greater that 50 char', (done) => {
       createCenter(
         alterCenterDetails({ location: randomCharacters(55) }),
-        failureAssertions('center location must be below 50 characters', 400, done),
+        failureAssertions('Center location must be below 50 characters', 400, done),
       );
     });
     it('should not create center with details greater that 300 char', (done) => {
       createCenter(
         alterCenterDetails({ details: randomCharacters(302) }),
-        failureAssertions('center details must be below 300 characters', 400, done),
+        failureAssertions('Center details must be below 300 characters', 400, done),
       );
     });
     it('should not create center without capacity', (done) => {
       createCenter(
         alterCenterDetails({ capacity: null }),
-        failureAssertions('capacity is required', 400, done),
+        failureAssertions('Capacity is required', 400, done),
       );
     });
     it('should not create center if capacity value is not a number', (done) => {
       createCenter(
         alterCenterDetails({ capacity: 'str' }),
-        failureAssertions('center capacity must be a number in string format', 400, done),
+        failureAssertions('Center capacity must be an integer in string format', 400, done),
       );
     });
     it('should not create center without price', (done) => {
       createCenter(
         alterCenterDetails({ price: null }),
-        failureAssertions('price is required', 400, done),
+        failureAssertions('Price is required', 400, done),
       );
     });
     it('should not create center if price value is not a number', (done) => {
       createCenter(
         alterCenterDetails({ price: 'str' }),
-        failureAssertions('center price must be a number in string format', 400, done),
+        failureAssertions('Center price must be an integer in string format', 400, done),
       );
     });
     it('should not create a center from a regular user', (done) => {
       createCenter(
         alterCenterDetails({ token: regularUserToken }),
-        failureAssertions('you are unauthorized to perform this action', 401, done),
+        failureAssertions('You are unauthorized to perform this action', 401, done),
       );
     });
     it('should create a center', (done) => {
@@ -172,7 +172,7 @@ describe('Centers Endpoint', () => {
         (err, res) => {
           res.should.have.status(201);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('center created');
+          res.body.message.should.be.eql('Center created');
           res.body.center.name.should.be.eql(normalCenterDetails.name);
           res.body.center.location.should.be.eql(normalCenterDetails.location);
           res.body.center.details.should.be.eql(normalCenterDetails.details);
@@ -202,50 +202,57 @@ describe('Centers Endpoint', () => {
     it('should not modify a center with empty name', (done) => {
       modifyCenter(
         alterCenterDetails({ name: '' }),
-        failureAssertions('center name cannot be empty', 400, done),
+        failureAssertions('Center name is required', 400, done),
       );
     });
-    it('should not modify a center with name less than 5 chars', (done) => {
+    it('should not modify a center with name less than 2 chars', (done) => {
       modifyCenter(
-        alterCenterDetails({ name: 'tes' }),
-        failureAssertions('center name must be between 5 and 30 characters', 400, done),
+        alterCenterDetails({ name: 't' }),
+        failureAssertions('Center name must be between 2 and 30 characters', 400, done),
       );
     });
     it('should not modify a center with name above 30 chars', (done) => {
       modifyCenter(
         alterCenterDetails({ name: randomCharacters(35) }),
-        failureAssertions('center name must be between 5 and 30 characters', 400, done),
+        failureAssertions('Center name must be between 2 and 30 characters', 400, done),
       );
     });
     it('should not modify a center with location above 50 chars', (done) => {
       modifyCenter(
         alterCenterDetails({ location: randomCharacters(53) }),
-        failureAssertions('center location must be below 50 characters', 400, done),
+        failureAssertions('Center location must be below 50 characters', 400, done),
       );
     });
     it('should not modify a center with details above 300 chars', (done) => {
       modifyCenter(
         alterCenterDetails({ details: randomCharacters(301) }),
-        failureAssertions('center details must be below 300 characters', 400, done),
+        failureAssertions('Center details must be below 300 characters', 400, done),
       );
     });
-    it('should not create center if capacity value is not a number', (done) => {
+    it('should not modify center if capacity value is not a number', (done) => {
       modifyCenter(
         alterCenterDetails({ capacity: 'str' }),
-        failureAssertions('center capacity must be a number in string format', 400, done),
+        failureAssertions('Center capacity must be an integer in string format', 400, done),
       );
     });
-    it('should not create center if price value is not a number', (done) => {
+    it('should not modify center if price value is not a number', (done) => {
       modifyCenter(
         alterCenterDetails({ price: 'str' }),
-        failureAssertions('center price must be a number in string format', 400, done),
+        failureAssertions('Center price must be an integer in string format', 400, done),
       );
     });
     it('should not modify a center that does not exist', (done) => {
       modifyCenter(
         alterCenterDetails({ name: 'modified name' }),
-        failureAssertions('center does not exist', 400, done),
+        failureAssertions('Center does not exist', 404, done),
         1000,
+      );
+    });
+    it('should not modify a center if the center ID is not given as an integer', (done) => {
+      modifyCenter(
+        alterCenterDetails({ name: 'modified name' }),
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'nonIntegerId',
       );
     });
     it('should modify a center', (done) => {
@@ -260,7 +267,7 @@ describe('Centers Endpoint', () => {
         (err, res) => {
           res.should.have.status(200);
           res.body.status.should.be.eql('success');
-          res.body.message.should.be.eql('center updated');
+          res.body.message.should.be.eql('Center updated');
           res.body.center.name.should.be.eql('modified name');
           res.body.center.location.should.be.eql('modified location');
           res.body.center.details.should.be.eql('modified details');
@@ -275,7 +282,13 @@ describe('Centers Endpoint', () => {
     it('should not get a center that does not exist', (done) => {
       getOneCenter(
         1000,
-        failureAssertions('center does not exist', 400, done),
+        failureAssertions('Center does not exist', 404, done),
+      );
+    });
+    it('should not get a center with non integer ID', (done) => {
+      getOneCenter(
+        'nonIntegerID',
+        failureAssertions('Resource ID must be an integer', 400, done),
       );
     });
     it('should get the first center', (done) => {

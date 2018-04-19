@@ -6,7 +6,7 @@ import path from 'path';
 import apiRoutes from './apiRoutes';
 import db from './models';
 import { updateEventStatus } from './helpers';
-import formatInputDatas from './middlewares/helpers';
+import formatInputDatas from './middlewares/formatInputDatas';
 
 const app = express();
 const { events, transactions } = db;

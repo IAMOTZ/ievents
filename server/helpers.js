@@ -47,7 +47,7 @@ export const getCurrentDate = (timeZoneOffset) => {
 };
 
 /**
- * Updates the status of all the event that their date is passed to DONE.
+ * Updates the status of all the event that their date is passed to become DONE.
  * It also deletes the transaction of such events.
  * @param {Object} eventModel The query interface for events in the database.
  * @param {Object} transactionModel The query interface for transactions in the database.
@@ -82,7 +82,7 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
       },
     },
   });
-  return;
+  return; // eslint-disable-line no-useless-return
 };
 
 /**
@@ -95,16 +95,14 @@ export const createSuperAdmin = async (userModel) => {
       email: process.env.SUPER_ADMIN_EMAIL,
     },
   });
-  if (user) {
-    return;
-  } else {
-    await userModel.create({
+  if (!user) {
+    const superAdmin = await userModel.create({
       name: process.env.SUPER_ADMIN_NAME,
       email: process.env.SUPER_ADMIN_EMAIL,
       password: process.env.SUPER_ADMIN_PASSWORD,
       role: 'superAdmin',
     });
-    return;
+    return superAdmin;
   }
 };
 
@@ -177,9 +175,5 @@ export const sendMail = (details) => {
     subject: details.subject,
     html: details.body,
   };
-  transporter.sendMail(mailOptions, (err) => {
-    if (err) {
-      console.log('Error Sending Email: ', err);
-    }
-  });
+  transporter.sendMail(mailOptions);
 };
