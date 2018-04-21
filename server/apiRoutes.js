@@ -8,6 +8,7 @@ import {
   validateUpdateCenterInputs, validateAddEventInputs,
   validateUpdateEventInputs, formatInputDatas, validateResourceID,
   validateChangePasswordInputs, validateDeleteUserInputs,
+  paginateRequest,
 } from './middlewares';
 
 const router = express.Router();
@@ -44,6 +45,7 @@ router.post(
 );
 router.get(
   '/centers',
+  paginateRequest,
   controllers.centers.getAll,
 );
 router.get(
@@ -54,6 +56,7 @@ router.get(
 router.get(
   '/events',
   isUser,
+  paginateRequest,
   controllers.events.getAll,
 );
 router.post(
@@ -100,6 +103,7 @@ router.get(
   '/transactions',
   isUser,
   isAdmin,
+  paginateRequest,
   controllers.transactions.getAll,
 );
 router.delete(

@@ -54,6 +54,8 @@ export default {
    */
   async getAll(req, res) {
     const allCenters = await centers.all({
+      limit: res.locals.limit,
+      offset: res.locals.offset,
       include: [{
         model: events,
         attributes: ['status', 'date'],

@@ -94,6 +94,8 @@ export default {
   async getAll(req, res) {
     const userId = req.decoded.id;
     const allEvents = await events.all({
+      limit: res.locals.limit,
+      offset: res.locals.offset,
       where: { userId },
     });
     return res.status(200).json({

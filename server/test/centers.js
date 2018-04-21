@@ -58,9 +58,9 @@ const modifyCenter = (centerDetails, assertions, id = centerId) => {
     .end(assertions);
 };
 
-const getCenters = (assertions) => {
+const getCenters = (assertions, paginate = {}) => {
   chai.request(app)
-    .get('/api/v1/centers')
+    .get(`/api/v1/centers?limit=${paginate.limit}&&offset=${paginate.offset}`)
     .end(assertions);
 };
 
@@ -312,6 +312,7 @@ describe('Centers Endpoint', () => {
       );
     });
   });
+
   describe('Getting All Centers', () => {
     it('should get all the center', (done) => {
       getCenters((err, res) => {
@@ -320,6 +321,28 @@ describe('Centers Endpoint', () => {
         res.body.centers.length.should.be.eql(2);
         done();
       });
+    });
+  });
+
+  describe('Getting centers by pagination', () => {
+    let firstCenterId = null;
+    it('should get just one center', (done) => {
+      getCenters((err, res) => {
+        res.should.have.status(200);
+        res.body.centers.should.be.a('array');
+        res.body.centers.length.should.be.eql(1);
+        firstCenterId = res.body.centers[0].id;
+        done();
+      }, { limit: 1 });
+    });
+    it('should get the second center', (done) => {
+      getCenters((err, res) => {
+        res.should.have.status(200);
+        res.body.centers.should.be.a('array');
+        res.body.centers.length.should.be.eql(1);
+        res.body.centers[0].id.should.not.be.eql(firstCenterId);
+        done();
+      }, { offset: 1 });
     });
   });
 });

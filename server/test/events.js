@@ -70,9 +70,9 @@ const deleteEvent = (token, assertions, id = eventId) => {
     .end(assertions);
 };
 
-const getEvents = (token, assertions) => {
+const getEvents = (token, assertions, paginate = {}) => {
   chai.request(app)
-    .get('/api/v1/events')
+    .get(`/api/v1/events?limit=${paginate.limit}&&offset=${paginate.offset}`)
     .send(token)
     .end(assertions);
 };
@@ -377,6 +377,35 @@ describe('Events Endpoint', () => {
       );
     });
   });
+
+  describe('Getting events by pagination', () => {
+    let firstEventId = null;
+    it('should get just one event', (done) => {
+      getEvents(
+        { token: userToken1 },
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.events.should.be.a('array');
+          res.body.events.length.should.be.eql(1);
+          firstEventId = res.body.events[0].id;
+          done();
+        }, { limit: '1' }
+      );
+    });
+    it('should get the second event', (done) => {
+      getEvents(
+        { token: userToken1 },
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.events.should.be.a('array');
+          res.body.events.length.should.be.eql(1);
+          res.body.events[0].id.should.not.be.eql(firstEventId);
+          done();
+        }, { offset: 1 }
+      );
+    });
+  });
+
   describe('Deleting Event', () => {
     it('should not delete event if the user is not the event owner', (done) => {
       deleteEvent(
