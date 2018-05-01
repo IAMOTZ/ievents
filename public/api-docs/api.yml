@@ -1,0 +1,579 @@
+swagger: '2.0'
+info:
+  description: This is the API documentation for ievents web application
+  version: 1.0.0
+  title: ievents API Documentation
+  contact:
+    email: ogunniyitunmise@gmial.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+basePath: '/api/v1'
+
+tags:
+- name: users
+  description: Operations on the users of the application
+- name: events
+  description: Operations on events
+- name: centers
+  description: Operations on centers
+- name: transactions
+  description: Operations on transactions
+
+paths:
+  /users:
+    # create user       
+    post:
+      tags:
+      - users
+      summary: Creates a new user
+      operationId: addUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: userInformation
+        description: The credentials of the user to be sign up
+        schema:
+          $ref: '#/definitions/CreateUser'
+      responses:
+        201:
+          description: User created
+        400:
+          description: Invalid inputs
+  /users/login:
+    # login
+    post:
+      tags:
+      - users
+      summary: Logs in a user
+      operationId: loginUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: userInformation
+        description: The credentials of the user to sign in
+        required: true
+        schema:
+          $ref: '#/definitions/LoginUser'
+      responses:
+        201:
+          description: Logged in
+        400:
+          description: Email or password incorrect
+  /users/admin:
+    # create admin
+    post:
+      tags:
+      - users
+      summary: Adds a new admin(only the superAdmin can use this endpoint)
+      operationId: addAdmin
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: email
+        description: The email of the user to become an admin
+        required: true
+        type: string
+        schema:
+          $ref: '#/definitions/NewAdmin'
+      - in: header
+        name: access-token
+        required: true
+        description: The auth token of the user making the request.
+        type: string
+      responses:
+        200:
+          description: The user has been updated to become an admin
+        400:
+          description: Invalid inputs
+        404:
+          description: The user to become an admin does not exist
+        401:
+          description: Unauthorised 
+  /users/changePassword:
+    # change password
+    put:
+      tags:
+      - users
+      summary: Change the password of a user
+      operationId: changePassword
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: passwordDetails
+        description: The password details of the user
+        required: true
+        schema:
+          $ref: '#/definitions/ChangePassword'
+      - in: header
+        name: access-token
+        required: true
+        description: The auth token of the user making the request.
+        type: string
+      responses:
+        200:
+          description: Password changed
+        400:
+          description: Invalid inputs
+        401:
+          description: Unauthorised
+  /users/deleteUser:
+    # delete user
+    post:
+      tags:
+      - users
+      summary: Deletes a user account
+      operationId: deleteUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: userPassword
+        description: The password of the user
+        required: true
+        schema:
+          $ref: '#/definitions/DeleteUser'
+      - in: header
+        name: access-token
+        required: true
+        description: The auth token of the user making the request.
+        type: string
+      responses:
+        200:
+          description: User deleted
+        400:
+          description: Invalid inputs
+        401:
+          description: Unauthorised
+  /events:
+    # fetch events
+    get:
+      tags:
+      - events
+      summary: Get events
+      operationId: getEvents
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Events successfully retrieved
+        401:
+          description: Unauthorised
+    # create event
+    post:
+      tags:
+      - events
+      summary: Add event
+      operationId: addEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: eventDetails
+        description: The details of the event
+        required: true
+        schema:
+          $ref: '#/definitions/NewEvent'
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        required: true
+        type: string
+      responses:
+        201:
+          description: Event created
+        400:
+          description: Invalid inputs
+        404:
+          description: The chosen center does not exist
+        401:
+          description: Unauthorised
+  /events/{id}:
+    # modify event
+    put:
+      tags:
+      - events
+      summary: Modify event
+      operationId: modifyEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the event to edit
+        required: true
+        type: integer
+      - in: body
+        name: eventDetails
+        description: details of the event
+        required: false
+        schema:
+          $ref: '#/definitions/EditEvent'
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Event updated
+        400:
+          description: Invalid inputs
+        401:
+          description: Unauthorised
+        404:
+          description: Event does not exist/The new chosen center does not exist
+    # delete event
+    delete:
+      tags:
+      - events
+      summary: Deletes an event
+      operationId: deleteEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the event to delete
+        required: true
+        type: integer
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Event deleted
+        400:
+          description: Invalid inputs
+        401:
+          description: Unauthorised
+        404:
+          description: Event does not exist
+  /centers:
+    # fetch centers
+    get:
+      tags:
+      - centers
+      summary: Get event centers
+      operationId: getCenters
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Centers successfully retrieved
+    # create center
+    post:
+      tags:
+      - centers
+      summary: Adds a new center(only admins can use this endpoint)
+      operationId: addCenter
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - in: formData
+        name: name
+        type: string
+        description: The name of the center
+        required: true
+        example: Ottawa event center
+      - in: formData
+        name: location
+        type: string
+        description: The location of the center
+        required: false
+        example: Ottawa, USA
+      - in: formData
+        name: details
+        type: string
+        description: Some information about the center
+        required: false
+        example: Ottawa is a very beautiful place and it has 7 toilets
+      - in: formData
+        name: capacity
+        type: integer
+        description: The amount of people the center can contain
+        required: true
+        example: 200
+      - in: formData
+        name: price
+        type: integer
+        description: The price of the center per day
+        required: true
+        example: 3000
+      - in: formData
+        name: image
+        type: file
+        description: The image of the center
+        required: false
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        type: string
+        required: true
+      responses:
+        201:
+          description: Center created
+        400:
+          description: Invalid inputs
+        401:
+          description: Unauthorised
+  /centers/{id}:
+    # modify center
+    put:
+      tags:
+      - centers
+      summary: Modify a center(only admins can use this endpoint)
+      operationId: modifyCenter
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the center to modify
+        type: integer
+        required: true
+      - in: formData
+        name: name
+        type: string
+        description: The name of the center
+        required: false
+        example: Havilla event center
+      - in: formData
+        name: location
+        type: string
+        description: The location of the center
+        required: false
+        example: Havilla, Nigeria
+      - in: formData
+        name: details
+        type: string
+        description: Some information about the center
+        required: false
+        example: Havilla is a very beautiful place and it is fully air conditioned
+      - in: formData
+        name: capacity
+        type: integer
+        description: The amount of people the center can contain
+        required: false
+        example: 200
+      - in: formData
+        name: price
+        type: integer
+        description: The price of the center per day
+        required: false
+        example: 3000
+      - in: formData
+        name: image
+        type: file
+        description: The image of the center
+        required: false
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        type: string
+        required: true
+      responses:
+        200:
+          description: Center updated
+        400:
+          description: Invalid inputs
+        401:
+          description: Unauthorised
+        404:
+          description: The center to modify does not exist
+  /transactions:
+    # fetch transactions
+    get:
+      tags:
+      - transactions
+      summary: Get transactions(only admins can use this endpoint)
+      operationId: getTransacitons
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Transactions successfully retrieved
+        401:
+          description: Unauthorised
+  /transactions/{id}:
+    # delete transactions
+    delete:
+      tags:
+      - transactions
+      summary: Delete a transaction(only admins can use this endpoint)
+      operationId: deleteTransaction
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the transaction to delete
+        required: true
+        type: integer
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Transaction deleted
+        401:
+          description: Unauthorised
+        404:
+          description: Transaction does not exist
+
+definitions:
+  CreateUser:
+    required:
+    - name
+    - email
+    - password
+    - confirmPassword
+    properties:
+      name:
+        type: string
+        description: The name of the user to be created
+        example: test
+      email:
+        type: string
+        description: The email of the user to be created
+        example: test@gmail.com
+      password:
+        type: string
+        description: The password of the user, it must contain uppercase letters, lowercase letters and numbers
+        example: Password123
+      confirmPassword:
+        type: string
+        description: This should be thesame as the password
+        example: Password123
+  LoginUser:
+    required:
+    - email
+    - password
+    properties:
+      email:
+        type: string
+        description: The email of the user
+        example: test@gmail.com
+      password:
+        type: string
+        description: the password of the user
+        example: Password123
+  NewAdmin:
+    required:
+    - email
+    properties:
+      email:
+        type: string
+        description: The email of the user to become admin
+        example: test@gmail.com
+  ChangePassword:
+    required:
+      - formerPassword
+      - newPassword
+      - confirmNewPassword
+    properties:
+      formerPassword:
+        type: string
+        description: The former password of the user
+        example: Password123
+      newPassword:
+        type: string
+        description: The new password of the user
+        example: Password456
+      confirmNewPassword:
+        type: string
+        description: This should be thesame as the newPassword field
+        example: Password456
+  DeleteUser:
+    required:
+    - password
+    properties:
+      password:
+        type: string
+        description: The password of the user
+        example: Password123
+  NewEvent:
+    required:
+    - title
+    - date
+    - centerId
+    properties:
+      title:
+        type: string
+        description: The title of the event
+        example: My Daddy birthday
+      description:
+        type: string
+        description: A short note on the event
+        example: My dadys birthday is going to be superb
+      date:
+        type: string
+        description: The date that the event would happen. This must be in the format dd/mm/yyyy
+        example: 2018/11/02
+      centerId:
+        type: integer
+        description: The id of the center that is to be choosen for the event
+        example: 1
+  EditEvent:
+    properties:
+      title: 
+        type: string
+        description: An optional field to replace the former title
+        example: My Mom's birthday
+      description: 
+        type: string
+        description: An optional field to replace the former description
+        example: My Mom's birthday is going to be superb
+      date: 
+        type: string
+        description: An optional field to replace the former date
+        example: 2018/12/02
+      centerId:
+        type: integer
+        description: An optional field to replace the former centerId
+        example: 1
