@@ -9,6 +9,9 @@ import { updateEventStatus } from './helpers';
 import formatInputDatas from './middlewares/formatInputDatas';
 
 const app = express();
+
+app.use('/api-docs', express.static(path.join(__dirname, '..', 'public', 'api-docs')));
+
 const { events, transactions } = db;
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));

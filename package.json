@@ -16,7 +16,7 @@
     "e2e:setup": "selenium-standalone install",
     "lint": "./node_modules/.bin/eslint",
     "coverage": "npm run test:server && nyc report --reporter=text-lcov | coveralls",
-    "heroku-postbuild": "npm run prod:client && npm run build && npm run database:setup",
+    "heroku-postbuild": "npm run prod:client && npm run prod:server && npm run database:setup",
     "database:setup": "babel-node ./server/setUpDatabase"
   },
   "repository": {
