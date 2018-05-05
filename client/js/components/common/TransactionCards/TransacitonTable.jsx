@@ -18,6 +18,7 @@ const TransactionTable = props => (
           <tr key={transaction.id}>
             <th scope="row" className="d-none d-lg-table-cell">{index + 1}</th>
             <td>{transaction.event.user.email}
+              {/* eslint-disable jsx-a11y/anchor-is-valid */}
               <a
                 href=""
                 className="d-block d-lg-inline ml-lg-2"
@@ -28,6 +29,7 @@ const TransactionTable = props => (
                 onClick={props.btnAction}
               >event details
               </a>
+              {/* eslint-disable jsx-a11y/anchor-is-valid */}
             </td>
             <td>{transaction.event.date}</td>
             <td>
@@ -68,3 +70,4 @@ TransactionTable.propTypes = {
 };
 
 export default TransactionTable;
+

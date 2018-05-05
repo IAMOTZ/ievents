@@ -6,7 +6,7 @@ const { centers, events } = db;
 
 /**
  * Map out the dates of allowed events.
- * @param {Array} events an array of events.
+ * @param {Array} eventsArray an array of events.
  * @returns {Array} an array of the date of allowed events.
  */
 const getDatesFromAllowedEvents = eventsArray => (

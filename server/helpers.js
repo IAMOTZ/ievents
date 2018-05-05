@@ -88,6 +88,7 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
 /**
  * Creates a super admin user.
  * @param {Object} userModel The query interface for the users in the database.
+ * @returns {Object} The superAdmin created.
  */
 export const createSuperAdmin = async (userModel) => {
   const user = await userModel.findOne({

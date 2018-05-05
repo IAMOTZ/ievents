@@ -163,7 +163,6 @@ export default {
    * Deletes a user.
    * @param {Object} req The request object.
    * @param {Object} res The response object.
-   * @returns {Object} The response object containing some resonse data.
    */
   async deleteUser(req, res) {
     const userPassword = res.locals.formattedInputs.password;

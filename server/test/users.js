@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import dotEnv from 'dotenv';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -5,6 +6,7 @@ import app from '../app';
 
 dotEnv.config();
 
+// eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 chai.use(chaiHttp);

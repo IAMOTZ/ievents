@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import db from '../models';
@@ -7,6 +8,7 @@ const {
   users, centers, events, transactions,
 } = db;
 
+// eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 chai.use(chaiHttp);
