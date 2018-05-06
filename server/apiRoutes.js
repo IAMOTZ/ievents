@@ -73,6 +73,13 @@ router.put(
   validateUpdateEventInputs,
   controllers.events.update,
 );
+router.post(
+  '/events/:id/cancel',
+  validateResourceID,
+  isUser,
+  isAdmin,
+  controllers.events.cancel,
+);
 router.delete(
   '/events/:id',
   validateResourceID,
@@ -100,18 +107,13 @@ router.put(
   controllers.centers.update,
 );
 router.get(
-  '/transactions',
-  isUser,
-  isAdmin,
-  paginateRequest,
-  controllers.transactions.getAll,
-);
-router.delete(
-  '/transactions/:id',
+  '/centers/:id/events',
   validateResourceID,
   isUser,
   isAdmin,
-  controllers.transactions.delete,
+  formatInputDatas,
+  paginateRequest,
+  controllers.centers.getCenterEvents,
 );
 
 export default router;

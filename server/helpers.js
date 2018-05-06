@@ -48,11 +48,9 @@ export const getCurrentDate = (timeZoneOffset) => {
 
 /**
  * Updates the status of all the event that their date is passed to become DONE.
- * It also deletes the transaction of such events.
  * @param {Object} eventModel The query interface for events in the database.
- * @param {Object} transactionModel The query interface for transactions in the database.
  */
-export const updateEventStatus = async (eventModel, transactionModel) => {
+export const updateEventStatus = async (eventModel) => {
   const currentDate = getCurrentDate(1); // Get the current time in Nigeria;
   const doneEvents = await eventModel.all({
     attributes: ['id', 'date'],
@@ -71,13 +69,6 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
   await eventModel.update({ status: 'done' }, {
     where: {
       id: {
-        [Op.in]: doneEventIds,
-      },
-    },
-  });
-  await transactionModel.destroy({
-    where: {
-      eventId: {
         [Op.in]: doneEventIds,
       },
     },
@@ -176,5 +167,7 @@ export const sendMail = (details) => {
     subject: details.subject,
     html: details.body,
   };
-  transporter.sendMail(mailOptions);
+  if (process.env.NODE_ENV !== 'test') {
+    transporter.sendMail(mailOptions);
+  }
 };

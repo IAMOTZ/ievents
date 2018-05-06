@@ -42,10 +42,20 @@ const regularUserDetails = {
   password: 'Password123',
 };
 
+/**
+ * Alters some or all of the properties in the center details(normalCenterDetails).
+ * @param {Object} newCenterDetails This object would be used to update the normalCenterDetails.
+ * @returns {Object} The updated center details.
+ */
 const alterCenterDetails = newCenterDetails => (
   Object.assign({}, normalCenterDetails, newCenterDetails)
 );
 
+/**
+ * An helper function to create a center.
+ * @param {Object} centerDetails The details of the center.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ */
 const createCenter = (centerDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/centers')
@@ -53,6 +63,12 @@ const createCenter = (centerDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper funciton to modify a center.
+ * @param {Object} centerDetails This object would be used to update the center.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Number} id The ID of the center to modify.
+ */
 const modifyCenter = (centerDetails, assertions, id = centerId) => {
   chai.request(app)
     .put(`/api/v1/centers/${id}`)
@@ -60,18 +76,33 @@ const modifyCenter = (centerDetails, assertions, id = centerId) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to fetch the centers.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Object} paginate An optional description of how to paginate the request.
+ */
 const getCenters = (assertions, paginate = {}) => {
   chai.request(app)
     .get(`/api/v1/centers?limit=${paginate.limit}&&offset=${paginate.offset}`)
     .end(assertions);
 };
 
+/**
+ * An helper function to fetch just one center.
+ * @param {Number} id The ID of the center.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ */
 const getOneCenter = (id, assertions) => {
   chai.request(app)
     .get(`/api/v1/centers/${id}`)
     .end(assertions);
 };
 
+/**
+ * An helper function to login a user.
+ * @param {Object} userDetails The details of the user.
+ * @param {Funciton} assertions The assertions to execute after the request is complete.
+ */
 const loginUser = (userDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users/login')
@@ -79,6 +110,13 @@ const loginUser = (userDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function that constructs assertions for a test that is meant to fail.
+ * @param {String} message The message expected in the response body.
+ * @param {Number} statusCode The status code expected in the response.
+ * @param {Fuction} done A callback from mohca to know when this assertion is complete.
+ * @returns {Function} The assertions.
+ */
 const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   res.should.have.status(statusCode);
   res.body.message.should.be.eql(message);
@@ -86,6 +124,11 @@ const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   done();
 };
 
+/**
+ * An helper function to generate a certain amount of random characters.
+ * @param {Number} length The length of the characters to generate.
+ * @returns {String} The random characters generated.
+ */
 const randomCharacters = length => Array.from({ length }, (e, i) => i).splice(0, length).join('');
 
 describe('Centers Endpoint', () => {

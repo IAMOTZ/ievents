@@ -1,7 +1,8 @@
 /* eslint-disable no-else-return */
 import db from '../models/index';
+import { sendMail } from '../helpers';
 
-const { events, centers, transactions } = db;
+const { events, centers, users } = db;
 
 /**
  * Format the event data to be returned to the user.
@@ -58,31 +59,22 @@ const isCenterBooked = async (eventModel, centerId, date) => {
 };
 
 /**
- * Creates a transaction.
- * @param {Object} transactionModel The query interface for transactions in the database.
- * @param {Object} event Event object containing the event details.
- * @returns {Object} The transaction that is created.
+ * Creates the email body to send to the user whoose event is to be canceled.
+ * @param {String} eventTitle The title of the event.
+ * @param {String} eventDate The date the event is supposed to occur.
+ * @returns {String} The email constructed.
  */
-const createTransaction = async (transactionModel, event) => {
-  const transaction = await transactionModel.create({
-    eventId: event.id,
-    centerId: event.centerId,
-  });
-  return transaction;
-};
-
-/**
- * Deletes a transaction.
- * @param {Object} transactionModel The query interface for transactions in the database.
- * @param {Object} event Event object containing the event details.
- */
-const deleteTransaction = async (transactionModel, event) => {
-  await transactionModel.destroy({
-    where: {
-      eventId: event.id,
-    },
-  });
-};
+const createEmailBody = (eventTitle, eventDate) => (
+  `<h3>Ievents</h3>
+  <p>Your event, <b>${eventTitle}</b> ,that is supposed to come up on <b>
+    ${eventDate}</b> has been canceled!!
+    <br> Consequently, the center would not be available for your event.
+    <br> <br>
+    <b>NOTE:</b>This email terminates the transaction we created with you on this event.
+    <br> <br> We are very sorry for any inconvinience that this might have caused you.
+    <br> For more details, you can always contact us at admin@ievents.com.
+  </p>`
+);
 
 export default {
   /**
@@ -137,7 +129,6 @@ export default {
           userId,
           centerId: centerid,
         });
-        await createTransaction(transactions, newEvent);
         return res.status(201).json({
           status: 'success',
           message: 'Event created',
@@ -179,8 +170,6 @@ export default {
           centerId: newChoosenCenter.id,
           description: description || event.description,
         });
-        await deleteTransaction(transactions, updatedEvent);
-        await createTransaction(transactions, updatedEvent);
       }
     } else {
       updatedEvent = await event.update({
@@ -193,6 +182,42 @@ export default {
       status: 'success',
       message: 'Event updated',
       event: formatEventData(updatedEvent),
+    });
+  },
+
+  /**
+   * Cancels an event.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
+  async cancel(req, res) {
+    const eventId = req.params.id;
+    const event = await events.findById(Number(eventId), {
+      include: [{ model: users, attributes: ['email'] }],
+    });
+    if (!event) {
+      return res.status(404).json({
+        status: 'failed',
+        message: 'Event does not exist',
+      });
+    } else if (event.status === 'canceled') {
+      return res.status(400).json({
+        status: 'failed',
+        message: 'Event already canceled',
+      });
+    } else {
+      await event.update({ status: 'canceled' });
+    }
+    sendMail({
+      recipient: event.user.email,
+      subject: 'Your Event Has Been Canceled',
+      body: createEmailBody(event.title, event.date),
+    });
+    return res.status(200).json({
+      status: 'success',
+      message: 'Event canceled',
+      event: formatEventData(event),
     });
   },
 

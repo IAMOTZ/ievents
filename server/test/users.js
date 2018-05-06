@@ -24,10 +24,20 @@ const superAdminDetails = {
   password: process.env.SUPER_ADMIN_PASSWORD,
 };
 
+/**
+ * Alters some or all of the properties in the normal user details(normalUserDetails).
+ * @param {Object} newUserDetails This object would be used to update the normal user details.
+ * @returns {Object} The updated user details.
+ */
 const alterUserDetails = newUserDetails => (
   Object.assign({}, normalUserDetails, newUserDetails)
 );
 
+/**
+ * An helper function to create a user(signup).
+ * @param {Object} userDetails Details of the user to create.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ */
 const createUser = (userDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users')
@@ -35,6 +45,11 @@ const createUser = (userDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to create an admin.
+ * @param {Object} adminDetails The admin details(only the email is required).
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ */
 const createAdmin = (adminDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users/admin')
@@ -42,6 +57,11 @@ const createAdmin = (adminDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to change the password of a user.
+ * @param {Object} passwordDetials The password details.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ */
 const changePassword = (passwordDetials, assertions) => {
   chai.request(app)
     .put('/api/v1/users/changePassword')
@@ -49,6 +69,11 @@ const changePassword = (passwordDetials, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to login a user(signin).
+ * @param {Object} userDetails The details of the user(email and password required).
+ * @param {Funciton} assertions The assertions to execute after the request is complete.
+ */
 const loginUser = (userDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users/login')
@@ -56,6 +81,11 @@ const loginUser = (userDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to delete a user.
+ * @param {Object} userDetails The user details(only the password is required)
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ */
 const deleteUser = (userDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users/deleteUser')
@@ -63,6 +93,13 @@ const deleteUser = (userDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function that constructs assertions for a test that is meant to fail.
+ * @param {String} message The message expected in the response body.
+ * @param {Number} statusCode The status code expected in the response.
+ * @param {Fuction} done A callback from mohca to know when this assertion is complete.
+ * @returns {Function} The assertion.
+ */
 const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   res.should.have.status(statusCode);
   res.body.message.should.be.eql(message);

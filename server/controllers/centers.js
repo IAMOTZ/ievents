@@ -2,7 +2,7 @@
 import db from '../models';
 import { uploadImage, deleteImage } from '../helpers';
 
-const { centers, events } = db;
+const { centers, events, users } = db;
 
 /**
  * Map out the dates of allowed events.
@@ -17,10 +17,11 @@ const getDatesFromAllowedEvents = eventsArray => (
  * Get a single center from the database.
  * @param {Object} centerModel The query interface for centers in the database.
  * @param {Number} centerId The ID of the center.
+ * @param {Object} options Query opitons.
  * @returns {Object} The center gotten from the database.
  */
-const getCenter = async (centerModel, centerId) => {
-  const center = await centerModel.findById(Number(centerId));
+const getCenter = async (centerModel, centerId, options) => {
+  const center = await centerModel.findById(Number(centerId), options);
   return center;
 };
 
@@ -76,10 +77,7 @@ export default {
    */
   async getOne(req, res) {
     const centerId = req.params.id;
-    const center = await centers.findOne({
-      where: {
-        id: centerId,
-      },
+    const center = await getCenter(centers, centerId, {
       include: [{
         model: events,
         attributes: ['status', 'date'],
@@ -95,6 +93,40 @@ export default {
         status: 'success',
         message: 'Center successfully retrieved',
         center: formatCenterData(center),
+      });
+    }
+  },
+
+  /**
+   * Get the events to happen in a particular center.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
+  async getCenterEvents(req, res) {
+    const centerId = req.params.id;
+    const center = await getCenter(centers, centerId, {
+      include: [{
+        model: events,
+        limit: res.locals.limit,
+        offset: res.locals.offset,
+        where: { status: 'allowed' },
+        include: [{
+          model: users,
+          attributes: ['email'],
+        }],
+      }],
+    });
+    if (!center) {
+      return res.status(404).json({
+        status: 'failed',
+        message: 'Center does not exist',
+      });
+    } else {
+      return res.status(200).json({
+        status: 'success',
+        message: 'Center events successfully retrieved',
+        events: center.events
       });
     }
   },

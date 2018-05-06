@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import db from '../models';
 import app from '../app';
 
 // eslint-disable-next-line no-unused-vars
@@ -8,7 +9,28 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
+const { users, centers, events } = db;
 
+/**
+ * Clear all the data stored in a particular table of the database.
+ * @param {Object} model The query interface.
+ * @returns {Object} The query interface.
+ */
+const clearDatabase = async (model) => {
+  await model.destroy({
+    cascade: true,
+    truncate: true,
+    restartIdentity: true,
+  });
+  return model;
+};
+
+/**
+ * Ensures that a number have two digits.
+ * If the number has one digit e.g 7, it is going to append 0 to it which would give 07.
+ * @param {Number} digit The Number to check.
+ * @returns {Number} The Number which has been ensured to have two digits.
+ */
 const ensureTwoDigit = (digit) => {
   const result = digit.toString().length < 2 ? Number(`0${digit}`) : digit;
   return result;
@@ -47,10 +69,20 @@ const userDetails2 = {
   password: 'Password123',
 };
 
+/**
+ * Alters some or all of the properties in the event details(normalEventDetails).
+ * @param {Object} newEventDetials This object would be used to update the normal event details.
+ * @returns {Object} The updated event details.
+ */
 const alterEventDetails = newEventDetials => (
   Object.assign({}, normalEventDetails, newEventDetials)
 );
 
+/**
+ * An helper function to create an event.
+ * @param {Object} eventDetails Details of the event to create.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ */
 const createEvent = (eventDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/events')
@@ -58,6 +90,12 @@ const createEvent = (eventDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to modify an event.
+ * @param {Object} eventDetails This object would be used to update the event.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Number} id The ID of the event to modify.
+ */
 const modifyEvent = (eventDetails, assertions, id = eventId) => {
   chai.request(app)
     .put(`/api/v1/events/${id}`)
@@ -65,6 +103,12 @@ const modifyEvent = (eventDetails, assertions, id = eventId) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to delete en event.
+ * @param {String} token The authentication token
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Number} id The ID of the event to delete.
+ */
 const deleteEvent = (token, assertions, id = eventId) => {
   chai.request(app)
     .delete(`/api/v1/events/${id}`)
@@ -72,6 +116,25 @@ const deleteEvent = (token, assertions, id = eventId) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to cancel an event.
+ * @param {String} token The authentication token. Admin token required.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Number} id The ID of the event to cancel
+ */
+const cancelEvent = (token, assertions, id = eventId) => {
+  chai.request(app)
+    .post(`/api/v1/events/${id}/cancel`)
+    .send(token)
+    .end(assertions);
+};
+
+/**
+ * An helper function to fetch the events of a user.
+ * @param {String} token The authentication token.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Object} paginate An optional description of how to paginate the request.
+ */
 const getEvents = (token, assertions, paginate = {}) => {
   chai.request(app)
     .get(`/api/v1/events?limit=${paginate.limit}&&offset=${paginate.offset}`)
@@ -79,6 +142,25 @@ const getEvents = (token, assertions, paginate = {}) => {
     .end(assertions);
 };
 
+/**
+ * An helper function to fetch the events to happen in a particular center.
+ * @param {String} token The authentication token. Addmin token is required.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Number} id The ID of the center.
+ * @param {Object} paginate An optional description of how to paginate the request.
+ */
+const getCenterEvents = (token, assertions, id, paginate = {}) => {
+  chai.request(app)
+    .get(`/api/v1/centers/${id}/events?limit=${paginate.limit}&&offset=${paginate.offset}`)
+    .send(token)
+    .end(assertions);
+};
+
+/**
+ * An helper function to login a user.
+ * @param {Object} userDetails The details of the user.
+ * @param {Funciton} assertions The assertions to execute after the request is complete.
+ */
 const loginUser = (userDetails, assertions) => {
   chai.request(app)
     .post('/api/v1/users/login')
@@ -86,6 +168,13 @@ const loginUser = (userDetails, assertions) => {
     .end(assertions);
 };
 
+/**
+ * An helper function that constructs assertions for a test that is meant to fail.
+ * @param {String} message The message expected in the response body.
+ * @param {Number} statusCode The status code expected in the response.
+ * @param {Fuction} done A callback from mohca to know when this assertion is complete.
+ * @returns {Function} The assertion.
+ */
 const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   res.should.have.status(statusCode);
   res.body.message.should.be.eql(message);
@@ -93,6 +182,11 @@ const failureAssertions = (message, statusCode = 400, done) => (err, res) => {
   done();
 };
 
+/**
+ * An helper function to generate a certain amount of random characters.
+ * @param {Number} length The length of the characters to generate.
+ * @returns {String} The random characters generated.
+ */
 const randomCharacters = length => Array.from({ length }, (e, i) => i).splice(0, length).join('');
 
 describe('Events Endpoint', () => {
@@ -101,11 +195,11 @@ describe('Events Endpoint', () => {
       userDetails1,
       (err, res) => {
         userToken1 = res.body.token;
-        normalEventDetails.token = userToken1;
+        normalEventDetails.token = userToken1; // Admin token
         loginUser(
           userDetails2,
           (error, response) => {
-            userToken2 = response.body.token;
+            userToken2 = response.body.token; // Normal user token
             done();
           },
         );
@@ -380,6 +474,57 @@ describe('Events Endpoint', () => {
     });
   });
 
+  describe('Getting Events of a Single Center', () => {
+    it('should not get events if the center ID is not given as integer', (done) => {
+      getCenterEvents(
+        { token: userToken1 },
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'akldfjal;d' // ID of wrong type
+      );
+    });
+    it('should not get events if the center does not exist', (done) => {
+      getCenterEvents(
+        { token: userToken1 },
+        failureAssertions('Center does not exist', 404, done),
+        47 // ID of a center that does not exist
+      );
+    });
+    it('should not get events when the request is sent by a non-admin user', (done) => {
+      getCenterEvents(
+        { token: userToken2 }, // Auth-Token of a user that is not an admin
+        failureAssertions('You are unauthorized to perform this action', 401, done),
+        2
+      );
+    });
+    it('should get the events of a single center', (done) => {
+      getCenterEvents(
+        { token: userToken1 },
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.events.should.be.a('array');
+          res.body.events.length.should.be.eql(2);
+          done();
+        },
+        2 // ID of a center that exist
+      );
+    });
+    it('should get the events of a single center by pagination', (done) => {
+      getCenterEvents(
+        { token: userToken1 },
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.events.should.be.a('array');
+          res.body.events.length.should.be.eql(1);
+          done();
+        },
+        2, // ID of a center that exist
+        { limit: 1 }
+      );
+    });
+  });
+
   describe('Getting events by pagination', () => {
     let firstEventId = null;
     it('should get just one event', (done) => {
@@ -408,7 +553,50 @@ describe('Events Endpoint', () => {
     });
   });
 
+  describe('Canceling Event', () => {
+    // NOTE: When the ID of an event is not specified, there is a default ID used by cancelEvent()
+    it('should not cancel an event that does not exist', (done) => {
+      cancelEvent(
+        { token: userToken1 },
+        failureAssertions('Event does not exist', 404, done),
+        44 // ID of an event that does not exist
+      );
+    });
+    it('should not cancel event if the event ID is not given as integer', (done) => {
+      cancelEvent(
+        { token: userToken1 },
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'string', // ID as a string instead of integer
+      );
+    });
+    it('should not cancel event if the request is sent by a non-admin', (done) => {
+      cancelEvent(
+        { token: userToken2 }, // Auth-Token of a user that is not an admin
+        failureAssertions('You are unauthorized to perform this action', 401, done),
+      );
+    });
+    it('should cancel event', (done) => {
+      cancelEvent(
+        { token: userToken1 },
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.message.should.be.eql('Event canceled');
+          res.body.event.status.should.be.eql('canceled');
+          done();
+        },
+      );
+    });
+    it('should not cancel an event that is already canceled', (done) => {
+      cancelEvent(
+        { token: userToken1 },
+        failureAssertions('Event already canceled', 400, done)
+      );
+    });
+  });
+
   describe('Deleting Event', () => {
+    // NOTE: When the ID of an event is not specified, there is a default ID used by deleteEvent()
     it('should not delete event if the user is not the event owner', (done) => {
       deleteEvent(
         { token: userToken2 },
@@ -433,11 +621,18 @@ describe('Events Endpoint', () => {
       deleteEvent(
         { token: userToken1 },
         (err, res) => {
+          res.should.have.status(200);
           res.body.status.should.be.eql('success');
           res.body.message.should.be.eql('Event deleted');
           done();
         },
       );
     });
+  });
+
+  after('Remove all the data created in the database', async () => {
+    await clearDatabase(events);
+    await clearDatabase(centers);
+    await clearDatabase(users);
   });
 });
