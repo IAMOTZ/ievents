@@ -1,6 +1,8 @@
 /* eslint-disable no-else-return */
 import db from '../../models';
-import { uploadImage, deleteImage, createPaginationInfo } from '../../commonHelpers';
+import {
+  uploadImage, deleteImage, createPaginationInfo, successResponse, failureResponse,
+} from '../../commonHelpers';
 import { getCenter, formatCenterData } from './helpers';
 
 const { centers, events } = db;
@@ -30,12 +32,10 @@ export default {
       currentCentersCount,
       totalCentersCount
     );
-    return res.status(200).json({
-      status: 'success',
-      message: 'Centers successfully retrieved',
-      paginationInfo,
-      centers: allCenters.rows.map(center => formatCenterData(center)),
-    });
+    const payload = {
+      paginationInfo, centers: allCenters.rows.map(center => formatCenterData(center))
+    };
+    return successResponse(res, 'Centers successfully retrieved', payload);
   },
 
   /**
@@ -53,16 +53,10 @@ export default {
       }],
     });
     if (!center) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'Center does not exist',
-      });
+      return failureResponse(res, 'Center does not exist', {}, 404);
     } else {
-      return res.status(200).json({
-        status: 'success',
-        message: 'Center successfully retrieved',
-        center: formatCenterData(center),
-      });
+      const payload = { center: formatCenterData(center) };
+      return successResponse(res, 'Center successfully retrieved', payload);
     }
   },
 
@@ -89,11 +83,8 @@ export default {
         price,
         images: image ? [image.secure_url] : null,
       });
-    return res.status(201).json({
-      status: 'success',
-      message: 'Center created',
-      center: formatCenterData(newCenter),
-    });
+    const payload = { center: formatCenterData(newCenter) };
+    return successResponse(res, 'Center created', payload, 201);
   },
 
   /**
@@ -109,10 +100,7 @@ export default {
     const centerId = req.params.id;
     const center = await getCenter(centers, centerId);
     if (!center) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'Center does not exist',
-      });
+      return failureResponse(res, 'Center does not exist', {}, 404);
     } else {
       let image = null;
       if (req.file) {
@@ -128,11 +116,8 @@ export default {
           price: price || center.price,
           images: image ? [image.secure_url] : center.images,
         });
-      return res.status(200).json({
-        status: 'success',
-        message: 'Center updated',
-        center: formatCenterData(updatedCenter),
-      });
+      const payload = { center: formatCenterData(updatedCenter) };
+      return successResponse(res, 'Center updated', payload);
     }
   },
 };

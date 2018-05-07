@@ -1,5 +1,8 @@
 /* eslint-disable no-else-return */
 import db from '../../models';
+import {
+  successResponse, failureResponse,
+} from '../../commonHelpers';
 import { formatUserData, getUser, generateToken, verifyPassword } from './helpers';
 
 const { users } = db;
@@ -17,21 +20,15 @@ export default {
     } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (user) {
-      return res.status(400).json({
-        status: 'failed',
-        message: 'User already exist',
-      });
+      return failureResponse(res, 'User already exist');
     } else {
       const newUser = await users.create({
         name,
         email: email.toLowerCase(),
         password,
       });
-      return res.status(201).json({
-        status: 'success',
-        message: 'User created',
-        token: generateToken(formatUserData(newUser)),
-      });
+      const payload = { token: generateToken(formatUserData(newUser)) };
+      return successResponse(res, 'User created', payload, 201);
     }
   },
 
@@ -45,21 +42,12 @@ export default {
     const { email, password } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (!user) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'Email or password incorrect',
-      });
+      return failureResponse(res, 'Email or password incorrect', {}, 404);
     } else if (verifyPassword(password, user.password)) {
-      return res.status(200).json({
-        status: 'success',
-        message: 'Logged in',
-        token: generateToken(formatUserData(user)),
-      });
+      const payload = { token: generateToken(formatUserData(user)) };
+      return successResponse(res, 'Logged in', payload);
     } else {
-      return res.status(400).json({
-        status: 'failed',
-        message: 'Email or password incorrect',
-      });
+      return failureResponse(res, 'Email or password incorrect');
     }
   },
 
@@ -70,15 +58,9 @@ export default {
       await user.update({
         password: newpassword,
       });
-      return res.status(200).json({
-        status: 'success',
-        message: 'Password changed',
-      });
+      return successResponse(res, 'Password changed');
     } else {
-      return res.status(400).json({
-        status: 'failed',
-        message: 'The former password is incorrect',
-      });
+      return failureResponse(res, 'The former password is incorrect');
     }
   },
 
@@ -92,21 +74,12 @@ export default {
     const { email } = res.locals.formattedInputs;
     const user = await getUser(users, email);
     if (!user) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'User not found',
-      });
+      return failureResponse(res, 'User not found', {}, 404);
     } else if (user.role === 'admin' || user.role === 'superAdmin') {
-      return res.status(200).json({
-        status: 'failed',
-        message: 'The user is already an admin',
-      });
+      return failureResponse(res, 'The user is already an admin', {}, 409);
     } else {
       await user.update({ role: 'admin' });
-      return res.status(200).json({
-        status: 'success',
-        message: 'The user has been updated to become an admin',
-      });
+      return successResponse(res, 'The user has been updated to become an admin');
     }
   },
 
@@ -114,6 +87,7 @@ export default {
    * Deletes a user.
    * @param {Object} req The request object.
    * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
    */
   async deleteUser(req, res) {
     const userPassword = res.locals.formattedInputs.password;
@@ -124,15 +98,9 @@ export default {
           email: user.email,
         },
       });
-      res.status(200).json({
-        status: 'success',
-        message: 'user deleted',
-      });
+      return successResponse(res, 'user deleted');
     } else {
-      res.status(400).json({
-        status: 'failed',
-        message: 'password incorrect',
-      });
+      return failureResponse(res, 'password incorrect');
     }
   },
 };

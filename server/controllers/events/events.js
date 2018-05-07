@@ -1,6 +1,8 @@
 /* eslint-disable no-else-return */
 import db from '../../models';
-import { sendMail, createPaginationInfo } from '../../commonHelpers';
+import {
+  sendMail, createPaginationInfo, successResponse, failureResponse
+} from '../../commonHelpers';
 import {
   formatEventData, createEmailBody, getCenter, isCenterBooked
 } from './helpers';
@@ -30,12 +32,8 @@ export default {
       currentEventsCount,
       totalEventsCount
     );
-    return res.status(200).json({
-      status: 'success',
-      message: 'Events successfully retrieved',
-      paginationInfo,
-      events: allEvents.rows.map(event => formatEventData(event)),
-    });
+    const payload = { paginationInfo, events: allEvents.rows.map(event => formatEventData(event)) };
+    return successResponse(res, 'Events successfully retrieved', payload);
   },
 
   /**
@@ -64,12 +62,8 @@ export default {
       currentEventsCount,
       totalEventsCount
     );
-    return res.status(200).json({
-      status: 'success',
-      message: `Events of center with ID ${centerId} successfully retrieved`,
-      paginationInfo,
-      events: allEvents.rows,
-    });
+    const payload = { paginationInfo, events: allEvents.rows };
+    return successResponse(res, `Events of center with ID ${centerId} successfully retrieved`, payload);
   },
 
   /**
@@ -85,17 +79,11 @@ export default {
     const userId = req.decoded.id;
     const choosenCenter = await getCenter(centers, centerid);
     if (!choosenCenter) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'The choosen center does not exist',
-      });
+      return failureResponse(res, 'The choosen center does not exist', {}, 404);
     } else {
       const centerIsBooked = await isCenterBooked(events, centerid, date);
       if (centerIsBooked) {
-        return res.status(400).json({
-          status: 'failed',
-          message: 'The center has been booked for that date',
-        });
+        return failureResponse(res, 'The center has been booked for that date', {});
       } else {
         const newEvent = await events.create({
           title,
@@ -104,11 +92,8 @@ export default {
           userId,
           centerId: centerid,
         });
-        return res.status(201).json({
-          status: 'success',
-          message: 'Event created',
-          event: formatEventData(newEvent),
-        });
+        const payload = { event: formatEventData(newEvent) };
+        return successResponse(res, 'Event created', payload, 201);
       }
     }
   },
@@ -129,15 +114,9 @@ export default {
       const newChoosenCenter = await getCenter(centers, centerid);
       const centerIsBooked = await isCenterBooked(events, centerid, date);
       if (!newChoosenCenter) {
-        return res.status(404).json({
-          status: 'failed',
-          message: 'The new choosen center does not exist',
-        });
+        return failureResponse(res, 'The new choosen center does not exist', {}, 404);
       } else if (centerIsBooked) {
-        return res.status(400).json({
-          status: 'failed',
-          message: 'The center has been booked for that date',
-        });
+        return failureResponse(res, 'The center has been booked for that date');
       } else {
         updatedEvent = await event.update({
           title: title || event.title,
@@ -153,11 +132,8 @@ export default {
         description: description || event.description,
       });
     }
-    return res.status(200).json({
-      status: 'success',
-      message: 'Event updated',
-      event: formatEventData(updatedEvent),
-    });
+    const payload = { event: formatEventData(updatedEvent) };
+    return successResponse(res, 'Event updated', payload);
   },
 
   /**
@@ -172,15 +148,9 @@ export default {
       include: [{ model: users, attributes: ['email'] }],
     });
     if (!event) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'Event does not exist',
-      });
+      return failureResponse(res, 'Event does not exist', {}, 404);
     } else if (event.status === 'canceled') {
-      return res.status(400).json({
-        status: 'failed',
-        message: 'Event already canceled',
-      });
+      return failureResponse(res, 'Event already canceled');
     } else {
       await event.update({ status: 'canceled' });
     }
@@ -189,11 +159,8 @@ export default {
       subject: 'Your Event Has Been Canceled',
       body: createEmailBody(event.title, event.date),
     });
-    return res.status(200).json({
-      status: 'success',
-      message: 'Event canceled',
-      event: formatEventData(event),
-    });
+    const payload = { event: formatEventData(event) };
+    return successResponse(res, 'Event canceled', payload);
   },
 
   /**
@@ -205,9 +172,6 @@ export default {
   async delete(req, res) {
     const { event } = res.locals;
     await event.destroy();
-    return res.status(200).json({
-      status: 'success',
-      message: 'Event deleted',
-    });
+    return successResponse(res, 'Event deleted');
   },
 };

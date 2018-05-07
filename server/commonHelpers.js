@@ -179,3 +179,11 @@ export const createPaginationInfo = (limit, offset, currentCount, totalCount) =>
   currentCount,
   totalCount,
 });
+
+export const successResponse = (responseObject, message, payload, statusCode = 200) => (
+  responseObject.status(statusCode).json(Object.assign({ status: 'success', message }, payload))
+);
+
+export const failureResponse = (responseObject, message, payload, statusCode = 400) => (
+  responseObject.status(statusCode).json(Object.assign({ status: 'failed', message }, payload))
+);

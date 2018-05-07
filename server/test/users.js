@@ -340,7 +340,7 @@ describe('User Endpoints', () => {
     it('should not create admin if he already exist', (done) => {
       createAdmin(
         adminDetails,
-        failureAssertions('The user is already an admin', 200, done),
+        failureAssertions('The user is already an admin', 409, done),
       );
     });
   });
