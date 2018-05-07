@@ -105,7 +105,7 @@ export default {
       let image = null;
       if (req.file) {
         image = await uploadImage(req.file);
-        await deleteImage(center.images[0]);
+        if (center.images && center.images[0]) await deleteImage(center.images[0]);
       }
       const updatedCenter =
         await center.update({
