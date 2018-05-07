@@ -482,13 +482,6 @@ describe('Events Endpoint', () => {
         'akldfjal;d' // ID of wrong type
       );
     });
-    it('should not get events if the center does not exist', (done) => {
-      getCenterEvents(
-        { token: userToken1 },
-        failureAssertions('Center does not exist', 404, done),
-        47 // ID of a center that does not exist
-      );
-    });
     it('should not get events when the request is sent by a non-admin user', (done) => {
       getCenterEvents(
         { token: userToken2 }, // Auth-Token of a user that is not an admin
@@ -504,12 +497,14 @@ describe('Events Endpoint', () => {
           res.body.status.should.be.eql('success');
           res.body.events.should.be.a('array');
           res.body.events.length.should.be.eql(2);
+          res.body.events[0].user.email.should.be.a('string');
           done();
         },
         2 // ID of a center that exist
       );
     });
     it('should get the events of a single center by pagination', (done) => {
+      const paginationInfo = 'This response is paginated. This object contains information about the pagination';
       getCenterEvents(
         { token: userToken1 },
         (err, res) => {
@@ -517,6 +512,12 @@ describe('Events Endpoint', () => {
           res.body.status.should.be.eql('success');
           res.body.events.should.be.a('array');
           res.body.events.length.should.be.eql(1);
+          res.body.events[0].user.email.should.be.a('string');
+          res.body.paginationInfo.message.should.be.eql(paginationInfo);
+          res.body.paginationInfo.limit.should.be.eql(1);
+          res.body.paginationInfo.offset.should.be.eql(0);
+          res.body.paginationInfo.currentCount.should.be.eql(1);
+          res.body.paginationInfo.totalCount.should.be.eql(2);
           done();
         },
         2, // ID of a center that exist
@@ -527,6 +528,7 @@ describe('Events Endpoint', () => {
 
   describe('Getting events by pagination', () => {
     let firstEventId = null;
+    const paginationInfo = 'This response is paginated. This object contains information about the pagination';
     it('should get just one event', (done) => {
       getEvents(
         { token: userToken1 },
@@ -534,6 +536,11 @@ describe('Events Endpoint', () => {
           res.should.have.status(200);
           res.body.events.should.be.a('array');
           res.body.events.length.should.be.eql(1);
+          res.body.paginationInfo.message.should.be.eql(paginationInfo);
+          res.body.paginationInfo.limit.should.be.eql(1);
+          res.body.paginationInfo.offset.should.be.eql(0);
+          res.body.paginationInfo.currentCount.should.be.eql(1);
+          res.body.paginationInfo.totalCount.should.be.eql(2);
           firstEventId = res.body.events[0].id;
           done();
         }, { limit: '1' }
@@ -547,6 +554,11 @@ describe('Events Endpoint', () => {
           res.body.events.should.be.a('array');
           res.body.events.length.should.be.eql(1);
           res.body.events[0].id.should.not.be.eql(firstEventId);
+          res.body.paginationInfo.message.should.be.eql(paginationInfo);
+          res.body.paginationInfo.limit.should.be.eql(20); // The default limit
+          res.body.paginationInfo.offset.should.be.eql(1);
+          res.body.paginationInfo.currentCount.should.be.eql(1);
+          res.body.paginationInfo.totalCount.should.be.eql(2);
           done();
         }, { offset: 1 }
       );

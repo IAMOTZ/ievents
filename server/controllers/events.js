@@ -1,6 +1,6 @@
 /* eslint-disable no-else-return */
 import db from '../models/index';
-import { sendMail } from '../helpers';
+import { sendMail, createPaginationInfo } from '../helpers';
 
 const { events, centers, users } = db;
 
@@ -85,15 +85,58 @@ export default {
    */
   async getAll(req, res) {
     const userId = req.decoded.id;
-    const allEvents = await events.all({
-      limit: res.locals.limit,
-      offset: res.locals.offset,
+    const { limit, offset } = res.locals;
+    const allEvents = await events.findAndCountAll({
+      limit,
+      offset,
       where: { userId },
     });
+    const currentEventsCount = allEvents.rows.length; const totalEventsCount = allEvents.count;
+    const paginationInfo = createPaginationInfo(
+      limit,
+      offset,
+      currentEventsCount,
+      totalEventsCount
+    );
     return res.status(200).json({
       status: 'success',
       message: 'Events successfully retrieved',
-      events: allEvents.map(event => formatEventData(event)),
+      paginationInfo,
+      events: allEvents.rows.map(event => formatEventData(event)),
+    });
+  },
+
+  /**
+   * Get the events to happen in a particular center.
+   * @param {Object} req The request object.
+   * @param {Object} res The response object.
+   * @returns {Object} The response object containing some response data.
+   */
+  async getEventsPerCenter(req, res) {
+    const centerId = req.params.id;
+    const { limit, offset } = res.locals;
+    const allEvents = await events.findAndCountAll({
+      limit,
+      offset,
+      where: { centerId },
+      distinct: true,
+      include: {
+        model: users,
+        attributes: ['email']
+      }
+    });
+    const currentEventsCount = allEvents.rows.length; const totalEventsCount = allEvents.count;
+    const paginationInfo = createPaginationInfo(
+      limit,
+      offset,
+      currentEventsCount,
+      totalEventsCount
+    );
+    return res.status(200).json({
+      status: 'success',
+      message: `Events of center with ID ${centerId} successfully retrieved`,
+      paginationInfo,
+      events: allEvents.rows,
     });
   },
 

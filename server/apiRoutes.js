@@ -113,7 +113,7 @@ router.get(
   isAdmin,
   formatInputDatas,
   paginateRequest,
-  controllers.centers.getCenterEvents,
+  controllers.events.getEventsPerCenter,
 );
 
 export default router;

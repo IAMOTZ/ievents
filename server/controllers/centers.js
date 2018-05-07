@@ -1,8 +1,8 @@
 /* eslint-disable no-else-return */
 import db from '../models';
-import { uploadImage, deleteImage } from '../helpers';
+import { uploadImage, deleteImage, createPaginationInfo } from '../helpers';
 
-const { centers, events, users } = db;
+const { centers, events } = db;
 
 /**
  * Map out the dates of allowed events.
@@ -54,18 +54,28 @@ export default {
    * @returns {Object} The response object containing some response data.
    */
   async getAll(req, res) {
-    const allCenters = await centers.all({
-      limit: res.locals.limit,
-      offset: res.locals.offset,
+    const { limit, offset } = res.locals;
+    const allCenters = await centers.findAndCountAll({
+      limit,
+      offset,
+      distinct: true,
       include: [{
         model: events,
         attributes: ['status', 'date'],
       }],
     });
+    const currentCentersCount = allCenters.rows.length; const totalCentersCount = allCenters.count;
+    const paginationInfo = createPaginationInfo(
+      limit,
+      offset,
+      currentCentersCount,
+      totalCentersCount
+    );
     return res.status(200).json({
       status: 'success',
       message: 'Centers successfully retrieved',
-      centers: allCenters.map(center => formatCenterData(center)),
+      paginationInfo,
+      centers: allCenters.rows.map(center => formatCenterData(center)),
     });
   },
 
@@ -93,40 +103,6 @@ export default {
         status: 'success',
         message: 'Center successfully retrieved',
         center: formatCenterData(center),
-      });
-    }
-  },
-
-  /**
-   * Get the events to happen in a particular center.
-   * @param {Object} req The request object.
-   * @param {Object} res The response object.
-   * @returns {Object} The response object containing some response data.
-   */
-  async getCenterEvents(req, res) {
-    const centerId = req.params.id;
-    const center = await getCenter(centers, centerId, {
-      include: [{
-        model: events,
-        limit: res.locals.limit,
-        offset: res.locals.offset,
-        where: { status: 'allowed' },
-        include: [{
-          model: users,
-          attributes: ['email'],
-        }],
-      }],
-    });
-    if (!center) {
-      return res.status(404).json({
-        status: 'failed',
-        message: 'Center does not exist',
-      });
-    } else {
-      return res.status(200).json({
-        status: 'success',
-        message: 'Center events successfully retrieved',
-        events: center.events
       });
     }
   },

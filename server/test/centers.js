@@ -371,12 +371,18 @@ describe('Centers Endpoint', () => {
 
   describe('Getting centers by pagination', () => {
     let firstCenterId = null;
+    const paginationInfo = 'This response is paginated. This object contains information about the pagination';
     it('should get just one center', (done) => {
       getCenters((err, res) => {
         res.should.have.status(200);
         res.body.centers.should.be.a('array');
         res.body.centers.length.should.be.eql(1);
         firstCenterId = res.body.centers[0].id;
+        res.body.paginationInfo.message.should.be.eql(paginationInfo);
+        res.body.paginationInfo.limit.should.be.eql(1);
+        res.body.paginationInfo.offset.should.be.eql(0);
+        res.body.paginationInfo.currentCount.should.be.eql(1);
+        res.body.paginationInfo.totalCount.should.be.eql(2);
         done();
       }, { limit: 1 });
     });
@@ -386,6 +392,11 @@ describe('Centers Endpoint', () => {
         res.body.centers.should.be.a('array');
         res.body.centers.length.should.be.eql(1);
         res.body.centers[0].id.should.not.be.eql(firstCenterId);
+        res.body.paginationInfo.message.should.be.eql(paginationInfo);
+        res.body.paginationInfo.limit.should.be.eql(20); // The default limit
+        res.body.paginationInfo.offset.should.be.eql(1);
+        res.body.paginationInfo.currentCount.should.be.eql(1);
+        res.body.paginationInfo.totalCount.should.be.eql(2);
         done();
       }, { offset: 1 });
     });

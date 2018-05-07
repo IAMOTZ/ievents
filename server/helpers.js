@@ -171,3 +171,11 @@ export const sendMail = (details) => {
     transporter.sendMail(mailOptions);
   }
 };
+
+export const createPaginationInfo = (limit, offset, currentCount, totalCount) => ({
+  message: 'This response is paginated. This object contains information about the pagination',
+  limit,
+  offset,
+  currentCount,
+  totalCount,
+});
