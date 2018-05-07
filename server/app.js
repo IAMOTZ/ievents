@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import apiRoutes from './apiRoutes';
 import db from './models';
-import { updateEventStatus } from './helpers';
+import { updateEventStatus } from './commonHelpers';
 import formatInputDatas from './middlewares/formatInputDatas';
 
 const app = express();

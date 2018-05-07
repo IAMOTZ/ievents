@@ -1,5 +1,5 @@
 import db from './models/index';
-import { createSuperAdmin } from './helpers';
+import { createSuperAdmin } from './commonHelpers';
 
 const { users } = db;
 

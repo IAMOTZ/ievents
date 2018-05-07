@@ -1,4 +1,4 @@
-import { getCurrentDate } from '../../helpers';
+import { getCurrentDate } from '../../commonHelpers';
 import * as utils from './utils';
 
 /**
