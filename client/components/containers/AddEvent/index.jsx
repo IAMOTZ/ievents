@@ -43,6 +43,9 @@ class AddEvent extends React.Component {
 
   componentWillMount() {
     this.props.dispatch(getAllCenters());
+    const state = { ...this.state };
+    state.centerId = String(this.props.centerToBook) || null;
+    this.setState(state);
   }
 
   componentWillUnmount() {
