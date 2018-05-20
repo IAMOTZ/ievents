@@ -16,8 +16,8 @@ import View from './View';
   return {
     userName: user.name,
     userToken: user.token,
-    isAdmin: user.role === 'admin',
-    isSuperAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isSuperAdmin: user.role === 'superAdmin',
     toUpdate: find(centers, { id: store.updateCenterReducer.centerToUpdate }),
     updatingCenterStarted: store.updateCenterReducer.updatingCenterStarted,
     updatingCenterResolved: store.updateCenterReducer.updatingCenterResolved,

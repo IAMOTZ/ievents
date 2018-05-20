@@ -14,8 +14,8 @@ import View from './View';
   return {
     userName: user.name,
     userToken: user.token,
-    isAdmin: user.role === 'admin',
-    isSuperAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isSuperAdmin: user.role === 'superAdmin',
     addingCenterStarted: store.addCenterReducer.addingCenterStarted,
     addingCenterResolved: store.addCenterReducer.addingCenterResolved,
     addingCenterError: store.addCenterReducer.addingCenterError,

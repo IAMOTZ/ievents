@@ -17,8 +17,8 @@ import View from './View';
   return {
     userName: user.name,
     userToken: user.token,
-    isAdmin: user.role === 'admin',
-    isSuperAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isSuperAdmin: user.role === 'superAdmin',
     events: store.fetchEventsReducer.events,
     changingPasswordStarted: store.changePasswordReducer.changingPasswordStarted,
     changingPasswordResolved: store.changePasswordReducer.changingPasswordResolved,

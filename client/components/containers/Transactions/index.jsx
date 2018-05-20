@@ -14,8 +14,8 @@ import View from './View';
   return {
     userName: user.name,
     userToken: user.token,
-    isAdmin: user.role === 'admin',
-    isSuperAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isSuperAdmin: user.role === 'superAdmin',
     transactions: store.fetchTransactionsReducer.transactions,
     fetchingTransactionsStarted: store.fetchTransactionsReducer.fetchingTransactionsStarted,
     deletingTransactionStarted: store.deleteTransactionReducer.deletingTransactionStarted,

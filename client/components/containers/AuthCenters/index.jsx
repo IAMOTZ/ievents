@@ -12,8 +12,8 @@ import View from './View';
   const { user } = store.authReducer;
   return {
     userName: user.name,
-    isAdmin: user.role === 'admin',
-    isSuperAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    isSuperAdmin: user.role === 'superAdmin',
     fetchingCentersStarted: store.fetchCentersReducer.fetchingCenterStarted,
     centers: store.fetchCentersReducer.centers,
   };
