@@ -5,6 +5,7 @@ import * as utils from './utils';
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateSignUpInputs = (req, res, next) => {
   const {
@@ -60,6 +61,7 @@ export const validateSignUpInputs = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateSigninInputs = (req, res, next) => {
   const {
@@ -89,6 +91,7 @@ export const validateSigninInputs = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateCreateAdminInputs = (req, res, next) => {
   const { email } = res.locals.formattedInputs;
@@ -111,6 +114,7 @@ export const validateCreateAdminInputs = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res  The response objcet.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateChangePasswordInputs = (req, res, next) => {
   const {
@@ -154,6 +158,7 @@ export const validateChangePasswordInputs = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res  The response objcet.
  * @param {Object} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateDeleteUserInputs = (req, res, next) => {
   const { password } = res.locals.formattedInputs;
@@ -173,6 +178,7 @@ export const validateDeleteUserInputs = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateResourceID = (req, res, next) => {
   const resourceID = req.params.id;

@@ -1,4 +1,4 @@
-import { getCurrentDate } from '../../helpers';
+import { getCurrentDate } from '../../commonHelpers';
 import * as utils from './utils';
 
 /**
@@ -7,6 +7,7 @@ import * as utils from './utils';
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateAddEventInputs = (req, res, next) => {
   const {
@@ -77,6 +78,7 @@ export const validateAddEventInputs = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateUpdateEventInputs = (req, res, next) => {
   const {

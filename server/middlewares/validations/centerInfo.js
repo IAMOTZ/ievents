@@ -1,10 +1,12 @@
 import * as utils from './utils';
+
 /**
  * A middleware.
  * Ensures that the inputs given when adding a center are valid.
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateAddCenterInputs = (req, res, next) => {
   const {
@@ -56,6 +58,7 @@ export const validateAddCenterInputs = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const validateUpdateCenterInputs = (req, res, next) => {
   const {

@@ -11,6 +11,7 @@ const { events, users } = db;
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const isUser = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['access-token'];
@@ -47,13 +48,14 @@ export const isUser = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const isAdmin = (req, res, next) => {
   const { role } = req.decoded;
   if (role.toLowerCase() === 'admin' || role.toLowerCase() === 'superadmin') {
     next();
   } else {
-    res.status(401).json({
+    return res.status(401).json({
       status: 'failed',
       message: 'You are unauthorized to perform this action',
     });
@@ -66,13 +68,14 @@ export const isAdmin = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with the error message.
  */
 export const isSuperAdmin = (req, res, next) => {
   const { role } = req.decoded;
   if (role.toLowerCase() === 'superadmin') {
     next();
   } else {
-    res.status(401).json({
+    return res.status(401).json({
       status: 'failed',
       message: 'You are unauthorized to perform this action',
     });
@@ -85,6 +88,7 @@ export const isSuperAdmin = (req, res, next) => {
  * @param {Object} req The request object.
  * @param {Object} res The response object.
  * @param {Function} next The function that transfers to the next middleware.
+ * @returns {Object} The response object with some data attached to it.
  */
 export const isEventOwner = async (req, res, next) => {
   const userId = req.decoded.id;

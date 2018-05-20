@@ -48,11 +48,9 @@ export const getCurrentDate = (timeZoneOffset) => {
 
 /**
  * Updates the status of all the event that their date is passed to become DONE.
- * It also deletes the transaction of such events.
  * @param {Object} eventModel The query interface for events in the database.
- * @param {Object} transactionModel The query interface for transactions in the database.
  */
-export const updateEventStatus = async (eventModel, transactionModel) => {
+export const updateEventStatus = async (eventModel) => {
   const currentDate = getCurrentDate(1); // Get the current time in Nigeria;
   const doneEvents = await eventModel.all({
     attributes: ['id', 'date'],
@@ -75,19 +73,13 @@ export const updateEventStatus = async (eventModel, transactionModel) => {
       },
     },
   });
-  await transactionModel.destroy({
-    where: {
-      eventId: {
-        [Op.in]: doneEventIds,
-      },
-    },
-  });
   return; // eslint-disable-line no-useless-return
 };
 
 /**
  * Creates a super admin user.
  * @param {Object} userModel The query interface for the users in the database.
+ * @returns {Object} The superAdmin created.
  */
 export const createSuperAdmin = async (userModel) => {
   const user = await userModel.findOne({
@@ -175,5 +167,23 @@ export const sendMail = (details) => {
     subject: details.subject,
     html: details.body,
   };
-  transporter.sendMail(mailOptions);
+  if (process.env.NODE_ENV !== 'test') {
+    transporter.sendMail(mailOptions);
+  }
 };
+
+export const createPaginationInfo = (limit, offset, currentCount, totalCount) => ({
+  message: 'This response is paginated. This object contains information about the pagination',
+  limit,
+  offset,
+  currentCount,
+  totalCount,
+});
+
+export const successResponse = (responseObject, message, payload, statusCode = 200) => (
+  responseObject.status(statusCode).json(Object.assign({ status: 'success', message }, payload))
+);
+
+export const failureResponse = (responseObject, message, payload, statusCode = 400) => (
+  responseObject.status(statusCode).json(Object.assign({ status: 'failed', message }, payload))
+);
