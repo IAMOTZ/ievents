@@ -15,7 +15,7 @@ const plugins = [
 
 module.exports = {
   entry: [
-    path.join(__dirname, '/client/js/index.jsx'),
+    path.join(__dirname, '/client/index.jsx'),
   ],
   module: {
     loaders: [

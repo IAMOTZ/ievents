@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import Routes from './components/Routes';
-import styles from '../sass/styles.scss';
+/* eslint-disable no-unused-vars */
+import styles from './styles/styles.scss';
 
 const app = document.getElementById('app');
 
@@ -13,5 +14,6 @@ ReactDOM.render(
     <Router>
       <Routes />
     </Router>
-  </Provider>, app,
+  </Provider>,
+  app,
 );
