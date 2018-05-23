@@ -48,7 +48,7 @@ class RegularCenters extends React.Component {
 
   render() {
     if (this.props.isUserAuthenticaed) {
-      return <Redirect to="/addEvent" />;
+      return <Redirect to="/events" />;
     }
     return (
       <View

@@ -86,7 +86,7 @@ class Signup extends React.Component {
 
   render() {
     if (this.props.loggingUserResolved) {
-      return (<Redirect to="/addEvent" />);
+      return (<Redirect to="/events" />);
     }
     return (
       <View

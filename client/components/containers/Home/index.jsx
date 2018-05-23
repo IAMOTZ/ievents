@@ -13,7 +13,7 @@ import View from './View';
 class Home extends React.Component {
   render() {
     if (this.props.isUserAuthenticated) {
-      return <Redirect to="/addEvent" />;
+      return <Redirect to="/events" />;
     }
     return <View />;
   }
