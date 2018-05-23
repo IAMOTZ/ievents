@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Aux from '../../hoc/Aux';
+import Aux from '../../hoc/FakeDiv';
 import CenterDropDown from './CenterDropDown';
 import { LoadingIcon } from '../../common/LoadingAnimation';
 import { BigAlert, SmallAlert } from '../../common/Alert';
