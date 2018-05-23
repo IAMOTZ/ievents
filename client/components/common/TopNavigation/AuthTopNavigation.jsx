@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './styles.scss'
 import AdminLinks from './AdminLinks';
 import { logOut } from '../../../actions/authAction';
 
 
 const AuthTopNavigation = props => (
-  <nav className="navbar navbar-expand-md navbar-dark fixed-top d-block d-lg-none">
+  <nav className="navbar navbar-expand-md navbar-dark fixed-top d-block d-lg-none" id="auth-top-navbar">
     <div className="container">
-      <a href="" className="navbar-brand">
+      <a href="#" className="navbar-brand">
         <strong className="text-capitalize">{props.name}</strong>
         <br />
         <p className="h6">{props.title}</p>
@@ -22,7 +23,7 @@ const AuthTopNavigation = props => (
             <Link to="/events" className="nav-link">My events</Link>
           </li>
           <li className="nav-item">
-            <Link to="/addEvent" className="nav-link">Add Events</Link>
+            <Link to="/addEvent" className="nav-link">Create Event</Link>
           </li>
           <li className="nav-item">
             <Link to="/centers2" className="nav-link">Centers</Link>

@@ -7,7 +7,7 @@ const ActionButton = (props) => {
     component = (
       <Link
         to="/editCenter"
-        class="btn text-white mt-3"
+        class="btn mt-3 ie-dark-button"
         id={props.id}
         onClick={props.startEditingCenter}
       >Edit
@@ -16,7 +16,7 @@ const ActionButton = (props) => {
   } else {
     component = (
       <button
-        className="btn text-white mt-3"
+        className="btn mt-3 ie-dark-button"
         data-toggle="modal"
         data-target="#center-details-modal"
         id={props.id}

@@ -25,54 +25,54 @@ const View = props => (
           isSuperAdmin={props.isSuperAdmin}
           dispatch={props.dispatch}
         />
-        {/* Main content */}
-        <div className="col-lg-10 offset-md-2 mt-lg-0" id="main-content">
-          {/* Content Header(navigation) on large screen */}
+        <div className="col-lg-10 offset-md-2 mt-lg-0">
           <Header text="Add an admin" />
-          <div className="d-flex flex-column align-items-center mt-5">
-            <LoadingIcon start={props.addingAdminStarted} size={3} />
-            <div className="card align-items-center text-center w-75">
-              <div className="card-body">
-                <BigAlert message={props.addingAdminError} />
-                {
-                  props.addingAdminResolved ?
-                    <BigAlert
-                      message={`${props.newAdmin} is now an admin`}
-                      type="success"
-                    /> : null
-                }
-                <div className="input-group px-3">
-                  <span className="input-group-addon">
-                    <i className="fa fa-user" />
-                  </span>
-                  <input
-                    id="input-email"
-                    type="text"
-                    className="form-control"
-                    placeholder="The user's email"
-                    name="email"
-                    onChange={props.getInput}
-                  />
+          <div className="page-content">
+            <div className="d-flex flex-column align-items-center mt-5">
+              <LoadingIcon start={props.addingAdminStarted} size={3} />
+              <div className="card align-items-center text-center w-75">
+                <div className="card-body">
+                  <BigAlert message={props.addingAdminError} />
+                  {
+                    props.addingAdminResolved ?
+                      <BigAlert
+                        message={`${props.newAdmin} is now an admin`}
+                        type="success"
+                      /> : null
+                  }
+                  <div className="input-group px-3">
+                    <span className="input-group-addon">
+                      <i className="fa fa-user" />
+                    </span>
+                    <input
+                      id="input-email"
+                      type="text"
+                      className="form-control"
+                      placeholder="The user's email"
+                      name="email"
+                      onChange={props.getInput}
+                    />
+                  </div>
+                  <SmallAlert message={props.inputErrors.emailError} />
+                  <ul className="text-left mt-2 text-muted">
+                    <li>The user must have signed up already</li>
+                    <li>If successful, the user would have access to:
+                      <ol type="number">
+                        <li>Creating a Center</li>
+                        <li>Editing a Center</li>
+                        <li>Viewing transactions</li>
+                        <li>Making decisions on transactions</li>
+                      </ol>
+                    </li>
+                  </ul>
+                  <button
+                    id="add-btn"
+                    className="btn ie-dark-button"
+                    disabled={props.addingAdminStarted}
+                    onClick={props.add}
+                  >Add Admin
+                  </button>
                 </div>
-                <SmallAlert message={props.inputErrors.emailError} />
-                <ul className="text-left mt-2 text-muted">
-                  <li>The user must have signed up already</li>
-                  <li>If successful, the user would have access to:
-                    <ol type="number">
-                      <li>Creating a Center</li>
-                      <li>Editing a Center</li>
-                      <li>Viewing transactions</li>
-                      <li>Making decisions on transactions</li>
-                    </ol>
-                  </li>
-                </ul>
-                <button
-                  id="add-btn"
-                  className="btn btn-primary pointer-button"
-                  disabled={props.addingAdminStarted}
-                  onClick={props.add}
-                >Add Admin
-                </button>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@ const View = props => (
     </div>
     <footer className="d-block d-sm-none mt-5">
       <div className="container text-white text-center py-5">
-        <h1>Ievents</h1>
+        <h1>ievents</h1>
         <p>Copyright &copy; 2017</p>
       </div>
     </footer>

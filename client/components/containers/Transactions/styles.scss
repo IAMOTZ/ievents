@@ -1,0 +1,14 @@
+#transactions-container {
+  #transactions {
+    margin-top: 100px;
+    .card {
+      z-index: 4;
+      a:hover {
+        text-decoration: none;      
+      }
+      .card-header {
+        background-color: white;
+      }
+    }
+  }
+}

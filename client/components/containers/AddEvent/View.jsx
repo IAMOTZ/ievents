@@ -9,7 +9,7 @@ const View = props => (
   <div className="add-event-container">
     <AuthTopNavigation
       name={props.userName}
-      title="Add Event"
+      title="Create Event"
       isAdmin={props.isAdmin}
       isSuperAdmin={props.isSuperAdmin}
       dispatch={props.dispatch}
@@ -22,23 +22,25 @@ const View = props => (
           isSuperAdmin={props.isSuperAdmin}
           dispatch={props.dispatch}
         />
-        <div className="col-lg-10 offset-md-2" id="main-content">
-          <Header text="Add Event" />
-          <EventForm
-            addingEventStarted={props.addingEventStarted}
-            addingEventError={props.addingEventError}
-            getInput={props.getInput}
-            inputErrors={props.inputErrors}
-            centers={props.centers}
-            centerToBook={props.centerToBook}
-            add={props.add}
-          />
+        <div className="col-lg-10 offset-md-2">
+          <Header text="Create Event" />
+          <div className="page-content">
+            <EventForm
+              addingEventStarted={props.addingEventStarted}
+              addingEventError={props.addingEventError}
+              getInput={props.getInput}
+              inputErrors={props.inputErrors}
+              centers={props.centers}
+              centerToBook={props.centerToBook}
+              add={props.add}
+            />
+          </div>
         </div>
       </div>
     </div>
     <footer className="d-block d-sm-none mt-5">
       <div className="container text-white text-center py-5">
-        <h1>Ievents</h1>
+        <h1>ievents</h1>
         <p>Copyright &copy; 2017</p>
       </div>
     </footer>

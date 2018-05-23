@@ -68,7 +68,7 @@ const ChangePasswordModal = props => (
         <div className="modal-footer">
           <button
             type="button"
-            className="btn btn-dark pointer-button"
+            className="btn ie-dark-button"
             data-dismiss="modal"
             onClick={props.closeModalEffects}
             disabled={props.changingPasswordStarted}

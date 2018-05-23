@@ -37,7 +37,7 @@ const View = props => (
           <Header text="Profile" />
 
           {/* <!-- Profile Detials --> */}
-          <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '500px', marginTop: '70px' }} id="content">
+          <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '500px', marginTop: '70px' }} id="profile-details">
             <div className="bg-white p-3" style={{ width: '500px' }}>
               <p className="h1 text-center text-capitalize" style={{ fontWeight: 'lighter', fontSize: '3rem' }}>{props.userName}</p>
               <p className="h3 mt-3" style={{ fontWeight: 'normal' }}>Events</p>

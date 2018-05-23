@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FakeDiv from '../../hoc/Aux';
 
 const AdminLinks = (props) => {
   let component;
   if (props.isAdmin || props.isSuperAdmin) {
     component = (
-      <span className="d-flex flex-column flex-md-row">
+      <FakeDiv>
         <li className="nav-item">
           <Link to="/addCenter" className="nav-link">Add Center</Link>
         </li>
@@ -18,7 +19,7 @@ const AdminLinks = (props) => {
         <li className="nav-item">
           <Link to="/transactions" className="nav-link">Transactions</Link>
         </li>
-      </span>
+      </FakeDiv>
     );
   } else {
     component = null;

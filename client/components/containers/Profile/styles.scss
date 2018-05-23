@@ -1,0 +1,15 @@
+#profile-container {
+  #profile-details {
+    a {
+      text-decoration: none;
+      color: black;
+      &:hover {
+        color: black;
+        text-decoration: underline;
+      }
+    }
+  }
+  .text-grey {
+    color: grey;
+  }
+}

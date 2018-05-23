@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './styles.scss';
 
 const RegularTopNavigation = () => (
-  <nav className="navbar navbar-expand-sm navbar-dark fixed-top">
+  <nav className="navbar navbar-expand-sm navbar-dark fixed-top" id="regular-top-navbar">
     <div className="container">
       <Link to="/" className="navbar-brand">
-        <strong>Ievents</strong>
+        <strong>ievents</strong>
       </Link>
       <button className="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
         <span className="navbar-toggler-icon" />

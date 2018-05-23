@@ -6,6 +6,7 @@ import { validateSigninInputs } from '../../../helpers/inputValidators';
 import { loginUser } from '../../../actions/authAction';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
+import './styles.scss';
 import View from './View';
 
 @connect(store => (

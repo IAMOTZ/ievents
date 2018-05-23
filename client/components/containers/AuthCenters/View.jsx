@@ -8,7 +8,7 @@ import { LoadingBox } from '../../common/LoadingAnimation';
 import { AuthTopNavigation } from '../../common/TopNavigation';
 
 const View = props => (
-  <div id="centers2-container">
+  <div id="auth-centers-container">
     <AuthTopNavigation
       name={props.userName}
       title="Centers"
@@ -24,52 +24,13 @@ const View = props => (
           isSuperAdmin={props.isSuperAdmin}
           dispatch={props.dispatch}
         />
-        <div className="col-lg-10 offset-lg-2 mt-lg-0" id="main-content">
+        <div className="col-lg-10 offset-lg-2 mt-lg-0">
           <Header text="Centers" />
-          {
-            props.centers.length === 0 && props.fetchingCentersStarted ?
-              <LoadingBox iconSize={4} /> :
-              <section id="centers-section">
+          <div className="page-content">
+            {
+              props.centers.length === 0 && props.fetchingCentersStarted ?
+                <LoadingBox iconSize={4} /> :
                 <div className="container">
-                  {/* Search Box */}
-                  <div
-                    id="center-section-content"
-                    className="d-flex flex-column align-items-center"
-                  >
-                    <div className="input-group w-50 mt-lg-5 search-box">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Search for a center"
-                      />
-                      <div className="input-group-btn d-none d-sm-block">
-                        <button
-                          type="button"
-                          className="btn btn-secondary dropdown-toggle"
-                          data-toggle="dropdown"
-                        >Search with
-                        </button>
-                        <div className="dropdown-menu dropdown-menu-right">
-                          <a className="dropdown-item" href="#">Location</a>
-                          <div role="separator" className="dropdown-divider" />
-                          <a className="dropdown-item" href="#">Name</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="search-box mt-3 d-block d-sm-none">
-                      <button
-                        type="button"
-                        className="btn btn-secondary dropdown-toggle"
-                        data-toggle="dropdown"
-                      >Search with
-                      </button>
-                      <div className="dropdown-menu">
-                        <a className="dropdown-item" href="#">Location</a>
-                        <div role="separator" className="dropdown-divider" />
-                        <a className="dropdown-item" href="#">Name</a>
-                      </div>
-                    </div>
-                  </div>
                   <div className="mt-5">
                     <div className="row">
                       <CenterCards
@@ -81,16 +42,16 @@ const View = props => (
                     </div>
                   </div>
                 </div>
-              </section>
-          }
-          {/* Modal */}
-          {
-            props.modalContent ? <CenterModal
-              modalContent={props.modalContent}
-              onBook={props.onBook}
-              redirectPath="/users/login"
-            /> : null
-          }
+            }
+            {/* Modal */}
+            {
+              props.modalContent ? <CenterModal
+                modalContent={props.modalContent}
+                onBook={props.onBook}
+                redirectPath="/users/login"
+              /> : null
+            }
+          </div>
         </div>
       </div>
     </div>

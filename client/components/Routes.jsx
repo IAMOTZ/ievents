@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import '../styles/generalStyles.scss';
 import Signup from './containers/Signup';
 import Signin from './containers/Signin';
 import Profile from './containers/Profile';

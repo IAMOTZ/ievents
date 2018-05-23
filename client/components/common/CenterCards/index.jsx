@@ -1,11 +1,12 @@
 import React from 'react';
 import ActionButton from './ActionButton';
+import './styles.scss';
 
 const defaultImage = '/images/defaultImgx4.jpeg';
 
 const CenterCards = props => props.centers.map(center => (
-  <div className="col-lg-4 col-md-6 col-sm-12" key={center.id}>
-    <div className="card">
+  <div className="col-lg-4 col-md-6 col-sm-1" key={center.id}>
+    <div className="card centerCard">
       <div>
         <img className="card-img-top" src={center.images ? center.images[0] : defaultImage} alt="" />
         <span className="badge text-white p-2 seat-badge ">{center.capacity} seats</span>

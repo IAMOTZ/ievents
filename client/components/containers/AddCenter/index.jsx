@@ -6,6 +6,7 @@ import { validateAddCenterInputs } from '../../../helpers/inputValidators';
 import { addCenter } from '../../../actions/centerActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
+import './styles.scss';
 import View from './View';
 
 

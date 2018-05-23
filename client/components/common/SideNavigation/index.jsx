@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './styles.scss';
 import AdminLinks from './AdminLinks';
 import { logOut } from '../../../actions/authAction';
 
@@ -15,7 +16,7 @@ const SideNavigation = props => (
           <i className="fa fa-book fa-fw" aria-hidden="true" />&nbsp; My Events
         </Link>
         <Link to="addEvent" className="list-group-item">
-          <i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; Add Events
+          <i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; Create Event
         </Link>
         <Link to="/centers2" className="list-group-item">
           <i className="fa fa-bank fa-fw" aria-hidden="true" />&nbsp; Centers

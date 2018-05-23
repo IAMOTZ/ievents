@@ -6,7 +6,7 @@ import { AuthTopNavigation } from '../../common/TopNavigation';
 import CenterForm from './CenterForm';
 
 const View = props => (
-  <div className="add-center-container">
+  <div id="add-center-container">
     <AuthTopNavigation
       name={props.userName}
       title="Add a center"
@@ -22,23 +22,25 @@ const View = props => (
           isSuperAdmin={props.isSuperAdmin}
           dispatch={props.dispatch}
         />
-        <div className="col-lg-10 offset-md-2" id="add-event-section">
+        <div className="col-lg-10 offset-md-2">
           <Header text="Add a center" />
-          <CenterForm
-            addingCenterStarted={props.addingCenterStarted}
-            addingCenterError={props.addingCenterError}
-            getInput={props.getInput}
-            inputErrors={props.inputErrors}
-            handleImageDrop={props.handleImageDrop}
-            images={props.images}
-            add={props.add}
-          />
+          <div className="page-content">
+            <CenterForm
+              addingCenterStarted={props.addingCenterStarted}
+              addingCenterError={props.addingCenterError}
+              getInput={props.getInput}
+              inputErrors={props.inputErrors}
+              handleImageDrop={props.handleImageDrop}
+              images={props.images}
+              add={props.add}
+            />
+          </div>
         </div>
       </div>
     </div>
     <footer className="d-block d-sm-none mt-5">
       <div className="container text-white text-center py-5">
-        <h1>Ievents</h1>
+        <h1>ievents</h1>
         <p>Copyright &copy; 2017</p>
       </div>
     </footer>

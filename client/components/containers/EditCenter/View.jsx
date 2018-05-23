@@ -22,24 +22,26 @@ const View = props => (
           isSuperAdmin={props.isSuperAdmin}
           dispatch={props.dispatch}
         />
-        <div className="col-lg-10 offset-md-2" id="add-event-section">
+        <div className="col-lg-10 offset-md-2">
           <Header text="Edit Center" />
-          <CenterForm
-            updatingCenterStarted={props.updatingCenterStarted}
-            updatingCenterError={props.updatingCenterError}
-            getInput={props.getInput}
-            inputErrors={props.inputErrors}
-            handleImageDrop={props.handleImageDrop}
-            images={props.images}
-            update={props.update}
-            toUpdate={props.toUpdate}
-          />
+          <div className="page-content">
+            <CenterForm
+              updatingCenterStarted={props.updatingCenterStarted}
+              updatingCenterError={props.updatingCenterError}
+              getInput={props.getInput}
+              inputErrors={props.inputErrors}
+              handleImageDrop={props.handleImageDrop}
+              images={props.images}
+              update={props.update}
+              toUpdate={props.toUpdate}
+            />
+          </div>
         </div>
       </div>
     </div>
     <footer className="d-block d-sm-none mt-5">
       <div className="container text-white text-center py-5">
-        <h1>Ievents</h1>
+        <h1>ievents</h1>
         <p>Copyright &copy; 2017</p>
       </div>
     </footer>

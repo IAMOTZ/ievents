@@ -5,6 +5,7 @@ import { validateAddAdminInputs } from '../../../helpers/inputValidators';
 import { addAdmin } from '../../../actions/userActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
+import './styles.scss';
 import View from './View';
 
 @connect((store) => {

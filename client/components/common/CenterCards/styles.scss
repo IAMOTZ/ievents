@@ -1,0 +1,14 @@
+.centerCard {
+  margin: 5px;
+  .card-img-top {
+    height: 250px;
+  }
+  .seat-badge {
+    position: absolute;
+    top: 200px;
+    left: 60%;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.4);
+  }
+}
+

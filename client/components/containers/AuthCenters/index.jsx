@@ -6,6 +6,7 @@ import {
   getAllCenters, setCenterToUpdate,
 } from '../../../actions/centerActions';
 import { setCenterToBook } from '../../../actions/eventActions';
+import './styles.scss';
 import View from './View';
 
 @connect((store) => {

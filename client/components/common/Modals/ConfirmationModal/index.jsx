@@ -9,7 +9,7 @@ const ConfirmationModal = props => (
           <h5 className="modal-title">Confirmation</h5>
           <button
             type="button"
-            className="close"
+            className="close pointer-button"
             data-dismiss="modal"
             onClick={props.onCancel}
           >
@@ -22,7 +22,7 @@ const ConfirmationModal = props => (
         <div className="modal-footer">
           <button
             type="button"
-            className="btn btn-dark"
+            className="btn ie-dark-button"
             data-dismiss="modal"
             onClick={props.onCancel}
           >
@@ -30,7 +30,7 @@ const ConfirmationModal = props => (
           </button>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary pointer-button"
             onClick={props.onOK}
           >
             Yes

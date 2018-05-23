@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import './styles.scss';
 import BookingTable from './BookingTable';
 
 const defaultImage = '/images/defaultImgx4.jpeg';
@@ -94,7 +95,7 @@ class CenterModal extends React.Component {
                     <p>{this.props.modalContent.details}</p>
                     {checkForBooking(this.props.modalContent.bookedOn).element}
                     <button
-                      className="btn text-white mt-2 btn-block"
+                      className="btn ie-dark-button mt-2 btn-block"
                       onClick={this.redirect}
                       id={this.props.modalContent.id}
                       data-dismiss="modal"

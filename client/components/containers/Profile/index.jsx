@@ -10,6 +10,7 @@ import { changePassword, deleteAccount } from '../../../actions/userActions';
 import { getAllEvents } from '../../../actions/eventActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
+import './styles.scss';
 import View from './View';
 
 @connect((store) => {

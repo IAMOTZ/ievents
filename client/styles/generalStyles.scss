@@ -1,0 +1,28 @@
+$custom-black: rgba(0,0,0, 0.9);
+$custom-blue: rgb(0, 142, 214);
+$background-color: #f6f7fa;
+
+
+body {
+  background-color: $background-color;
+}
+
+.ie-dark-button {  
+  background-color: lighten($color: $custom-black, $amount: 15%);
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+}
+.pointer-button {
+  cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  .w-lg-50 {
+      width: 50% !important;
+    }
+}
+

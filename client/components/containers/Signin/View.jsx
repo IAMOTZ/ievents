@@ -8,7 +8,7 @@ import { BigAlert, SmallAlert } from '../../common/Alert';
 const View = props => (
   <div id="sign-in-container">
     <RegularTopNavigation />
-    <div className="d-flex flex-column align-items-center main-content">
+    <div className="d-flex flex-column align-items-center page-content">
       <LoadingIcon start={props.loggingUserStarted} size={3} />
       <div className="card card-form">
         <h1 className="card-header">Sign in</h1>
@@ -50,7 +50,7 @@ const View = props => (
               <SmallAlert message={props.inputErrors.passwordError} />
             </div>
             <button
-              className="btn btn-block dark-button text-white"
+              className="btn btn-block ie-dark-button text-white"
               disabled={props.loggingUserStarted}
               onClick={props.login}
             >Log in
@@ -61,8 +61,8 @@ const View = props => (
           </form>
         </div>
       </div>
-      <Footer />
     </div>
+    <Footer />
   </div>
 );
 
