@@ -3,7 +3,7 @@ $custom-blue: rgb(0, 142, 214);
 
 @mixin nav-bar-theme {
   background-color: $custom-black;
-  border-bottom: 2px solid $custom-blue;
+  border-bottom: 3px solid $custom-blue;
 }
 
 nav#regular-top-navbar{

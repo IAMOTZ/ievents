@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Aux from '../../hoc/FakeDiv';
+import FakeDiv from '../../hoc/FakeDiv';
 import CenterDropDown from './CenterDropDown';
 import { LoadingIcon } from '../../common/LoadingAnimation';
 import { BigAlert, SmallAlert } from '../../common/Alert';
@@ -8,7 +8,7 @@ import { BigAlert, SmallAlert } from '../../common/Alert';
 const EventForm = (props) => {
   const toUpdate = { ...props.toUpdate };
   return (
-    <Aux>
+    <FakeDiv>
       <form className="mt-lg-5 w-lg-50">
         <LoadingIcon start={props.addingEventStarted || props.updatingEventStarted} size={3} />
         <BigAlert message={props.addingEventError || props.updatingEventError} />
@@ -73,12 +73,12 @@ const EventForm = (props) => {
         </div>
       </form>
       <button
-        className="btn btn-outline-dark"
+        className="btn ie-blue-button"
         disabled={props.addingEventStarted || props.updatingEventStarted}
         onClick={props.add || props.update}
-      >{toUpdate.title ? 'Update' : 'Add'}
+      >{toUpdate.title ? 'Update' : 'Create'}
       </button>
-    </Aux>
+    </FakeDiv>
   );
 };
 

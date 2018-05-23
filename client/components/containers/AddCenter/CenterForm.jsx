@@ -120,7 +120,7 @@ const CenterForm = (props) => {
               <div className="ml-3 pt-3">
                 <button
                   id="add-btn"
-                  className="btn btn-outline-dark"
+                  className="btn ie-blue-button"
                   disabled={props.addingCenterStarted || props.updatingCenterStarted}
                   onClick={props.add || props.update}
                 >{toUpdate.name ? 'Update' : 'Add'}

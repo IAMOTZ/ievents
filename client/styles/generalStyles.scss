@@ -1,6 +1,4 @@
-$custom-black: rgba(0,0,0, 0.9);
-$custom-blue: rgb(0, 142, 214);
-$background-color: #f6f7fa;
+@import './variables.scss';
 
 
 body {
@@ -16,6 +14,21 @@ body {
     color: white;
   }
 }
+
+.ie-blue-button {  
+  background-color: $custom-blue;
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background-color: darken($color: $custom-blue, $amount: 10%);
+    color: white;
+  }
+  &:focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
 .pointer-button {
   cursor: pointer;
 }
@@ -32,7 +45,6 @@ body {
   textarea:focus {
     border-color: $custom-blue !important;
     box-shadow: none !important;
-    outline-width: 0;
   }
   
   label {

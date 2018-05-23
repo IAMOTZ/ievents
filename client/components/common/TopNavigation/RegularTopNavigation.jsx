@@ -20,10 +20,10 @@ const RegularTopNavigation = () => (
             <Link to="/centers1" className="nav-link">Centers</Link>
           </li>
           <li className="nav-item">
-            <Link to="/users/login" className="nav-link"> Signin </Link>
+            <Link to="/users/login" className="nav-link"> Log in </Link>
           </li>
           <li className="nav-item">
-            <Link to="/users" className="nav-link"> Signup </Link>
+            <Link to="/users" className="nav-link"> Sign up </Link>
           </li>
         </ul>
       </div>

@@ -92,7 +92,7 @@ const View = props => (
               <SmallAlert message={props.inputErrors.confirmPasswordError} />
             </div>
             <button
-              className="btn btn-block ie-dark-button text-white mt-4"
+              className="btn btn-block ie-blue-button mt-4"
               disabled={props.loggingUserStarted}
               onClick={props.register}
             >Register

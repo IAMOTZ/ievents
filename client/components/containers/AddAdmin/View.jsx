@@ -67,7 +67,7 @@ const View = props => (
                   </ul>
                   <button
                     id="add-btn"
-                    className="btn ie-dark-button"
+                    className="btn ie-blue-button"
                     disabled={props.addingAdminStarted}
                     onClick={props.add}
                   >Add Admin

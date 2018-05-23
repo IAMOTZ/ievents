@@ -1,5 +1,4 @@
-$custom-black: rgba(0,0,0, 0.9);
-$custom-blue: rgb(0, 142, 214);
+@import '../../../styles/variables';
 
 #side-navigation {
   background-color: $custom-black;

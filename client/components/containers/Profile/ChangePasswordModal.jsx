@@ -76,7 +76,7 @@ const ChangePasswordModal = props => (
           </button>
           <button
             type="button"
-            className="btn btn-primary pointer-button"
+            className="btn ie-blue-button"
             onClick={props.changePassword}
             disabled={props.changingPasswordStarted}
           >Change

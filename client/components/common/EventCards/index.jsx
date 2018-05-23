@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCenterById } from '../../../helpers/helpers';
+import './styles.scss';
 import EventStatus from './EventStatus';
 
 const getCenterName = (centers, centerId) => {
@@ -18,7 +19,7 @@ const EventCards = props => props.events.map(event => (
   <div
     style={{ maxWidth: `${20}rem` }}
     key={event.id}
-    className="card text-dark bg-white mb-3 mx-auto"
+    className="card text-dark bg-white mb-3 mx-auto event-card"
   >
     <div className="card-header d-flex justify-content-between">
       <span className={event.status === 'allowed' ? 'h4 mb-0' : 'h4 mb-0 text-muted'}>{event.title}</span>
@@ -29,7 +30,7 @@ const EventCards = props => props.events.map(event => (
               <i className="fa fa-pencil" onClick={props.edit} id={event.id} />
             </Link> : null
         }
-        <a href="#" className="text-primary" data-toggle="modal" data-target="#confirmation-modal">
+        <a href="#" data-toggle="modal" data-target="#confirmation-modal">
           <i className="fa fa-trash" onClick={props.startDelete} id={event.id} />
         </a>
       </span>

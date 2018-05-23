@@ -11,7 +11,7 @@ const View = props => (
     <div className="d-flex flex-column align-items-center page-content">
       <LoadingIcon start={props.loggingUserStarted} size={3} />
       <div className="card card-form">
-        <h1 className="card-header">Sign in</h1>
+        <h1 className="card-header">Log in</h1>
         <div className="card-body">
           <BigAlert message={props.loggingUserError ? 'Email or password incorrect' : null} />
           <form>
@@ -50,14 +50,11 @@ const View = props => (
               <SmallAlert message={props.inputErrors.passwordError} />
             </div>
             <button
-              className="btn btn-block ie-dark-button text-white"
+              className="btn btn-block ie-blue-button text-white"
               disabled={props.loggingUserStarted}
               onClick={props.login}
             >Log in
             </button>
-            <div className="text-center mt-2">
-              <a href="" className="text-muted">forgot password?</a>
-            </div>
           </form>
         </div>
       </div>
