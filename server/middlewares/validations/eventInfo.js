@@ -1,4 +1,4 @@
-import { getCurrentDate } from '../../commonHelpers';
+import { getCurrentDate, failureResponse } from '../../commonHelpers';
 import * as utils from './utils';
 
 /**
@@ -67,7 +67,7 @@ export const validateAddEventInputs = (req, res, next) => {
       throw new Error('Center id must be an integer in a string format');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
@@ -134,7 +134,7 @@ export const validateUpdateEventInputs = (req, res, next) => {
       throw new Error('Center id must be an integer in a string format');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };

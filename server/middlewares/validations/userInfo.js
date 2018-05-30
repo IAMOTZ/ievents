@@ -1,4 +1,6 @@
 import * as utils from './utils';
+import { failureResponse } from '../../commonHelpers';
+
 /**
  * A middleware.
  * Ensures that the inputs given when creating a user are valid.
@@ -50,7 +52,7 @@ export const validateSignUpInputs = (req, res, next) => {
       throw new Error('Password and confirm password input does not match');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
@@ -80,7 +82,7 @@ export const validateSigninInputs = (req, res, next) => {
       throw new Error('Password is required');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
@@ -103,7 +105,7 @@ export const validateCreateAdminInputs = (req, res, next) => {
       throw new Error('Email format is wrong');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
@@ -147,7 +149,7 @@ export const validateChangePasswordInputs = (req, res, next) => {
       throw new Error('The new password and confirm password input does not match');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
@@ -167,7 +169,7 @@ export const validateDeleteUserInputs = (req, res, next) => {
       throw new Error('password is required');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
@@ -185,6 +187,6 @@ export const validateResourceID = (req, res, next) => {
   if (utils.isInteger(resourceID)) {
     next();
   } else {
-    return res.status(400).json({ status: 'failed', message: 'Resource ID must be an integer' });
+    return failureResponse(res, 'Resource ID must be an integer');
   }
 };

@@ -2,6 +2,7 @@
 /* eslint-disable consistent-return */
 import jwt from 'jsonwebtoken';
 import db from '../../models';
+import { failureResponse } from '../../commonHelpers';
 
 const { events, users } = db;
 
@@ -18,27 +19,18 @@ export const isUser = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE, async (error, decoded) => {
       if (error) {
-        return res.status(401).json({
-          status: 'failed',
-          message: 'Failed to authenticate token',
-        });
+        return failureResponse(res, 'Failed to authenticate token', {}, 401);
       } else {
         req.decoded = decoded;
         const user = await users.findById(Number(req.decoded.id));
         if (!user) {
-          return res.status(401).json({
-            status: 'failed',
-            message: 'Failed to authenticate token',
-          });
+          return failureResponse(res, 'Failed to authenticate token', {}, 401);
         } else res.locals.currentUser = user;
         next();
       }
     });
   } else {
-    return res.status(401).send({
-      status: 'failed',
-      message: 'No access-token provided',
-    });
+    return failureResponse(res, 'No access-token provided', {}, 401);
   }
 };
 
@@ -55,10 +47,7 @@ export const isAdmin = (req, res, next) => {
   if (role.toLowerCase() === 'admin' || role.toLowerCase() === 'superadmin') {
     next();
   } else {
-    return res.status(401).json({
-      status: 'failed',
-      message: 'You are unauthorized to perform this action',
-    });
+    return failureResponse(res, 'You are unauthorized to perform this action', {}, 401);
   }
 };
 
@@ -75,10 +64,7 @@ export const isSuperAdmin = (req, res, next) => {
   if (role.toLowerCase() === 'superadmin') {
     next();
   } else {
-    return res.status(401).json({
-      status: 'failed',
-      message: 'You are unauthorized to perform this action',
-    });
+    return failureResponse(res, 'You are unauthorized to perform this action', {}, 401);
   }
 };
 
@@ -95,15 +81,9 @@ export const isEventOwner = async (req, res, next) => {
   const eventId = req.params.id;
   const event = await events.findById(Number(eventId));
   if (!event) {
-    return res.status(404).json({
-      status: 'failed',
-      message: 'Event does not exist',
-    });
+    return failureResponse(res, 'Event does not exist', {}, 404);
   } else if (event.userId !== userId) {
-    return res.status(401).json({
-      status: 'failed',
-      message: 'Unauthorised to perform this action',
-    });
+    return failureResponse(res, 'Unauthorised to perform this action', {}, 401);
   } else {
     res.locals.event = event;
     next();
