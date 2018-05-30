@@ -25,8 +25,10 @@ export const isUser = (req, res, next) => {
         const user = await users.findById(Number(req.decoded.id));
         if (!user) {
           return failureResponse(res, 'Failed to authenticate token', {}, 401);
-        } else res.locals.currentUser = user;
-        next();
+        } else {
+          res.locals.currentUser = user;
+          next();
+        }
       }
     });
   } else {
@@ -43,7 +45,7 @@ export const isUser = (req, res, next) => {
  * @returns {Object} The response object with the error message.
  */
 export const isAdmin = (req, res, next) => {
-  const { role } = req.decoded;
+  const { role } = res.locals.currentUser;
   if (role.toLowerCase() === 'admin' || role.toLowerCase() === 'superadmin') {
     next();
   } else {
@@ -60,7 +62,7 @@ export const isAdmin = (req, res, next) => {
  * @returns {Object} The response object with the error message.
  */
 export const isSuperAdmin = (req, res, next) => {
-  const { role } = req.decoded;
+  const { role } = res.locals.currentUser;
   if (role.toLowerCase() === 'superadmin') {
     next();
   } else {
