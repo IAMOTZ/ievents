@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import apiRoutes from './apiRoutes';
 import db from './models';
-import { updateEventStatus } from './commonHelpers';
+import { updateEventStatus, failureResponse } from './commonHelpers';
 import formatInputDatas from './middlewares/formatInputDatas';
 
 const app = express();
@@ -34,16 +34,15 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
-app.use((req, res) => {
-  res.status(404).json({ error: 'page not found' });
-});
+app.use((req, res) => failureResponse(res, 'page not found', {}, 404));
 
 app.set('port', process.env.PORT || 3000);
 
-// After starting the app, updateEventStatus is set to run everyday.
+// After starting the app, updateEventStatus is executed and also set to run everyday.
 /* eslint-disable no-console */
 app.listen(app.get('port'), () => {
   console.log(`App started on port ${app.get('port')}`);
+  updateEventStatus(events);
   const interval = 24 * 60 * 60 * 1000; // One day
   setInterval(() => {
     updateEventStatus(events);
