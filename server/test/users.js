@@ -244,7 +244,7 @@ describe('User Endpoints', () => {
     it('should not signin a user with wrong email format', (done) => {
       loginUser(
         alterUserDetails({ email: 'test.com' }),
-        failureAssertions('Email or password incorrect', 400, done),
+        failureAssertions('Email format is wrong', 400, done),
       );
     });
     it('should not signin a user without password', (done) => {
