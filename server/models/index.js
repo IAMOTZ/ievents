@@ -33,7 +33,7 @@ db.users = users(sequelize, Sequelize.DataTypes);
 db.events = events(sequelize, Sequelize.DataTypes);
 db.centers = centers(sequelize, Sequelize.DataTypes);
 
-db.users.hasMany(db.events);
+db.users.hasMany(db.events, { onDelete: 'cascade' });
 db.users.hasMany(db.centers);
 
 db.centers.belongsTo(db.users);
