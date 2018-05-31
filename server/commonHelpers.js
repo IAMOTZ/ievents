@@ -172,6 +172,14 @@ export const sendMail = (details) => {
   }
 };
 
+/**
+ * Creates information about a paginated resposne sent to the API consumer.
+ * @param {Number} limit The limit of the pagination.
+ * @param {Number} offset The offset of the pagination.
+ * @param {Number} currentCount The count of the resource sent back to the user.
+ * @param {Number} totalCount The total count of the resouce available in the database.
+ * @returns {Object} The object containing the pagination info.
+ */
 export const createPaginationInfo = (limit, offset, currentCount, totalCount) => ({
   message: 'This response is paginated. This object contains information about the pagination',
   limit,
@@ -180,10 +188,26 @@ export const createPaginationInfo = (limit, offset, currentCount, totalCount) =>
   totalCount,
 });
 
+/**
+ * An helper to abstract sending of success response sent to the API consumer.
+ * @param {Object} responseObject The response object.
+ * @param {String} message A message to send as part of the response.
+ * @param {Object} payload The payload containing the response data.
+ * @param {Number} statusCode Status code of the response.
+ * @returns {Object} The response object from express.
+ */
 export const successResponse = (responseObject, message, payload, statusCode = 200) => (
   responseObject.status(statusCode).json(Object.assign({ status: 'success', message }, payload))
 );
 
+/**
+ * An helper to abstract sending of failure response sent to the API consumer.
+ * @param {Object} responseObject The response object.
+ * @param {String} message A message to send as part of the response.
+ * @param {Object} payload The payload containing the response data.
+ * @param {Number} statusCode Status code of the response.
+ * @returns {Object} The response object.
+ */
 export const failureResponse = (responseObject, message, payload, statusCode = 400) => (
   responseObject.status(statusCode).json(Object.assign({ status: 'failed', message }, payload))
 );

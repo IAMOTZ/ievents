@@ -1,4 +1,5 @@
 import * as utils from './utils';
+import { failureResponse } from '../../commonHelpers';
 
 /**
  * A middleware.
@@ -47,7 +48,7 @@ export const validateAddCenterInputs = (req, res, next) => {
       throw new Error('Center price must be an integer in string format');
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
@@ -105,7 +106,7 @@ export const validateUpdateCenterInputs = (req, res, next) => {
       }
     }
   } catch (error) {
-    return res.status(400).json({ status: 'failed', message: error.message });
+    return failureResponse(res, error.message);
   }
   next();
 };
