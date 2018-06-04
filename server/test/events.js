@@ -296,10 +296,10 @@ describe('Events Endpoint', () => {
         failureAssertions('Center id must be an integer in a string format', 400, done),
       );
     });
-    it('should not create an event if the choosen center does not exist', (done) => {
+    it('should not create an event if the  center does not exist', (done) => {
       createEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('The choosen center does not exist', 404, done),
+        failureAssertions('The chosen center does not exist', 404, done),
       );
     });
     it('should create an event', (done) => {
@@ -420,13 +420,13 @@ describe('Events Endpoint', () => {
         failureAssertions('Unauthorised to perform this action', 401, done),
       );
     });
-    it('should not modify event if the new choosen center does not exist', (done) => {
+    it('should not modify event if the new chosen center does not exist', (done) => {
       modifyEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('The new choosen center does not exist', 404, done),
+        failureAssertions('The new chosen center does not exist', 404, done),
       );
     });
-    it('should not modify event if the new choosen center is booked for the date', (done) => {
+    it('should not modify event if the new chosen center is booked for the date', (done) => {
       const date = `${currentYear + 1}/${currentMonth}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ centerId: 2, date }),
