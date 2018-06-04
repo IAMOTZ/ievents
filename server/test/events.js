@@ -3,6 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import db from '../models';
 import app from '../app';
+import { fail } from 'assert';
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
@@ -153,6 +154,18 @@ const getCenterEvents = (token, assertions, id, paginate = {}) => {
   chai.request(app)
     .get(`/api/v1/centers/${id}/events?limit=${paginate.limit}&&offset=${paginate.offset}`)
     .send(token)
+    .end(assertions);
+};
+
+/**
+ * An helper function to fetch the dates a center has been booked.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Number} id The ID of the center.
+ * @param {Object} paginate An optional description of how to paginate the request.
+ */
+const getCenterBookedDates = (assertions, id, paginate = {}) => {
+  chai.request(app)
+    .get(`/api/v1/centers/${id}/bookedDates?limit=${paginate.limit}&&offset=${paginate.offset}`)
     .end(assertions);
 };
 
@@ -521,6 +534,54 @@ describe('Events Endpoint', () => {
           done();
         },
         2, // ID of a center that exist
+        { limit: 1 }
+      );
+    });
+  });
+
+  describe('Getting the dates a center has been booked', () => {
+    it('should not get booked dates if the center ID is not given as integer', (done) => {
+      getCenterBookedDates(
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'aldkfasdkf' // ID of wrong type
+      );
+    });
+    it('should not get dates if the center does not exist', (done) => {
+      getCenterBookedDates(
+        failureAssertions('Center does not exist', 404, done),
+        44430 // ID of center that does not exist.
+      );
+    });
+    it('should get booked dates of a center', (done) => {
+      getCenterBookedDates(
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.bookedDates.should.be.a('array');
+          res.body.bookedDates.length.should.be.eql(2);
+          res.body.bookedDates[0].should.be.a('string');
+          done();
+        },
+        2
+      );
+    });
+    it('should get booked dates of a center by pagination', (done) => {
+      const paginationInfo = 'This response is paginated. This object contains information about the pagination';
+      getCenterBookedDates(
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.bookedDates.should.be.a('array');
+          res.body.bookedDates.length.should.be.eql(1);
+          res.body.bookedDates[0].should.be.a('string');
+          res.body.paginationInfo.message.should.be.eql(paginationInfo);
+          res.body.paginationInfo.limit.should.be.eql(1);
+          res.body.paginationInfo.offset.should.be.eql(0);
+          res.body.paginationInfo.currentCount.should.be.eql(1);
+          res.body.paginationInfo.totalCount.should.be.eql(2);
+          done();
+        },
+        2,
         { limit: 1 }
       );
     });

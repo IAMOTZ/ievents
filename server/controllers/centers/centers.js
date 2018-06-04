@@ -3,7 +3,7 @@ import db from '../../models';
 import {
   uploadImage, deleteImage, createPaginationInfo, successResponse, failureResponse,
 } from '../../commonHelpers';
-import { getCenter, formatCenterData } from './helpers';
+import { getCenter, formatCenterData, getDatesFromEvents } from './helpers';
 
 const { centers, events } = db;
 
@@ -58,6 +58,32 @@ export default {
       const payload = { center: formatCenterData(center) };
       return successResponse(res, 'Center successfully retrieved', payload);
     }
+  },
+
+  /**
+   * Get the dates booked for a particular center.
+   * @param {Object} req The request object.
+   * @param {Object} res The resonse object.
+   * @returns {Object} The response object containing some reponse data.
+   */
+  async getBookedDates(req, res) {
+    const centerId = req.params.id;
+    const { limit, offset } = res.locals;
+    const center = await getCenter(centers, centerId);
+    if (!center) {
+      return failureResponse(res, 'Center does not exist', {}, 404);
+    }
+    const centerEvents = await events.findAndCountAll({
+      where: { centerId, status: 'allowed' },
+      attributes: ['date'],
+      limit,
+      offset
+    });
+    const bookedDates = getDatesFromEvents(centerEvents.rows);
+    const currentDateCount = centerEvents.rows.length; const totalDateCount = centerEvents.count;
+    const paginationInfo = createPaginationInfo(limit, offset, currentDateCount, totalDateCount);
+    const payload = { paginationInfo, bookedDates };
+    return successResponse(res, `The dates for center with id ${centerId} successfully retrieved`, payload);
   },
 
   /**
