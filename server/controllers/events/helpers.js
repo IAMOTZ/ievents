@@ -55,7 +55,7 @@ export const isCenterBooked = async (eventModel, centerId, date) => {
  * @returns {String} The email constructed.
  */
 export const createEmailBody = (eventTitle, eventDate) => (
-  `<h3>Ievents</h3>
+  `<h3>iEvents</h3>
   <p>Your event, <b>${eventTitle}</b> ,that is supposed to come up on <b>
     ${eventDate}</b> has been canceled!!
     <br> Consequently, the center would not be available for your event.

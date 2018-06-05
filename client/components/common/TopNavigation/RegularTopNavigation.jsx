@@ -6,7 +6,7 @@ const RegularTopNavigation = () => (
   <nav className="navbar navbar-expand-sm navbar-dark fixed-top" id="regular-top-navbar">
     <div className="container">
       <Link to="/" className="navbar-brand">
-        <strong>ievents</strong>
+        <strong>iEvents</strong>
       </Link>
       <button className="navbar-toggler" data-toggle="collapse" data-target="#navMenu">
         <span className="navbar-toggler-icon" />

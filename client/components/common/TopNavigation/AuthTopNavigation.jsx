@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './styles.scss'
+import './styles.scss';
 import AdminLinks from './AdminLinks';
 import { logOut } from '../../../actions/authAction';
 

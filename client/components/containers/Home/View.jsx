@@ -10,7 +10,7 @@ const Home = () => (
         id="page-content"
         className="d-flex flex-column align-items-center text-center"
       >
-        <h1 className="display-2 text-center">Welcome to<strong> ievents</strong>
+        <h1 className="display-2 text-center">Welcome to<strong> iEvents</strong>
         </h1>
         <p className="display-4 d-none d-sm-block">Get the perfect center for your events</p>
         <p
@@ -18,7 +18,9 @@ const Home = () => (
           style={{ fontSize: '2.0rem' }}
         >Get the perfect center for your events
         </p>
-        <Link to="/centers1" className="btn btn-primary mt-3">Checkout Our Centers</Link>
+        <Link to="/centers1" className="btn btn-primary mt-3">
+          <i className="fa fa-bank fa-fw" aria-hidden="true" />&nbsp; Checkout Our Centers
+        </Link>
       </div>
     </div>
   </div>

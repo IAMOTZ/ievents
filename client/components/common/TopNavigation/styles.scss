@@ -8,6 +8,19 @@ $custom-blue: rgb(0, 142, 214);
 
 nav#regular-top-navbar{
   @include nav-bar-theme;
+  .nav-link:hover {
+    color: white;
+  }
+  .nav-item {
+    margin-left: 10px;
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0px;
+    }
+    &:first-child {
+      margin-left: 0px;
+    }
+  }
 }
 
 nav#auth-top-navbar {
