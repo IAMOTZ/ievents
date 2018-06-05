@@ -54,6 +54,12 @@ router.get(
   controllers.centers.getOne,
 );
 router.get(
+  '/centers/:id/bookedDates',
+  validateResourceID,
+  paginateRequest,
+  controllers.centers.getBookedDates,
+);
+router.get(
   '/events',
   isUser,
   paginateRequest,

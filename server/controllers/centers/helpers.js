@@ -11,14 +11,13 @@ export const getCenter = async (centerModel, centerId, options) => {
 };
 
 /**
- * Map out the dates of allowed events.
+ * Map out the dates of from an array of event objects.
  * @param {Array} eventsArray an array of events.
- * @returns {Array} an array of the date of allowed events.
+ * @returns {Array} an array of event dates.
  */
-const getDatesFromAllowedEvents = eventsArray => (
-  eventsArray.filter(event => event.status === 'allowed').map(event => event.date)
+export const getDatesFromEvents = eventsArray => (
+  eventsArray.map(event => event.date)
 );
-
 
 /**
  * Format the center data to be returned to the user.
@@ -36,7 +35,6 @@ export const formatCenterData = centerData => (
       capacity: centerData.capacity,
       price: centerData.price,
       images: centerData.images,
-      bookedOn: centerData.events ? getDatesFromAllowedEvents(centerData.events) : null,
     },
   )
 );

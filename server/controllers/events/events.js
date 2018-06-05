@@ -77,9 +77,9 @@ export default {
       title, description, date, centerid,
     } = res.locals.formattedInputs;
     const userId = req.decoded.id;
-    const choosenCenter = await getCenter(centers, centerid);
-    if (!choosenCenter) {
-      return failureResponse(res, 'The choosen center does not exist', {}, 404);
+    const chosenCenter = await getCenter(centers, centerid);
+    if (!chosenCenter) {
+      return failureResponse(res, 'The chosen center does not exist', {}, 404);
     } else {
       const centerIsBooked = await isCenterBooked(events, centerid, date);
       if (centerIsBooked) {
@@ -111,17 +111,17 @@ export default {
     const { event } = res.locals;
     let updatedEvent = null;
     if (centerid && event.centerId !== Number(centerid)) {
-      const newChoosenCenter = await getCenter(centers, centerid);
+      const newChosenCenter = await getCenter(centers, centerid);
       const centerIsBooked = await isCenterBooked(events, centerid, date);
-      if (!newChoosenCenter) {
-        return failureResponse(res, 'The new choosen center does not exist', {}, 404);
+      if (!newChosenCenter) {
+        return failureResponse(res, 'The new chosen center does not exist', {}, 404);
       } else if (centerIsBooked) {
         return failureResponse(res, 'The center has been booked for that date');
       } else {
         updatedEvent = await event.update({
           title: title || event.title,
           date: date || event.date,
-          centerId: newChoosenCenter.id,
+          centerId: newChosenCenter.id,
           description: description || event.description,
         });
       }

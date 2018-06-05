@@ -3,6 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import db from '../models';
 import app from '../app';
+import { fail } from 'assert';
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
@@ -47,7 +48,7 @@ const currentDay = ensureTwoDigit(currentDate.getDate());
 let normalEventDetails = {
   title: 'test event',
   description: 'test description',
-  date: `${currentYear}/${currentMonth}/${currentDay}`,
+  date: `${currentYear}/${currentMonth}/${currentDay + 2}`,
   centerId: 1,
   token: null,
 };
@@ -157,6 +158,18 @@ const getCenterEvents = (token, assertions, id, paginate = {}) => {
 };
 
 /**
+ * An helper function to fetch the dates a center has been booked.
+ * @param {Function} assertions The assertions to execute after the request is complete.
+ * @param {Number} id The ID of the center.
+ * @param {Object} paginate An optional description of how to paginate the request.
+ */
+const getCenterBookedDates = (assertions, id, paginate = {}) => {
+  chai.request(app)
+    .get(`/api/v1/centers/${id}/bookedDates?limit=${paginate.limit}&&offset=${paginate.offset}`)
+    .end(assertions);
+};
+
+/**
  * An helper function to login a user.
  * @param {Object} userDetails The details of the user.
  * @param {Funciton} assertions The assertions to execute after the request is complete.
@@ -243,45 +256,31 @@ describe('Events Endpoint', () => {
         failureAssertions('Event date is required', 400, done),
       );
     });
-    it('should not create event with wrog date format', (done) => {
+    it('should not create event with wrong date format', (done) => {
       createEvent(
-        alterEventDetails({ date: '2017-2-56' }),
-        failureAssertions('The date format should be yyyy/mm/dd', 400, done),
+        alterEventDetails({ date: '02-2019-10' }),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not create event if days in the date is more that 31', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth}/40`;
+    it('should not create event for invalid date', (done) => {
+      const wrongDate = `${currentYear + 1}-02-30`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('Days in the date cannot be more than 31', 400, done),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not create event if month in date is more than 12', (done) => {
-      const wrongDate = `${currentYear}/15/${currentDay}`;
+    it('should not create event for today', (done) => {
+      const wrongDate = `${currentYear}-${currentMonth}-${currentDay}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('Month in the date cannot be more than 12', 400, done),
-      );
-    });
-    it('should not create event for past years', (done) => {
-      const wrongDate = `${currentYear - 10}/${currentMonth}/${currentDay}`;
-      createEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this year and upcoming years', 400, done),
-      );
-    });
-    it('should not create event for past months', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth - 1}/${currentDay}`;
-      createEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this month and upcoming months', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
     it('should not create event for past days', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth}/${currentDay - 1}`;
+      const wrongDate = `${currentYear}-${currentMonth}-${currentDay - 1}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for today and upcoming days', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
     it('should not create event without a center', (done) => {
@@ -296,10 +295,10 @@ describe('Events Endpoint', () => {
         failureAssertions('Center id must be an integer in a string format', 400, done),
       );
     });
-    it('should not create an event if the choosen center does not exist', (done) => {
+    it('should not create an event if the  center does not exist', (done) => {
       createEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('The choosen center does not exist', 404, done),
+        failureAssertions('The chosen center does not exist', 404, done),
       );
     });
     it('should create an event', (done) => {
@@ -367,45 +366,31 @@ describe('Events Endpoint', () => {
         failureAssertions('Event description must be below 200 characters', 400, done),
       );
     });
-    it('should not modify event with wrong date format', (done) => {
+    it('should not modify event if the date format is wrong', (done) => {
       modifyEvent(
-        alterEventDetails({ date: '2017-2-56' }),
-        failureAssertions('The date format should be yyyy/mm/dd', 400, done),
+        alterEventDetails({ date: '04-2017-11' }),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not modify event if days in the date is more than 31', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth}/40`;
-      modifyEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('Days in the date cannot be more than 31', 400, done),
-      );
-    });
-    it('should not modify event if month in date is more than 12', (done) => {
-      const wrongDate = `${currentYear}/15/${currentDay}`;
+    it('should not modify event if the date is invalid', (done) => {
+      const wrongDate = `${currentYear + 1}-02-30`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('Month in the date cannot be more than 12', 400, done),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not modify event for past years', (done) => {
-      const wrongDate = `${currentYear - 10}/${currentMonth}/${currentDay}`;
+    it('should not modify event if the date becomes today', (done) => {
+      const wrongDate = `${currentYear}/${currentMonth}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this year and upcoming years', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
-    it('should not modify event for past months', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth - 1}/${currentDay}`;
-      modifyEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this month and upcoming months', 400, done),
-      );
-    });
-    it('should not modify event for past days', (done) => {
+    it('should not modify event if the date becomes one of past days', (done) => {
       const wrongDate = `${currentYear}/${currentMonth}/${currentDay - 1}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for today and upcoming days', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
     it('should not modify event if center value is not an integer', (done) => {
@@ -420,13 +405,13 @@ describe('Events Endpoint', () => {
         failureAssertions('Unauthorised to perform this action', 401, done),
       );
     });
-    it('should not modify event if the new choosen center does not exist', (done) => {
+    it('should not modify event if the new chosen center does not exist', (done) => {
       modifyEvent(
         alterEventDetails({ centerId: 1000 }),
-        failureAssertions('The new choosen center does not exist', 404, done),
+        failureAssertions('The new chosen center does not exist', 404, done),
       );
     });
-    it('should not modify event if the new choosen center is booked for the date', (done) => {
+    it('should not modify event if the new chosen center is booked for the date', (done) => {
       const date = `${currentYear + 1}/${currentMonth}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ centerId: 2, date }),
@@ -521,6 +506,54 @@ describe('Events Endpoint', () => {
           done();
         },
         2, // ID of a center that exist
+        { limit: 1 }
+      );
+    });
+  });
+
+  describe('Getting the dates a center has been booked', () => {
+    it('should not get booked dates if the center ID is not given as integer', (done) => {
+      getCenterBookedDates(
+        failureAssertions('Resource ID must be an integer', 400, done),
+        'aldkfasdkf' // ID of wrong type
+      );
+    });
+    it('should not get dates if the center does not exist', (done) => {
+      getCenterBookedDates(
+        failureAssertions('Center does not exist', 404, done),
+        44430 // ID of center that does not exist.
+      );
+    });
+    it('should get booked dates of a center', (done) => {
+      getCenterBookedDates(
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.bookedDates.should.be.a('array');
+          res.body.bookedDates.length.should.be.eql(2);
+          res.body.bookedDates[0].should.be.a('string');
+          done();
+        },
+        2
+      );
+    });
+    it('should get booked dates of a center by pagination', (done) => {
+      const paginationInfo = 'This response is paginated. This object contains information about the pagination';
+      getCenterBookedDates(
+        (err, res) => {
+          res.should.have.status(200);
+          res.body.status.should.be.eql('success');
+          res.body.bookedDates.should.be.a('array');
+          res.body.bookedDates.length.should.be.eql(1);
+          res.body.bookedDates[0].should.be.a('string');
+          res.body.paginationInfo.message.should.be.eql(paginationInfo);
+          res.body.paginationInfo.limit.should.be.eql(1);
+          res.body.paginationInfo.offset.should.be.eql(0);
+          res.body.paginationInfo.currentCount.should.be.eql(1);
+          res.body.paginationInfo.totalCount.should.be.eql(2);
+          done();
+        },
+        2,
         { limit: 1 }
       );
     });
