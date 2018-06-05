@@ -13,6 +13,7 @@ import View from './View';
     isUserAuthenticaed: store.authReducer.loggingUserResolved,
     fetchingCenterStarted: store.fetchCentersReducer.fetchingCenterStarted,
     centers: store.fetchCentersReducer.centers,
+    pagination: store.fetchCentersReducer.pagination,
   }
 ))
 class RegularCenters extends React.Component {
@@ -23,7 +24,10 @@ class RegularCenters extends React.Component {
     };
   }
   componentWillMount() {
-    this.props.dispatch(getAllCenters());
+    this.props.dispatch(getAllCenters({
+      limit: this.props.pagination.limit,
+      offset: this.props.pagination.offset,
+    }));
   }
 
   /**
@@ -46,6 +50,14 @@ class RegularCenters extends React.Component {
     this.setState(state);
   }
 
+  updatePagination = (pageData) => {
+    const nextOffset = pageData.selected * this.props.pagination.limit;
+    this.props.dispatch(getAllCenters({
+      limit: this.props.pagination.limit,
+      offset: nextOffset
+    }));
+  }
+
   render() {
     if (this.props.isUserAuthenticaed) {
       return <Redirect to="/events" />;
@@ -57,6 +69,8 @@ class RegularCenters extends React.Component {
         showModal={this.showModal}
         modalContent={this.state.modalContent}
         fetchingCenterStarted={this.props.fetchingCenterStarted}
+        pagination={this.props.pagination}
+        updatePagination={this.updatePagination}
       />
     );
   }
@@ -67,6 +81,7 @@ RegularCenters.defaultProps = {
   fetchingCenterStarted: false,
   centers: [],
   dispatch: () => {},
+  pagination: {}
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -75,6 +90,7 @@ RegularCenters.propTypes = {
   fetchingCenterStarted: PropTypes.bool,
   centers: PropTypes.array,
   dispatch: PropTypes.func,
+  pagination: PropTypes.object,
 };
 
 export default RegularCenters;

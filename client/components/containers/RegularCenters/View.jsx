@@ -5,6 +5,7 @@ import Footer from '../../common/Footer';
 import CenterCards from '../../common/CenterCards';
 import { CenterModal } from '../../common/Modals';
 import { LoadingBox } from '../../common/LoadingAnimation';
+import Pagination from '../../common/Pagination';
 
 const View = props => (
   <div id="regular-centers-container">
@@ -22,6 +23,10 @@ const View = props => (
               </div>
             </div>
           </div>
+          <Pagination
+            pageCount={Math.ceil(props.pagination.totalCount / props.pagination.limit)}
+            onPageChange={props.updatePagination}
+          />
         </div>
     }
     {/* Modal */}
@@ -47,6 +52,8 @@ View.propTypes = {
   showModal: PropTypes.func.isRequired,
   modalContent: PropTypes.object,
   fetchingCenterStarted: PropTypes.bool.isRequired,
+  pagination: PropTypes.object.isRequired,
+  updatePagination: PropTypes.func.isRequired
 };
 
 export default View;

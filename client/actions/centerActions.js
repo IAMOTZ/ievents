@@ -5,11 +5,12 @@ const apiBaseUrl = process.env.API_BASE_URL;
 
 /**
  * A Thunk modeled action that eventually retrieves all the centers in the app.
- * @returns {Function}
+ * @param {Object} pagination Description of how to paginatie the request for centers.
+ * @returns {Function} Actions wrapped in a function.
  */
-export const getAllCenters = () => (dispatch) => {
+export const getAllCenters = (pagination = {}) => (dispatch) => {
   dispatch({ type: actionTypes.FETCHING_CENTERS_STARTED });
-  axios.get(`${apiBaseUrl}/centers`)
+  axios.get(`/api/v1/centers?limit=${pagination.limit}&&offset=${pagination.offset}`)
     .then((response) => {
       dispatch({ type: actionTypes.FETCHING_CENTERS_RESOLVED, payload: response.data });
     })
@@ -22,7 +23,7 @@ export const getAllCenters = () => (dispatch) => {
  * A Thunk modeled action that eventually adds a center.
  * @param {Object} centerDetails The details of the center to be added.
  * @param {String} userToken The token of the user that wants to add the center.
- * @returns {Function}
+ * @returns {Function} Actions wrapped in a function.
  */
 export const addCenter = (centerDetails, userToken) => (dispatch) => {
   dispatch({ type: actionTypes.ADDING_CENTER_STARTED });
@@ -46,7 +47,7 @@ export const addCenter = (centerDetails, userToken) => (dispatch) => {
  * @param {Number} id The ID of the center to update.
  * @param {Object} centerDetails The details of the center to update.
  * @param {String} userToken The token of the user that wants to update the center.
- * @returns {Function}
+ * @returns {Function} Actions wrapped in a function.
  */
 export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
   dispatch({ type: actionTypes.UPDATING_CENTER_STARTED });
@@ -68,7 +69,7 @@ export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
 /**
  * It informs the reducer about a center that is about to be updated/edited.
  * @param {Number} centerId The ID of the center to update.
- * @returns {Object}
+ * @returns {Object} The action.
  */
 export const setCenterToUpdate = centerId => (
   { type: actionTypes.SET_CENTER_TO_UPDATE, payload: centerId }

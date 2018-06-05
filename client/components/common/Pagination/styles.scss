@@ -1,0 +1,45 @@
+@import "../../../styles/variables";
+
+#pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  .react-paginate {
+    ul {
+      display: inline-block;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    li {
+      display: inline-block;
+      border: 1px solid #d9d9d9;
+      padding: 6px 10px 6px 10px;
+      &:first-child {
+        margin-right: 20px;
+      }
+      &:last-child {
+        margin-left: 20px;
+      }
+      &.active {
+        background-color: $custom-blue;
+        border: 1px solid $custom-blue;
+        a {
+          color: white;
+        }
+      }
+      &.disabled {
+        a {
+          cursor: default;
+          text-decoration: none;
+          color: grey;
+        }
+      }
+      a {
+        cursor: pointer;
+        color: $custom-blue;
+        outline: none;
+      }
+    }
+  }
+}
