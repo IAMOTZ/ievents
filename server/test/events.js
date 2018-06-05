@@ -48,7 +48,7 @@ const currentDay = ensureTwoDigit(currentDate.getDate());
 let normalEventDetails = {
   title: 'test event',
   description: 'test description',
-  date: `${currentYear}/${currentMonth}/${currentDay}`,
+  date: `${currentYear}/${currentMonth}/${currentDay + 2}`,
   centerId: 1,
   token: null,
 };
@@ -256,45 +256,31 @@ describe('Events Endpoint', () => {
         failureAssertions('Event date is required', 400, done),
       );
     });
-    it('should not create event with wrog date format', (done) => {
+    it('should not create event with wrong date format', (done) => {
       createEvent(
-        alterEventDetails({ date: '2017-2-56' }),
-        failureAssertions('The date format should be yyyy/mm/dd', 400, done),
+        alterEventDetails({ date: '02-2019-10' }),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not create event if days in the date is more that 31', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth}/40`;
+    it('should not create event for invalid date', (done) => {
+      const wrongDate = `${currentYear + 1}-02-30`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('Days in the date cannot be more than 31', 400, done),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not create event if month in date is more than 12', (done) => {
-      const wrongDate = `${currentYear}/15/${currentDay}`;
+    it('should not create event for today', (done) => {
+      const wrongDate = `${currentYear}-${currentMonth}-${currentDay}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('Month in the date cannot be more than 12', 400, done),
-      );
-    });
-    it('should not create event for past years', (done) => {
-      const wrongDate = `${currentYear - 10}/${currentMonth}/${currentDay}`;
-      createEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this year and upcoming years', 400, done),
-      );
-    });
-    it('should not create event for past months', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth - 1}/${currentDay}`;
-      createEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this month and upcoming months', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
     it('should not create event for past days', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth}/${currentDay - 1}`;
+      const wrongDate = `${currentYear}-${currentMonth}-${currentDay - 1}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for today and upcoming days', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
     it('should not create event without a center', (done) => {
@@ -380,45 +366,31 @@ describe('Events Endpoint', () => {
         failureAssertions('Event description must be below 200 characters', 400, done),
       );
     });
-    it('should not modify event with wrong date format', (done) => {
+    it('should not modify event if the date format is wrong', (done) => {
       modifyEvent(
-        alterEventDetails({ date: '2017-2-56' }),
-        failureAssertions('The date format should be yyyy/mm/dd', 400, done),
+        alterEventDetails({ date: '04-2017-11' }),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not modify event if days in the date is more than 31', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth}/40`;
-      modifyEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('Days in the date cannot be more than 31', 400, done),
-      );
-    });
-    it('should not modify event if month in date is more than 12', (done) => {
-      const wrongDate = `${currentYear}/15/${currentDay}`;
+    it('should not modify event if the date is invalid', (done) => {
+      const wrongDate = `${currentYear + 1}-02-30`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('Month in the date cannot be more than 12', 400, done),
+        failureAssertions('The date is not valid. Date Format is YYYY-MM-DD', 400, done),
       );
     });
-    it('should not modify event for past years', (done) => {
-      const wrongDate = `${currentYear - 10}/${currentMonth}/${currentDay}`;
+    it('should not modify event if the date becomes today', (done) => {
+      const wrongDate = `${currentYear}/${currentMonth}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this year and upcoming years', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
-    it('should not modify event for past months', (done) => {
-      const wrongDate = `${currentYear}/${currentMonth - 1}/${currentDay}`;
-      modifyEvent(
-        alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for this month and upcoming months', 400, done),
-      );
-    });
-    it('should not modify event for past days', (done) => {
+    it('should not modify event if the date becomes one of past days', (done) => {
       const wrongDate = `${currentYear}/${currentMonth}/${currentDay - 1}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for today and upcoming days', 400, done),
+        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
       );
     });
     it('should not modify event if center value is not an integer', (done) => {

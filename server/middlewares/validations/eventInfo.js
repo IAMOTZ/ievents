@@ -1,4 +1,5 @@
-import { getCurrentDate, failureResponse } from '../../commonHelpers';
+import moment from 'moment';
+import { failureResponse } from '../../commonHelpers';
 import * as utils from './utils';
 
 /**
@@ -31,33 +32,11 @@ export const validateAddEventInputs = (req, res, next) => {
     if (!utils.isNotEmpty(date) || !utils.isDefined(date)) {
       throw new Error('Event date is required');
     }
-    if (utils.isDefined(date)) {
-      const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
-      if (!dateData) {
-        throw new Error('The date format should be yyyy/mm/dd');
-      }
-      const currentTime = getCurrentDate(1);
-      const currentYear = currentTime.getFullYear();
-      const currentMonth = currentTime.getMonth() + 1;
-      const currentDate = currentTime.getDate();
-      const eventYear = Number(dateData[1]);
-      const eventMonth = Number(dateData[2]);
-      const eventDate = Number(dateData[3]);
-      if (eventDate > 31) {
-        throw new Error('Days in the date cannot be more than 31');
-      }
-      if (eventMonth > 12) {
-        throw new Error('Month in the date cannot be more than 12');
-      }
-      if (eventYear < currentYear) {
-        throw new Error('You can only create event for this year and upcoming years');
-      }
-      if (eventYear === currentYear && eventMonth < currentMonth) {
-        throw new Error('You can only create event for this month and upcoming months');
-      }
-      if (eventYear === currentYear && eventMonth === currentMonth && eventDate < currentDate) {
-        throw new Error('You can only create event for today and upcoming days');
-      }
+    if (!moment(date, 'YYYY-MM-DD').isValid()) {
+      throw new Error('The date is not valid. Date Format is YYYY-MM-DD');
+    }
+    if (moment(new Date(date)).diff(moment(), 'days', true) < 1) {
+      throw new Error('You can only create event for tomorrow and upcoming days');
     }
     // Validating Center ID.
     if (!centerid) {
@@ -102,31 +81,11 @@ export const validateUpdateEventInputs = (req, res, next) => {
     }
     // Validating Date.
     if (date) {
-      const dateData = date.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
-      if (!dateData) {
-        throw new Error('The date format should be yyyy/mm/dd');
+      if (!moment(date, 'YYYY-MM-DD').isValid()) {
+        throw new Error('The date is not valid. Date Format is YYYY-MM-DD');
       }
-      const currentTime = getCurrentDate(1);
-      const currentYear = currentTime.getFullYear();
-      const currentMonth = currentTime.getMonth() + 1;
-      const currentDate = currentTime.getDate();
-      const eventYear = Number(dateData[1]);
-      const eventMonth = Number(dateData[2]);
-      const eventDate = Number(dateData[3]);
-      if (eventDate > 31) {
-        throw new Error('Days in the date cannot be more than 31');
-      }
-      if (eventMonth > 12) {
-        throw new Error('Month in the date cannot be more than 12');
-      }
-      if (eventYear < currentYear) {
-        throw new Error('You can only create event for this year and upcoming years');
-      }
-      if (eventYear === currentYear && eventMonth < currentMonth) {
-        throw new Error('You can only create event for this month and upcoming months');
-      }
-      if (eventYear === currentYear && eventMonth === currentMonth && eventDate < currentDate) {
-        throw new Error('You can only create event for today and upcoming days');
+      if (moment(new Date(date)).diff(moment(), 'days', true) < 1) {
+        throw new Error('You can only create event for tomorrow and upcoming days');
       }
     }
     // Validating Center ID
