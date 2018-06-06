@@ -21,11 +21,11 @@ export default () => (
     <Route exact path="/" component={Home} />
     <Route exact path="/users" component={Signup} />
     <Route exact path="/users/login" component={Signin} />
-    <Route exact path="/centers1" component={RegularCenters} />
+    <Route exact path="/explore/centers" component={RegularCenters} />
     <Route exact path="/addEvent" component={RequireAuthentication(AddEvent)} />
     <Route exact path="/editEvent" component={RequireAuthentication(EditEvent)} />
     <Route exact path="/events" component={RequireAuthentication(Events)} />
-    <Route exact path="/centers2" component={RequireAuthentication(AuthCenters)} />
+    <Route exact path="/centers" component={RequireAuthentication(AuthCenters)} />
     <Route exact path="/addCenter" component={RequireAuthentication(AddCenter)} />
     <Route exact path="/editCenter" component={RequireAuthentication(EditCenter)} />
     <Route exact path="/transactions" component={RequireAuthentication(Transactions)} />

@@ -118,7 +118,7 @@ class AddCenter extends React.Component {
 
   render() {
     if (this.props.addingCenterResolved) {
-      return (<Redirect to="/centers2" />);
+      return (<Redirect to="/centers" />);
     }
     return (
       <View

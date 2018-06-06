@@ -122,7 +122,7 @@ class EditCenter extends React.Component {
 
   render() {
     if (this.props.updatingCenterResolved) {
-      return (<Redirect to="/centers2" />);
+      return (<Redirect to="/centers" />);
     }
     return (
       <View

@@ -18,7 +18,7 @@ const Home = () => (
           style={{ fontSize: '2.0rem' }}
         >Get the perfect center for your events
         </p>
-        <Link to="/centers1" className="btn btn-primary mt-3">
+        <Link to="/explore/centers" className="btn btn-primary mt-3">
           <i className="fa fa-bank fa-fw" aria-hidden="true" />&nbsp; Checkout Our Centers
         </Link>
       </div>

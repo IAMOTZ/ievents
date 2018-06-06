@@ -18,7 +18,7 @@ const SideNavigation = props => (
         <Link to="addEvent" className="list-group-item">
           <i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; Create Event
         </Link>
-        <Link to="/centers2" className="list-group-item">
+        <Link to="/centers" className="list-group-item">
           <i className="fa fa-bank fa-fw" aria-hidden="true" />&nbsp; Centers
         </Link>
         <AdminLinks isAdmin={props.isAdmin} isSuperAdmin={props.isSuperAdmin} />
