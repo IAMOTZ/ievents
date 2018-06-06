@@ -9,7 +9,9 @@ const CenterCards = props => props.centers.map(center => (
     <div className="card centerCard">
       <div>
         <img className="card-img-top" src={center.images ? center.images[0] : defaultImage} alt="" />
-        <span className="badge text-white p-2 seat-badge ">{center.capacity} seats</span>
+        <div className="badge-container">
+          <span className="badge text-white p-2 seat-badge ">{center.capacity} seats</span>
+        </div>
       </div>
       <div className="card-body d-flex flex-column">
         <div>
