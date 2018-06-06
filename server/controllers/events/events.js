@@ -24,6 +24,7 @@ export default {
       limit,
       offset,
       where: { userId },
+      order: [['createdAt', 'DESC']]
     });
     const currentEventsCount = allEvents.rows.length; const totalEventsCount = allEvents.count;
     const paginationInfo = createPaginationInfo(
@@ -53,7 +54,8 @@ export default {
       include: {
         model: users,
         attributes: ['email']
-      }
+      },
+      order: [['createdAt', 'DESC']]
     });
     const currentEventsCount = allEvents.rows.length; const totalEventsCount = allEvents.count;
     const paginationInfo = createPaginationInfo(
