@@ -11,7 +11,6 @@ const View = props => (
     {/* Top navigation on small screen */}
     <SideNavigation
       name={props.userName}
-      title="Add an admin"
       isAdmin={props.isAdmin}
       isSuperAdmin={props.isSuperAdmin}
       dispatch={props.dispatch}
@@ -21,6 +20,7 @@ const View = props => (
         {/*  Side navigation on large screen */}
         <AuthTopNavigation
           name={props.userName}
+          title="Add an admin"
           isAdmin={props.isAdmin}
           isSuperAdmin={props.isSuperAdmin}
           dispatch={props.dispatch}

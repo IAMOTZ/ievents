@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { RegularTopNavigation } from '../../common/TopNavigation';
 import Footer from '../../common/Footer';
 import CenterCards from '../../common/CenterCards';
-import { CenterModal } from '../../common/Modals';
 import { LoadingBox } from '../../common/LoadingAnimation';
 import Pagination from '../../common/Pagination';
 
@@ -19,7 +18,10 @@ const View = props => (
             {/* Centers Grid */}
             <div className="mt-5">
               <div className="row">
-                <CenterCards centers={props.centers} btnAction={props.showModal} />
+                <CenterCards
+                  centers={props.centers}
+                  onBook={props.onBook}
+                />
               </div>
             </div>
           </div>
@@ -29,28 +31,14 @@ const View = props => (
           />
         </div>
     }
-    {/* Modal */}
-    {
-      props.modalContent ? <CenterModal
-        modalContent={props.modalContent}
-        onBook={props.onBook}
-        redirectPath="/users/login"
-      /> : null
-    }
     <Footer />
   </div>
 );
-
-View.defaultProps = {
-  modalContent: {},
-};
 
 /* eslint-disable react/forbid-prop-types */
 View.propTypes = {
   centers: PropTypes.array.isRequired,
   onBook: PropTypes.func.isRequired,
-  showModal: PropTypes.func.isRequired,
-  modalContent: PropTypes.object,
   fetchingCenterStarted: PropTypes.bool.isRequired,
   pagination: PropTypes.object.isRequired,
   updatePagination: PropTypes.func.isRequired

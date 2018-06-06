@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { find } from 'lodash';
 import { getAllCenters } from '../../../actions/centerActions';
 import { setCenterToBook } from '../../../actions/eventActions';
 import './styles.scss';
@@ -17,12 +16,6 @@ import View from './View';
   }
 ))
 class RegularCenters extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      modalContent: null,
-    };
-  }
   componentWillMount() {
     this.props.dispatch(getAllCenters({
       limit: this.props.pagination.limit,
@@ -36,18 +29,6 @@ class RegularCenters extends React.Component {
    */
   onBook = (centerId) => {
     this.props.dispatch(setCenterToBook(centerId));
-  }
-
-  /**
-   * Displays the center modal.
-   * It uses the center ID to get the details of the center to show.
-   * @param {Event} event The event object.
-   */
-  showModal = (event) => {
-    const state = { ...this.state };
-    const centerId = Number(event.target.id);
-    state.modalContent = find(this.props.centers, { id: centerId });
-    this.setState(state);
   }
 
   updatePagination = (pageData) => {
@@ -66,8 +47,6 @@ class RegularCenters extends React.Component {
       <View
         centers={this.props.centers}
         onBook={this.onBook}
-        showModal={this.showModal}
-        modalContent={this.state.modalContent}
         fetchingCenterStarted={this.props.fetchingCenterStarted}
         pagination={this.props.pagination}
         updatePagination={this.updatePagination}

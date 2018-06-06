@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { find } from 'lodash';
 import {
   getAllCenters, setCenterToUpdate,
 } from '../../../actions/centerActions';
@@ -20,13 +19,6 @@ import View from './View';
   };
 })
 class AuthCenters extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      modalContent: null,
-    };
-  }
-
   componentWillMount() {
     this.props.dispatch(getAllCenters());
   }
@@ -36,27 +28,15 @@ class AuthCenters extends React.Component {
    * @param {Event} event The event object.
    */
   onEdit = (event) => {
-    this.props.dispatch(setCenterToUpdate(event.target.id));
+    this.props.dispatch(setCenterToUpdate(Number(event.target.id)));
   }
 
   /**
    * It updates the store about a center that is to be booked.
-   * @param {Number} centerId The ID of the center.
-   */
-  onBook = (centerId) => {
-    this.props.dispatch(setCenterToBook(centerId));
-  }
-
-  /**
-   * Displays the center modal.
-   * It uses the center ID to get the details of the center to show.
    * @param {Event} event The event object.
    */
-  showModal = (event) => {
-    const state = { ...this.state };
-    const centerId = Number(event.target.id);
-    state.modalContent = find(this.props.centers, { id: centerId });
-    this.setState(state);
+  onBook = (event) => {
+    this.props.dispatch(setCenterToBook(Number(event.target.id)));
   }
 
   render() {
@@ -68,9 +48,7 @@ class AuthCenters extends React.Component {
         dispatch={this.props.dispatch}
         centers={this.props.centers}
         fetchingCentersStarted={this.props.fetchingCentersStarted}
-        showModal={this.showModal}
         onEdit={this.onEdit}
-        modalContent={this.state.modalContent}
         onBook={this.onBook}
       />
     );

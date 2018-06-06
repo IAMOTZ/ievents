@@ -1,3 +1,5 @@
+@import "../../../styles/variables";
+
 .centerCard {
   margin: 5px;
   .card-img-top {
@@ -13,5 +15,30 @@
       font-size: 20px;
       background-color: rgba(0,0,0,0.4);
     }
+  }
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .admin-only-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    span {
+      cursor: pointer;
+    }
+    i {
+      margin-top: 3px;
+    }
+  }
+  .icons, .admin-only-icons {
+    span, a {
+      color: grey;
+      font-size: 15px;
+    }
+  }
+  .center-details {
+    font-size: 15px;
   }
 }

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import SideNavigation from '../../common/SideNavigation';
 import Header from '../../common/Header';
 import CenterCards from '../../common/CenterCards';
-import { CenterModal } from '../../common/Modals';
 import { LoadingBox } from '../../common/LoadingAnimation';
 import { AuthTopNavigation } from '../../common/TopNavigation';
 
@@ -35,21 +34,13 @@ const View = props => (
                     <div className="row">
                       <CenterCards
                         centers={props.centers}
-                        btnAction={props.showModal}
-                        editAction={props.onEdit}
                         isAdmin={props.isAdmin || props.isSuperAdmin}
+                        onBook={props.onBook}
+                        onEdit={props.onEdit}
                       />
                     </div>
                   </div>
                 </div>
-            }
-            {/* Modal */}
-            {
-              props.modalContent ? <CenterModal
-                modalContent={props.modalContent}
-                onBook={props.onBook}
-                redirectPath="/users/login"
-              /> : null
             }
           </div>
         </div>
@@ -57,10 +48,6 @@ const View = props => (
     </div>
   </div>
 );
-
-View.defaultProps = {
-  modalContent: {},
-};
 
 /* eslint-disable react/forbid-prop-types */
 View.propTypes = {
@@ -70,9 +57,7 @@ View.propTypes = {
   dispatch: PropTypes.func.isRequired,
   centers: PropTypes.array.isRequired,
   fetchingCentersStarted: PropTypes.bool.isRequired,
-  showModal: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
-  modalContent: PropTypes.object,
   onBook: PropTypes.func.isRequired,
 };
 
