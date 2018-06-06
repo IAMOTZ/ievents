@@ -1,3 +1,4 @@
 import ConfirmationModal from './ConfirmationModal';
+import CenterDetailsModal from './CenterDetailsModal';
 
-export default ConfirmationModal;
+export { ConfirmationModal, CenterDetailsModal };

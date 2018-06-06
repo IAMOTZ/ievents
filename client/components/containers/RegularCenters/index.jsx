@@ -16,6 +16,13 @@ import View from './View';
   }
 ))
 class RegularCenters extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      modalContent: null,
+    };
+  }
+
   componentWillMount() {
     this.props.dispatch(getAllCenters({
       limit: this.props.pagination.limit,
@@ -29,6 +36,21 @@ class RegularCenters extends React.Component {
    */
   onBook = (centerId) => {
     this.props.dispatch(setCenterToBook(centerId));
+  }
+
+  /**
+   * Compose the content to be displayed in the center details modal.
+   * @param {Object} center The center object.
+   */
+  createModalContent = (center) => {
+    const { images, name, details } = center;
+    const state = { ...this.state };
+    state.modalContent = {
+      centerName: name,
+      centerImages: images,
+      centerDetails: details
+    };
+    this.setState(state);
   }
 
   updatePagination = (pageData) => {
@@ -50,6 +72,8 @@ class RegularCenters extends React.Component {
         fetchingCenterStarted={this.props.fetchingCenterStarted}
         pagination={this.props.pagination}
         updatePagination={this.updatePagination}
+        createModalContent={this.createModalContent}
+        modalContent={this.state.modalContent}
       />
     );
   }

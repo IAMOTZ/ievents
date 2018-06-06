@@ -24,7 +24,14 @@ const CenterCards = props => props.centers.map(center => (
             </div>
             <div>
               <i className="fa fa-info-circle fa-fw" aria-hidden="true" />&nbsp;
-              <a data-toggle="collapse" href={`#center-details-collapse-${center.id}`} role="button">About center</a>
+              <a
+                className="no-outline-btn"
+                onClick={() => props.createModalContent(center)}
+                data-toggle="modal"
+                href="#center-details-modal"
+                role="button"
+              >About center
+              </a>
             </div>
           </div>
           <div className="collapse" id={`center-details-collapse-${center.id}`}>

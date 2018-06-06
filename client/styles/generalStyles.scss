@@ -39,6 +39,12 @@ body {
     }
 }
 
+.no-outline-btn {
+  &:focus {
+    outline: none;
+  }
+}
+
 .form-group {
   input:focus, 
   select:focus,

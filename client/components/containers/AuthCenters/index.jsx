@@ -19,6 +19,13 @@ import View from './View';
   };
 })
 class AuthCenters extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      modalContent: null,
+    };
+  }
+
   componentWillMount() {
     this.props.dispatch(getAllCenters());
   }
@@ -39,6 +46,22 @@ class AuthCenters extends React.Component {
     this.props.dispatch(setCenterToBook(Number(event.target.id)));
   }
 
+  /**
+   * Compose the content to be displayed in the center details modal.
+   * @param {Object} center The center object.
+   */
+  createModalContent = (center) => {
+    const { images, name, details } = center;
+    const state = { ...this.state };
+    state.modalContent = {
+      centerName: name,
+      centerImages: images,
+      centerDetails: details
+    };
+    this.setState(state);
+  }
+
+
   render() {
     return (
       <View
@@ -50,6 +73,8 @@ class AuthCenters extends React.Component {
         fetchingCentersStarted={this.props.fetchingCentersStarted}
         onEdit={this.onEdit}
         onBook={this.onBook}
+        createModalContent={this.createModalContent}
+        modalContent={this.state.modalContent}
       />
     );
   }
