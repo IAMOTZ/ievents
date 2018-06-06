@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { RegularTopNavigation } from '../../common/TopNavigation';
 import Footer from '../../common/Footer';
 import { LoadingIcon } from '../../common/LoadingAnimation';
@@ -55,6 +56,10 @@ const View = props => (
               onClick={props.login}
             >Log in
             </button>
+            <div className="text-center mt-2" style={{ fontSize: '15px' }}>
+              <span>{'Don\'t have an account?'}</span>&nbsp;
+              <Link to="/users/signup">Sign up</Link>
+            </div>
           </form>
         </div>
       </div>

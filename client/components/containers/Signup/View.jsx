@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { RegularTopNavigation } from '../../common/TopNavigation';
 import Footer from '../../common/Footer';
 import { LoadingIcon } from '../../common/LoadingAnimation';
@@ -30,10 +31,6 @@ const View = props => (
                   onChange={props.getInput}
                 />
               </div>
-              <small
-                className="form-text text-muted"
-              >Can contain letters and numbers alone
-              </small>
               <SmallAlert message={props.inputErrors.nameError} />
             </div>
             <div className="form-group">
@@ -97,6 +94,10 @@ const View = props => (
               onClick={props.register}
             >Register
             </button>
+            <div className="text-center mt-2" style={{ fontSize: '15px' }}>
+              <span>Already registered?</span>&nbsp;
+              <Link to="/users/login">Log in</Link>
+            </div>
           </form>
         </div>
       </div>

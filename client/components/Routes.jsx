@@ -19,7 +19,7 @@ import RequireAuthentication from './hoc/RequireAuthentication';
 export default () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route exact path="/users" component={Signup} />
+    <Route exact path="/users/signup" component={Signup} />
     <Route exact path="/users/login" component={Signin} />
     <Route exact path="/explore/centers" component={RegularCenters} />
     <Route exact path="/addEvent" component={RequireAuthentication(AddEvent)} />

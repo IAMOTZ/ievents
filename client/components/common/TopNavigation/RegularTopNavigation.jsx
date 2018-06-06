@@ -23,7 +23,7 @@ const RegularTopNavigation = () => (
             <Link to="/users/login" className="nav-link"> Log in </Link>
           </li>
           <li className="nav-item">
-            <Link to="/users" className="nav-link"> Sign up </Link>
+            <Link to="/users/signup" className="nav-link"> Sign up </Link>
           </li>
         </ul>
       </div>
