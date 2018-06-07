@@ -72,7 +72,7 @@ class Signin extends React.Component {
 
   render() {
     if (this.props.loggingUserResolved) {
-      return (<Redirect to="/events" />);
+      return (<Redirect to="/centers" />);
     }
     return (
       <View

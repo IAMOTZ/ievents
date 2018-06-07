@@ -1,24 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { find } from 'lodash';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { getAllCenters } from '../../../actions/centerActions';
 import { addEvent } from '../../../actions/eventActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
 import { validateAddEventInputs } from '../../../helpers/inputValidators';
+import './styles.scss';
 import View from './View';
 
 
 @connect((store) => {
   const { user } = store.authReducer;
+  const { centers } = store.fetchCentersReducer;
   return {
     userName: user.name,
     userToken: user.token,
     isAdmin: user.role === 'admin' || user.role === 'superAdmin',
     isSuperAdmin: user.role === 'superAdmin',
-    centers: store.fetchCentersReducer.centers,
-    centerToBook: store.addEventReducer.centerToBook,
+    centerToBook: find(centers, { id: store.addEventReducer.centerToBook }),
     addingEventStarted: store.addEventReducer.addingEventStarted,
     addingEventResolved: store.addEventReducer.addingEventResolved,
     addingEventError: store.addEventReducer.addingEventError,
@@ -36,16 +37,14 @@ class AddEvent extends React.Component {
         titleError: null,
         descriptionError: null,
         dateError: null,
-        centerIdError: null,
       },
     };
   }
 
   componentWillMount() {
-    this.props.dispatch(getAllCenters());
     const state = { ...this.state };
-    const centerToBook = this.props.centerToBook || null;
-    state.centerId = centerToBook ? String(centerToBook) : null;
+    const { centerToBook } = this.props;
+    state.centerId = centerToBook ? String(centerToBook.id) : null;
     this.setState(state);
   }
 
@@ -64,15 +63,24 @@ class AddEvent extends React.Component {
   }
 
   /**
+   * Store the date selected in the state of this component.
+   * @param {String} dateString The date in its string form.
+   */
+  handleDateSelection = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    const state = { ...this.state };
+    state.date = formattedDate;
+    this.setState(state);
+  }
+
+  /**
    * Clears all the inputErros in the state.
    */
   clearInputErrors = () => {
     const state = { ...this.state };
     state.inputErrors = {
-      titleError: null,
-      descriptionError: null,
-      dateError: null,
-      centerIdError: null,
+      titleError: null, descriptionError: null, dateError: null
     };
     this.setState(state);
   }
@@ -82,10 +90,8 @@ class AddEvent extends React.Component {
    */
   add = () => {
     this.props.dispatch(stopAsyncProcess(asyncProcess.ADDING_EVENT));
-    const {
-      title, description, centerId,
-    } = this.state;
-    const date = this.state.date ? this.state.date.replace(/-/g, '/') : null;
+    const { title, description, date } = this.state;
+    const centerId = this.props.centerToBook.id;
     const eventDetails = {
       title, description, date, centerId,
     };
@@ -104,13 +110,15 @@ class AddEvent extends React.Component {
   render() {
     if (this.props.addingEventResolved) {
       return <Redirect to="/events" />;
+    } else if (!this.props.centerToBook) {
+      return <Redirect to="/centers" />;
     }
     return (
       <View
         add={this.add}
         userName={this.props.userName}
         getInput={this.getInput}
-        centers={this.props.centers}
+        handleDateSelection={this.handleDateSelection}
         isAdmin={this.props.isAdmin}
         dispatch={this.props.dispatch}
         inputErrors={this.state.inputErrors}
@@ -128,12 +136,11 @@ AddEvent.defaultProps = {
   userToken: '',
   isAdmin: false,
   isSuperAdmin: false,
-  centers: [],
-  centerToBook: 0,
+  centerToBook: null,
   addingEventStarted: false,
   addingEventResolved: false,
   addingEventError: '',
-  dispatch: () => {},
+  dispatch: () => { },
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -142,7 +149,6 @@ AddEvent.propTypes = {
   userToken: PropTypes.string,
   isAdmin: PropTypes.bool,
   isSuperAdmin: PropTypes.bool,
-  centers: PropTypes.array,
   centerToBook: PropTypes.number,
   addingEventStarted: PropTypes.bool,
   addingEventResolved: PropTypes.bool,

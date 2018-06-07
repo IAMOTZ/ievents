@@ -83,15 +83,9 @@ export const validateSignupInputs = (inputs) => {
  * @returns {Object} All the errors identified.
  */
 export const validateAddEventInputs = (inputs) => {
-  const {
-    title, description, date, centerId,
-  } = inputs;
+  const { title, description, date } = inputs;
   const errors = {
-    titleError: null,
-    descriptionError: null,
-    dateError: null,
-    centerIdError: null,
-    errorFound: false,
+    titleError: null, descriptionError: null, dateError: null
   };
   // Validating title.
   if (!utils.isNotEmpty(title) || !utils.isDefined(title)) {
@@ -108,15 +102,8 @@ export const validateAddEventInputs = (inputs) => {
   // Validating date.
   if (!utils.isNotEmpty(date) || !utils.isDefined(date)) {
     errors.dateError = 'Date is required';
-  } else if (!utils.isCorrectDate(date)) {
-    errors.dateError = 'Choose today or upcoming days';
   }
-  // Validating center.
-  if (!utils.isNotEmpty(centerId) || !utils.isDefined(centerId)) {
-    errors.centerIdError = 'Center is required';
-  }
-  if (errors.titleError || errors.descriptionError
-    || errors.dateError || errors.centerIdError) {
+  if (errors.titleError || errors.descriptionError || errors.dateError) {
     errors.errorFound = true;
   }
   return errors;

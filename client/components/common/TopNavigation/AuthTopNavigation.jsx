@@ -23,9 +23,6 @@ const AuthTopNavigation = props => (
             <Link to="/events" className="nav-link">My events</Link>
           </li>
           <li className="nav-item">
-            <Link to="/addEvent" className="nav-link">Create Event</Link>
-          </li>
-          <li className="nav-item">
             <Link to="/centers" className="nav-link">Centers</Link>
           </li>
           <AdminLinks isAdmin={props.isAdmin} isSuperAdmin={props.isSuperAdmin} />

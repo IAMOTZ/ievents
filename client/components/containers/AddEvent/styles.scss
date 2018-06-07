@@ -1,0 +1,48 @@
+@import "../../../styles/variables";
+
+.add-event-container {
+  .inputs-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .calendar-container {
+      order: 1;
+      margin-bottom: 1rem;
+      label {
+        font-size: 13px;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+      span.text-danger {
+        padding-left: 15px;
+      }
+      .Cal__Container__root {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+    .input-form {
+      order: 2;
+      min-width: 354px;
+      .action-btns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        a {
+          font-size: 15px;
+          padding-top: 5px;
+          margin-left: 10px;
+        }
+      }
+    }
+    @include media-breakpoint-up("sm") {
+      .calendar-container {
+        order: 2;
+        margin-left: 15px;
+      }
+      .input-form {
+        order: 1;
+      }
+    }
+  }
+}

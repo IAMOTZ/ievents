@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FakeDiv from '../../hoc/FakeDiv';
-import CenterDropDown from './CenterDropDown';
-import { LoadingIcon } from '../../common/LoadingAnimation';
-import { BigAlert, SmallAlert } from '../../common/Alert';
+import { Link } from 'react-router-dom';
+import { SmallAlert } from '../../common/Alert';
 
 const EventForm = (props) => {
   const toUpdate = { ...props.toUpdate };
   return (
-    <FakeDiv>
-      <form className="mt-lg-5 w-lg-50">
-        <LoadingIcon start={props.addingEventStarted || props.updatingEventStarted} size={3} />
-        <BigAlert message={props.addingEventError || props.updatingEventError} />
+    <div className="input-form">
+      <form>
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
@@ -22,6 +18,7 @@ const EventForm = (props) => {
             placeholder="A short description of your event"
             defaultValue={toUpdate.title}
             onChange={props.getInput}
+            autoComplete="off"
           />
           <small
             id="emailHelp"
@@ -49,45 +46,25 @@ const EventForm = (props) => {
           <SmallAlert message={props.inputErrors.descriptionError} />
         </div>
       </form>
-      <form className="my-3 form-inline">
-        <div className="form-group">
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            className="form-control ml-sm-3"
-            name="date"
-            defaultValue={toUpdate.title ? toUpdate.date.replace(/\//g, '-') : null}
-            onChange={props.getInput}
-          />
-          <SmallAlert message={props.inputErrors.dateError} />
-        </div>
-        <div className="form-group ml-md-3">
-          <label htmlFor="centers">Choose a Center</label>
-          <CenterDropDown
-            centers={props.centers}
-            handleChange={props.getInput}
-            defaultValue={props.centerToBook || toUpdate.centerId}
-          />
-          <SmallAlert message={props.inputErrors.centerIdError} />
-        </div>
-      </form>
-      <button
-        className="btn ie-blue-button"
-        disabled={props.addingEventStarted || props.updatingEventStarted}
-        onClick={props.add || props.update}
-      >{toUpdate.title ? 'Update' : 'Create'}
-      </button>
-    </FakeDiv>
+      <div className="action-btns">
+        <button
+          className="btn ie-blue-button"
+          disabled={props.addingEventStarted || props.updatingEventStarted}
+          onClick={props.add || props.update}
+        >{toUpdate.title ? 'Update Event' : `Book ${props.centerToBook.name}`}
+        </button>
+        {
+          !toUpdate.title ?
+            <Link className="custom-blue-text small-text" to="centers">Choose another center</Link > : null
+        }
+      </div>
+    </div>
   );
 };
 
 EventForm.defaultProps = {
   addingEventStarted: undefined,
-  addingEventError: '',
   updatingEventStarted: undefined,
-  updatingEventError: '',
-  centerToBook: 0,
   inputErrors: {},
   toUpdate: {},
   add: undefined,
@@ -97,16 +74,13 @@ EventForm.defaultProps = {
 /* eslint-disable react/forbid-prop-types */
 EventForm.propTypes = {
   addingEventStarted: PropTypes.bool,
-  addingEventError: PropTypes.string,
   updatingEventStarted: PropTypes.bool,
-  updatingEventError: PropTypes.string,
   getInput: PropTypes.func.isRequired,
   inputErrors: PropTypes.object,
-  centers: PropTypes.array.isRequired,
-  centerToBook: PropTypes.number,
   toUpdate: PropTypes.object,
   add: PropTypes.func,
   update: PropTypes.func,
+  centerToBook: PropTypes.object.isRequired,
 };
 
 export default EventForm;

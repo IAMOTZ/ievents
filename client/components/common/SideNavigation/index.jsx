@@ -15,9 +15,6 @@ const SideNavigation = props => (
         <Link to="/events" className="list-group-item">
           <i className="fa fa-book fa-fw" aria-hidden="true" />&nbsp; My Events
         </Link>
-        <Link to="addEvent" className="list-group-item">
-          <i className="fa fa-plus fa-fw" aria-hidden="true" />&nbsp; Create Event
-        </Link>
         <Link to="/centers" className="list-group-item">
           <i className="fa fa-bank fa-fw" aria-hidden="true" />&nbsp; Centers
         </Link>

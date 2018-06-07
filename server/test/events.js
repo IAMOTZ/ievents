@@ -3,7 +3,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import db from '../models';
 import app from '../app';
-import { fail } from 'assert';
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
@@ -273,14 +272,14 @@ describe('Events Endpoint', () => {
       const wrongDate = `${currentYear}-${currentMonth}-${currentDay}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
+        failureAssertions('There must be 24hours difference(processing time) between today and the event date.', 400, done),
       );
     });
     it('should not create event for past days', (done) => {
       const wrongDate = `${currentYear}-${currentMonth}-${currentDay - 1}`;
       createEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
+        failureAssertions('There must be 24hours difference(processing time) between today and the event date.', 400, done),
       );
     });
     it('should not create event without a center', (done) => {
@@ -383,14 +382,14 @@ describe('Events Endpoint', () => {
       const wrongDate = `${currentYear}/${currentMonth}/${currentDay}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
+        failureAssertions('There must be 24hours difference(processing time) between today and the event date.', 400, done),
       );
     });
     it('should not modify event if the date becomes one of past days', (done) => {
       const wrongDate = `${currentYear}/${currentMonth}/${currentDay - 1}`;
       modifyEvent(
         alterEventDetails({ date: wrongDate }),
-        failureAssertions('You can only create event for tomorrow and upcoming days', 400, done),
+        failureAssertions('There must be 24hours difference(processing time) between today and the event date.', 400, done),
       );
     });
     it('should not modify event if center value is not an integer', (done) => {

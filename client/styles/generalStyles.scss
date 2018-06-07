@@ -1,8 +1,11 @@
 @import './variables.scss';
 
-
 body {
   background-color: $background-color;
+}
+
+.custom-blue-text {
+  color: $custom-blue;
 }
 
 .ie-dark-button {  
@@ -26,6 +29,14 @@ body {
   &:focus {
     border-color: transparent;
     box-shadow: none;
+  }
+}
+
+.page-content {
+  margin-top: 115px;
+  @include media-breakpoint-up("sm") {
+    margin-top: 0px;
+    padding-top: 30px;
   }
 }
 
