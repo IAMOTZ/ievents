@@ -93,6 +93,7 @@ export default {
           date,
           userId,
           centerId: centerid,
+          centerName: chosenCenter.name,
         });
         const payload = { event: formatEventData(newEvent) };
         return successResponse(res, 'Event created', payload, 201);
@@ -124,6 +125,7 @@ export default {
           title: title || event.title,
           date: date || event.date,
           centerId: newChosenCenter.id,
+          centerName: newChosenCenter.name,
           description: description || event.description,
         });
       }

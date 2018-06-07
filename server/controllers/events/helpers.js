@@ -9,6 +9,7 @@ export const formatEventData = eventData => (
     {
       id: eventData.id,
       centerId: eventData.centerId,
+      centerName: eventData.centerName,
       userId: eventData.userId,
       title: eventData.title,
       description: eventData.description,
