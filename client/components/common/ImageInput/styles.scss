@@ -1,0 +1,33 @@
+.react-dropzone,
+.image-preview img,
+.image-preview-overlay {
+  height: 250px;
+  width: 290px;
+  border-radius: 3px;
+}
+
+.image-preview img, .react-dropzone {
+  position: relative;
+}
+
+.image-preview-overlay {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  transition: all ease 2.0s;
+  text-align: center;
+  padding: 100px 0px;
+  font-size: 16px;
+}
+
+.react-dropzone:hover, 
+.image-preview:hover, 
+.image-preview img:hover {
+  cursor: pointer;
+  .image-preview-overlay {
+    display: block;
+  }
+}

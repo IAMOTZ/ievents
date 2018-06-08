@@ -7,7 +7,7 @@ import { validateUpdateCenterInputs } from '../../../helpers/inputValidators';
 import { updateCenter } from '../../../actions/centerActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
-import View from './View';
+import View from '../AddCenter/View';
 
 
 @connect((store) => {
@@ -18,7 +18,7 @@ import View from './View';
     userToken: user.token,
     isAdmin: user.role === 'admin' || user.role === 'superAdmin',
     isSuperAdmin: user.role === 'superAdmin',
-    toUpdate: find(centers, { id: store.updateCenterReducer.centerToUpdate }),
+    centerToUpdate: find(centers, { id: store.updateCenterReducer.centerToUpdate }),
     updatingCenterStarted: store.updateCenterReducer.updatingCenterStarted,
     updatingCenterResolved: store.updateCenterReducer.updatingCenterResolved,
     updatingCenterError: store.updateCenterReducer.updatingCenterError,
@@ -33,7 +33,7 @@ class EditCenter extends React.Component {
       details: null,
       capacity: null,
       price: null,
-      newImages: null,
+      newImage: null,
       inputErrors: {
         nameError: null,
         locationError: null,
@@ -78,9 +78,7 @@ class EditCenter extends React.Component {
    * @param {File} files The image file.
    */
   handleImageDrop = (files) => {
-    this.setState({
-      newImages: files,
-    });
+    this.setState({ newImage: files[0] });
   }
 
   /**
@@ -91,9 +89,9 @@ class EditCenter extends React.Component {
     event.preventDefault();
     this.props.dispatch(stopAsyncProcess(asyncProcess.UPDATING_CENTER));
     const {
-      name, location, details, capacity, price, newImages,
+      name, location, details, capacity, price, newImage,
     } = this.state;
-    const centerId = this.props.toUpdate.id;
+    const centerId = this.props.centerToUpdate.id;
     const centerDetails = {
       name, location, details, capacity, price,
     };
@@ -112,8 +110,8 @@ class EditCenter extends React.Component {
           fd.append(key, value);
         }
       });
-      if (newImages) {
-        fd.append('image', newImages[0]);
+      if (newImage) {
+        fd.append('image', newImage);
       }
       this.props.dispatch(updateCenter(centerId, fd, this.props.userToken));
     }
@@ -121,8 +119,8 @@ class EditCenter extends React.Component {
   }
 
   render() {
-    if (this.props.updatingCenterResolved) {
-      return (<Redirect to="/centers" />);
+    if (this.props.updatingCenterResolved || !this.props.centerToUpdate) {
+      return <Redirect to="/centers" />;
     }
     return (
       <View
@@ -135,9 +133,10 @@ class EditCenter extends React.Component {
         getInput={this.getInput}
         inputErrors={this.state.inputErrors}
         handleImageDrop={this.handleImageDrop}
-        images={this.state.images}
+        newImageLink={this.state.newImage ? this.state.newImage.preview : null}
         update={this.update}
-        toUpdate={this.props.toUpdate}
+        updating
+        centerToUpdate={this.props.centerToUpdate}
       />
     );
   }
@@ -148,7 +147,7 @@ EditCenter.defaultProps = {
   userToken: '',
   isAdmin: false,
   isSuperAdmin: false,
-  toUpdate: {},
+  centerToUpdate: {},
   updatingCenterStarted: false,
   updatingCenterResolved: false,
   updatingCenterError: '',
@@ -161,7 +160,7 @@ EditCenter.propTypes = {
   userToken: PropTypes.string,
   isAdmin: PropTypes.bool,
   isSuperAdmin: PropTypes.bool,
-  toUpdate: PropTypes.object,
+  centerToUpdate: PropTypes.object,
   updatingCenterStarted: PropTypes.bool,
   updatingCenterResolved: PropTypes.bool,
   updatingCenterError: PropTypes.string,

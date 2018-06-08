@@ -31,7 +31,7 @@ class AddCenter extends React.Component {
       details: null,
       capacity: null,
       price: null,
-      images: null,
+      newImage: null,
       inputErrors: {
         nameError: null,
         locationError: null,
@@ -76,7 +76,7 @@ class AddCenter extends React.Component {
    * @param {File} files The image file.
    */
   handleImageDrop = (files) => {
-    this.setState({ images: files });
+    this.setState({ newImage: files[0] });
   }
 
   /**
@@ -87,7 +87,7 @@ class AddCenter extends React.Component {
     event.preventDefault();
     this.props.dispatch(stopAsyncProcess(asyncProcess.ADDING_CENTER));
     const {
-      name, location, details, capacity, price, images,
+      name, location, details, capacity, price, newImage,
     } = this.state;
     const centerDetails = {
       name, location, details, capacity, price,
@@ -108,8 +108,8 @@ class AddCenter extends React.Component {
           fd.append(key, value);
         }
       });
-      if (images) {
-        fd.append('image', images[0]);
+      if (newImage) {
+        fd.append('image', newImage);
       }
       this.props.dispatch(addCenter(fd, this.props.userToken));
     }
@@ -131,7 +131,7 @@ class AddCenter extends React.Component {
         getInput={this.getInput}
         inputErrors={this.state.inputErrors}
         handleImageDrop={this.handleImageDrop}
-        images={this.state.images}
+        newImageLink={this.state.newImage ? this.state.newImage.preview : null}
         add={this.add}
       />
     );
