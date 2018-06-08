@@ -15,12 +15,13 @@ const Calendar = (props) => {
   }
   const maxMonth = new Date(today.getFullYear(), today.getMonth() + 12, today.getDate());
   const minMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const selectedDate = props.selectedDate ? new Date(props.selectedDate) : false;
 
   return (
     <InfiniteCalendar
       width={400}
       height={300}
-      selected={false}
+      selected={selectedDate}
       minDate={minDate}
       max={maxMonth}
       min={minMonth}
@@ -35,8 +36,13 @@ const Calendar = (props) => {
   );
 };
 
+Calendar.defaultProps = {
+  selectedDate: null,
+};
+
 Calendar.propTypes = {
-  handleDateSelection: PropTypes.func.isRequired
+  handleDateSelection: PropTypes.func.isRequired,
+  selectedDate: PropTypes.string,
 };
 
 export default Calendar;

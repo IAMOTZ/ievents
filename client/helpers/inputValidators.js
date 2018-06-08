@@ -115,15 +115,9 @@ export const validateAddEventInputs = (inputs) => {
  * @returns {Object} All the errors identified.
  */
 export const validateUpdateEventInputs = (inputs) => {
-  const {
-    title, description, date, centerId,
-  } = inputs;
+  const { title, description, date } = inputs;
   const errors = {
-    titleError: null,
-    descriptionError: null,
-    dateError: null,
-    centerIdError: null,
-    errorFound: false,
+    titleError: null, descriptionError: null, dateError: null
   };
   // Validating title.
   if (utils.isDefined(title)) {
@@ -143,18 +137,9 @@ export const validateUpdateEventInputs = (inputs) => {
   if (utils.isDefined(date)) {
     if (!utils.isNotEmpty(date)) {
       errors.dateError = 'Date is required';
-    } else if (!utils.isCorrectDate(date)) {
-      errors.dateError = 'Choose today or upcoming days';
     }
   }
-  // Validating center.
-  if (utils.isDefined(centerId)) {
-    if (!utils.isNotEmpty(centerId)) {
-      errors.centerIdError = 'Center is required';
-    }
-  }
-  if (errors.titleError || errors.descriptionError
-    || errors.dateError || errors.centerIdError) {
+  if (errors.titleError || errors.descriptionError || errors.dateError) {
     errors.errorFound = true;
   }
   return errors;

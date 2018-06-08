@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { find } from 'lodash';
-import { getAllCenters } from '../../../actions/centerActions';
 import { updateEvent } from '../../../actions/eventActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
 import { validateUpdateEventInputs } from '../../../helpers/inputValidators';
-import View from './View';
+import View from '../AddEvent/View';
 
 @connect((store) => {
   const { user } = store.authReducer;
@@ -18,11 +17,10 @@ import View from './View';
     userToken: user.token,
     isAdmin: user.role === 'admin' || user.role === 'superAdmin',
     isSuperAdmin: user.role === 'superAdmin',
-    toUpdate: find(events, { id: store.updateEventReducer.eventToUpdate }),
+    eventToUpdate: find(events, { id: store.updateEventReducer.eventToUpdate }),
     updatingEventStarted: store.updateEventReducer.updatingEventStarted,
     updatingEventResolved: store.updateEventReducer.updatingEventResolved,
     updatingEventError: store.updateEventReducer.updatingEventError,
-    centers: store.fetchCentersReducer.centers,
   };
 })
 class EditEvent extends React.Component {
@@ -37,13 +35,8 @@ class EditEvent extends React.Component {
         titleError: null,
         descriptionError: null,
         dateError: null,
-        centerIdError: null,
       },
     };
-  }
-
-  componentDidMount() {
-    this.props.dispatch(getAllCenters());
   }
 
   componentWillUnmount() {
@@ -61,15 +54,24 @@ class EditEvent extends React.Component {
   }
 
   /**
+   * Store the date selected in the state of this component.
+   * @param {String} dateString The date in its string form.
+   */
+  handleDateSelection = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    const state = { ...this.state };
+    state.date = formattedDate;
+    this.setState(state);
+  }
+
+  /**
    * Clears all the inputErros in the state.
    */
   clearInputErrors = () => {
     const state = { ...this.state };
     state.inputErrors = {
-      titleError: null,
-      descriptionError: null,
-      dateError: null,
-      centerIdError: null,
+      titleError: null, descriptionError: null, dateError: null,
     };
     this.setState(state);
   }
@@ -79,10 +81,8 @@ class EditEvent extends React.Component {
    */
   update = () => {
     this.props.dispatch(stopAsyncProcess(asyncProcess.UPDATING_EVENT));
-    const {
-      title, description, centerId,
-    } = this.state;
-    const date = this.state.date ? this.state.date.replace(/-/g, '/') : null;
+    const { title, description, date } = this.state;
+    const { centerId } = this.props.eventToUpdate;
     const eventDetails = {
       title, description, date, centerId,
     };
@@ -92,7 +92,7 @@ class EditEvent extends React.Component {
       state.inputErrors = inputErrors;
       this.setState(state);
     } else {
-      const eventId = this.props.toUpdate.id;
+      const eventId = this.props.eventToUpdate.id;
       this.props.dispatch(updateEvent(eventId, eventDetails, this.props.userToken));
       window.scrollTo(0, 0);
     }
@@ -100,7 +100,9 @@ class EditEvent extends React.Component {
 
   render() {
     if (this.props.updatingEventResolved) {
-      return (<Redirect to="/events" />);
+      return <Redirect to="/events" />;
+    } else if (!this.props.eventToUpdate) {
+      return <Redirect to="/events" />;
     }
     return (
       <View
@@ -108,13 +110,14 @@ class EditEvent extends React.Component {
         isAdmin={this.props.isAdmin}
         isSuperAdmin={this.props.isSuperAdmin}
         dispatch={this.props.dispatch}
-        updatingEventStarted={this.props.updatingEventStarted}
-        updatingEventError={this.props.updatingEventError}
         getInput={this.getInput}
         inputErrors={this.state.inputErrors}
-        centers={this.props.centers}
         update={this.update}
-        toUpdate={this.props.toUpdate}
+        updatingEventStarted={this.props.updatingEventStarted}
+        updatingEventError={this.props.updatingEventError}
+        eventToUpdate={this.props.eventToUpdate}
+        updating
+        handleDateSelection={this.handleDateSelection}
       />
     );
   }
@@ -125,12 +128,11 @@ EditEvent.defaultProps = {
   userToken: '',
   isAdmin: false,
   isSuperAdmin: false,
-  toUpdate: {},
+  eventToUpdate: {},
   updatingEventStarted: false,
   updatingEventResolved: false,
   updatingEventError: '',
-  centers: [],
-  dispatch: () => {},
+  dispatch: () => { },
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -139,11 +141,10 @@ EditEvent.propTypes = {
   userToken: PropTypes.string,
   isAdmin: PropTypes.bool,
   isSuperAdmin: PropTypes.bool,
-  toUpdate: PropTypes.object,
+  eventToUpdate: PropTypes.object,
   updatingEventStarted: PropTypes.bool,
   updatingEventResolved: PropTypes.bool,
   updatingEventError: PropTypes.string,
-  centers: PropTypes.array,
   dispatch: PropTypes.func,
 };
 

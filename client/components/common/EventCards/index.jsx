@@ -26,7 +26,7 @@ const EventCards = props => props.events.map(event => (
       <span>
         {
           event.status === 'allowed' ?
-            <Link to="/editEvent" className="mr-2">
+            <Link to={`/events/${event.id}/edit`} className="mr-2">
               <i className="fa fa-pencil" onClick={props.edit} id={event.id} />
             </Link> : null
         }

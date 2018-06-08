@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { SmallAlert } from '../../common/Alert';
 
+// This component is reused in AddEvent and EditEvent container
 const EventForm = (props) => {
-  const toUpdate = { ...props.toUpdate };
+  const eventToUpdate = { ...props.eventToUpdate };
   return (
     <div className="input-form">
       <form>
@@ -16,7 +17,7 @@ const EventForm = (props) => {
             name="title"
             className="form-control"
             placeholder="A short description of your event"
-            defaultValue={toUpdate.title}
+            defaultValue={eventToUpdate.title}
             onChange={props.getInput}
             autoComplete="off"
           />
@@ -35,7 +36,7 @@ const EventForm = (props) => {
             id="description"
             className="form-control"
             placeholder="More details about the event"
-            defaultValue={toUpdate.description}
+            defaultValue={eventToUpdate.description}
             onChange={props.getInput}
           />
           <small
@@ -50,11 +51,11 @@ const EventForm = (props) => {
         <button
           className="btn ie-blue-button"
           disabled={props.addingEventStarted || props.updatingEventStarted}
-          onClick={props.add || props.update}
-        >{toUpdate.title ? 'Update Event' : `Book ${props.centerToBook.name}`}
+          onClick={props.updating ? props.update : props.add}
+        >{props.updating ? 'Update Event' : 'Create Event'}
         </button>
         {
-          !toUpdate.title ?
+          !props.updating ?
             <Link className="custom-blue-text small-text" to="centers">Choose another center</Link > : null
         }
       </div>
@@ -66,9 +67,10 @@ EventForm.defaultProps = {
   addingEventStarted: undefined,
   updatingEventStarted: undefined,
   inputErrors: {},
-  toUpdate: {},
+  eventToUpdate: {},
   add: undefined,
   update: undefined,
+  updating: false,
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -77,10 +79,10 @@ EventForm.propTypes = {
   updatingEventStarted: PropTypes.bool,
   getInput: PropTypes.func.isRequired,
   inputErrors: PropTypes.object,
-  toUpdate: PropTypes.object,
+  eventToUpdate: PropTypes.object,
   add: PropTypes.func,
   update: PropTypes.func,
-  centerToBook: PropTypes.object.isRequired,
+  updating: PropTypes.bool,
 };
 
 export default EventForm;
