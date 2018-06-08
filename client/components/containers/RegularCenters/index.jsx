@@ -53,6 +53,10 @@ class RegularCenters extends React.Component {
     this.setState(state);
   }
 
+  /**
+   * Updates the pagination for the centers.
+   * @param {Object} pageData The current page data.
+   */
   updatePagination = (pageData) => {
     const nextOffset = pageData.selected * this.props.pagination.limit;
     this.props.dispatch(getAllCenters({

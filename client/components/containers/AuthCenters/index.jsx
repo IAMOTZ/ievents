@@ -16,6 +16,7 @@ import View from './View';
     isSuperAdmin: user.role === 'superAdmin',
     fetchingCentersStarted: store.fetchCentersReducer.fetchingCenterStarted,
     centers: store.fetchCentersReducer.centers,
+    pagination: store.fetchCentersReducer.pagination,
   };
 })
 class AuthCenters extends React.Component {
@@ -27,7 +28,10 @@ class AuthCenters extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(getAllCenters());
+    this.props.dispatch(getAllCenters({
+      limit: this.props.pagination.limit,
+      offset: this.props.pagination.offset,
+    }));
   }
 
   /**
@@ -60,7 +64,17 @@ class AuthCenters extends React.Component {
     };
     this.setState(state);
   }
-
+  /**
+   * Updates the pagination for the centers.
+   * @param {Object} pageData The current page data.
+   */
+  updatePagination = (pageData) => {
+    const nextOffset = pageData.selected * this.props.pagination.limit;
+    this.props.dispatch(getAllCenters({
+      limit: this.props.pagination.limit,
+      offset: nextOffset
+    }));
+  }
 
   render() {
     return (
@@ -75,6 +89,8 @@ class AuthCenters extends React.Component {
         onBook={this.onBook}
         createModalContent={this.createModalContent}
         modalContent={this.state.modalContent}
+        pagination={this.props.pagination}
+        updatePagination={this.updatePagination}
       />
     );
   }
@@ -87,6 +103,7 @@ AuthCenters.defaultProps = {
   fetchingCentersStarted: false,
   centers: [],
   dispatch: () => {},
+  pagination: {},
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -97,6 +114,7 @@ AuthCenters.propTypes = {
   fetchingCentersStarted: PropTypes.bool,
   centers: PropTypes.array,
   dispatch: PropTypes.func,
+  pagination: PropTypes.object,
 };
 
 export default AuthCenters;

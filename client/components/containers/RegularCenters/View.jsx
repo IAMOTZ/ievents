@@ -15,16 +15,14 @@ const View = props => (
         <LoadingBox iconSize={4} /> :
         <div className="page-content mb-5">
           <div className="container">
-            <h1 className="display-4">A special center for a special event</h1>
+            <h1 className="caption-text">A special center for a special event</h1>
             {/* Centers Grid */}
-            <div className="mt-5">
-              <div className="row">
-                <CenterCards
-                  centers={props.centers}
-                  onBook={props.onBook}
-                  createModalContent={props.createModalContent}
-                />
-              </div>
+            <div className="row">
+              <CenterCards
+                centers={props.centers}
+                onBook={props.onBook}
+                createModalContent={props.createModalContent}
+              />
             </div>
           </div>
           <Pagination

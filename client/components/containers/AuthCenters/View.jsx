@@ -6,6 +6,7 @@ import CenterCards from '../../common/CenterCards';
 import { LoadingBox } from '../../common/LoadingAnimation';
 import { AuthTopNavigation } from '../../common/TopNavigation';
 import { CenterDetailsModal } from '../../common/Modals';
+import Pagination from '../../common/Pagination';
 
 const View = props => (
   <div id="auth-centers-container">
@@ -31,7 +32,8 @@ const View = props => (
               <LoadingBox iconSize={4} /> :
               <div className="page-content">
                 <div className="container">
-                  <div className="mt-5">
+                  <h1 className="caption-text">A special center for a special event</h1>
+                  <div>
                     <div className="row">
                       <CenterCards
                         centers={props.centers}
@@ -43,6 +45,10 @@ const View = props => (
                     </div>
                   </div>
                 </div>
+                <Pagination
+                  pageCount={Math.ceil(props.pagination.totalCount / props.pagination.limit)}
+                  onPageChange={props.updatePagination}
+                />
                 <CenterDetailsModal {...props.modalContent} />
               </div>
           }
@@ -67,7 +73,9 @@ View.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onBook: PropTypes.func.isRequired,
   modalContent: PropTypes.object,
-  createModalContent: PropTypes.func.isRequired
+  createModalContent: PropTypes.func.isRequired,
+  pagination: PropTypes.object.isRequired,
+  updatePagination: PropTypes.func.isRequired,
 };
 
 export default View;
