@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {
   getAllEvents, deleteEvent, setEventToUpdate,
 } from '../../../actions/eventActions';
-import { getAllCenters } from '../../../actions/centerActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
 import './styles.scss';
@@ -23,7 +22,6 @@ import View from './View';
     deletingEventStarted: store.deleteEventReducer.deletingEventStarted,
     deletingEventResolved: store.deleteEventReducer.deletingEventResolved,
     events: store.fetchEventsReducer.events,
-    centers: store.fetchCentersReducer.centers,
   };
 })
 class Events extends React.Component {
@@ -36,7 +34,6 @@ class Events extends React.Component {
 
   componentWillMount() {
     this.props.dispatch(getAllEvents(this.props.userToken));
-    this.props.dispatch(getAllCenters());
   }
 
   componentDidUpdate() {
@@ -52,7 +49,8 @@ class Events extends React.Component {
    * @param {Event} event The event object.
    */
   onEdit = (event) => {
-    this.props.dispatch(setEventToUpdate(event.target.id));
+    const { id } = event.currentTarget;
+    this.props.dispatch(setEventToUpdate(id));
   }
 
   /**
@@ -61,7 +59,7 @@ class Events extends React.Component {
    * @param {Event} event The event object.
    */
   startDelete = (event) => {
-    const { id } = event.target;
+    const { id } = event.currentTarget;
     const state = { ...this.state };
     state.toDelete = id;
     this.setState(state);
@@ -94,7 +92,6 @@ class Events extends React.Component {
         deletingEventStarted={this.props.deletingEventStarted}
         fetchingEventsStarted={this.props.fetchingEventsStarted}
         events={this.props.events}
-        centers={this.props.centers}
         startDelete={this.startDelete}
         onEdit={this.onEdit}
         cancelDelete={this.cancelDelete}
@@ -113,7 +110,6 @@ Events.defaultProps = {
   deletingEventStarted: false,
   deletingEventResolved: false,
   events: [],
-  centers: [],
   dispatch: () => { },
 };
 
@@ -127,7 +123,6 @@ Events.propTypes = {
   deletingEventStarted: PropTypes.bool,
   deletingEventResolved: PropTypes.bool,
   events: PropTypes.array,
-  centers: PropTypes.array,
   dispatch: PropTypes.func,
 };
 

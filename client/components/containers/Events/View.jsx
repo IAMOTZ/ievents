@@ -38,7 +38,6 @@ const View = props => (
                   <div className="card-columns mx-auto">
                     <EventCards
                       events={props.events}
-                      centers={props.centers}
                       startDelete={props.startDelete}
                       edit={props.onEdit}
                     />
@@ -73,7 +72,6 @@ View.propTypes = {
   deletingEventStarted: PropTypes.bool.isRequired,
   fetchingEventsStarted: PropTypes.bool.isRequired,
   events: PropTypes.array.isRequired,
-  centers: PropTypes.array.isRequired,
   startDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   cancelDelete: PropTypes.func.isRequired,

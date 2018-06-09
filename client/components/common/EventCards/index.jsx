@@ -1,19 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getCenterById } from '../../../helpers/helpers';
 import './styles.scss';
-import EventStatus from './EventStatus';
-
-const getCenterName = (centers, centerId) => {
-  const center = getCenterById(centers, centerId);
-  let result;
-  if (center) {
-    result = center.name;
-  } else {
-    result = null;
-  }
-  return result;
-};
 
 const EventCards = props => props.events.map(event => (
   <div
@@ -21,32 +9,57 @@ const EventCards = props => props.events.map(event => (
     key={event.id}
     className="card text-dark bg-white mb-3 mx-auto event-card"
   >
-    <div className="card-header d-flex justify-content-between">
+    <div className="card-header">
       <span className={event.status === 'allowed' ? 'h4 mb-0' : 'h4 mb-0 text-muted'}>{event.title}</span>
-      <span>
-        {
-          event.status === 'allowed' ?
-            <Link to={`/events/${event.id}/edit`} className="mr-2">
-              <i className="fa fa-pencil" onClick={props.edit} id={event.id} />
-            </Link> : null
-        }
-        <a href="#" data-toggle="modal" data-target="#confirmation-modal">
-          <i className="fa fa-trash" onClick={props.startDelete} id={event.id} />
-        </a>
-      </span>
     </div>
     <div className="card-body">
       <div className={event.status === 'allowed' ? '' : 'text-muted'}>
         <p className="card-text">{event.description}</p>
         <p className="mb-1">
-          <i className="fa fa-map-marker fa-fw" aria-hidden="true" />&nbsp;
-          {getCenterName(props.centers, event.centerId)}
+          <i className="fa fa-bank fa-fw" />&nbsp;
+          <span className="text-capitalize">{event.centerName}</span>
         </p>
-        <span>{event.date}&nbsp;</span>
+        <div className="date-and-status">
+          <span>{event.date.replace(/-/g, '/')}&nbsp;</span>
+          <span className="ml-5 text-capitalize">{event.status}</span>
+        </div>
       </div>
     </div>
-    <EventStatus status={event.status} />
+    <div className="card-footer">
+      <div className="action-links">
+        <span>
+          {
+            event.status === 'allowed' ?
+              <Link to={`/events/${event.id}/edit`} onClick={props.edit} id={event.id} >
+                <i className="fa fa-pencil fa-fw text-dark" />
+                <span>Edit Event</span>
+              </Link> :
+              <span>
+                {
+                  event.status === 'canceled' ?
+                    <i className="fa fa-times text-danger" /> :
+                    <i className="fa fa-check text-success" />
+                }
+                &nbsp;<span className="text-capitalize">{event.status}</span>
+              </span>
+          }
+        </span>
+        <span>
+          <a href="#confirmation-modal" data-toggle="modal" onClick={props.startDelete} id={event.id}>
+            <i className="fa fa-trash text-dark" />&nbsp;
+            <span>Delete Event</span>
+          </a>
+        </span>
+      </div>
+    </div>
   </div>
 ));
+
+/* eslint-disable react/forbid-prop-types */
+EventCards.propTypes = {
+  events: PropTypes.array.isRequired,
+  edit: PropTypes.func.isRequired,
+  startDelete: PropTypes.func.isRequired,
+};
 
 export default EventCards;
