@@ -42,7 +42,7 @@ const View = props => (
                   }
                   <div className="input-group px-3">
                     <span className="input-group-addon">
-                      <i className="fa fa-user" />
+                      <i className="fa fa-envelope" />
                     </span>
                     <input
                       id="input-email"
@@ -54,7 +54,7 @@ const View = props => (
                     />
                   </div>
                   <SmallAlert message={props.inputErrors.emailError} />
-                  <ul className="text-left mt-2 text-muted">
+                  <ul className="text-left mt-2">
                     <li>The user must have signed up already</li>
                     <li>If successful, the user would have access to:
                       <ol type="number">
