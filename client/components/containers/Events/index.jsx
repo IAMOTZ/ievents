@@ -7,7 +7,6 @@ import {
 } from '../../../actions/eventActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
-import './styles.scss';
 import View from './View';
 
 @connect((store) => {
@@ -30,6 +29,7 @@ class Events extends React.Component {
     super();
     this.state = {
       toDelete: null,
+      modalContent: null,
     };
   }
 
@@ -90,6 +90,20 @@ class Events extends React.Component {
   }
 
   /**
+   * Compose the content to be displayed in the event details modal.
+   * @param {Object} event The event whose details is to be displayed.
+   */
+  createModalContent = (event) => {
+    const { title, description } = event;
+    const state = { ...this.state };
+    state.modalContent = {
+      eventTitle: title,
+      eventDescription: description,
+    };
+    this.setState(state);
+  }
+
+  /**
    * Updates the pagination for the events.
    * @param {Object} pageData The current page data.
    */
@@ -117,6 +131,8 @@ class Events extends React.Component {
         finishDelete={this.finishDelete}
         pagination={this.props.pagination}
         updatePagination={this.updatePagination}
+        modalContent={this.state.modalContent}
+        createModalContent={this.createModalContent}
       />
     );
   }

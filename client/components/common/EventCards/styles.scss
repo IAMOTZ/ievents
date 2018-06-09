@@ -6,6 +6,12 @@
     border-bottom-color: $custom-blue;
   }
   .card-body {
+    .description {
+      height: 75px;
+    }
+    .read-more-link {
+      font-size: 13px;
+    }
     .date-and-status {
       font-size: 15px;
       display: flex;
