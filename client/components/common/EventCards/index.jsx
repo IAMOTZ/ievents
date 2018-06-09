@@ -21,7 +21,6 @@ const EventCards = props => props.events.map(event => (
         </p>
         <div className="date-and-status">
           <span>{event.date.replace(/-/g, '/')}&nbsp;</span>
-          <span className="ml-5 text-capitalize">{event.status}</span>
         </div>
       </div>
     </div>

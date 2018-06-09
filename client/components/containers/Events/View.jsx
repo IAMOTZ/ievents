@@ -6,6 +6,7 @@ import EventCards from '../../common/EventCards';
 import { AuthTopNavigation } from '../../common/TopNavigation';
 import { ConfirmationModal } from '../../common/Modals';
 import { LoadingBox, LoadingIcon } from '../../common/LoadingAnimation';
+import Pagination from '../../common/Pagination';
 
 const View = props => (
   <div id="events-container">
@@ -44,6 +45,10 @@ const View = props => (
                   </div>
                 </div>
             }
+            <Pagination
+              pageCount={Math.ceil(props.pagination.totalCount / props.pagination.limit)}
+              onPageChange={props.updatePagination}
+            />
             <ConfirmationModal
               onCancel={props.cancelDelete}
               onOK={props.finishDelete}
@@ -76,6 +81,8 @@ View.propTypes = {
   onEdit: PropTypes.func.isRequired,
   cancelDelete: PropTypes.func.isRequired,
   finishDelete: PropTypes.func.isRequired,
+  pagination: PropTypes.object.isRequired,
+  updatePagination: PropTypes.object.isRequired,
 };
 
 export default View;

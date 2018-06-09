@@ -22,6 +22,7 @@ import View from './View';
     deletingEventStarted: store.deleteEventReducer.deletingEventStarted,
     deletingEventResolved: store.deleteEventReducer.deletingEventResolved,
     events: store.fetchEventsReducer.events,
+    pagination: store.fetchEventsReducer.pagination
   };
 })
 class Events extends React.Component {
@@ -33,13 +34,19 @@ class Events extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(getAllEvents(this.props.userToken));
+    this.props.dispatch(getAllEvents(this.props.userToken, {
+      limit: this.props.pagination.limit,
+      offset: this.props.pagination.offset,
+    }));
   }
 
   componentDidUpdate() {
     if (this.props.deletingEventResolved) {
       const { userToken } = this.props;
-      this.props.dispatch(getAllEvents(userToken));
+      this.props.dispatch(getAllEvents(userToken, {
+        limit: this.props.pagination.limit,
+        offset: this.props.pagination.offset,
+      }));
       this.props.dispatch(stopAsyncProcess(asyncProcess.DELETING_EVENT));
     }
   }
@@ -82,6 +89,18 @@ class Events extends React.Component {
     this.setState({ toDelete: null });
   }
 
+  /**
+   * Updates the pagination for the events.
+   * @param {Object} pageData The current page data.
+   */
+  updatePagination = (pageData) => {
+    const nextOffset = pageData.selected * this.props.pagination.limit;
+    this.props.dispatch(getAllEvents(this.props.userToken, {
+      limit: this.props.pagination.limit,
+      offset: nextOffset,
+    }));
+  }
+
   render() {
     return (
       <View
@@ -96,6 +115,8 @@ class Events extends React.Component {
         onEdit={this.onEdit}
         cancelDelete={this.cancelDelete}
         finishDelete={this.finishDelete}
+        pagination={this.props.pagination}
+        updatePagination={this.updatePagination}
       />
     );
   }
@@ -111,6 +132,7 @@ Events.defaultProps = {
   deletingEventResolved: false,
   events: [],
   dispatch: () => { },
+  pagination: {}
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -124,6 +146,7 @@ Events.propTypes = {
   deletingEventResolved: PropTypes.bool,
   events: PropTypes.array,
   dispatch: PropTypes.func,
+  pagination: PropTypes.object,
 };
 
 export default Events;
