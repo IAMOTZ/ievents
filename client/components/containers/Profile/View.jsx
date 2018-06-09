@@ -62,11 +62,11 @@ const View = props => (
                 </li>
               </ul>
               <p className="h3 mt-3" style={{ fontWeight: 'normal' }}>Account Settings</p>
-              <ul className="list-group">
-                <a href="" className="just-link" data-toggle="modal" data-target="#change-password-modal">
+              <ul className="list-group account-settings">
+                <a href="#change-password-modal" className="just-link no-outline-btn" data-toggle="modal">
                   <li className="list-group-item">Change Password</li>
                 </a>
-                <a href="" className="just-link" data-toggle="modal" data-target="#delete-account-modal">
+                <a href="#delete-account-modal" className="just-link no-outline-btn" data-toggle="modal">
                   <li className="list-group-item">Delete Account</li>
                 </a>
               </ul>

@@ -13,6 +13,17 @@
     .badge {
       background-color: $custom-blue;
     }
+    .list-group.account-settings {
+      a[href='#change-password-modal'] li {
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      a[href='#delete-account-modal'] li {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
   }
   .text-grey {
     color: grey;
