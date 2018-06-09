@@ -21,127 +21,106 @@ const CenterForm = (props) => {
             props.addingCenterError : props.updatingCenterError}
         />
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-lg-6">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                name="name"
-                placeholder="The name of the center"
-                defaultValue={centerToUpdate.name}
-                onChange={props.getInput}
-                autoComplete="off"
-              />
-              <small className="form-text text-muted">Between 2 and 30 characters</small>
-              <SmallAlert message={props.inputErrors.nameError} />
-            </div>
+      <div className="form-inputs">
+        <div className="text-inputs mr-lg-5">
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              placeholder="The name of the center"
+              defaultValue={centerToUpdate.name}
+              onChange={props.getInput}
+              autoComplete="off"
+            />
+            <small className="form-text text-muted">Between 2 and 30 characters</small>
+            <SmallAlert message={props.inputErrors.nameError} />
           </div>
-          <div className="col-12 col-lg-6">
-            <div className="form-group">
-              <label htmlFor="location">Location</label>
-              <input
-                type="text"
-                className="form-control"
-                id="location"
-                name="location"
-                placeholder="The location of the center"
-                defaultValue={centerToUpdate.location}
-                onChange={props.getInput}
-              />
-              <small className="form-text text-muted">Less than 50 characters</small>
-              <SmallAlert message={props.inputErrors.locationError} />
-            </div>
+          <div className="form-group">
+            <label htmlFor="location">Location</label>
+            <input
+              type="text"
+              className="form-control"
+              id="location"
+              name="location"
+              placeholder="The location of the center"
+              defaultValue={centerToUpdate.location}
+              onChange={props.getInput}
+            />
+            <small className="form-text text-muted">Less than 50 characters</small>
+            <SmallAlert message={props.inputErrors.locationError} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="capacity">Capacity</label>
+            <input
+              type="number"
+              pattern="\d*"
+              className="form-control"
+              id="capacity"
+              name="capacity"
+              placeholder="How many seats"
+              defaultValue={centerToUpdate.capacity}
+              onChange={props.getInput}
+            />
+            <SmallAlert message={props.inputErrors.capacityError} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="price">Price</label>
+            <input
+              type="number"
+              className="form-control"
+              id="price"
+              name="price"
+              placeholder="Price"
+              defaultValue={centerToUpdate.price}
+              onChange={props.getInput}
+            />
+            <SmallAlert message={props.inputErrors.priceError} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="details">Details</label>
+            <textarea
+              className="form-control"
+              id="details"
+              rows="7"
+              name="details"
+              placeholder="More details about the center"
+              defaultValue={centerToUpdate.details}
+              onChange={props.getInput}
+            />
+            <small className="form-text text-muted">Less than 300 characters</small>
+            <SmallAlert message={props.inputErrors.detailsError} />
           </div>
         </div>
-        <div className="row">
-          <div className="col-12 col-lg-6">
-            <div className="form-group">
-              <label htmlFor="details">Details</label>
-              <textarea
-                className="form-control"
-                id="details"
-                rows="7"
-                name="details"
-                placeholder="More details about the center"
-                defaultValue={centerToUpdate.details}
-                onChange={props.getInput}
-              />
-              <small className="form-text text-muted">Less than 300 characters</small>
-              <SmallAlert message={props.inputErrors.detailsError} />
-            </div>
-          </div>
-          <div className="col-12 col-lg-6">
-            <div className="row">
-              <div className="col-12">
-                <div className="form-group">
-                  <label htmlFor="capacity">Capacity</label>
-                  <input
-                    type="number"
-                    pattern="\d*"
-                    className="form-control"
-                    id="capacity"
-                    name="capacity"
-                    placeholder="How many seats"
-                    defaultValue={centerToUpdate.capacity}
-                    onChange={props.getInput}
-                  />
-                  <SmallAlert message={props.inputErrors.capacityError} />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="form-group">
-                  <label htmlFor="price">Price</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    id="price"
-                    name="price"
-                    placeholder="Price"
-                    defaultValue={centerToUpdate.price}
-                    onChange={props.getInput}
-                  />
-                  <SmallAlert message={props.inputErrors.priceError} />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <div className="form-group">
-                  <label htmlFor="image">Image(click to upload new)</label>
-                  <ImageInput
-                    style={{ height: '100px' }}
-                    id="image"
-                    onDrop={props.handleImageDrop}
-                    newImage={props.newImageLink}
-                    previousImage={
-                      centerToUpdate.images ? centerToUpdate.images[0] : null
-                    }
-                  />
-                </div>
-              </div>
-              <div className="ml-3 pt-3">
-                <button
-                  id="add-btn"
-                  className="btn ie-blue-button"
-                  disabled={props.updating ?
-                    props.updatingCenterStarted : props.addingCenterStarted}
-                  onClick={props.updating ? props.update : props.add}
-                >{props.updating ? 'Update Center' : 'Add Center'}
-                </button>
-                <Link
-                  className={`btn ie-dark-button ml-3 ${
-                    props.updatingCenterStarted || props.addingCenterStarted ? 'd-none' : ''
+        <div className="image-input">
+          <div className="form-group">
+            <label htmlFor="image">Image(click to upload new)</label>
+            <ImageInput
+              id="image"
+              onDrop={props.handleImageDrop}
+              newImage={props.newImageLink}
+              previousImage={
+                centerToUpdate.images ? centerToUpdate.images[0] : null
+              }
+            />
+            <div className="mt-5">
+              <button
+                id="add-btn"
+                className="btn ie-blue-button"
+                disabled={props.updating ?
+                  props.updatingCenterStarted : props.addingCenterStarted}
+                onClick={props.updating ? props.update : props.add}
+              >{props.updating ? 'Update Center' : 'Add Center'}
+              </button>
+              <Link
+                className={`btn ie-dark-button ml-3 ${
+                  props.updatingCenterStarted || props.addingCenterStarted ? 'd-none' : ''
                   }`}
-                  to="/centers"
-                > Cancel
-                </Link>
-              </div>
+                to="/centers"
+              > Cancel
+              </Link>
             </div>
           </div>
         </div>

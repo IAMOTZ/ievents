@@ -44,7 +44,7 @@ const CenterCards = props => props.centers.map(center => (
             <div className="admin-only-icons">
               <i className="fa fa-pencil fa-fw" aria-hidden="true" />&nbsp;
               <Link
-                to="/editCenter"
+                to={`/centers/${center.id}/edit`}
                 id={center.id}
                 onClick={props.onEdit}
               >Edit Center

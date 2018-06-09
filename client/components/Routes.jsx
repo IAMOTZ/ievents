@@ -27,7 +27,7 @@ export default () => (
     <Route exact path="/events" component={RequireAuthentication(Events)} />
     <Route exact path="/centers" component={RequireAuthentication(AuthCenters)} />
     <Route exact path="/addCenter" component={RequireAuthentication(AddCenter)} />
-    <Route exact path="/editCenter" component={RequireAuthentication(EditCenter)} />
+    <Route exact path="/centers/:id/edit" component={RequireAuthentication(EditCenter)} />
     <Route exact path="/transactions" component={RequireAuthentication(Transactions)} />
     <Route exact path="/addAdmin" component={RequireAuthentication(AddAdmin)} />
     <Route exact path="/profile" component={RequireAuthentication(Profile)} />
