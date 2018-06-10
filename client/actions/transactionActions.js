@@ -37,7 +37,7 @@ export const deleteTransaction = (userToken, id) => (dispatch) => {
       'access-token': userToken,
     },
   };
-  axios.delete(`${apiBaseUrl}/transactions/${id}`, config)
+  axios.post(`${apiBaseUrl}/events/${id}/cancel`, {}, config)
     .then((response) => {
       dispatch({ type: actionTypes.DELETING_TRANSACTION_RESOLVED, payload: response.data });
     })

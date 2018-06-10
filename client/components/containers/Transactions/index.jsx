@@ -163,6 +163,7 @@ Transactions.defaultProps = {
   deletingTransactionResolved: false,
   dispatch: () => { },
   pagination: {},
+  centerToTransact: null,
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -176,7 +177,7 @@ Transactions.propTypes = {
   deletingTransactionStarted: PropTypes.bool,
   deletingTransactionResolved: PropTypes.bool,
   dispatch: PropTypes.func,
-  centerToTransact: PropTypes.number.isRequired,
+  centerToTransact: PropTypes.number,
   pagination: PropTypes.object,
 };
 
