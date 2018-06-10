@@ -16,7 +16,7 @@ export const getAllEvents = (userToken, pagination = {}) => (dispatch) => {
       'access-token': userToken,
     },
   };
-  axios.get(`${apiBaseUrl}/events/?limit=${pagination.limit}&&offset=${pagination.offset}`, config)
+  axios.get(`${apiBaseUrl}/events?limit=${pagination.limit}&&offset=${pagination.offset}`, config)
     .then((response) => {
       dispatch({ type: actionTypes.FETCHING_EVENTS_RESOLVED, payload: response.data });
     })

@@ -19,6 +19,7 @@ import View from './View';
     isSuperAdmin: user.role === 'admin' || user.role === 'superAdmin',
     centerToTransact: store.updateCenterReducer.centerToTransact,
     transactions: store.fetchTransactionsReducer.transactions,
+    pagination: store.fetchTransactionsReducer.pagination,
     fetchingTransactionsStarted: store.fetchTransactionsReducer.fetchingTransactionsStarted,
     deletingTransactionStarted: store.deleteTransactionReducer.deletingTransactionStarted,
     deletingTransactionResolved: store.deleteTransactionReducer.deletingTransactionResolved,
@@ -37,7 +38,11 @@ class Transactions extends React.Component {
     if (this.props.centerToTransact) {
       this.props.dispatch(getAllTransactions(
         this.props.userToken,
-        this.props.centerToTransact
+        this.props.centerToTransact,
+        {
+          limit: this.props.pagination.limit,
+          offset: this.props.pagination.offset,
+        }
       ));
     }
   }
@@ -54,7 +59,14 @@ class Transactions extends React.Component {
    */
   refresh = () => {
     this.props.dispatch(stopAsyncProcess(asyncProcess.DELETING_TRANSACTION));
-    this.props.dispatch(getAllTransactions(this.props.userToken));
+    this.props.dispatch(getAllTransactions(
+      this.props.userToken,
+      this.props.centerToTransact,
+      {
+        limit: this.props.pagination.limit,
+        offset: this.props.pagination.offset,
+      }
+    ));
   }
 
   /**
@@ -96,6 +108,22 @@ class Transactions extends React.Component {
     this.setState(state);
   }
 
+  /**
+   * Updates the pagination for the events.
+   * @param {Object} pageData The current page data.
+   */
+  updatePagination = (pageData) => {
+    const nextOffset = pageData.selected * this.props.pagination.limit;
+    this.props.dispatch(getAllTransactions(
+      this.props.userToken,
+      this.props.centerToTransact,
+      {
+        limit: this.props.pagination.limit,
+        offset: nextOffset,
+      }
+    ));
+  }
+
   render() {
     if (!this.props.centerToTransact) {
       return <Redirect to="/centers/transactions" />;
@@ -117,6 +145,8 @@ class Transactions extends React.Component {
         createModalContent={this.createModalContent}
         modalContent={this.state.modalContent}
         isTransactionsPage
+        pagination={this.props.pagination}
+        updatePagination={this.updatePagination}
       />
     );
   }
@@ -132,6 +162,7 @@ Transactions.defaultProps = {
   deletingTransactionStarted: false,
   deletingTransactionResolved: false,
   dispatch: () => { },
+  pagination: {},
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -146,6 +177,7 @@ Transactions.propTypes = {
   deletingTransactionResolved: PropTypes.bool,
   dispatch: PropTypes.func,
   centerToTransact: PropTypes.number.isRequired,
+  pagination: PropTypes.object,
 };
 
 export default Transactions;

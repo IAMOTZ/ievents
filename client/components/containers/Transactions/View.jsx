@@ -7,6 +7,7 @@ import { AuthTopNavigation } from '../../common/TopNavigation';
 import { ConfirmationModal, EventDetailsModal } from '../../common/Modals';
 import { LoadingBox } from '../../common/LoadingAnimation';
 import Footer from '../../common/Footer';
+import Pagination from '../../common/Pagination';
 
 const View = props => (
   <div id="events-container">
@@ -44,6 +45,10 @@ const View = props => (
                   />
                 </div>
             }
+            <Pagination
+              pageCount={Math.ceil(props.pagination.totalCount / props.pagination.limit)}
+              onPageChange={props.updatePagination}
+            />
             <ConfirmationModal
               onCancel={props.stopEventCancel}
               onOK={props.finishEventCancel}
@@ -74,12 +79,15 @@ View.propTypes = {
   finishEventCancel: PropTypes.func.isRequired,
   stopEventCancel: PropTypes.func.isRequired,
   createModalContent: PropTypes.func.isRequired,
-  modalContent: PropTypes.object
+  modalContent: PropTypes.object,
+  pagination: PropTypes.object,
+  updatePagination: PropTypes.func.isRequired,
 };
 
 View.defaultProps = {
   modalContent: null,
-  transactions: []
+  transactions: [],
+  pagination: {},
 };
 
 export default View;
