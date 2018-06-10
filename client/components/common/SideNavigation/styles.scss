@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+#side-navigation {
+  background-color: $custom-black;
+  min-height: 2000px;
+  .navigation-links {
+    a {
+      color: white;
+    }
+    .list-group-item {
+      background-color: transparent;
+      border-top: 1px solid $custom-blue;
+    }
+    .list-group-item:last-child {
+      border-bottom: 1px solid $custom-blue;
+    }
+  }
+}

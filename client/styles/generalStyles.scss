@@ -1,0 +1,85 @@
+@import './variables.scss';
+
+body {
+  background-color: $background-color;
+}
+
+.custom-blue-text {
+  color: $custom-blue;
+}
+
+.ie-dark-button {  
+  background-color: lighten($color: $custom-black, $amount: 15%);
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+}
+
+.ie-blue-button {  
+  background-color: $custom-blue;
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background-color: darken($color: $custom-blue, $amount: 10%);
+    color: white;
+  }
+  &:focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.ie-red-button {
+  background-color: #dc3545;
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background-color: darken($color: #dc3545, $amount: 10%);
+    color: white;
+  }
+  &:focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.page-content {
+  margin-top: 115px;
+  @include media-breakpoint-up("sm") {
+    margin-top: 0px;
+    padding-top: 30px;
+  }
+}
+
+.pointer-button {
+  cursor: pointer;
+}
+
+@media (min-width: 992px) {
+  .w-lg-50 {
+      width: 50% !important;
+    }
+}
+
+.no-outline-btn {
+  &:focus {
+    outline: none;
+  }
+}
+
+.form-group {
+  input:focus, 
+  select:focus,
+  textarea:focus {
+    border-color: $custom-blue !important;
+    box-shadow: none !important;
+  }
+  
+  label {
+    font-size: 13px;
+    font-weight: bold;
+  }
+}

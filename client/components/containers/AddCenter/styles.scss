@@ -1,0 +1,12 @@
+#add-center-container {
+  .form-inputs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .text-inputs {
+    display: flex;
+    flex-flow: column wrap;
+    min-width: 351px;
+  }
+}

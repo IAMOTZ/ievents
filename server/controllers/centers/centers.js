@@ -24,6 +24,7 @@ export default {
         model: events,
         attributes: ['status', 'date'],
       }],
+      order: [['name', 'ASC']]
     });
     const currentCentersCount = allCenters.rows.length; const totalCentersCount = allCenters.count;
     const paginationInfo = createPaginationInfo(

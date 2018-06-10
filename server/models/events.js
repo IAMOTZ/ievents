@@ -25,6 +25,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    centerName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,

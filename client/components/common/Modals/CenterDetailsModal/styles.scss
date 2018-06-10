@@ -1,0 +1,16 @@
+#center-details-modal {
+  .modal-body {
+    display: flex;
+  }
+  .center-image img {
+    height: 123px;
+    width: 150px;
+    border-radius: 0.25rem;
+  }
+  .center-details {
+    p {
+      font-size: 15px;
+    }
+    padding-left: 10px;
+  }
+}

@@ -1,0 +1,23 @@
+$custom-black: rgba(0,0,0, 0.9);
+$custom-blue: rgb(0, 142, 214);
+$background-color: #f6f7fa;
+
+@mixin media-breakpoint-up($breakpoint) {
+  @if $breakpoint == "sm" {
+    @media only screen and (min-width: 600px) {
+      @content;
+    } 
+  } @else if $breakpoint == "md" {
+    @media only screen and (min-width: 768px) {
+      @content;
+    } 
+  } @else if $breakpoint == "lg" {
+    @media only screen and (min-width: 992px) {
+      @content;
+    } 
+  } @else if $breakpoint == "xl" {
+    @media only screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+}

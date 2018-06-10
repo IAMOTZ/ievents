@@ -1,0 +1,32 @@
+@import "../../../styles/variables";
+
+.event-card {
+  border-color: $custom-blue;
+  .card-header {
+    border-bottom-color: $custom-blue;
+  }
+  .card-body {
+    .description {
+      height: 75px;
+    }
+    .read-more-link {
+      font-size: 13px;
+    }
+    .date-and-status {
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .card-footer {
+    border-top-color: $custom-blue;
+    .action-links {
+      display: flex;
+      justify-content: space-between;
+      a, span {
+        color: #343a40;
+        font-size: 15px;
+      }
+    }
+  }
+}

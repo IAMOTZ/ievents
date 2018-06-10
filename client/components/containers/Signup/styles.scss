@@ -1,0 +1,19 @@
+@import '../../../styles/variables.scss';
+
+#sign-up-container {
+  .page-content {
+    margin-top: 100px;
+    min-height: 70vh;
+  }
+  .card-form {
+    margin-bottom: 95px;
+    width: 350px;
+    .card-title {
+      background-color: $custom-black;
+      color: white;
+    }
+    .form-group {
+      margin-bottom: 0.6rem;
+    }
+  }
+}

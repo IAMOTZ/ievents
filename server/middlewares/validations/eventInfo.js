@@ -36,7 +36,7 @@ export const validateAddEventInputs = (req, res, next) => {
       throw new Error('The date is not valid. Date Format is YYYY-MM-DD');
     }
     if (moment(new Date(date)).diff(moment(), 'days', true) < 1) {
-      throw new Error('You can only create event for tomorrow and upcoming days');
+      throw new Error('There must be 24hours difference(processing time) between today and the event date.');
     }
     // Validating Center ID.
     if (!centerid) {
@@ -85,7 +85,7 @@ export const validateUpdateEventInputs = (req, res, next) => {
         throw new Error('The date is not valid. Date Format is YYYY-MM-DD');
       }
       if (moment(new Date(date)).diff(moment(), 'days', true) < 1) {
-        throw new Error('You can only create event for tomorrow and upcoming days');
+        throw new Error('There must be 24hours difference(processing time) between today and the event date.');
       }
     }
     // Validating Center ID
