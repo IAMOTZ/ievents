@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  getAllCenters, setCenterToUpdate,
+  getAllCenters, setCenterToUpdate, setCenterToTransact,
 } from '../../../actions/centerActions';
 import { setCenterToBook } from '../../../actions/eventActions';
 import './styles.scss';
@@ -51,6 +51,14 @@ class AuthCenters extends React.Component {
   }
 
   /**
+   * It updates the store about a center whoose transactions is to be viewed.
+   * @param {Event} event The event object.
+   */
+  onViewTransactions = (event) => {
+    this.props.dispatch(setCenterToTransact(Number(event.currentTarget.id)));
+  }
+
+  /**
    * Compose the content to be displayed in the center details modal.
    * @param {Object} center The center object.
    */
@@ -87,10 +95,12 @@ class AuthCenters extends React.Component {
         fetchingCentersStarted={this.props.fetchingCentersStarted}
         onEdit={this.onEdit}
         onBook={this.onBook}
+        onViewTransactions={this.onViewTransactions}
         createModalContent={this.createModalContent}
         modalContent={this.state.modalContent}
         pagination={this.props.pagination}
         updatePagination={this.updatePagination}
+        isTransactionsPage={this.props.isTransactionsPage}
       />
     );
   }
@@ -100,6 +110,7 @@ AuthCenters.defaultProps = {
   userName: '',
   isAdmin: false,
   isSuperAdmin: false,
+  isTransactionsPage: false,
   fetchingCentersStarted: false,
   centers: [],
   dispatch: () => {},
@@ -111,6 +122,7 @@ AuthCenters.propTypes = {
   userName: PropTypes.string,
   isAdmin: PropTypes.bool,
   isSuperAdmin: PropTypes.bool,
+  isTransactionsPage: PropTypes.bool,
   fetchingCentersStarted: PropTypes.bool,
   centers: PropTypes.array,
   dispatch: PropTypes.func,

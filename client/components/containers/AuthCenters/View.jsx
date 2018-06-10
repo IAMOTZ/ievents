@@ -12,7 +12,7 @@ const View = props => (
   <div id="auth-centers-container">
     <AuthTopNavigation
       name={props.userName}
-      title="Centers"
+      title={props.isTransactionsPage ? 'Transactions' : 'Centers'}
       isAdmin={props.isAdmin}
       isSuperAdmin={props.isSuperAdmin}
       dispatch={props.dispatch}
@@ -26,13 +26,16 @@ const View = props => (
           dispatch={props.dispatch}
         />
         <div className="col-lg-10 offset-lg-2 mt-lg-0">
-          <Header text="Centers" />
+          <Header text={props.isTransactionsPage ? 'Transactions' : 'Centers'} />
           {
             props.centers.length === 0 && props.fetchingCentersStarted ?
               <LoadingBox iconSize={4} /> :
               <div className="page-content">
                 <div className="container">
-                  <h1 className="caption-text">A special center for a special event</h1>
+                  {
+                    props.isTransactionsPage ?
+                      null : <h1 className="caption-text">A special center for a special event</h1>
+                  }
                   <div>
                     <div className="row">
                       <CenterCards
@@ -40,7 +43,9 @@ const View = props => (
                         isAdmin={props.isAdmin || props.isSuperAdmin}
                         onBook={props.onBook}
                         onEdit={props.onEdit}
+                        onViewTransactions={props.onViewTransactions}
                         createModalContent={props.createModalContent}
+                        isTransactionsPage={props.isTransactionsPage}
                       />
                     </div>
                   </div>
@@ -59,7 +64,8 @@ const View = props => (
 );
 
 View.defaultProps = {
-  modalContent: {}
+  modalContent: {},
+  isTransactionsPage: false,
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -67,11 +73,13 @@ View.propTypes = {
   userName: PropTypes.string.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   isSuperAdmin: PropTypes.bool.isRequired,
+  isTransactionsPage: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
   centers: PropTypes.array.isRequired,
   fetchingCentersStarted: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onBook: PropTypes.func.isRequired,
+  onViewTransactions: PropTypes.func.isRequired,
   modalContent: PropTypes.object,
   createModalContent: PropTypes.func.isRequired,
   pagination: PropTypes.object.isRequired,

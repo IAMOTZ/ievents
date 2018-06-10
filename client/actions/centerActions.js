@@ -74,3 +74,7 @@ export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
 export const setCenterToUpdate = centerId => (
   { type: actionTypes.SET_CENTER_TO_UPDATE, payload: centerId }
 );
+
+export const setCenterToTransact = centerId => (
+  { type: actionTypes.SET_CENTER_TO_TRANSACT, payload: centerId }
+);

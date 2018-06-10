@@ -18,9 +18,10 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.FETCHING_TRANSACTIONS_RESOLVED: {
+      const { events } = action.payload;
       return {
         ...state,
-        transactions: action.payload,
+        transactions: events,
         fetchingTransactionsStarted: false,
         fetchingTransactionsResolved: true,
         fetchingTransacitonsError: null,

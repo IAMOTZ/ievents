@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import './styles.scss';
+import { RenderCenterBody, RenderCenterBodyInTransactions } from './subComponents';
 
 const defaultImage = '/images/defaultImgx4.jpeg';
 
@@ -14,60 +14,26 @@ const CenterCards = props => props.centers.map(center => (
           <span className="badge text-white p-2 seat-badge ">{center.capacity} seats</span>
         </div>
       </div>
-      <div className="card-body d-flex flex-column">
-        <div>
-          <h4 className="card-title text-capitalize">{center.name}</h4>
-          <div className="icons">
-            <div>
-              <i className="fa fa-map-marker fa-fw" aria-hidden="true" />&nbsp;
-              <span className="text-capitalize">{center.location}</span>
-            </div>
-            <div>
-              <i className="fa fa-info-circle fa-fw" aria-hidden="true" />&nbsp;
-              <a
-                className="no-outline-btn"
-                onClick={() => props.createModalContent(center)}
-                data-toggle="modal"
-                href="#center-details-modal"
-                role="button"
-              >About center
-              </a>
-            </div>
-          </div>
-          <div className="collapse" id={`center-details-collapse-${center.id}`}>
-            <br />
-            <span className="center-details">{center.details}</span>
-          </div>
-        </div>
-        {
-          props.isAdmin ?
-            <div className="admin-only-icons">
-              <i className="fa fa-pencil fa-fw" aria-hidden="true" />&nbsp;
-              <Link
-                to={`/centers/${center.id}/edit`}
-                id={center.id}
-                onClick={props.onEdit}
-              >Edit Center
-              </Link>
-            </div> : null
-        }
-        <Link
-          to="/addEvent"
-          onClick={props.onBook}
-          id={center.id}
-          className="btn ie-blue-button mt-2 btn-block"
-        > Book now for ₦{center.price}/Day
-        </Link>
-      </div>
+      {
+        props.isTransactionsPage ?
+          <RenderCenterBodyInTransactions center={center} {...props} /> :
+          <RenderCenterBody center={center} {...props} />
+      }
     </div>
   </div>
 ));
-
 /* eslint-disable react/forbid-prop-types */
 CenterCards.propTypes = {
-  centers: PropTypes.array.isRequired,
+  centers: PropTypes.array,
+  createModalContent: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool,
   onBook: PropTypes.func.isRequired,
   onEdit: PropTypes.func,
+};
+CenterCards.defaultProps = {
+  centers: [],
+  isAdmin: false,
+  onEdit: () => { }
 };
 
 export default CenterCards;

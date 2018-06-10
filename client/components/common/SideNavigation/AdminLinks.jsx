@@ -16,7 +16,7 @@ const AdminLinks = (props) => {
               <i className="fa fa-user fa-fw" aria-hidden="true" />&nbsp; Add Admin
             </Link> : null
         }
-        <Link to="/transactions" className="list-group-item">
+        <Link to="/centers/transactions" className="list-group-item">
           <i className="fa fa-tasks fa-fw" aria-hidden="true" />&nbsp; Transactions
         </Link>
       </FakeDiv>

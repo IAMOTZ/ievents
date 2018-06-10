@@ -17,7 +17,7 @@ const AdminLinks = (props) => {
             </li> : null
         }
         <li className="nav-item">
-          <Link to="/transactions" className="nav-link">Transactions</Link>
+          <Link to="/centers/transactions" className="nav-link">Transactions</Link>
         </li>
       </FakeDiv>
     );

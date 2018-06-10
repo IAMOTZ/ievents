@@ -28,7 +28,15 @@ export default () => (
     <Route exact path="/centers" component={RequireAuthentication(AuthCenters)} />
     <Route exact path="/addCenter" component={RequireAuthentication(AddCenter)} />
     <Route exact path="/centers/:id/edit" component={RequireAuthentication(EditCenter)} />
-    <Route exact path="/transactions" component={RequireAuthentication(Transactions)} />
+    <Route
+      exact
+      path="/centers/transactions"
+      render={() => {
+        const Page = RequireAuthentication(AuthCenters, { isTransactionsPage: true });
+        return <Page />;
+      }}
+    />
+    <Route exact path="/transaction/:id/events" component={Transactions} />
     <Route exact path="/addAdmin" component={RequireAuthentication(AddAdmin)} />
     <Route exact path="/profile" component={RequireAuthentication(Profile)} />
   </Switch>

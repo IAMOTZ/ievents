@@ -8,14 +8,14 @@ const apiBaseUrl = process.env.API_BASE_URL;
  * @param {String} userToken The token of the user that wants the transaction.
  * @returns {Function}
  */
-export const getAllTransactions = userToken => (dispatch) => {
+export const getAllTransactions = (userToken, centerId) => (dispatch) => {
   dispatch({ type: actionTypes.FETCHING_TRANSACTIONS_STARTED });
   const config = {
     headers: {
       'access-token': userToken,
     },
   };
-  axios.get(`${apiBaseUrl}/transactions`, config)
+  axios.get(`${apiBaseUrl}/centers/${centerId}/events`, config)
     .then((response) => {
       dispatch({ type: actionTypes.FETCHING_TRANSACTIONS_RESOLVED, payload: response.data });
     })

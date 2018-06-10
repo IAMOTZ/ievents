@@ -49,7 +49,7 @@ export default {
     const allEvents = await events.findAndCountAll({
       limit,
       offset,
-      where: { centerId },
+      where: { centerId, status: 'allowed' },
       distinct: true,
       include: {
         model: users,

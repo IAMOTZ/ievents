@@ -2,12 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import {
   getAllTransactions, deleteTransaction,
 } from '../../../actions/transactionActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
-import './styles.scss';
 import View from './View';
 
 @connect((store) => {
@@ -15,8 +15,9 @@ import View from './View';
   return {
     userName: user.name,
     userToken: user.token,
-    isAdmin: user.role === 'admin' || user.role === 'superAdmin',
-    isSuperAdmin: user.role === 'superAdmin',
+    isAdmin: user.role === 'admin',
+    isSuperAdmin: user.role === 'admin' || user.role === 'superAdmin',
+    centerToTransact: store.updateCenterReducer.centerToTransact,
     transactions: store.fetchTransactionsReducer.transactions,
     fetchingTransactionsStarted: store.fetchTransactionsReducer.fetchingTransactionsStarted,
     deletingTransactionStarted: store.deleteTransactionReducer.deletingTransactionStarted,
@@ -28,11 +29,17 @@ class Transactions extends React.Component {
     super();
     this.state = {
       toDelete: null,
+      modalContent: null,
     };
   }
 
   componentWillMount() {
-    this.props.dispatch(getAllTransactions(this.props.userToken));
+    if (this.props.centerToTransact) {
+      this.props.dispatch(getAllTransactions(
+        this.props.userToken,
+        this.props.centerToTransact
+      ));
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,31 +58,48 @@ class Transactions extends React.Component {
   }
 
   /**
-   * It updates the state about a transaction that is to be deleted/canceled.
+   * It updates the state about an event that is to be canceled.
    * @param {Event} event The event object.
    */
-  startDelete = (event) => {
+  startEventCancel = (event) => {
     this.setState({
-      toDelete: event.target.dataset.transactionId,
+      toDelete: event.currentTarget.id,
     });
   }
 
   /**
    * It eventually deletes the event.
    */
-  finishDelete = () => {
+  finishEventCancel = () => {
     this.props.dispatch(deleteTransaction(this.props.userToken, this.state.toDelete));
     $('#confirmation-modal').modal('hide');
   }
 
   /**
-   * It cancels the deleting of a transaction.
+   * It stops the canceling of an event.
    */
-  cancelDelete = () => {
+  stopEventCancel = () => {
     this.setState({ toDelete: null });
   }
 
+  /**
+   * Compose the content to be displayed in the event details modal.
+   * @param {Object} event The event whose details is to be displayed.
+   */
+  createModalContent = (event) => {
+    const { title, description } = event;
+    const state = { ...this.state };
+    state.modalContent = {
+      eventTitle: title,
+      eventDescription: description,
+    };
+    this.setState(state);
+  }
+
   render() {
+    if (!this.props.centerToTransact) {
+      return <Redirect to="/centers/transactions" />;
+    }
     return (
       <View
         userName={this.props.userName}
@@ -86,10 +110,13 @@ class Transactions extends React.Component {
         deletingTransactionStarted={this.props.deletingTransactionStarted}
         transactions={this.props.transactions}
         refresh={this.refresh}
-        toDelete={this.state.toDelete}
-        startDelete={this.startDelete}
-        cancelDelete={this.cancelDelete}
-        finishDelete={this.finishDelete}
+        toCancel={this.state.toCancel}
+        startEventCancel={this.startEventCancel}
+        stopEventCancel={this.stopEventCancel}
+        finishEventCancel={this.finishEventCancel}
+        createModalContent={this.createModalContent}
+        modalContent={this.state.modalContent}
+        isTransactionsPage
       />
     );
   }
@@ -104,7 +131,7 @@ Transactions.defaultProps = {
   fetchingTransactionsStarted: false,
   deletingTransactionStarted: false,
   deletingTransactionResolved: false,
-  dispatch: () => {},
+  dispatch: () => { },
 };
 
 /* eslint-disable react/forbid-prop-types */
@@ -118,6 +145,7 @@ Transactions.propTypes = {
   deletingTransactionStarted: PropTypes.bool,
   deletingTransactionResolved: PropTypes.bool,
   dispatch: PropTypes.func,
+  centerToTransact: PropTypes.number.isRequired,
 };
 
 export default Transactions;

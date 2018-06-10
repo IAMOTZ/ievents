@@ -32,6 +32,20 @@ body {
   }
 }
 
+.ie-red-button {
+  background-color: #dc3545;
+  cursor: pointer;
+  color: white;
+  &:hover {
+    background-color: darken($color: #dc3545, $amount: 10%);
+    color: white;
+  }
+  &:focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
 .page-content {
   margin-top: 115px;
   @include media-breakpoint-up("sm") {

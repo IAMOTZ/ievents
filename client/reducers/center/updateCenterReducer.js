@@ -2,6 +2,7 @@ import * as actionTypes from '../../actions/actionTypes';
 
 const initialState = {
   centerToUpdate: null,
+  centerToTransact: null,
   updatingCenterStarted: false,
   updatingCenterResolved: false,
   updatingCenterError: null,
@@ -47,6 +48,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         centerToUpdate: Number(centerId),
+      };
+    }
+    case actionTypes.SET_CENTER_TO_TRANSACT: {
+      const centerId = action.payload;
+      return {
+        ...state,
+        centerToTransact: Number(centerId)
       };
     }
     default: {
