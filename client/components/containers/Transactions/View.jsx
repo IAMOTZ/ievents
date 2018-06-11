@@ -38,7 +38,7 @@ const View = props => (
                     startEventCancel={props.startEventCancel}
                     stopEventCancel={props.stopEventCancel}
                     finishEventCancel={props.finishEventCancel}
-                    deletingTransactionStarted={props.deletingTransactionStarted}
+                    cancelingTransactionStarted={props.cancelingTransactionStarted}
                     createModalContent={props.createModalContent}
                     modalContent={props.modalContent}
                     isTransactionsPage
@@ -75,7 +75,7 @@ View.propTypes = {
   transactions: PropTypes.array,
   startEventCancel: PropTypes.func.isRequired,
   fetchingTransactionsStarted: PropTypes.bool.isRequired,
-  deletingTransactionStarted: PropTypes.bool.isRequired,
+  cancelingTransactionStarted: PropTypes.bool.isRequired,
   finishEventCancel: PropTypes.func.isRequired,
   stopEventCancel: PropTypes.func.isRequired,
   createModalContent: PropTypes.func.isRequired,

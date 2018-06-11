@@ -1,5 +1,6 @@
 import * as actionTypes from '../../actions/actionTypes';
 
+// Transactions are events that belong to the same center
 const initialState = {
   transactions: [],
   pagination: {

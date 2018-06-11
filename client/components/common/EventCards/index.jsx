@@ -23,7 +23,7 @@ const EventCards = props => props.events.map(event => (
             event={event}
             createModalContent={props.createModalContent}
             startEventCancel={props.startEventCancel}
-            deletingTransactionStarted={props.deletingTransactionStarted}
+            cancelingTransactionStarted={props.cancelingTransactionStarted}
           /> :
           <RenderEventBody
             event={event}

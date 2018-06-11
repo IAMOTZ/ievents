@@ -134,7 +134,7 @@ export const RenderEventBodyInTransactions = (props) => {
         className="btn ie-red-button mt-2 btn-block"
       >
         {
-          props.deletingTransactionStarted ?
+          props.cancelingTransactionStarted ?
             <span>Canceling&nbsp;<i className="fa fa-spinner fa-pulse" /></span> : <span>Cancel Event</span>
         }
       </button>
@@ -145,5 +145,5 @@ RenderEventBodyInTransactions.propTypes = {
   createModalContent: PropTypes.func.isRequired,
   event: PropTypes.object.isRequired,
   startEventCancel: PropTypes.func.isRequired,
-  deletingTransactionStarted: PropTypes.bool.isRequired,
+  cancelingTransactionStarted: PropTypes.bool.isRequired,
 };
