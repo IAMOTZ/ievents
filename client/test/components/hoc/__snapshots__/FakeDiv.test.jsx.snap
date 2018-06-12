@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FakeDiv /> Rendering: should render correctly 1`] = `
+<p>
+  I am wrapped by a fake div
+</p>
+`;

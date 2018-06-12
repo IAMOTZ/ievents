@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageInput /> Rendering: should render correctly when there is a new image 1`] = `
+<Dropzone
+  accept=".jpg, .jpeg, .png"
+  className="react-dropzone"
+  disableClick={false}
+  disablePreview={false}
+  disabled={false}
+  maxSize={Infinity}
+  minSize={0}
+  multiple={false}
+  onDropAccepted={[MockFunction]}
+  preventDropOnDocument={true}
+>
+  <div
+    className="image-preview"
+  >
+    <img
+      alt=""
+      src="https://linkToNewImage"
+    />
+    <div
+      className="image-preview-overlay"
+    >
+      <span>
+        Click to select another image.
+      </span>
+    </div>
+  </div>
+</Dropzone>
+`;
+
+exports[`<ImageInput /> Rendering: should render correctly when there is a previous image 1`] = `
+<Dropzone
+  accept=".jpg, .jpeg, .png"
+  className="react-dropzone"
+  disableClick={false}
+  disablePreview={false}
+  disabled={false}
+  maxSize={Infinity}
+  minSize={0}
+  multiple={false}
+  onDropAccepted={[MockFunction]}
+  preventDropOnDocument={true}
+>
+  <div
+    className="image-preview"
+  >
+    <img
+      alt=""
+      src="https://linkToPreviousImage"
+    />
+    <div
+      className="image-preview-overlay"
+    >
+      <span>
+        Click to select another image.
+      </span>
+    </div>
+  </div>
+</Dropzone>
+`;
+
+exports[`<ImageInput /> Rendering: should render correctly when there is no image 1`] = `
+<Dropzone
+  accept=".jpg, .jpeg, .png"
+  className="react-dropzone"
+  disableClick={false}
+  disablePreview={false}
+  disabled={false}
+  maxSize={Infinity}
+  minSize={0}
+  multiple={false}
+  onDropAccepted={[MockFunction]}
+  preventDropOnDocument={true}
+>
+  <div
+    className="image-preview"
+  >
+    <img
+      alt=""
+      src="/images/defaultImgx4.jpeg"
+    />
+    <div
+      className="image-preview-overlay"
+    >
+      <span>
+        This is the default center image. Click to select another image.
+      </span>
+    </div>
+  </div>
+</Dropzone>
+`;

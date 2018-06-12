@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminLinks /> Rendering should render correctly if the user is a super admin 1`] = `
+<Aux>
+  <li
+    className="nav-item"
+  >
+    <Link
+      className="nav-link"
+      replace={false}
+      to="/addCenter"
+    >
+      Add Center
+    </Link>
+  </li>
+  <li
+    className="nav-item"
+  >
+    <Link
+      className="nav-link"
+      replace={false}
+      to="/addAdmin"
+    >
+      Add Admin
+    </Link>
+  </li>
+  <li
+    className="nav-item"
+  >
+    <Link
+      className="nav-link"
+      replace={false}
+      to="/centers/transactions"
+    >
+      Transactions
+    </Link>
+  </li>
+</Aux>
+`;
+
+exports[`<AdminLinks /> Rendering should render correctly if the user is an admin 1`] = `
+<Aux>
+  <li
+    className="nav-item"
+  >
+    <Link
+      className="nav-link"
+      replace={false}
+      to="/addCenter"
+    >
+      Add Center
+    </Link>
+  </li>
+  <li
+    className="nav-item"
+  >
+    <Link
+      className="nav-link"
+      replace={false}
+      to="/centers/transactions"
+    >
+      Transactions
+    </Link>
+  </li>
+</Aux>
+`;
+
+exports[`<AdminLinks /> Rendering should render correctly if the user is not an admin 1`] = `""`;
+
+exports[`<AuthTopNavigation /> Rendering: should render correctly 1`] = `
+<nav
+  className="navbar navbar-expand-md navbar-dark fixed-top d-block d-lg-none"
+  id="auth-top-navbar"
+>
+  <div
+    className="container"
+  >
+    <a
+      className="navbar-brand"
+      href="#"
+    >
+      <strong
+        className="text-capitalize"
+      >
+        Tester
+      </strong>
+      <br />
+      <p
+        className="h6"
+      >
+        Testing
+      </p>
+    </a>
+    <button
+      className="navbar-toggler"
+      data-target="#navMenu"
+      data-toggle="collapse"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navMenu"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/events"
+          >
+            My events
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/centers"
+          >
+            Centers
+          </Link>
+        </li>
+        <AdminLinks
+          isAdmin={false}
+          isSuperAdmin={false}
+        />
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/profile"
+          >
+            Profile
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            onClick={[Function]}
+            replace={false}
+            to="/"
+          >
+            Logout
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;
+
+exports[`<RegularTopNavigation /> Rendering: should render correctly 1`] = `
+<nav
+  className="navbar navbar-expand-sm navbar-dark fixed-top"
+  id="regular-top-navbar"
+>
+  <div
+    className="container"
+  >
+    <Link
+      className="navbar-brand"
+      replace={false}
+      to="/"
+    >
+      <strong>
+        iEvents
+      </strong>
+    </Link>
+    <button
+      className="navbar-toggler"
+      data-target="#navMenu"
+      data-toggle="collapse"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="collapse navbar-collapse"
+      id="navMenu"
+    >
+      <ul
+        className="navbar-nav ml-auto"
+      >
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/"
+          >
+            Home
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/explore/centers"
+          >
+            Centers
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/users/login"
+          >
+             Log in 
+          </Link>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <Link
+            className="nav-link"
+            replace={false}
+            to="/users/signup"
+          >
+             Sign up 
+          </Link>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+`;

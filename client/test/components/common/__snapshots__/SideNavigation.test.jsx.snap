@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AdminLinks /> Rendering should render correctly if the user is a super admin 1`] = `
+<Aux>
+  <Link
+    className="list-group-item"
+    replace={false}
+    to="/addCenter"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-plus fa-fw"
+    />
+      Add Center
+  </Link>
+  <Link
+    className="list-group-item"
+    replace={false}
+    to="/addAdmin"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-user fa-fw"
+    />
+      Add Admin
+  </Link>
+  <Link
+    className="list-group-item"
+    replace={false}
+    to="/centers/transactions"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-tasks fa-fw"
+    />
+      Transactions
+  </Link>
+</Aux>
+`;
+
+exports[`<AdminLinks /> Rendering should render correctly if the user is an admin 1`] = `
+<Aux>
+  <Link
+    className="list-group-item"
+    replace={false}
+    to="/addCenter"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-plus fa-fw"
+    />
+      Add Center
+  </Link>
+  <Link
+    className="list-group-item"
+    replace={false}
+    to="/centers/transactions"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-tasks fa-fw"
+    />
+      Transactions
+  </Link>
+</Aux>
+`;
+
+exports[`<AdminLinks /> Rendering should render correctly if the user is not an admin 1`] = `""`;
+
+exports[`<SideNavigation /> Rendering: should render correctly 1`] = `
+<div
+  className="col-lg-2 fixed-top  d-none d-lg-block"
+  id="side-navigation"
+>
+  <div
+    className="mt-5 text-center"
+  >
+    <p
+      className="lead text-white pt-3 text-capitalize"
+      id="name"
+    >
+      name
+    </p>
+  </div>
+  <div
+    className="pt-3 navigation-links"
+  >
+    <div
+      className="list-group"
+    >
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/events"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-book fa-fw"
+        />
+          My Events
+      </Link>
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/centers"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-bank fa-fw"
+        />
+          Centers
+      </Link>
+      <AdminLinks
+        isAdmin={false}
+        isSuperAdmin={false}
+      />
+      <Link
+        className="list-group-item"
+        replace={false}
+        to="/profile"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-user-circle fa-fw"
+        />
+          Profile
+      </Link>
+      <Link
+        className="list-group-item"
+        onClick={[Function]}
+        replace={false}
+        to="/"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-power-off fa-fw"
+        />
+          Logout
+      </Link>
+    </div>
+  </div>
+</div>
+`;

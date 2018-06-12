@@ -17,7 +17,7 @@ const truncateText = (text) => {
 };
 
 /* eslint-disable react/forbid-prop-types */
-const RenderEventDescription = (props) => {
+export const RenderEventDescription = (props) => {
   const { event } = props;
   const truncatedText = truncateText(event.description);
   return (

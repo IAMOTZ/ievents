@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> Rendering: should render correctly 1`] = `
+<nav
+  className="navbar w-100 mt-3 d-none d-lg-block"
+  style={
+    Object {
+      "backgroundColor": "rgba(0,0,0, 0.9)",
+    }
+  }
+>
+  <strong
+    className="navbar-brand text-white"
+  >
+    I am testing
+  </strong>
+</nav>
+`;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination /> Rendering: should render correctly when paginationCount is greater than one 1`] = `
+<div
+  id="pagination"
+>
+  <PaginationBoxView
+    activeClassName="active"
+    breakLabel="..."
+    containerClassName="react-paginate"
+    disableInitialCallback={false}
+    disabledClassName="disabled"
+    marginPagesDisplayed={2}
+    nextClassName="next"
+    nextLabel="Next"
+    onPageChange={[MockFunction]}
+    pageCount={5}
+    pageRangeDisplayed={3}
+    previousClassName="previous"
+    previousLabel="Previous"
+  />
+</div>
+`;
+
+exports[`<Pagination /> Rendering: should render correctly when paginationCount is less than one 1`] = `""`;

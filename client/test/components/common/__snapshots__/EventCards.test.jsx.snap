@@ -1,0 +1,470 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventCards /> Rendering: should render correctly on Events page 1`] = `
+<div
+  className="col-lg-4 col-md-6 col-sm-1"
+  key="1"
+>
+  <div
+    className="card text-dark bg-white mb-3 mx-auto event-card"
+    style={
+      Object {
+        "maxWidth": "20rem",
+      }
+    }
+  >
+    <div
+      className="card-header"
+    >
+      <span
+        className="h4 mb-0"
+      >
+        test-event
+      </span>
+    </div>
+    <RenderEventBody
+      createModalContent={[MockFunction]}
+      event={
+        Object {
+          "centerId": 1,
+          "date": "12/34/2020",
+          "description": "test description",
+          "id": 1,
+          "status": "allowed",
+          "title": "test-event",
+          "user": Object {
+            "email": "tester@gmail.com",
+          },
+          "userId": 1,
+        }
+      }
+    />
+    <RenderEventFooter
+      edit={[MockFunction]}
+      event={
+        Object {
+          "centerId": 1,
+          "date": "12/34/2020",
+          "description": "test description",
+          "id": 1,
+          "status": "allowed",
+          "title": "test-event",
+          "user": Object {
+            "email": "tester@gmail.com",
+          },
+          "userId": 1,
+        }
+      }
+      startDelete={[MockFunction]}
+    />
+  </div>
+</div>
+`;
+
+exports[`<EventCards /> Rendering: should render correctly on Transactions page 1`] = `
+<div
+  className="col-lg-4 col-md-6 col-sm-1"
+  key="1"
+>
+  <div
+    className="card text-dark bg-white mb-3 mx-auto event-card"
+    style={
+      Object {
+        "maxWidth": "20rem",
+      }
+    }
+  >
+    <div
+      className="card-header"
+    >
+      <span
+        className="h4 mb-0"
+      >
+        test-event
+      </span>
+    </div>
+    <RenderEventBodyInTransactions
+      cancelingTransactionStarted={false}
+      createModalContent={[MockFunction]}
+      event={
+        Object {
+          "centerId": 1,
+          "date": "12/34/2020",
+          "description": "test description",
+          "id": 1,
+          "status": "allowed",
+          "title": "test-event",
+          "user": Object {
+            "email": "tester@gmail.com",
+          },
+          "userId": 1,
+        }
+      }
+      startEventCancel={[MockFunction]}
+    />
+  </div>
+</div>
+`;
+
+exports[`<RenderEventBody /> Rendering: should render correctly 1`] = `
+<div
+  className="card-body"
+>
+  <div
+    className=""
+  >
+    <RenderEventDescription
+      createModalContent={[MockFunction]}
+      event={
+        Object {
+          "centerId": 1,
+          "date": "12/34/2020",
+          "description": "test description",
+          "id": 1,
+          "status": "allowed",
+          "title": "test-event",
+          "user": Object {
+            "email": "tester@gmail.com",
+          },
+          "userId": 1,
+        }
+      }
+    />
+    <p
+      className="mb-1"
+    >
+      <i
+        className="fa fa-bank fa-fw"
+      />
+       
+      <span
+        className="text-capitalize"
+      />
+    </p>
+    <div
+      className="date-and-status"
+    >
+      <span>
+        12/34/2020
+         
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<RenderEventBody /> Rendering: should render correctly when the event is not allowed 1`] = `
+<div
+  className="card-body"
+>
+  <div
+    className="text-muted"
+  >
+    <RenderEventDescription
+      createModalContent={[MockFunction]}
+      event={
+        Object {
+          "centerId": 1,
+          "date": "12/34/2020",
+          "description": "test description",
+          "id": 1,
+          "status": "canceled",
+          "title": "test-event",
+          "user": Object {
+            "email": "tester@gmail.com",
+          },
+          "userId": 1,
+        }
+      }
+    />
+    <p
+      className="mb-1"
+    >
+      <i
+        className="fa fa-bank fa-fw"
+      />
+       
+      <span
+        className="text-capitalize"
+      />
+    </p>
+    <div
+      className="date-and-status"
+    >
+      <span>
+        12/34/2020
+         
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<RenderEventBodyInTransactions /> Rendering: should render correctly 1`] = `
+<div
+  className="card-body"
+>
+  <RenderEventDescription
+    createModalContent={[MockFunction]}
+    event={
+      Object {
+        "centerId": 1,
+        "date": "12/34/2020",
+        "description": "test description",
+        "id": 1,
+        "status": "allowed",
+        "title": "test-event",
+        "user": Object {
+          "email": "tester@gmail.com",
+        },
+        "userId": 1,
+      }
+    }
+  />
+  <p
+    className="mb-1"
+  >
+    <i
+      className="fa fa-user fa-fw"
+    />
+     
+    <span>
+      tester@gmail.com
+    </span>
+  </p>
+  <div
+    className="date-and-status"
+  >
+    <span>
+      12/34/2020
+       
+    </span>
+  </div>
+  <button
+    className="btn ie-red-button mt-2 btn-block"
+    data-target="#confirmation-modal"
+    data-toggle="modal"
+    id={1}
+    onClick={[MockFunction]}
+  >
+    <span>
+      Cancel Event
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<RenderEventBodyInTransactions /> Rendering: should render correctly when cancelingTransactionStarted in props is true 1`] = `
+<div
+  className="card-body"
+>
+  <RenderEventDescription
+    createModalContent={[MockFunction]}
+    event={
+      Object {
+        "centerId": 1,
+        "date": "12/34/2020",
+        "description": "test description",
+        "id": 1,
+        "status": "allowed",
+        "title": "test-event",
+        "user": Object {
+          "email": "tester@gmail.com",
+        },
+        "userId": 1,
+      }
+    }
+  />
+  <p
+    className="mb-1"
+  >
+    <i
+      className="fa fa-user fa-fw"
+    />
+     
+    <span>
+      tester@gmail.com
+    </span>
+  </p>
+  <div
+    className="date-and-status"
+  >
+    <span>
+      12/34/2020
+       
+    </span>
+  </div>
+  <button
+    className="btn ie-red-button mt-2 btn-block"
+    data-target="#confirmation-modal"
+    data-toggle="modal"
+    id={1}
+    onClick={[MockFunction]}
+  >
+    <span>
+      Canceling 
+      <i
+        className="fa fa-spinner fa-pulse"
+      />
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<RenderEventDescription /> Rendering: should render correctly when description is less than 100 chars 1`] = `
+<div
+  className="description"
+>
+  <span>
+    test description
+  </span>
+</div>
+`;
+
+exports[`<RenderEventDescription /> Rendering: should render truncated text when description is greater 100chars 1`] = `
+<div
+  className="description"
+>
+  <span>
+    <span>
+      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...
+    </span>
+    <span
+      className="read-more-link"
+    >
+       
+      <a
+        className="no-outline-btn"
+        data-toggle="modal"
+        href="#event-details-modal"
+        onClick={[Function]}
+        role="button"
+      >
+        Read more
+      </a>
+    </span>
+  </span>
+</div>
+`;
+
+exports[`<RenderEventFooter /> Rendering: should render correctly when event is allowed 1`] = `
+<div
+  className="card-footer"
+>
+  <div
+    className="action-links"
+  >
+    <span>
+      <Link
+        id={1}
+        onClick={[MockFunction]}
+        replace={false}
+        to="/events/1/edit"
+      >
+        <i
+          className="fa fa-pencil fa-fw text-dark"
+        />
+        <span>
+          Edit Event
+        </span>
+      </Link>
+    </span>
+    <span>
+      <a
+        data-toggle="modal"
+        href="#confirmation-modal"
+        id={1}
+        onClick={[MockFunction]}
+      >
+        <i
+          className="fa fa-trash text-dark"
+        />
+         
+        <span>
+          Delete Event
+        </span>
+      </a>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<RenderEventFooter /> Rendering: should render correctly when event is canceled 1`] = `
+<div
+  className="card-footer"
+>
+  <div
+    className="action-links"
+  >
+    <span>
+      <span>
+        <i
+          className="fa fa-times text-danger"
+        />
+         
+        <span
+          className="text-capitalize"
+        >
+          canceled
+        </span>
+      </span>
+    </span>
+    <span>
+      <a
+        data-toggle="modal"
+        href="#confirmation-modal"
+        id={1}
+        onClick={[MockFunction]}
+      >
+        <i
+          className="fa fa-trash text-dark"
+        />
+         
+        <span>
+          Delete Event
+        </span>
+      </a>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<RenderEventFooter /> Rendering: should render correctly when event is done 1`] = `
+<div
+  className="card-footer"
+>
+  <div
+    className="action-links"
+  >
+    <span>
+      <span>
+        <i
+          className="fa fa-check text-success"
+        />
+         
+        <span
+          className="text-capitalize"
+        >
+          done
+        </span>
+      </span>
+    </span>
+    <span>
+      <a
+        data-toggle="modal"
+        href="#confirmation-modal"
+        id={1}
+        onClick={[MockFunction]}
+      >
+        <i
+          className="fa fa-trash text-dark"
+        />
+         
+        <span>
+          Delete Event
+        </span>
+      </a>
+    </span>
+  </div>
+</div>
+`;
