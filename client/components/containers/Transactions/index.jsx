@@ -29,7 +29,7 @@ class Transactions extends React.Component {
   constructor() {
     super();
     this.state = {
-      toDelete: null,
+      toCancel: null,
       modalContent: null,
     };
   }
@@ -49,7 +49,7 @@ class Transactions extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.cancelingTransactionResolved) {
-      this.setState({ toDelete: null });
+      this.setState({ toCancel: null });
       this.refresh();
     }
   }
@@ -75,7 +75,7 @@ class Transactions extends React.Component {
    */
   startEventCancel = (event) => {
     this.setState({
-      toDelete: event.currentTarget.id,
+      toCancel: event.currentTarget.id,
     });
   }
 
@@ -83,7 +83,7 @@ class Transactions extends React.Component {
    * It eventually deletes the event.
    */
   finishEventCancel = () => {
-    this.props.dispatch(cancelTransaction(this.props.userToken, this.state.toDelete));
+    this.props.dispatch(cancelTransaction(this.props.userToken, this.state.toCancel));
     $('#confirmation-modal').modal('hide');
   }
 
@@ -91,7 +91,7 @@ class Transactions extends React.Component {
    * It stops the canceling of an event.
    */
   stopEventCancel = () => {
-    this.setState({ toDelete: null });
+    this.setState({ toCancel: null });
   }
 
   /**

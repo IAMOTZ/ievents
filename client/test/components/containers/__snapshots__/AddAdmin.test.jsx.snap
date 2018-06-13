@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddAdmin /> Rendering: should render correctly 1`] = `
+<View
+  add={[Function]}
+  addingAdminError={null}
+  addingAdminResolved={false}
+  addingAdminStarted={false}
+  dispatch={[MockFunction]}
+  getInput={[Function]}
+  inputErrors={
+    Object {
+      "emailError": null,
+    }
+  }
+  isAdmin={false}
+  isSuperAdmin={false}
+  newAdmin={null}
+  userName="tester"
+/>
+`;
+
+exports[`<AddAdminView /> Rendering should render an alert when adding admin resolves 1`] = `
+<div
+  id="add-admin-container"
+>
+  <SideNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <AuthTopNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+        title="Add an admin"
+      />
+      <div
+        className="col-lg-10 offset-md-2 mt-lg-0"
+      >
+        <Header
+          text="Add an admin"
+        />
+        <div
+          className="page-content"
+        >
+          <div
+            className="d-flex flex-column align-items-center mt-5"
+          >
+            <LoadingIcon
+              size={3}
+              start={false}
+            />
+            <div
+              className="card align-items-center text-center w-75"
+            >
+              <div
+                className="card-body"
+              >
+                <BigAlert
+                  message={null}
+                />
+                <BigAlert
+                  message="newAdmin@gmail.com is now an admin"
+                  type="success"
+                />
+                <div
+                  className="input-group px-3"
+                >
+                  <span
+                    className="input-group-addon"
+                  >
+                    <i
+                      className="fa fa-envelope"
+                    />
+                  </span>
+                  <input
+                    className="form-control"
+                    id="input-email"
+                    name="email"
+                    onChange={[MockFunction]}
+                    placeholder="The user's email"
+                    type="text"
+                  />
+                </div>
+                <SmallAlert />
+                <ul
+                  className="text-left mt-2"
+                >
+                  <li>
+                    The user must have signed up already
+                  </li>
+                  <li>
+                    If successful, the user would have access to:
+                    <ol
+                      type="number"
+                    >
+                      <li>
+                        Creating a Center
+                      </li>
+                      <li>
+                        Editing a Center
+                      </li>
+                      <li>
+                        Viewing transactions
+                      </li>
+                      <li>
+                        Making decisions on transactions
+                      </li>
+                    </ol>
+                  </li>
+                </ul>
+                <button
+                  className="btn ie-blue-button"
+                  disabled={false}
+                  id="add-btn"
+                  onClick={[MockFunction]}
+                >
+                  Add Admin
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
+
+exports[`<AddAdminView /> Rendering should render correctly 1`] = `
+<div
+  id="add-admin-container"
+>
+  <SideNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <AuthTopNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+        title="Add an admin"
+      />
+      <div
+        className="col-lg-10 offset-md-2 mt-lg-0"
+      >
+        <Header
+          text="Add an admin"
+        />
+        <div
+          className="page-content"
+        >
+          <div
+            className="d-flex flex-column align-items-center mt-5"
+          >
+            <LoadingIcon
+              size={3}
+              start={false}
+            />
+            <div
+              className="card align-items-center text-center w-75"
+            >
+              <div
+                className="card-body"
+              >
+                <BigAlert
+                  message={null}
+                />
+                <div
+                  className="input-group px-3"
+                >
+                  <span
+                    className="input-group-addon"
+                  >
+                    <i
+                      className="fa fa-envelope"
+                    />
+                  </span>
+                  <input
+                    className="form-control"
+                    id="input-email"
+                    name="email"
+                    onChange={[MockFunction]}
+                    placeholder="The user's email"
+                    type="text"
+                  />
+                </div>
+                <SmallAlert />
+                <ul
+                  className="text-left mt-2"
+                >
+                  <li>
+                    The user must have signed up already
+                  </li>
+                  <li>
+                    If successful, the user would have access to:
+                    <ol
+                      type="number"
+                    >
+                      <li>
+                        Creating a Center
+                      </li>
+                      <li>
+                        Editing a Center
+                      </li>
+                      <li>
+                        Viewing transactions
+                      </li>
+                      <li>
+                        Making decisions on transactions
+                      </li>
+                    </ol>
+                  </li>
+                </ul>
+                <button
+                  className="btn ie-blue-button"
+                  disabled={false}
+                  id="add-btn"
+                  onClick={[MockFunction]}
+                >
+                  Add Admin
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;

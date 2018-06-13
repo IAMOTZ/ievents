@@ -1,0 +1,453 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddEvent /> Rendering: should redirect to the centers page if there is no center to book 1`] = `
+<Redirect
+  push={false}
+  to="/centers"
+/>
+`;
+
+exports[`<AddEvent /> Rendering: should redirect to the events page if adding events resolved 1`] = `
+<Redirect
+  push={false}
+  to="/events"
+/>
+`;
+
+exports[`<AddEvent /> Rendering: should render correctly 1`] = `
+<View
+  add={[Function]}
+  addingEventError={null}
+  addingEventStarted={false}
+  centerToBook={
+    Object {
+      "id": 5,
+    }
+  }
+  dispatch={[MockFunction]}
+  eventToUpdate={Object {}}
+  getInput={[Function]}
+  handleDateSelection={[Function]}
+  inputErrors={
+    Object {
+      "dateError": null,
+      "descriptionError": null,
+      "titleError": null,
+    }
+  }
+  isAdmin={false}
+  isSuperAdmin={false}
+  update={[Function]}
+  updating={false}
+  updatingEventError=""
+  updatingEventStarted={false}
+  userName="tester"
+/>
+`;
+
+exports[`<AddEventView /> Rendering should render correctly when adding 1`] = `
+<div
+  className="add-event-container"
+>
+  <AuthTopNavigation
+    dispatch={[Function]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Create Event"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[Function]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+      >
+        <Header
+          text="Create Event"
+        />
+        <div
+          className="page-content"
+        >
+          <LoadingIcon
+            size={3}
+            start={false}
+          />
+          <BigAlert
+            message={null}
+          />
+          <div
+            className="text-center"
+          >
+            <p
+              className="event-center-name"
+            >
+              You are booking 
+              <span
+                className="text-capitalize"
+              />
+            </p>
+          </div>
+          <div
+            className="inputs-container"
+          >
+            <EventForm
+              add={[Function]}
+              addingEventError={null}
+              addingEventStarted={false}
+              eventToUpdate={Object {}}
+              getInput={[Function]}
+              inputErrors={Object {}}
+              update={[Function]}
+              updating={false}
+              updatingEventError={null}
+              updatingEventStarted={false}
+            />
+            <div
+              className="calendar-container"
+            >
+              <label
+                className="d-block"
+              >
+                Select the event date
+              </label>
+              <SmallAlert />
+              <Calendar
+                handleDateSelection={[Function]}
+                selectedDate={null}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
+
+exports[`<AddEventView /> Rendering should render correctly when updating 1`] = `
+<div
+  className="add-event-container"
+>
+  <AuthTopNavigation
+    dispatch={[Function]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Edit Event"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[Function]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+      >
+        <Header
+          text="Edit Event"
+        />
+        <div
+          className="page-content"
+        >
+          <LoadingIcon
+            size={3}
+            start={false}
+          />
+          <BigAlert
+            message={null}
+          />
+          <div
+            className="text-center"
+          >
+            <p
+              className="event-center-name"
+            >
+              You are booking 
+              <span
+                className="text-capitalize"
+              />
+            </p>
+          </div>
+          <div
+            className="inputs-container"
+          >
+            <EventForm
+              add={[Function]}
+              addingEventError={null}
+              addingEventStarted={false}
+              eventToUpdate={Object {}}
+              getInput={[Function]}
+              inputErrors={Object {}}
+              update={[Function]}
+              updating={true}
+              updatingEventError={null}
+              updatingEventStarted={false}
+            />
+            <div
+              className="calendar-container"
+            >
+              <label
+                className="d-block"
+              >
+                Select the event date
+              </label>
+              <SmallAlert />
+              <Calendar
+                handleDateSelection={[Function]}
+                selectedDate={null}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
+
+exports[`<EventForm /> Rendering should disable the create/update button when updating/adding event starts 1`] = `
+<div
+  className="input-form"
+>
+  <form>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="title"
+      >
+        Title
+      </label>
+      <input
+        autoComplete="off"
+        className="form-control"
+        id="title"
+        name="title"
+        onChange={[Function]}
+        placeholder="A short description of your event"
+        type="text"
+      />
+      <small
+        className="form-text text-muted"
+        id="emailHelp"
+      >
+        Between 5 and 30 characters
+      </small>
+      <SmallAlert />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="description"
+      >
+        Description
+      </label>
+      <textarea
+        className="form-control"
+        id="description"
+        name="description"
+        onChange={[Function]}
+        placeholder="More details about the event"
+        rows="6"
+      />
+      <small
+        className="form-text text-muted"
+        id="emailHelp"
+      >
+        Less than 200 characters
+      </small>
+      <SmallAlert />
+    </div>
+  </form>
+  <div
+    className="action-btns"
+  >
+    <button
+      className="btn ie-blue-button"
+      disabled={true}
+      onClick={[Function]}
+    >
+      Create Event
+    </button>
+    <Link
+      className="custom-blue-text small-text"
+      replace={false}
+      to="centers"
+    >
+      Choose another center
+    </Link>
+  </div>
+</div>
+`;
+
+exports[`<EventForm /> Rendering should render correctly when adding 1`] = `
+<div
+  className="input-form"
+>
+  <form>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="title"
+      >
+        Title
+      </label>
+      <input
+        autoComplete="off"
+        className="form-control"
+        id="title"
+        name="title"
+        onChange={[Function]}
+        placeholder="A short description of your event"
+        type="text"
+      />
+      <small
+        className="form-text text-muted"
+        id="emailHelp"
+      >
+        Between 5 and 30 characters
+      </small>
+      <SmallAlert />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="description"
+      >
+        Description
+      </label>
+      <textarea
+        className="form-control"
+        id="description"
+        name="description"
+        onChange={[Function]}
+        placeholder="More details about the event"
+        rows="6"
+      />
+      <small
+        className="form-text text-muted"
+        id="emailHelp"
+      >
+        Less than 200 characters
+      </small>
+      <SmallAlert />
+    </div>
+  </form>
+  <div
+    className="action-btns"
+  >
+    <button
+      className="btn ie-blue-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Create Event
+    </button>
+    <Link
+      className="custom-blue-text small-text"
+      replace={false}
+      to="centers"
+    >
+      Choose another center
+    </Link>
+  </div>
+</div>
+`;
+
+exports[`<EventForm /> Rendering should render correctly when updating 1`] = `
+<div
+  className="input-form"
+>
+  <form>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="title"
+      >
+        Title
+      </label>
+      <input
+        autoComplete="off"
+        className="form-control"
+        id="title"
+        name="title"
+        onChange={[Function]}
+        placeholder="A short description of your event"
+        type="text"
+      />
+      <small
+        className="form-text text-muted"
+        id="emailHelp"
+      >
+        Between 5 and 30 characters
+      </small>
+      <SmallAlert />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="description"
+      >
+        Description
+      </label>
+      <textarea
+        className="form-control"
+        id="description"
+        name="description"
+        onChange={[Function]}
+        placeholder="More details about the event"
+        rows="6"
+      />
+      <small
+        className="form-text text-muted"
+        id="emailHelp"
+      >
+        Less than 200 characters
+      </small>
+      <SmallAlert />
+    </div>
+  </form>
+  <div
+    className="action-btns"
+  >
+    <button
+      className="btn ie-blue-button"
+      disabled={false}
+      onClick={[Function]}
+    >
+      Update Event
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegularCenters /> Rendering: should redirect to centers page if user is authenticated 1`] = `
+<Redirect
+  push={false}
+  to="/centers"
+/>
+`;
+
+exports[`<RegularCenters /> Rendering: should render correctly 1`] = `
+<View
+  centers={
+    Array [
+      Object {
+        "capacity": "200",
+        "details": "test-center-details",
+        "id": 1,
+        "images": Array [
+          "http://testImage.jpg",
+        ],
+        "location": "test-center-location",
+        "name": "test-center1",
+        "price": "500",
+      },
+    ]
+  }
+  createModalContent={[Function]}
+  fetchingCenterStarted={false}
+  modalContent={null}
+  onBook={[Function]}
+  pagination={Object {}}
+  updatePagination={[Function]}
+/>
+`;
+
+exports[`<RegularCentersView /> Rendering should render correctly when there are centers and it is not fetching 1`] = `
+<div
+  id="regular-centers-container"
+>
+  <RegularTopNavigation />
+  <div
+    className="page-content mb-5"
+  >
+    <div
+      className="container"
+    >
+      <h1
+        className="caption-text"
+      >
+        A special center for a special event
+      </h1>
+      <div
+        className="row"
+      >
+        <CenterCards
+          centers={
+            Array [
+              Object {
+                "capacity": "200",
+                "details": "test-center-details",
+                "id": 1,
+                "images": Array [
+                  "http://testImage.jpg",
+                ],
+                "location": "test-center-location",
+                "name": "test-center1",
+                "price": "500",
+              },
+            ]
+          }
+          createModalContent={[MockFunction]}
+          isAdmin={false}
+          isTransactionsPage={false}
+          onBook={[MockFunction]}
+          onEdit={[Function]}
+          onViewTransactions={[Function]}
+        />
+      </div>
+    </div>
+    <Pagination
+      onPageChange={[MockFunction]}
+      pageCount={NaN}
+    />
+    <CenterDetailsModal
+      centerDetails=""
+      centerImages={
+        Array [
+          "/images/defaultImgx4.jpeg",
+        ]
+      }
+      centerName=""
+    />
+  </div>
+  <Footer />
+</div>
+`;
+
+exports[`<RegularCentersView /> Rendering should render correctly when there are no centers and it is fetching 1`] = `
+<div
+  id="regular-centers-container"
+>
+  <RegularTopNavigation />
+  <LoadingBox
+    iconSize={4}
+  />
+  <Footer />
+</div>
+`;

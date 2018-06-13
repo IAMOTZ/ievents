@@ -1,0 +1,837 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddCenter /> Rendering: should redirect to the centers page if adding center resolved 1`] = `
+<Redirect
+  push={false}
+  to="/centers"
+/>
+`;
+
+exports[`<AddCenter /> Rendering: should render correctly 1`] = `
+<View
+  add={[Function]}
+  addingCenterError={null}
+  addingCenterStarted={false}
+  centerToUpdate={Object {}}
+  dispatch={[MockFunction]}
+  getInput={[Function]}
+  handleImageDrop={[Function]}
+  inputErrors={
+    Object {
+      "capacityError": null,
+      "detailsError": null,
+      "locationError": null,
+      "nameError": null,
+      "priceError": null,
+    }
+  }
+  isAdmin={false}
+  isSuperAdmin={false}
+  newImageLink={null}
+  update={[Function]}
+  updating={false}
+  updatingCenterError={null}
+  updatingCenterStarted={false}
+  userName="tester"
+/>
+`;
+
+exports[`<AddCenterView /> Rendering should render correctly when adding 1`] = `
+<div
+  id="add-center-container"
+>
+  <AuthTopNavigation
+    dispatch={[Function]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Add a center"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[Function]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+      >
+        <Header
+          text="Add a center"
+        />
+        <div
+          className="page-content"
+        >
+          <CenterForm
+            add={[Function]}
+            addingCenterError={null}
+            addingCenterStarted={false}
+            centerToUpdate={Object {}}
+            getInput={[Function]}
+            handleImageDrop={[Function]}
+            inputErrors={Object {}}
+            newImageLink="http://testImage.jpg"
+            update={[Function]}
+            updating={false}
+            updatingCenterError={null}
+            updatingCenterStarted={false}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
+
+exports[`<AddCenterView /> Rendering should render correctly when updating 1`] = `
+<div
+  id="add-center-container"
+>
+  <AuthTopNavigation
+    dispatch={[Function]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Edit Center"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[Function]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2"
+      >
+        <Header
+          text="Edit Center"
+        />
+        <div
+          className="page-content"
+        >
+          <CenterForm
+            add={[Function]}
+            addingCenterError={null}
+            addingCenterStarted={false}
+            centerToUpdate={Object {}}
+            getInput={[Function]}
+            handleImageDrop={[Function]}
+            inputErrors={Object {}}
+            newImageLink="http://testImage.jpg"
+            update={[Function]}
+            updating={true}
+            updatingCenterError={null}
+            updatingCenterStarted={false}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
+
+exports[`<CenterForm /> Rendering should hide cancel button when updating/adding center starts 1`] = `
+<form
+  className="mt-lg-5 mb-md-5"
+>
+  <LoadingIcon
+    size={3}
+    start={true}
+  />
+  <div
+    className="w-lg-50 mx-auto"
+  >
+    <BigAlert
+      message={null}
+    />
+  </div>
+  <div
+    className="form-inputs"
+  >
+    <div
+      className="text-inputs mr-lg-5"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="name"
+        >
+          Name
+        </label>
+        <input
+          autoComplete="off"
+          className="form-control"
+          id="name"
+          name="name"
+          onChange={[Function]}
+          placeholder="The name of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Between 2 and 30 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="location"
+        >
+          Location
+        </label>
+        <input
+          className="form-control"
+          id="location"
+          name="location"
+          onChange={[Function]}
+          placeholder="The location of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 50 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="capacity"
+        >
+          Capacity
+        </label>
+        <input
+          className="form-control"
+          id="capacity"
+          name="capacity"
+          onChange={[Function]}
+          pattern="\\\\d*"
+          placeholder="How many seats"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="price"
+        >
+          Price
+        </label>
+        <input
+          className="form-control"
+          id="price"
+          name="price"
+          onChange={[Function]}
+          placeholder="Price"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="details"
+        >
+          Details
+        </label>
+        <textarea
+          className="form-control"
+          id="details"
+          name="details"
+          onChange={[Function]}
+          placeholder="More details about the center"
+          rows="7"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 300 characters
+        </small>
+        <SmallAlert />
+      </div>
+    </div>
+    <div
+      className="image-input"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="image"
+        >
+          Image(click to upload new)
+        </label>
+        <ImageInput
+          id="image"
+          newImage="http://testImage.jpg"
+          onDrop={[Function]}
+          previousImage={null}
+        />
+        <div
+          className="mt-5"
+        >
+          <button
+            className="btn ie-blue-button"
+            disabled={true}
+            id="add-btn"
+            onClick={[Function]}
+          >
+            Add Center
+          </button>
+          <Link
+            className="btn ie-dark-button ml-3 d-none"
+            replace={false}
+            to="/centers"
+          >
+             Cancel
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`<CenterForm /> Rendering should render correctly if the center has its image 1`] = `
+<form
+  className="mt-lg-5 mb-md-5"
+>
+  <LoadingIcon
+    size={3}
+    start={false}
+  />
+  <div
+    className="w-lg-50 mx-auto"
+  >
+    <BigAlert
+      message={null}
+    />
+  </div>
+  <div
+    className="form-inputs"
+  >
+    <div
+      className="text-inputs mr-lg-5"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="name"
+        >
+          Name
+        </label>
+        <input
+          autoComplete="off"
+          className="form-control"
+          id="name"
+          name="name"
+          onChange={[Function]}
+          placeholder="The name of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Between 2 and 30 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="location"
+        >
+          Location
+        </label>
+        <input
+          className="form-control"
+          id="location"
+          name="location"
+          onChange={[Function]}
+          placeholder="The location of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 50 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="capacity"
+        >
+          Capacity
+        </label>
+        <input
+          className="form-control"
+          id="capacity"
+          name="capacity"
+          onChange={[Function]}
+          pattern="\\\\d*"
+          placeholder="How many seats"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="price"
+        >
+          Price
+        </label>
+        <input
+          className="form-control"
+          id="price"
+          name="price"
+          onChange={[Function]}
+          placeholder="Price"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="details"
+        >
+          Details
+        </label>
+        <textarea
+          className="form-control"
+          id="details"
+          name="details"
+          onChange={[Function]}
+          placeholder="More details about the center"
+          rows="7"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 300 characters
+        </small>
+        <SmallAlert />
+      </div>
+    </div>
+    <div
+      className="image-input"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="image"
+        >
+          Image(click to upload new)
+        </label>
+        <ImageInput
+          id="image"
+          newImage="http://testImage.jpg"
+          onDrop={[Function]}
+          previousImage="image1"
+        />
+        <div
+          className="mt-5"
+        >
+          <button
+            className="btn ie-blue-button"
+            disabled={false}
+            id="add-btn"
+            onClick={[Function]}
+          >
+            Add Center
+          </button>
+          <Link
+            className="btn ie-dark-button ml-3 "
+            replace={false}
+            to="/centers"
+          >
+             Cancel
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`<CenterForm /> Rendering should render correctly when adding 1`] = `
+<form
+  className="mt-lg-5 mb-md-5"
+>
+  <LoadingIcon
+    size={3}
+    start={false}
+  />
+  <div
+    className="w-lg-50 mx-auto"
+  >
+    <BigAlert
+      message={null}
+    />
+  </div>
+  <div
+    className="form-inputs"
+  >
+    <div
+      className="text-inputs mr-lg-5"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="name"
+        >
+          Name
+        </label>
+        <input
+          autoComplete="off"
+          className="form-control"
+          id="name"
+          name="name"
+          onChange={[Function]}
+          placeholder="The name of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Between 2 and 30 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="location"
+        >
+          Location
+        </label>
+        <input
+          className="form-control"
+          id="location"
+          name="location"
+          onChange={[Function]}
+          placeholder="The location of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 50 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="capacity"
+        >
+          Capacity
+        </label>
+        <input
+          className="form-control"
+          id="capacity"
+          name="capacity"
+          onChange={[Function]}
+          pattern="\\\\d*"
+          placeholder="How many seats"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="price"
+        >
+          Price
+        </label>
+        <input
+          className="form-control"
+          id="price"
+          name="price"
+          onChange={[Function]}
+          placeholder="Price"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="details"
+        >
+          Details
+        </label>
+        <textarea
+          className="form-control"
+          id="details"
+          name="details"
+          onChange={[Function]}
+          placeholder="More details about the center"
+          rows="7"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 300 characters
+        </small>
+        <SmallAlert />
+      </div>
+    </div>
+    <div
+      className="image-input"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="image"
+        >
+          Image(click to upload new)
+        </label>
+        <ImageInput
+          id="image"
+          newImage="http://testImage.jpg"
+          onDrop={[Function]}
+          previousImage={null}
+        />
+        <div
+          className="mt-5"
+        >
+          <button
+            className="btn ie-blue-button"
+            disabled={false}
+            id="add-btn"
+            onClick={[Function]}
+          >
+            Add Center
+          </button>
+          <Link
+            className="btn ie-dark-button ml-3 "
+            replace={false}
+            to="/centers"
+          >
+             Cancel
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`<CenterForm /> Rendering should render correctly when updating 1`] = `
+<form
+  className="mt-lg-5 mb-md-5"
+>
+  <LoadingIcon
+    size={3}
+    start={false}
+  />
+  <div
+    className="w-lg-50 mx-auto"
+  >
+    <BigAlert
+      message={null}
+    />
+  </div>
+  <div
+    className="form-inputs"
+  >
+    <div
+      className="text-inputs mr-lg-5"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="name"
+        >
+          Name
+        </label>
+        <input
+          autoComplete="off"
+          className="form-control"
+          id="name"
+          name="name"
+          onChange={[Function]}
+          placeholder="The name of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Between 2 and 30 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="location"
+        >
+          Location
+        </label>
+        <input
+          className="form-control"
+          id="location"
+          name="location"
+          onChange={[Function]}
+          placeholder="The location of the center"
+          type="text"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 50 characters
+        </small>
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="capacity"
+        >
+          Capacity
+        </label>
+        <input
+          className="form-control"
+          id="capacity"
+          name="capacity"
+          onChange={[Function]}
+          pattern="\\\\d*"
+          placeholder="How many seats"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="price"
+        >
+          Price
+        </label>
+        <input
+          className="form-control"
+          id="price"
+          name="price"
+          onChange={[Function]}
+          placeholder="Price"
+          type="number"
+        />
+        <SmallAlert />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="details"
+        >
+          Details
+        </label>
+        <textarea
+          className="form-control"
+          id="details"
+          name="details"
+          onChange={[Function]}
+          placeholder="More details about the center"
+          rows="7"
+        />
+        <small
+          className="form-text text-muted"
+        >
+          Less than 300 characters
+        </small>
+        <SmallAlert />
+      </div>
+    </div>
+    <div
+      className="image-input"
+    >
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="image"
+        >
+          Image(click to upload new)
+        </label>
+        <ImageInput
+          id="image"
+          newImage="http://testImage.jpg"
+          onDrop={[Function]}
+          previousImage={null}
+        />
+        <div
+          className="mt-5"
+        >
+          <button
+            className="btn ie-blue-button"
+            disabled={false}
+            id="add-btn"
+            onClick={[Function]}
+          >
+            Update Center
+          </button>
+          <Link
+            className="btn ie-dark-button ml-3 "
+            replace={false}
+            to="/centers"
+          >
+             Cancel
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;

@@ -15,6 +15,8 @@ export const validateSigninInputs = (inputs) => {
   // Validating Email.
   if (!utils.isNotEmpty(email) || !utils.isDefined(email)) {
     errors.emailError = 'Email is required';
+  } else if (!utils.isEmail(email)) {
+    errors.emailError = 'Email format is wrong';
   }
   // Validating Password.
   if (!utils.isNotEmpty(password) || !utils.isDefined(password)) {

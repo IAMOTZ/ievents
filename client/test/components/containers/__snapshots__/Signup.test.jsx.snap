@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Signup /> Rendering: should redirect to centers page if logging resolved 1`] = `
+<Redirect
+  push={false}
+  to="/centers"
+/>
+`;
+
+exports[`<Signup /> Rendering: should render correctly 1`] = `
+<View
+  getInput={[Function]}
+  inputErrors={
+    Object {
+      "confirmPasswordError": null,
+      "emailError": null,
+      "nameError": null,
+      "passwordError": null,
+    }
+  }
+  loggingUserError={null}
+  loggingUserStarted={false}
+  register={[Function]}
+/>
+`;
+
+exports[`<SignupView /> Rendering should render correctly 1`] = `
+<div
+  id="sign-up-container"
+>
+  <RegularTopNavigation />
+  <div
+    className="d-flex flex-column align-items-center page-content"
+  >
+    <LoadingIcon
+      size={3}
+      start={false}
+    />
+    <div
+      className="card card-form"
+    >
+      <h1
+        className="card-header"
+      >
+        Sign up
+      </h1>
+      <div
+        className="card-body"
+      >
+        <BigAlert
+          message={null}
+        />
+        <form>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="name"
+            >
+              Name
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-user"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="name"
+                name="name"
+                onChange={[MockFunction]}
+                placeholder="Name"
+                type="text"
+              />
+            </div>
+            <SmallAlert />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-envelope"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="email"
+                name="email"
+                onChange={[MockFunction]}
+                placeholder="Your Email"
+                type="email"
+              />
+            </div>
+            <SmallAlert />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-user-secret"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="password"
+                name="password"
+                onChange={[MockFunction]}
+                placeholder="Password"
+                type="password"
+              />
+            </div>
+            <small
+              className="form-text text-muted"
+            >
+              Must contain capital, small letters and numbers
+            </small>
+            <SmallAlert />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="password"
+            >
+              Confirm Password
+            </label>
+            <div
+              className="input-group"
+            >
+              <div
+                className="input-group-addon"
+              >
+                <i
+                  className="fa fa-user-secret"
+                />
+              </div>
+              <input
+                className="form-control"
+                id="confirm-password"
+                name="confirmPassword"
+                onChange={[MockFunction]}
+                placeholder="Confirm Password"
+                type="password"
+              />
+            </div>
+            <SmallAlert />
+          </div>
+          <button
+            className="btn btn-block ie-blue-button mt-4"
+            disabled={false}
+            onClick={[MockFunction]}
+          >
+            Register
+          </button>
+          <div
+            className="text-center mt-2"
+            style={
+              Object {
+                "fontSize": "15px",
+              }
+            }
+          >
+            <span>
+              Already registered?
+            </span>
+             
+            <Link
+              replace={false}
+              to="/users/login"
+            >
+              Log in
+            </Link>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</div>
+`;

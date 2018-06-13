@@ -92,6 +92,7 @@ class EditEvent extends React.Component {
       state.inputErrors = inputErrors;
       this.setState(state);
     } else {
+      this.clearInputErrors();
       const eventId = this.props.eventToUpdate.id;
       this.props.dispatch(updateEvent(eventId, eventDetails, this.props.userToken));
       window.scrollTo(0, 0);
@@ -99,9 +100,7 @@ class EditEvent extends React.Component {
   }
 
   render() {
-    if (this.props.updatingEventResolved) {
-      return <Redirect to="/events" />;
-    } else if (!this.props.eventToUpdate) {
+    if (this.props.updatingEventResolved || !this.props.eventToUpdate) {
       return <Redirect to="/events" />;
     }
     return (

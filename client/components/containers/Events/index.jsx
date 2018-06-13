@@ -16,7 +16,6 @@ import View from './View';
     userToken: user.token,
     isAdmin: user.role === 'admin' || user.role === 'superAdmin',
     isSuperAdmin: user.role === 'superAdmin',
-    isUserAuthenticated: store.authReducer.loggingUserResolved,
     fetchingEventsStarted: store.fetchEventsReducer.fetchingEventsStarted,
     deletingEventStarted: store.deleteEventReducer.deletingEventStarted,
     deletingEventResolved: store.deleteEventReducer.deletingEventResolved,

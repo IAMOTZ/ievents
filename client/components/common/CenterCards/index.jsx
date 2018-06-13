@@ -30,13 +30,14 @@ CenterCards.propTypes = {
   isTransactionsPage: PropTypes.bool,
   onBook: PropTypes.func.isRequired,
   onEdit: PropTypes.func,
-  onViewTransactions: PropTypes.func.isRequired,
+  onViewTransactions: PropTypes.func,
 };
 CenterCards.defaultProps = {
   centers: [],
   isAdmin: false,
   isTransactionsPage: false,
-  onEdit: () => { }
+  onEdit: () => {},
+  onViewTransactions: () => {}
 };
 
 export default CenterCards;

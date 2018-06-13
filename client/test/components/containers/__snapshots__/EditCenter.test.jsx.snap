@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EditCenter /> Rendering: should redirect to the centers page if there is no center to update 1`] = `
+<Redirect
+  push={false}
+  to="/centers"
+/>
+`;
+
+exports[`<EditCenter /> Rendering: should redirect to the centers page if updating center resolved 1`] = `
+<Redirect
+  push={false}
+  to="/centers"
+/>
+`;
+
+exports[`<EditCenter /> Rendering: should render correctly 1`] = `
+<View
+  add={[Function]}
+  addingCenterError={null}
+  addingCenterStarted={false}
+  centerToUpdate={
+    Object {
+      "id": 5,
+    }
+  }
+  dispatch={[MockFunction]}
+  getInput={[Function]}
+  handleImageDrop={[Function]}
+  inputErrors={
+    Object {
+      "capacityError": null,
+      "detailsError": null,
+      "locationError": null,
+      "nameError": null,
+      "priceError": null,
+    }
+  }
+  isAdmin={false}
+  isSuperAdmin={false}
+  newImageLink={null}
+  update={[Function]}
+  updating={true}
+  updatingCenterError={null}
+  updatingCenterStarted={false}
+  userName="tester"
+/>
+`;

@@ -11,7 +11,7 @@ before_script:
    - "export NODE_ENV=test && ./node_modules/.bin/babel-node ./server/setUpDatabase"
    
 script: 
-   -  "./node_modules/.bin/mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --exit"
+   -  "npm run test:server"
 
 after_success: npm run coverage
 

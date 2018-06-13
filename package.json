@@ -11,10 +11,11 @@
     "dev:client": "webpack-dev-server --content-base src --inline --hot",
     "dev:template": "gulp",
     "test:server": "export NODE_ENV=test && npm run database:setup && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --timeout 5000 --exit",
-    "test:client": "jest --coverage",
+    "test:client": "jest && codecov",
     "test:client:update": "jest -u",
-    "e2e:test": "nightwatch",
-    "e2e:setup": "selenium-standalone install",
+    "test:e2e": "nightwatch",
+    "test:e2e:setup": "selenium-standalone install",
+    "test:full": "npm run test:server && npm run test:client",
     "lint": "./node_modules/.bin/eslint",
     "coverage": "npm run test:server && nyc report --reporter=text-lcov | coveralls",
     "heroku-postbuild": "npm run prod:client && npm run prod:server && npm run database:setup",
@@ -93,6 +94,7 @@
     "browser-sync": "^2.18.13",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "codecov": "^3.0.2",
     "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -130,7 +132,18 @@
     ],
     "setupFiles": [
       "./client/test/testSetup/browserMock.js",
-      "./client/test/testSetup/enzymeSetup.js"
+      "./client/test/testSetup/globals.js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/client/**/*.{js,jsx}",
+      "!**/client/test/**",
+      "!**/client/helpers/**",
+      "!**/client/store.js",
+      "!**/client/index.{js,jsx}",
+      "!**/client/reducers/index.js",
+      "!**/client/components/Routes.{js,jsx}",
+      "!**/client/components/common/Calendar/**.jsx"
     ],
     "moduleNameMapper": {
       "^.+\\.(css|less|scss)$": "identity-obj-proxy"

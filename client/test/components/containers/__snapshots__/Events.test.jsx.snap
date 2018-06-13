@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Events /> Rendering: should render correctly 1`] = `
+<View
+  cancelDelete={[Function]}
+  createModalContent={[Function]}
+  deletingEventStarted={false}
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          [Function],
+        ],
+      ],
+    }
+  }
+  events={
+    Array [
+      Object {
+        "centerId": 1,
+        "date": "12/34/2020",
+        "description": "test description",
+        "id": 1,
+        "status": "allowed",
+        "title": "test-event",
+        "userId": 1,
+      },
+    ]
+  }
+  fetchingEventsStarted={false}
+  finishDelete={[Function]}
+  isAdmin={false}
+  isSuperAdmin={false}
+  modalContent={null}
+  onEdit={[Function]}
+  pagination={Object {}}
+  startDelete={[Function]}
+  updatePagination={[Function]}
+  userName="tester"
+/>
+`;
+
+exports[`<EventsView /> Rendering should render correctly when there are events and it is not fetching 1`] = `
+<div
+  id="events-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="My Events"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2 mt-lg-0"
+      >
+        <Header
+          text="My Events"
+        />
+        <div
+          className="page-content"
+        >
+          <LoadingIcon
+            size={2}
+            start={false}
+          />
+          <div
+            className="row"
+          >
+            <EventCards
+              createModalContent={[MockFunction]}
+              edit={[MockFunction]}
+              events={
+                Array [
+                  Object {
+                    "centerId": 1,
+                    "date": "12/34/2020",
+                    "description": "test description",
+                    "id": 1,
+                    "status": "allowed",
+                    "title": "test-event",
+                    "userId": 1,
+                  },
+                ]
+              }
+              startDelete={[MockFunction]}
+            />
+          </div>
+          <Pagination
+            onPageChange={[MockFunction]}
+            pageCount={NaN}
+          />
+          <ConfirmationModal
+            onCancel={[MockFunction]}
+            onOK={[MockFunction]}
+          >
+            <span>
+              Are you sure you want to delete this event?
+            </span>
+          </ConfirmationModal>
+          <EventDetailsModal
+            eventDescription={null}
+            eventTitle={null}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
+
+exports[`<EventsView /> Rendering should render correctly when there are no events and it is fetching 1`] = `
+<div
+  id="events-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="My Events"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2 mt-lg-0"
+      >
+        <Header
+          text="My Events"
+        />
+        <div
+          className="page-content"
+        >
+          <LoadingIcon
+            size={2}
+            start={false}
+          />
+          <LoadingBox
+            iconSize={4}
+          />
+          <Pagination
+            onPageChange={[MockFunction]}
+            pageCount={NaN}
+          />
+          <ConfirmationModal
+            onCancel={[MockFunction]}
+            onOK={[MockFunction]}
+          >
+            <span>
+              Are you sure you want to delete this event?
+            </span>
+          </ConfirmationModal>
+          <EventDetailsModal
+            eventDescription={null}
+            eventTitle={null}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;

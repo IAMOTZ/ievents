@@ -22,22 +22,64 @@ export default () => (
     <Route exact path="/users/signup" component={Signup} />
     <Route exact path="/users/login" component={Signin} />
     <Route exact path="/explore/centers" component={RegularCenters} />
-    <Route exact path="/addEvent" component={RequireAuthentication(AddEvent)} />
-    <Route exact path="/events/:id/edit" component={RequireAuthentication(EditEvent)} />
-    <Route exact path="/events" component={RequireAuthentication(Events)} />
-    <Route exact path="/centers" component={RequireAuthentication(AuthCenters)} />
-    <Route exact path="/addCenter" component={RequireAuthentication(AddCenter)} />
-    <Route exact path="/centers/:id/edit" component={RequireAuthentication(EditCenter)} />
+    <Route
+      exact
+      path="/addEvent"
+      render={() =>
+        <RequireAuthentication><AddEvent /></RequireAuthentication>}
+    />
+    <Route
+      exact
+      path="/events/:id/edit"
+      render={() =>
+        <RequireAuthentication><EditEvent /></RequireAuthentication>}
+    />
+    <Route
+      exact
+      path="/events"
+      render={() =>
+        <RequireAuthentication><Events /></RequireAuthentication>}
+    />
+    <Route
+      exact
+      path="/centers"
+      render={() =>
+        <RequireAuthentication><AuthCenters /></RequireAuthentication>}
+    />
+    <Route
+      exact
+      path="/addCenter"
+      render={() =>
+        <RequireAuthentication><AddCenter /></RequireAuthentication>}
+    />
+    <Route
+      exact
+      path="/centers/:id/edit"
+      render={() =>
+        <RequireAuthentication><EditCenter /></RequireAuthentication>}
+    />
     <Route
       exact
       path="/centers/transactions"
-      render={() => {
-        const Page = RequireAuthentication(AuthCenters, { isTransactionsPage: true });
-        return <Page />;
-      }}
+      render={() =>
+        <RequireAuthentication><AuthCenters isTransactionsPage /></RequireAuthentication>}
     />
-    <Route exact path="/transaction/:id/events" component={Transactions} />
-    <Route exact path="/addAdmin" component={RequireAuthentication(AddAdmin)} />
-    <Route exact path="/profile" component={RequireAuthentication(Profile)} />
+    <Route
+      exact
+      path="/transaction/:id/events"
+      render={() =>
+        <RequireAuthentication><Transactions /></RequireAuthentication>}
+    />
+    <Route
+      exact
+      path="/addAdmin"
+      render={() =>
+        <RequireAuthentication><AddAdmin /></RequireAuthentication>}
+    />
+    <Route
+      exact
+      path="/profile"
+      render={() => <RequireAuthentication><Profile /></RequireAuthentication>}
+    />
   </Switch>
 );

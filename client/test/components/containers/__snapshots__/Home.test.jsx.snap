@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> Rendering: should redirect to centers page if user is authenticated 1`] = `
+<Redirect
+  push={false}
+  to="/centers"
+/>
+`;
+
+exports[`<Home /> Rendering: should render correctly 1`] = `<Home />`;
+
+exports[`<HomeView /> Rendering should render correctly 1`] = `
+<div
+  id="home-container"
+>
+  <RegularTopNavigation />
+  <div
+    className="dark-overlay"
+  >
+    <div
+      className="d-flex flex-column align-items-center text-center"
+      id="page-content"
+    >
+      <h1
+        className="display-2 text-center"
+      >
+        Welcome to
+        <strong>
+           iEvents
+        </strong>
+      </h1>
+      <p
+        className="display-4 d-none d-sm-block"
+      >
+        Get the perfect center for your events
+      </p>
+      <p
+        className="display-4 d-block d-sm-none"
+        style={
+          Object {
+            "fontSize": "2.0rem",
+          }
+        }
+      >
+        Get the perfect center for your events
+      </p>
+      <Link
+        className="btn btn-primary mt-3"
+        replace={false}
+        to="/explore/centers"
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-bank fa-fw"
+        />
+          Checkout Our Centers
+      </Link>
+    </div>
+  </div>
+</div>
+`;
