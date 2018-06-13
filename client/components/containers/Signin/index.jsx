@@ -45,6 +45,7 @@ class Signin extends React.Component {
 
   /**
    * Dispatches an action to authenticate a user.
+   * @param {Event} event The event object.
    */
   login = (event) => {
     event.preventDefault();

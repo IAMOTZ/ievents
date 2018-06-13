@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthCentersView /> Rendering should render correctly on transactions page 1`] = `
+<div
+  id="auth-centers-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Transactions"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-lg-2 mt-lg-0"
+      >
+        <Header
+          text="Transactions"
+        />
+        <div
+          className="page-content"
+        >
+          <div
+            className="container"
+          >
+            <div>
+              <div
+                className="row"
+              >
+                <CenterCards
+                  centers={
+                    Array [
+                      Object {
+                        "capacity": "200",
+                        "details": "test-center-details",
+                        "id": 1,
+                        "images": Array [
+                          "http://testImage.jpg",
+                        ],
+                        "location": "test-center-location",
+                        "name": "test-center1",
+                        "price": "500",
+                      },
+                    ]
+                  }
+                  createModalContent={[MockFunction]}
+                  isAdmin={false}
+                  isTransactionsPage={true}
+                  onBook={[MockFunction]}
+                  onEdit={[MockFunction]}
+                  onViewTransactions={[MockFunction]}
+                />
+              </div>
+            </div>
+          </div>
+          <Pagination
+            onPageChange={[MockFunction]}
+            pageCount={NaN}
+          />
+          <CenterDetailsModal
+            centerDetails=""
+            centerImages={
+              Array [
+                "/images/defaultImgx4.jpeg",
+              ]
+            }
+            centerName=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<AuthCentersView /> Rendering should render correctly when there are centers and it is not fetching 1`] = `
+<div
+  id="auth-centers-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Centers"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-lg-2 mt-lg-0"
+      >
+        <Header
+          text="Centers"
+        />
+        <div
+          className="page-content"
+        >
+          <div
+            className="container"
+          >
+            <h1
+              className="caption-text"
+            >
+              A special center for a special event
+            </h1>
+            <div>
+              <div
+                className="row"
+              >
+                <CenterCards
+                  centers={
+                    Array [
+                      Object {
+                        "capacity": "200",
+                        "details": "test-center-details",
+                        "id": 1,
+                        "images": Array [
+                          "http://testImage.jpg",
+                        ],
+                        "location": "test-center-location",
+                        "name": "test-center1",
+                        "price": "500",
+                      },
+                    ]
+                  }
+                  createModalContent={[MockFunction]}
+                  isAdmin={false}
+                  isTransactionsPage={false}
+                  onBook={[MockFunction]}
+                  onEdit={[MockFunction]}
+                  onViewTransactions={[MockFunction]}
+                />
+              </div>
+            </div>
+          </div>
+          <Pagination
+            onPageChange={[MockFunction]}
+            pageCount={NaN}
+          />
+          <CenterDetailsModal
+            centerDetails=""
+            centerImages={
+              Array [
+                "/images/defaultImgx4.jpeg",
+              ]
+            }
+            centerName=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<AuthCentersView /> Rendering should render correctly when there are no centers and it is fetching 1`] = `
+<div
+  id="auth-centers-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Centers"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-lg-2 mt-lg-0"
+      >
+        <Header
+          text="Centers"
+        />
+        <LoadingBox
+          iconSize={4}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<RegularCenters /> Rendering: should render correctly 1`] = `
+<View
+  centers={
+    Array [
+      Object {
+        "capacity": "200",
+        "details": "test-center-details",
+        "id": 1,
+        "images": Array [
+          "http://testImage.jpg",
+        ],
+        "location": "test-center-location",
+        "name": "test-center1",
+        "price": "500",
+      },
+    ]
+  }
+  createModalContent={[Function]}
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          [Function],
+        ],
+      ],
+    }
+  }
+  fetchingCentersStarted={false}
+  isAdmin={false}
+  isSuperAdmin={false}
+  isTransactionsPage={false}
+  modalContent={null}
+  onBook={[Function]}
+  onEdit={[Function]}
+  onViewTransactions={[Function]}
+  pagination={Object {}}
+  updatePagination={[Function]}
+  userName=""
+/>
+`;

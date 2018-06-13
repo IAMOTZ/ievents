@@ -13,14 +13,14 @@ if (previousToken) {
   }
 }
 
-const initailSatate = {
+const initialState = {
   user: previousUser || null,
   loggingUserStarted: false,
   loggingUserResolved: Boolean(previousUser),
   loggingUserError: null,
 };
 
-export default (state = initailSatate, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOGGING_USER_STARTED: {
       return {
@@ -33,7 +33,7 @@ export default (state = initailSatate, action) => {
     case actionTypes.LOGGING_USER_RESOLVED: {
       const { token } = action.payload;
       localStorage.setItem(TOKEN_NAME, token);
-      let user = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE);
+      let user = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE || 'testToken');
       user = { ...user, token };
       return {
         ...state,
@@ -63,7 +63,7 @@ export default (state = initailSatate, action) => {
     case actionTypes.ADDING_USER_RESOLVED: {
       const { token } = action.payload;
       localStorage.setItem(TOKEN_NAME, token);
-      let user = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE);
+      let user = jwt.verify(token, process.env.JSON_WEB_TOKEN_SECRETE || 'testToken');
       user = { ...user, token };
       return {
         ...state,

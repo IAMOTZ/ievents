@@ -23,7 +23,7 @@ const EventCards = props => props.events.map(event => (
             event={event}
             createModalContent={props.createModalContent}
             startEventCancel={props.startEventCancel}
-            deletingTransactionStarted={props.deletingTransactionStarted}
+            cancelingTransactionStarted={props.cancelingTransactionStarted}
           /> :
           <RenderEventBody
             event={event}
@@ -44,9 +44,15 @@ const EventCards = props => props.events.map(event => (
 ));
 EventCards.propTypes = {
   events: PropTypes.array,
+  edit: PropTypes.func,
+  isTransactionsPage: PropTypes.bool,
+  cancelingTransactionStarted: PropTypes.bool,
+  createModalContent: PropTypes.func,
+  startEventCancel: PropTypes.func,
+  startDelete: PropTypes.func,
 };
 EventCards.defaultProps = {
-  events: []
+  events: [],
 };
 
 

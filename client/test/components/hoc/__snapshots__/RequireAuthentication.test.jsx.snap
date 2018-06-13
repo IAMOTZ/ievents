@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequireAuthentication /> Rendering: should redirect to login page if user is not authenticated 1`] = `
+<Redirect
+  push={false}
+  to="/users/login"
+/>
+`;
+
+exports[`<RequireAuthentication /> Rendering: should render the child componetn is the user is authenticated 1`] = `
+<p>
+  You need authentication to see me
+</p>
+`;

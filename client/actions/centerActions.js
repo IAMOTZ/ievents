@@ -10,7 +10,7 @@ const apiBaseUrl = process.env.API_BASE_URL;
  */
 export const getAllCenters = (pagination = {}) => (dispatch) => {
   dispatch({ type: actionTypes.FETCHING_CENTERS_STARTED });
-  axios.get(`/api/v1/centers?limit=${pagination.limit}&&offset=${pagination.offset}`)
+  return axios.get(`${apiBaseUrl}/centers?limit=${pagination.limit}&&offset=${pagination.offset}`)
     .then((response) => {
       dispatch({ type: actionTypes.FETCHING_CENTERS_RESOLVED, payload: response.data });
     })
@@ -33,7 +33,7 @@ export const addCenter = (centerDetails, userToken) => (dispatch) => {
       'Content-type': 'multipart/form-data',
     },
   };
-  axios.post(`${apiBaseUrl}/centers`, centerDetails, config)
+  return axios.post(`${apiBaseUrl}/centers`, centerDetails, config)
     .then((response) => {
       dispatch({ type: actionTypes.ADDING_CENTER_RESOLVED, payload: response.data });
     })
@@ -57,7 +57,7 @@ export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
       'Content-type': 'multipart/form-data',
     },
   };
-  axios.put(`${apiBaseUrl}/centers/${id}`, centerDetails, config)
+  return axios.put(`${apiBaseUrl}/centers/${id}`, centerDetails, config)
     .then((response) => {
       dispatch({ type: actionTypes.UPDATING_CENTER_RESOLVED, payload: response.data });
     })
@@ -72,9 +72,9 @@ export const updateCenter = (id, centerDetails, userToken) => (dispatch) => {
  * @returns {Object} The action.
  */
 export const setCenterToUpdate = centerId => (
-  { type: actionTypes.SET_CENTER_TO_UPDATE, payload: centerId }
+  { type: actionTypes.SET_CENTER_TO_UPDATE, payload: { centerId } }
 );
 
 export const setCenterToTransact = centerId => (
-  { type: actionTypes.SET_CENTER_TO_TRANSACT, payload: centerId }
+  { type: actionTypes.SET_CENTER_TO_TRANSACT, payload: { centerId } }
 );

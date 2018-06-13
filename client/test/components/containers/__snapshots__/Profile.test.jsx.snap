@@ -1,0 +1,450 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChangePasswordModal /> Rendering should render correctly 1`] = `
+<div
+  className="modal fade"
+  data-backdrop="static"
+  id="change-password-modal"
+  role="dialog"
+  tabIndex="-1"
+>
+  <div
+    className="modal-dialog"
+    role="document"
+  >
+    <div
+      className="modal-content"
+    >
+      <div
+        className="modal-header"
+      >
+        <h5
+          className="modal-title"
+        >
+          Change Password
+        </h5>
+        <button
+          aria-label="Close"
+          className="close"
+          data-dismiss="modal"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+      </div>
+      <div
+        className="modal-body"
+      >
+        <LoadingIcon
+          size={3}
+          start={false}
+        />
+        <BigAlert
+          message={null}
+        />
+        <BigAlert
+          message={null}
+          type="success"
+        />
+        <form
+          className="mt-0"
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="former-password"
+            >
+              Former Password
+            </label>
+            <input
+              className="form-control"
+              id="former-password"
+              name="formerPassword"
+              onChange={[Function]}
+              type="password"
+              value=""
+            />
+            <SmallAlert />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="new-password"
+            >
+              New Password
+            </label>
+            <input
+              className="form-control"
+              id="new-password"
+              name="newPassword"
+              onChange={[Function]}
+              type="password"
+              value=""
+            />
+            <SmallAlert />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="confirm-new-password"
+            >
+              Confirm New Password
+            </label>
+            <input
+              className="form-control"
+              id="confirm-new-password"
+              name="confirmNewPassword"
+              onChange={[Function]}
+              type="password"
+              value=""
+            />
+            <SmallAlert />
+          </div>
+        </form>
+      </div>
+      <div
+        className="modal-footer"
+      >
+        <button
+          className="btn ie-dark-button"
+          data-dismiss="modal"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Cancel
+        </button>
+        <button
+          className="btn ie-blue-button"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Change
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<DeleteAccountModal /> Rendering should render correctly 1`] = `
+<div
+  className="modal fade"
+  data-backdrop="static"
+  id="delete-account-modal"
+  role="dialog"
+  tabIndex="-1"
+>
+  <div
+    className="modal-dialog"
+    role="document"
+  >
+    <div
+      className="modal-content"
+    >
+      <div
+        className="modal-header"
+      >
+        <h5
+          className="modal-title"
+        >
+          Delete Account
+        </h5>
+        <button
+          aria-label="Close"
+          className="close"
+          data-dismiss="modal"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          <span
+            aria-hidden="true"
+          >
+            ×
+          </span>
+        </button>
+      </div>
+      <div
+        className="modal-body"
+      >
+        <p
+          className="h6"
+        >
+          Are you sure you wan't to delete your account? 
+        </p>
+        <span
+          className="text-grey"
+        >
+          This action is irreversible, you would loose all your data on this platform.
+        </span>
+        <div
+          className="form-group mt-3"
+        >
+          <label
+            className="h6"
+            htmlFor="password"
+          >
+            Your Password
+          </label>
+          <input
+            className="form-control"
+            id="password"
+            name="password"
+            onChange={[Function]}
+            placeholder="Input you password to continue"
+            type="password"
+            value={null}
+          />
+          <SmallAlert />
+          <LoadingIcon
+            size={3}
+            start={false}
+          />
+          <br />
+          <BigAlert
+            message={null}
+          />
+        </div>
+      </div>
+      <div
+        className="modal-footer"
+      >
+        <button
+          className="btn btn-dark pointer-button"
+          data-dismiss="modal"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Cancel
+        </button>
+        <button
+          className="btn btn-danger pointer-button"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Profile /> Rendering: should render correctly 1`] = `
+<View
+  changePassword={[Function]}
+  changingPasswordError={null}
+  changingPasswordResolved={false}
+  changingPasswordStarted={false}
+  closeModalEffects={[Function]}
+  confirmNewPassword=""
+  deleteAccount={[Function]}
+  deletingAccountError={null}
+  deletingAccountStarted={false}
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          [Function],
+        ],
+      ],
+    }
+  }
+  events={Array []}
+  formerPassword=""
+  getInput={[Function]}
+  inputErrors={
+    Object {
+      "confirmNewPasswordError": null,
+      "formerPasswordError": null,
+      "newPasswordError": null,
+      "passwordError": null,
+    }
+  }
+  isAdmin={false}
+  isSuperAdmin={false}
+  newPassword=""
+  password=""
+  userName="tester"
+/>
+`;
+
+exports[`<ProfileView /> Rendering should render correctly 1`] = `
+<div
+  id="profile-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Profile"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-lg-2"
+      >
+        <Header
+          text="Profile"
+        />
+        <div
+          className="d-flex align-items-center justify-content-center"
+          id="profile-details"
+          style={
+            Object {
+              "marginTop": "70px",
+              "minHeight": "500px",
+            }
+          }
+        >
+          <div
+            className="bg-white p-3"
+            style={
+              Object {
+                "width": "500px",
+              }
+            }
+          >
+            <p
+              className="h1 text-center text-capitalize"
+              style={
+                Object {
+                  "fontSize": "3rem",
+                  "fontWeight": "lighter",
+                }
+              }
+            >
+              tester
+            </p>
+            <p
+              className="h3 mt-3"
+              style={
+                Object {
+                  "fontWeight": "normal",
+                }
+              }
+            >
+              Events
+            </p>
+            <ul
+              className="list-group"
+            >
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center text-grey"
+              >
+                Done
+                <span
+                  className="badge badge-primary badge-pill"
+                >
+                  0
+                </span>
+              </li>
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center text-grey"
+              >
+                Allowed
+                <span
+                  className="badge badge-primary badge-pill"
+                >
+                  0
+                </span>
+              </li>
+              <li
+                className="list-group-item d-flex justify-content-between align-items-center text-grey"
+              >
+                Canceled
+                <span
+                  className="badge badge-primary badge-pill"
+                >
+                  0
+                </span>
+              </li>
+            </ul>
+            <p
+              className="h3 mt-3"
+              style={
+                Object {
+                  "fontWeight": "normal",
+                }
+              }
+            >
+              Account Settings
+            </p>
+            <ul
+              className="list-group account-settings"
+            >
+              <a
+                className="just-link no-outline-btn"
+                data-toggle="modal"
+                href="#change-password-modal"
+              >
+                <li
+                  className="list-group-item"
+                >
+                  Change Password
+                </li>
+              </a>
+              <a
+                className="just-link no-outline-btn"
+                data-toggle="modal"
+                href="#delete-account-modal"
+              >
+                <li
+                  className="list-group-item"
+                >
+                  Delete Account
+                </li>
+              </a>
+            </ul>
+          </div>
+        </div>
+        <ChangePasswordModal
+          changePassword={[Function]}
+          changingPasswordError={null}
+          changingPasswordResolved={false}
+          changingPasswordStarted={false}
+          closeModalEffects={[Function]}
+          confirmNewPassword=""
+          formerPassword=""
+          getInput={[Function]}
+          inputErrors={Object {}}
+          newPassword=""
+        />
+        <DeleteAccountModal
+          closeModalEffects={[Function]}
+          deleteAccount={[Function]}
+          deletingAccountError={null}
+          deletingAccountStarted={false}
+          getInput={[Function]}
+          inputErrors={Object {}}
+          password=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

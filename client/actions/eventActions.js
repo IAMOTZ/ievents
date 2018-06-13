@@ -16,7 +16,7 @@ export const getAllEvents = (userToken, pagination = {}) => (dispatch) => {
       'access-token': userToken,
     },
   };
-  axios.get(`${apiBaseUrl}/events?limit=${pagination.limit}&&offset=${pagination.offset}`, config)
+  return axios.get(`${apiBaseUrl}/events?limit=${pagination.limit}&&offset=${pagination.offset}`, config)
     .then((response) => {
       dispatch({ type: actionTypes.FETCHING_EVENTS_RESOLVED, payload: response.data });
     })
@@ -38,7 +38,7 @@ export const addEvent = (eventDetails, userToken) => (dispatch) => {
       'access-token': userToken,
     },
   };
-  axios.post(`${apiBaseUrl}/events`, eventDetails, config)
+  return axios.post(`${apiBaseUrl}/events`, eventDetails, config)
     .then((response) => {
       dispatch({ type: actionTypes.ADDING_EVENT_RESOLVED, payload: response.data });
     })
@@ -61,7 +61,7 @@ export const updateEvent = (id, eventDetails, userToken) => (dispatch) => {
       'access-token': userToken,
     },
   };
-  axios.put(`${apiBaseUrl}/events/${id}`, eventDetails, config)
+  return axios.put(`${apiBaseUrl}/events/${id}`, eventDetails, config)
     .then((response) => {
       dispatch({ type: actionTypes.UPDATING_EVENT_RESOLVED, payload: response.data });
     })
@@ -83,7 +83,7 @@ export const deleteEvent = (id, userToken) => (dispatch) => {
       'access-token': userToken,
     },
   };
-  axios.delete(`${apiBaseUrl}/events/${id}`, config)
+  return axios.delete(`${apiBaseUrl}/events/${id}`, config)
     .then((response) => {
       dispatch({ type: actionTypes.DELETING_EVENT_RESOLVED, payload: response.data });
     })

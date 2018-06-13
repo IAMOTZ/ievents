@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> Rendering: should render correctly 1`] = `
+<footer
+  className="w-100 mt-auto"
+  style={
+    Object {
+      "backgroundColor": "rgba(0,0,0, 0.9)",
+      "borderTop": "2px solid rgb(0, 142, 214)",
+    }
+  }
+>
+  <div
+    className="container text-white text-center py-5"
+  >
+    <h1>
+      iEvents
+    </h1>
+    <p>
+      Copyright © 2017
+    </p>
+  </div>
+</footer>
+`;

@@ -37,10 +37,11 @@ class AddAdmin extends React.Component {
   /**
    * Stores the user inputs in the state of this component.
    * @param {Event} event The event object.
+   * @returns {Function} The refresh method.
    */
   getInput = (event) => {
     if (this.props.addingAdminResolved || this.props.addingAdminError) {
-      this.refresh();
+      return this.refresh();
     }
     const state = { ...this.state };
     state[event.target.name] = event.target.value;

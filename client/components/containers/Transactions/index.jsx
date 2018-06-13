@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import {
-  getAllTransactions, deleteTransaction,
+  getAllTransactions, cancelTransaction,
 } from '../../../actions/transactionActions';
 import { stopAsyncProcess } from '../../../actions/commonActions';
 import * as asyncProcess from '../../../actions/asyncProcess';
@@ -21,15 +21,15 @@ import View from './View';
     transactions: store.fetchTransactionsReducer.transactions,
     pagination: store.fetchTransactionsReducer.pagination,
     fetchingTransactionsStarted: store.fetchTransactionsReducer.fetchingTransactionsStarted,
-    deletingTransactionStarted: store.deleteTransactionReducer.deletingTransactionStarted,
-    deletingTransactionResolved: store.deleteTransactionReducer.deletingTransactionResolved,
+    cancelingTransactionStarted: store.cancelTransactionReducer.cancelingTransactionStarted,
+    cancelingTransactionResolved: store.cancelTransactionReducer.cancelingTransactionResolved,
   };
 })
 class Transactions extends React.Component {
   constructor() {
     super();
     this.state = {
-      toDelete: null,
+      toCancel: null,
       modalContent: null,
     };
   }
@@ -48,8 +48,8 @@ class Transactions extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.deletingTransactionResolved) {
-      this.setState({ toDelete: null });
+    if (nextProps.cancelingTransactionResolved) {
+      this.setState({ toCancel: null });
       this.refresh();
     }
   }
@@ -58,7 +58,7 @@ class Transactions extends React.Component {
    * Refresh the page by clearing all created info eg Error Messages.
    */
   refresh = () => {
-    this.props.dispatch(stopAsyncProcess(asyncProcess.DELETING_TRANSACTION));
+    this.props.dispatch(stopAsyncProcess(asyncProcess.CANCELING_TRANSACTION));
     this.props.dispatch(getAllTransactions(
       this.props.userToken,
       this.props.centerToTransact,
@@ -75,7 +75,7 @@ class Transactions extends React.Component {
    */
   startEventCancel = (event) => {
     this.setState({
-      toDelete: event.currentTarget.id,
+      toCancel: event.currentTarget.id,
     });
   }
 
@@ -83,7 +83,7 @@ class Transactions extends React.Component {
    * It eventually deletes the event.
    */
   finishEventCancel = () => {
-    this.props.dispatch(deleteTransaction(this.props.userToken, this.state.toDelete));
+    this.props.dispatch(cancelTransaction(this.props.userToken, this.state.toCancel));
     $('#confirmation-modal').modal('hide');
   }
 
@@ -91,7 +91,7 @@ class Transactions extends React.Component {
    * It stops the canceling of an event.
    */
   stopEventCancel = () => {
-    this.setState({ toDelete: null });
+    this.setState({ toCancel: null });
   }
 
   /**
@@ -135,7 +135,7 @@ class Transactions extends React.Component {
         isSuperAdmin={this.props.isSuperAdmin}
         dispatch={this.props.dispatch}
         fetchingTransactionsStarted={this.props.fetchingTransactionsStarted}
-        deletingTransactionStarted={this.props.deletingTransactionStarted}
+        cancelingTransactionStarted={this.props.cancelingTransactionStarted}
         transactions={this.props.transactions}
         refresh={this.refresh}
         toCancel={this.state.toCancel}
@@ -159,8 +159,8 @@ Transactions.defaultProps = {
   isSuperAdmin: false,
   transactions: [],
   fetchingTransactionsStarted: false,
-  deletingTransactionStarted: false,
-  deletingTransactionResolved: false,
+  cancelingTransactionStarted: false,
+  cancelingTransactionResolved: false,
   dispatch: () => { },
   pagination: {},
   centerToTransact: null,
@@ -174,8 +174,8 @@ Transactions.propTypes = {
   isSuperAdmin: PropTypes.bool,
   transactions: PropTypes.array,
   fetchingTransactionsStarted: PropTypes.bool,
-  deletingTransactionStarted: PropTypes.bool,
-  deletingTransactionResolved: PropTypes.bool,
+  cancelingTransactionStarted: PropTypes.bool,
+  cancelingTransactionResolved: PropTypes.bool,
   dispatch: PropTypes.func,
   centerToTransact: PropTypes.number,
   pagination: PropTypes.object,

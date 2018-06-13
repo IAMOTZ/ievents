@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BigAlert /> Rendering should render correctly when the type is success 1`] = `
+<div
+  className="alert text-center alert-success"
+  role="alert"
+>
+  I am a success test
+</div>
+`;
+
+exports[`<BigAlert /> Rendering should render correctly when there is a message 1`] = `
+<div
+  className="alert text-center alert-danger"
+  role="alert"
+>
+  I am a test
+</div>
+`;
+
+exports[`<BigAlert /> Rendering should render correctly when there is no message 1`] = `""`;
+
+exports[`<SmallAlert /> Rendering should render correctly when there is a message 1`] = `
+<span
+  className="text-danger text-center small"
+>
+  I am a test
+</span>
+`;
+
+exports[`<SmallAlert /> Rendering should render correctly when there is no message 1`] = `""`;

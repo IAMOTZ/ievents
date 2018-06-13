@@ -101,6 +101,7 @@ class EditCenter extends React.Component {
       state.inputErrors = inputErrors;
       this.setState(state);
     } else {
+      this.clearInputErrors();
       const fd = new FormData();
       const entries = Object.entries(centerDetails);
       entries.forEach((entry) => {

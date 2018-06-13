@@ -6,11 +6,11 @@ const apiBaseUrl = process.env.API_BASE_URL;
 /**
  * A Thunk modeled action that eventually registers a user.
  * @param {Object} userDetails The details of the user to create.
- * @returns {Function}
+ * @returns {Function} Actions wrapped in a function.
  */
 export const createUser = userDetails => (dispatch) => {
   dispatch({ type: actionTypes.ADDING_USER_STARTED });
-  axios.post(`${apiBaseUrl}/users`, userDetails)
+  return axios.post(`${apiBaseUrl}/users`, userDetails)
     .then((response) => {
       dispatch({ type: actionTypes.ADDING_USER_RESOLVED, payload: response.data });
     })
@@ -22,11 +22,11 @@ export const createUser = userDetails => (dispatch) => {
 /**
  * A Thunk modeled action that eventually authenticates a user.
  * @param {Object} userDetails The details of the user.
- * @returns {Function}
+ * @returns {Function} Actions wrapped in a function.
  */
 export const loginUser = userDetails => (dispatch) => {
   dispatch({ type: actionTypes.LOGGING_USER_STARTED });
-  axios.post(`${apiBaseUrl}/users/login`, userDetails)
+  return axios.post(`${apiBaseUrl}/users/login`, userDetails)
     .then((response) => {
       dispatch({ type: actionTypes.LOGGING_USER_RESOLVED, payload: response.data });
     })
@@ -38,6 +38,6 @@ export const loginUser = userDetails => (dispatch) => {
 /**
  * Clears the storage that the user info is stored along with his authentication token.
  * This would cause the user to be logged out.
- * @returns {Object}
+ * @returns {Object} The Actions
  */
 export const logOut = () => ({ type: actionTypes.LOG_OUT });

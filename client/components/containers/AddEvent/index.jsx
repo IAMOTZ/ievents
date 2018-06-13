@@ -149,7 +149,7 @@ AddEvent.propTypes = {
   userToken: PropTypes.string,
   isAdmin: PropTypes.bool,
   isSuperAdmin: PropTypes.bool,
-  centerToBook: PropTypes.number,
+  centerToBook: PropTypes.object,
   addingEventStarted: PropTypes.bool,
   addingEventResolved: PropTypes.bool,
   addingEventError: PropTypes.string,

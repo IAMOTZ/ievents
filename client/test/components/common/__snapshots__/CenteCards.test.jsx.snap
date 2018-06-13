@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CenterCards /> Rendering: should render correctly on Events page 1`] = `
+<div
+  className="col-lg-4 col-md-6 col-sm-1"
+  key="1"
+>
+  <div
+    className="card centerCard"
+  >
+    <div>
+      <img
+        alt="The Center"
+        className="card-img-top"
+        src="http://testImage.jpg"
+      />
+      <div
+        className="badge-container"
+      >
+        <span
+          className="badge text-white p-2 seat-badge "
+        >
+          200
+           seats
+        </span>
+      </div>
+    </div>
+    <RenderCenterBody
+      center={
+        Object {
+          "capacity": "200",
+          "details": "test-center-details",
+          "id": 1,
+          "images": Array [
+            "http://testImage.jpg",
+          ],
+          "location": "test-center-location",
+          "name": "test-center1",
+          "price": "500",
+        }
+      }
+      centers={
+        Array [
+          Object {
+            "capacity": "200",
+            "details": "test-center-details",
+            "id": 1,
+            "images": Array [
+              "http://testImage.jpg",
+            ],
+            "location": "test-center-location",
+            "name": "test-center1",
+            "price": "500",
+          },
+        ]
+      }
+      createModalContent={[MockFunction]}
+      isAdmin={false}
+      isTransactionsPage={false}
+      onBook={[MockFunction]}
+      onEdit={[MockFunction]}
+      onViewTransactions={[MockFunction]}
+    />
+  </div>
+</div>
+`;
+
+exports[`<CenterCards /> Rendering: should render correctly on Transactions page 1`] = `
+<div
+  className="col-lg-4 col-md-6 col-sm-1"
+  key="1"
+>
+  <div
+    className="card centerCard"
+  >
+    <div>
+      <img
+        alt="The Center"
+        className="card-img-top"
+        src="http://testImage.jpg"
+      />
+      <div
+        className="badge-container"
+      >
+        <span
+          className="badge text-white p-2 seat-badge "
+        >
+          200
+           seats
+        </span>
+      </div>
+    </div>
+    <RenderCenterBodyInTransactions
+      center={
+        Object {
+          "capacity": "200",
+          "details": "test-center-details",
+          "id": 1,
+          "images": Array [
+            "http://testImage.jpg",
+          ],
+          "location": "test-center-location",
+          "name": "test-center1",
+          "price": "500",
+        }
+      }
+      centers={
+        Array [
+          Object {
+            "capacity": "200",
+            "details": "test-center-details",
+            "id": 1,
+            "images": Array [
+              "http://testImage.jpg",
+            ],
+            "location": "test-center-location",
+            "name": "test-center1",
+            "price": "500",
+          },
+        ]
+      }
+      createModalContent={[MockFunction]}
+      isAdmin={false}
+      isTransactionsPage={true}
+      onBook={[MockFunction]}
+      onEdit={[MockFunction]}
+      onViewTransactions={[MockFunction]}
+    />
+  </div>
+</div>
+`;
+
+exports[`<CenterCards /> Rendering: should use the default image if an image is not given in props 1`] = `
+<div
+  className="col-lg-4 col-md-6 col-sm-1"
+  key="1"
+>
+  <div
+    className="card centerCard"
+  >
+    <div>
+      <img
+        alt="The Center"
+        className="card-img-top"
+        src="/images/defaultImgx4.jpeg"
+      />
+      <div
+        className="badge-container"
+      >
+        <span
+          className="badge text-white p-2 seat-badge "
+        >
+          200
+           seats
+        </span>
+      </div>
+    </div>
+    <RenderCenterBody
+      center={
+        Object {
+          "capacity": "200",
+          "details": "test-center-details",
+          "id": 1,
+          "images": null,
+          "location": "test-center-location",
+          "name": "test-center1",
+          "price": "500",
+        }
+      }
+      centers={
+        Array [
+          Object {
+            "capacity": "200",
+            "details": "test-center-details",
+            "id": 1,
+            "images": null,
+            "location": "test-center-location",
+            "name": "test-center1",
+            "price": "500",
+          },
+        ]
+      }
+      createModalContent={[MockFunction]}
+      isAdmin={false}
+      isTransactionsPage={false}
+      onBook={[MockFunction]}
+      onEdit={[MockFunction]}
+      onViewTransactions={[MockFunction]}
+    />
+  </div>
+</div>
+`;
+
+exports[`<RenderCenterBody /> Rendering: should render correctly when the user is an admin 1`] = `
+<div
+  className="card-body d-flex flex-column"
+>
+  <div>
+    <h4
+      className="card-title text-capitalize"
+    >
+      test-center1
+    </h4>
+    <div
+      className="icons"
+    >
+      <div>
+        <i
+          aria-hidden="true"
+          className="fa fa-map-marker fa-fw"
+        />
+         
+        <span
+          className="text-capitalize"
+        >
+          test-center-location
+        </span>
+      </div>
+      <div>
+        <i
+          aria-hidden="true"
+          className="fa fa-info-circle fa-fw"
+        />
+         
+        <a
+          className="no-outline-btn"
+          data-toggle="modal"
+          href="#center-details-modal"
+          onClick={[Function]}
+          role="button"
+        >
+          About center
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="admin-only-icons"
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-pencil fa-fw"
+    />
+     
+    <Link
+      id={1}
+      onClick={[MockFunction]}
+      replace={false}
+      to="/centers/1/edit"
+    >
+      Edit Center
+    </Link>
+  </div>
+  <Link
+    className="btn ie-blue-button mt-2 btn-block"
+    id={1}
+    onClick={[MockFunction]}
+    replace={false}
+    to="/addEvent"
+  >
+     Book now for ₦
+    500
+    /Day
+  </Link>
+</div>
+`;
+
+exports[`<RenderCenterBody /> Rendering: should render correctly when the user is not an admin 1`] = `
+<div
+  className="card-body d-flex flex-column"
+>
+  <div>
+    <h4
+      className="card-title text-capitalize"
+    >
+      test-center1
+    </h4>
+    <div
+      className="icons"
+    >
+      <div>
+        <i
+          aria-hidden="true"
+          className="fa fa-map-marker fa-fw"
+        />
+         
+        <span
+          className="text-capitalize"
+        >
+          test-center-location
+        </span>
+      </div>
+      <div>
+        <i
+          aria-hidden="true"
+          className="fa fa-info-circle fa-fw"
+        />
+         
+        <a
+          className="no-outline-btn"
+          data-toggle="modal"
+          href="#center-details-modal"
+          onClick={[Function]}
+          role="button"
+        >
+          About center
+        </a>
+      </div>
+    </div>
+  </div>
+  <Link
+    className="btn ie-blue-button mt-2 btn-block"
+    id={1}
+    onClick={[MockFunction]}
+    replace={false}
+    to="/addEvent"
+  >
+     Book now for ₦
+    500
+    /Day
+  </Link>
+</div>
+`;
+
+exports[`<RenderCenterBodyInTransactions /> Rendering: should render correctly 1`] = `
+<div
+  className="card-body d-flex flex-column"
+>
+  <div>
+    <h4
+      className="card-title text-capitalize"
+    >
+      test-center1
+    </h4>
+    <div>
+      <i
+        aria-hidden="true"
+        className="fa fa-map-marker fa-fw"
+      />
+       
+      <span
+        className="text-capitalize"
+      >
+        test-center-location
+      </span>
+    </div>
+  </div>
+  <Link
+    className="btn ie-blue-button mt-2 btn-block"
+    id={1}
+    onClick={[MockFunction]}
+    replace={false}
+    to="/transaction/1/events"
+  >
+    View Transactions
+  </Link>
+</div>
+`;

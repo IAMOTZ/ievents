@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoadingBox /> Rendering: should render correctly 1`] = `
+<div
+  className="d-flex justify-content-center w-100 mt-3"
+  style={
+    Object {
+      "minHeight": "300px",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "marginTop": "100px",
+      }
+    }
+  >
+    <LoadingIcon
+      size={2}
+      start={true}
+    />
+  </div>
+</div>
+`;
+
+exports[`<LoadingIcon /> Rendering: should render correctly when size and start props is given 1`] = `
+<div
+  className="d-flex flex-column align-items-center m-3"
+>
+  <i
+    className="fa fa-spinner fa-pulse fa-2x"
+  />
+</div>
+`;
+
+exports[`<LoadingIcon /> Rendering: should render correctly when size and start props is not given 1`] = `""`;
+
+exports[`<LoadingIcon /> Rendering: should use the default size when the size props is not given 1`] = `
+<div
+  className="d-flex flex-column align-items-center m-3"
+>
+  <i
+    className="fa fa-spinner fa-pulse fa-1x"
+  />
+</div>
+`;

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EditEvent /> Rendering: should redirect to the events page if there is no event to update 1`] = `
+<Redirect
+  push={false}
+  to="/events"
+/>
+`;
+
+exports[`<EditEvent /> Rendering: should redirect to the events page if updating event resolved 1`] = `
+<Redirect
+  push={false}
+  to="/events"
+/>
+`;
+
+exports[`<EditEvent /> Rendering: should render correctly 1`] = `
+<View
+  add={[Function]}
+  addingEventError=""
+  addingEventStarted={false}
+  centerToBook={Object {}}
+  dispatch={[MockFunction]}
+  eventToUpdate={
+    Object {
+      "id": 5,
+    }
+  }
+  getInput={[Function]}
+  handleDateSelection={[Function]}
+  inputErrors={
+    Object {
+      "dateError": null,
+      "descriptionError": null,
+      "titleError": null,
+    }
+  }
+  isAdmin={false}
+  isSuperAdmin={false}
+  update={[Function]}
+  updating={true}
+  updatingEventError={null}
+  updatingEventStarted={false}
+  userName="tester"
+/>
+`;

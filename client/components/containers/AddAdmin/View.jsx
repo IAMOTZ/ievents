@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SideNavigation from '../../common/SideNavigation';
 import Header from '../../common/Header';
+import Footer from '../../common/Footer';
 import { AuthTopNavigation } from '../../common/TopNavigation';
 import { LoadingIcon } from '../../common/LoadingAnimation';
 import { BigAlert, SmallAlert } from '../../common/Alert';
@@ -79,12 +80,9 @@ const View = props => (
         </div>
       </div>
     </div>
-    <footer className="d-block d-sm-none mt-5">
-      <div className="container text-white text-center py-5">
-        <h1>iEvents</h1>
-        <p>Copyright &copy; 2017</p>
-      </div>
-    </footer>
+    <span className="d-block d-sm-none mt-5">
+      <Footer />
+    </span>
   </div>
 );
 

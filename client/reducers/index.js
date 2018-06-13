@@ -12,7 +12,7 @@ import {
   updateCenterReducer,
 } from './center';
 import {
-  fetchTransactionsReducer, deleteTransactionReducer,
+  fetchTransactionsReducer, cancelTransactionReducer,
 } from './transaction';
 
 export default combineReducers({
@@ -28,5 +28,5 @@ export default combineReducers({
   addCenterReducer,
   updateCenterReducer,
   fetchTransactionsReducer,
-  deleteTransactionReducer,
+  cancelTransactionReducer,
 });

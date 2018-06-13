@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Transactions /> Rendering: should redirect to the centers-as-transactions page if there is no center to transact 1`] = `
+<Redirect
+  push={false}
+  to="/centers/transactions"
+/>
+`;
+
+exports[`<Transactions /> Rendering: should render correctly 1`] = `
+<View
+  cancelingTransactionStarted={false}
+  createModalContent={[Function]}
+  dispatch={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          [Function],
+        ],
+      ],
+    }
+  }
+  fetchingTransactionsStarted={false}
+  finishEventCancel={[Function]}
+  isAdmin={false}
+  isSuperAdmin={false}
+  isTransactionsPage={true}
+  modalContent={null}
+  pagination={Object {}}
+  refresh={[Function]}
+  startEventCancel={[Function]}
+  stopEventCancel={[Function]}
+  toCancel={null}
+  transactions={
+    Array [
+      Object {
+        "centerId": 1,
+        "date": "12/34/2020",
+        "description": "test description",
+        "id": 1,
+        "status": "allowed",
+        "title": "test-event",
+        "user": Object {
+          "email": "tester@gmail.com",
+        },
+        "userId": 1,
+      },
+    ]
+  }
+  updatePagination={[Function]}
+  userName="tester"
+/>
+`;
+
+exports[`<TransactionsView /> Rendering should render correctly when there are no transactions and it is fetching 1`] = `
+<div
+  id="events-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Transaction/Events"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2 mt-lg-0"
+      >
+        <Header
+          text="Transaction/Events"
+        />
+        <div
+          className="page-content"
+        >
+          <LoadingBox
+            iconSize={4}
+          />
+          <Pagination
+            onPageChange={[Function]}
+            pageCount={NaN}
+          />
+          <ConfirmationModal
+            onCancel={[Function]}
+            onOK={[Function]}
+          >
+            <span>
+              Are you sure you want to cancel this event?
+            </span>
+          </ConfirmationModal>
+          <EventDetailsModal
+            eventDescription={null}
+            eventTitle={null}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
+
+exports[`<TransactionsView /> Rendering should render correctly when there are transactions and it is not fetching 1`] = `
+<div
+  id="events-container"
+>
+  <AuthTopNavigation
+    dispatch={[MockFunction]}
+    isAdmin={false}
+    isSuperAdmin={false}
+    name="tester"
+    title="Transaction/Events"
+  />
+  <div
+    className="container-fluid"
+  >
+    <div
+      className="row"
+    >
+      <SideNavigation
+        dispatch={[MockFunction]}
+        isAdmin={false}
+        isSuperAdmin={false}
+        name="tester"
+      />
+      <div
+        className="col-lg-10 offset-md-2 mt-lg-0"
+      >
+        <Header
+          text="Transaction/Events"
+        />
+        <div
+          className="page-content"
+        >
+          <div
+            className="row"
+          >
+            <EventCards
+              cancelingTransactionStarted={false}
+              createModalContent={[Function]}
+              events={Array []}
+              finishEventCancel={[Function]}
+              isTransactionsPage={true}
+              modalContent={Object {}}
+              startEventCancel={[Function]}
+              stopEventCancel={[Function]}
+            />
+          </div>
+          <Pagination
+            onPageChange={[Function]}
+            pageCount={NaN}
+          />
+          <ConfirmationModal
+            onCancel={[Function]}
+            onOK={[Function]}
+          >
+            <span>
+              Are you sure you want to cancel this event?
+            </span>
+          </ConfirmationModal>
+          <EventDetailsModal
+            eventDescription={null}
+            eventTitle={null}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    className="d-block d-sm-none mt-5"
+  >
+    <Footer />
+  </span>
+</div>
+`;
