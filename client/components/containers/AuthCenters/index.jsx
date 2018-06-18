@@ -14,7 +14,7 @@ import View from './View';
     userName: user.name,
     isAdmin: user.role === 'admin' || user.role === 'superAdmin',
     isSuperAdmin: user.role === 'superAdmin',
-    fetchingCentersStarted: store.fetchCentersReducer.fetchingCenterStarted,
+    fetchingCenterStarted: store.fetchCentersReducer.fetchingCenterStarted,
     centers: store.fetchCentersReducer.centers,
     pagination: store.fetchCentersReducer.pagination,
   };
@@ -92,7 +92,7 @@ class AuthCenters extends React.Component {
         isSuperAdmin={this.props.isSuperAdmin}
         dispatch={this.props.dispatch}
         centers={this.props.centers}
-        fetchingCentersStarted={this.props.fetchingCentersStarted}
+        fetchingCenterStarted={this.props.fetchingCenterStarted}
         onEdit={this.onEdit}
         onBook={this.onBook}
         onViewTransactions={this.onViewTransactions}
@@ -111,7 +111,7 @@ AuthCenters.defaultProps = {
   isAdmin: false,
   isSuperAdmin: false,
   isTransactionsPage: false,
-  fetchingCentersStarted: false,
+  fetchingCenterStarted: false,
   centers: [],
   dispatch: () => {},
   pagination: {},
@@ -123,7 +123,7 @@ AuthCenters.propTypes = {
   isAdmin: PropTypes.bool,
   isSuperAdmin: PropTypes.bool,
   isTransactionsPage: PropTypes.bool,
-  fetchingCentersStarted: PropTypes.bool,
+  fetchingCenterStarted: PropTypes.bool,
   centers: PropTypes.array,
   dispatch: PropTypes.func,
   pagination: PropTypes.object,
