@@ -56,7 +56,7 @@ const EventForm = (props) => {
         </button>
         {
           !props.updating ?
-            <Link className="custom-blue-text small-text" to="centers">Choose another center</Link > : null
+            <Link className="custom-blue-text small-text" to="/centers">Choose another center</Link > : null
         }
       </div>
     </div>
