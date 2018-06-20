@@ -1,5 +1,5 @@
 import React from 'react';
-import RequireAuthentication from '../../../components/hoc/RequireAuthentication';
+import RequireAuthentication from '../../../components/containers/RequireAuthentication';
 
 describe('<RequireAuthentication />', () => {
   const props = {

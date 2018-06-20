@@ -15,7 +15,7 @@ import Transactions from './containers/Transactions';
 import AddAdmin from './containers/AddAdmin';
 import Home from './containers/Home';
 import PageNotFound from './common/PageNotFound';
-import RequireAuthentication from './hoc/RequireAuthentication';
+import RequireAuthentication from './containers/RequireAuthentication';
 
 export default () => (
   <Switch>

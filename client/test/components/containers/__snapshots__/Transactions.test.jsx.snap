@@ -148,18 +148,25 @@ exports[`<TransactionsView /> Rendering should render correctly when there are t
           className="page-content"
         >
           <div
-            className="row"
+            className="page-content text-center"
           >
-            <EventCards
-              cancelingTransactionStarted={false}
-              createModalContent={[Function]}
-              events={Array []}
-              finishEventCancel={[Function]}
-              isTransactionsPage={true}
-              modalContent={Object {}}
-              startEventCancel={[Function]}
-              stopEventCancel={[Function]}
-            />
+            <h1
+              className="display-3"
+            >
+              The center has no transactions
+            </h1>
+            <h3
+              className="font-weight-normal"
+            >
+              Back to 
+              <Link
+                replace={false}
+                to="/centers/transactions"
+              >
+                transactions page
+              </Link>
+              .
+            </h3>
           </div>
           <Pagination
             onPageChange={[Function]}

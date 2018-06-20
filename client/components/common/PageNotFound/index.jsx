@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import FakeDiv from '../../hoc/FakeDiv';
+import FakeDiv from '../../common/FakeDiv';
 import Footer from '../Footer';
 import './styles.scss';
 

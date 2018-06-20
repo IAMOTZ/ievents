@@ -1,5 +1,5 @@
 import React from 'react';
-import FakeDiv from '../../../components/hoc/FakeDiv';
+import FakeDiv from '../../../components/common/FakeDiv';
 
 describe('<FakeDiv />', () => {
   describe('Rendering:', () => {

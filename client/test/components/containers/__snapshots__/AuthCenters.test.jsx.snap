@@ -204,9 +204,15 @@ exports[`<AuthCentersView /> Rendering should render correctly when there are no
         <Header
           text="Centers"
         />
-        <LoadingBox
-          iconSize={4}
-        />
+        <div
+          className="page-content text-center"
+        >
+          <h1
+            className="display-3"
+          >
+            The centers list is empty
+          </h1>
+        </div>
       </div>
     </div>
   </div>
@@ -240,7 +246,7 @@ exports[`<RegularCenters /> Rendering: should render correctly 1`] = `
       ],
     }
   }
-  fetchingCentersStarted={false}
+  fetchingCenterStarted={false}
   isAdmin={false}
   isSuperAdmin={false}
   isTransactionsPage={false}
