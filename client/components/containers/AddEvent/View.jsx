@@ -64,7 +64,7 @@ const View = props => (
                 <SmallAlert message={props.inputErrors.dateError} />
                 <Calendar
                   handleDateSelection={props.handleDateSelection}
-                  selectedDate={props.eventToUpdate.date}
+                  selectedDate={props.selectedDate}
                 />
               </div>
             </div>
@@ -85,6 +85,7 @@ View.defaultProps = {
   centerToBook: {},
   eventToUpdate: {},
   inputErrors: {},
+  selectedDate: null,
   update: () => {},
   updating: false,
   updatingEventStarted: false,
@@ -109,6 +110,7 @@ View.propTypes = {
   centerToBook: PropTypes.object,
   eventToUpdate: PropTypes.object,
   handleDateSelection: PropTypes.func.isRequired,
+  selectedDate: PropTypes.string,
 };
 
 export default View;

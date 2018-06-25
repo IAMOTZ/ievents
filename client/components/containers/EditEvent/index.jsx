@@ -117,6 +117,7 @@ class EditEvent extends React.Component {
         eventToUpdate={this.props.eventToUpdate}
         updating
         handleDateSelection={this.handleDateSelection}
+        selectedDate={this.state.date || this.props.eventToUpdate.date}
       />
     );
   }
