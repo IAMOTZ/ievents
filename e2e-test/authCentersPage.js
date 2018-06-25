@@ -18,7 +18,7 @@ export default {
       .verify.visible('.centerCard a[href="#center-details-modal"]')
       .click('.centerCard a[href="#center-details-modal"]', () => {
         browser
-          .pause(100)
+          .pause(200)
           .assert.visible('div#center-details-modal')
           .click('div#center-details-modal button[data-dismiss="modal"]');
       })

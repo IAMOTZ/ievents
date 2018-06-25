@@ -30,13 +30,6 @@ export default {
       .assert.visible('#side-navigation a.list-group-item[href="/"]')
       .assert.containsText('#header strong.navbar-brand', 'Transaction/Events')
       .verify.visible('.event-card')
-      .verify.visible('.event-card a[href="#event-details-modal"]')
-      .click('.event-card a[href="#event-details-modal"]', () => {
-        browser
-          .pause(100)
-          .assert.visible('div#event-details-modal')
-          .click('div#event-details-modal button[data-dismiss="modal"]');
-      })
       .pause(500);
   }
 };
