@@ -1,14 +1,14 @@
 {
-  "src_folders" : ["e2e-test"],
+  "src_folders" : ["e2e-test/testPath"],
   "output_folder" : "reports",
 
   "selenium" : {
     "start_process" : true,
-    "server_path" : "node_modules/selenium-standalone/.selenium/selenium-server/",
+    "server_path" : "./bin/selenium-server-standalone-3.9.1.jar",
     "log_path" : "",
     "port" : 4444,
     "cli_args" : {
-      "webdriver.chrome.driver" : "./bin/chromedriver.exe"
+      "webdriver.chrome.driver" : "./bin/chromedriver"
     }
   },
 

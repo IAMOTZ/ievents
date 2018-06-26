@@ -3,6 +3,7 @@
 exports[`<Header /> Rendering: should render correctly 1`] = `
 <nav
   className="navbar w-100 mt-3 d-none d-lg-block"
+  id="header"
   style={
     Object {
       "backgroundColor": "rgba(0,0,0, 0.9)",

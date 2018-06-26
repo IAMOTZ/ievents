@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SideNavigation from '../../common/SideNavigation';
 import Header from '../../common/Header';
@@ -9,30 +10,42 @@ import { LoadingBox, LoadingIcon } from '../../common/LoadingAnimation';
 import Pagination from '../../common/Pagination';
 import Footer from '../../common/Footer';
 
-const View = props => (
-  <div id="events-container">
-    <AuthTopNavigation
-      name={props.userName}
-      title="My Events"
-      isAdmin={props.isAdmin}
-      isSuperAdmin={props.isSuperAdmin}
-      dispatch={props.dispatch}
-    />
-    <div className="container-fluid">
-      <div className="row">
-        <SideNavigation
-          name={props.userName}
-          isAdmin={props.isAdmin}
-          isSuperAdmin={props.isSuperAdmin}
-          dispatch={props.dispatch}
-        />
-        <div className="col-lg-10 offset-md-2 mt-lg-0">
-          <Header text="My Events" />
-          <div className="page-content">
-            <LoadingIcon start={props.deletingEventStarted} size={2} />
-            {
-              props.events.length === 0 && props.fetchingEventsStarted ?
-                <LoadingBox iconSize={4} /> :
+const View = (props) => {
+  const renderAlternateBody = () => {
+    if (props.events.length === 0 && props.fetchingEventsStarted) {
+      return <LoadingBox iconSize={4} />;
+    } else if (props.events.length === 0 && !props.fetchingEventsStarted) {
+      return (
+        <div className="page-content text-center">
+          <h1 className="display-3">The Events list is empty</h1>
+          <h3 className="font-weight-normal">Click <Link to="/centers">here</Link> to book a center.</h3>
+        </div>
+      );
+    } return null;
+  };
+  return (
+    <div id="events-container">
+      <AuthTopNavigation
+        name={props.userName}
+        title="My Events"
+        isAdmin={props.isAdmin}
+        isSuperAdmin={props.isSuperAdmin}
+        dispatch={props.dispatch}
+      />
+      <div className="container-fluid">
+        <div className="row">
+          <SideNavigation
+            name={props.userName}
+            isAdmin={props.isAdmin}
+            isSuperAdmin={props.isSuperAdmin}
+            dispatch={props.dispatch}
+          />
+          <div className="col-lg-10 offset-md-2 mt-lg-0">
+            <Header text="My Events" />
+            <div className="page-content">
+              <LoadingIcon start={props.deletingEventStarted} size={2} />
+              {
+                renderAlternateBody() ||
                 <div className="row">
                   <EventCards
                     events={props.events}
@@ -41,27 +54,28 @@ const View = props => (
                     createModalContent={props.createModalContent}
                   />
                 </div>
-            }
-            <Pagination
-              pageCount={Math.ceil(props.pagination.totalCount / props.pagination.limit)}
-              onPageChange={props.updatePagination}
-            />
-            <ConfirmationModal
-              onCancel={props.cancelDelete}
-              onOK={props.finishDelete}
-            ><span>Are you sure you want to delete this event?</span>
-            </ConfirmationModal>
-            <EventDetailsModal {...props.modalContent} />
-          </div>
+              }
+              <Pagination
+                pageCount={Math.ceil(props.pagination.totalCount / props.pagination.limit)}
+                onPageChange={props.updatePagination}
+              />
+              <ConfirmationModal
+                onCancel={props.cancelDelete}
+                onOK={props.finishDelete}
+              ><span>Are you sure you want to delete this event?</span>
+              </ConfirmationModal>
+              <EventDetailsModal {...props.modalContent} />
+            </div>
 
+          </div>
         </div>
       </div>
+      <span className="d-block d-sm-none mt-5">
+        <Footer />
+      </span>
     </div>
-    <span className="d-block d-sm-none mt-5">
-      <Footer />
-    </span>
-  </div>
-);
+  );
+};
 
 /* eslint-disable react/forbid-prop-types */
 View.propTypes = {

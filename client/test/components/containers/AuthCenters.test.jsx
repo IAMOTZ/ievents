@@ -103,7 +103,7 @@ describe('<AuthCentersView />', () => {
     dispatch: jest.fn(),
     isTransactionsPage: false,
     centers: [],
-    fetchingCentersStarted: false,
+    fetchingCenterStarted: false,
     onEdit: jest.fn(),
     onBook: jest.fn(),
     onViewTransactions: jest.fn(),

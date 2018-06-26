@@ -178,10 +178,12 @@ paths:
         required: true
         type: string
       responses:
-        200:
-          description: Events successfully retrieved
         401:
           description: Unauthorised
+        200:
+          description: Events successfully retrieved
+          schema:
+            $ref: '#definitions/FetchEventsSampleResponse'
     # create event
     post:
       tags:
@@ -279,19 +281,50 @@ paths:
         401:
           description: Unauthorised
         404:
+          description: Event does not exist      
+  /events/{id}/cancel:
+    # cancel event
+    post:
+      tags:
+      - events
+      summary: Cancels an event(only admins can use this endpoint)
+      operationId: cancelEvent
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the event to cancel
+        required: true
+        type: integer
+      - in: header
+        name: access-token
+        description: The auth token of the user making the request.
+        required: true
+        type: string
+      responses:
+        200:
+          description: Event canceled
+        401:
+          description: Unauthorised
+        404:
           description: Event does not exist
   /centers:
     # fetch centers
     get:
       tags:
       - centers
-      summary: Get event centers
+      summary: Get centers
       operationId: getCenters
       produces:
       - application/json
       responses:
         200:
           description: Centers successfully retrieved
+          schema:
+            $ref: '#definitions/FetchCentersSampleResponse'
     # create center
     post:
       tags:
@@ -351,6 +384,27 @@ paths:
         401:
           description: Unauthorised
   /centers/{id}:
+    # fetch one center
+    get:
+      tags:
+      - centers
+      summary: Get one center
+      operationId: getOneCenter
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the center to fetch
+        required: true
+        type: integer
+      responses:
+        404:
+          description: The center does not exist 
+        200:
+          description: Centers successfully retrieved 
+          schema:
+              $ref: '#definitions/FetchOneCenterSampleResponse'
     # modify center
     put:
       tags:
@@ -416,55 +470,56 @@ paths:
           description: Unauthorised
         404:
           description: The center to modify does not exist
-  /transactions:
-    # fetch transactions
+  /centers/{id}/bookedDates:
+    # Get the dates a center has been booked
     get:
       tags:
-      - transactions
-      summary: Get transactions(only admins can use this endpoint)
-      operationId: getTransacitons
-      produces:
-      - application/json
-      parameters:
-      - in: header
-        name: access-token
-        description: The auth token of the user making the request.
-        required: true
-        type: string
-      responses:
-        200:
-          description: Transactions successfully retrieved
-        401:
-          description: Unauthorised
-  /transactions/{id}:
-    # delete transactions
-    delete:
-      tags:
-      - transactions
-      summary: Delete a transaction(only admins can use this endpoint)
-      operationId: deleteTransaction
-      consumes:
-      - application/json
+      - centers
+      summary: Get the dates a center has been booked
+      operationId: getBookedDates
       produces:
       - application/json
       parameters:
       - in: path
         name: id
-        description: The ID of the transaction to delete
+        description: The ID of the center
+        required: true
+        type: integer
+      responses: 
+        404:
+          description: The center does not exist 
+        200:
+          description: Dates successfully retrieved
+          schema:
+            $ref: '#definitions/FetchBookedDatesSampleResponse'
+
+  /centers/{id}/events:
+    # fetch events attached to a center
+    get:
+      tags:
+      - centers
+      summary: Fetch events of a center(only admins can use this endpoint)
+      operationId: getCenterEvents
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: The ID of the center
         required: true
         type: integer
       - in: header
         name: access-token
         description: The auth token of the user making the request.
-        required: true
         type: string
+        required: true
       responses:
-        200:
-          description: Transaction deleted
-        401:
-          description: Unauthorised
         404:
-          description: Transaction does not exist
+          description: The center does not exist 
+        200:
+          description: Events successfully retrieved 
+          schema:
+            $ref: '#definitions/FetchCenterEventsSampleResponse'
 
 definitions:
   CreateUser:
@@ -576,4 +631,85 @@ definitions:
       centerId:
         type: integer
         description: An optional field to replace the former centerId
-        example: 1
+        example: 1 
+  FetchEventsSampleResponse:
+    properties:
+      status: 
+        type: string
+        example: success
+      message:
+        type: string
+        example: Events successfully retrieved
+      events:
+        type: array
+        description: An array of events
+        example: []
+      paginationInfo:
+        type: object
+        description: Details on how the response is paginated
+        example: {}
+  FetchCentersSampleResponse:
+    properties:
+      status: 
+        type: string
+        example: success
+      message:
+        type: string
+        example: Centers successfully retrieved
+      centers:
+        type: array
+        description: An array of centers
+        example: []
+      paginationInfo:
+        type: object
+        description: Details on how the response is paginated
+        example: {}
+  FetchOneCenterSampleResponse: 
+    properties:
+      status: 
+        type: string 
+        example: success
+      message:
+        type: string
+        example: Center successfully retrieved
+      center:
+        type: object
+        description: The center
+        example: {}
+      paginationInfo:
+        type: object
+        description: Details on how the response is paginated
+        example: {}
+  FetchBookedDatesSampleResponse: 
+    properties:
+      status: 
+        type: string 
+        example: success
+      message:
+        type: string
+        example: The date for center with ID .. successfully retrieved
+      bookedDates:
+        type: array
+        description: An array of dates
+        example: []
+      paginationInfo:
+        type: object
+        description: Details on how the response is paginated
+        example: {}
+  FetchCenterEventsSampleResponse: 
+    properties:
+      status: 
+        type: string 
+        example: success
+      message:
+        type: string
+        example: Events of center with ID .. successfully retrieved
+      events:
+        type: array
+        description: An array of event
+        example: []
+      paginationInfo:
+        type: object
+        description: Details on how the response is paginated
+        example: {}
+  

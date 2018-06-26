@@ -299,7 +299,7 @@ exports[`<EventForm /> Rendering should disable the create/update button when up
     <Link
       className="custom-blue-text small-text"
       replace={false}
-      to="centers"
+      to="/centers"
     >
       Choose another center
     </Link>
@@ -375,7 +375,7 @@ exports[`<EventForm /> Rendering should render correctly when adding 1`] = `
     <Link
       className="custom-blue-text small-text"
       replace={false}
-      to="centers"
+      to="/centers"
     >
       Choose another center
     </Link>

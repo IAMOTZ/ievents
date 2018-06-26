@@ -6,7 +6,7 @@ const headerStyle = {
 };
 
 const Header = props => (
-  <nav className="navbar w-100 mt-3 d-none d-lg-block" style={headerStyle}>
+  <nav className="navbar w-100 mt-3 d-none d-lg-block" style={headerStyle} id="header">
     <strong className="navbar-brand text-white">{props.text}</strong>
   </nav>
 );

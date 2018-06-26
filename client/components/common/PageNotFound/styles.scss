@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+#page-not-found .page-content {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  min-height: 55vh;
+  h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+  p {
+    font-size: 17px;
+  }
+  @include media-breakpoint-up("sm") {
+    min-height: 78vh;
+    h1 {
+      font-size: 6rem;
+    }
+    p {
+      font-size: 2rem;
+    }
+  }
+}

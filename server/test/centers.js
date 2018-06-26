@@ -20,7 +20,7 @@ let normalCenterDetails = {
   location: 'test location',
   details: 'test description',
   capacity: '3000',
-  price: '4000',
+  price: '4000.50',
   token: null,
 };
 
@@ -202,7 +202,7 @@ describe('Centers Endpoint', () => {
     it('should not create center if price value is not a number', (done) => {
       createCenter(
         alterCenterDetails({ price: 'str' }),
-        failureAssertions('Center price must be an integer in string format', 400, done),
+        failureAssertions('Center price is not valid', 400, done),
       );
     });
     it('should not create a center from a regular user', (done) => {
@@ -222,7 +222,10 @@ describe('Centers Endpoint', () => {
           res.body.center.location.should.be.eql(normalCenterDetails.location);
           res.body.center.details.should.be.eql(normalCenterDetails.details);
           res.body.center.capacity.should.be.eql(Number(normalCenterDetails.capacity));
-          res.body.center.price.should.be.eql(Number(normalCenterDetails.price));
+          // The next line might look somehow tricky but all did
+          // is to ensure that a value like 10.10365 becomes 10.1
+          const roundedPrice = Number(Number(normalCenterDetails.price).toFixed(2));
+          res.body.center.price.should.be.equal(roundedPrice);
           centerId = res.body.center.id;
           done();
         },
@@ -283,7 +286,7 @@ describe('Centers Endpoint', () => {
     it('should not modify center if price value is not a number', (done) => {
       modifyCenter(
         alterCenterDetails({ price: 'str' }),
-        failureAssertions('Center price must be an integer in string format', 400, done),
+        failureAssertions('Center price is not valid', 400, done),
       );
     });
     it('should not modify a center that does not exist', (done) => {
@@ -316,8 +319,11 @@ describe('Centers Endpoint', () => {
           res.body.center.name.should.be.eql('modified name');
           res.body.center.location.should.be.eql('modified location');
           res.body.center.details.should.be.eql('modified details');
-          res.body.center.capacity.should.be.eql('500');
-          res.body.center.price.should.be.eql('1000');
+          res.body.center.capacity.should.be.eql(Number('500'));
+          // Note that if you change the price to a decimal value,
+          // the check here would need to be more complex than this.
+          // You should study how the price-check was done when creating center.
+          res.body.center.price.should.be.eql(Number('1000'));
           done();
         },
       );

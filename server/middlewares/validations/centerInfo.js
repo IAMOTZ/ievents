@@ -44,8 +44,8 @@ export const validateAddCenterInputs = (req, res, next) => {
     if (!utils.isNotEmpty(price) || !utils.isDefined(price)) {
       throw new Error('Price is required');
     }
-    if (!utils.isInteger(price)) {
-      throw new Error('Center price must be an integer in string format');
+    if (!utils.isValidPrice(price)) {
+      throw new Error('Center price is not valid');
     }
   } catch (error) {
     return failureResponse(res, error.message);
@@ -101,8 +101,8 @@ export const validateUpdateCenterInputs = (req, res, next) => {
       if (!utils.isNotEmpty(price) || !utils.isDefined(price)) {
         throw new Error('Price is required');
       }
-      if (!utils.isInteger(price)) {
-        throw new Error('Center price must be an integer in string format');
+      if (!utils.isValidPrice(price)) {
+        throw new Error('Center price is not valid');
       }
     }
   } catch (error) {

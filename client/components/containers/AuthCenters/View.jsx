@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SideNavigation from '../../common/SideNavigation';
 import Header from '../../common/Header';
@@ -8,28 +9,44 @@ import { AuthTopNavigation } from '../../common/TopNavigation';
 import { CenterDetailsModal } from '../../common/Modals';
 import Pagination from '../../common/Pagination';
 
-const View = props => (
-  <div id="auth-centers-container">
-    <AuthTopNavigation
-      name={props.userName}
-      title={props.isTransactionsPage ? 'Transactions' : 'Centers'}
-      isAdmin={props.isAdmin}
-      isSuperAdmin={props.isSuperAdmin}
-      dispatch={props.dispatch}
-    />
-    <div className="container-fluid">
-      <div className="row">
-        <SideNavigation
-          name={props.userName}
-          isAdmin={props.isAdmin}
-          isSuperAdmin={props.isSuperAdmin}
-          dispatch={props.dispatch}
-        />
-        <div className="col-lg-10 offset-lg-2 mt-lg-0">
-          <Header text={props.isTransactionsPage ? 'Transactions' : 'Centers'} />
+const View = (props) => {
+  const renderAlternateBody = () => {
+    if (props.centers.length === 0 && props.fetchingCenterStarted) {
+      return <LoadingBox iconSize={4} />;
+    } else if (props.centers.length === 0 && !props.fetchingCenterStarted) {
+      return (
+        <div className="page-content text-center">
+          <h1 className="display-3">The centers list is empty</h1>
           {
-            props.centers.length === 0 && props.fetchingCentersStarted ?
-              <LoadingBox iconSize={4} /> :
+            props.isAdmin ?
+              <h3 className="font-weight-normal">Click <Link to="/addCenter">here</Link> to create a center.</h3> :
+              null
+          }
+        </div>
+      );
+    } return null;
+  };
+  return (
+    <div id="auth-centers-container">
+      <AuthTopNavigation
+        name={props.userName}
+        title={props.isTransactionsPage ? 'Transactions' : 'Centers'}
+        isAdmin={props.isAdmin}
+        isSuperAdmin={props.isSuperAdmin}
+        dispatch={props.dispatch}
+      />
+      <div className="container-fluid">
+        <div className="row">
+          <SideNavigation
+            name={props.userName}
+            isAdmin={props.isAdmin}
+            isSuperAdmin={props.isSuperAdmin}
+            dispatch={props.dispatch}
+          />
+          <div className="col-lg-10 offset-lg-2 mt-lg-0">
+            <Header text={props.isTransactionsPage ? 'Transactions' : 'Centers'} />
+            {
+              renderAlternateBody() ||
               <div className="page-content">
                 <div className="container">
                   {
@@ -56,12 +73,13 @@ const View = props => (
                 />
                 <CenterDetailsModal {...props.modalContent} />
               </div>
-          }
+            }
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 View.defaultProps = {
   modalContent: {},
@@ -76,7 +94,7 @@ View.propTypes = {
   isTransactionsPage: PropTypes.bool,
   dispatch: PropTypes.func.isRequired,
   centers: PropTypes.array.isRequired,
-  fetchingCentersStarted: PropTypes.bool.isRequired,
+  fetchingCenterStarted: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onBook: PropTypes.func.isRequired,
   onViewTransactions: PropTypes.func.isRequired,

@@ -14,7 +14,8 @@ import EditCenter from './containers/EditCenter';
 import Transactions from './containers/Transactions';
 import AddAdmin from './containers/AddAdmin';
 import Home from './containers/Home';
-import RequireAuthentication from './hoc/RequireAuthentication';
+import PageNotFound from './common/PageNotFound';
+import RequireAuthentication from './containers/RequireAuthentication';
 
 export default () => (
   <Switch>
@@ -80,6 +81,10 @@ export default () => (
       exact
       path="/profile"
       render={() => <RequireAuthentication><Profile /></RequireAuthentication>}
+    />
+    <Route
+      path="*"
+      render={() => <PageNotFound />}
     />
   </Switch>
 );

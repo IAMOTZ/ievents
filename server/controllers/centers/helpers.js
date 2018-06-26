@@ -32,8 +32,8 @@ export const formatCenterData = centerData => (
       name: centerData.name,
       location: centerData.location,
       details: centerData.details,
-      capacity: centerData.capacity,
-      price: centerData.price,
+      capacity: Number(centerData.capacity),
+      price: Number(centerData.price),
       images: centerData.images,
     },
   )
