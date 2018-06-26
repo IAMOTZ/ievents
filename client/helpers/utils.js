@@ -51,6 +51,13 @@ export const isInteger = (input) => {
 };
 
 /**
+ * Ensures that a price value is valid.
+ * @param {Number} input The price to verify.
+ * @returns {Boolean} Truthy value to tell if the check is successsful or not.
+ */
+export const isValidPrice = input => (Number.isFinite(Number(input)) && input > 0);
+
+/**
  * Ensures that an email string is in the correct format.
  * @param {String} input The email string to verify.
  * @returns {Boolean} Truthy value to tell if the check is successsful or not.

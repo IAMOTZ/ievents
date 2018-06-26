@@ -10,7 +10,7 @@
     "dev:server": "npm run database:setup && nodemon ./server/app --exec babel-node  --watch ./server",
     "dev:client": "webpack-dev-server --content-base src --inline --hot",
     "dev:template": "gulp",
-    "test:server": "npm run database:test:setup && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --timeout 5000 --exit",
+    "test:server": "export NODE_ENV=test && npm run database:setup && nyc mocha --compilers js:babel-core/register --require babel-polyfill ./server/test/testPath.js --timeout 5000 --exit",
     "test:client": "jest && codecov",
     "test:client:update": "jest -u",
     "test:e2e": "nightwatch",
@@ -19,8 +19,7 @@
     "lint": "./node_modules/.bin/eslint",
     "coverage": "npm run test:server && nyc report --reporter=text-lcov | coveralls",
     "heroku-postbuild": "npm run prod:client && npm run prod:server && npm run database:setup",
-    "database:setup": "babel-node ./server/setUpDatabase",
-    "database:test:setup": "export NODE_ENV=test && babel-node ./server/setUpDatabase"
+    "database:setup": "babel-node ./server/setUpDatabase"
   },
   "repository": {
     "type": "git",

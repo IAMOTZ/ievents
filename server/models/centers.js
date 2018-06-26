@@ -20,7 +20,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     price: {
-      type: DataTypes.REAL,
+      type: DataTypes.FLOAT,
     },
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),

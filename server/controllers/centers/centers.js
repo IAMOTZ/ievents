@@ -107,7 +107,7 @@ export default {
         location,
         details,
         capacity,
-        price,
+        price: Number(price).toFixed(2),
         images: image ? [image.secure_url] : null,
       });
     const payload = { center: formatCenterData(newCenter) };
@@ -140,7 +140,7 @@ export default {
           location: location || center.location,
           details: details || center.details,
           capacity: capacity || center.capacity,
-          price: price || center.price,
+          price: Number(price).toFixed(2) || center.price,
           images: image ? [image.secure_url] : center.images,
         });
       const payload = { center: formatCenterData(updatedCenter) };

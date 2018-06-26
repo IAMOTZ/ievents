@@ -271,7 +271,7 @@ export const validateAddCenterInputs = (inputs) => {
   // Validating price.
   if (!utils.isNotEmpty(price) || !utils.isDefined(price)) {
     errors.priceError = 'Price is required';
-  } else if (!utils.isInteger(price)) {
+  } else if (!utils.isValidPrice(price)) {
     errors.priceError = 'Price is not valid';
   }
   if (errors.nameError || errors.locationError ||
@@ -326,7 +326,7 @@ export const validateUpdateCenterInputs = (inputs) => {
   if (utils.isDefined(price)) {
     if (!utils.isNotEmpty(price) || !utils.isDefined(price)) {
       errors.priceError = 'Price is required';
-    } else if (!utils.isInteger(price)) {
+    } else if (!utils.isValidPrice(price)) {
       errors.priceError = 'Price is not valid';
     }
   }
