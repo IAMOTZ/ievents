@@ -1,4 +1,4 @@
-# ievents [![Build Status](https://travis-ci.org/IAMOTZ/Ievents.svg?branch=develop)](https://travis-ci.org/IAMOTZ/Ievents) [![Coverage Status](https://coveralls.io/repos/github/IAMOTZ/Ievents/badge.svg?branch=develop)](https://coveralls.io/github/IAMOTZ/Ievents) [![Maintainability](https://api.codeclimate.com/v1/badges/030535b6a20d86efcd0c/maintainability)](https://codeclimate.com/github/IAMOTZ/Ievents/maintainability)
+# ievents [![Build Status](https://travis-ci.org/IAMOTZ/ievents.svg?branch=develop)](https://travis-ci.org/IAMOTZ/ievents) [![Coverage Status](https://coveralls.io/repos/github/IAMOTZ/Ievents/badge.svg?branch=develop)](https://coveralls.io/github/IAMOTZ/Ievents) [![Maintainability](https://api.codeclimate.com/v1/badges/030535b6a20d86efcd0c/maintainability)](https://codeclimate.com/github/IAMOTZ/Ievents/maintainability)
 
 This is a web application to help manage event centers - https://ievents-otz.herokuapp.com/   
 Given you manage event centers, this app will help you accept applications to use your center/facilities, and will either decline events when the proposed day is already taken, or suggest an available day.
